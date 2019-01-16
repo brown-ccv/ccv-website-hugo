@@ -1,8 +1,8 @@
-baseURL: "https://ccv.brown.edu/"
-languageCode: "en-us"
-title: "Brown Center for Computing and Visualization"
-theme: "gb-theme"
-# i18n
+---
+baseURL: " http://ccv-website-dev.s3-website-us-east-1.amazonaws.com"
+languageCode: en-us
+title: Brown Center for Computing and Visualization
+theme: gb-theme
 DefaultContentLanguage: en
 languages:
   en:
