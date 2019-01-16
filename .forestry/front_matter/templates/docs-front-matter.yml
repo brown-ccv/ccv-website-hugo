@@ -1,0 +1,36 @@
+---
+label: docs-front-matter
+hide_body: false
+is_partial: false
+fields:
+- type: text
+  label: section
+  name: section
+  config:
+    required: true
+- type: text
+  name: title
+  label: title
+  config:
+    required: true
+- type: text
+  label: type
+  name: type
+  config:
+    required: true
+- type: text
+  name: version
+  label: version
+- type: text
+  name: weight
+  label: weight
+- type: number
+  name: weight
+  label: weight
+  config:
+    required: true
+- type: blocks
+  template_types:
+  - subitems
+  label: subitems
+  name: subitems
