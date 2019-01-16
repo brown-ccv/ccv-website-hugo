@@ -1,0 +1,54 @@
+<!doctype html>
+{{- partial "head/head.html" . -}}
+{{- partial "header/site-header.html" . -}}
+<section class="py-0">
+  <div class="container-fluid">
+    <div class="row justify-content-between">
+
+      <!-- navigation -->
+      {{- block "navigation" . }}{{- end}}
+      <!-- / navigation -->
+      <!-- content -->
+      <article class="col-lg-9 col-xxl-10 doc-content">
+
+        <div class="row">
+          <div class="col">
+            <div class="doc-content-header">
+              <div class="row align-items-center">
+                <div class="col">
+                  <nav aria-label="breadcrumb" class="align-items-center">
+                    <button onclick="goBack()" class="breadcrumb-back btn btn-sm" title="Back"></button>
+                    <ol class="breadcrumb d-none d-lg-inline-flex">
+                      <li class="breadcrumb-item"><a href="{{ .Parent.Permalink }}">{{ .Params.section }}</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">{{ .Title }}</li>
+                    </ol>
+                  </nav>
+                </div>
+                <div class="col text-right">
+                  <a href="" class="btn btn-sm btn-primary"><span class="icon-pencil" aria-hidden="true"></span>&nbsp;&nbsp;Edit on GitHub</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row justify-content-between doc-content-body">
+          <article class="col-md-9 col-xxl-8">
+            {{- block "content-body" . }}{{- end }}
+          </article>
+          <aside class="col-md-3 col-xxl-3 d-none d-md-block">
+            <div class="sticky">
+              {{ .TableOfContents }}
+            </div>
+          </aside>
+        </div>
+      </article>
+      <!-- / content -->
+    </div>
+  </div>
+</section>
+
+<!-- footer -->
+{{- partial "footer/site-footer" . -}}
+<!-- / footer -->
+{{- partial "footer/scripts" . -}}

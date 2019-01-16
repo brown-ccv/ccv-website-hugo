@@ -1,0 +1,15 @@
+baseURL: "https://ccv.brown.edu/"
+languageCode: "en-us"
+title: "Brown Center for Computing and Visualization"
+theme: "gb-theme"
+# i18n
+DefaultContentLanguage: en
+languages:
+  en:
+    languageName: English
+    weight: 1
+    contentDir: content/english
+  pt:
+    languageName: Portuguese
+    weight: 2
+    contentDir: content/portuguese
