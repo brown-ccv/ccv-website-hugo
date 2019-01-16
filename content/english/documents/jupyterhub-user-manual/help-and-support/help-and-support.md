@@ -1,6 +1,5 @@
 +++
 date = "2019-01-16T18:28:13+00:00"
-draft = true
 section = "JupyterHub"
 title = "Help and Support"
 type = "JupyterHub"
