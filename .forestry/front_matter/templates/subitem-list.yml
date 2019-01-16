@@ -1,0 +1,15 @@
+---
+label: subitem-list
+hide_body: false
+is_partial: true
+fields:
+- type: text
+  name: subsection
+  label: subsection
+  config:
+    required: true
+- type: text
+  name: ref
+  label: ref
+  config:
+    required: true
