@@ -26,6 +26,6 @@ fields:
   label: weight
   config:
     required: true
-- type: list
+- type: blocks
   name: subitems
   label: subitems
