@@ -34,3 +34,5 @@ fields:
   label: subitems
   template_types:
   - subitem-list
+pages:
+- content/english/documents/jupyterhub-user-manual/help-and-support/help-and-support.md
