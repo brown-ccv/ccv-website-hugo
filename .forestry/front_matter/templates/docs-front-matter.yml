@@ -30,7 +30,7 @@ fields:
   config:
     required: true
 - type: blocks
-  template_types:
-  - subitems
-  label: subitems
   name: subitems
+  label: subitems
+  template_types:
+  - subitem-list
