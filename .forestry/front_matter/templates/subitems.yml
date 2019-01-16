@@ -1,0 +1,10 @@
+---
+label: subitems
+hide_body: false
+is_partial: true
+fields:
+- type: blocks
+  name: subitems
+  label: subitems
+  template_types:
+  - subitem-list
