@@ -1,7 +1,7 @@
 ---
 title: "Sharing Notebooks"
 project: JupyterHub
-section: Using Your Notebook
+section: Using Your Hub
 date: 2019-01-14T13:06:08-05:00
 draft: false
 ---
@@ -19,6 +19,6 @@ The easiest and fastest way to share your Notebook file is to use the integrated
 
 The recipient will receive an email that the file has been shared with them. They can add the file to their Drive by following the [Step 3: Import Notebooks](../getting-started/step-3-import-notebooks.md) steps.
 
-{% hint style="info" %}
+{{% alert info %}}
 Keep in mind, these files are stored on your Google Drive which is accessible outside of the JupyterHub. To view your files through the Google Drive interface, visit [https://www.google.com/drive/](https://www.google.com/drive/)
-{% endhint %}
+{{% /alert %}}

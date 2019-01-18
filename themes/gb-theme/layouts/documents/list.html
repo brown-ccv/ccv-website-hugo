@@ -12,11 +12,12 @@
       </div>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul id="page-nav" class="nav flex-column nav-vertical-2">
+          {{ $main_title := .Params.title }}
           {{ range $index, $page := (where $.Site.Pages "Type" .Params.type) }}
           {{ if ne .Params.weight 0}}
           <li class="nav-item{{ if (eq $index 1) }} active{{ end }}">
             <a class="nav-link" data-toggle="collapse" href="#menu-{{$index}}" role="button" aria-expanded="nav-item{{ if (eq $index 1) }}true{{ end }}" aria-controls="menu-{{$index}}">{{ $page.Title }}</a>
-            <div class="collapse{{ if (eq $index 1) }} show{{ end }}" id="menu-{{$index}}" data-parent="#page-nav">
+            <div class="collapse{{ if (eq $page.Title $main_title) }} show{{ end }}" id="menu-{{$index}}" data-parent="#page-nav">
               <ul class="nav flex-column">
                 {{ if $page.Params.subitems }}
                   {{ range $sub_index, $sub_item := $page.Params.subitems }}
@@ -44,7 +45,7 @@
       </div>
       <div class="row">
         {{ if (eq .Params.section "Documentation")}}
-          {{ .Content | markdownify }}          
+          {{ .Content | markdownify }}
         {{ end }}
         </div>
       <div class="row">

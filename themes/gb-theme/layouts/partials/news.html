@@ -1,0 +1,28 @@
+<section id="section-3" class="bg-dark py-6 quick-links">
+  <div class="container">
+    <div class="row justify-content-center">
+      <article class="col-md-12">
+        <div class="d-flex align-items-center">
+          {{ readFile .Params.hero.logo2 | safeHTML }}
+        <h1 class="">{{ .Params.news.title | markdownify }}</h1>
+        </div>
+        <div class="row gutter-1 my-2 col-md-9">
+          {{ range $cards := sort ($.Params.quick_links.cards) "weight" "asc" }}
+              <div class="col-9 col-md-5 col-lg-4 scale p-2">
+                <div class="type boxed" style="background-image: url('/images/stocks.png'); background-size: cover;">
+                  <div>
+                    <span class="badge badge-primary">Tag</span>
+                    <h5 class="type-title text-light">News</h5>
+                    <div class="type-example">
+                      <span class="type-title text-light">HL</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          {{ end }}
+        </div>
+
+      </article>
+    </div>
+  </div>
+</section>

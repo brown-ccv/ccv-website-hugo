@@ -1,10 +1,21 @@
 <!DOCTYPE html>
 <html>
     {{- partial "head/head.html" . -}}
-        {{- partial "header/site-header.html" . -}}
-        <div id="content">
-        {{- block "main" . }}{{- end }}
-        </div>
+    {{- partial "header/site-header.html" . -}}
+
+
+        <div id="content" class="py-0">
+            <aside>
+                <nav class="menu-trigger">
+                    <button class="btn p-0" onclick="showMenu()"><span class="fas fa-bars fa-3x"></span></button>
+                </nav>
+            </aside>
+            {{- block "content" . }}{{- end }}
+          <aside id="menu" class="col-lg-3 col-xxl-2 p-3 bg-dark">
+          {{ partial "menu" . }}
+          </aside>
+      </div>
+
         {{- partial "footer/site-footer.html" . -}}
         {{- partial "footer/scripts.html" . -}}
 </html>

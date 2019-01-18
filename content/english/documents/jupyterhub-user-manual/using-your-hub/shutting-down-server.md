@@ -1,7 +1,7 @@
 ---
 title: "Shutting Down Server"
 project: JupyterHub
-section: Using Your Notebook
+section: Using Your Hub
 date: 2019-01-14T13:06:08-05:00
 draft: false
 ---
@@ -19,6 +19,6 @@ This method is highly recommended as it stores the state of the machine prior to
 
 Alternatively, if your server is timed out due to inactivity \(ie: simply walking away from your live server\), we cannot guarantee automatic notebook booting upon your next login.
 
-{% hint style="success" %}
+{{< alert success >}}
 Manually shutting down your sever is the recommended best practice procedure for when you are done working on your server.
-{% endhint %}
+{{< /alert >}}

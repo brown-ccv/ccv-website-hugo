@@ -1,0 +1,37 @@
+// quick links
+.quick-links, .showcase {
+  .ccv-logo {
+    height: 10rem;
+    .c1 {
+      fill: gray;
+      fill-opacity: 0.5;
+    }
+    .c2 {
+      fill: teal;
+      fill-opacity: 0.5;
+    }
+    .v {
+      fill: darkgray;
+      fill-opacity: 0.5;
+    }
+  }
+  h1 {
+    font-size: $h1-font-size * 2 !important;
+    color: lightgray;
+  }
+}
+.showcase {
+  .container {
+    position: absolute;
+    z-index: 10;
+    opacity: 0.8;
+  }
+  h1 {
+    font-size: $h1-font-size * 2 !important;
+  }
+  .carousel-caption {
+    h1, p {
+      text-align: right !important;
+    }
+  }
+}

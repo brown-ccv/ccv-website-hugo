@@ -5,12 +5,12 @@ section: JupyterHub
 version: 1.0.0
 weight: 1
 subitems:
-  - subsection: Sign In
+  - subsection: "Step 1: Sign In"
     ref: "sign-in/"
-  - subsection: Sync Google Drive
+  - subsection: "Step 2: Sync Google Drive"
     ref: "sync-g-drive/"
-  - subsection: Import Notebooks
+  - subsection: "Step 3: Import Notebooks"
     ref: "import-notebooks/"
-  - subsection: Launch Notebook
+  - subsection: "Step 4: Launch a Notebook"
     ref: "launch-notebook/"
 ---

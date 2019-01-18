@@ -9,9 +9,9 @@ version: 1.0.0
 
 # Opening an Existing Notebook You Own from Google Drive
 
-{% hint style="warning" %}
-Prior to following these steps, please ensure you have followed the [Sync Google Drive](sign-in.md#how-to-enable-google-drive) instructions.
-{% endhint %}
+{{% alert warning %}}
+Prior to following these steps, please ensure you have followed the [Sync Google Drive]({{< ref "sign-in.md#how-to-enable-google-drive" >}}) instructions.
+{{% /alert %}}
 
 Now that your drive has been synced, navigate to a Jupyter Notebook \(.ipynb\) file you wish to open and double click on it to launch a kernel session with that notebook.
 
@@ -22,9 +22,9 @@ Now that your drive has been synced, navigate to a Jupyter Notebook \(.ipynb\) f
 
 ![](../.gitbook/assets/screenshot-from-2018-09-18-14-29-32.png)
 
-{% hint style="info" %}
+{{% alert info %}}
 If you do not have any existing notebooks, feel free to download and explore the Introduction to Python3 on Jupyter Notebooks by clicking [here](https://drive.google.com/drive/folders/15ztZjxdZ_eZC_RV5tEVmizNfNP8Km7oh)**.**
-{% endhint %}
+{{% /alert %}}
 
 # Errors Opening a Notebook Shared With You
 

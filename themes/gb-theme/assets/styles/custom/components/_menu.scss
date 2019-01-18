@@ -1,0 +1,47 @@
+.menu-trigger {
+    position: fixed;
+    right: 2em;
+    top: 2em;
+}
+
+#menu {
+  -moz-transform: translateX(22em);
+  -webkit-transform: translateX(22em);
+  -ms-transform: translateX(22em);
+  transform: translateX(22em);
+  -moz-transition: -moz-transform 0.45s ease, visibility 0.45s;
+  -webkit-transition: -webkit-transform 0.45s ease, visibility 0.45s;
+  -ms-transition: -ms-transform 0.45s ease, visibility 0.45s;
+  transition: transform 0.45s ease, visibility 0.45s;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 22em;
+  max-width: 80%;
+  height: 100%;
+  -webkit-overflow-scrolling: touch;
+  background: #585858;
+  color: #ffffff;
+  cursor: default;
+  visibility: hidden;
+  z-index: 10002;
+}
+
+
+.menu-visible {
+  -moz-transform: translateX(0) !important;
+  -webkit-transform: translateX(0) !important;
+  -ms-transform: translateX(0) !important;
+  transform: translateX(20px) !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+
+.menu-visible .close {
+    -moz-transform: scale(1.0) rotate(0deg);
+    -webkit-transform: scale(1.0) rotate(0deg);
+    -ms-transform: scale(1.0) rotate(0deg);
+    transform: scale(1.0) rotate(0deg);
+    opacity: 1;
+  }

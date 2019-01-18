@@ -7,6 +7,7 @@ weight: 0
 subitems:
   - subsection: getting-started
   - subsection: using-your-hub
+  - subsection: help-and-support
 ---
 # Introduction
 

@@ -1,0 +1,62 @@
+
+// hero
+#hero {
+  background-image: url("/images/bigdatablog.jpg");
+  background-size: cover;
+  background-position: 100% 100%;
+  background-attachment: fixed;
+  .brown-logo {
+    fill: white;
+    fill-opacity: 0.5;
+    height: 15rem;
+  }
+  .ccv-logo {
+    height: 15rem;
+    .c1 {
+      fill: gray;
+      fill-opacity: 0.6;
+    }
+    .c2 {
+      fill: teal;
+      fill-opacity: 0.7;
+    }
+    .v {
+      fill: white;
+      fill-opacity: 0.3;
+    }
+  }
+  svg {
+    padding: 1rem;
+  }
+  h1 {
+    font-weight: 600;
+    font-style: italic;
+    font-size: $h1-font-size * 1.2;
+    opacity: 0.8;
+  }
+  hr {
+    width: 150% !important;
+    opacity: 0.5;
+  }
+}
+
+
+// diagonal-carousel
+
+.diagonal {
+  background-color: darkslategray;
+  height: 80vh;
+  -webkit-transform: skewY(-5deg);
+  -moz-transform: skewY(-5deg);
+  -ms-transform: skewY(-5deg);
+  -o-transform: skewY(-5deg);
+  transform: skewY(-5deg);
+}
+
+.diagonal > .diagonal-child {
+    -webkit-transform: skewY(5deg);
+    -moz-transform: skewY(5deg);
+    -ms-transform: skewY(5deg);
+    -o-transform: skewY(5deg);
+    transform: skewY(5deg) translateY(-15vh);
+}

@@ -1,5 +1,5 @@
 ---
-title: "Step 1: Sign in"
+title: "Step 1: Sign In"
 project: JupyterHub
 section: Getting Started
 date: 2019-01-14T13:06:08-05:00
@@ -32,6 +32,10 @@ Once connected, you should arrive at the JupyterHub home page as seen below. For
 
 ![Home launch screen once a new server has been started.](../.gitbook/assets/home.png)
 
-{% hint style="info" %}
+{{< alert info >}}
  Once you have already started a server, future logins will automatically spawn any active notebooks automatically.
-{% endhint %}
+{{< /alert >}}
+
+{{% file-tree %}}
+test
+{{% /file-tree %}}

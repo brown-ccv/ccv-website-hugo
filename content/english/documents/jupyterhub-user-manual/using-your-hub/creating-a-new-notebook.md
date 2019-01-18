@@ -1,7 +1,7 @@
 ---
-title: "Creating a New Blank Notebook"
+title: "Creating a New Notebook"
 project: JupyterHub
-section: Using Your Notebook
+section: Using Your Hub
 date: 2019-01-14T13:06:08-05:00
 draft: false
 ---
@@ -10,7 +10,7 @@ draft: false
 
 If you do not have a previously existing notebook on your drive created, or wish to create a new notebook, use the Notebook Launcher tool for Google Drive by following these steps:
 
-1. Select ![](../.gitbook/assets/image%20%285%29.png)Google Drive browser from left sidebar
+1. Select  {{< fab "google-drive">}}Google Drive browser from left sidebar
 2. Create a new launcher using the ![](../.gitbook/assets/screenshot-from-2018-09-19-15-46-05.png)New Launcher button  
 3. Ensure the “**GDrive**” path is displayed for your launcher as seen below
 4. Navigate to the location within your drive you would like to store the new file
@@ -19,19 +19,19 @@ If you do not have a previously existing notebook on your drive created, or wish
 
 ![](../.gitbook/assets/screenshot-from-2018-09-18-14-21-03.png)
 
-{% hint style="warning" %}
+{{< alert warning >}}
 Please ensure that your Launcher process has the “GDrive” path specified \(as seen in the examples provided above\). If this is not displayed, carefully repeat the steps listed above.
-{% endhint %}
+{{< /alert >}}
 
-{% hint style="danger" %}
+{{% alert danger %}}
 If the “GDrive” path is not present from the launcher, then any notebook you create using the launcher **WILL NOT** **AUTOMATICALLY** **BE SAVED TO YOUR GOOGLE DRIVE AND THUS NOT SECURELY BACKED UP!**
-{% endhint %}
+{{% /alert %}}
 
 # Creating a Notebook on Locally on JupyterHub
 
-{% hint style="danger" %}
+{{< alert danger >}}
 Notebooks created and stored on locally on the JupyterHub are not automatically backed up.
-{% endhint %}
+{{< /alert >}}
 
 If you wish to create a temporary notebook for short-term usage that you would not like to store on you Google Drive, you can use the JupyterHub local drives as a workspace for notebooks. Notebooks created and stored on locally on the JupyterHub will persist between logins, but will not have any long-term backups synced unlike [Creating a Notebook on Google Drive](creating-a-new-notebook.md#creating-a-notebook-on-google-drive). Should you lose permissions to access the hub, or should the hub crash, these files will be lost.
 

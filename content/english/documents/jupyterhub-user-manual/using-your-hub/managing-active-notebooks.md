@@ -1,7 +1,7 @@
 ---
 title: "Managing Active Notebooks"
 project: JupyterHub
-section: Using Your Notebook
+section: Using Your Hub
 date: 2019-01-14T13:06:08-05:00
 draft: false
 ---
@@ -16,14 +16,14 @@ Additionally, you can manually manage actively running notebook kernels and term
 
 ![](../.gitbook/assets/image%20%284%29.png)
 
-{% hint style="info" %}
+{{< alert info >}}
  Shutting down a notebook kernel does note delete any of its content or data, but simply halts all running code until it has been restarted.
-{% endhint %}
+{{< /alert >}}
 
 # Restarting Notebook Kernel
 
 Periodically a given notebook may begin to misbehave. This can be due to a poorly constructed segment of code, resource overflows, or other similar events. A common solution to these types of problems is to restart the notebook kernel, which will release any memory and variable states of the notebook and reload them. This can be done by selecting **Kernel &gt; Restart Kernel**.
 
-{% hint style="info" %}
+{{< alert info >}}
 If you are experiencing poor performance or erratic behavior with a given notebook, it is typically a good first step to shutdown unused notebooks and restart the targeted notebook's kernel.
-{% endhint %}
+{{< /alert >}}
