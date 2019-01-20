@@ -1,37 +1,57 @@
-// quick links
-.quick-links, .showcase {
+// sections
+section {
   .ccv-logo {
     height: 10rem;
     .c1 {
       fill: gray;
-      fill-opacity: 0.5;
+      fill-opacity: 0.9;
     }
     .c2 {
+      fill: darkgray;
+      fill-opacity: 0.3;
+    }
+    .v {
       fill: teal;
       fill-opacity: 0.5;
     }
-    .v {
-      fill: darkgray;
-      fill-opacity: 0.5;
-    }
   }
-  h1 {
-    font-size: $h1-font-size * 2 !important;
-    color: lightgray;
+  header {
+    h1 {
+      font-size: $h1-font-size * 1.5 !important;
+      color: lightgray;
+    }
   }
 }
-.showcase {
-  .container {
-    position: absolute;
-    z-index: 10;
-    opacity: 0.8;
-  }
-  h1 {
-    font-size: $h1-font-size * 2 !important;
-  }
-  .carousel-caption {
-    h1, p {
-      text-align: right !important;
+.news {
+  article {
+    h1 {
+      font-size: $h1-font-size * 0.3;
+      color: lightgray;
+      margin-top: 1.4rem;
+      font-family: $font-family-base;
+    }
+    h2 {
+      font-family: $headings-font-family;
+      font-size: $h1-font-size * 0.4;
     }
   }
+}
+// diagonal
+
+.diagonal {
+  background-color: darkslategray;
+  height: 100vh;
+  -webkit-transform: skewY(-5deg);
+  -moz-transform: skewY(-5deg);
+  -ms-transform: skewY(-5deg);
+  -o-transform: skewY(-5deg);
+  transform: skewY(-5deg);
+}
+
+.diagonal > .diagonal-child {
+    -webkit-transform: skewY(5deg);
+    -moz-transform: skewY(5deg);
+    -ms-transform: skewY(5deg);
+    -o-transform: skewY(5deg);
+    transform: skewY(5deg) translateY(-15vh);
 }

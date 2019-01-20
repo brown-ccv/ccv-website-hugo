@@ -3,8 +3,7 @@
       crossorigin="anonymous">
 
 {{ $style := resources.Get "styles/scss/style.scss"  | resources.ToCSS | resources.Minify }}
+{{ $vendor := resources.Get "styles/css/vendor.css"  | resources.Minify }}
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-      crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="{{ $style.Permalink }}">
+<link rel="stylesheet" href="{{ $style.Permalink }}">
+<link rel="stylesheet" href="{{ $vendor.Permalink }}">

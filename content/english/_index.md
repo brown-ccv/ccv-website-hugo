@@ -40,11 +40,6 @@ quick_links:
       text: submit a ticket
       href:
       weight: 3
-    - name: YURT
-      icon: video-camera
-      text: Some text goes here
-      href:
-      weight: 7
     - name: Advanced Research Computing
       icon: code
       text: Some text goes here
@@ -56,7 +51,7 @@ quick_links:
       href:
       weight: 6
 showcase:
-  title: "@ Brown"
+  title: "CCV @ Brown"
   items:
     - title: Project 1
       team:
@@ -75,5 +70,5 @@ showcase:
       href:
 
 news:
-  title: News
+  title: Latest Updates
 ---

@@ -1,26 +1,31 @@
 <section id="section-1" class="bg-white py-6 quick-links">
+
   <div class="container">
     <div class="row justify-content-center">
-      <article class="col-md-12">
-        <div class="d-flex align-items-center">
-          {{ readFile .Params.hero.logo2 | safeHTML }}
-        <h1 class="">{{ .Params.quick_links.title | markdownify }}</h1>
-        </div>
-        <div class="row gutter-1 my-2">
-          {{ range $cards := sort ($.Params.quick_links.cards) "weight" "asc" }}
-              <div class="col-7 col-md-5 col-lg-3 scale p-2">
-                <div class="card  highlight ">
-                  <div class="card-body text-center px-0 py-1 py-md-2 py-lg-3">
-                    <span class="icon-{{.icon}} h1"></span>
-                    <h3 class="">{{ .name | markdownify }}</h3>
-                    <p>{{.text}}</p>
-                    <a href="#" class="eyebrow link">go to page</a>
+      <div class="col-md-12">
+
+        <header class="d-flex align-items-center">
+          <span class="btn btn-outline-dark btn-ico btn-lg btn-rounded mx-3"><i class="icon-link2 fs-22"></i></span>
+          <h1 class="">{{ .Params.quick_links.title | markdownify }}</h1>
+        </header>
+
+        <section>
+          <article class="row gutter-1 my-2">
+            {{ range $cards := sort ($.Params.quick_links.cards) "weight" "asc" }}
+                <div class="col-7 col-md-5 col-lg-3 scale p-2">
+                  <div class="card  highlight">
+                    <div class="card-body text-center px-0 py-1 py-md-2 py-lg-3">
+                      <span class="icon-{{.icon}} h1"></span>
+                      <h3 class="">{{ .name | markdownify }}</h3>
+                      <p>{{.text}}</p>
+                      <a href="#" class="eyebrow link">go to page</a>
+                    </div>
                   </div>
                 </div>
-              </div>
-          {{ end }}
-        </div>
-        <div class="card">
+            {{ end }}
+          </article>
+
+        <footer class="card">
             <div class="card-footer py-2">
               <h3 class="text-secondary">Not What You're Looking For?</h3>
             </div>
@@ -34,10 +39,10 @@
                   </div>
                 </div>
               </div>
+          </footer>
 
-            </div>
-
-      </article>
+        </section>
+      </div>
     </div>
   </div>
 </section>

@@ -45,3 +45,32 @@
     transform: scale(1.0) rotate(0deg);
     opacity: 1;
   }
+
+#menu-container {
+  height: 100vh;
+  .logos {
+    bottom: 0;
+    padding-bottom: 3rem;
+    padding-left: 1rem;
+    position: absolute;
+  }
+  svg {
+    height: 6rem;
+    z-index: 1000;
+    fill: white !important;
+    fill-opacity: 0.5;
+    padding: 1rem;
+    .c1 {
+      fill: white;
+      fill-opacity: 0.5;
+    }
+    .c2 {
+      fill: white;
+      fill-opacity: 0.2;
+    }
+    .v {
+      fill: white;
+      fill-opacity: 0.3;
+    }
+  }
+}

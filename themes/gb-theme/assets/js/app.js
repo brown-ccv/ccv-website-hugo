@@ -5,7 +5,7 @@
 
     // Launch Functions
     Launch: function () {
-      fn.Header();
+      // fn.Header();
       fn.Masonry();
       fn.Overlay();
       fn.Filetree();
@@ -16,11 +16,11 @@
     },
 
 
-    Header: function (){
-      $(document.body).headroom({
-        tolerance : 10
-      });
-    },
+    // Header: function (){
+    //   $(document.body).headroom({
+    //     tolerance : 10
+    //   });
+    // },
 
 
     Masonry: function() {
@@ -141,7 +141,7 @@
               }
           });
       });
-      
+
       $('.popup-youtube, .popup-vimeo, .popup-gmaps').magnificPopup({
         disableOn: 700,
         type: 'iframe',
@@ -177,8 +177,8 @@
 
 
       // skrollr
-      skrollr.init({  
-          forceHeight: false,        
+      skrollr.init({
+          forceHeight: false,
           mobileCheck: function() {
               //hack - forces mobile version to be off
               return false;

@@ -1,28 +1,44 @@
-<section id="section-3" class="bg-dark py-6 quick-links">
+<section id="section-2" class="bg-light py-6 news">
   <div class="container">
-    <div class="row justify-content-center">
-      <article class="col-md-12">
-        <div class="d-flex align-items-center">
-          {{ readFile .Params.hero.logo2 | safeHTML }}
-        <h1 class="">{{ .Params.news.title | markdownify }}</h1>
-        </div>
-        <div class="row gutter-1 my-2 col-md-9">
-          {{ range $cards := sort ($.Params.quick_links.cards) "weight" "asc" }}
-              <div class="col-9 col-md-5 col-lg-4 scale p-2">
-                <div class="type boxed" style="background-image: url('/images/stocks.png'); background-size: cover;">
+    <div class="col-md-12">
+        <header class="align-items-center row">
+          <span class="btn btn-outline-dark btn-ico btn-lg btn-rounded mx-3"><i class="icon-clock fs-22"></i></span>
+          <h1>{{ .Params.news.title | markdownify }}</h1>
+        </header>
+
+        <div class="row">
+        <article class="col-md-8 row">
+          {{ range (first 6 .Site.Pages.ByPublishDate.Reverse) }}
+          <div class="col-9 col-md-5 col-lg-4">
+            <div class="py-2">
+              <a id="test" class="page-box" data-target="{{sha1 .Title }}">
+                <div class="type boxed scale" style="background-image: url('/images/stocks.png'); background-size: cover;">
                   <div>
-                    <span class="badge badge-primary">Tag</span>
-                    <h5 class="type-title text-light">News</h5>
+                    <span class="badge badge-primary">{{ .Section }}</span>
+                    <small class="type-title text-light">{{ truncate 70 .Content}}</small>
                     <div class="type-example">
-                      <span class="type-title text-light">HL</span>
+                      <h2 class="type-title text-light">{{ .Title }}</h2>
                     </div>
                   </div>
                 </div>
-              </div>
+              </a>
+            </div>
+          </div>
           {{ end }}
+        </article>
+
+        <aside class="col-md-3 col-lg-4 px-2">
+
+        {{ range (first 6 .Site.Pages.ByPublishDate.Reverse) }}
+          <div class="page-summary" id="{{ sha1 .Title }}">
+            <h1>{{ .Title }}</h1>
+            {{ truncate 500 .Summary | markdownify }}
+          </div>
+        {{ end }}
+
+        </aside>
         </div>
 
-      </article>
     </div>
   </div>
 </section>

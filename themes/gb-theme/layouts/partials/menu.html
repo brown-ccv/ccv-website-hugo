@@ -1,38 +1,47 @@
 
 <!-- sidebar start -->
-<nav class="sticky">
-    <div class="container">
-        <div class="row">
-            <button class="btn menu-trigger" onclick="hideMenu()"><span id="menu-close" class="fas fa-times fa-3x"></span></button>
-        </div>
-        <div class="row">
-            <ul class="nav flex-column">
-                {{ $currentPage := . }}
-                {{ range .Site.Menus.main }}
-                    {{ if .HasChildren }}
-                        <li class="nav-item {{ if $currentPage.HasMenuCurrent "main" . }}active{{ end }}">
-                            <a class="nav-link" href="#">
-                                {{ .Pre }}
-                                <span><h3>{{ .Name }}</h3></span>
-                            </a>
-                        </li>
-                        <ul class="sub-menu">
-                            {{ range .Children }}
-                                <li class="{{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }}">
-                                    <a class="nav-link" href="{{ .URL }}"><h3>{{ .Name }}</h3></a>
-                                </li>
-                            {{ end }}
-                        </ul>
-                    {{ else }}
-                        <li  class="nav-item">
-                            <a class="nav-link" href="{{ .URL }}">
-                                {{ .Pre }}
-                                <span class="text-light h4">{{ .Name }}</span>
-                            </a>
-                        </li>
-                    {{ end }}
-                {{ end }}
-            </ul>
-        </div>
+<nav id="menu-container">
+    <div class="row">
+        <button class="btn menu-trigger">
+            <span id="menu-close" class="fas fa-times fa-3x"></span>
+        </button>
     </div>
+    
+    <div class="row">
+        <ul class="nav flex-column">
+            {{ $currentPage := . }}
+            {{ range .Site.Menus.main }}
+                {{ if .HasChildren }}
+                    <li class="nav-item {{ if $currentPage.HasMenuCurrent "main" . }}active{{ end }}">
+                        <a class="nav-link" href="#">
+                            {{ .Pre }}
+                            <span><h3>{{ .Name }}</h3></span>
+                        </a>
+                    </li>
+                    <ul class="sub-menu">
+                        {{ range .Children }}
+                            <li class="{{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }}">
+                                <a class="nav-link" href="{{ .URL }}">
+                                <h3>{{ .Name }}</h3>
+                                </a>
+                            </li>
+                        {{ end }}
+                    </ul>
+                {{ else }}
+                    <li  class="nav-item">
+                        <a class="nav-link" href="{{ .URL }}">
+                            {{ .Pre }}
+                            <span class="text-light h4">{{ .Name }}</span>
+                        </a>
+                    </li>
+                {{ end }}
+            {{ end }}
+        </ul>
+    </div>
+
+    <div class="row logos">
+    {{ readFile "/themes/gb-theme/static/images/brown-v.svg" | safeHTML }}
+    {{ readFile "/themes/gb-theme/static/images/ccv-logo.svg" | safeHTML }}
+    </div>
+
 </nav>

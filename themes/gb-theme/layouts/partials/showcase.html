@@ -1,38 +1,49 @@
-<section id="section-2" class="bg-dark text-light showcase">
+<section id="section-3" class="bg-white showcase">
+  <section>
+
   <div class="container">
     <div class="row justify-content-center">
-      <article class="col-md-12">
-        <div class="d-flex align-items-center">
-          {{ readFile .Params.hero.logo2 | safeHTML }}
-        <h1 class="text-light">{{ .Params.showcase.title | markdownify }}</h1>
-        </div>
+      <div class="col-md-12">
+
+        <header class="d-flex align-items-center">
+          <span class="btn btn-outline-dark btn-ico btn-lg btn-rounded mx-3">
+            <i class="fas fa-project-diagram"></i>
+          </span>
+          <h1 class="py-8">{{ .Params.showcase.title | markdownify }}</h1>
+        </header>
+        <section>
+
+        </section>
       </div>
     </div>
+  </div>
+</section>
+<section>
+<div class="owl-carousel
+            owl-carousel-showcase
+            owl-carousel-fluid
+            owl-loaded owl-drag
+            skrollable
+            skrollable-before"
+      data-items="[2,2,1]"
+      data-center="true"
+      data-nav="true"
+      data-margin="20"
+      data-loop="true"
+      >
+  {{ range $index, $item := .Params.showcase.items }}
+  <figure class="photo">
+    <a class="lightbox" href="" title="Image title">
+      <img src="{{ .image }}" alt="Image">
+      <div class="carousel-caption flex-column d-flex">
+        <h1 class="text-light">{{ .title }}</h1>
+        <p class="h3 text-light">{{ .text }}</p>
+        <p><a href="#" class="eyebrow link">Read More</a></p>
+      </div>
+    </a>
+  </figure>
 
-     <div id="carouselProjects" class="carousel slide" data-ride="carousel" data-items="[3,2,1]" data-margin="10">
-       <div class="carousel-inner">
-         {{ range $index, $item := .Params.showcase.items }}
-         <div class="carousel-item {{if (eq $index 0) }}active{{ end }}">
-           <img class="w-100" src="{{ .image }}" alt="First slide">
-           <div class="carousel-caption flex-column d-flex">
-             <h1 class="text-light">{{ .title }}</h1>
-             <p class="h3 text-light">{{ .text }}</p>
-             <p><a href="#" class="eyebrow link">Read More</a></p>
-           </div>
-         </div>
-         {{ end }}
-
-       </div>
-       <a class="carousel-control-prev" href="#carouselProjects" role="button" data-slide="prev">
-         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-         <span class="sr-only">Previous</span>
-       </a>
-       <a class="carousel-control-next" href="#carouselProjects" role="button" data-slide="next">
-         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-         <span class="sr-only">Next</span>
-       </a>
-     </div>
-
-
-
+  {{ end }}
+</div>
+</section>
 </section>

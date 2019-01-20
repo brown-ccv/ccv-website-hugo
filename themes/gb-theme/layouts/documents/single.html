@@ -3,8 +3,8 @@
   <div class="sticky">
     <nav class="navbar navbar-vertical navbar-expand-lg navbar-light">
       <div>
-        <img src="/images/logo.svg" alt="Logo">
-        <a href="../../index.html" class="navbar-brand"><span class="badge badge-red ml-3">Resources</span></a>
+        {{ readFile "/themes/gb-theme/static/images/ccv-logo.svg" | safeHTML }}
+        <!-- <a class="navbar-brand"><span class="badge badge-dark ml-1">Resources</span></a> -->
         <h2>{{ .Params.Project }}</h2>
         {{ $main_title := .Params.section }}
         {{ $page_title := .Title }}
