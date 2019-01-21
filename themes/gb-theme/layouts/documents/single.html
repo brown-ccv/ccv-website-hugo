@@ -2,8 +2,7 @@
 <aside class="col-lg-3 col-xxl-2 p-3 doc-sidebar">
   <div class="sticky">
     <nav class="navbar navbar-vertical navbar-expand-lg navbar-light">
-      <div>
-        {{ readFile "/themes/gb-theme/static/images/ccv-logo.svg" | safeHTML }}
+      <div class="d-flex row align-middle">
         <!-- <a class="navbar-brand"><span class="badge badge-dark ml-1">Resources</span></a> -->
         <h2>{{ .Params.Project }}</h2>
         {{ $main_title := .Params.section }}
@@ -35,6 +34,7 @@
         </ul>
       </div>
     </nav>
+    {{ readFile "/themes/gb-theme/static/images/ccv-logo.svg" | safeHTML }}
   </div>
 </aside>
 {{ end }}

@@ -6,7 +6,7 @@
             <span id="menu-close" class="fas fa-times fa-3x"></span>
         </button>
     </div>
-    
+
     <div class="row">
         <ul class="nav flex-column">
             {{ $currentPage := . }}
@@ -28,7 +28,7 @@
                         {{ end }}
                     </ul>
                 {{ else }}
-                    <li  class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ .URL }}">
                             {{ .Pre }}
                             <span class="text-light h4">{{ .Name }}</span>

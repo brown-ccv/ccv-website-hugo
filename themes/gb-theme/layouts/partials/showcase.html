@@ -18,7 +18,7 @@
     </div>
   </div>
 </section>
-<section>
+<section class="bg-white row">
 <div class="owl-carousel
             owl-carousel-showcase
             owl-carousel-fluid
@@ -27,9 +27,10 @@
             skrollable-before"
       data-items="[2,2,1]"
       data-center="true"
-      data-nav="true"
+      data-nav="false"
       data-margin="20"
       data-loop="true"
+      data-dots="true"
       >
   {{ range $index, $item := .Params.showcase.items }}
   <figure class="photo">
@@ -38,7 +39,7 @@
       <div class="carousel-caption flex-column d-flex">
         <h1 class="text-light">{{ .title }}</h1>
         <p class="h3 text-light">{{ .text }}</p>
-        <p><a href="#" class="eyebrow link">Read More</a></p>
+        <p><a href="#" class="eyebrow link text-orange">Read More</a></p>
       </div>
     </a>
   </figure>

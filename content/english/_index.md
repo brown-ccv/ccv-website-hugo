@@ -21,7 +21,7 @@ quick_links:
       href:
       weight: 0
     - name: High Performance Computing
-      icon: hard-drive
+      icon: server2
       text: Some text goes here
       href:
       weight:

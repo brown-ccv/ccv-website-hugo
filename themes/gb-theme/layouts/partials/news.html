@@ -31,6 +31,8 @@
 
         {{ range (first 6 .Site.Pages.ByPublishDate.Reverse) }}
           <div class="page-summary" id="{{ sha1 .Title }}">
+            <small><strong>{{ humanize .Section }} | {{ .Params.project }}</strong></small>
+
             <h1>{{ .Title }}</h1>
             {{ truncate 500 .Summary | markdownify }}
           </div>
