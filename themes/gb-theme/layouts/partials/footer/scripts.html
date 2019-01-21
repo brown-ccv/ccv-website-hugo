@@ -1,6 +1,7 @@
 {{ $vendor := resources.Get "js/vendor.js" }}
 {{ $app := resources.Get "js/app.js" }}
 {{ $custom := resources.Get "js/custom.js" }}
+{{ $search := resources.Get "js/search.js"}}
 
 {{ $js := slice $custom $vendor $app | resources.Concat "js/bundle.js"  }}
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -12,8 +13,13 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.0/fuse.min.js"></script>
 
-<script type="text/javascript" src="{{ $js.Permalink }}"></script>
+<script src="{{ $js.Permalink }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.js"></script>
+
+<script src="{{ $search.Permalink }}"></script>
+
 
 </body>
 </html>
