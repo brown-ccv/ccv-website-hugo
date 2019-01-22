@@ -4,12 +4,12 @@
     <div class="container">
       <div class="vh-100 py-10 row align-items-end justify-content-around">
           <div class="row">
-          {{ readFile .Params.hero.logo1 | safeHTML }}
+          <!-- {{ readFile .Params.hero.logo1 | safeHTML }} -->
           {{ readFile .Params.hero.logo2 | safeHTML }}
           </div>
           <div class="col-md-11">
 
-          <h1 class="text-light">{{ upper .Params.hero.title}}</h1>
+          <h1 class="text-light">{{ upper .Params.hero.title }}</h1>
           <hr class="bg-light w-100">
           <p class="h2 text-light">{{ .Params.hero.lead }}</p>
           <a data-scroll href="#section-1" class="btn btn-outline-white btn-ico btn-lg btn-rounded mt-5"><i class="icon-arrow-down2 fs-22"></i></a>

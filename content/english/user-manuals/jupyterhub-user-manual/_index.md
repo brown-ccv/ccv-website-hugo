@@ -1,7 +1,7 @@
 ---
 Title: JupyterHub
 type: JupyterHub
-section: Documentation
+section: User Manuals
 version: 1.0.0
 weight: 0
 subitems:

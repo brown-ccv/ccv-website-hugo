@@ -5,7 +5,7 @@
       <div class="col-md-12">
 
         <header class="d-flex align-items-center">
-          <span class="btn btn-outline-dark btn-ico btn-lg btn-rounded mx-3"><i class="icon-link2 fs-22"></i></span>
+          <span class="btn-primary btn-ico btn-lg btn-rounded mx-3"><i class="icon-link2 fs-40"></i></span>
           <h1 class="">{{ .Params.quick_links.title | markdownify }}</h1>
         </header>
 
@@ -32,10 +32,12 @@
               <div class="card-body py-2">
                 <div class="row">
                   <div class="col-md-8 col-lg-10">
-                    <input type="text" class="form-control form-control-minimal" placeholder="Search the CCV Site here ..." aria-label="Search">
+                    <form id="search-form" action="{{ "search" | absURL }}">
+                      <input id="search-query" name="s" type="text" class="form-control form-control-minimal" placeholder="Search the CCV Site here ..." aria-label="Search">
+                    </form>
                   </div>
                   <div class="col-md-4 col-lg-2">
-                    <button type="button" class="btn btn-block btn-dark">Search</button>
+                    <button form="search-form" type="submit" class="btn btn-block btn-dark" value="Submit">Search</button>
                   </div>
                 </div>
               </div>

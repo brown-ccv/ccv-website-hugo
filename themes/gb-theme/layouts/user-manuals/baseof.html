@@ -5,11 +5,17 @@
 
 <section class="py-0">
   <div class="container-fluid">
+    <aside class="row">
+      <nav>
+          <button class="btn p-0 menu-trigger"><span class="fas fa-bars fa-3x"></span></button>
+      </nav>
+    </aside>
     <div class="row justify-content-between">
 
       <!-- navigation -->
       {{- block "navigation" . }}{{- end}}
       <!-- / navigation -->
+
       <!-- content -->
       <article class="col-lg-9 col-xxl-10 doc-content">
 
@@ -21,6 +27,9 @@
             <div class="sticky">
               {{ .TableOfContents }}
             </div>
+          </aside>
+          <aside id="menu" class="col-lg-3 col-xxl-2 p-3 bg-dark">
+          {{ partial "blocks/menu" . }}
           </aside>
         </div>
       </article>

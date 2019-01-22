@@ -35,7 +35,3 @@ Once connected, you should arrive at the JupyterHub home page as seen below. For
 {{< alert info >}}
  Once you have already started a server, future logins will automatically spawn any active notebooks automatically.
 {{< /alert >}}
-
-{{% file-tree %}}
-test
-{{% /file-tree %}}

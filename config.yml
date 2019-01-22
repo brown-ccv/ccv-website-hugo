@@ -12,6 +12,35 @@ outputs:
 DefaultContentLanguage: en
 canonifyURLs: true
 relativeURLs: true
+
+menu:
+  main:
+  - identifier: about
+    name: About
+    title: About
+    url: /about/
+    weight: 1
+  - identifier: services
+    name: Services
+    title: Services
+    url: /services/
+    weight: 2
+  - identifier: resources
+    name: Resources
+    title: Resources
+    url: /resources/
+    weight: 2
+  - identifier: documentation
+    name: User Manuals
+    title: Documentation
+    url: /documents/
+    weight: 3
+  - identifier: blog
+    name: Blog
+    title: Blog
+    url: /blog/
+    weight: 4
+
 disableLanguages:
   - pt
 languages:
@@ -19,53 +48,8 @@ languages:
     languageName: English
     weight: 1
     contentDir: content/english
-    menu:
-      main:
-      - identifier: about
-        name: About
-        title: About
-        url: /about/
-        weight: 1
-      - identifier: services
-        name: Services
-        title: Services
-        url: /services/
-        weight: 2
-      - identifier: documentation
-        name: Documentation
-        title: Documentation
-        url: /documents/
-        weight: 3
-      - identifier: blog
-        name: Blog
-        title: Blog
-        url: /blog/
-        weight: 4
-
 
   pt:
     languageName: Portuguese
     weight: 2
     contentDir: content/portuguese
-    menu:
-      main:
-      - identifier: sobre
-        name: Sobre
-        title: sobre section
-        url: /about/
-        weight: 1
-      - identifier: serviços
-        name: Serviços
-        title: serviços section
-        url: /services/
-        weight: 2
-      - identifier: documentação
-        name: Documentação
-        title: documentação section
-        url: /documents/
-        weight: 3
-      - identifier: blog
-        name: Blog
-        title: blog section
-        url: /blog/
-        weight: 4
