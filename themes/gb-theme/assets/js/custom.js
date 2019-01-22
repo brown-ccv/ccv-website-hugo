@@ -20,4 +20,11 @@ $(function () {
         $('.page-summary').addClass('d-none');
         $(`#${targetId}`).removeClass('d-none');
     });
+
+// // Toggle collapse
+//     $('button').click(function () {
+//         const targetId = $(this).attr('data-target');
+//         $(`${targetId}`).removeClass('show');
+//         $(`${targetId}`).addClass('collapse');
+//     })
 });
