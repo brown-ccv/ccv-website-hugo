@@ -5,4 +5,5 @@ draft: false
 category: ""
 lead: ""
 weight: 0
+icon: check
 ---
