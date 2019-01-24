@@ -1,6 +1,6 @@
 <!-- hero -->
-  <section id="hero" class="p-10 bg-white">
-      <div class="p-10 vh-80 row align-items-start">
+  <section id="hero" class=" bg-light vh-80">
+      <div class="p-10  row align-items-start">
 
           <div class="col-md-8 d-flex flex-column">
 
@@ -8,7 +8,11 @@
           <hr class="bg-light w-100">
           <p class="fs-30 text-light">{{ .Params.hero.lead }}</p>
 
-        </div>
+          </div>
+
+      </div>
+      <div class="row d-flex justify-content-end px-10">
+        {{ readFile "/themes/gb-theme/static/images/background.svg" | safeHTML }}
       </div>
   </section>
 <!-- / hero -->

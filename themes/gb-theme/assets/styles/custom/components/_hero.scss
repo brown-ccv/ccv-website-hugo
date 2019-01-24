@@ -1,9 +1,9 @@
 
 // hero
 #hero {
-  background-image: url("/images/background.svg");
+  background-image: url("/images/background-image.svg");
+  background-position: 20% 25%;
   background-size: cover;
-  background-position: 20% 20%;
   .brown-logo {
     fill: white;
     fill-opacity: 0.5;
@@ -35,4 +35,9 @@
   hr {
     opacity: 0.5;
   }
+}
+.iso-ccv {
+  height: 30rem;
+  margin-left: 2rem;
+  margin-top: -12rem;
 }
