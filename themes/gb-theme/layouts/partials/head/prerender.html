@@ -4,6 +4,8 @@
 
 {{ $style := resources.Get "styles/scss/style.scss"  | resources.ToCSS | resources.Minify }}
 {{ $vendor := resources.Get "styles/css/vendor.css"  | resources.Minify }}
+{{ $brown := resources.Get "styles/brown/styles.css"  | resources.Minify }}
 
 <link rel="stylesheet" href="{{ $style.Permalink }}">
 <link rel="stylesheet" href="{{ $vendor.Permalink }}">
+<!-- <link rel="stylesheet" href="{{ $brown.Permalink }}"> -->

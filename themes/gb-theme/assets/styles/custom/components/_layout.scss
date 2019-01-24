@@ -55,3 +55,14 @@ section {
     -o-transform: skewY(5deg);
     transform: skewY(5deg) translateY(-15vh);
 }
+
+.badge-outline {
+  border: solid 3px;
+  padding: 1rem;
+  background: white;
+}
+
+.badge-outline-primary {
+  border-color: $blue;
+  color: $blue;
+}
