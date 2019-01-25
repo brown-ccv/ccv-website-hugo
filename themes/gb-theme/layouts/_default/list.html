@@ -1,23 +1,25 @@
 {{ define "content"}}
 
 {{ $current_section := .Section }}
-<section id="section-1" class="bg-light">
-  <header class="d-flex align-items-center vh-80 bg-dark">
-    <div class="container">
-      <div class="row align-items-end justify-content-around">
-        <div class="py-4">
-        {{ readFile  "themes/gb-theme/static/images/ccv-logo.svg" | safeHTML }}
-        </div>
-        <div class="col-md-12 px-5">
+<section id="hero" class=" bg-light vh-40">
+    <div class="p-10  row align-items-start">
 
-          <h1 class="text-light">{{ humanize .Section }}</h1>
-          <hr class="bg-light w-100">
-          <p class="fs-30 text-light">{{ .Params.hero.lead }}</p>
-          <a data-scroll href="#section" class="btn btn-outline-white btn-ico btn-lg btn-rounded mt-5"><i class="icon-arrow-down2 fs-40"></i></a>
+        <div class="col-md-8 d-flex flex-column">
+
+
+        <p class="fs-40 text-dark h3">{{ .Params.hero.lead }}</p>
+        <div class="row d-flex">
+          <h1 class="text-dark section-title">
+            {{ readFile ( printf "/themes/gb-theme/static/images/iso-%s.svg" .Section ) | safeHTML }}
+          </h1>
+
         </div>
-      </div>
+        </div>
     </div>
-  </header>
+    <div class="row ">
+
+    </div>
+</section>
 
   <div class="container py-10">
     <div class="row justify-content-center">
