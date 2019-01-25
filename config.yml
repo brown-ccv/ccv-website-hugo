@@ -18,7 +18,7 @@ menu:
   main:
   - identifier: home
     name: Home
-    title: Homt
+    title: Home
     url: /
     weight: 0
   - identifier: about

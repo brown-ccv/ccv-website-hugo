@@ -1,18 +1,31 @@
 <!-- hero -->
-  <section id="hero" class=" bg-light vh-80">
+  <section id="hero" class=" bg-light vh-70">
       <div class="p-10  row align-items-start">
 
           <div class="col-md-8 d-flex flex-column">
 
-          <h1 class="text-light">{{ upper .Params.hero.title }}</h1>
-          <hr class="bg-light w-100">
+          <h1 class="text-dark">{{ upper .Params.hero.title }}</h1>
           <p class="fs-30 text-light">{{ .Params.hero.lead }}</p>
-
+          <div class="row d-flex">
+              <ul class="nav">
+                  {{ $currentPage := . }}
+                  {{ range .Site.Menus.main }}
+                  {{ if ne .Name "Home" }}
+                  <li class="mx-1 nav-item  bg-green shadow lift">
+                      <a class="nav-link" href="{{ .URL }}">
+                          {{ .Pre }}
+                          <span class="text-light h4">{{ .Name }}</span>
+                      </a>
+                  </li>
+                  {{ end }}
+                  {{ end }}
+              </ul>
+          </div>
           </div>
 
       </div>
       <div class="row d-flex justify-content-end px-10">
-        {{ readFile "/themes/gb-theme/static/images/background.svg" | safeHTML }}
+        {{ readFile "/themes/gb-theme/static/images/isometric-ccv.svg" | safeHTML }}
       </div>
   </section>
 <!-- / hero -->
