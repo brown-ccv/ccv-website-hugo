@@ -1,26 +1,34 @@
 {{ define "content"}}
 
 {{ $current_section := .Section }}
-<section id="hero" class=" bg-light vh-40">
-    <div class="p-10  row align-items-start">
-
-        <div class="col-md-8 d-flex flex-column">
-
-
-        <p class="fs-40 text-dark h3">{{ .Params.hero.lead }}</p>
-        <div class="row d-flex">
-          <h1 class="text-dark section-title">
-            {{ readFile ( printf "/themes/gb-theme/static/images/iso-%s.svg" .Section ) | safeHTML }}
-          </h1>
-
-        </div>
+<section id="hero-list" class=" bg-yellow text pb-5">
+<div class="container">
+    <div class="pt-2 row">
+        <div class="col-md-12 d-flex flex-column">
+          <h1 class="fs-60"> {{ humanize .Section }} </h1>
+          <p class="fs-30">{{ .Params.hero.lead }}</p>
         </div>
     </div>
-    <div class="row ">
-
-    </div>
+</div>
 </section>
-
+<div class="container">
+  <div class="row">
+    <ul class="nav d-flex justify-content-between">
+      {{ range $key, $value := .Site.Taxonomies.category }}
+      {{ range first 1 $value.Pages }}
+      {{ if eq .Section $current_section }}
+        <li class="mx-1 nav-item  bg-green shadow lift my-1">
+            <a class="nav-link" href="">
+                <span class="text-dark icon-{{.Params.icon}} pr-1 fs-24"></span>
+                <span class="text-dark fs-20">{{ humanize $key }}</span>
+            </a>
+        </li>
+        {{ end }}
+        {{ end }}
+        {{ end }}
+    </ul>
+  </div>
+</div>
   <div class="container py-10">
     <div class="row justify-content-center">
       <div class="col-md-12">

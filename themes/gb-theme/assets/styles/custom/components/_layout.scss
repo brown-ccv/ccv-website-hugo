@@ -3,16 +3,16 @@ section {
   .ccv-logo {
     height: 10rem;
     .c1 {
-      fill: gray;
-      fill-opacity: 0.9;
+      fill: $yellow;
+      fill-opacity: 1;
     }
     .c2 {
-      fill: darkgray;
-      fill-opacity: 0.3;
+      fill: $green;
+      fill-opacity: 1;
     }
     .v {
-      fill: teal;
-      fill-opacity: 0.5;
+      fill: $yellow;
+      fill-opacity: 1;
     }
   }
   header {

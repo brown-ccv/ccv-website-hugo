@@ -5,16 +5,17 @@
           <div class="col-md-8 d-flex flex-column">
 
           <h1 class="text-dark">{{ upper .Params.hero.title }}</h1>
-          <p class="fs-30 text-light">{{ .Params.hero.lead }}</p>
+          <p class="fs-30 text-medium-brown">{{ .Params.hero.lead }}</p>
           <div class="row d-flex">
               <ul class="nav">
                   {{ $currentPage := . }}
                   {{ range .Site.Menus.main }}
-                  {{ if ne .Name "Home" }}
+                  {{ if in "Resources, Services" .Name }}
                   <li class="mx-1 nav-item  bg-green shadow lift">
                       <a class="nav-link" href="{{ .URL }}">
                           {{ .Pre }}
-                          <span class="text-light h4">{{ .Name }}</span>
+                          <span class="text-sand pr-1 icon-{{if eq .Name `Resources`}}server2{{ else }}users2{{end}} fs-24"></span>
+                          <span class="text-beige fs-28 font-weight-bold">{{ .Name }}</span>
                       </a>
                   </li>
                   {{ end }}
