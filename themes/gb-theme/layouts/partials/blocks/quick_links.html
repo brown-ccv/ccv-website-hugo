@@ -10,11 +10,11 @@
         </header>
 
         <section>
-          <article class="row gutter-1 my-2">
+          <article class="row">
             {{ range $cards := sort ($.Params.quick_links.cards) "weight" "asc" }}
-                <div class="col-7 col-md-5 col-lg-3 scale p-2">
-                  <div class="card  highlight">
-                    <div class="card-body text-center px-0 py-1 py-md-2 py-lg-3">
+                <div class="col-7 col-md-5 col-lg-3 p-2">
+                  <div class="card scale">
+                    <div class="card-body text-center">
                       <span class="icon-{{.icon}} h1"></span>
                       <h3 class="">{{ .name | markdownify }}</h3>
                       <p>{{.text}}</p>
@@ -26,10 +26,10 @@
           </article>
 
         <footer class="card">
-            <div class="card-footer py-2">
-              <h3 class="text-secondary">Not What You're Looking For?</h3>
+            <div class="card-footer">
+              <p class="text-secondary fs-20 font-weight-bold">Not What You're Looking For?</p>
             </div>
-              <div class="card-body py-2">
+              <div class="card-body">
                 <div class="row">
                   <div class="col-md-8 col-lg-10">
                     <form id="search-form" action="{{ "search" | absURL }}">
@@ -37,7 +37,7 @@
                     </form>
                   </div>
                   <div class="col-md-4 col-lg-2">
-                    <button form="search-form" type="submit" class="btn btn-block btn-dark" value="Submit">Search</button>
+                    <button form="search-form" type="submit" class="btn btn-block btn-dark font-weight-bold fs-16" value="Submit">Search</button>
                   </div>
                 </div>
               </div>

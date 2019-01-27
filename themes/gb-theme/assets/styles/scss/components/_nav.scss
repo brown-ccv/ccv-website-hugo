@@ -121,7 +121,7 @@
 		position: absolute;
 		top: -40px;
 		left: -$border-width;
-		content: "Table of Contents";
+		// content: "Table of Contents";
 		padding: 0 $card-spacer-x;
 		line-height: 40px;
 		color: $gray-500;
@@ -163,7 +163,7 @@
 			@include transition;
 			opacity: 0;
 			margin-left: 1rem;
-			content: "view now";
+			content: "view";
 			text-transform: uppercase;
 			letter-spacing: $letter-spacing;
 			font-size: 12px;
@@ -221,7 +221,7 @@
       }
     }
 
-    &[aria-expanded="true"] { 
+    &[aria-expanded="true"] {
       &::after {
         @include rotate(180deg);
       }
@@ -283,7 +283,7 @@
       }
     }
 
-    &[aria-expanded="true"] { 
+    &[aria-expanded="true"] {
       &::after {
         @include rotate(180deg);
       }

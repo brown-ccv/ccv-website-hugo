@@ -20,32 +20,32 @@ menu:
     name: Home
     title: Home
     url: /
-    weight: 0
+    weight: 1
   - identifier: about
     name: About
     title: About
     url: /about/
-    weight: 1
+    weight: 2
   - identifier: services
     name: Services
     title: Services
     url: /services/
-    weight: 2
+    weight: 3
   - identifier: resources
     name: Resources
     title: Resources
     url: /resources/
-    weight: 2
+    weight: 4
   - identifier: documentation
     name: User Manuals
     title: User Manuals
     url: /user-manuals/
-    weight: 3
+    weight: 5
   - identifier: blog
     name: Blog
     title: Blog
     url: /posts/
-    weight: 4
+    weight: 6
 
 # i18n
 disableLanguages:

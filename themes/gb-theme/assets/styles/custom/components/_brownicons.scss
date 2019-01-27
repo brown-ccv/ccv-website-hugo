@@ -2,11 +2,11 @@
 /* start Brown icons font */
 @font-face {
   font-family: "brown-icons";
-  src: url("fonts/brownicons/brown-icons.eot");
-  src: url("fonts/brownicons/brown-icons.eot?#iefix") format("embedded-opentype"),
-  url("fonts/brownicons/brown-icons.woff") format("woff"),
-  url("fonts/brownicons/brown-icons.ttf") format("truetype"),
-  url("fonts/brownicons/brown-icons.svg#brown-icons") format("svg");
+  src: url("/fonts/brown-icons.eot");
+  src: url("/fonts/brown-icons.eot?#iefix") format("embedded-opentype"),
+  url("/fonts/brown-icons.woff") format("woff"),
+  url("/fonts/brown-icons.ttf") format("truetype"),
+  url("/fonts/brown-icons.svg#brown-icons") format("svg");
   font-weight: normal;
   font-style: normal; }
 [data-icon]::before {

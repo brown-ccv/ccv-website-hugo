@@ -1,24 +1,26 @@
 {{ define "content"}}
 
+<!-- header - yellow container -->
 {{ $current_section := .Section }}
-<section id="hero-list" class=" bg-yellow text pb-5">
+<div id="hero-list" class=" bg-yellow text pb-5">
 <div class="container">
-    <div class="pt-2 row">
-        <div class="col-md-12 d-flex flex-column">
+    <div class="row">
+        <div class="col-md-12 d-flex flex-column pt-6 pb-10">
           <h1 class="fs-60"> {{ humanize .Section }} </h1>
           <p class="fs-30">{{ .Params.hero.lead }}</p>
         </div>
     </div>
 </div>
-</section>
-<div class="container">
-  <div class="row">
-    <ul class="nav d-flex justify-content-between">
+</div>
+
+<!-- table of contents -->
+  <div class="col-lg-6 overlay-top">
+    <ul class="nav nav-toc-page flex-column boxed">
       {{ range $key, $value := .Site.Taxonomies.category }}
       {{ range first 1 $value.Pages }}
       {{ if eq .Section $current_section }}
-        <li class="mx-1 nav-item  bg-green shadow lift my-1">
-            <a class="nav-link" href="">
+        <li class="mx-1 nav-item bg-white lift my-1">
+            <a class="nav-link" href="{{.Site.BaseURL }}{{ .Section }}#{{$key}}">
                 <span class="text-dark icon-{{.Params.icon}} pr-1 fs-24"></span>
                 <span class="text-dark fs-20">{{ humanize $key }}</span>
             </a>
@@ -28,7 +30,9 @@
         {{ end }}
     </ul>
   </div>
-</div>
+
+<!-- content -->
+<div class="container">
   <div class="container py-10">
     <div class="row justify-content-center">
       <div class="col-md-12">
@@ -36,7 +40,7 @@
       {{ range $key, $value := .Site.Taxonomies.category }}
       {{ range first 1 $value.Pages }}
       {{ if eq .Section $current_section }}
-        <header class="d-flex align-items-center">
+        <header id="{{$key}}" class="d-flex align-items-center">
           <span class="btn-{{ if eq .Section `resources`}}yellow{{else if eq .Section `services`}}primary{{end}} btn-ico btn-lg btn-rounded"><i class="icon-{{ .Params.icon }} fs-40"></i></span>
           <h1 class="mx-4 text-secondary">{{ humanize $key }}</h1>
           <hr class="bg-dark w-40"/>
@@ -62,9 +66,5 @@
     </div>
   </div>
 </div>
-
-</section>
-
-
 
 {{ end }}

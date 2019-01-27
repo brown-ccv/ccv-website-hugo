@@ -1,7 +1,7 @@
 // sections
-section {
+section, footer {
   .ccv-logo {
-    height: 10rem;
+    height: 4rem;
     .c1 {
       fill: $yellow;
       fill-opacity: 1;
@@ -36,7 +36,6 @@ section {
     }
   }
 }
-
 .section-title {
   svg {
     height: 30rem;
@@ -44,33 +43,19 @@ section {
   margin-left: 90%;
   margin-top: -15rem;
 }
-// diagonal
-
-.diagonal {
-  background-color: darkslategray;
-  height: 100vh;
-  -webkit-transform: skewY(-5deg);
-  -moz-transform: skewY(-5deg);
-  -ms-transform: skewY(-5deg);
-  -o-transform: skewY(-5deg);
-  transform: skewY(-5deg);
-}
-
-.diagonal > .diagonal-child {
-    -webkit-transform: skewY(5deg);
-    -moz-transform: skewY(5deg);
-    -ms-transform: skewY(5deg);
-    -o-transform: skewY(5deg);
-    transform: skewY(5deg) translateY(-15vh);
-}
-
 .badge-outline {
   border: solid 3px;
   padding: 1rem;
   background: white;
 }
-
 .badge-outline-primary {
   border-color: $blue;
   color: $blue;
+}
+
+// List section - table of contents
+
+.overlay-top {
+  margin-left: 25%;
+  margin-top: -8%;
 }

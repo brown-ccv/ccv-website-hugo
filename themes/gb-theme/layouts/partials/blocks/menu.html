@@ -10,19 +10,19 @@
     <div class="row ">
         <ul class="nav flex-column">
             {{ $currentPage := . }}
-            {{ range .Site.Menus.main }}
+            {{ range .Site.Menus.main.ByWeight }}
                 {{ if .HasChildren }}
                     <li class="nav-item {{ if $currentPage.HasMenuCurrent "main" . }}active{{ end }}">
                         <a class="nav-link" href="#">
                             {{ .Pre }}
-                            <span><h3>{{ .Name }}</h3></span>
+                            <span>{{ .Name }}</span>
                         </a>
                     </li>
                     <ul class="sub-menu">
                         {{ range .Children }}
                             <li class="{{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }}">
                                 <a class="nav-link" href="{{ .URL }}">
-                                <h3>{{ .Name }}</h3>
+                                {{ .Name }}
                                 </a>
                             </li>
                         {{ end }}
@@ -31,7 +31,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ .URL }}">
                             {{ .Pre }}
-                            <span class="text-light h4">{{ .Name }}</span>
+                            <span class="text-dark fs-24 link ">{{ .Name }}</span>
                         </a>
                     </li>
                 {{ end }}
