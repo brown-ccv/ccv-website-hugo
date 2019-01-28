@@ -1,0 +1,99 @@
+{{ define "content" }}
+<!-- header - yellow container -->
+{{ $current_section := .Section }}
+<div id="hero-list" class=" bg-yellow text pb-5">
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 d-flex flex-column pt-6 pb-10">
+          <h1 class="fs-60"> {{ humanize .Section }} </h1>
+          <p class="fs-30">{{ .Params.overview.lead | markdownify }}</p>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<!-- table of contents -->
+  <div class="col-lg-6 overlay-top">
+    <ul class="nav nav-toc-page flex-column boxed">
+      {{ range .Params.items }}
+        <li class="mx-1 nav-item bg-white lift my-1">
+            <a class="nav-link" href="{{.Site.BaseURL }}about/#{{.name}}">
+                <span class="text-dark fas fa-{{ .icon }} pr-1 fs-24"></span>
+                <span class="text-dark fs-20">{{ humanize .name }}</span>
+            </a>
+        </li>
+        {{ end }}
+    </ul>
+  </div>
+
+
+  <div class="container">
+    <div class="container py-10">
+      <div class="row justify-content-center">
+        <div class="col-md-12">
+
+          <!-- Overview -->
+          <header id="overview" class="d-flex align-items-center">
+            <span class="btn-red btn-ico btn-lg btn-rounded"><i class="fas fa-crow fs-40"></i></span>
+            <h1 class="mx-4 text-secondary">Overview</h1>
+            <hr class="bg-dark w-40"/>
+          </header>
+
+          <article class="d-flex py-6 justify-content-between flex-wrap">
+            <div class="col-md-12 py-3">
+              <div class="card p-4">
+                <p class="fs-20">{{ .Params.overview.text | markdownify }}</p>
+                <ul>
+                {{ range .Params.overview.list_items }}
+                  <li>{{ . }}</li>
+                {{ end }}
+                </ul>
+                {{ .Params.overview.after | markdownify }}
+              </div>
+            </div>
+        </article>
+
+        <!-- People -->
+        <header id="overview" class="d-flex align-items-center">
+          <span class="btn-red btn-ico btn-lg btn-rounded"><i class="fas fa-person-booth fs-40"></i></span>
+          <h1 class="mx-4 text-secondary">People</h1>
+          <hr class="bg-dark w-40"/>
+        </header>
+
+        <article class="d-flex py-6 justify-content-between flex-wrap">
+          {{ range where $.Site.Pages "Section" "people"}}
+          {{ if .Params }}
+          <div class="card card-background mb-0 mx-0" style="max-width: 25%; max-height: 16rem;">
+            <div class="image" style="background-image:url('{{"/images/people/gelin.png" | absURL }}')"></div>
+            <div class="card-body">
+              <h2 class="card-title mb-0">{{ .Params.name }}</h2>
+              <p class="card-text">{{ .Params.title }}</p>
+              <small class="font-weight-bold text-beige"><span class="icon-users2 pr-1"></span>{{ .Params.team }}</small>
+            </div>
+          </div>
+          {{ end }}
+          {{ end }}
+        </article>
+
+        <!-- Publications -->
+        <header id="overview" class="d-flex align-items-center">
+          <span class="btn-red btn-ico btn-lg btn-rounded"><i class="fas fa-book-dead fs-40"></i></span>
+          <h1 class="mx-4 text-secondary">Publications</h1>
+          <hr class="bg-dark w-40"/>
+        </header>
+
+
+
+        <!-- Opportunities -->
+        <header id="overview" class="d-flex align-items-center">
+          <span class="btn-red btn-ico btn-lg btn-rounded"><i class="fas fa-user-circle fs-40"></i></span>
+          <h1 class="mx-4 text-secondary">Opportunities</h1>
+          <hr class="bg-dark w-40"/>
+        </header>
+
+
+      </div>
+    </div>
+  </div>
+{{ end }}
