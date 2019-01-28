@@ -1,18 +1,18 @@
 // sections
-section {
+section, footer {
   .ccv-logo {
-    height: 10rem;
+    height: 4rem;
     .c1 {
-      fill: gray;
-      fill-opacity: 0.9;
+      fill: $yellow;
+      fill-opacity: 1;
     }
     .c2 {
-      fill: darkgray;
-      fill-opacity: 0.3;
+      fill: $green;
+      fill-opacity: 1;
     }
     .v {
-      fill: teal;
-      fill-opacity: 0.5;
+      fill: $yellow;
+      fill-opacity: 1;
     }
   }
   header {
@@ -36,22 +36,32 @@ section {
     }
   }
 }
-// diagonal
-
-.diagonal {
-  background-color: darkslategray;
-  height: 100vh;
-  -webkit-transform: skewY(-5deg);
-  -moz-transform: skewY(-5deg);
-  -ms-transform: skewY(-5deg);
-  -o-transform: skewY(-5deg);
-  transform: skewY(-5deg);
+.section-title {
+  svg {
+    height: 30rem;
+  }
+  margin-left: 90%;
+  margin-top: -15rem;
+}
+.badge-outline {
+  border: solid 3px;
+  padding: 1rem;
+  background: white;
+}
+.badge-outline-primary {
+  border-color: $blue;
+  color: $blue;
 }
 
-.diagonal > .diagonal-child {
-    -webkit-transform: skewY(5deg);
-    -moz-transform: skewY(5deg);
-    -ms-transform: skewY(5deg);
-    -o-transform: skewY(5deg);
-    transform: skewY(5deg) translateY(-15vh);
+// List section - table of contents
+
+.overlay-top {
+  margin-left: 25%;
+  margin-top: -8%;
+}
+
+// footer
+footer {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }

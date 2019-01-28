@@ -2,6 +2,7 @@
 <html>
     {{- partial "head/head.html" . -}}
     {{- partial "header/site-header.html" . -}}
+    {{- partial "header/site-nav.html" . -}}
 
 
         <div id="content" class="py-0">
@@ -11,11 +12,13 @@
                 </nav>
             </aside>
             {{- block "content" . }}{{- end }}
-          <aside id="menu" class="col-lg-3 col-xxl-2 p-3 bg-dark">
+          <aside id="menu" class="col-lg-3 col-xxl-2 p-3 bg-white shadow">
           {{ partial "blocks/menu" . }}
           </aside>
       </div>
-
-        {{- partial "footer/site-footer.html" . -}}
+      
+        {{ partial "footer/site-footer" . }}
+        {{- partial "footer/brown-footer.html" . -}}
         {{- partial "footer/scripts.html" . -}}
+
 </html>

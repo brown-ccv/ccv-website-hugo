@@ -1,24 +1,38 @@
 {{ define "content"}}
 
+<!-- header - yellow container -->
 {{ $current_section := .Section }}
-<section id="section-1" class="bg-light">
-  <header class="d-flex align-items-center vh-80 bg-dark">
-    <div class="container">
-      <div class="row align-items-end justify-content-around">
-        <div class="py-4">
-        {{ readFile  "themes/gb-theme/static/images/ccv-logo.svg" | safeHTML }}
+<div id="hero-list" class=" bg-yellow text pb-5">
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 d-flex flex-column pt-6 pb-10">
+          <h1 class="fs-60"> {{ humanize .Section }} </h1>
+          <p class="fs-30">{{ .Params.hero.lead }}</p>
         </div>
-        <div class="col-md-12 px-5">
-
-          <h1 class="text-light">{{ humanize .Section }}</h1>
-          <hr class="bg-light w-100">
-          <p class="fs-30 text-light">{{ .Params.hero.lead }}</p>
-          <a data-scroll href="#section" class="btn btn-outline-white btn-ico btn-lg btn-rounded mt-5"><i class="icon-arrow-down2 fs-40"></i></a>
-        </div>
-      </div>
     </div>
-  </header>
+</div>
+</div>
 
+<!-- table of contents -->
+  <div class="col-lg-6 overlay-top">
+    <ul class="nav nav-toc-page flex-column boxed">
+      {{ range $key, $value := .Site.Taxonomies.category }}
+      {{ range first 1 $value.Pages }}
+      {{ if eq .Section $current_section }}
+        <li class="mx-1 nav-item bg-white lift my-1">
+            <a class="nav-link" href="{{.Site.BaseURL }}{{ .Section }}#{{$key}}">
+                <span class="text-dark icon-{{.Params.icon}} pr-1 fs-24"></span>
+                <span class="text-dark fs-20">{{ humanize $key }}</span>
+            </a>
+        </li>
+        {{ end }}
+        {{ end }}
+        {{ end }}
+    </ul>
+  </div>
+
+<!-- content -->
+<div class="container">
   <div class="container py-10">
     <div class="row justify-content-center">
       <div class="col-md-12">
@@ -26,16 +40,16 @@
       {{ range $key, $value := .Site.Taxonomies.category }}
       {{ range first 1 $value.Pages }}
       {{ if eq .Section $current_section }}
-        <header class="d-flex align-items-center">
+        <header id="{{$key}}" class="d-flex align-items-center">
           <span class="btn-{{ if eq .Section `resources`}}yellow{{else if eq .Section `services`}}primary{{end}} btn-ico btn-lg btn-rounded"><i class="icon-{{ .Params.icon }} fs-40"></i></span>
           <h1 class="mx-4 text-secondary">{{ humanize $key }}</h1>
           <hr class="bg-dark w-40"/>
         </header>
-        <article class="d-flex py-6 justify-content-between">
+        <article class="d-flex py-6 justify-content-between flex-wrap">
           {{ range where $.Site.Pages "Section" $current_section}}
           {{ if eq (.Params.category | urlize) $key }}
           {{ $weight := .Params.weight }}
-          <div class="col-md-6 mb-6">
+          <div class="col-md-6 py-3">
             <div class="card p-4 lift">
               <h1>{{ .Title | markdownify }}</h1>
               <hr class="bg-primary">
@@ -52,9 +66,5 @@
     </div>
   </div>
 </div>
-
-</section>
-
-
 
 {{ end }}

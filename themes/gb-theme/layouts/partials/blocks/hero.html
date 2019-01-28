@@ -1,20 +1,34 @@
 <!-- hero -->
-  <section id="hero" class="p-0">
-    <div class="image image-overlay"></div>
-    <div class="container">
-      <div class="vh-100 py-10 row align-items-end justify-content-around">
-          <div class="row">
-          <!-- {{ readFile .Params.hero.logo1 | safeHTML }} -->
-          {{ readFile .Params.hero.logo2 | safeHTML }}
-          </div>
-          <div class="col-md-12 px-5 d-flex flex-column justify-content-center">
+<!-- yellow banner -->
+<section id="hero" class="position-relative">
 
-          <h1 class="text-light">{{ upper .Params.hero.title }}</h1>
-          <hr class="bg-light w-100">
-          <p class="fs-30 text-light">{{ .Params.hero.lead }}</p>
-          <a data-scroll href="#section-1" class="btn btn-outline-white btn-ico btn-lg btn-rounded mt-5"><i class="icon-arrow-down2 fs-40"></i></a>
-        </div>
+  <div class="hero-content-container bg-yellow">
+    <div class="hero-content pl-10 d-flex flex-column">
+      <h1 class="text-dark">{{ upper .Params.hero.title }}</h1>
+      <p class="fs-30 text-medium-brown">{{ .Params.hero.lead }}</p>
+      <div class="row d-flex">
+        <ul class="nav">
+          {{ $currentPage := . }}
+          {{ range .Site.Menus.main }}
+          {{ if in "Resources, Services" .Name }}
+          <li class="mx-1 nav-item  bg-green shadow lift">
+            <a class="nav-link" href="{{ .URL }}">
+              {{ .Pre }}
+              <span class="text-sand pr-1 icon-{{if eq .Name `Resources`}}server2{{ else }}users2{{end}} fs-24"></span>
+              <span class="text-beige fs-28 font-weight-bold">{{ .Name }}</span>
+            </a>
+          </li>
+          {{ end }}
+          {{ end }}
+        </ul>
       </div>
     </div>
-  </section>
+  </div>
+
+  <!-- floating graphic -->
+  <div class="right-1 bottom-6 position-absolute z-10">
+    {{ readFile "/themes/gb-theme/static/images/isometric-ccv.svg" | safeHTML }}
+  </div>
+
+</section>
 <!-- / hero -->

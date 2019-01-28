@@ -1,0 +1,55 @@
+<svg  class="iso-ccv" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 941.1 635.4" style="enable-background:new 0 0 941.1 635.4;" xml:space="preserve">
+<!-- <style type="text/css">
+	.st0{fill:#559DAD;stroke:#FFFFFF;stroke-miterlimit:10;}
+	.st1{fill:#165F70;stroke:#FFFFFF;stroke-miterlimit:10;}
+	.st2{fill:#CC87A3;stroke:#FFFFFF;stroke-miterlimit:10;}
+	.st3{fill:#D85088;stroke:#FFFFFF;stroke-miterlimit:10;}
+	.st4{fill:#75AA71;stroke:#FFFFFF;stroke-miterlimit:10;}
+	.st5{fill:#84D880;stroke:#FFFFFF;stroke-miterlimit:10;}
+	.st6{fill:#489B42;stroke:#FFFFFF;stroke-miterlimit:10;}
+	.st7{fill:#E2135D;stroke:#FFFFFF;stroke-miterlimit:10;}
+	.st8{fill:#003545;stroke:#FFFFFF;stroke-miterlimit:10;}
+</style> -->
+<g id="Layer_2">
+	<polygon class="ccv-st0" points="497.3,141 497.3,234.3 585.6,280.9 585.6,187.6 	"/>
+	<polygon class="ccv-st0" points="761.5,94.3 761.5,187.6 849.8,234.3 849.8,141 	"/>
+	<polygon class="ccv-st0" points="585.6,187.6 585.6,280.9 673.9,327.6 673.9,234.3 	"/>
+	<polygon class="ccv-st1" points="672.4,234.3 760.7,187.6 760.7,280.9 672.4,327.6 	"/>
+	<polygon class="ccv-st1" points="849.8,141 938.1,94.3 938.1,187.6 849.8,234.3 	"/>
+	<polygon class="ccv-st2" points="292.9,341.6 292.9,434.8 381.2,481.5 381.2,388.2 	"/>
+	<polygon class="ccv-st3" points="381.2,388.2 469.5,341.6 469.5,434.9 381.2,481.5 	"/>
+	<polygon class="ccv-st4" points="88.3,448.9 176.6,402.2 176.6,495.5 88.3,542.1 	"/>
+	<polygon class="ccv-st5" points="0,402.2 0,495.5 88.3,542.1 88.3,448.9 	"/>
+	<polygon class="ccv-st6" points="0,495.5 88.3,448.9 176.6,495.5 88.3,542.1 	"/>
+	<polygon class="ccv-st5" points="0,495.5 0,588.8 88.3,635.4 88.3,542.1 	"/>
+	<polygon class="ccv-st4" points="88.3,542.1 176.6,495.5 176.6,588.8 88.3,635.4 	"/>
+	<polygon class="ccv-st6" points="0,402.2 88.3,355.6 176.6,402.2 88.3,448.9 	"/>
+	<polygon class="ccv-st6" points="88.3,355.6 176.6,308.9 264.9,355.6 176.6,402.2 	"/>
+	<polygon class="ccv-st4" points="176.6,402.2 264.9,355.6 264.9,448.8 176.6,495.5 	"/>
+	<polygon class="ccv-st6" points="176.6,495.5 264.9,448.9 353.2,495.5 264.9,542.1 	"/>
+	<polygon class="ccv-st6" points="264.9,448.8 353.2,402.2 441.5,448.8 353.2,495.5 	"/>
+	<polygon class="ccv-st4" points="264.9,542.1 353.2,495.5 353.2,588.8 264.9,635.4 	"/>
+	<polygon class="ccv-st4" points="353.2,495.5 441.5,448.9 441.5,542.1 353.2,588.8 	"/>
+	<polygon class="ccv-st5" points="176.6,495.5 176.6,588.8 264.9,635.4 264.9,542.1 	"/>
+	<polygon class="ccv-st3" points="381.2,294.9 469.5,248.3 469.5,341.6 381.2,388.2 	"/>
+	<polygon class="ccv-st2" points="292.9,248.3 292.9,341.6 381.2,388.2 381.2,294.9 	"/>
+	<polygon class="ccv-st7" points="292.9,341.6 381.2,294.9 469.5,341.6 381.2,388.2 	"/>
+	<polygon class="ccv-st7" points="292.9,248.3 381.2,201.6 469.5,248.3 381.2,294.9 	"/>
+	<polygon class="ccv-st7" points="381.2,201.6 469.5,155 557.8,201.6 469.5,248.3 	"/>
+	<polygon class="ccv-st3" points="469.5,248.3 557.8,201.6 557.8,294.9 469.5,341.6 	"/>
+	<polygon class="ccv-st7" points="469.5,341.6 557.9,294.9 646.2,341.6 557.9,388.2 	"/>
+	<polygon class="ccv-st7" points="557.9,294.9 646.2,248.3 734.5,294.9 646.2,341.6 	"/>
+	<polygon class="ccv-st3" points="557.9,388.2 646.2,341.6 646.2,434.9 557.8,481.5 	"/>
+	<polygon class="ccv-st3" points="646.2,341.6 734.5,294.9 734.5,388.2 646.2,434.9 	"/>
+	<polygon class="ccv-st2" points="469.5,341.6 469.5,434.8 557.8,481.5 557.9,388.2 	"/>
+	<polygon class="ccv-st8" points="496.5,141 584.9,94.3 673.2,141 584.9,187.6 	"/>
+	<polygon class="ccv-st8" points="584.8,187.6 673.2,141 761.5,187.6 673.2,234.3 	"/>
+	<polygon class="ccv-st8" points="760.7,187.6 849,141 937.3,187.6 849,234.3 	"/>
+	<polygon class="ccv-st8" points="673.2,47.7 761.5,1 849.8,47.7 761.5,94.3 	"/>
+	<polygon class="ccv-st8" points="761.5,94.3 849.8,47.7 938.1,94.3 849.8,141 	"/>
+	<polygon class="ccv-st0" points="760.7,187.6 760.7,280.9 849,327.6 849,234.3 	"/>
+	<polygon class="ccv-st0" points="673.2,47.7 673.2,141 761.5,187.6 761.5,94.3 	"/>
+	<polygon class="ccv-st1" points="849.8,234.3 938.1,187.6 938.1,280.9 849.8,327.6 	"/>
+</g>
+</svg>

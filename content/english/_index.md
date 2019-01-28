@@ -71,4 +71,26 @@ showcase:
 
 news:
   title: Latest Updates
+
+events:
+  title: Upcoming Events
+  items:
+    - title: Intro to Oscar Workshop
+      text: Some text with brief description of event.
+      image:
+      href:
+      date: Wednesday, Feb 13
+      time: 2pm-4pm
+    - title: Intro to Linux Workshop
+      text: Some text with brief description of event.
+      image:
+      href:
+      date: Thursday, Feb 7
+      time: 10am-12pm
+    - title: Office Hours
+      text: Some text with brief description of event.
+      image:
+      href:
+      date: Fridays
+      time: 10am-1pm
 ---

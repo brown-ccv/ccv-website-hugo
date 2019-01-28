@@ -1,0 +1,57 @@
+<section id="section-3" class="bg-white showcase">
+  <section>
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-12">
+
+        <header class="d-flex align-items-center">
+          <span class="btn bg-yellow btn-ico btn-lg btn-rounded mx-3">
+            <i class="text-light fa-2x fas fa-calendar"></i>
+          </span>
+          <h1 class="py-8">{{ .Params.events.title | markdownify }}</h1>
+        </header>
+        <section>
+
+        </section>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="container">
+  <section class="bg-white row">
+  <div class="owl-carousel
+              owl-carousel-showcase
+              owl-carousel-fluid
+              owl-loaded owl-drag
+              skrollable
+              skrollable-before"
+        data-items="[3,3,1]"
+        data-center="true"
+        data-nav="false"
+        data-margin="40"
+        data-loop="true"
+        data-dots="true"
+        >
+    {{ range $index, $item := .Params.events.items }}
+      <div class="py-2">
+        <a id="" class="page-box" data-target="{{sha1 .title }}">
+          <div class="type boxed scale mr-2">
+            <div class="d-flex flex-column">
+              <span class="badge badge-outline badge-outline-primary"><span class="icon-calendar fs-34"></span></span>
+              <h2 class="text-dark h3">{{ .date }}</h2>
+              <h2 class="text-dark h3">{{ .time }}</h2>
+              <p class="">{{ .text }}</p>
+              <div class="type-example">
+                <h2 class="text-dark">{{ .title }}</h2>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+    {{ end }}
+  </div>
+  </section>
+</div>
+</section>

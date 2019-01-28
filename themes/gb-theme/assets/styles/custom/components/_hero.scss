@@ -1,29 +1,35 @@
 
 // hero
 #hero {
-  background-image: url("/images/bigdatablog.jpg");
-  background-size: cover;
-  background-position: 100% 100%;
-  background-attachment: fixed;
-  .brown-logo {
-    fill: white;
-    fill-opacity: 0.5;
-    height: 15rem;
+  position: relative;
+  .hero-content-container {
+    position: relative;
+    overflow: hidden;
+    background-image: url("/images/background-art.svg");
+    background-position: 20% 65%;
+    background-size: cover;
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      padding-right: 33% !important;
+      padding-top: 15% !important;
+      padding-bottom: 15% !important;
+    }
+    &::after {
+      position: absolute;
+      z-index: 0;
+      content: "";
+      width: 200%;
+      top: 100%;
+      bottom: -200%;
+      left: 60%;
+      background-color: $gray-100;
+      transform-origin: top left;
+      transform: rotate(-28deg);
+    }
   }
-  .ccv-logo {
-    height: 15rem;
-    .c1 {
-      fill: gray;
-      fill-opacity: 0.6;
-    }
-    .c2 {
-      fill: teal;
-      fill-opacity: 0.7;
-    }
-    .v {
-      fill: white;
-      fill-opacity: 0.3;
-    }
+  .z-10 {
+    z-index: 100;
   }
   svg {
     padding: 1rem;
@@ -35,5 +41,44 @@
   }
   hr {
     opacity: 0.5;
+  }
+}
+.right-1 {
+  right: 1% !important;
+}
+.bottom-6 {
+  bottom: -6% !important;
+}
+.iso-ccv {
+  height: 28rem;
+  stroke: white;
+  stroke-width: 2px;
+  .ccv-st0, .ccv-st2, .ccv-st5 {
+    fill: $brown-100;
+    fill-opacity: 0.9;
+  }
+  .ccv-st1, .ccv-st3, .ccv-st4 {
+    fill: $beige;
+    fill-opacity: 0.9;
+  }
+  .ccv-st6, .ccv-st7, .ccv-st8 {
+    fill: $sand;
+    fill-opacity: 0.9;
+  }
+}
+@include media-breakpoint-down(md) {
+  .iso-ccv {
+    height: 20rem;
+  }
+  .right-1 {
+    right: 1% !important;
+  }
+  .bottom-6 {
+    bottom: -6% !important;
+  }
+}
+@include media-breakpoint-down(sm) {
+  .iso-ccv {
+    height: 10rem;
   }
 }
