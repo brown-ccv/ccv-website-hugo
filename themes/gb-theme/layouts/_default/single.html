@@ -9,7 +9,7 @@
         </div>
         <div class="col-md-12 px-5">
 
-          <h1 class="text-{{if eq .Section `resources`}}dark{{ else if eq .Section `services`}}light{{ else }}dark{{end}}">{{ humanize .Section | markdownify }} | {{ humanize .Title | markdownify }}</h1>
+          <h1 class="text-{{if eq .Section `resources`}}dark{{ else if eq .Section `support`}}light{{ else }}dark{{end}}">{{ humanize .Section | markdownify }} | {{ humanize .Title | markdownify }}</h1>
           <hr class="bg-light w-100">
           <p class="fs-30 text-{{if eq .Section `resources`}}dark{{ else if eq .Section `services`}}light{{ else }}dark{{end}}">{{ .Params.lead | markdownify }}</p>
           <a data-scroll href="#section" class="btn btn-outline-white btn-ico btn-lg btn-rounded mt-5"><i class="icon-arrow-down2 fs-40"></i></a>

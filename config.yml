@@ -26,10 +26,10 @@ menu:
     title: About
     url: /about/
     weight: 2
-  - identifier: services
-    name: Services
-    title: Services
-    url: /services/
+  - identifier: support
+    name: Support
+    title: Support
+    url: /support/
     weight: 3
   - identifier: resources
     name: Resources
@@ -37,14 +37,14 @@ menu:
     url: /resources/
     weight: 4
   - identifier: documentation
-    name: User Manuals
-    title: User Manuals
-    url: /user-manuals/
+    name: Documentation
+    title: Documentation
+    url: /documentation/
     weight: 5
-  - identifier: blog
-    name: Blog
-    title: Blog
-    url: /posts/
+  - identifier: news
+    name: News
+    title: News
+    url: /news/
     weight: 6
 
 # i18n

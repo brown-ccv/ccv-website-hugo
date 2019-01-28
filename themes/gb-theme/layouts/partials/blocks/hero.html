@@ -10,7 +10,7 @@
         <ul class="nav">
           {{ $currentPage := . }}
           {{ range .Site.Menus.main }}
-          {{ if in "Resources, Services" .Name }}
+          {{ if in "Resources, Support" .Name }}
           <li class="mx-1 nav-item  bg-green shadow lift">
             <a class="nav-link" href="{{ .URL }}">
               {{ .Pre }}

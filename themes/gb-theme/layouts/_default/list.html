@@ -41,7 +41,7 @@
       {{ range first 1 $value.Pages }}
       {{ if eq .Section $current_section }}
         <header id="{{$key}}" class="d-flex align-items-center">
-          <span class="btn-{{ if eq .Section `resources`}}yellow{{else if eq .Section `services`}}primary{{end}} btn-ico btn-lg btn-rounded"><i class="icon-{{ .Params.icon }} fs-40"></i></span>
+          <span class="btn-{{ if eq .Section `resources`}}yellow{{else if eq .Section `support`}}primary{{end}} btn-ico btn-lg btn-rounded"><i class="icon-{{ .Params.icon }} fs-40"></i></span>
           <h1 class="mx-4 text-secondary">{{ humanize $key }}</h1>
           <hr class="bg-dark w-40"/>
         </header>

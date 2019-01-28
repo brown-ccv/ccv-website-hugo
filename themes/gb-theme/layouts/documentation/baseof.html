@@ -1,0 +1,46 @@
+<!doctype html>
+{{- partial "head/head.html" . -}}
+{{- partial "header/site-header.html" . -}}
+<body lang="en" id="top"  data-spy="scroll" data-offset="0"  data-target="#TableOfContents">
+
+<section class="py-0">
+  <div class="container-fluid">
+    <aside class="row">
+      <nav>
+          <button class="btn p-0 menu-trigger"><span class="fas fa-bars fa-3x"></span></button>
+      </nav>
+    </aside>
+    <div class="row justify-content-between">
+
+      <!-- navigation -->
+      {{- block "navigation" . }}{{- end}}
+      <!-- / navigation -->
+
+      <!-- content -->
+      <article class="col-lg-9 col-xxl-10 doc-content">
+
+        <div class="row justify-content-between doc-content-body">
+          <article class="col-md-9 col-xxl-8">
+            {{- block "content-body" . }}{{- end }}
+          </article>
+          <aside class="col-md-3 col-xxl-3 d-none d-md-block">
+            <div class="sticky">
+              {{ .TableOfContents }}
+            </div>
+          </aside>
+          <aside id="menu" class="col-lg-3 col-xxl-2 p-3 bg-dark">
+          {{ partial "blocks/menu" . }}
+          </aside>
+        </div>
+      </article>
+      <!-- / content -->
+    </div>
+  </div>
+</section>
+
+<!-- footer -->
+{{- partial "footer/site-footer" . -}}
+{{- partial "footer/brown-footer" . -}}
+
+<!-- / footer -->
+{{- partial "footer/scripts" . -}}
