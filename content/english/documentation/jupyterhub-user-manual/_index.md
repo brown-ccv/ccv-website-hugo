@@ -26,4 +26,4 @@ Once connected to your server, you are provided an isolated workspace where you 
 
 In order to get started using your own JupyterHub notebook server, please follow the instructions provided in the [Getting Started - Sign In](getting-started/untitled.md) section of this document.
 
-{{% sign %}}
+{{% sign email="fer@brown.edu" twitter="1" github="fernandogelin" %}}
