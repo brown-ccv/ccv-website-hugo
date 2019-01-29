@@ -67,7 +67,9 @@ section, footer {
 
 
 // Docs section
-
+.doc-container {
+  height: 80vh;
+}
 .docs-icon {
     fill: $gray-600;
     height: 4rem !important;
