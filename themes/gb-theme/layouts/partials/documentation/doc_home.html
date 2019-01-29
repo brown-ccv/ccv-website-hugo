@@ -9,6 +9,13 @@
     </div>
 </div>
 
+<!-- button menu trigger -->
+<aside class="row">
+  <nav>
+      <button class="btn p-0 menu-trigger"><span class="fas fa-bars fa-3x"></span></button>
+  </nav>
+</aside>
+
 <!-- table of contents -->
 <div class="col-lg-6 overlay-top">
 <ul class="nav nav-toc-page flex-column boxed">
@@ -16,7 +23,7 @@
     {{ if eq .Params.level "Main" }}
     <li class="mx-1 nav-item bg-white lift my-1">
         <a class="nav-link" href="{{ .Permalink }}">
-            <span class="text-dark icon-{{.Params.icon}} pr-1 fs-24"></span>
+            {{ readFile (printf "/themes/gb-theme/static/images/%s" .Params.icon ) | safeHTML }}
             <span class="text-dark fs-20">{{ .Title }}</span>
         </a>
     </li>
@@ -24,3 +31,7 @@
     {{ end }}
 </ul>
 </div>
+
+<aside id="menu" class="col-lg-3 col-xxl-2 p-3 bg-white shadow">
+{{ partial "blocks/menu" . }}
+</aside>

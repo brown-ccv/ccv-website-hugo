@@ -3,6 +3,7 @@ Title: JupyterHub
 type: JupyterHub
 level: Main
 weight: 0
+icon: jupyter.svg
 ---
 
 # Introduction
