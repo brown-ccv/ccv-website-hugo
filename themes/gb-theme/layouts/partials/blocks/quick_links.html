@@ -27,22 +27,19 @@
             {{ end }}
           </article>
 
-        <footer class="card">
-            <div class="pl-5">
-              <p class="text-secondary fs-20 font-weight-bold">Not What You're Looking For?</p>
-            </div>
-            <hr>
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-md-8 col-lg-10">
+        <footer class="mt-2">
+
+                <div class="row d-flex justify-content-center">
+                  <div class="col-md-6 col-lg-6">
                     <form id="search-form" action="{{ "search" | absURL }}">
-                      <input id="search-query" name="s" type="text" class="form-control form-control-minimal" placeholder="Search the CCV Site here ..." aria-label="Search">
+                      <input id="search-query" name="s" type="text" class="scale form-control form-control-minimal" placeholder="what are you looking for?" aria-label="Search">
                     </form>
                   </div>
-                  <div class="col-md-4 col-lg-2">
-                    <button form="search-form" type="submit" class="btn btn-block btn-dark font-weight-bold fs-16" value="Submit">Search</button>
+                  <div class="col-md-6 col-lg-2">
+                    <button form="search-form" type="submit" class="scale btn btn-block btn-blue font-weight-bold fs-16" value="Submit">Search</button>
                   </div>
                 </div>
+
           </footer>
 
         </section>
