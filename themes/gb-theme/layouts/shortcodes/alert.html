@@ -12,6 +12,6 @@
     <strong>{{ humanize (.Get 0)}}</strong>
   </h4>
   <p>
-    {{.Inner}}
+    {{.Inner | markdownify }}
   </p>
 </div>

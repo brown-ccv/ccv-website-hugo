@@ -1,0 +1,26 @@
+<div id="hero-list" class=" bg-yellow text pb-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 d-flex flex-column pt-6 pb-10">
+              <h1 class="fs-60"> {{ humanize .Section }} </h1>
+              <p class="fs-30">{{ .Params.hero.lead }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- table of contents -->
+<div class="col-lg-6 overlay-top">
+<ul class="nav nav-toc-page flex-column boxed">
+    {{ range where $.Site.Pages "Section" "documentation" }}
+    {{ if eq .Params.level "Main" }}
+    <li class="mx-1 nav-item bg-white lift my-1">
+        <a class="nav-link" href="{{ .Permalink }}">
+            <span class="text-dark icon-{{.Params.icon}} pr-1 fs-24"></span>
+            <span class="text-dark fs-20">{{ .Title }}</span>
+        </a>
+    </li>
+    {{ end }}
+    {{ end }}
+</ul>
+</div>
