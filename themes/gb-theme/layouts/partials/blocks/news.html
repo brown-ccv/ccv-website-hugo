@@ -30,7 +30,7 @@
         <aside class="col-md-3 col-lg-4 px-2">
 
         {{ range (first 6 .Site.Pages.ByPublishDate.Reverse) }}
-          <div class="page-summary" id="{{ sha1 .Title }}">
+          <div class="page-summary ml-4" id="{{ sha1 .Title }}">
             <small><strong>{{ humanize .Section }} | {{ .Params.project }}{{ .Params.category }}</strong></small>
 
             <h1>{{ .Title }}</h1>

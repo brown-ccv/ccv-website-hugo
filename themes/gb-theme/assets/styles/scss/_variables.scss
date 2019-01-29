@@ -264,7 +264,7 @@ $transition-collapse:         height .35s ease !default;
 // Font, line-height, and color for body text, headings, and more.
 
 // stylelint-disable value-keyword-case
-$font-family-sans-serif:      'Open Sans', sans-serif;
+$font-family-sans-serif:      'Circular-Book', sans-serif;
 $font-family-monospace:       'Roboto Mono', monospace;
 $font-family-base:            $font-family-sans-serif;
 // stylelint-enable value-keyword-case
@@ -280,15 +280,15 @@ $font-weight-bold:            700 !default;
 $font-weight-base:            $font-weight-normal !default;
 $line-height-base:            1.5 !default;
 
-$h1-font-size:                $font-size-base * 3.125;
-$h2-font-size:                $font-size-base * 2.5;
-$h3-font-size:                $font-size-base * 1.875;
+$h1-font-size:                $font-size-base * 2.825;
+$h2-font-size:                $font-size-base * 1.5;
+$h3-font-size:                $font-size-base * 1.475;
 $h4-font-size:                $font-size-base * 1.5;
 $h5-font-size:                $font-size-base * 1.25;
 $h6-font-size:                $font-size-base !default;
 
 $headings-margin-bottom:      ($spacer / 2) !default;
-$headings-font-family:        'atrament-web', sans-serif; // 'Muli', sans-serif;
+$headings-font-family:        'Circular-Bold', sans-serif; // 'Muli', sans-serif;
 $headings-font-weight:        400;
 $headings-line-height:        1.4;
 $headings-color:              $black;
