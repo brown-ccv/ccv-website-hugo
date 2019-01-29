@@ -47,31 +47,21 @@
     opacity: 1;
   }
 
-#menu-container {
-  height: 100vh;
-  .logos {
-    bottom: 0;
-    padding-bottom: 3rem;
-    padding-left: 1rem;
-    position: absolute;
-  }
+.logos {
+  bottom: 3%;
+  position: absolute;
   svg {
-    height: 6rem;
-    z-index: 1000;
-    fill: white !important;
-    fill-opacity: 0.5;
+    height: 5rem;
+    z-index: 100;
     padding: 1rem;
     .c1 {
-      fill: white;
-      fill-opacity: 0.5;
+      fill: $yellow;
     }
     .c2 {
-      fill: white;
-      fill-opacity: 0.2;
+      fill: $green;
     }
     .v {
-      fill: white;
-      fill-opacity: 0.3;
+      fill: $yellow;
     }
   }
 }
