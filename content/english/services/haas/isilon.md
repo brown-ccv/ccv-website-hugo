@@ -6,4 +6,5 @@ category: "Data Storage"
 icon: "database2"
 lead: ""
 weight: 1
+haas: true
 ---

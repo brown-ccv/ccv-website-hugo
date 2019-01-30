@@ -26,16 +26,11 @@ menu:
     title: About
     url: /about/
     weight: 2
-  - identifier: support
-    name: Support
-    title: Support
-    url: /support/
+  - identifier: services
+    name: Services
+    title: Services
+    url: /services/
     weight: 3
-  - identifier: resources
-    name: Resources
-    title: Resources
-    url: /resources/
-    weight: 4
   - identifier: documentation
     name: Documentation
     title: Documentation
