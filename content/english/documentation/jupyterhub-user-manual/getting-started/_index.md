@@ -2,7 +2,7 @@
 Title: Getting Started
 type: JupyterHub
 section: JupyterHub
-version: 1.0.0
+version: beta
 weight: 1
 subitems:
   - subsection: "Step 1: Sign In"

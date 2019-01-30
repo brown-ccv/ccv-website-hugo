@@ -4,7 +4,7 @@ draft = false
 section = "JupyterHub"
 title = "Help and Support"
 type = "JupyterHub"
-version = "1.0.0"
+version = "beta"
 weight = 3
 [[subitems]]
 ref = "additional-resources"

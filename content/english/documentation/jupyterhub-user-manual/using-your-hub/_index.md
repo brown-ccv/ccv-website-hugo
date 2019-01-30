@@ -2,7 +2,7 @@
 Title: Using Your Hub
 type: JupyterHub
 section: JupyterHub
-version: 1.0.0
+version: beta
 weight: 2
 subitems:
   - subsection: Creating a New Notebook

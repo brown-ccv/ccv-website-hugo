@@ -13,9 +13,10 @@
       <aside class="col-lg-3 col-xxl-2 p-3 doc-sidebar">
         <div class="sticky">
           <nav class="navbar navbar-vertical navbar-expand-lg navbar-light">
-            <div class="d-flex row align-middle">
+            <div class="d-flex row align-items-center">
               <!-- <a href="../../index.html" class="navbar-brand"><span class="badge badge-red ml-3">Resources</span></a> -->
               <h2>{{ .Params.type }}</h2>
+              <span class="ml-1 badge badge-red h-50">{{ .Params.version }}</span>
               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>

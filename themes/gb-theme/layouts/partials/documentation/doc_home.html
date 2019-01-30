@@ -27,6 +27,7 @@
         <a class="nav-link" href="{{ .Permalink }}">
             {{ readFile (printf "/themes/gb-theme/static/images/%s" .Params.icon ) | safeHTML }}
             <span class="text-dark fs-20">{{ .Title }}</span>
+            <span class="badge badge-red">{{ .Params.version }}</span>
         </a>
     </li>
     {{ end }}

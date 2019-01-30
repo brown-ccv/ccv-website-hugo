@@ -2,9 +2,15 @@
 Title: JupyterHub
 type: JupyterHub
 level: Main
+version: beta
 weight: 0
 icon: jupyter.svg
 ---
+
+{{% alert info %}}
+## **JupyterHub** is in a **pilot** phase, we are testing the service with a few courses during Spring 2019. 
+{{% /alert %}}   
+
 
 # Introduction
 

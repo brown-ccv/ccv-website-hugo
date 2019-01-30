@@ -4,7 +4,7 @@ project: JupyterHub
 section: Getting Started
 date: 2019-01-14T13:06:08-05:00
 draft: false
-version: 1.0.0
+version: beta
 ---
 
 # How to Enable Google Drive
