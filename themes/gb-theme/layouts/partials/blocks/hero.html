@@ -10,12 +10,11 @@
         <ul class="nav">
           {{ $currentPage := . }}
           {{ range .Site.Menus.main }}
-          {{ if in "Resources, Support" .Name }}
+          {{ if eq "Services" .Name }}
           <li class="mx-1 nav-item  bg-green shadow lift">
             <a class="nav-link" href="{{ .URL }}">
               {{ .Pre }}
-              <span class="text-sand pr-1 icon-{{if eq .Name `Resources`}}server2{{ else }}users2{{end}} fs-24"></span>
-              <span class="text-beige fs-28 font-weight-bold">{{ .Name }}</span>
+              <span class="text-beige fs-28 font-weight-bold">Learn About CCV {{ .Name }}</span>
             </a>
           </li>
           {{ end }}

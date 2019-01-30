@@ -5,4 +5,5 @@ draft: false
 category: "Visualization Systems"
 icon: eye2
 lead: ""
+haas: true
 ---
