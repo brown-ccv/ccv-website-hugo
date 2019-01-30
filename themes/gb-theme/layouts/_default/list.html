@@ -55,7 +55,10 @@
           {{ $weight := .Params.weight }}
           <div class="col-md-6 py-3">
             <div class="card p-4 lift">
+              <div class="d-flex">
               <h1>{{ .Title | markdownify }}</h1>
+              <span class="badge-red badge h-50 ml-1">{{ .Params.version }}</span>
+              </div>
               <hr class="bg-primary">
               <p class="fs-20">{{ .Params.lead | markdownify }}</p>
               <p><a href="{{.Permalink}}" class="eyebrow link text-primary mt-3">Learn More</a></p>
