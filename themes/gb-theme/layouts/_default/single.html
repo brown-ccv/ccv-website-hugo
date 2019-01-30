@@ -1,22 +1,20 @@
 {{ define "content" }}
 
-<section id="section-1" class="bg-light">
-  <header class="d-flex align-items-center vh-80 bg-{{if eq .Section `resources`}}yellow{{ else if eq .Section `services`}}blue{{ else }}orange{{end}}">
-    <div class="container">
-      <div class="row align-items-end justify-content-around">
-        <div class="py-4">
-        {{ readFile  "themes/gb-theme/static/images/ccv-logo.svg" | safeHTML }}
-        </div>
-        <div class="col-md-12 px-5">
+<div id="hero-list" class=" bg-green text pb-5">
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 d-flex flex-column pt-6 pb-10">
+          <h1 class="fs-60"> {{ humanize .Title }} </h1>
+          <p class="fs-30 text-beige">{{ .Params.lead }}</p>
 
-          <h1 class="text-{{if eq .Section `resources`}}dark{{ else if eq .Section `support`}}light{{ else }}dark{{end}}">{{ humanize .Section | markdownify }} | {{ humanize .Title | markdownify }}</h1>
-          <hr class="bg-light w-100">
-          <p class="fs-30 text-{{if eq .Section `resources`}}dark{{ else if eq .Section `services`}}light{{ else }}dark{{end}}">{{ .Params.lead | markdownify }}</p>
-          <a data-scroll href="#section" class="btn btn-outline-white btn-ico btn-lg btn-rounded mt-5"><i class="icon-arrow-down2 fs-40"></i></a>
         </div>
-      </div>
     </div>
-  </header>
+</div>
+</div>
+
+<section id="section-1" class="bg-light">
+
+
 
   <div class="container py-10">
     <div class="row justify-content-center">
