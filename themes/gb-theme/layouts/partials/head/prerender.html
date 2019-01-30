@@ -2,8 +2,8 @@
       integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
       crossorigin="anonymous">
 
-{{ $style := resources.Get "styles/scss/style.scss"  | resources.ToCSS | resources.Minify }}
-{{ $vendor := resources.Get "styles/css/vendor.css"  | resources.Minify }}
+{{ $style := resources.Get "styles/gb-theme/style.scss"  | resources.ToCSS | resources.Minify }}
+{{ $vendor := resources.Get "styles/vendor/vendor.css"  | resources.Minify }}
 
 <link rel="stylesheet" href="{{ $style.Permalink }}">
 <link rel="stylesheet" href="{{ $vendor.Permalink }}">
