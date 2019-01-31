@@ -24,7 +24,7 @@
               {{ else if eq `events` $key}}
               <span class="text-dark fas fa-calendar-day pr-1 fs-28 text-green"></span>
               {{ else }}
-              <span class="text-dark fas fa-chalckboard-teacher pr-1 fs-28 text-green"></span>
+              <span class="text-dark fas fa-chalkboard-teacher pr-1 fs-28 text-green"></span>
               {{ end }}
               <span class="text-dark fs-20">{{ humanize $key }}</span>
           </a>
@@ -49,11 +49,11 @@
                 <div class="top-right">
                     {{ range first 1 .Params.types }}
                         {{if eq `posts` $key}}
-                        <span class="text-dark fas fa-blog pr-1 fs-28 text-green"></span>
+                        <span class="fas fa-blog pr-1 fs-28 text-green"></span>
                         {{ else if eq `events` $key}}
-                        <span class="text-dark fas fa-calendar-day pr-1 fs-28 text-green"></span>
+                        <span class="fas fa-calendar-day pr-1 fs-28 text-green"></span>
                         {{ else }}
-                        <span class="text-dark fas fa-chalckboard-teacher pr-1 fs-28 text-green"></span>
+                        <span class="fas fa-chalkboard-teacher pr-1 fs-28 text-green"></span>
                         {{ end }}
                     {{ end }}
                 </div>
@@ -83,7 +83,7 @@
                         {{ else if eq `events` .}}
                         <span class="text-dark fas fa-calendar-day pr-1 fs-28 text-green"></span>
                         {{ else }}
-                        <span class="text-dark fas fa-chalckboard-teacher pr-1 fs-28 text-green"></span>
+                        <span class="text-dark fas fa-chalkboard-teacher pr-1 fs-28 text-green"></span>
                         {{ end }}
                     {{ end }}
                 </div>
