@@ -12,7 +12,7 @@
 h1, h2, h3, h4, h5,
 .h1, .h2, .h3, .h4, .h5 {
   margin-bottom: .25em;
-  
+
   &:last-child { margin-bottom: 0; }
 }
 
@@ -41,7 +41,7 @@ p, blockquote, .alert, ul, ol {
   font-family: $font-family-sans-serif;
   border-radius: $border-radius;
   color: $body-color;
-  
+
   &::before {
     @include transition;
     @include translate(0,-50%);
@@ -352,7 +352,7 @@ a {
     &.copied {
       border-color: $primary;
       background: $primary;
-      
+
       &::after {
         color: $white;
         content: "\ebf7";
@@ -397,7 +397,7 @@ a {
     color: $white;
   }
 
-  p { 
+  p {
     color: rgba($white, .55);
   }
 

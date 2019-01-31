@@ -1,11 +1,10 @@
 {{ define "content" }}
 {{ $current_section := .Section }}
-
 <div id="hero-list" class=" bg-yellow text pb-5">
 <div class="container">
     <div class="row">
         <div class="col-md-12 d-flex flex-column pt-6 pb-10">
-          <h1 class="fs-60"> {{ humanize .Section }} </h1>
+          <h1 class="fs-60"> {{ if eq .Section "tags"}}News{{end}} </h1>
           <p class="fs-30"></p>
         </div>
     </div>
@@ -16,9 +15,8 @@
   <ul class="nav nav-toc-page flex-column boxed">
     {{ range $key, $value := .Site.Taxonomies.types }}
     {{ range first 1 $value.Pages }}
-    {{ if eq .Section $current_section }}
       <li class="mx-1 nav-item bg-white lift my-1">
-          <a class="nav-link" href="{{.Site.BaseURL }}{{ .Section }}/{{$key}}">
+          <a class="nav-link" href="{{ .Site.BaseURL }}{{ .Section }}/{{$key}}">
               {{if eq `posts` $key}}
               <span class="text-dark fas fa-blog pr-1 fs-28 text-green"></span>
               {{ else if eq `events` $key}}
@@ -31,7 +29,6 @@
       </li>
       {{ end }}
       {{ end }}
-      {{ end }}
   </ul>
 </div>
 
@@ -39,8 +36,10 @@
     <div class="row">
     <section class="my-2 bg-light col-md-9">
     <!-- News front page -->
-    {{ if eq .Title "News" }}
-    {{ range $key, $value := .Site.Taxonomies.types }}
+    {{ $page := .Page.Title | urlize }}
+
+    {{ range $key, $value := .Site.Taxonomies.tags }}
+    {{ if eq $key $page }}
     {{ range $value.Pages }}
 
     <div class="row my-1 p-4 bg-white position-relative">
@@ -69,34 +68,6 @@
     </div>
 
     {{ end }}
-    {{ end }}
-    {{ else }}
-    <!-- types pages -->
-    {{ range .Pages }}
-    <div class="row p-4 border bg-white position-relative">
-        <a href="{{.Permalink}}">
-            <header>
-                <div class="top-right">
-                    {{ range first 1 .Params.types }}
-                        {{if eq `posts` .}}
-                        <span class="text-dark fas fa-blog pr-1 fs-28 text-green"></span>
-                        {{ else if eq `events` .}}
-                        <span class="text-dark fas fa-calendar-day pr-1 fs-28 text-green"></span>
-                        {{ else }}
-                        <span class="text-dark fas fa-chalckboard-teacher pr-1 fs-28 text-green"></span>
-                        {{ end }}
-                    {{ end }}
-                </div>
-                <small class="small-date">{{ .PublishDate.Format "January 2, 2006" }}</small>
-                <h4>{{ .Title }}</h4>
-                <small class="font-italic text-gray fs-18">by {{ range .Params.authors }}{{ . }}{{ end }}</small>
-            </header>
-            <hr class="bg-blue">
-            <article>
-            {{ truncate 200 .Plain }}
-            </article>
-        </a>
-    </div>
     {{ end }}
     {{ end }}
     </section>

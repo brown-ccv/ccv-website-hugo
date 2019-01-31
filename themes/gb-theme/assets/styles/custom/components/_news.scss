@@ -1,0 +1,43 @@
+.small-date {
+  font-size: $font-size-base * 0.8;
+  color: $gray;
+}
+
+.line-around {
+  line-height: 0.5;
+  text-align: center;
+}
+
+.line-around span {
+  display: inline-block;
+  position: relative;
+}
+
+.line-around span:before, .line-around span:after {
+  content: "";
+  position: absolute;
+  height: 5px;
+  border-bottom: 1px solid $yellow;
+  top: 15px;
+  width: 100px;
+}
+
+.line-around span:before {
+  right: 100%;
+  margin-right: 30px;
+}
+
+.line-around span:after {
+  left: 100%;
+  margin-left: 15px;
+}
+
+.top-right {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+}
+
+.small {
+  font-size: 1rem !important;
+}

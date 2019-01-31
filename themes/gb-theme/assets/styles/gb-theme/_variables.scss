@@ -265,13 +265,14 @@ $transition-collapse:         height .35s ease !default;
 
 // stylelint-disable value-keyword-case
 $font-family-sans-serif:      'Circular-Book', sans-serif;
+$font-family-serif:           'Minion-Pro', serif;
 $font-family-monospace:       'Roboto Mono', monospace;
 $font-family-base:            $font-family-sans-serif;
 // stylelint-enable value-keyword-case
 
-$font-size-base:              1rem !default; // Assumes the browser default, typically `16px`
-$font-size-lg:                ($font-size-base * 1.125) !default;
-$font-size-sm:                ($font-size-base * .875) !default;
+$font-size-base:              1.2rem !default; // Assumes the browser default, typically `16px`
+$font-size-lg:                ($font-size-base * 1.325) !default;
+$font-size-sm:                ($font-size-base * 1.175) !default;
 
 $font-weight-light:           300 !default;
 $font-weight-normal:          400 !default;
@@ -280,11 +281,11 @@ $font-weight-bold:            700 !default;
 $font-weight-base:            $font-weight-normal !default;
 $line-height-base:            1.5 !default;
 
-$h1-font-size:                $font-size-base * 2.825;
-$h2-font-size:                $font-size-base * 1.5;
-$h3-font-size:                $font-size-base * 1.475;
-$h4-font-size:                $font-size-base * 1.5;
-$h5-font-size:                $font-size-base * 1.25;
+$h1-font-size:                $font-size-base * 2.325;
+$h2-font-size:                $font-size-base * 1.4;
+$h3-font-size:                $font-size-base * 1.3;
+$h4-font-size:                $font-size-base * 1.2;
+$h5-font-size:                $font-size-base * 1.1;
 $h6-font-size:                $font-size-base !default;
 
 $headings-margin-bottom:      ($spacer / 2) !default;

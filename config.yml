@@ -2,7 +2,9 @@ baseURL: http://ccv-website-dev.s3-website-us-east-1.amazonaws.com
 languageCode: en-us
 title: Brown Center for Computing and Visualization
 theme: gb-theme
-
+permalinks:
+  news: "/:year/:month/:day/:slug/"
+  
 outputs:
   home:
     - html
@@ -12,6 +14,8 @@ outputs:
 DefaultContentLanguage: en
 canonifyURLs: true
 relativeURLs: true
+
+pygmentsCodefences: true
 
 # Menu
 menu:
@@ -60,4 +64,5 @@ languages:
 # Taxonomies
 taxonomies:
   tag: "tags"
+  type: "types"
   category: "category"

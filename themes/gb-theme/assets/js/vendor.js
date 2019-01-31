@@ -10364,7 +10364,7 @@ return jQuery;
 } );
 
 /*!
-  * Bootstrap v4.1.3 (https://getbootstrap.com/)
+  * Bootstrap v4.2.1 (https://getbootstrap.com/)
   * Copyright 2011-2018 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
@@ -10434,1350 +10434,1435 @@ return jQuery;
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.3): util.js
+   * Bootstrap (v4.2.1): util.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
+  /**
+   * ------------------------------------------------------------------------
+   * Private TransitionEnd Helpers
+   * ------------------------------------------------------------------------
+   */
 
-  var Util = function ($$$1) {
+  var TRANSITION_END = 'transitionend';
+  var MAX_UID = 1000000;
+  var MILLISECONDS_MULTIPLIER = 1000; // Shoutout AngusCroll (https://goo.gl/pxwQGp)
+
+  function toType(obj) {
+    return {}.toString.call(obj).match(/\s([a-z]+)/i)[1].toLowerCase();
+  }
+
+  function getSpecialTransitionEndEvent() {
+    return {
+      bindType: TRANSITION_END,
+      delegateType: TRANSITION_END,
+      handle: function handle(event) {
+        if ($(event.target).is(this)) {
+          return event.handleObj.handler.apply(this, arguments); // eslint-disable-line prefer-rest-params
+        }
+
+        return undefined; // eslint-disable-line no-undefined
+      }
+    };
+  }
+
+  function transitionEndEmulator(duration) {
+    var _this = this;
+
+    var called = false;
+    $(this).one(Util.TRANSITION_END, function () {
+      called = true;
+    });
+    setTimeout(function () {
+      if (!called) {
+        Util.triggerTransitionEnd(_this);
+      }
+    }, duration);
+    return this;
+  }
+
+  function setTransitionEndSupport() {
+    $.fn.emulateTransitionEnd = transitionEndEmulator;
+    $.event.special[Util.TRANSITION_END] = getSpecialTransitionEndEvent();
+  }
+  /**
+   * --------------------------------------------------------------------------
+   * Public Util Api
+   * --------------------------------------------------------------------------
+   */
+
+
+  var Util = {
+    TRANSITION_END: 'bsTransitionEnd',
+    getUID: function getUID(prefix) {
+      do {
+        // eslint-disable-next-line no-bitwise
+        prefix += ~~(Math.random() * MAX_UID); // "~~" acts like a faster Math.floor() here
+      } while (document.getElementById(prefix));
+
+      return prefix;
+    },
+    getSelectorFromElement: function getSelectorFromElement(element) {
+      var selector = element.getAttribute('data-target');
+
+      if (!selector || selector === '#') {
+        var hrefAttr = element.getAttribute('href');
+        selector = hrefAttr && hrefAttr !== '#' ? hrefAttr.trim() : '';
+      }
+
+      return selector && document.querySelector(selector) ? selector : null;
+    },
+    getTransitionDurationFromElement: function getTransitionDurationFromElement(element) {
+      if (!element) {
+        return 0;
+      } // Get transition-duration of the element
+
+
+      var transitionDuration = $(element).css('transition-duration');
+      var transitionDelay = $(element).css('transition-delay');
+      var floatTransitionDuration = parseFloat(transitionDuration);
+      var floatTransitionDelay = parseFloat(transitionDelay); // Return 0 if element or transition duration is not found
+
+      if (!floatTransitionDuration && !floatTransitionDelay) {
+        return 0;
+      } // If multiple durations are defined, take the first
+
+
+      transitionDuration = transitionDuration.split(',')[0];
+      transitionDelay = transitionDelay.split(',')[0];
+      return (parseFloat(transitionDuration) + parseFloat(transitionDelay)) * MILLISECONDS_MULTIPLIER;
+    },
+    reflow: function reflow(element) {
+      return element.offsetHeight;
+    },
+    triggerTransitionEnd: function triggerTransitionEnd(element) {
+      $(element).trigger(TRANSITION_END);
+    },
+    // TODO: Remove in v5
+    supportsTransitionEnd: function supportsTransitionEnd() {
+      return Boolean(TRANSITION_END);
+    },
+    isElement: function isElement(obj) {
+      return (obj[0] || obj).nodeType;
+    },
+    typeCheckConfig: function typeCheckConfig(componentName, config, configTypes) {
+      for (var property in configTypes) {
+        if (Object.prototype.hasOwnProperty.call(configTypes, property)) {
+          var expectedTypes = configTypes[property];
+          var value = config[property];
+          var valueType = value && Util.isElement(value) ? 'element' : toType(value);
+
+          if (!new RegExp(expectedTypes).test(valueType)) {
+            throw new Error(componentName.toUpperCase() + ": " + ("Option \"" + property + "\" provided type \"" + valueType + "\" ") + ("but expected type \"" + expectedTypes + "\"."));
+          }
+        }
+      }
+    },
+    findShadowRoot: function findShadowRoot(element) {
+      if (!document.documentElement.attachShadow) {
+        return null;
+      } // Can find the shadow root otherwise it'll return the document
+
+
+      if (typeof element.getRootNode === 'function') {
+        var root = element.getRootNode();
+        return root instanceof ShadowRoot ? root : null;
+      }
+
+      if (element instanceof ShadowRoot) {
+        return element;
+      } // when we don't find a shadow root
+
+
+      if (!element.parentNode) {
+        return null;
+      }
+
+      return Util.findShadowRoot(element.parentNode);
+    }
+  };
+  setTransitionEndSupport();
+
+  /**
+   * ------------------------------------------------------------------------
+   * Constants
+   * ------------------------------------------------------------------------
+   */
+
+  var NAME = 'alert';
+  var VERSION = '4.2.1';
+  var DATA_KEY = 'bs.alert';
+  var EVENT_KEY = "." + DATA_KEY;
+  var DATA_API_KEY = '.data-api';
+  var JQUERY_NO_CONFLICT = $.fn[NAME];
+  var Selector = {
+    DISMISS: '[data-dismiss="alert"]'
+  };
+  var Event = {
+    CLOSE: "close" + EVENT_KEY,
+    CLOSED: "closed" + EVENT_KEY,
+    CLICK_DATA_API: "click" + EVENT_KEY + DATA_API_KEY
+  };
+  var ClassName = {
+    ALERT: 'alert',
+    FADE: 'fade',
+    SHOW: 'show'
     /**
      * ------------------------------------------------------------------------
-     * Private TransitionEnd Helpers
+     * Class Definition
      * ------------------------------------------------------------------------
      */
-    var TRANSITION_END = 'transitionend';
-    var MAX_UID = 1000000;
-    var MILLISECONDS_MULTIPLIER = 1000; // Shoutout AngusCroll (https://goo.gl/pxwQGp)
 
-    function toType(obj) {
-      return {}.toString.call(obj).match(/\s([a-z]+)/i)[1].toLowerCase();
-    }
+  };
 
-    function getSpecialTransitionEndEvent() {
-      return {
-        bindType: TRANSITION_END,
-        delegateType: TRANSITION_END,
-        handle: function handle(event) {
-          if ($$$1(event.target).is(this)) {
-            return event.handleObj.handler.apply(this, arguments); // eslint-disable-line prefer-rest-params
-          }
+  var Alert =
+  /*#__PURE__*/
+  function () {
+    function Alert(element) {
+      this._element = element;
+    } // Getters
 
-          return undefined; // eslint-disable-line no-undefined
-        }
-      };
-    }
 
-    function transitionEndEmulator(duration) {
+    var _proto = Alert.prototype;
+
+    // Public
+    _proto.close = function close(element) {
+      var rootElement = this._element;
+
+      if (element) {
+        rootElement = this._getRootElement(element);
+      }
+
+      var customEvent = this._triggerCloseEvent(rootElement);
+
+      if (customEvent.isDefaultPrevented()) {
+        return;
+      }
+
+      this._removeElement(rootElement);
+    };
+
+    _proto.dispose = function dispose() {
+      $.removeData(this._element, DATA_KEY);
+      this._element = null;
+    }; // Private
+
+
+    _proto._getRootElement = function _getRootElement(element) {
+      var selector = Util.getSelectorFromElement(element);
+      var parent = false;
+
+      if (selector) {
+        parent = document.querySelector(selector);
+      }
+
+      if (!parent) {
+        parent = $(element).closest("." + ClassName.ALERT)[0];
+      }
+
+      return parent;
+    };
+
+    _proto._triggerCloseEvent = function _triggerCloseEvent(element) {
+      var closeEvent = $.Event(Event.CLOSE);
+      $(element).trigger(closeEvent);
+      return closeEvent;
+    };
+
+    _proto._removeElement = function _removeElement(element) {
       var _this = this;
 
-      var called = false;
-      $$$1(this).one(Util.TRANSITION_END, function () {
-        called = true;
-      });
-      setTimeout(function () {
-        if (!called) {
-          Util.triggerTransitionEnd(_this);
-        }
-      }, duration);
-      return this;
-    }
+      $(element).removeClass(ClassName.SHOW);
 
-    function setTransitionEndSupport() {
-      $$$1.fn.emulateTransitionEnd = transitionEndEmulator;
-      $$$1.event.special[Util.TRANSITION_END] = getSpecialTransitionEndEvent();
-    }
-    /**
-     * --------------------------------------------------------------------------
-     * Public Util Api
-     * --------------------------------------------------------------------------
-     */
+      if (!$(element).hasClass(ClassName.FADE)) {
+        this._destroyElement(element);
 
-
-    var Util = {
-      TRANSITION_END: 'bsTransitionEnd',
-      getUID: function getUID(prefix) {
-        do {
-          // eslint-disable-next-line no-bitwise
-          prefix += ~~(Math.random() * MAX_UID); // "~~" acts like a faster Math.floor() here
-        } while (document.getElementById(prefix));
-
-        return prefix;
-      },
-      getSelectorFromElement: function getSelectorFromElement(element) {
-        var selector = element.getAttribute('data-target');
-
-        if (!selector || selector === '#') {
-          selector = element.getAttribute('href') || '';
-        }
-
-        try {
-          return document.querySelector(selector) ? selector : null;
-        } catch (err) {
-          return null;
-        }
-      },
-      getTransitionDurationFromElement: function getTransitionDurationFromElement(element) {
-        if (!element) {
-          return 0;
-        } // Get transition-duration of the element
-
-
-        var transitionDuration = $$$1(element).css('transition-duration');
-        var floatTransitionDuration = parseFloat(transitionDuration); // Return 0 if element or transition duration is not found
-
-        if (!floatTransitionDuration) {
-          return 0;
-        } // If multiple durations are defined, take the first
-
-
-        transitionDuration = transitionDuration.split(',')[0];
-        return parseFloat(transitionDuration) * MILLISECONDS_MULTIPLIER;
-      },
-      reflow: function reflow(element) {
-        return element.offsetHeight;
-      },
-      triggerTransitionEnd: function triggerTransitionEnd(element) {
-        $$$1(element).trigger(TRANSITION_END);
-      },
-      // TODO: Remove in v5
-      supportsTransitionEnd: function supportsTransitionEnd() {
-        return Boolean(TRANSITION_END);
-      },
-      isElement: function isElement(obj) {
-        return (obj[0] || obj).nodeType;
-      },
-      typeCheckConfig: function typeCheckConfig(componentName, config, configTypes) {
-        for (var property in configTypes) {
-          if (Object.prototype.hasOwnProperty.call(configTypes, property)) {
-            var expectedTypes = configTypes[property];
-            var value = config[property];
-            var valueType = value && Util.isElement(value) ? 'element' : toType(value);
-
-            if (!new RegExp(expectedTypes).test(valueType)) {
-              throw new Error(componentName.toUpperCase() + ": " + ("Option \"" + property + "\" provided type \"" + valueType + "\" ") + ("but expected type \"" + expectedTypes + "\"."));
-            }
-          }
-        }
+        return;
       }
-    };
-    setTransitionEndSupport();
-    return Util;
-  }($);
 
-  /**
-   * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.3): alert.js
-   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
-   * --------------------------------------------------------------------------
-   */
-
-  var Alert = function ($$$1) {
-    /**
-     * ------------------------------------------------------------------------
-     * Constants
-     * ------------------------------------------------------------------------
-     */
-    var NAME = 'alert';
-    var VERSION = '4.1.3';
-    var DATA_KEY = 'bs.alert';
-    var EVENT_KEY = "." + DATA_KEY;
-    var DATA_API_KEY = '.data-api';
-    var JQUERY_NO_CONFLICT = $$$1.fn[NAME];
-    var Selector = {
-      DISMISS: '[data-dismiss="alert"]'
-    };
-    var Event = {
-      CLOSE: "close" + EVENT_KEY,
-      CLOSED: "closed" + EVENT_KEY,
-      CLICK_DATA_API: "click" + EVENT_KEY + DATA_API_KEY
-    };
-    var ClassName = {
-      ALERT: 'alert',
-      FADE: 'fade',
-      SHOW: 'show'
-      /**
-       * ------------------------------------------------------------------------
-       * Class Definition
-       * ------------------------------------------------------------------------
-       */
-
+      var transitionDuration = Util.getTransitionDurationFromElement(element);
+      $(element).one(Util.TRANSITION_END, function (event) {
+        return _this._destroyElement(element, event);
+      }).emulateTransitionEnd(transitionDuration);
     };
 
-    var Alert =
-    /*#__PURE__*/
-    function () {
-      function Alert(element) {
-        this._element = element;
-      } // Getters
+    _proto._destroyElement = function _destroyElement(element) {
+      $(element).detach().trigger(Event.CLOSED).remove();
+    }; // Static
 
 
-      var _proto = Alert.prototype;
+    Alert._jQueryInterface = function _jQueryInterface(config) {
+      return this.each(function () {
+        var $element = $(this);
+        var data = $element.data(DATA_KEY);
 
-      // Public
-      _proto.close = function close(element) {
-        var rootElement = this._element;
-
-        if (element) {
-          rootElement = this._getRootElement(element);
+        if (!data) {
+          data = new Alert(this);
+          $element.data(DATA_KEY, data);
         }
 
-        var customEvent = this._triggerCloseEvent(rootElement);
-
-        if (customEvent.isDefaultPrevented()) {
-          return;
+        if (config === 'close') {
+          data[config](this);
         }
-
-        this._removeElement(rootElement);
-      };
-
-      _proto.dispose = function dispose() {
-        $$$1.removeData(this._element, DATA_KEY);
-        this._element = null;
-      }; // Private
-
-
-      _proto._getRootElement = function _getRootElement(element) {
-        var selector = Util.getSelectorFromElement(element);
-        var parent = false;
-
-        if (selector) {
-          parent = document.querySelector(selector);
-        }
-
-        if (!parent) {
-          parent = $$$1(element).closest("." + ClassName.ALERT)[0];
-        }
-
-        return parent;
-      };
-
-      _proto._triggerCloseEvent = function _triggerCloseEvent(element) {
-        var closeEvent = $$$1.Event(Event.CLOSE);
-        $$$1(element).trigger(closeEvent);
-        return closeEvent;
-      };
-
-      _proto._removeElement = function _removeElement(element) {
-        var _this = this;
-
-        $$$1(element).removeClass(ClassName.SHOW);
-
-        if (!$$$1(element).hasClass(ClassName.FADE)) {
-          this._destroyElement(element);
-
-          return;
-        }
-
-        var transitionDuration = Util.getTransitionDurationFromElement(element);
-        $$$1(element).one(Util.TRANSITION_END, function (event) {
-          return _this._destroyElement(element, event);
-        }).emulateTransitionEnd(transitionDuration);
-      };
-
-      _proto._destroyElement = function _destroyElement(element) {
-        $$$1(element).detach().trigger(Event.CLOSED).remove();
-      }; // Static
-
-
-      Alert._jQueryInterface = function _jQueryInterface(config) {
-        return this.each(function () {
-          var $element = $$$1(this);
-          var data = $element.data(DATA_KEY);
-
-          if (!data) {
-            data = new Alert(this);
-            $element.data(DATA_KEY, data);
-          }
-
-          if (config === 'close') {
-            data[config](this);
-          }
-        });
-      };
-
-      Alert._handleDismiss = function _handleDismiss(alertInstance) {
-        return function (event) {
-          if (event) {
-            event.preventDefault();
-          }
-
-          alertInstance.close(this);
-        };
-      };
-
-      _createClass(Alert, null, [{
-        key: "VERSION",
-        get: function get() {
-          return VERSION;
-        }
-      }]);
-
-      return Alert;
-    }();
-    /**
-     * ------------------------------------------------------------------------
-     * Data Api implementation
-     * ------------------------------------------------------------------------
-     */
-
-
-    $$$1(document).on(Event.CLICK_DATA_API, Selector.DISMISS, Alert._handleDismiss(new Alert()));
-    /**
-     * ------------------------------------------------------------------------
-     * jQuery
-     * ------------------------------------------------------------------------
-     */
-
-    $$$1.fn[NAME] = Alert._jQueryInterface;
-    $$$1.fn[NAME].Constructor = Alert;
-
-    $$$1.fn[NAME].noConflict = function () {
-      $$$1.fn[NAME] = JQUERY_NO_CONFLICT;
-      return Alert._jQueryInterface;
+      });
     };
+
+    Alert._handleDismiss = function _handleDismiss(alertInstance) {
+      return function (event) {
+        if (event) {
+          event.preventDefault();
+        }
+
+        alertInstance.close(this);
+      };
+    };
+
+    _createClass(Alert, null, [{
+      key: "VERSION",
+      get: function get() {
+        return VERSION;
+      }
+    }]);
 
     return Alert;
-  }($);
-
+  }();
   /**
-   * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.3): button.js
-   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
-   * --------------------------------------------------------------------------
+   * ------------------------------------------------------------------------
+   * Data Api implementation
+   * ------------------------------------------------------------------------
    */
 
-  var Button = function ($$$1) {
+
+  $(document).on(Event.CLICK_DATA_API, Selector.DISMISS, Alert._handleDismiss(new Alert()));
+  /**
+   * ------------------------------------------------------------------------
+   * jQuery
+   * ------------------------------------------------------------------------
+   */
+
+  $.fn[NAME] = Alert._jQueryInterface;
+  $.fn[NAME].Constructor = Alert;
+
+  $.fn[NAME].noConflict = function () {
+    $.fn[NAME] = JQUERY_NO_CONFLICT;
+    return Alert._jQueryInterface;
+  };
+
+  /**
+   * ------------------------------------------------------------------------
+   * Constants
+   * ------------------------------------------------------------------------
+   */
+
+  var NAME$1 = 'button';
+  var VERSION$1 = '4.2.1';
+  var DATA_KEY$1 = 'bs.button';
+  var EVENT_KEY$1 = "." + DATA_KEY$1;
+  var DATA_API_KEY$1 = '.data-api';
+  var JQUERY_NO_CONFLICT$1 = $.fn[NAME$1];
+  var ClassName$1 = {
+    ACTIVE: 'active',
+    BUTTON: 'btn',
+    FOCUS: 'focus'
+  };
+  var Selector$1 = {
+    DATA_TOGGLE_CARROT: '[data-toggle^="button"]',
+    DATA_TOGGLE: '[data-toggle="buttons"]',
+    INPUT: 'input:not([type="hidden"])',
+    ACTIVE: '.active',
+    BUTTON: '.btn'
+  };
+  var Event$1 = {
+    CLICK_DATA_API: "click" + EVENT_KEY$1 + DATA_API_KEY$1,
+    FOCUS_BLUR_DATA_API: "focus" + EVENT_KEY$1 + DATA_API_KEY$1 + " " + ("blur" + EVENT_KEY$1 + DATA_API_KEY$1)
     /**
      * ------------------------------------------------------------------------
-     * Constants
-     * ------------------------------------------------------------------------
-     */
-    var NAME = 'button';
-    var VERSION = '4.1.3';
-    var DATA_KEY = 'bs.button';
-    var EVENT_KEY = "." + DATA_KEY;
-    var DATA_API_KEY = '.data-api';
-    var JQUERY_NO_CONFLICT = $$$1.fn[NAME];
-    var ClassName = {
-      ACTIVE: 'active',
-      BUTTON: 'btn',
-      FOCUS: 'focus'
-    };
-    var Selector = {
-      DATA_TOGGLE_CARROT: '[data-toggle^="button"]',
-      DATA_TOGGLE: '[data-toggle="buttons"]',
-      INPUT: 'input',
-      ACTIVE: '.active',
-      BUTTON: '.btn'
-    };
-    var Event = {
-      CLICK_DATA_API: "click" + EVENT_KEY + DATA_API_KEY,
-      FOCUS_BLUR_DATA_API: "focus" + EVENT_KEY + DATA_API_KEY + " " + ("blur" + EVENT_KEY + DATA_API_KEY)
-      /**
-       * ------------------------------------------------------------------------
-       * Class Definition
-       * ------------------------------------------------------------------------
-       */
-
-    };
-
-    var Button =
-    /*#__PURE__*/
-    function () {
-      function Button(element) {
-        this._element = element;
-      } // Getters
-
-
-      var _proto = Button.prototype;
-
-      // Public
-      _proto.toggle = function toggle() {
-        var triggerChangeEvent = true;
-        var addAriaPressed = true;
-        var rootElement = $$$1(this._element).closest(Selector.DATA_TOGGLE)[0];
-
-        if (rootElement) {
-          var input = this._element.querySelector(Selector.INPUT);
-
-          if (input) {
-            if (input.type === 'radio') {
-              if (input.checked && this._element.classList.contains(ClassName.ACTIVE)) {
-                triggerChangeEvent = false;
-              } else {
-                var activeElement = rootElement.querySelector(Selector.ACTIVE);
-
-                if (activeElement) {
-                  $$$1(activeElement).removeClass(ClassName.ACTIVE);
-                }
-              }
-            }
-
-            if (triggerChangeEvent) {
-              if (input.hasAttribute('disabled') || rootElement.hasAttribute('disabled') || input.classList.contains('disabled') || rootElement.classList.contains('disabled')) {
-                return;
-              }
-
-              input.checked = !this._element.classList.contains(ClassName.ACTIVE);
-              $$$1(input).trigger('change');
-            }
-
-            input.focus();
-            addAriaPressed = false;
-          }
-        }
-
-        if (addAriaPressed) {
-          this._element.setAttribute('aria-pressed', !this._element.classList.contains(ClassName.ACTIVE));
-        }
-
-        if (triggerChangeEvent) {
-          $$$1(this._element).toggleClass(ClassName.ACTIVE);
-        }
-      };
-
-      _proto.dispose = function dispose() {
-        $$$1.removeData(this._element, DATA_KEY);
-        this._element = null;
-      }; // Static
-
-
-      Button._jQueryInterface = function _jQueryInterface(config) {
-        return this.each(function () {
-          var data = $$$1(this).data(DATA_KEY);
-
-          if (!data) {
-            data = new Button(this);
-            $$$1(this).data(DATA_KEY, data);
-          }
-
-          if (config === 'toggle') {
-            data[config]();
-          }
-        });
-      };
-
-      _createClass(Button, null, [{
-        key: "VERSION",
-        get: function get() {
-          return VERSION;
-        }
-      }]);
-
-      return Button;
-    }();
-    /**
-     * ------------------------------------------------------------------------
-     * Data Api implementation
+     * Class Definition
      * ------------------------------------------------------------------------
      */
 
+  };
 
-    $$$1(document).on(Event.CLICK_DATA_API, Selector.DATA_TOGGLE_CARROT, function (event) {
-      event.preventDefault();
-      var button = event.target;
+  var Button =
+  /*#__PURE__*/
+  function () {
+    function Button(element) {
+      this._element = element;
+    } // Getters
 
-      if (!$$$1(button).hasClass(ClassName.BUTTON)) {
-        button = $$$1(button).closest(Selector.BUTTON);
+
+    var _proto = Button.prototype;
+
+    // Public
+    _proto.toggle = function toggle() {
+      var triggerChangeEvent = true;
+      var addAriaPressed = true;
+      var rootElement = $(this._element).closest(Selector$1.DATA_TOGGLE)[0];
+
+      if (rootElement) {
+        var input = this._element.querySelector(Selector$1.INPUT);
+
+        if (input) {
+          if (input.type === 'radio') {
+            if (input.checked && this._element.classList.contains(ClassName$1.ACTIVE)) {
+              triggerChangeEvent = false;
+            } else {
+              var activeElement = rootElement.querySelector(Selector$1.ACTIVE);
+
+              if (activeElement) {
+                $(activeElement).removeClass(ClassName$1.ACTIVE);
+              }
+            }
+          }
+
+          if (triggerChangeEvent) {
+            if (input.hasAttribute('disabled') || rootElement.hasAttribute('disabled') || input.classList.contains('disabled') || rootElement.classList.contains('disabled')) {
+              return;
+            }
+
+            input.checked = !this._element.classList.contains(ClassName$1.ACTIVE);
+            $(input).trigger('change');
+          }
+
+          input.focus();
+          addAriaPressed = false;
+        }
       }
 
-      Button._jQueryInterface.call($$$1(button), 'toggle');
-    }).on(Event.FOCUS_BLUR_DATA_API, Selector.DATA_TOGGLE_CARROT, function (event) {
-      var button = $$$1(event.target).closest(Selector.BUTTON)[0];
-      $$$1(button).toggleClass(ClassName.FOCUS, /^focus(in)?$/.test(event.type));
-    });
-    /**
-     * ------------------------------------------------------------------------
-     * jQuery
-     * ------------------------------------------------------------------------
-     */
+      if (addAriaPressed) {
+        this._element.setAttribute('aria-pressed', !this._element.classList.contains(ClassName$1.ACTIVE));
+      }
 
-    $$$1.fn[NAME] = Button._jQueryInterface;
-    $$$1.fn[NAME].Constructor = Button;
-
-    $$$1.fn[NAME].noConflict = function () {
-      $$$1.fn[NAME] = JQUERY_NO_CONFLICT;
-      return Button._jQueryInterface;
+      if (triggerChangeEvent) {
+        $(this._element).toggleClass(ClassName$1.ACTIVE);
+      }
     };
+
+    _proto.dispose = function dispose() {
+      $.removeData(this._element, DATA_KEY$1);
+      this._element = null;
+    }; // Static
+
+
+    Button._jQueryInterface = function _jQueryInterface(config) {
+      return this.each(function () {
+        var data = $(this).data(DATA_KEY$1);
+
+        if (!data) {
+          data = new Button(this);
+          $(this).data(DATA_KEY$1, data);
+        }
+
+        if (config === 'toggle') {
+          data[config]();
+        }
+      });
+    };
+
+    _createClass(Button, null, [{
+      key: "VERSION",
+      get: function get() {
+        return VERSION$1;
+      }
+    }]);
 
     return Button;
-  }($);
-
+  }();
   /**
-   * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.3): carousel.js
-   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
-   * --------------------------------------------------------------------------
+   * ------------------------------------------------------------------------
+   * Data Api implementation
+   * ------------------------------------------------------------------------
    */
 
-  var Carousel = function ($$$1) {
+
+  $(document).on(Event$1.CLICK_DATA_API, Selector$1.DATA_TOGGLE_CARROT, function (event) {
+    event.preventDefault();
+    var button = event.target;
+
+    if (!$(button).hasClass(ClassName$1.BUTTON)) {
+      button = $(button).closest(Selector$1.BUTTON);
+    }
+
+    Button._jQueryInterface.call($(button), 'toggle');
+  }).on(Event$1.FOCUS_BLUR_DATA_API, Selector$1.DATA_TOGGLE_CARROT, function (event) {
+    var button = $(event.target).closest(Selector$1.BUTTON)[0];
+    $(button).toggleClass(ClassName$1.FOCUS, /^focus(in)?$/.test(event.type));
+  });
+  /**
+   * ------------------------------------------------------------------------
+   * jQuery
+   * ------------------------------------------------------------------------
+   */
+
+  $.fn[NAME$1] = Button._jQueryInterface;
+  $.fn[NAME$1].Constructor = Button;
+
+  $.fn[NAME$1].noConflict = function () {
+    $.fn[NAME$1] = JQUERY_NO_CONFLICT$1;
+    return Button._jQueryInterface;
+  };
+
+  /**
+   * ------------------------------------------------------------------------
+   * Constants
+   * ------------------------------------------------------------------------
+   */
+
+  var NAME$2 = 'carousel';
+  var VERSION$2 = '4.2.1';
+  var DATA_KEY$2 = 'bs.carousel';
+  var EVENT_KEY$2 = "." + DATA_KEY$2;
+  var DATA_API_KEY$2 = '.data-api';
+  var JQUERY_NO_CONFLICT$2 = $.fn[NAME$2];
+  var ARROW_LEFT_KEYCODE = 37; // KeyboardEvent.which value for left arrow key
+
+  var ARROW_RIGHT_KEYCODE = 39; // KeyboardEvent.which value for right arrow key
+
+  var TOUCHEVENT_COMPAT_WAIT = 500; // Time for mouse compat events to fire after touch
+
+  var SWIPE_THRESHOLD = 40;
+  var Default = {
+    interval: 5000,
+    keyboard: true,
+    slide: false,
+    pause: 'hover',
+    wrap: true,
+    touch: true
+  };
+  var DefaultType = {
+    interval: '(number|boolean)',
+    keyboard: 'boolean',
+    slide: '(boolean|string)',
+    pause: '(string|boolean)',
+    wrap: 'boolean',
+    touch: 'boolean'
+  };
+  var Direction = {
+    NEXT: 'next',
+    PREV: 'prev',
+    LEFT: 'left',
+    RIGHT: 'right'
+  };
+  var Event$2 = {
+    SLIDE: "slide" + EVENT_KEY$2,
+    SLID: "slid" + EVENT_KEY$2,
+    KEYDOWN: "keydown" + EVENT_KEY$2,
+    MOUSEENTER: "mouseenter" + EVENT_KEY$2,
+    MOUSELEAVE: "mouseleave" + EVENT_KEY$2,
+    TOUCHSTART: "touchstart" + EVENT_KEY$2,
+    TOUCHMOVE: "touchmove" + EVENT_KEY$2,
+    TOUCHEND: "touchend" + EVENT_KEY$2,
+    POINTERDOWN: "pointerdown" + EVENT_KEY$2,
+    POINTERUP: "pointerup" + EVENT_KEY$2,
+    DRAG_START: "dragstart" + EVENT_KEY$2,
+    LOAD_DATA_API: "load" + EVENT_KEY$2 + DATA_API_KEY$2,
+    CLICK_DATA_API: "click" + EVENT_KEY$2 + DATA_API_KEY$2
+  };
+  var ClassName$2 = {
+    CAROUSEL: 'carousel',
+    ACTIVE: 'active',
+    SLIDE: 'slide',
+    RIGHT: 'carousel-item-right',
+    LEFT: 'carousel-item-left',
+    NEXT: 'carousel-item-next',
+    PREV: 'carousel-item-prev',
+    ITEM: 'carousel-item',
+    POINTER_EVENT: 'pointer-event'
+  };
+  var Selector$2 = {
+    ACTIVE: '.active',
+    ACTIVE_ITEM: '.active.carousel-item',
+    ITEM: '.carousel-item',
+    ITEM_IMG: '.carousel-item img',
+    NEXT_PREV: '.carousel-item-next, .carousel-item-prev',
+    INDICATORS: '.carousel-indicators',
+    DATA_SLIDE: '[data-slide], [data-slide-to]',
+    DATA_RIDE: '[data-ride="carousel"]'
+  };
+  var PointerType = {
+    TOUCH: 'touch',
+    PEN: 'pen'
     /**
      * ------------------------------------------------------------------------
-     * Constants
+     * Class Definition
      * ------------------------------------------------------------------------
      */
-    var NAME = 'carousel';
-    var VERSION = '4.1.3';
-    var DATA_KEY = 'bs.carousel';
-    var EVENT_KEY = "." + DATA_KEY;
-    var DATA_API_KEY = '.data-api';
-    var JQUERY_NO_CONFLICT = $$$1.fn[NAME];
-    var ARROW_LEFT_KEYCODE = 37; // KeyboardEvent.which value for left arrow key
 
-    var ARROW_RIGHT_KEYCODE = 39; // KeyboardEvent.which value for right arrow key
+  };
 
-    var TOUCHEVENT_COMPAT_WAIT = 500; // Time for mouse compat events to fire after touch
+  var Carousel =
+  /*#__PURE__*/
+  function () {
+    function Carousel(element, config) {
+      this._items = null;
+      this._interval = null;
+      this._activeElement = null;
+      this._isPaused = false;
+      this._isSliding = false;
+      this.touchTimeout = null;
+      this.touchStartX = 0;
+      this.touchDeltaX = 0;
+      this._config = this._getConfig(config);
+      this._element = element;
+      this._indicatorsElement = this._element.querySelector(Selector$2.INDICATORS);
+      this._touchSupported = 'ontouchstart' in document.documentElement || navigator.maxTouchPoints > 0;
+      this._pointerEvent = Boolean(window.PointerEvent || window.MSPointerEvent);
 
-    var Default = {
-      interval: 5000,
-      keyboard: true,
-      slide: false,
-      pause: 'hover',
-      wrap: true
-    };
-    var DefaultType = {
-      interval: '(number|boolean)',
-      keyboard: 'boolean',
-      slide: '(boolean|string)',
-      pause: '(string|boolean)',
-      wrap: 'boolean'
-    };
-    var Direction = {
-      NEXT: 'next',
-      PREV: 'prev',
-      LEFT: 'left',
-      RIGHT: 'right'
-    };
-    var Event = {
-      SLIDE: "slide" + EVENT_KEY,
-      SLID: "slid" + EVENT_KEY,
-      KEYDOWN: "keydown" + EVENT_KEY,
-      MOUSEENTER: "mouseenter" + EVENT_KEY,
-      MOUSELEAVE: "mouseleave" + EVENT_KEY,
-      TOUCHEND: "touchend" + EVENT_KEY,
-      LOAD_DATA_API: "load" + EVENT_KEY + DATA_API_KEY,
-      CLICK_DATA_API: "click" + EVENT_KEY + DATA_API_KEY
-    };
-    var ClassName = {
-      CAROUSEL: 'carousel',
-      ACTIVE: 'active',
-      SLIDE: 'slide',
-      RIGHT: 'carousel-item-right',
-      LEFT: 'carousel-item-left',
-      NEXT: 'carousel-item-next',
-      PREV: 'carousel-item-prev',
-      ITEM: 'carousel-item'
-    };
-    var Selector = {
-      ACTIVE: '.active',
-      ACTIVE_ITEM: '.active.carousel-item',
-      ITEM: '.carousel-item',
-      NEXT_PREV: '.carousel-item-next, .carousel-item-prev',
-      INDICATORS: '.carousel-indicators',
-      DATA_SLIDE: '[data-slide], [data-slide-to]',
-      DATA_RIDE: '[data-ride="carousel"]'
-      /**
-       * ------------------------------------------------------------------------
-       * Class Definition
-       * ------------------------------------------------------------------------
-       */
+      this._addEventListeners();
+    } // Getters
 
+
+    var _proto = Carousel.prototype;
+
+    // Public
+    _proto.next = function next() {
+      if (!this._isSliding) {
+        this._slide(Direction.NEXT);
+      }
     };
 
-    var Carousel =
-    /*#__PURE__*/
-    function () {
-      function Carousel(element, config) {
-        this._items = null;
-        this._interval = null;
-        this._activeElement = null;
+    _proto.nextWhenVisible = function nextWhenVisible() {
+      // Don't call next when the page isn't visible
+      // or the carousel or its parent isn't visible
+      if (!document.hidden && $(this._element).is(':visible') && $(this._element).css('visibility') !== 'hidden') {
+        this.next();
+      }
+    };
+
+    _proto.prev = function prev() {
+      if (!this._isSliding) {
+        this._slide(Direction.PREV);
+      }
+    };
+
+    _proto.pause = function pause(event) {
+      if (!event) {
+        this._isPaused = true;
+      }
+
+      if (this._element.querySelector(Selector$2.NEXT_PREV)) {
+        Util.triggerTransitionEnd(this._element);
+        this.cycle(true);
+      }
+
+      clearInterval(this._interval);
+      this._interval = null;
+    };
+
+    _proto.cycle = function cycle(event) {
+      if (!event) {
         this._isPaused = false;
-        this._isSliding = false;
-        this.touchTimeout = null;
-        this._config = this._getConfig(config);
-        this._element = $$$1(element)[0];
-        this._indicatorsElement = this._element.querySelector(Selector.INDICATORS);
+      }
 
-        this._addEventListeners();
-      } // Getters
-
-
-      var _proto = Carousel.prototype;
-
-      // Public
-      _proto.next = function next() {
-        if (!this._isSliding) {
-          this._slide(Direction.NEXT);
-        }
-      };
-
-      _proto.nextWhenVisible = function nextWhenVisible() {
-        // Don't call next when the page isn't visible
-        // or the carousel or its parent isn't visible
-        if (!document.hidden && $$$1(this._element).is(':visible') && $$$1(this._element).css('visibility') !== 'hidden') {
-          this.next();
-        }
-      };
-
-      _proto.prev = function prev() {
-        if (!this._isSliding) {
-          this._slide(Direction.PREV);
-        }
-      };
-
-      _proto.pause = function pause(event) {
-        if (!event) {
-          this._isPaused = true;
-        }
-
-        if (this._element.querySelector(Selector.NEXT_PREV)) {
-          Util.triggerTransitionEnd(this._element);
-          this.cycle(true);
-        }
-
+      if (this._interval) {
         clearInterval(this._interval);
         this._interval = null;
-      };
-
-      _proto.cycle = function cycle(event) {
-        if (!event) {
-          this._isPaused = false;
-        }
-
-        if (this._interval) {
-          clearInterval(this._interval);
-          this._interval = null;
-        }
-
-        if (this._config.interval && !this._isPaused) {
-          this._interval = setInterval((document.visibilityState ? this.nextWhenVisible : this.next).bind(this), this._config.interval);
-        }
-      };
-
-      _proto.to = function to(index) {
-        var _this = this;
-
-        this._activeElement = this._element.querySelector(Selector.ACTIVE_ITEM);
-
-        var activeIndex = this._getItemIndex(this._activeElement);
-
-        if (index > this._items.length - 1 || index < 0) {
-          return;
-        }
-
-        if (this._isSliding) {
-          $$$1(this._element).one(Event.SLID, function () {
-            return _this.to(index);
-          });
-          return;
-        }
-
-        if (activeIndex === index) {
-          this.pause();
-          this.cycle();
-          return;
-        }
-
-        var direction = index > activeIndex ? Direction.NEXT : Direction.PREV;
-
-        this._slide(direction, this._items[index]);
-      };
-
-      _proto.dispose = function dispose() {
-        $$$1(this._element).off(EVENT_KEY);
-        $$$1.removeData(this._element, DATA_KEY);
-        this._items = null;
-        this._config = null;
-        this._element = null;
-        this._interval = null;
-        this._isPaused = null;
-        this._isSliding = null;
-        this._activeElement = null;
-        this._indicatorsElement = null;
-      }; // Private
-
-
-      _proto._getConfig = function _getConfig(config) {
-        config = _objectSpread({}, Default, config);
-        Util.typeCheckConfig(NAME, config, DefaultType);
-        return config;
-      };
-
-      _proto._addEventListeners = function _addEventListeners() {
-        var _this2 = this;
-
-        if (this._config.keyboard) {
-          $$$1(this._element).on(Event.KEYDOWN, function (event) {
-            return _this2._keydown(event);
-          });
-        }
-
-        if (this._config.pause === 'hover') {
-          $$$1(this._element).on(Event.MOUSEENTER, function (event) {
-            return _this2.pause(event);
-          }).on(Event.MOUSELEAVE, function (event) {
-            return _this2.cycle(event);
-          });
-
-          if ('ontouchstart' in document.documentElement) {
-            // If it's a touch-enabled device, mouseenter/leave are fired as
-            // part of the mouse compatibility events on first tap - the carousel
-            // would stop cycling until user tapped out of it;
-            // here, we listen for touchend, explicitly pause the carousel
-            // (as if it's the second time we tap on it, mouseenter compat event
-            // is NOT fired) and after a timeout (to allow for mouse compatibility
-            // events to fire) we explicitly restart cycling
-            $$$1(this._element).on(Event.TOUCHEND, function () {
-              _this2.pause();
-
-              if (_this2.touchTimeout) {
-                clearTimeout(_this2.touchTimeout);
-              }
-
-              _this2.touchTimeout = setTimeout(function (event) {
-                return _this2.cycle(event);
-              }, TOUCHEVENT_COMPAT_WAIT + _this2._config.interval);
-            });
-          }
-        }
-      };
-
-      _proto._keydown = function _keydown(event) {
-        if (/input|textarea/i.test(event.target.tagName)) {
-          return;
-        }
-
-        switch (event.which) {
-          case ARROW_LEFT_KEYCODE:
-            event.preventDefault();
-            this.prev();
-            break;
-
-          case ARROW_RIGHT_KEYCODE:
-            event.preventDefault();
-            this.next();
-            break;
-
-          default:
-        }
-      };
-
-      _proto._getItemIndex = function _getItemIndex(element) {
-        this._items = element && element.parentNode ? [].slice.call(element.parentNode.querySelectorAll(Selector.ITEM)) : [];
-        return this._items.indexOf(element);
-      };
-
-      _proto._getItemByDirection = function _getItemByDirection(direction, activeElement) {
-        var isNextDirection = direction === Direction.NEXT;
-        var isPrevDirection = direction === Direction.PREV;
-
-        var activeIndex = this._getItemIndex(activeElement);
-
-        var lastItemIndex = this._items.length - 1;
-        var isGoingToWrap = isPrevDirection && activeIndex === 0 || isNextDirection && activeIndex === lastItemIndex;
-
-        if (isGoingToWrap && !this._config.wrap) {
-          return activeElement;
-        }
-
-        var delta = direction === Direction.PREV ? -1 : 1;
-        var itemIndex = (activeIndex + delta) % this._items.length;
-        return itemIndex === -1 ? this._items[this._items.length - 1] : this._items[itemIndex];
-      };
-
-      _proto._triggerSlideEvent = function _triggerSlideEvent(relatedTarget, eventDirectionName) {
-        var targetIndex = this._getItemIndex(relatedTarget);
-
-        var fromIndex = this._getItemIndex(this._element.querySelector(Selector.ACTIVE_ITEM));
-
-        var slideEvent = $$$1.Event(Event.SLIDE, {
-          relatedTarget: relatedTarget,
-          direction: eventDirectionName,
-          from: fromIndex,
-          to: targetIndex
-        });
-        $$$1(this._element).trigger(slideEvent);
-        return slideEvent;
-      };
-
-      _proto._setActiveIndicatorElement = function _setActiveIndicatorElement(element) {
-        if (this._indicatorsElement) {
-          var indicators = [].slice.call(this._indicatorsElement.querySelectorAll(Selector.ACTIVE));
-          $$$1(indicators).removeClass(ClassName.ACTIVE);
-
-          var nextIndicator = this._indicatorsElement.children[this._getItemIndex(element)];
-
-          if (nextIndicator) {
-            $$$1(nextIndicator).addClass(ClassName.ACTIVE);
-          }
-        }
-      };
-
-      _proto._slide = function _slide(direction, element) {
-        var _this3 = this;
-
-        var activeElement = this._element.querySelector(Selector.ACTIVE_ITEM);
-
-        var activeElementIndex = this._getItemIndex(activeElement);
-
-        var nextElement = element || activeElement && this._getItemByDirection(direction, activeElement);
-
-        var nextElementIndex = this._getItemIndex(nextElement);
-
-        var isCycling = Boolean(this._interval);
-        var directionalClassName;
-        var orderClassName;
-        var eventDirectionName;
-
-        if (direction === Direction.NEXT) {
-          directionalClassName = ClassName.LEFT;
-          orderClassName = ClassName.NEXT;
-          eventDirectionName = Direction.LEFT;
-        } else {
-          directionalClassName = ClassName.RIGHT;
-          orderClassName = ClassName.PREV;
-          eventDirectionName = Direction.RIGHT;
-        }
-
-        if (nextElement && $$$1(nextElement).hasClass(ClassName.ACTIVE)) {
-          this._isSliding = false;
-          return;
-        }
-
-        var slideEvent = this._triggerSlideEvent(nextElement, eventDirectionName);
-
-        if (slideEvent.isDefaultPrevented()) {
-          return;
-        }
-
-        if (!activeElement || !nextElement) {
-          // Some weirdness is happening, so we bail
-          return;
-        }
-
-        this._isSliding = true;
-
-        if (isCycling) {
-          this.pause();
-        }
-
-        this._setActiveIndicatorElement(nextElement);
-
-        var slidEvent = $$$1.Event(Event.SLID, {
-          relatedTarget: nextElement,
-          direction: eventDirectionName,
-          from: activeElementIndex,
-          to: nextElementIndex
-        });
-
-        if ($$$1(this._element).hasClass(ClassName.SLIDE)) {
-          $$$1(nextElement).addClass(orderClassName);
-          Util.reflow(nextElement);
-          $$$1(activeElement).addClass(directionalClassName);
-          $$$1(nextElement).addClass(directionalClassName);
-          var transitionDuration = Util.getTransitionDurationFromElement(activeElement);
-          $$$1(activeElement).one(Util.TRANSITION_END, function () {
-            $$$1(nextElement).removeClass(directionalClassName + " " + orderClassName).addClass(ClassName.ACTIVE);
-            $$$1(activeElement).removeClass(ClassName.ACTIVE + " " + orderClassName + " " + directionalClassName);
-            _this3._isSliding = false;
-            setTimeout(function () {
-              return $$$1(_this3._element).trigger(slidEvent);
-            }, 0);
-          }).emulateTransitionEnd(transitionDuration);
-        } else {
-          $$$1(activeElement).removeClass(ClassName.ACTIVE);
-          $$$1(nextElement).addClass(ClassName.ACTIVE);
-          this._isSliding = false;
-          $$$1(this._element).trigger(slidEvent);
-        }
-
-        if (isCycling) {
-          this.cycle();
-        }
-      }; // Static
-
-
-      Carousel._jQueryInterface = function _jQueryInterface(config) {
-        return this.each(function () {
-          var data = $$$1(this).data(DATA_KEY);
-
-          var _config = _objectSpread({}, Default, $$$1(this).data());
-
-          if (typeof config === 'object') {
-            _config = _objectSpread({}, _config, config);
-          }
-
-          var action = typeof config === 'string' ? config : _config.slide;
-
-          if (!data) {
-            data = new Carousel(this, _config);
-            $$$1(this).data(DATA_KEY, data);
-          }
-
-          if (typeof config === 'number') {
-            data.to(config);
-          } else if (typeof action === 'string') {
-            if (typeof data[action] === 'undefined') {
-              throw new TypeError("No method named \"" + action + "\"");
-            }
-
-            data[action]();
-          } else if (_config.interval) {
-            data.pause();
-            data.cycle();
-          }
-        });
-      };
-
-      Carousel._dataApiClickHandler = function _dataApiClickHandler(event) {
-        var selector = Util.getSelectorFromElement(this);
-
-        if (!selector) {
-          return;
-        }
-
-        var target = $$$1(selector)[0];
-
-        if (!target || !$$$1(target).hasClass(ClassName.CAROUSEL)) {
-          return;
-        }
-
-        var config = _objectSpread({}, $$$1(target).data(), $$$1(this).data());
-
-        var slideIndex = this.getAttribute('data-slide-to');
-
-        if (slideIndex) {
-          config.interval = false;
-        }
-
-        Carousel._jQueryInterface.call($$$1(target), config);
-
-        if (slideIndex) {
-          $$$1(target).data(DATA_KEY).to(slideIndex);
-        }
-
-        event.preventDefault();
-      };
-
-      _createClass(Carousel, null, [{
-        key: "VERSION",
-        get: function get() {
-          return VERSION;
-        }
-      }, {
-        key: "Default",
-        get: function get() {
-          return Default;
-        }
-      }]);
-
-      return Carousel;
-    }();
-    /**
-     * ------------------------------------------------------------------------
-     * Data Api implementation
-     * ------------------------------------------------------------------------
-     */
-
-
-    $$$1(document).on(Event.CLICK_DATA_API, Selector.DATA_SLIDE, Carousel._dataApiClickHandler);
-    $$$1(window).on(Event.LOAD_DATA_API, function () {
-      var carousels = [].slice.call(document.querySelectorAll(Selector.DATA_RIDE));
-
-      for (var i = 0, len = carousels.length; i < len; i++) {
-        var $carousel = $$$1(carousels[i]);
-
-        Carousel._jQueryInterface.call($carousel, $carousel.data());
       }
-    });
-    /**
-     * ------------------------------------------------------------------------
-     * jQuery
-     * ------------------------------------------------------------------------
-     */
 
-    $$$1.fn[NAME] = Carousel._jQueryInterface;
-    $$$1.fn[NAME].Constructor = Carousel;
-
-    $$$1.fn[NAME].noConflict = function () {
-      $$$1.fn[NAME] = JQUERY_NO_CONFLICT;
-      return Carousel._jQueryInterface;
+      if (this._config.interval && !this._isPaused) {
+        this._interval = setInterval((document.visibilityState ? this.nextWhenVisible : this.next).bind(this), this._config.interval);
+      }
     };
+
+    _proto.to = function to(index) {
+      var _this = this;
+
+      this._activeElement = this._element.querySelector(Selector$2.ACTIVE_ITEM);
+
+      var activeIndex = this._getItemIndex(this._activeElement);
+
+      if (index > this._items.length - 1 || index < 0) {
+        return;
+      }
+
+      if (this._isSliding) {
+        $(this._element).one(Event$2.SLID, function () {
+          return _this.to(index);
+        });
+        return;
+      }
+
+      if (activeIndex === index) {
+        this.pause();
+        this.cycle();
+        return;
+      }
+
+      var direction = index > activeIndex ? Direction.NEXT : Direction.PREV;
+
+      this._slide(direction, this._items[index]);
+    };
+
+    _proto.dispose = function dispose() {
+      $(this._element).off(EVENT_KEY$2);
+      $.removeData(this._element, DATA_KEY$2);
+      this._items = null;
+      this._config = null;
+      this._element = null;
+      this._interval = null;
+      this._isPaused = null;
+      this._isSliding = null;
+      this._activeElement = null;
+      this._indicatorsElement = null;
+    }; // Private
+
+
+    _proto._getConfig = function _getConfig(config) {
+      config = _objectSpread({}, Default, config);
+      Util.typeCheckConfig(NAME$2, config, DefaultType);
+      return config;
+    };
+
+    _proto._handleSwipe = function _handleSwipe() {
+      var absDeltax = Math.abs(this.touchDeltaX);
+
+      if (absDeltax <= SWIPE_THRESHOLD) {
+        return;
+      }
+
+      var direction = absDeltax / this.touchDeltaX; // swipe left
+
+      if (direction > 0) {
+        this.prev();
+      } // swipe right
+
+
+      if (direction < 0) {
+        this.next();
+      }
+    };
+
+    _proto._addEventListeners = function _addEventListeners() {
+      var _this2 = this;
+
+      if (this._config.keyboard) {
+        $(this._element).on(Event$2.KEYDOWN, function (event) {
+          return _this2._keydown(event);
+        });
+      }
+
+      if (this._config.pause === 'hover') {
+        $(this._element).on(Event$2.MOUSEENTER, function (event) {
+          return _this2.pause(event);
+        }).on(Event$2.MOUSELEAVE, function (event) {
+          return _this2.cycle(event);
+        });
+      }
+
+      this._addTouchEventListeners();
+    };
+
+    _proto._addTouchEventListeners = function _addTouchEventListeners() {
+      var _this3 = this;
+
+      if (!this._touchSupported) {
+        return;
+      }
+
+      var start = function start(event) {
+        if (_this3._pointerEvent && PointerType[event.originalEvent.pointerType.toUpperCase()]) {
+          _this3.touchStartX = event.originalEvent.clientX;
+        } else if (!_this3._pointerEvent) {
+          _this3.touchStartX = event.originalEvent.touches[0].clientX;
+        }
+      };
+
+      var move = function move(event) {
+        // ensure swiping with one touch and not pinching
+        if (event.originalEvent.touches && event.originalEvent.touches.length > 1) {
+          _this3.touchDeltaX = 0;
+        } else {
+          _this3.touchDeltaX = event.originalEvent.touches[0].clientX - _this3.touchStartX;
+        }
+      };
+
+      var end = function end(event) {
+        if (_this3._pointerEvent && PointerType[event.originalEvent.pointerType.toUpperCase()]) {
+          _this3.touchDeltaX = event.originalEvent.clientX - _this3.touchStartX;
+        }
+
+        _this3._handleSwipe();
+
+        if (_this3._config.pause === 'hover') {
+          // If it's a touch-enabled device, mouseenter/leave are fired as
+          // part of the mouse compatibility events on first tap - the carousel
+          // would stop cycling until user tapped out of it;
+          // here, we listen for touchend, explicitly pause the carousel
+          // (as if it's the second time we tap on it, mouseenter compat event
+          // is NOT fired) and after a timeout (to allow for mouse compatibility
+          // events to fire) we explicitly restart cycling
+          _this3.pause();
+
+          if (_this3.touchTimeout) {
+            clearTimeout(_this3.touchTimeout);
+          }
+
+          _this3.touchTimeout = setTimeout(function (event) {
+            return _this3.cycle(event);
+          }, TOUCHEVENT_COMPAT_WAIT + _this3._config.interval);
+        }
+      };
+
+      $(this._element.querySelectorAll(Selector$2.ITEM_IMG)).on(Event$2.DRAG_START, function (e) {
+        return e.preventDefault();
+      });
+
+      if (this._pointerEvent) {
+        $(this._element).on(Event$2.POINTERDOWN, function (event) {
+          return start(event);
+        });
+        $(this._element).on(Event$2.POINTERUP, function (event) {
+          return end(event);
+        });
+
+        this._element.classList.add(ClassName$2.POINTER_EVENT);
+      } else {
+        $(this._element).on(Event$2.TOUCHSTART, function (event) {
+          return start(event);
+        });
+        $(this._element).on(Event$2.TOUCHMOVE, function (event) {
+          return move(event);
+        });
+        $(this._element).on(Event$2.TOUCHEND, function (event) {
+          return end(event);
+        });
+      }
+    };
+
+    _proto._keydown = function _keydown(event) {
+      if (/input|textarea/i.test(event.target.tagName)) {
+        return;
+      }
+
+      switch (event.which) {
+        case ARROW_LEFT_KEYCODE:
+          event.preventDefault();
+          this.prev();
+          break;
+
+        case ARROW_RIGHT_KEYCODE:
+          event.preventDefault();
+          this.next();
+          break;
+
+        default:
+      }
+    };
+
+    _proto._getItemIndex = function _getItemIndex(element) {
+      this._items = element && element.parentNode ? [].slice.call(element.parentNode.querySelectorAll(Selector$2.ITEM)) : [];
+      return this._items.indexOf(element);
+    };
+
+    _proto._getItemByDirection = function _getItemByDirection(direction, activeElement) {
+      var isNextDirection = direction === Direction.NEXT;
+      var isPrevDirection = direction === Direction.PREV;
+
+      var activeIndex = this._getItemIndex(activeElement);
+
+      var lastItemIndex = this._items.length - 1;
+      var isGoingToWrap = isPrevDirection && activeIndex === 0 || isNextDirection && activeIndex === lastItemIndex;
+
+      if (isGoingToWrap && !this._config.wrap) {
+        return activeElement;
+      }
+
+      var delta = direction === Direction.PREV ? -1 : 1;
+      var itemIndex = (activeIndex + delta) % this._items.length;
+      return itemIndex === -1 ? this._items[this._items.length - 1] : this._items[itemIndex];
+    };
+
+    _proto._triggerSlideEvent = function _triggerSlideEvent(relatedTarget, eventDirectionName) {
+      var targetIndex = this._getItemIndex(relatedTarget);
+
+      var fromIndex = this._getItemIndex(this._element.querySelector(Selector$2.ACTIVE_ITEM));
+
+      var slideEvent = $.Event(Event$2.SLIDE, {
+        relatedTarget: relatedTarget,
+        direction: eventDirectionName,
+        from: fromIndex,
+        to: targetIndex
+      });
+      $(this._element).trigger(slideEvent);
+      return slideEvent;
+    };
+
+    _proto._setActiveIndicatorElement = function _setActiveIndicatorElement(element) {
+      if (this._indicatorsElement) {
+        var indicators = [].slice.call(this._indicatorsElement.querySelectorAll(Selector$2.ACTIVE));
+        $(indicators).removeClass(ClassName$2.ACTIVE);
+
+        var nextIndicator = this._indicatorsElement.children[this._getItemIndex(element)];
+
+        if (nextIndicator) {
+          $(nextIndicator).addClass(ClassName$2.ACTIVE);
+        }
+      }
+    };
+
+    _proto._slide = function _slide(direction, element) {
+      var _this4 = this;
+
+      var activeElement = this._element.querySelector(Selector$2.ACTIVE_ITEM);
+
+      var activeElementIndex = this._getItemIndex(activeElement);
+
+      var nextElement = element || activeElement && this._getItemByDirection(direction, activeElement);
+
+      var nextElementIndex = this._getItemIndex(nextElement);
+
+      var isCycling = Boolean(this._interval);
+      var directionalClassName;
+      var orderClassName;
+      var eventDirectionName;
+
+      if (direction === Direction.NEXT) {
+        directionalClassName = ClassName$2.LEFT;
+        orderClassName = ClassName$2.NEXT;
+        eventDirectionName = Direction.LEFT;
+      } else {
+        directionalClassName = ClassName$2.RIGHT;
+        orderClassName = ClassName$2.PREV;
+        eventDirectionName = Direction.RIGHT;
+      }
+
+      if (nextElement && $(nextElement).hasClass(ClassName$2.ACTIVE)) {
+        this._isSliding = false;
+        return;
+      }
+
+      var slideEvent = this._triggerSlideEvent(nextElement, eventDirectionName);
+
+      if (slideEvent.isDefaultPrevented()) {
+        return;
+      }
+
+      if (!activeElement || !nextElement) {
+        // Some weirdness is happening, so we bail
+        return;
+      }
+
+      this._isSliding = true;
+
+      if (isCycling) {
+        this.pause();
+      }
+
+      this._setActiveIndicatorElement(nextElement);
+
+      var slidEvent = $.Event(Event$2.SLID, {
+        relatedTarget: nextElement,
+        direction: eventDirectionName,
+        from: activeElementIndex,
+        to: nextElementIndex
+      });
+
+      if ($(this._element).hasClass(ClassName$2.SLIDE)) {
+        $(nextElement).addClass(orderClassName);
+        Util.reflow(nextElement);
+        $(activeElement).addClass(directionalClassName);
+        $(nextElement).addClass(directionalClassName);
+        var nextElementInterval = parseInt(nextElement.getAttribute('data-interval'), 10);
+
+        if (nextElementInterval) {
+          this._config.defaultInterval = this._config.defaultInterval || this._config.interval;
+          this._config.interval = nextElementInterval;
+        } else {
+          this._config.interval = this._config.defaultInterval || this._config.interval;
+        }
+
+        var transitionDuration = Util.getTransitionDurationFromElement(activeElement);
+        $(activeElement).one(Util.TRANSITION_END, function () {
+          $(nextElement).removeClass(directionalClassName + " " + orderClassName).addClass(ClassName$2.ACTIVE);
+          $(activeElement).removeClass(ClassName$2.ACTIVE + " " + orderClassName + " " + directionalClassName);
+          _this4._isSliding = false;
+          setTimeout(function () {
+            return $(_this4._element).trigger(slidEvent);
+          }, 0);
+        }).emulateTransitionEnd(transitionDuration);
+      } else {
+        $(activeElement).removeClass(ClassName$2.ACTIVE);
+        $(nextElement).addClass(ClassName$2.ACTIVE);
+        this._isSliding = false;
+        $(this._element).trigger(slidEvent);
+      }
+
+      if (isCycling) {
+        this.cycle();
+      }
+    }; // Static
+
+
+    Carousel._jQueryInterface = function _jQueryInterface(config) {
+      return this.each(function () {
+        var data = $(this).data(DATA_KEY$2);
+
+        var _config = _objectSpread({}, Default, $(this).data());
+
+        if (typeof config === 'object') {
+          _config = _objectSpread({}, _config, config);
+        }
+
+        var action = typeof config === 'string' ? config : _config.slide;
+
+        if (!data) {
+          data = new Carousel(this, _config);
+          $(this).data(DATA_KEY$2, data);
+        }
+
+        if (typeof config === 'number') {
+          data.to(config);
+        } else if (typeof action === 'string') {
+          if (typeof data[action] === 'undefined') {
+            throw new TypeError("No method named \"" + action + "\"");
+          }
+
+          data[action]();
+        } else if (_config.interval) {
+          data.pause();
+          data.cycle();
+        }
+      });
+    };
+
+    Carousel._dataApiClickHandler = function _dataApiClickHandler(event) {
+      var selector = Util.getSelectorFromElement(this);
+
+      if (!selector) {
+        return;
+      }
+
+      var target = $(selector)[0];
+
+      if (!target || !$(target).hasClass(ClassName$2.CAROUSEL)) {
+        return;
+      }
+
+      var config = _objectSpread({}, $(target).data(), $(this).data());
+
+      var slideIndex = this.getAttribute('data-slide-to');
+
+      if (slideIndex) {
+        config.interval = false;
+      }
+
+      Carousel._jQueryInterface.call($(target), config);
+
+      if (slideIndex) {
+        $(target).data(DATA_KEY$2).to(slideIndex);
+      }
+
+      event.preventDefault();
+    };
+
+    _createClass(Carousel, null, [{
+      key: "VERSION",
+      get: function get() {
+        return VERSION$2;
+      }
+    }, {
+      key: "Default",
+      get: function get() {
+        return Default;
+      }
+    }]);
 
     return Carousel;
-  }($);
-
+  }();
   /**
-   * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.3): collapse.js
-   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
-   * --------------------------------------------------------------------------
+   * ------------------------------------------------------------------------
+   * Data Api implementation
+   * ------------------------------------------------------------------------
    */
 
-  var Collapse = function ($$$1) {
+
+  $(document).on(Event$2.CLICK_DATA_API, Selector$2.DATA_SLIDE, Carousel._dataApiClickHandler);
+  $(window).on(Event$2.LOAD_DATA_API, function () {
+    var carousels = [].slice.call(document.querySelectorAll(Selector$2.DATA_RIDE));
+
+    for (var i = 0, len = carousels.length; i < len; i++) {
+      var $carousel = $(carousels[i]);
+
+      Carousel._jQueryInterface.call($carousel, $carousel.data());
+    }
+  });
+  /**
+   * ------------------------------------------------------------------------
+   * jQuery
+   * ------------------------------------------------------------------------
+   */
+
+  $.fn[NAME$2] = Carousel._jQueryInterface;
+  $.fn[NAME$2].Constructor = Carousel;
+
+  $.fn[NAME$2].noConflict = function () {
+    $.fn[NAME$2] = JQUERY_NO_CONFLICT$2;
+    return Carousel._jQueryInterface;
+  };
+
+  /**
+   * ------------------------------------------------------------------------
+   * Constants
+   * ------------------------------------------------------------------------
+   */
+
+  var NAME$3 = 'collapse';
+  var VERSION$3 = '4.2.1';
+  var DATA_KEY$3 = 'bs.collapse';
+  var EVENT_KEY$3 = "." + DATA_KEY$3;
+  var DATA_API_KEY$3 = '.data-api';
+  var JQUERY_NO_CONFLICT$3 = $.fn[NAME$3];
+  var Default$1 = {
+    toggle: true,
+    parent: ''
+  };
+  var DefaultType$1 = {
+    toggle: 'boolean',
+    parent: '(string|element)'
+  };
+  var Event$3 = {
+    SHOW: "show" + EVENT_KEY$3,
+    SHOWN: "shown" + EVENT_KEY$3,
+    HIDE: "hide" + EVENT_KEY$3,
+    HIDDEN: "hidden" + EVENT_KEY$3,
+    CLICK_DATA_API: "click" + EVENT_KEY$3 + DATA_API_KEY$3
+  };
+  var ClassName$3 = {
+    SHOW: 'show',
+    COLLAPSE: 'collapse',
+    COLLAPSING: 'collapsing',
+    COLLAPSED: 'collapsed'
+  };
+  var Dimension = {
+    WIDTH: 'width',
+    HEIGHT: 'height'
+  };
+  var Selector$3 = {
+    ACTIVES: '.show, .collapsing',
+    DATA_TOGGLE: '[data-toggle="collapse"]'
     /**
      * ------------------------------------------------------------------------
-     * Constants
-     * ------------------------------------------------------------------------
-     */
-    var NAME = 'collapse';
-    var VERSION = '4.1.3';
-    var DATA_KEY = 'bs.collapse';
-    var EVENT_KEY = "." + DATA_KEY;
-    var DATA_API_KEY = '.data-api';
-    var JQUERY_NO_CONFLICT = $$$1.fn[NAME];
-    var Default = {
-      toggle: true,
-      parent: ''
-    };
-    var DefaultType = {
-      toggle: 'boolean',
-      parent: '(string|element)'
-    };
-    var Event = {
-      SHOW: "show" + EVENT_KEY,
-      SHOWN: "shown" + EVENT_KEY,
-      HIDE: "hide" + EVENT_KEY,
-      HIDDEN: "hidden" + EVENT_KEY,
-      CLICK_DATA_API: "click" + EVENT_KEY + DATA_API_KEY
-    };
-    var ClassName = {
-      SHOW: 'show',
-      COLLAPSE: 'collapse',
-      COLLAPSING: 'collapsing',
-      COLLAPSED: 'collapsed'
-    };
-    var Dimension = {
-      WIDTH: 'width',
-      HEIGHT: 'height'
-    };
-    var Selector = {
-      ACTIVES: '.show, .collapsing',
-      DATA_TOGGLE: '[data-toggle="collapse"]'
-      /**
-       * ------------------------------------------------------------------------
-       * Class Definition
-       * ------------------------------------------------------------------------
-       */
-
-    };
-
-    var Collapse =
-    /*#__PURE__*/
-    function () {
-      function Collapse(element, config) {
-        this._isTransitioning = false;
-        this._element = element;
-        this._config = this._getConfig(config);
-        this._triggerArray = $$$1.makeArray(document.querySelectorAll("[data-toggle=\"collapse\"][href=\"#" + element.id + "\"]," + ("[data-toggle=\"collapse\"][data-target=\"#" + element.id + "\"]")));
-        var toggleList = [].slice.call(document.querySelectorAll(Selector.DATA_TOGGLE));
-
-        for (var i = 0, len = toggleList.length; i < len; i++) {
-          var elem = toggleList[i];
-          var selector = Util.getSelectorFromElement(elem);
-          var filterElement = [].slice.call(document.querySelectorAll(selector)).filter(function (foundElem) {
-            return foundElem === element;
-          });
-
-          if (selector !== null && filterElement.length > 0) {
-            this._selector = selector;
-
-            this._triggerArray.push(elem);
-          }
-        }
-
-        this._parent = this._config.parent ? this._getParent() : null;
-
-        if (!this._config.parent) {
-          this._addAriaAndCollapsedClass(this._element, this._triggerArray);
-        }
-
-        if (this._config.toggle) {
-          this.toggle();
-        }
-      } // Getters
-
-
-      var _proto = Collapse.prototype;
-
-      // Public
-      _proto.toggle = function toggle() {
-        if ($$$1(this._element).hasClass(ClassName.SHOW)) {
-          this.hide();
-        } else {
-          this.show();
-        }
-      };
-
-      _proto.show = function show() {
-        var _this = this;
-
-        if (this._isTransitioning || $$$1(this._element).hasClass(ClassName.SHOW)) {
-          return;
-        }
-
-        var actives;
-        var activesData;
-
-        if (this._parent) {
-          actives = [].slice.call(this._parent.querySelectorAll(Selector.ACTIVES)).filter(function (elem) {
-            return elem.getAttribute('data-parent') === _this._config.parent;
-          });
-
-          if (actives.length === 0) {
-            actives = null;
-          }
-        }
-
-        if (actives) {
-          activesData = $$$1(actives).not(this._selector).data(DATA_KEY);
-
-          if (activesData && activesData._isTransitioning) {
-            return;
-          }
-        }
-
-        var startEvent = $$$1.Event(Event.SHOW);
-        $$$1(this._element).trigger(startEvent);
-
-        if (startEvent.isDefaultPrevented()) {
-          return;
-        }
-
-        if (actives) {
-          Collapse._jQueryInterface.call($$$1(actives).not(this._selector), 'hide');
-
-          if (!activesData) {
-            $$$1(actives).data(DATA_KEY, null);
-          }
-        }
-
-        var dimension = this._getDimension();
-
-        $$$1(this._element).removeClass(ClassName.COLLAPSE).addClass(ClassName.COLLAPSING);
-        this._element.style[dimension] = 0;
-
-        if (this._triggerArray.length) {
-          $$$1(this._triggerArray).removeClass(ClassName.COLLAPSED).attr('aria-expanded', true);
-        }
-
-        this.setTransitioning(true);
-
-        var complete = function complete() {
-          $$$1(_this._element).removeClass(ClassName.COLLAPSING).addClass(ClassName.COLLAPSE).addClass(ClassName.SHOW);
-          _this._element.style[dimension] = '';
-
-          _this.setTransitioning(false);
-
-          $$$1(_this._element).trigger(Event.SHOWN);
-        };
-
-        var capitalizedDimension = dimension[0].toUpperCase() + dimension.slice(1);
-        var scrollSize = "scroll" + capitalizedDimension;
-        var transitionDuration = Util.getTransitionDurationFromElement(this._element);
-        $$$1(this._element).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
-        this._element.style[dimension] = this._element[scrollSize] + "px";
-      };
-
-      _proto.hide = function hide() {
-        var _this2 = this;
-
-        if (this._isTransitioning || !$$$1(this._element).hasClass(ClassName.SHOW)) {
-          return;
-        }
-
-        var startEvent = $$$1.Event(Event.HIDE);
-        $$$1(this._element).trigger(startEvent);
-
-        if (startEvent.isDefaultPrevented()) {
-          return;
-        }
-
-        var dimension = this._getDimension();
-
-        this._element.style[dimension] = this._element.getBoundingClientRect()[dimension] + "px";
-        Util.reflow(this._element);
-        $$$1(this._element).addClass(ClassName.COLLAPSING).removeClass(ClassName.COLLAPSE).removeClass(ClassName.SHOW);
-        var triggerArrayLength = this._triggerArray.length;
-
-        if (triggerArrayLength > 0) {
-          for (var i = 0; i < triggerArrayLength; i++) {
-            var trigger = this._triggerArray[i];
-            var selector = Util.getSelectorFromElement(trigger);
-
-            if (selector !== null) {
-              var $elem = $$$1([].slice.call(document.querySelectorAll(selector)));
-
-              if (!$elem.hasClass(ClassName.SHOW)) {
-                $$$1(trigger).addClass(ClassName.COLLAPSED).attr('aria-expanded', false);
-              }
-            }
-          }
-        }
-
-        this.setTransitioning(true);
-
-        var complete = function complete() {
-          _this2.setTransitioning(false);
-
-          $$$1(_this2._element).removeClass(ClassName.COLLAPSING).addClass(ClassName.COLLAPSE).trigger(Event.HIDDEN);
-        };
-
-        this._element.style[dimension] = '';
-        var transitionDuration = Util.getTransitionDurationFromElement(this._element);
-        $$$1(this._element).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
-      };
-
-      _proto.setTransitioning = function setTransitioning(isTransitioning) {
-        this._isTransitioning = isTransitioning;
-      };
-
-      _proto.dispose = function dispose() {
-        $$$1.removeData(this._element, DATA_KEY);
-        this._config = null;
-        this._parent = null;
-        this._element = null;
-        this._triggerArray = null;
-        this._isTransitioning = null;
-      }; // Private
-
-
-      _proto._getConfig = function _getConfig(config) {
-        config = _objectSpread({}, Default, config);
-        config.toggle = Boolean(config.toggle); // Coerce string values
-
-        Util.typeCheckConfig(NAME, config, DefaultType);
-        return config;
-      };
-
-      _proto._getDimension = function _getDimension() {
-        var hasWidth = $$$1(this._element).hasClass(Dimension.WIDTH);
-        return hasWidth ? Dimension.WIDTH : Dimension.HEIGHT;
-      };
-
-      _proto._getParent = function _getParent() {
-        var _this3 = this;
-
-        var parent = null;
-
-        if (Util.isElement(this._config.parent)) {
-          parent = this._config.parent; // It's a jQuery object
-
-          if (typeof this._config.parent.jquery !== 'undefined') {
-            parent = this._config.parent[0];
-          }
-        } else {
-          parent = document.querySelector(this._config.parent);
-        }
-
-        var selector = "[data-toggle=\"collapse\"][data-parent=\"" + this._config.parent + "\"]";
-        var children = [].slice.call(parent.querySelectorAll(selector));
-        $$$1(children).each(function (i, element) {
-          _this3._addAriaAndCollapsedClass(Collapse._getTargetFromElement(element), [element]);
-        });
-        return parent;
-      };
-
-      _proto._addAriaAndCollapsedClass = function _addAriaAndCollapsedClass(element, triggerArray) {
-        if (element) {
-          var isOpen = $$$1(element).hasClass(ClassName.SHOW);
-
-          if (triggerArray.length) {
-            $$$1(triggerArray).toggleClass(ClassName.COLLAPSED, !isOpen).attr('aria-expanded', isOpen);
-          }
-        }
-      }; // Static
-
-
-      Collapse._getTargetFromElement = function _getTargetFromElement(element) {
-        var selector = Util.getSelectorFromElement(element);
-        return selector ? document.querySelector(selector) : null;
-      };
-
-      Collapse._jQueryInterface = function _jQueryInterface(config) {
-        return this.each(function () {
-          var $this = $$$1(this);
-          var data = $this.data(DATA_KEY);
-
-          var _config = _objectSpread({}, Default, $this.data(), typeof config === 'object' && config ? config : {});
-
-          if (!data && _config.toggle && /show|hide/.test(config)) {
-            _config.toggle = false;
-          }
-
-          if (!data) {
-            data = new Collapse(this, _config);
-            $this.data(DATA_KEY, data);
-          }
-
-          if (typeof config === 'string') {
-            if (typeof data[config] === 'undefined') {
-              throw new TypeError("No method named \"" + config + "\"");
-            }
-
-            data[config]();
-          }
-        });
-      };
-
-      _createClass(Collapse, null, [{
-        key: "VERSION",
-        get: function get() {
-          return VERSION;
-        }
-      }, {
-        key: "Default",
-        get: function get() {
-          return Default;
-        }
-      }]);
-
-      return Collapse;
-    }();
-    /**
-     * ------------------------------------------------------------------------
-     * Data Api implementation
+     * Class Definition
      * ------------------------------------------------------------------------
      */
 
+  };
 
-    $$$1(document).on(Event.CLICK_DATA_API, Selector.DATA_TOGGLE, function (event) {
-      // preventDefault only for <a> elements (which change the URL) not inside the collapsible element
-      if (event.currentTarget.tagName === 'A') {
-        event.preventDefault();
+  var Collapse =
+  /*#__PURE__*/
+  function () {
+    function Collapse(element, config) {
+      this._isTransitioning = false;
+      this._element = element;
+      this._config = this._getConfig(config);
+      this._triggerArray = [].slice.call(document.querySelectorAll("[data-toggle=\"collapse\"][href=\"#" + element.id + "\"]," + ("[data-toggle=\"collapse\"][data-target=\"#" + element.id + "\"]")));
+      var toggleList = [].slice.call(document.querySelectorAll(Selector$3.DATA_TOGGLE));
+
+      for (var i = 0, len = toggleList.length; i < len; i++) {
+        var elem = toggleList[i];
+        var selector = Util.getSelectorFromElement(elem);
+        var filterElement = [].slice.call(document.querySelectorAll(selector)).filter(function (foundElem) {
+          return foundElem === element;
+        });
+
+        if (selector !== null && filterElement.length > 0) {
+          this._selector = selector;
+
+          this._triggerArray.push(elem);
+        }
       }
 
-      var $trigger = $$$1(this);
-      var selector = Util.getSelectorFromElement(this);
-      var selectors = [].slice.call(document.querySelectorAll(selector));
-      $$$1(selectors).each(function () {
-        var $target = $$$1(this);
-        var data = $target.data(DATA_KEY);
-        var config = data ? 'toggle' : $trigger.data();
+      this._parent = this._config.parent ? this._getParent() : null;
 
-        Collapse._jQueryInterface.call($target, config);
-      });
-    });
-    /**
-     * ------------------------------------------------------------------------
-     * jQuery
-     * ------------------------------------------------------------------------
-     */
+      if (!this._config.parent) {
+        this._addAriaAndCollapsedClass(this._element, this._triggerArray);
+      }
 
-    $$$1.fn[NAME] = Collapse._jQueryInterface;
-    $$$1.fn[NAME].Constructor = Collapse;
+      if (this._config.toggle) {
+        this.toggle();
+      }
+    } // Getters
 
-    $$$1.fn[NAME].noConflict = function () {
-      $$$1.fn[NAME] = JQUERY_NO_CONFLICT;
-      return Collapse._jQueryInterface;
+
+    var _proto = Collapse.prototype;
+
+    // Public
+    _proto.toggle = function toggle() {
+      if ($(this._element).hasClass(ClassName$3.SHOW)) {
+        this.hide();
+      } else {
+        this.show();
+      }
     };
 
+    _proto.show = function show() {
+      var _this = this;
+
+      if (this._isTransitioning || $(this._element).hasClass(ClassName$3.SHOW)) {
+        return;
+      }
+
+      var actives;
+      var activesData;
+
+      if (this._parent) {
+        actives = [].slice.call(this._parent.querySelectorAll(Selector$3.ACTIVES)).filter(function (elem) {
+          if (typeof _this._config.parent === 'string') {
+            return elem.getAttribute('data-parent') === _this._config.parent;
+          }
+
+          return elem.classList.contains(ClassName$3.COLLAPSE);
+        });
+
+        if (actives.length === 0) {
+          actives = null;
+        }
+      }
+
+      if (actives) {
+        activesData = $(actives).not(this._selector).data(DATA_KEY$3);
+
+        if (activesData && activesData._isTransitioning) {
+          return;
+        }
+      }
+
+      var startEvent = $.Event(Event$3.SHOW);
+      $(this._element).trigger(startEvent);
+
+      if (startEvent.isDefaultPrevented()) {
+        return;
+      }
+
+      if (actives) {
+        Collapse._jQueryInterface.call($(actives).not(this._selector), 'hide');
+
+        if (!activesData) {
+          $(actives).data(DATA_KEY$3, null);
+        }
+      }
+
+      var dimension = this._getDimension();
+
+      $(this._element).removeClass(ClassName$3.COLLAPSE).addClass(ClassName$3.COLLAPSING);
+      this._element.style[dimension] = 0;
+
+      if (this._triggerArray.length) {
+        $(this._triggerArray).removeClass(ClassName$3.COLLAPSED).attr('aria-expanded', true);
+      }
+
+      this.setTransitioning(true);
+
+      var complete = function complete() {
+        $(_this._element).removeClass(ClassName$3.COLLAPSING).addClass(ClassName$3.COLLAPSE).addClass(ClassName$3.SHOW);
+        _this._element.style[dimension] = '';
+
+        _this.setTransitioning(false);
+
+        $(_this._element).trigger(Event$3.SHOWN);
+      };
+
+      var capitalizedDimension = dimension[0].toUpperCase() + dimension.slice(1);
+      var scrollSize = "scroll" + capitalizedDimension;
+      var transitionDuration = Util.getTransitionDurationFromElement(this._element);
+      $(this._element).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
+      this._element.style[dimension] = this._element[scrollSize] + "px";
+    };
+
+    _proto.hide = function hide() {
+      var _this2 = this;
+
+      if (this._isTransitioning || !$(this._element).hasClass(ClassName$3.SHOW)) {
+        return;
+      }
+
+      var startEvent = $.Event(Event$3.HIDE);
+      $(this._element).trigger(startEvent);
+
+      if (startEvent.isDefaultPrevented()) {
+        return;
+      }
+
+      var dimension = this._getDimension();
+
+      this._element.style[dimension] = this._element.getBoundingClientRect()[dimension] + "px";
+      Util.reflow(this._element);
+      $(this._element).addClass(ClassName$3.COLLAPSING).removeClass(ClassName$3.COLLAPSE).removeClass(ClassName$3.SHOW);
+      var triggerArrayLength = this._triggerArray.length;
+
+      if (triggerArrayLength > 0) {
+        for (var i = 0; i < triggerArrayLength; i++) {
+          var trigger = this._triggerArray[i];
+          var selector = Util.getSelectorFromElement(trigger);
+
+          if (selector !== null) {
+            var $elem = $([].slice.call(document.querySelectorAll(selector)));
+
+            if (!$elem.hasClass(ClassName$3.SHOW)) {
+              $(trigger).addClass(ClassName$3.COLLAPSED).attr('aria-expanded', false);
+            }
+          }
+        }
+      }
+
+      this.setTransitioning(true);
+
+      var complete = function complete() {
+        _this2.setTransitioning(false);
+
+        $(_this2._element).removeClass(ClassName$3.COLLAPSING).addClass(ClassName$3.COLLAPSE).trigger(Event$3.HIDDEN);
+      };
+
+      this._element.style[dimension] = '';
+      var transitionDuration = Util.getTransitionDurationFromElement(this._element);
+      $(this._element).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
+    };
+
+    _proto.setTransitioning = function setTransitioning(isTransitioning) {
+      this._isTransitioning = isTransitioning;
+    };
+
+    _proto.dispose = function dispose() {
+      $.removeData(this._element, DATA_KEY$3);
+      this._config = null;
+      this._parent = null;
+      this._element = null;
+      this._triggerArray = null;
+      this._isTransitioning = null;
+    }; // Private
+
+
+    _proto._getConfig = function _getConfig(config) {
+      config = _objectSpread({}, Default$1, config);
+      config.toggle = Boolean(config.toggle); // Coerce string values
+
+      Util.typeCheckConfig(NAME$3, config, DefaultType$1);
+      return config;
+    };
+
+    _proto._getDimension = function _getDimension() {
+      var hasWidth = $(this._element).hasClass(Dimension.WIDTH);
+      return hasWidth ? Dimension.WIDTH : Dimension.HEIGHT;
+    };
+
+    _proto._getParent = function _getParent() {
+      var _this3 = this;
+
+      var parent;
+
+      if (Util.isElement(this._config.parent)) {
+        parent = this._config.parent; // It's a jQuery object
+
+        if (typeof this._config.parent.jquery !== 'undefined') {
+          parent = this._config.parent[0];
+        }
+      } else {
+        parent = document.querySelector(this._config.parent);
+      }
+
+      var selector = "[data-toggle=\"collapse\"][data-parent=\"" + this._config.parent + "\"]";
+      var children = [].slice.call(parent.querySelectorAll(selector));
+      $(children).each(function (i, element) {
+        _this3._addAriaAndCollapsedClass(Collapse._getTargetFromElement(element), [element]);
+      });
+      return parent;
+    };
+
+    _proto._addAriaAndCollapsedClass = function _addAriaAndCollapsedClass(element, triggerArray) {
+      var isOpen = $(element).hasClass(ClassName$3.SHOW);
+
+      if (triggerArray.length) {
+        $(triggerArray).toggleClass(ClassName$3.COLLAPSED, !isOpen).attr('aria-expanded', isOpen);
+      }
+    }; // Static
+
+
+    Collapse._getTargetFromElement = function _getTargetFromElement(element) {
+      var selector = Util.getSelectorFromElement(element);
+      return selector ? document.querySelector(selector) : null;
+    };
+
+    Collapse._jQueryInterface = function _jQueryInterface(config) {
+      return this.each(function () {
+        var $this = $(this);
+        var data = $this.data(DATA_KEY$3);
+
+        var _config = _objectSpread({}, Default$1, $this.data(), typeof config === 'object' && config ? config : {});
+
+        if (!data && _config.toggle && /show|hide/.test(config)) {
+          _config.toggle = false;
+        }
+
+        if (!data) {
+          data = new Collapse(this, _config);
+          $this.data(DATA_KEY$3, data);
+        }
+
+        if (typeof config === 'string') {
+          if (typeof data[config] === 'undefined') {
+            throw new TypeError("No method named \"" + config + "\"");
+          }
+
+          data[config]();
+        }
+      });
+    };
+
+    _createClass(Collapse, null, [{
+      key: "VERSION",
+      get: function get() {
+        return VERSION$3;
+      }
+    }, {
+      key: "Default",
+      get: function get() {
+        return Default$1;
+      }
+    }]);
+
     return Collapse;
-  }($);
+  }();
+  /**
+   * ------------------------------------------------------------------------
+   * Data Api implementation
+   * ------------------------------------------------------------------------
+   */
+
+
+  $(document).on(Event$3.CLICK_DATA_API, Selector$3.DATA_TOGGLE, function (event) {
+    // preventDefault only for <a> elements (which change the URL) not inside the collapsible element
+    if (event.currentTarget.tagName === 'A') {
+      event.preventDefault();
+    }
+
+    var $trigger = $(this);
+    var selector = Util.getSelectorFromElement(this);
+    var selectors = [].slice.call(document.querySelectorAll(selector));
+    $(selectors).each(function () {
+      var $target = $(this);
+      var data = $target.data(DATA_KEY$3);
+      var config = data ? 'toggle' : $trigger.data();
+
+      Collapse._jQueryInterface.call($target, config);
+    });
+  });
+  /**
+   * ------------------------------------------------------------------------
+   * jQuery
+   * ------------------------------------------------------------------------
+   */
+
+  $.fn[NAME$3] = Collapse._jQueryInterface;
+  $.fn[NAME$3].Constructor = Collapse;
+
+  $.fn[NAME$3].noConflict = function () {
+    $.fn[NAME$3] = JQUERY_NO_CONFLICT$3;
+    return Collapse._jQueryInterface;
+  };
 
   /**!
    * @fileOverview Kickass library to create and place poppers near their reference elements.
-   * @version 1.14.3
+   * @version 1.14.6
    * @license
    * Copyright (c) 2016 Federico Zivolo and contributors
    *
@@ -11874,7 +11959,8 @@ return jQuery;
       return [];
     }
     // NOTE: 1 DOM access here
-    var css = getComputedStyle(element, null);
+    var window = element.ownerDocument.defaultView;
+    var css = window.getComputedStyle(element, null);
     return property ? css[property] : css;
   }
 
@@ -11962,7 +12048,7 @@ return jQuery;
     var noOffsetParent = isIE(10) ? document.body : null;
 
     // NOTE: 1 DOM access here
-    var offsetParent = element.offsetParent;
+    var offsetParent = element.offsetParent || null;
     // Skip hidden elements which don't have an offsetParent
     while (offsetParent === noOffsetParent && element.nextElementSibling) {
       offsetParent = (element = element.nextElementSibling).offsetParent;
@@ -11974,9 +12060,9 @@ return jQuery;
       return element ? element.ownerDocument.documentElement : document.documentElement;
     }
 
-    // .offsetParent will return the closest TD or TABLE in case
+    // .offsetParent will return the closest TH, TD or TABLE in case
     // no offsetParent is present, I hate this job...
-    if (['TD', 'TABLE'].indexOf(offsetParent.nodeName) !== -1 && getStyleComputedProperty(offsetParent, 'position') === 'static') {
+    if (['TH', 'TD', 'TABLE'].indexOf(offsetParent.nodeName) !== -1 && getStyleComputedProperty(offsetParent, 'position') === 'static') {
       return getOffsetParent(offsetParent);
     }
 
@@ -12114,10 +12200,10 @@ return jQuery;
   }
 
   function getSize(axis, body, html, computedStyle) {
-    return Math.max(body['offset' + axis], body['scroll' + axis], html['client' + axis], html['offset' + axis], html['scroll' + axis], isIE(10) ? html['offset' + axis] + computedStyle['margin' + (axis === 'Height' ? 'Top' : 'Left')] + computedStyle['margin' + (axis === 'Height' ? 'Bottom' : 'Right')] : 0);
+    return Math.max(body['offset' + axis], body['scroll' + axis], html['client' + axis], html['offset' + axis], html['scroll' + axis], isIE(10) ? parseInt(html['offset' + axis]) + parseInt(computedStyle['margin' + (axis === 'Height' ? 'Top' : 'Left')]) + parseInt(computedStyle['margin' + (axis === 'Height' ? 'Bottom' : 'Right')]) : 0);
   }
 
-  function getWindowSizes() {
+  function getWindowSizes(document) {
     var body = document.body;
     var html = document.documentElement;
     var computedStyle = isIE(10) && getComputedStyle(html);
@@ -12234,7 +12320,7 @@ return jQuery;
     };
 
     // subtract scrollbar size from sizes
-    var sizes = element.nodeName === 'HTML' ? getWindowSizes() : {};
+    var sizes = element.nodeName === 'HTML' ? getWindowSizes(element.ownerDocument) : {};
     var width = sizes.width || element.clientWidth || result.right - result.left;
     var height = sizes.height || element.clientHeight || result.bottom - result.top;
 
@@ -12269,7 +12355,7 @@ return jQuery;
     var borderLeftWidth = parseFloat(styles.borderLeftWidth, 10);
 
     // In cases where the parent is fixed, we must ignore negative scroll in offset calc
-    if (fixedPosition && parent.nodeName === 'HTML') {
+    if (fixedPosition && isHTML) {
       parentRect.top = Math.max(parentRect.top, 0);
       parentRect.left = Math.max(parentRect.left, 0);
     }
@@ -12407,7 +12493,7 @@ return jQuery;
 
       // In case of HTML, we need a different computation
       if (boundariesNode.nodeName === 'HTML' && !isFixed(offsetParent)) {
-        var _getWindowSizes = getWindowSizes(),
+        var _getWindowSizes = getWindowSizes(popper.ownerDocument),
             height = _getWindowSizes.height,
             width = _getWindowSizes.width;
 
@@ -12422,10 +12508,12 @@ return jQuery;
     }
 
     // Add paddings
-    boundaries.left += padding;
-    boundaries.top += padding;
-    boundaries.right -= padding;
-    boundaries.bottom -= padding;
+    padding = padding || 0;
+    var isPaddingNumber = typeof padding === 'number';
+    boundaries.left += isPaddingNumber ? padding : padding.left || 0;
+    boundaries.top += isPaddingNumber ? padding : padding.top || 0;
+    boundaries.right -= isPaddingNumber ? padding : padding.right || 0;
+    boundaries.bottom -= isPaddingNumber ? padding : padding.bottom || 0;
 
     return boundaries;
   }
@@ -12522,9 +12610,10 @@ return jQuery;
    * @returns {Object} object containing width and height properties
    */
   function getOuterSizes(element) {
-    var styles = getComputedStyle(element);
-    var x = parseFloat(styles.marginTop) + parseFloat(styles.marginBottom);
-    var y = parseFloat(styles.marginLeft) + parseFloat(styles.marginRight);
+    var window = element.ownerDocument.defaultView;
+    var styles = window.getComputedStyle(element);
+    var x = parseFloat(styles.marginTop || 0) + parseFloat(styles.marginBottom || 0);
+    var y = parseFloat(styles.marginLeft || 0) + parseFloat(styles.marginRight || 0);
     var result = {
       width: element.offsetWidth + y,
       height: element.offsetHeight + x
@@ -12750,7 +12839,7 @@ return jQuery;
   }
 
   /**
-   * Destroy the popper
+   * Destroys the popper.
    * @method
    * @memberof Popper
    */
@@ -12857,7 +12946,7 @@ return jQuery;
 
   /**
    * It will remove resize/scroll events and won't recalculate popper position
-   * when they are triggered. It also won't trigger onUpdate callback anymore,
+   * when they are triggered. It also won't trigger `onUpdate` callback anymore,
    * unless you call `update` method manually.
    * @method
    * @memberof Popper
@@ -12976,6 +13065,52 @@ return jQuery;
 
   /**
    * @function
+   * @memberof Popper.Utils
+   * @argument {Object} data - The data object generated by `update` method
+   * @argument {Boolean} shouldRound - If the offsets should be rounded at all
+   * @returns {Object} The popper's position offsets rounded
+   *
+   * The tale of pixel-perfect positioning. It's still not 100% perfect, but as
+   * good as it can be within reason.
+   * Discussion here: https://github.com/FezVrasta/popper.js/pull/715
+   *
+   * Low DPI screens cause a popper to be blurry if not using full pixels (Safari
+   * as well on High DPI screens).
+   *
+   * Firefox prefers no rounding for positioning and does not have blurriness on
+   * high DPI screens.
+   *
+   * Only horizontal placement and left/right values need to be considered.
+   */
+  function getRoundedOffsets(data, shouldRound) {
+    var _data$offsets = data.offsets,
+        popper = _data$offsets.popper,
+        reference = _data$offsets.reference;
+
+
+    var isVertical = ['left', 'right'].indexOf(data.placement) !== -1;
+    var isVariation = data.placement.indexOf('-') !== -1;
+    var sameWidthOddness = reference.width % 2 === popper.width % 2;
+    var bothOddWidth = reference.width % 2 === 1 && popper.width % 2 === 1;
+    var noRound = function noRound(v) {
+      return v;
+    };
+
+    var horizontalToInteger = !shouldRound ? noRound : isVertical || isVariation || sameWidthOddness ? Math.round : Math.floor;
+    var verticalToInteger = !shouldRound ? noRound : Math.round;
+
+    return {
+      left: horizontalToInteger(bothOddWidth && !isVariation && shouldRound ? popper.left - 1 : popper.left),
+      top: verticalToInteger(popper.top),
+      bottom: verticalToInteger(popper.bottom),
+      right: horizontalToInteger(popper.right)
+    };
+  }
+
+  var isFirefox = isBrowser && /Firefox/i.test(navigator.userAgent);
+
+  /**
+   * @function
    * @memberof Modifiers
    * @argument {Object} data - The data object generated by `update` method
    * @argument {Object} options - Modifiers configuration and options
@@ -13004,15 +13139,7 @@ return jQuery;
       position: popper.position
     };
 
-    // Avoid blurry text by using full pixel integers.
-    // For pixel-perfect positioning, top/bottom prefers rounded
-    // values, while left/right prefers floored values.
-    var offsets = {
-      left: Math.floor(popper.left),
-      top: Math.round(popper.top),
-      bottom: Math.round(popper.bottom),
-      right: Math.floor(popper.right)
-    };
+    var offsets = getRoundedOffsets(data, window.devicePixelRatio < 2 || !isFirefox);
 
     var sideA = x === 'bottom' ? 'top' : 'bottom';
     var sideB = y === 'right' ? 'left' : 'right';
@@ -13034,12 +13161,22 @@ return jQuery;
     var left = void 0,
         top = void 0;
     if (sideA === 'bottom') {
-      top = -offsetParentRect.height + offsets.bottom;
+      // when offsetParent is <html> the positioning is relative to the bottom of the screen (excluding the scrollbar)
+      // and not the bottom of the html element
+      if (offsetParent.nodeName === 'HTML') {
+        top = -offsetParent.clientHeight + offsets.bottom;
+      } else {
+        top = -offsetParentRect.height + offsets.bottom;
+      }
     } else {
       top = offsets.top;
     }
     if (sideB === 'right') {
-      left = -offsetParentRect.width + offsets.right;
+      if (offsetParent.nodeName === 'HTML') {
+        left = -offsetParent.clientWidth + offsets.right;
+      } else {
+        left = -offsetParentRect.width + offsets.right;
+      }
     } else {
       left = offsets.left;
     }
@@ -13148,7 +13285,7 @@ return jQuery;
 
     //
     // extends keepTogether behavior making sure the popper and its
-    // reference have enough pixels in conjuction
+    // reference have enough pixels in conjunction
     //
 
     // top/left side
@@ -13218,7 +13355,7 @@ return jQuery;
    * - `top-end` (on top of reference, right aligned)
    * - `right-start` (on right of reference, top aligned)
    * - `bottom` (on bottom, centered)
-   * - `auto-right` (on the side with more space available, alignment depends by placement)
+   * - `auto-end` (on the side with more space available, alignment depends by placement)
    *
    * @static
    * @type {Array}
@@ -13760,7 +13897,7 @@ return jQuery;
      * The `offset` modifier can shift your popper on both its axis.
      *
      * It accepts the following units:
-     * - `px` or unitless, interpreted as pixels
+     * - `px` or unit-less, interpreted as pixels
      * - `%` or `%r`, percentage relative to the length of the reference element
      * - `%p`, percentage relative to the length of the popper element
      * - `vw`, CSS viewport width unit
@@ -13768,7 +13905,7 @@ return jQuery;
      *
      * For length is intended the main axis relative to the placement of the popper.<br />
      * This means that if the placement is `top` or `bottom`, the length will be the
-     * `width`. In case of `left` or `right`, it will be the height.
+     * `width`. In case of `left` or `right`, it will be the `height`.
      *
      * You can provide a single value (as `Number` or `String`), or a pair of values
      * as `String` divided by a comma or one (or more) white spaces.<br />
@@ -13789,7 +13926,7 @@ return jQuery;
      * ```
      * > **NB**: If you desire to apply offsets to your poppers in a way that may make them overlap
      * > with their reference element, unfortunately, you will have to disable the `flip` modifier.
-     * > More on this [reading this issue](https://github.com/FezVrasta/popper.js/issues/373)
+     * > You can read more on this at this [issue](https://github.com/FezVrasta/popper.js/issues/373).
      *
      * @memberof modifiers
      * @inner
@@ -13810,7 +13947,7 @@ return jQuery;
     /**
      * Modifier used to prevent the popper from being positioned outside the boundary.
      *
-     * An scenario exists where the reference itself is not within the boundaries.<br />
+     * A scenario exists where the reference itself is not within the boundaries.<br />
      * We can say it has "escaped the boundaries" — or just "escaped".<br />
      * In this case we need to decide whether the popper should either:
      *
@@ -13840,23 +13977,23 @@ return jQuery;
       /**
        * @prop {number} padding=5
        * Amount of pixel used to define a minimum distance between the boundaries
-       * and the popper this makes sure the popper has always a little padding
+       * and the popper. This makes sure the popper always has a little padding
        * between the edges of its container
        */
       padding: 5,
       /**
        * @prop {String|HTMLElement} boundariesElement='scrollParent'
-       * Boundaries used by the modifier, can be `scrollParent`, `window`,
+       * Boundaries used by the modifier. Can be `scrollParent`, `window`,
        * `viewport` or any DOM element.
        */
       boundariesElement: 'scrollParent'
     },
 
     /**
-     * Modifier used to make sure the reference and its popper stay near eachothers
-     * without leaving any gap between the two. Expecially useful when the arrow is
-     * enabled and you want to assure it to point to its reference element.
-     * It cares only about the first axis, you can still have poppers with margin
+     * Modifier used to make sure the reference and its popper stay near each other
+     * without leaving any gap between the two. Especially useful when the arrow is
+     * enabled and you want to ensure that it points to its reference element.
+     * It cares only about the first axis. You can still have poppers with margin
      * between the popper and its reference element.
      * @memberof modifiers
      * @inner
@@ -13874,7 +14011,7 @@ return jQuery;
      * This modifier is used to move the `arrowElement` of the popper to make
      * sure it is positioned between the reference element and its popper element.
      * It will read the outer size of the `arrowElement` node to detect how many
-     * pixels of conjuction are needed.
+     * pixels of conjunction are needed.
      *
      * It has no effect if no `arrowElement` is provided.
      * @memberof modifiers
@@ -13913,7 +14050,7 @@ return jQuery;
        * @prop {String|Array} behavior='flip'
        * The behavior used to change the popper's placement. It can be one of
        * `flip`, `clockwise`, `counterclockwise` or an array with a list of valid
-       * placements (with optional variations).
+       * placements (with optional variations)
        */
       behavior: 'flip',
       /**
@@ -13923,9 +14060,9 @@ return jQuery;
       padding: 5,
       /**
        * @prop {String|HTMLElement} boundariesElement='viewport'
-       * The element which will define the boundaries of the popper position,
-       * the popper will never be placed outside of the defined boundaries
-       * (except if keepTogether is enabled)
+       * The element which will define the boundaries of the popper position.
+       * The popper will never be placed outside of the defined boundaries
+       * (except if `keepTogether` is enabled)
        */
       boundariesElement: 'viewport'
     },
@@ -13989,8 +14126,8 @@ return jQuery;
       fn: computeStyle,
       /**
        * @prop {Boolean} gpuAcceleration=true
-       * If true, it uses the CSS 3d transformation to position the popper.
-       * Otherwise, it will use the `top` and `left` properties.
+       * If true, it uses the CSS 3D transformation to position the popper.
+       * Otherwise, it will use the `top` and `left` properties
        */
       gpuAcceleration: true,
       /**
@@ -14017,7 +14154,7 @@ return jQuery;
      * Note that if you disable this modifier, you must make sure the popper element
      * has its position set to `absolute` before Popper.js can do its work!
      *
-     * Just disable this modifier and define you own to achieve the desired effect.
+     * Just disable this modifier and define your own to achieve the desired effect.
      *
      * @memberof modifiers
      * @inner
@@ -14034,27 +14171,27 @@ return jQuery;
       /**
        * @deprecated since version 1.10.0, the property moved to `computeStyle` modifier
        * @prop {Boolean} gpuAcceleration=true
-       * If true, it uses the CSS 3d transformation to position the popper.
-       * Otherwise, it will use the `top` and `left` properties.
+       * If true, it uses the CSS 3D transformation to position the popper.
+       * Otherwise, it will use the `top` and `left` properties
        */
       gpuAcceleration: undefined
     }
   };
 
   /**
-   * The `dataObject` is an object containing all the informations used by Popper.js
-   * this object get passed to modifiers and to the `onCreate` and `onUpdate` callbacks.
+   * The `dataObject` is an object containing all the information used by Popper.js.
+   * This object is passed to modifiers and to the `onCreate` and `onUpdate` callbacks.
    * @name dataObject
    * @property {Object} data.instance The Popper.js instance
    * @property {String} data.placement Placement applied to popper
    * @property {String} data.originalPlacement Placement originally defined on init
    * @property {Boolean} data.flipped True if popper has been flipped by flip modifier
-   * @property {Boolean} data.hide True if the reference element is out of boundaries, useful to know when to hide the popper.
+   * @property {Boolean} data.hide True if the reference element is out of boundaries, useful to know when to hide the popper
    * @property {HTMLElement} data.arrowElement Node used as arrow by arrow modifier
-   * @property {Object} data.styles Any CSS property defined here will be applied to the popper, it expects the JavaScript nomenclature (eg. `marginBottom`)
-   * @property {Object} data.arrowStyles Any CSS property defined here will be applied to the popper arrow, it expects the JavaScript nomenclature (eg. `marginBottom`)
+   * @property {Object} data.styles Any CSS property defined here will be applied to the popper. It expects the JavaScript nomenclature (eg. `marginBottom`)
+   * @property {Object} data.arrowStyles Any CSS property defined here will be applied to the popper arrow. It expects the JavaScript nomenclature (eg. `marginBottom`)
    * @property {Object} data.boundaries Offsets of the popper boundaries
-   * @property {Object} data.offsets The measurements of popper, reference and arrow elements.
+   * @property {Object} data.offsets The measurements of popper, reference and arrow elements
    * @property {Object} data.offsets.popper `top`, `left`, `width`, `height` values
    * @property {Object} data.offsets.reference `top`, `left`, `width`, `height` values
    * @property {Object} data.offsets.arrow] `top` and `left` offsets, only one of them will be different from 0
@@ -14062,9 +14199,9 @@ return jQuery;
 
   /**
    * Default options provided to Popper.js constructor.<br />
-   * These can be overriden using the `options` argument of Popper.js.<br />
-   * To override an option, simply pass as 3rd argument an object with the same
-   * structure of this object, example:
+   * These can be overridden using the `options` argument of Popper.js.<br />
+   * To override an option, simply pass an object with the same
+   * structure of the `options` object, as the 3rd argument. For example:
    * ```
    * new Popper(ref, pop, {
    *   modifiers: {
@@ -14078,7 +14215,7 @@ return jQuery;
    */
   var Defaults = {
     /**
-     * Popper's placement
+     * Popper's placement.
      * @prop {Popper.placements} placement='bottom'
      */
     placement: 'bottom',
@@ -14090,7 +14227,7 @@ return jQuery;
     positionFixed: false,
 
     /**
-     * Whether events (resize, scroll) are initially enabled
+     * Whether events (resize, scroll) are initially enabled.
      * @prop {Boolean} eventsEnabled=true
      */
     eventsEnabled: true,
@@ -14104,17 +14241,17 @@ return jQuery;
 
     /**
      * Callback called when the popper is created.<br />
-     * By default, is set to no-op.<br />
+     * By default, it is set to no-op.<br />
      * Access Popper.js instance with `data.instance`.
      * @prop {onCreate}
      */
     onCreate: function onCreate() {},
 
     /**
-     * Callback called when the popper is updated, this callback is not called
+     * Callback called when the popper is updated. This callback is not called
      * on the initialization/creation of the popper, but only on subsequent
      * updates.<br />
-     * By default, is set to no-op.<br />
+     * By default, it is set to no-op.<br />
      * Access Popper.js instance with `data.instance`.
      * @prop {onUpdate}
      */
@@ -14122,7 +14259,7 @@ return jQuery;
 
     /**
      * List of modifiers used to modify the offsets before they are applied to the popper.
-     * They provide most of the functionalities of Popper.js
+     * They provide most of the functionalities of Popper.js.
      * @prop {modifiers}
      */
     modifiers: modifiers
@@ -14142,10 +14279,10 @@ return jQuery;
   // Methods
   var Popper = function () {
     /**
-     * Create a new Popper.js instance
+     * Creates a new Popper.js instance.
      * @class Popper
      * @param {HTMLElement|referenceObject} reference - The reference element used to position the popper
-     * @param {HTMLElement} popper - The HTML element used as popper.
+     * @param {HTMLElement} popper - The HTML element used as the popper
      * @param {Object} options - Your custom options to override the ones defined in [Defaults](#defaults)
      * @return {Object} instance - The generated Popper.js instance
      */
@@ -14241,7 +14378,7 @@ return jQuery;
       }
 
       /**
-       * Schedule an update, it will run on the next UI update available
+       * Schedules an update. It will run on the next UI update available.
        * @method scheduleUpdate
        * @memberof Popper
        */
@@ -14278,7 +14415,7 @@ return jQuery;
    * new Popper(referenceObject, popperNode);
    * ```
    *
-   * NB: This feature isn't supported in Internet Explorer 10
+   * NB: This feature isn't supported in Internet Explorer 10.
    * @name referenceObject
    * @property {Function} data.getBoundingClientRect
    * A function that returns a set of coordinates compatible with the native `getBoundingClientRect` method.
@@ -14294,2509 +14431,2728 @@ return jQuery;
   Popper.Defaults = Defaults;
 
   /**
-   * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.3): dropdown.js
-   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
-   * --------------------------------------------------------------------------
+   * ------------------------------------------------------------------------
+   * Constants
+   * ------------------------------------------------------------------------
    */
 
-  var Dropdown = function ($$$1) {
+  var NAME$4 = 'dropdown';
+  var VERSION$4 = '4.2.1';
+  var DATA_KEY$4 = 'bs.dropdown';
+  var EVENT_KEY$4 = "." + DATA_KEY$4;
+  var DATA_API_KEY$4 = '.data-api';
+  var JQUERY_NO_CONFLICT$4 = $.fn[NAME$4];
+  var ESCAPE_KEYCODE = 27; // KeyboardEvent.which value for Escape (Esc) key
+
+  var SPACE_KEYCODE = 32; // KeyboardEvent.which value for space key
+
+  var TAB_KEYCODE = 9; // KeyboardEvent.which value for tab key
+
+  var ARROW_UP_KEYCODE = 38; // KeyboardEvent.which value for up arrow key
+
+  var ARROW_DOWN_KEYCODE = 40; // KeyboardEvent.which value for down arrow key
+
+  var RIGHT_MOUSE_BUTTON_WHICH = 3; // MouseEvent.which value for the right button (assuming a right-handed mouse)
+
+  var REGEXP_KEYDOWN = new RegExp(ARROW_UP_KEYCODE + "|" + ARROW_DOWN_KEYCODE + "|" + ESCAPE_KEYCODE);
+  var Event$4 = {
+    HIDE: "hide" + EVENT_KEY$4,
+    HIDDEN: "hidden" + EVENT_KEY$4,
+    SHOW: "show" + EVENT_KEY$4,
+    SHOWN: "shown" + EVENT_KEY$4,
+    CLICK: "click" + EVENT_KEY$4,
+    CLICK_DATA_API: "click" + EVENT_KEY$4 + DATA_API_KEY$4,
+    KEYDOWN_DATA_API: "keydown" + EVENT_KEY$4 + DATA_API_KEY$4,
+    KEYUP_DATA_API: "keyup" + EVENT_KEY$4 + DATA_API_KEY$4
+  };
+  var ClassName$4 = {
+    DISABLED: 'disabled',
+    SHOW: 'show',
+    DROPUP: 'dropup',
+    DROPRIGHT: 'dropright',
+    DROPLEFT: 'dropleft',
+    MENURIGHT: 'dropdown-menu-right',
+    MENULEFT: 'dropdown-menu-left',
+    POSITION_STATIC: 'position-static'
+  };
+  var Selector$4 = {
+    DATA_TOGGLE: '[data-toggle="dropdown"]',
+    FORM_CHILD: '.dropdown form',
+    MENU: '.dropdown-menu',
+    NAVBAR_NAV: '.navbar-nav',
+    VISIBLE_ITEMS: '.dropdown-menu .dropdown-item:not(.disabled):not(:disabled)'
+  };
+  var AttachmentMap = {
+    TOP: 'top-start',
+    TOPEND: 'top-end',
+    BOTTOM: 'bottom-start',
+    BOTTOMEND: 'bottom-end',
+    RIGHT: 'right-start',
+    RIGHTEND: 'right-end',
+    LEFT: 'left-start',
+    LEFTEND: 'left-end'
+  };
+  var Default$2 = {
+    offset: 0,
+    flip: true,
+    boundary: 'scrollParent',
+    reference: 'toggle',
+    display: 'dynamic'
+  };
+  var DefaultType$2 = {
+    offset: '(number|string|function)',
+    flip: 'boolean',
+    boundary: '(string|element)',
+    reference: '(string|element)',
+    display: 'string'
     /**
      * ------------------------------------------------------------------------
-     * Constants
-     * ------------------------------------------------------------------------
-     */
-    var NAME = 'dropdown';
-    var VERSION = '4.1.3';
-    var DATA_KEY = 'bs.dropdown';
-    var EVENT_KEY = "." + DATA_KEY;
-    var DATA_API_KEY = '.data-api';
-    var JQUERY_NO_CONFLICT = $$$1.fn[NAME];
-    var ESCAPE_KEYCODE = 27; // KeyboardEvent.which value for Escape (Esc) key
-
-    var SPACE_KEYCODE = 32; // KeyboardEvent.which value for space key
-
-    var TAB_KEYCODE = 9; // KeyboardEvent.which value for tab key
-
-    var ARROW_UP_KEYCODE = 38; // KeyboardEvent.which value for up arrow key
-
-    var ARROW_DOWN_KEYCODE = 40; // KeyboardEvent.which value for down arrow key
-
-    var RIGHT_MOUSE_BUTTON_WHICH = 3; // MouseEvent.which value for the right button (assuming a right-handed mouse)
-
-    var REGEXP_KEYDOWN = new RegExp(ARROW_UP_KEYCODE + "|" + ARROW_DOWN_KEYCODE + "|" + ESCAPE_KEYCODE);
-    var Event = {
-      HIDE: "hide" + EVENT_KEY,
-      HIDDEN: "hidden" + EVENT_KEY,
-      SHOW: "show" + EVENT_KEY,
-      SHOWN: "shown" + EVENT_KEY,
-      CLICK: "click" + EVENT_KEY,
-      CLICK_DATA_API: "click" + EVENT_KEY + DATA_API_KEY,
-      KEYDOWN_DATA_API: "keydown" + EVENT_KEY + DATA_API_KEY,
-      KEYUP_DATA_API: "keyup" + EVENT_KEY + DATA_API_KEY
-    };
-    var ClassName = {
-      DISABLED: 'disabled',
-      SHOW: 'show',
-      DROPUP: 'dropup',
-      DROPRIGHT: 'dropright',
-      DROPLEFT: 'dropleft',
-      MENURIGHT: 'dropdown-menu-right',
-      MENULEFT: 'dropdown-menu-left',
-      POSITION_STATIC: 'position-static'
-    };
-    var Selector = {
-      DATA_TOGGLE: '[data-toggle="dropdown"]',
-      FORM_CHILD: '.dropdown form',
-      MENU: '.dropdown-menu',
-      NAVBAR_NAV: '.navbar-nav',
-      VISIBLE_ITEMS: '.dropdown-menu .dropdown-item:not(.disabled):not(:disabled)'
-    };
-    var AttachmentMap = {
-      TOP: 'top-start',
-      TOPEND: 'top-end',
-      BOTTOM: 'bottom-start',
-      BOTTOMEND: 'bottom-end',
-      RIGHT: 'right-start',
-      RIGHTEND: 'right-end',
-      LEFT: 'left-start',
-      LEFTEND: 'left-end'
-    };
-    var Default = {
-      offset: 0,
-      flip: true,
-      boundary: 'scrollParent',
-      reference: 'toggle',
-      display: 'dynamic'
-    };
-    var DefaultType = {
-      offset: '(number|string|function)',
-      flip: 'boolean',
-      boundary: '(string|element)',
-      reference: '(string|element)',
-      display: 'string'
-      /**
-       * ------------------------------------------------------------------------
-       * Class Definition
-       * ------------------------------------------------------------------------
-       */
-
-    };
-
-    var Dropdown =
-    /*#__PURE__*/
-    function () {
-      function Dropdown(element, config) {
-        this._element = element;
-        this._popper = null;
-        this._config = this._getConfig(config);
-        this._menu = this._getMenuElement();
-        this._inNavbar = this._detectNavbar();
-
-        this._addEventListeners();
-      } // Getters
-
-
-      var _proto = Dropdown.prototype;
-
-      // Public
-      _proto.toggle = function toggle() {
-        if (this._element.disabled || $$$1(this._element).hasClass(ClassName.DISABLED)) {
-          return;
-        }
-
-        var parent = Dropdown._getParentFromElement(this._element);
-
-        var isActive = $$$1(this._menu).hasClass(ClassName.SHOW);
-
-        Dropdown._clearMenus();
-
-        if (isActive) {
-          return;
-        }
-
-        var relatedTarget = {
-          relatedTarget: this._element
-        };
-        var showEvent = $$$1.Event(Event.SHOW, relatedTarget);
-        $$$1(parent).trigger(showEvent);
-
-        if (showEvent.isDefaultPrevented()) {
-          return;
-        } // Disable totally Popper.js for Dropdown in Navbar
-
-
-        if (!this._inNavbar) {
-          /**
-           * Check for Popper dependency
-           * Popper - https://popper.js.org
-           */
-          if (typeof Popper === 'undefined') {
-            throw new TypeError('Bootstrap dropdown require Popper.js (https://popper.js.org)');
-          }
-
-          var referenceElement = this._element;
-
-          if (this._config.reference === 'parent') {
-            referenceElement = parent;
-          } else if (Util.isElement(this._config.reference)) {
-            referenceElement = this._config.reference; // Check if it's jQuery element
-
-            if (typeof this._config.reference.jquery !== 'undefined') {
-              referenceElement = this._config.reference[0];
-            }
-          } // If boundary is not `scrollParent`, then set position to `static`
-          // to allow the menu to "escape" the scroll parent's boundaries
-          // https://github.com/twbs/bootstrap/issues/24251
-
-
-          if (this._config.boundary !== 'scrollParent') {
-            $$$1(parent).addClass(ClassName.POSITION_STATIC);
-          }
-
-          this._popper = new Popper(referenceElement, this._menu, this._getPopperConfig());
-        } // If this is a touch-enabled device we add extra
-        // empty mouseover listeners to the body's immediate children;
-        // only needed because of broken event delegation on iOS
-        // https://www.quirksmode.org/blog/archives/2014/02/mouse_event_bub.html
-
-
-        if ('ontouchstart' in document.documentElement && $$$1(parent).closest(Selector.NAVBAR_NAV).length === 0) {
-          $$$1(document.body).children().on('mouseover', null, $$$1.noop);
-        }
-
-        this._element.focus();
-
-        this._element.setAttribute('aria-expanded', true);
-
-        $$$1(this._menu).toggleClass(ClassName.SHOW);
-        $$$1(parent).toggleClass(ClassName.SHOW).trigger($$$1.Event(Event.SHOWN, relatedTarget));
-      };
-
-      _proto.dispose = function dispose() {
-        $$$1.removeData(this._element, DATA_KEY);
-        $$$1(this._element).off(EVENT_KEY);
-        this._element = null;
-        this._menu = null;
-
-        if (this._popper !== null) {
-          this._popper.destroy();
-
-          this._popper = null;
-        }
-      };
-
-      _proto.update = function update() {
-        this._inNavbar = this._detectNavbar();
-
-        if (this._popper !== null) {
-          this._popper.scheduleUpdate();
-        }
-      }; // Private
-
-
-      _proto._addEventListeners = function _addEventListeners() {
-        var _this = this;
-
-        $$$1(this._element).on(Event.CLICK, function (event) {
-          event.preventDefault();
-          event.stopPropagation();
-
-          _this.toggle();
-        });
-      };
-
-      _proto._getConfig = function _getConfig(config) {
-        config = _objectSpread({}, this.constructor.Default, $$$1(this._element).data(), config);
-        Util.typeCheckConfig(NAME, config, this.constructor.DefaultType);
-        return config;
-      };
-
-      _proto._getMenuElement = function _getMenuElement() {
-        if (!this._menu) {
-          var parent = Dropdown._getParentFromElement(this._element);
-
-          if (parent) {
-            this._menu = parent.querySelector(Selector.MENU);
-          }
-        }
-
-        return this._menu;
-      };
-
-      _proto._getPlacement = function _getPlacement() {
-        var $parentDropdown = $$$1(this._element.parentNode);
-        var placement = AttachmentMap.BOTTOM; // Handle dropup
-
-        if ($parentDropdown.hasClass(ClassName.DROPUP)) {
-          placement = AttachmentMap.TOP;
-
-          if ($$$1(this._menu).hasClass(ClassName.MENURIGHT)) {
-            placement = AttachmentMap.TOPEND;
-          }
-        } else if ($parentDropdown.hasClass(ClassName.DROPRIGHT)) {
-          placement = AttachmentMap.RIGHT;
-        } else if ($parentDropdown.hasClass(ClassName.DROPLEFT)) {
-          placement = AttachmentMap.LEFT;
-        } else if ($$$1(this._menu).hasClass(ClassName.MENURIGHT)) {
-          placement = AttachmentMap.BOTTOMEND;
-        }
-
-        return placement;
-      };
-
-      _proto._detectNavbar = function _detectNavbar() {
-        return $$$1(this._element).closest('.navbar').length > 0;
-      };
-
-      _proto._getPopperConfig = function _getPopperConfig() {
-        var _this2 = this;
-
-        var offsetConf = {};
-
-        if (typeof this._config.offset === 'function') {
-          offsetConf.fn = function (data) {
-            data.offsets = _objectSpread({}, data.offsets, _this2._config.offset(data.offsets) || {});
-            return data;
-          };
-        } else {
-          offsetConf.offset = this._config.offset;
-        }
-
-        var popperConfig = {
-          placement: this._getPlacement(),
-          modifiers: {
-            offset: offsetConf,
-            flip: {
-              enabled: this._config.flip
-            },
-            preventOverflow: {
-              boundariesElement: this._config.boundary
-            }
-          } // Disable Popper.js if we have a static display
-
-        };
-
-        if (this._config.display === 'static') {
-          popperConfig.modifiers.applyStyle = {
-            enabled: false
-          };
-        }
-
-        return popperConfig;
-      }; // Static
-
-
-      Dropdown._jQueryInterface = function _jQueryInterface(config) {
-        return this.each(function () {
-          var data = $$$1(this).data(DATA_KEY);
-
-          var _config = typeof config === 'object' ? config : null;
-
-          if (!data) {
-            data = new Dropdown(this, _config);
-            $$$1(this).data(DATA_KEY, data);
-          }
-
-          if (typeof config === 'string') {
-            if (typeof data[config] === 'undefined') {
-              throw new TypeError("No method named \"" + config + "\"");
-            }
-
-            data[config]();
-          }
-        });
-      };
-
-      Dropdown._clearMenus = function _clearMenus(event) {
-        if (event && (event.which === RIGHT_MOUSE_BUTTON_WHICH || event.type === 'keyup' && event.which !== TAB_KEYCODE)) {
-          return;
-        }
-
-        var toggles = [].slice.call(document.querySelectorAll(Selector.DATA_TOGGLE));
-
-        for (var i = 0, len = toggles.length; i < len; i++) {
-          var parent = Dropdown._getParentFromElement(toggles[i]);
-
-          var context = $$$1(toggles[i]).data(DATA_KEY);
-          var relatedTarget = {
-            relatedTarget: toggles[i]
-          };
-
-          if (event && event.type === 'click') {
-            relatedTarget.clickEvent = event;
-          }
-
-          if (!context) {
-            continue;
-          }
-
-          var dropdownMenu = context._menu;
-
-          if (!$$$1(parent).hasClass(ClassName.SHOW)) {
-            continue;
-          }
-
-          if (event && (event.type === 'click' && /input|textarea/i.test(event.target.tagName) || event.type === 'keyup' && event.which === TAB_KEYCODE) && $$$1.contains(parent, event.target)) {
-            continue;
-          }
-
-          var hideEvent = $$$1.Event(Event.HIDE, relatedTarget);
-          $$$1(parent).trigger(hideEvent);
-
-          if (hideEvent.isDefaultPrevented()) {
-            continue;
-          } // If this is a touch-enabled device we remove the extra
-          // empty mouseover listeners we added for iOS support
-
-
-          if ('ontouchstart' in document.documentElement) {
-            $$$1(document.body).children().off('mouseover', null, $$$1.noop);
-          }
-
-          toggles[i].setAttribute('aria-expanded', 'false');
-          $$$1(dropdownMenu).removeClass(ClassName.SHOW);
-          $$$1(parent).removeClass(ClassName.SHOW).trigger($$$1.Event(Event.HIDDEN, relatedTarget));
-        }
-      };
-
-      Dropdown._getParentFromElement = function _getParentFromElement(element) {
-        var parent;
-        var selector = Util.getSelectorFromElement(element);
-
-        if (selector) {
-          parent = document.querySelector(selector);
-        }
-
-        return parent || element.parentNode;
-      }; // eslint-disable-next-line complexity
-
-
-      Dropdown._dataApiKeydownHandler = function _dataApiKeydownHandler(event) {
-        // If not input/textarea:
-        //  - And not a key in REGEXP_KEYDOWN => not a dropdown command
-        // If input/textarea:
-        //  - If space key => not a dropdown command
-        //  - If key is other than escape
-        //    - If key is not up or down => not a dropdown command
-        //    - If trigger inside the menu => not a dropdown command
-        if (/input|textarea/i.test(event.target.tagName) ? event.which === SPACE_KEYCODE || event.which !== ESCAPE_KEYCODE && (event.which !== ARROW_DOWN_KEYCODE && event.which !== ARROW_UP_KEYCODE || $$$1(event.target).closest(Selector.MENU).length) : !REGEXP_KEYDOWN.test(event.which)) {
-          return;
-        }
-
-        event.preventDefault();
-        event.stopPropagation();
-
-        if (this.disabled || $$$1(this).hasClass(ClassName.DISABLED)) {
-          return;
-        }
-
-        var parent = Dropdown._getParentFromElement(this);
-
-        var isActive = $$$1(parent).hasClass(ClassName.SHOW);
-
-        if (!isActive && (event.which !== ESCAPE_KEYCODE || event.which !== SPACE_KEYCODE) || isActive && (event.which === ESCAPE_KEYCODE || event.which === SPACE_KEYCODE)) {
-          if (event.which === ESCAPE_KEYCODE) {
-            var toggle = parent.querySelector(Selector.DATA_TOGGLE);
-            $$$1(toggle).trigger('focus');
-          }
-
-          $$$1(this).trigger('click');
-          return;
-        }
-
-        var items = [].slice.call(parent.querySelectorAll(Selector.VISIBLE_ITEMS));
-
-        if (items.length === 0) {
-          return;
-        }
-
-        var index = items.indexOf(event.target);
-
-        if (event.which === ARROW_UP_KEYCODE && index > 0) {
-          // Up
-          index--;
-        }
-
-        if (event.which === ARROW_DOWN_KEYCODE && index < items.length - 1) {
-          // Down
-          index++;
-        }
-
-        if (index < 0) {
-          index = 0;
-        }
-
-        items[index].focus();
-      };
-
-      _createClass(Dropdown, null, [{
-        key: "VERSION",
-        get: function get() {
-          return VERSION;
-        }
-      }, {
-        key: "Default",
-        get: function get() {
-          return Default;
-        }
-      }, {
-        key: "DefaultType",
-        get: function get() {
-          return DefaultType;
-        }
-      }]);
-
-      return Dropdown;
-    }();
-    /**
-     * ------------------------------------------------------------------------
-     * Data Api implementation
+     * Class Definition
      * ------------------------------------------------------------------------
      */
 
-
-    $$$1(document).on(Event.KEYDOWN_DATA_API, Selector.DATA_TOGGLE, Dropdown._dataApiKeydownHandler).on(Event.KEYDOWN_DATA_API, Selector.MENU, Dropdown._dataApiKeydownHandler).on(Event.CLICK_DATA_API + " " + Event.KEYUP_DATA_API, Dropdown._clearMenus).on(Event.CLICK_DATA_API, Selector.DATA_TOGGLE, function (event) {
-      event.preventDefault();
-      event.stopPropagation();
-
-      Dropdown._jQueryInterface.call($$$1(this), 'toggle');
-    }).on(Event.CLICK_DATA_API, Selector.FORM_CHILD, function (e) {
-      e.stopPropagation();
-    });
-    /**
-     * ------------------------------------------------------------------------
-     * jQuery
-     * ------------------------------------------------------------------------
-     */
-
-    $$$1.fn[NAME] = Dropdown._jQueryInterface;
-    $$$1.fn[NAME].Constructor = Dropdown;
-
-    $$$1.fn[NAME].noConflict = function () {
-      $$$1.fn[NAME] = JQUERY_NO_CONFLICT;
-      return Dropdown._jQueryInterface;
-    };
-
-    return Dropdown;
-  }($, Popper);
-
-  /**
-   * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.3): modal.js
-   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
-   * --------------------------------------------------------------------------
-   */
-
-  var Modal = function ($$$1) {
-    /**
-     * ------------------------------------------------------------------------
-     * Constants
-     * ------------------------------------------------------------------------
-     */
-    var NAME = 'modal';
-    var VERSION = '4.1.3';
-    var DATA_KEY = 'bs.modal';
-    var EVENT_KEY = "." + DATA_KEY;
-    var DATA_API_KEY = '.data-api';
-    var JQUERY_NO_CONFLICT = $$$1.fn[NAME];
-    var ESCAPE_KEYCODE = 27; // KeyboardEvent.which value for Escape (Esc) key
-
-    var Default = {
-      backdrop: true,
-      keyboard: true,
-      focus: true,
-      show: true
-    };
-    var DefaultType = {
-      backdrop: '(boolean|string)',
-      keyboard: 'boolean',
-      focus: 'boolean',
-      show: 'boolean'
-    };
-    var Event = {
-      HIDE: "hide" + EVENT_KEY,
-      HIDDEN: "hidden" + EVENT_KEY,
-      SHOW: "show" + EVENT_KEY,
-      SHOWN: "shown" + EVENT_KEY,
-      FOCUSIN: "focusin" + EVENT_KEY,
-      RESIZE: "resize" + EVENT_KEY,
-      CLICK_DISMISS: "click.dismiss" + EVENT_KEY,
-      KEYDOWN_DISMISS: "keydown.dismiss" + EVENT_KEY,
-      MOUSEUP_DISMISS: "mouseup.dismiss" + EVENT_KEY,
-      MOUSEDOWN_DISMISS: "mousedown.dismiss" + EVENT_KEY,
-      CLICK_DATA_API: "click" + EVENT_KEY + DATA_API_KEY
-    };
-    var ClassName = {
-      SCROLLBAR_MEASURER: 'modal-scrollbar-measure',
-      BACKDROP: 'modal-backdrop',
-      OPEN: 'modal-open',
-      FADE: 'fade',
-      SHOW: 'show'
-    };
-    var Selector = {
-      DIALOG: '.modal-dialog',
-      DATA_TOGGLE: '[data-toggle="modal"]',
-      DATA_DISMISS: '[data-dismiss="modal"]',
-      FIXED_CONTENT: '.fixed-top, .fixed-bottom, .is-fixed, .sticky-top',
-      STICKY_CONTENT: '.sticky-top'
-      /**
-       * ------------------------------------------------------------------------
-       * Class Definition
-       * ------------------------------------------------------------------------
-       */
-
-    };
-
-    var Modal =
-    /*#__PURE__*/
-    function () {
-      function Modal(element, config) {
-        this._config = this._getConfig(config);
-        this._element = element;
-        this._dialog = element.querySelector(Selector.DIALOG);
-        this._backdrop = null;
-        this._isShown = false;
-        this._isBodyOverflowing = false;
-        this._ignoreBackdropClick = false;
-        this._scrollbarWidth = 0;
-      } // Getters
-
-
-      var _proto = Modal.prototype;
-
-      // Public
-      _proto.toggle = function toggle(relatedTarget) {
-        return this._isShown ? this.hide() : this.show(relatedTarget);
-      };
-
-      _proto.show = function show(relatedTarget) {
-        var _this = this;
-
-        if (this._isTransitioning || this._isShown) {
-          return;
-        }
-
-        if ($$$1(this._element).hasClass(ClassName.FADE)) {
-          this._isTransitioning = true;
-        }
-
-        var showEvent = $$$1.Event(Event.SHOW, {
-          relatedTarget: relatedTarget
-        });
-        $$$1(this._element).trigger(showEvent);
-
-        if (this._isShown || showEvent.isDefaultPrevented()) {
-          return;
-        }
-
-        this._isShown = true;
-
-        this._checkScrollbar();
-
-        this._setScrollbar();
-
-        this._adjustDialog();
-
-        $$$1(document.body).addClass(ClassName.OPEN);
-
-        this._setEscapeEvent();
-
-        this._setResizeEvent();
-
-        $$$1(this._element).on(Event.CLICK_DISMISS, Selector.DATA_DISMISS, function (event) {
-          return _this.hide(event);
-        });
-        $$$1(this._dialog).on(Event.MOUSEDOWN_DISMISS, function () {
-          $$$1(_this._element).one(Event.MOUSEUP_DISMISS, function (event) {
-            if ($$$1(event.target).is(_this._element)) {
-              _this._ignoreBackdropClick = true;
-            }
-          });
-        });
-
-        this._showBackdrop(function () {
-          return _this._showElement(relatedTarget);
-        });
-      };
-
-      _proto.hide = function hide(event) {
-        var _this2 = this;
-
-        if (event) {
-          event.preventDefault();
-        }
-
-        if (this._isTransitioning || !this._isShown) {
-          return;
-        }
-
-        var hideEvent = $$$1.Event(Event.HIDE);
-        $$$1(this._element).trigger(hideEvent);
-
-        if (!this._isShown || hideEvent.isDefaultPrevented()) {
-          return;
-        }
-
-        this._isShown = false;
-        var transition = $$$1(this._element).hasClass(ClassName.FADE);
-
-        if (transition) {
-          this._isTransitioning = true;
-        }
-
-        this._setEscapeEvent();
-
-        this._setResizeEvent();
-
-        $$$1(document).off(Event.FOCUSIN);
-        $$$1(this._element).removeClass(ClassName.SHOW);
-        $$$1(this._element).off(Event.CLICK_DISMISS);
-        $$$1(this._dialog).off(Event.MOUSEDOWN_DISMISS);
-
-        if (transition) {
-          var transitionDuration = Util.getTransitionDurationFromElement(this._element);
-          $$$1(this._element).one(Util.TRANSITION_END, function (event) {
-            return _this2._hideModal(event);
-          }).emulateTransitionEnd(transitionDuration);
-        } else {
-          this._hideModal();
-        }
-      };
-
-      _proto.dispose = function dispose() {
-        $$$1.removeData(this._element, DATA_KEY);
-        $$$1(window, document, this._element, this._backdrop).off(EVENT_KEY);
-        this._config = null;
-        this._element = null;
-        this._dialog = null;
-        this._backdrop = null;
-        this._isShown = null;
-        this._isBodyOverflowing = null;
-        this._ignoreBackdropClick = null;
-        this._scrollbarWidth = null;
-      };
-
-      _proto.handleUpdate = function handleUpdate() {
-        this._adjustDialog();
-      }; // Private
-
-
-      _proto._getConfig = function _getConfig(config) {
-        config = _objectSpread({}, Default, config);
-        Util.typeCheckConfig(NAME, config, DefaultType);
-        return config;
-      };
-
-      _proto._showElement = function _showElement(relatedTarget) {
-        var _this3 = this;
-
-        var transition = $$$1(this._element).hasClass(ClassName.FADE);
-
-        if (!this._element.parentNode || this._element.parentNode.nodeType !== Node.ELEMENT_NODE) {
-          // Don't move modal's DOM position
-          document.body.appendChild(this._element);
-        }
-
-        this._element.style.display = 'block';
-
-        this._element.removeAttribute('aria-hidden');
-
-        this._element.scrollTop = 0;
-
-        if (transition) {
-          Util.reflow(this._element);
-        }
-
-        $$$1(this._element).addClass(ClassName.SHOW);
-
-        if (this._config.focus) {
-          this._enforceFocus();
-        }
-
-        var shownEvent = $$$1.Event(Event.SHOWN, {
-          relatedTarget: relatedTarget
-        });
-
-        var transitionComplete = function transitionComplete() {
-          if (_this3._config.focus) {
-            _this3._element.focus();
-          }
-
-          _this3._isTransitioning = false;
-          $$$1(_this3._element).trigger(shownEvent);
-        };
-
-        if (transition) {
-          var transitionDuration = Util.getTransitionDurationFromElement(this._element);
-          $$$1(this._dialog).one(Util.TRANSITION_END, transitionComplete).emulateTransitionEnd(transitionDuration);
-        } else {
-          transitionComplete();
-        }
-      };
-
-      _proto._enforceFocus = function _enforceFocus() {
-        var _this4 = this;
-
-        $$$1(document).off(Event.FOCUSIN) // Guard against infinite focus loop
-        .on(Event.FOCUSIN, function (event) {
-          if (document !== event.target && _this4._element !== event.target && $$$1(_this4._element).has(event.target).length === 0) {
-            _this4._element.focus();
-          }
-        });
-      };
-
-      _proto._setEscapeEvent = function _setEscapeEvent() {
-        var _this5 = this;
-
-        if (this._isShown && this._config.keyboard) {
-          $$$1(this._element).on(Event.KEYDOWN_DISMISS, function (event) {
-            if (event.which === ESCAPE_KEYCODE) {
-              event.preventDefault();
-
-              _this5.hide();
-            }
-          });
-        } else if (!this._isShown) {
-          $$$1(this._element).off(Event.KEYDOWN_DISMISS);
-        }
-      };
-
-      _proto._setResizeEvent = function _setResizeEvent() {
-        var _this6 = this;
-
-        if (this._isShown) {
-          $$$1(window).on(Event.RESIZE, function (event) {
-            return _this6.handleUpdate(event);
-          });
-        } else {
-          $$$1(window).off(Event.RESIZE);
-        }
-      };
-
-      _proto._hideModal = function _hideModal() {
-        var _this7 = this;
-
-        this._element.style.display = 'none';
-
-        this._element.setAttribute('aria-hidden', true);
-
-        this._isTransitioning = false;
-
-        this._showBackdrop(function () {
-          $$$1(document.body).removeClass(ClassName.OPEN);
-
-          _this7._resetAdjustments();
-
-          _this7._resetScrollbar();
-
-          $$$1(_this7._element).trigger(Event.HIDDEN);
-        });
-      };
-
-      _proto._removeBackdrop = function _removeBackdrop() {
-        if (this._backdrop) {
-          $$$1(this._backdrop).remove();
-          this._backdrop = null;
-        }
-      };
-
-      _proto._showBackdrop = function _showBackdrop(callback) {
-        var _this8 = this;
-
-        var animate = $$$1(this._element).hasClass(ClassName.FADE) ? ClassName.FADE : '';
-
-        if (this._isShown && this._config.backdrop) {
-          this._backdrop = document.createElement('div');
-          this._backdrop.className = ClassName.BACKDROP;
-
-          if (animate) {
-            this._backdrop.classList.add(animate);
-          }
-
-          $$$1(this._backdrop).appendTo(document.body);
-          $$$1(this._element).on(Event.CLICK_DISMISS, function (event) {
-            if (_this8._ignoreBackdropClick) {
-              _this8._ignoreBackdropClick = false;
-              return;
-            }
-
-            if (event.target !== event.currentTarget) {
-              return;
-            }
-
-            if (_this8._config.backdrop === 'static') {
-              _this8._element.focus();
-            } else {
-              _this8.hide();
-            }
-          });
-
-          if (animate) {
-            Util.reflow(this._backdrop);
-          }
-
-          $$$1(this._backdrop).addClass(ClassName.SHOW);
-
-          if (!callback) {
-            return;
-          }
-
-          if (!animate) {
-            callback();
-            return;
-          }
-
-          var backdropTransitionDuration = Util.getTransitionDurationFromElement(this._backdrop);
-          $$$1(this._backdrop).one(Util.TRANSITION_END, callback).emulateTransitionEnd(backdropTransitionDuration);
-        } else if (!this._isShown && this._backdrop) {
-          $$$1(this._backdrop).removeClass(ClassName.SHOW);
-
-          var callbackRemove = function callbackRemove() {
-            _this8._removeBackdrop();
-
-            if (callback) {
-              callback();
-            }
-          };
-
-          if ($$$1(this._element).hasClass(ClassName.FADE)) {
-            var _backdropTransitionDuration = Util.getTransitionDurationFromElement(this._backdrop);
-
-            $$$1(this._backdrop).one(Util.TRANSITION_END, callbackRemove).emulateTransitionEnd(_backdropTransitionDuration);
-          } else {
-            callbackRemove();
-          }
-        } else if (callback) {
-          callback();
-        }
-      }; // ----------------------------------------------------------------------
-      // the following methods are used to handle overflowing modals
-      // todo (fat): these should probably be refactored out of modal.js
-      // ----------------------------------------------------------------------
-
-
-      _proto._adjustDialog = function _adjustDialog() {
-        var isModalOverflowing = this._element.scrollHeight > document.documentElement.clientHeight;
-
-        if (!this._isBodyOverflowing && isModalOverflowing) {
-          this._element.style.paddingLeft = this._scrollbarWidth + "px";
-        }
-
-        if (this._isBodyOverflowing && !isModalOverflowing) {
-          this._element.style.paddingRight = this._scrollbarWidth + "px";
-        }
-      };
-
-      _proto._resetAdjustments = function _resetAdjustments() {
-        this._element.style.paddingLeft = '';
-        this._element.style.paddingRight = '';
-      };
-
-      _proto._checkScrollbar = function _checkScrollbar() {
-        var rect = document.body.getBoundingClientRect();
-        this._isBodyOverflowing = rect.left + rect.right < window.innerWidth;
-        this._scrollbarWidth = this._getScrollbarWidth();
-      };
-
-      _proto._setScrollbar = function _setScrollbar() {
-        var _this9 = this;
-
-        if (this._isBodyOverflowing) {
-          // Note: DOMNode.style.paddingRight returns the actual value or '' if not set
-          //   while $(DOMNode).css('padding-right') returns the calculated value or 0 if not set
-          var fixedContent = [].slice.call(document.querySelectorAll(Selector.FIXED_CONTENT));
-          var stickyContent = [].slice.call(document.querySelectorAll(Selector.STICKY_CONTENT)); // Adjust fixed content padding
-
-          $$$1(fixedContent).each(function (index, element) {
-            var actualPadding = element.style.paddingRight;
-            var calculatedPadding = $$$1(element).css('padding-right');
-            $$$1(element).data('padding-right', actualPadding).css('padding-right', parseFloat(calculatedPadding) + _this9._scrollbarWidth + "px");
-          }); // Adjust sticky content margin
-
-          $$$1(stickyContent).each(function (index, element) {
-            var actualMargin = element.style.marginRight;
-            var calculatedMargin = $$$1(element).css('margin-right');
-            $$$1(element).data('margin-right', actualMargin).css('margin-right', parseFloat(calculatedMargin) - _this9._scrollbarWidth + "px");
-          }); // Adjust body padding
-
-          var actualPadding = document.body.style.paddingRight;
-          var calculatedPadding = $$$1(document.body).css('padding-right');
-          $$$1(document.body).data('padding-right', actualPadding).css('padding-right', parseFloat(calculatedPadding) + this._scrollbarWidth + "px");
-        }
-      };
-
-      _proto._resetScrollbar = function _resetScrollbar() {
-        // Restore fixed content padding
-        var fixedContent = [].slice.call(document.querySelectorAll(Selector.FIXED_CONTENT));
-        $$$1(fixedContent).each(function (index, element) {
-          var padding = $$$1(element).data('padding-right');
-          $$$1(element).removeData('padding-right');
-          element.style.paddingRight = padding ? padding : '';
-        }); // Restore sticky content
-
-        var elements = [].slice.call(document.querySelectorAll("" + Selector.STICKY_CONTENT));
-        $$$1(elements).each(function (index, element) {
-          var margin = $$$1(element).data('margin-right');
-
-          if (typeof margin !== 'undefined') {
-            $$$1(element).css('margin-right', margin).removeData('margin-right');
-          }
-        }); // Restore body padding
-
-        var padding = $$$1(document.body).data('padding-right');
-        $$$1(document.body).removeData('padding-right');
-        document.body.style.paddingRight = padding ? padding : '';
-      };
-
-      _proto._getScrollbarWidth = function _getScrollbarWidth() {
-        // thx d.walsh
-        var scrollDiv = document.createElement('div');
-        scrollDiv.className = ClassName.SCROLLBAR_MEASURER;
-        document.body.appendChild(scrollDiv);
-        var scrollbarWidth = scrollDiv.getBoundingClientRect().width - scrollDiv.clientWidth;
-        document.body.removeChild(scrollDiv);
-        return scrollbarWidth;
-      }; // Static
-
-
-      Modal._jQueryInterface = function _jQueryInterface(config, relatedTarget) {
-        return this.each(function () {
-          var data = $$$1(this).data(DATA_KEY);
-
-          var _config = _objectSpread({}, Default, $$$1(this).data(), typeof config === 'object' && config ? config : {});
-
-          if (!data) {
-            data = new Modal(this, _config);
-            $$$1(this).data(DATA_KEY, data);
-          }
-
-          if (typeof config === 'string') {
-            if (typeof data[config] === 'undefined') {
-              throw new TypeError("No method named \"" + config + "\"");
-            }
-
-            data[config](relatedTarget);
-          } else if (_config.show) {
-            data.show(relatedTarget);
-          }
-        });
-      };
-
-      _createClass(Modal, null, [{
-        key: "VERSION",
-        get: function get() {
-          return VERSION;
-        }
-      }, {
-        key: "Default",
-        get: function get() {
-          return Default;
-        }
-      }]);
-
-      return Modal;
-    }();
-    /**
-     * ------------------------------------------------------------------------
-     * Data Api implementation
-     * ------------------------------------------------------------------------
-     */
-
-
-    $$$1(document).on(Event.CLICK_DATA_API, Selector.DATA_TOGGLE, function (event) {
-      var _this10 = this;
-
-      var target;
-      var selector = Util.getSelectorFromElement(this);
-
-      if (selector) {
-        target = document.querySelector(selector);
+  };
+
+  var Dropdown =
+  /*#__PURE__*/
+  function () {
+    function Dropdown(element, config) {
+      this._element = element;
+      this._popper = null;
+      this._config = this._getConfig(config);
+      this._menu = this._getMenuElement();
+      this._inNavbar = this._detectNavbar();
+
+      this._addEventListeners();
+    } // Getters
+
+
+    var _proto = Dropdown.prototype;
+
+    // Public
+    _proto.toggle = function toggle() {
+      if (this._element.disabled || $(this._element).hasClass(ClassName$4.DISABLED)) {
+        return;
       }
 
-      var config = $$$1(target).data(DATA_KEY) ? 'toggle' : _objectSpread({}, $$$1(target).data(), $$$1(this).data());
+      var parent = Dropdown._getParentFromElement(this._element);
 
-      if (this.tagName === 'A' || this.tagName === 'AREA') {
-        event.preventDefault();
+      var isActive = $(this._menu).hasClass(ClassName$4.SHOW);
+
+      Dropdown._clearMenus();
+
+      if (isActive) {
+        return;
       }
 
-      var $target = $$$1(target).one(Event.SHOW, function (showEvent) {
-        if (showEvent.isDefaultPrevented()) {
-          // Only register focus restorer if modal will actually get shown
-          return;
-        }
+      var relatedTarget = {
+        relatedTarget: this._element
+      };
+      var showEvent = $.Event(Event$4.SHOW, relatedTarget);
+      $(parent).trigger(showEvent);
 
-        $target.one(Event.HIDDEN, function () {
-          if ($$$1(_this10).is(':visible')) {
-            _this10.focus();
-          }
-        });
-      });
+      if (showEvent.isDefaultPrevented()) {
+        return;
+      } // Disable totally Popper.js for Dropdown in Navbar
 
-      Modal._jQueryInterface.call($$$1(target), config, this);
-    });
-    /**
-     * ------------------------------------------------------------------------
-     * jQuery
-     * ------------------------------------------------------------------------
-     */
 
-    $$$1.fn[NAME] = Modal._jQueryInterface;
-    $$$1.fn[NAME].Constructor = Modal;
-
-    $$$1.fn[NAME].noConflict = function () {
-      $$$1.fn[NAME] = JQUERY_NO_CONFLICT;
-      return Modal._jQueryInterface;
-    };
-
-    return Modal;
-  }($);
-
-  /**
-   * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.3): tooltip.js
-   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
-   * --------------------------------------------------------------------------
-   */
-
-  var Tooltip = function ($$$1) {
-    /**
-     * ------------------------------------------------------------------------
-     * Constants
-     * ------------------------------------------------------------------------
-     */
-    var NAME = 'tooltip';
-    var VERSION = '4.1.3';
-    var DATA_KEY = 'bs.tooltip';
-    var EVENT_KEY = "." + DATA_KEY;
-    var JQUERY_NO_CONFLICT = $$$1.fn[NAME];
-    var CLASS_PREFIX = 'bs-tooltip';
-    var BSCLS_PREFIX_REGEX = new RegExp("(^|\\s)" + CLASS_PREFIX + "\\S+", 'g');
-    var DefaultType = {
-      animation: 'boolean',
-      template: 'string',
-      title: '(string|element|function)',
-      trigger: 'string',
-      delay: '(number|object)',
-      html: 'boolean',
-      selector: '(string|boolean)',
-      placement: '(string|function)',
-      offset: '(number|string)',
-      container: '(string|element|boolean)',
-      fallbackPlacement: '(string|array)',
-      boundary: '(string|element)'
-    };
-    var AttachmentMap = {
-      AUTO: 'auto',
-      TOP: 'top',
-      RIGHT: 'right',
-      BOTTOM: 'bottom',
-      LEFT: 'left'
-    };
-    var Default = {
-      animation: true,
-      template: '<div class="tooltip" role="tooltip">' + '<div class="arrow"></div>' + '<div class="tooltip-inner"></div></div>',
-      trigger: 'hover focus',
-      title: '',
-      delay: 0,
-      html: false,
-      selector: false,
-      placement: 'top',
-      offset: 0,
-      container: false,
-      fallbackPlacement: 'flip',
-      boundary: 'scrollParent'
-    };
-    var HoverState = {
-      SHOW: 'show',
-      OUT: 'out'
-    };
-    var Event = {
-      HIDE: "hide" + EVENT_KEY,
-      HIDDEN: "hidden" + EVENT_KEY,
-      SHOW: "show" + EVENT_KEY,
-      SHOWN: "shown" + EVENT_KEY,
-      INSERTED: "inserted" + EVENT_KEY,
-      CLICK: "click" + EVENT_KEY,
-      FOCUSIN: "focusin" + EVENT_KEY,
-      FOCUSOUT: "focusout" + EVENT_KEY,
-      MOUSEENTER: "mouseenter" + EVENT_KEY,
-      MOUSELEAVE: "mouseleave" + EVENT_KEY
-    };
-    var ClassName = {
-      FADE: 'fade',
-      SHOW: 'show'
-    };
-    var Selector = {
-      TOOLTIP: '.tooltip',
-      TOOLTIP_INNER: '.tooltip-inner',
-      ARROW: '.arrow'
-    };
-    var Trigger = {
-      HOVER: 'hover',
-      FOCUS: 'focus',
-      CLICK: 'click',
-      MANUAL: 'manual'
-      /**
-       * ------------------------------------------------------------------------
-       * Class Definition
-       * ------------------------------------------------------------------------
-       */
-
-    };
-
-    var Tooltip =
-    /*#__PURE__*/
-    function () {
-      function Tooltip(element, config) {
+      if (!this._inNavbar) {
         /**
          * Check for Popper dependency
          * Popper - https://popper.js.org
          */
         if (typeof Popper === 'undefined') {
-          throw new TypeError('Bootstrap tooltips require Popper.js (https://popper.js.org)');
-        } // private
+          throw new TypeError('Bootstrap\'s dropdowns require Popper.js (https://popper.js.org/)');
+        }
+
+        var referenceElement = this._element;
+
+        if (this._config.reference === 'parent') {
+          referenceElement = parent;
+        } else if (Util.isElement(this._config.reference)) {
+          referenceElement = this._config.reference; // Check if it's jQuery element
+
+          if (typeof this._config.reference.jquery !== 'undefined') {
+            referenceElement = this._config.reference[0];
+          }
+        } // If boundary is not `scrollParent`, then set position to `static`
+        // to allow the menu to "escape" the scroll parent's boundaries
+        // https://github.com/twbs/bootstrap/issues/24251
 
 
-        this._isEnabled = true;
-        this._timeout = 0;
-        this._hoverState = '';
-        this._activeTrigger = {};
-        this._popper = null; // Protected
+        if (this._config.boundary !== 'scrollParent') {
+          $(parent).addClass(ClassName$4.POSITION_STATIC);
+        }
 
-        this.element = element;
-        this.config = this._getConfig(config);
-        this.tip = null;
-
-        this._setListeners();
-      } // Getters
+        this._popper = new Popper(referenceElement, this._menu, this._getPopperConfig());
+      } // If this is a touch-enabled device we add extra
+      // empty mouseover listeners to the body's immediate children;
+      // only needed because of broken event delegation on iOS
+      // https://www.quirksmode.org/blog/archives/2014/02/mouse_event_bub.html
 
 
-      var _proto = Tooltip.prototype;
+      if ('ontouchstart' in document.documentElement && $(parent).closest(Selector$4.NAVBAR_NAV).length === 0) {
+        $(document.body).children().on('mouseover', null, $.noop);
+      }
 
-      // Public
-      _proto.enable = function enable() {
-        this._isEnabled = true;
+      this._element.focus();
+
+      this._element.setAttribute('aria-expanded', true);
+
+      $(this._menu).toggleClass(ClassName$4.SHOW);
+      $(parent).toggleClass(ClassName$4.SHOW).trigger($.Event(Event$4.SHOWN, relatedTarget));
+    };
+
+    _proto.show = function show() {
+      if (this._element.disabled || $(this._element).hasClass(ClassName$4.DISABLED) || $(this._menu).hasClass(ClassName$4.SHOW)) {
+        return;
+      }
+
+      var relatedTarget = {
+        relatedTarget: this._element
+      };
+      var showEvent = $.Event(Event$4.SHOW, relatedTarget);
+
+      var parent = Dropdown._getParentFromElement(this._element);
+
+      $(parent).trigger(showEvent);
+
+      if (showEvent.isDefaultPrevented()) {
+        return;
+      }
+
+      $(this._menu).toggleClass(ClassName$4.SHOW);
+      $(parent).toggleClass(ClassName$4.SHOW).trigger($.Event(Event$4.SHOWN, relatedTarget));
+    };
+
+    _proto.hide = function hide() {
+      if (this._element.disabled || $(this._element).hasClass(ClassName$4.DISABLED) || !$(this._menu).hasClass(ClassName$4.SHOW)) {
+        return;
+      }
+
+      var relatedTarget = {
+        relatedTarget: this._element
+      };
+      var hideEvent = $.Event(Event$4.HIDE, relatedTarget);
+
+      var parent = Dropdown._getParentFromElement(this._element);
+
+      $(parent).trigger(hideEvent);
+
+      if (hideEvent.isDefaultPrevented()) {
+        return;
+      }
+
+      $(this._menu).toggleClass(ClassName$4.SHOW);
+      $(parent).toggleClass(ClassName$4.SHOW).trigger($.Event(Event$4.HIDDEN, relatedTarget));
+    };
+
+    _proto.dispose = function dispose() {
+      $.removeData(this._element, DATA_KEY$4);
+      $(this._element).off(EVENT_KEY$4);
+      this._element = null;
+      this._menu = null;
+
+      if (this._popper !== null) {
+        this._popper.destroy();
+
+        this._popper = null;
+      }
+    };
+
+    _proto.update = function update() {
+      this._inNavbar = this._detectNavbar();
+
+      if (this._popper !== null) {
+        this._popper.scheduleUpdate();
+      }
+    }; // Private
+
+
+    _proto._addEventListeners = function _addEventListeners() {
+      var _this = this;
+
+      $(this._element).on(Event$4.CLICK, function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        _this.toggle();
+      });
+    };
+
+    _proto._getConfig = function _getConfig(config) {
+      config = _objectSpread({}, this.constructor.Default, $(this._element).data(), config);
+      Util.typeCheckConfig(NAME$4, config, this.constructor.DefaultType);
+      return config;
+    };
+
+    _proto._getMenuElement = function _getMenuElement() {
+      if (!this._menu) {
+        var parent = Dropdown._getParentFromElement(this._element);
+
+        if (parent) {
+          this._menu = parent.querySelector(Selector$4.MENU);
+        }
+      }
+
+      return this._menu;
+    };
+
+    _proto._getPlacement = function _getPlacement() {
+      var $parentDropdown = $(this._element.parentNode);
+      var placement = AttachmentMap.BOTTOM; // Handle dropup
+
+      if ($parentDropdown.hasClass(ClassName$4.DROPUP)) {
+        placement = AttachmentMap.TOP;
+
+        if ($(this._menu).hasClass(ClassName$4.MENURIGHT)) {
+          placement = AttachmentMap.TOPEND;
+        }
+      } else if ($parentDropdown.hasClass(ClassName$4.DROPRIGHT)) {
+        placement = AttachmentMap.RIGHT;
+      } else if ($parentDropdown.hasClass(ClassName$4.DROPLEFT)) {
+        placement = AttachmentMap.LEFT;
+      } else if ($(this._menu).hasClass(ClassName$4.MENURIGHT)) {
+        placement = AttachmentMap.BOTTOMEND;
+      }
+
+      return placement;
+    };
+
+    _proto._detectNavbar = function _detectNavbar() {
+      return $(this._element).closest('.navbar').length > 0;
+    };
+
+    _proto._getPopperConfig = function _getPopperConfig() {
+      var _this2 = this;
+
+      var offsetConf = {};
+
+      if (typeof this._config.offset === 'function') {
+        offsetConf.fn = function (data) {
+          data.offsets = _objectSpread({}, data.offsets, _this2._config.offset(data.offsets) || {});
+          return data;
+        };
+      } else {
+        offsetConf.offset = this._config.offset;
+      }
+
+      var popperConfig = {
+        placement: this._getPlacement(),
+        modifiers: {
+          offset: offsetConf,
+          flip: {
+            enabled: this._config.flip
+          },
+          preventOverflow: {
+            boundariesElement: this._config.boundary
+          }
+        } // Disable Popper.js if we have a static display
+
       };
 
-      _proto.disable = function disable() {
-        this._isEnabled = false;
+      if (this._config.display === 'static') {
+        popperConfig.modifiers.applyStyle = {
+          enabled: false
+        };
+      }
+
+      return popperConfig;
+    }; // Static
+
+
+    Dropdown._jQueryInterface = function _jQueryInterface(config) {
+      return this.each(function () {
+        var data = $(this).data(DATA_KEY$4);
+
+        var _config = typeof config === 'object' ? config : null;
+
+        if (!data) {
+          data = new Dropdown(this, _config);
+          $(this).data(DATA_KEY$4, data);
+        }
+
+        if (typeof config === 'string') {
+          if (typeof data[config] === 'undefined') {
+            throw new TypeError("No method named \"" + config + "\"");
+          }
+
+          data[config]();
+        }
+      });
+    };
+
+    Dropdown._clearMenus = function _clearMenus(event) {
+      if (event && (event.which === RIGHT_MOUSE_BUTTON_WHICH || event.type === 'keyup' && event.which !== TAB_KEYCODE)) {
+        return;
+      }
+
+      var toggles = [].slice.call(document.querySelectorAll(Selector$4.DATA_TOGGLE));
+
+      for (var i = 0, len = toggles.length; i < len; i++) {
+        var parent = Dropdown._getParentFromElement(toggles[i]);
+
+        var context = $(toggles[i]).data(DATA_KEY$4);
+        var relatedTarget = {
+          relatedTarget: toggles[i]
+        };
+
+        if (event && event.type === 'click') {
+          relatedTarget.clickEvent = event;
+        }
+
+        if (!context) {
+          continue;
+        }
+
+        var dropdownMenu = context._menu;
+
+        if (!$(parent).hasClass(ClassName$4.SHOW)) {
+          continue;
+        }
+
+        if (event && (event.type === 'click' && /input|textarea/i.test(event.target.tagName) || event.type === 'keyup' && event.which === TAB_KEYCODE) && $.contains(parent, event.target)) {
+          continue;
+        }
+
+        var hideEvent = $.Event(Event$4.HIDE, relatedTarget);
+        $(parent).trigger(hideEvent);
+
+        if (hideEvent.isDefaultPrevented()) {
+          continue;
+        } // If this is a touch-enabled device we remove the extra
+        // empty mouseover listeners we added for iOS support
+
+
+        if ('ontouchstart' in document.documentElement) {
+          $(document.body).children().off('mouseover', null, $.noop);
+        }
+
+        toggles[i].setAttribute('aria-expanded', 'false');
+        $(dropdownMenu).removeClass(ClassName$4.SHOW);
+        $(parent).removeClass(ClassName$4.SHOW).trigger($.Event(Event$4.HIDDEN, relatedTarget));
+      }
+    };
+
+    Dropdown._getParentFromElement = function _getParentFromElement(element) {
+      var parent;
+      var selector = Util.getSelectorFromElement(element);
+
+      if (selector) {
+        parent = document.querySelector(selector);
+      }
+
+      return parent || element.parentNode;
+    }; // eslint-disable-next-line complexity
+
+
+    Dropdown._dataApiKeydownHandler = function _dataApiKeydownHandler(event) {
+      // If not input/textarea:
+      //  - And not a key in REGEXP_KEYDOWN => not a dropdown command
+      // If input/textarea:
+      //  - If space key => not a dropdown command
+      //  - If key is other than escape
+      //    - If key is not up or down => not a dropdown command
+      //    - If trigger inside the menu => not a dropdown command
+      if (/input|textarea/i.test(event.target.tagName) ? event.which === SPACE_KEYCODE || event.which !== ESCAPE_KEYCODE && (event.which !== ARROW_DOWN_KEYCODE && event.which !== ARROW_UP_KEYCODE || $(event.target).closest(Selector$4.MENU).length) : !REGEXP_KEYDOWN.test(event.which)) {
+        return;
+      }
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      if (this.disabled || $(this).hasClass(ClassName$4.DISABLED)) {
+        return;
+      }
+
+      var parent = Dropdown._getParentFromElement(this);
+
+      var isActive = $(parent).hasClass(ClassName$4.SHOW);
+
+      if (!isActive || isActive && (event.which === ESCAPE_KEYCODE || event.which === SPACE_KEYCODE)) {
+        if (event.which === ESCAPE_KEYCODE) {
+          var toggle = parent.querySelector(Selector$4.DATA_TOGGLE);
+          $(toggle).trigger('focus');
+        }
+
+        $(this).trigger('click');
+        return;
+      }
+
+      var items = [].slice.call(parent.querySelectorAll(Selector$4.VISIBLE_ITEMS));
+
+      if (items.length === 0) {
+        return;
+      }
+
+      var index = items.indexOf(event.target);
+
+      if (event.which === ARROW_UP_KEYCODE && index > 0) {
+        // Up
+        index--;
+      }
+
+      if (event.which === ARROW_DOWN_KEYCODE && index < items.length - 1) {
+        // Down
+        index++;
+      }
+
+      if (index < 0) {
+        index = 0;
+      }
+
+      items[index].focus();
+    };
+
+    _createClass(Dropdown, null, [{
+      key: "VERSION",
+      get: function get() {
+        return VERSION$4;
+      }
+    }, {
+      key: "Default",
+      get: function get() {
+        return Default$2;
+      }
+    }, {
+      key: "DefaultType",
+      get: function get() {
+        return DefaultType$2;
+      }
+    }]);
+
+    return Dropdown;
+  }();
+  /**
+   * ------------------------------------------------------------------------
+   * Data Api implementation
+   * ------------------------------------------------------------------------
+   */
+
+
+  $(document).on(Event$4.KEYDOWN_DATA_API, Selector$4.DATA_TOGGLE, Dropdown._dataApiKeydownHandler).on(Event$4.KEYDOWN_DATA_API, Selector$4.MENU, Dropdown._dataApiKeydownHandler).on(Event$4.CLICK_DATA_API + " " + Event$4.KEYUP_DATA_API, Dropdown._clearMenus).on(Event$4.CLICK_DATA_API, Selector$4.DATA_TOGGLE, function (event) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    Dropdown._jQueryInterface.call($(this), 'toggle');
+  }).on(Event$4.CLICK_DATA_API, Selector$4.FORM_CHILD, function (e) {
+    e.stopPropagation();
+  });
+  /**
+   * ------------------------------------------------------------------------
+   * jQuery
+   * ------------------------------------------------------------------------
+   */
+
+  $.fn[NAME$4] = Dropdown._jQueryInterface;
+  $.fn[NAME$4].Constructor = Dropdown;
+
+  $.fn[NAME$4].noConflict = function () {
+    $.fn[NAME$4] = JQUERY_NO_CONFLICT$4;
+    return Dropdown._jQueryInterface;
+  };
+
+  /**
+   * ------------------------------------------------------------------------
+   * Constants
+   * ------------------------------------------------------------------------
+   */
+
+  var NAME$5 = 'modal';
+  var VERSION$5 = '4.2.1';
+  var DATA_KEY$5 = 'bs.modal';
+  var EVENT_KEY$5 = "." + DATA_KEY$5;
+  var DATA_API_KEY$5 = '.data-api';
+  var JQUERY_NO_CONFLICT$5 = $.fn[NAME$5];
+  var ESCAPE_KEYCODE$1 = 27; // KeyboardEvent.which value for Escape (Esc) key
+
+  var Default$3 = {
+    backdrop: true,
+    keyboard: true,
+    focus: true,
+    show: true
+  };
+  var DefaultType$3 = {
+    backdrop: '(boolean|string)',
+    keyboard: 'boolean',
+    focus: 'boolean',
+    show: 'boolean'
+  };
+  var Event$5 = {
+    HIDE: "hide" + EVENT_KEY$5,
+    HIDDEN: "hidden" + EVENT_KEY$5,
+    SHOW: "show" + EVENT_KEY$5,
+    SHOWN: "shown" + EVENT_KEY$5,
+    FOCUSIN: "focusin" + EVENT_KEY$5,
+    RESIZE: "resize" + EVENT_KEY$5,
+    CLICK_DISMISS: "click.dismiss" + EVENT_KEY$5,
+    KEYDOWN_DISMISS: "keydown.dismiss" + EVENT_KEY$5,
+    MOUSEUP_DISMISS: "mouseup.dismiss" + EVENT_KEY$5,
+    MOUSEDOWN_DISMISS: "mousedown.dismiss" + EVENT_KEY$5,
+    CLICK_DATA_API: "click" + EVENT_KEY$5 + DATA_API_KEY$5
+  };
+  var ClassName$5 = {
+    SCROLLBAR_MEASURER: 'modal-scrollbar-measure',
+    BACKDROP: 'modal-backdrop',
+    OPEN: 'modal-open',
+    FADE: 'fade',
+    SHOW: 'show'
+  };
+  var Selector$5 = {
+    DIALOG: '.modal-dialog',
+    DATA_TOGGLE: '[data-toggle="modal"]',
+    DATA_DISMISS: '[data-dismiss="modal"]',
+    FIXED_CONTENT: '.fixed-top, .fixed-bottom, .is-fixed, .sticky-top',
+    STICKY_CONTENT: '.sticky-top'
+    /**
+     * ------------------------------------------------------------------------
+     * Class Definition
+     * ------------------------------------------------------------------------
+     */
+
+  };
+
+  var Modal =
+  /*#__PURE__*/
+  function () {
+    function Modal(element, config) {
+      this._config = this._getConfig(config);
+      this._element = element;
+      this._dialog = element.querySelector(Selector$5.DIALOG);
+      this._backdrop = null;
+      this._isShown = false;
+      this._isBodyOverflowing = false;
+      this._ignoreBackdropClick = false;
+      this._isTransitioning = false;
+      this._scrollbarWidth = 0;
+    } // Getters
+
+
+    var _proto = Modal.prototype;
+
+    // Public
+    _proto.toggle = function toggle(relatedTarget) {
+      return this._isShown ? this.hide() : this.show(relatedTarget);
+    };
+
+    _proto.show = function show(relatedTarget) {
+      var _this = this;
+
+      if (this._isShown || this._isTransitioning) {
+        return;
+      }
+
+      if ($(this._element).hasClass(ClassName$5.FADE)) {
+        this._isTransitioning = true;
+      }
+
+      var showEvent = $.Event(Event$5.SHOW, {
+        relatedTarget: relatedTarget
+      });
+      $(this._element).trigger(showEvent);
+
+      if (this._isShown || showEvent.isDefaultPrevented()) {
+        return;
+      }
+
+      this._isShown = true;
+
+      this._checkScrollbar();
+
+      this._setScrollbar();
+
+      this._adjustDialog();
+
+      this._setEscapeEvent();
+
+      this._setResizeEvent();
+
+      $(this._element).on(Event$5.CLICK_DISMISS, Selector$5.DATA_DISMISS, function (event) {
+        return _this.hide(event);
+      });
+      $(this._dialog).on(Event$5.MOUSEDOWN_DISMISS, function () {
+        $(_this._element).one(Event$5.MOUSEUP_DISMISS, function (event) {
+          if ($(event.target).is(_this._element)) {
+            _this._ignoreBackdropClick = true;
+          }
+        });
+      });
+
+      this._showBackdrop(function () {
+        return _this._showElement(relatedTarget);
+      });
+    };
+
+    _proto.hide = function hide(event) {
+      var _this2 = this;
+
+      if (event) {
+        event.preventDefault();
+      }
+
+      if (!this._isShown || this._isTransitioning) {
+        return;
+      }
+
+      var hideEvent = $.Event(Event$5.HIDE);
+      $(this._element).trigger(hideEvent);
+
+      if (!this._isShown || hideEvent.isDefaultPrevented()) {
+        return;
+      }
+
+      this._isShown = false;
+      var transition = $(this._element).hasClass(ClassName$5.FADE);
+
+      if (transition) {
+        this._isTransitioning = true;
+      }
+
+      this._setEscapeEvent();
+
+      this._setResizeEvent();
+
+      $(document).off(Event$5.FOCUSIN);
+      $(this._element).removeClass(ClassName$5.SHOW);
+      $(this._element).off(Event$5.CLICK_DISMISS);
+      $(this._dialog).off(Event$5.MOUSEDOWN_DISMISS);
+
+      if (transition) {
+        var transitionDuration = Util.getTransitionDurationFromElement(this._element);
+        $(this._element).one(Util.TRANSITION_END, function (event) {
+          return _this2._hideModal(event);
+        }).emulateTransitionEnd(transitionDuration);
+      } else {
+        this._hideModal();
+      }
+    };
+
+    _proto.dispose = function dispose() {
+      [window, this._element, this._dialog].forEach(function (htmlElement) {
+        return $(htmlElement).off(EVENT_KEY$5);
+      });
+      /**
+       * `document` has 2 events `Event.FOCUSIN` and `Event.CLICK_DATA_API`
+       * Do not move `document` in `htmlElements` array
+       * It will remove `Event.CLICK_DATA_API` event that should remain
+       */
+
+      $(document).off(Event$5.FOCUSIN);
+      $.removeData(this._element, DATA_KEY$5);
+      this._config = null;
+      this._element = null;
+      this._dialog = null;
+      this._backdrop = null;
+      this._isShown = null;
+      this._isBodyOverflowing = null;
+      this._ignoreBackdropClick = null;
+      this._isTransitioning = null;
+      this._scrollbarWidth = null;
+    };
+
+    _proto.handleUpdate = function handleUpdate() {
+      this._adjustDialog();
+    }; // Private
+
+
+    _proto._getConfig = function _getConfig(config) {
+      config = _objectSpread({}, Default$3, config);
+      Util.typeCheckConfig(NAME$5, config, DefaultType$3);
+      return config;
+    };
+
+    _proto._showElement = function _showElement(relatedTarget) {
+      var _this3 = this;
+
+      var transition = $(this._element).hasClass(ClassName$5.FADE);
+
+      if (!this._element.parentNode || this._element.parentNode.nodeType !== Node.ELEMENT_NODE) {
+        // Don't move modal's DOM position
+        document.body.appendChild(this._element);
+      }
+
+      this._element.style.display = 'block';
+
+      this._element.removeAttribute('aria-hidden');
+
+      this._element.setAttribute('aria-modal', true);
+
+      this._element.scrollTop = 0;
+
+      if (transition) {
+        Util.reflow(this._element);
+      }
+
+      $(this._element).addClass(ClassName$5.SHOW);
+
+      if (this._config.focus) {
+        this._enforceFocus();
+      }
+
+      var shownEvent = $.Event(Event$5.SHOWN, {
+        relatedTarget: relatedTarget
+      });
+
+      var transitionComplete = function transitionComplete() {
+        if (_this3._config.focus) {
+          _this3._element.focus();
+        }
+
+        _this3._isTransitioning = false;
+        $(_this3._element).trigger(shownEvent);
       };
 
-      _proto.toggleEnabled = function toggleEnabled() {
-        this._isEnabled = !this._isEnabled;
-      };
+      if (transition) {
+        var transitionDuration = Util.getTransitionDurationFromElement(this._dialog);
+        $(this._dialog).one(Util.TRANSITION_END, transitionComplete).emulateTransitionEnd(transitionDuration);
+      } else {
+        transitionComplete();
+      }
+    };
 
-      _proto.toggle = function toggle(event) {
-        if (!this._isEnabled) {
+    _proto._enforceFocus = function _enforceFocus() {
+      var _this4 = this;
+
+      $(document).off(Event$5.FOCUSIN) // Guard against infinite focus loop
+      .on(Event$5.FOCUSIN, function (event) {
+        if (document !== event.target && _this4._element !== event.target && $(_this4._element).has(event.target).length === 0) {
+          _this4._element.focus();
+        }
+      });
+    };
+
+    _proto._setEscapeEvent = function _setEscapeEvent() {
+      var _this5 = this;
+
+      if (this._isShown && this._config.keyboard) {
+        $(this._element).on(Event$5.KEYDOWN_DISMISS, function (event) {
+          if (event.which === ESCAPE_KEYCODE$1) {
+            event.preventDefault();
+
+            _this5.hide();
+          }
+        });
+      } else if (!this._isShown) {
+        $(this._element).off(Event$5.KEYDOWN_DISMISS);
+      }
+    };
+
+    _proto._setResizeEvent = function _setResizeEvent() {
+      var _this6 = this;
+
+      if (this._isShown) {
+        $(window).on(Event$5.RESIZE, function (event) {
+          return _this6.handleUpdate(event);
+        });
+      } else {
+        $(window).off(Event$5.RESIZE);
+      }
+    };
+
+    _proto._hideModal = function _hideModal() {
+      var _this7 = this;
+
+      this._element.style.display = 'none';
+
+      this._element.setAttribute('aria-hidden', true);
+
+      this._element.removeAttribute('aria-modal');
+
+      this._isTransitioning = false;
+
+      this._showBackdrop(function () {
+        $(document.body).removeClass(ClassName$5.OPEN);
+
+        _this7._resetAdjustments();
+
+        _this7._resetScrollbar();
+
+        $(_this7._element).trigger(Event$5.HIDDEN);
+      });
+    };
+
+    _proto._removeBackdrop = function _removeBackdrop() {
+      if (this._backdrop) {
+        $(this._backdrop).remove();
+        this._backdrop = null;
+      }
+    };
+
+    _proto._showBackdrop = function _showBackdrop(callback) {
+      var _this8 = this;
+
+      var animate = $(this._element).hasClass(ClassName$5.FADE) ? ClassName$5.FADE : '';
+
+      if (this._isShown && this._config.backdrop) {
+        this._backdrop = document.createElement('div');
+        this._backdrop.className = ClassName$5.BACKDROP;
+
+        if (animate) {
+          this._backdrop.classList.add(animate);
+        }
+
+        $(this._backdrop).appendTo(document.body);
+        $(this._element).on(Event$5.CLICK_DISMISS, function (event) {
+          if (_this8._ignoreBackdropClick) {
+            _this8._ignoreBackdropClick = false;
+            return;
+          }
+
+          if (event.target !== event.currentTarget) {
+            return;
+          }
+
+          if (_this8._config.backdrop === 'static') {
+            _this8._element.focus();
+          } else {
+            _this8.hide();
+          }
+        });
+
+        if (animate) {
+          Util.reflow(this._backdrop);
+        }
+
+        $(this._backdrop).addClass(ClassName$5.SHOW);
+
+        if (!callback) {
           return;
         }
 
-        if (event) {
-          var dataKey = this.constructor.DATA_KEY;
-          var context = $$$1(event.currentTarget).data(dataKey);
-
-          if (!context) {
-            context = new this.constructor(event.currentTarget, this._getDelegateConfig());
-            $$$1(event.currentTarget).data(dataKey, context);
-          }
-
-          context._activeTrigger.click = !context._activeTrigger.click;
-
-          if (context._isWithActiveTrigger()) {
-            context._enter(null, context);
-          } else {
-            context._leave(null, context);
-          }
-        } else {
-          if ($$$1(this.getTipElement()).hasClass(ClassName.SHOW)) {
-            this._leave(null, this);
-
-            return;
-          }
-
-          this._enter(null, this);
-        }
-      };
-
-      _proto.dispose = function dispose() {
-        clearTimeout(this._timeout);
-        $$$1.removeData(this.element, this.constructor.DATA_KEY);
-        $$$1(this.element).off(this.constructor.EVENT_KEY);
-        $$$1(this.element).closest('.modal').off('hide.bs.modal');
-
-        if (this.tip) {
-          $$$1(this.tip).remove();
+        if (!animate) {
+          callback();
+          return;
         }
 
-        this._isEnabled = null;
-        this._timeout = null;
-        this._hoverState = null;
-        this._activeTrigger = null;
+        var backdropTransitionDuration = Util.getTransitionDurationFromElement(this._backdrop);
+        $(this._backdrop).one(Util.TRANSITION_END, callback).emulateTransitionEnd(backdropTransitionDuration);
+      } else if (!this._isShown && this._backdrop) {
+        $(this._backdrop).removeClass(ClassName$5.SHOW);
 
-        if (this._popper !== null) {
-          this._popper.destroy();
-        }
-
-        this._popper = null;
-        this.element = null;
-        this.config = null;
-        this.tip = null;
-      };
-
-      _proto.show = function show() {
-        var _this = this;
-
-        if ($$$1(this.element).css('display') === 'none') {
-          throw new Error('Please use show on visible elements');
-        }
-
-        var showEvent = $$$1.Event(this.constructor.Event.SHOW);
-
-        if (this.isWithContent() && this._isEnabled) {
-          $$$1(this.element).trigger(showEvent);
-          var isInTheDom = $$$1.contains(this.element.ownerDocument.documentElement, this.element);
-
-          if (showEvent.isDefaultPrevented() || !isInTheDom) {
-            return;
-          }
-
-          var tip = this.getTipElement();
-          var tipId = Util.getUID(this.constructor.NAME);
-          tip.setAttribute('id', tipId);
-          this.element.setAttribute('aria-describedby', tipId);
-          this.setContent();
-
-          if (this.config.animation) {
-            $$$1(tip).addClass(ClassName.FADE);
-          }
-
-          var placement = typeof this.config.placement === 'function' ? this.config.placement.call(this, tip, this.element) : this.config.placement;
-
-          var attachment = this._getAttachment(placement);
-
-          this.addAttachmentClass(attachment);
-          var container = this.config.container === false ? document.body : $$$1(document).find(this.config.container);
-          $$$1(tip).data(this.constructor.DATA_KEY, this);
-
-          if (!$$$1.contains(this.element.ownerDocument.documentElement, this.tip)) {
-            $$$1(tip).appendTo(container);
-          }
-
-          $$$1(this.element).trigger(this.constructor.Event.INSERTED);
-          this._popper = new Popper(this.element, tip, {
-            placement: attachment,
-            modifiers: {
-              offset: {
-                offset: this.config.offset
-              },
-              flip: {
-                behavior: this.config.fallbackPlacement
-              },
-              arrow: {
-                element: Selector.ARROW
-              },
-              preventOverflow: {
-                boundariesElement: this.config.boundary
-              }
-            },
-            onCreate: function onCreate(data) {
-              if (data.originalPlacement !== data.placement) {
-                _this._handlePopperPlacementChange(data);
-              }
-            },
-            onUpdate: function onUpdate(data) {
-              _this._handlePopperPlacementChange(data);
-            }
-          });
-          $$$1(tip).addClass(ClassName.SHOW); // If this is a touch-enabled device we add extra
-          // empty mouseover listeners to the body's immediate children;
-          // only needed because of broken event delegation on iOS
-          // https://www.quirksmode.org/blog/archives/2014/02/mouse_event_bub.html
-
-          if ('ontouchstart' in document.documentElement) {
-            $$$1(document.body).children().on('mouseover', null, $$$1.noop);
-          }
-
-          var complete = function complete() {
-            if (_this.config.animation) {
-              _this._fixTransition();
-            }
-
-            var prevHoverState = _this._hoverState;
-            _this._hoverState = null;
-            $$$1(_this.element).trigger(_this.constructor.Event.SHOWN);
-
-            if (prevHoverState === HoverState.OUT) {
-              _this._leave(null, _this);
-            }
-          };
-
-          if ($$$1(this.tip).hasClass(ClassName.FADE)) {
-            var transitionDuration = Util.getTransitionDurationFromElement(this.tip);
-            $$$1(this.tip).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
-          } else {
-            complete();
-          }
-        }
-      };
-
-      _proto.hide = function hide(callback) {
-        var _this2 = this;
-
-        var tip = this.getTipElement();
-        var hideEvent = $$$1.Event(this.constructor.Event.HIDE);
-
-        var complete = function complete() {
-          if (_this2._hoverState !== HoverState.SHOW && tip.parentNode) {
-            tip.parentNode.removeChild(tip);
-          }
-
-          _this2._cleanTipClass();
-
-          _this2.element.removeAttribute('aria-describedby');
-
-          $$$1(_this2.element).trigger(_this2.constructor.Event.HIDDEN);
-
-          if (_this2._popper !== null) {
-            _this2._popper.destroy();
-          }
+        var callbackRemove = function callbackRemove() {
+          _this8._removeBackdrop();
 
           if (callback) {
             callback();
           }
         };
 
-        $$$1(this.element).trigger(hideEvent);
+        if ($(this._element).hasClass(ClassName$5.FADE)) {
+          var _backdropTransitionDuration = Util.getTransitionDurationFromElement(this._backdrop);
 
-        if (hideEvent.isDefaultPrevented()) {
-          return;
-        }
-
-        $$$1(tip).removeClass(ClassName.SHOW); // If this is a touch-enabled device we remove the extra
-        // empty mouseover listeners we added for iOS support
-
-        if ('ontouchstart' in document.documentElement) {
-          $$$1(document.body).children().off('mouseover', null, $$$1.noop);
-        }
-
-        this._activeTrigger[Trigger.CLICK] = false;
-        this._activeTrigger[Trigger.FOCUS] = false;
-        this._activeTrigger[Trigger.HOVER] = false;
-
-        if ($$$1(this.tip).hasClass(ClassName.FADE)) {
-          var transitionDuration = Util.getTransitionDurationFromElement(tip);
-          $$$1(tip).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
+          $(this._backdrop).one(Util.TRANSITION_END, callbackRemove).emulateTransitionEnd(_backdropTransitionDuration);
         } else {
-          complete();
+          callbackRemove();
+        }
+      } else if (callback) {
+        callback();
+      }
+    }; // ----------------------------------------------------------------------
+    // the following methods are used to handle overflowing modals
+    // todo (fat): these should probably be refactored out of modal.js
+    // ----------------------------------------------------------------------
+
+
+    _proto._adjustDialog = function _adjustDialog() {
+      var isModalOverflowing = this._element.scrollHeight > document.documentElement.clientHeight;
+
+      if (!this._isBodyOverflowing && isModalOverflowing) {
+        this._element.style.paddingLeft = this._scrollbarWidth + "px";
+      }
+
+      if (this._isBodyOverflowing && !isModalOverflowing) {
+        this._element.style.paddingRight = this._scrollbarWidth + "px";
+      }
+    };
+
+    _proto._resetAdjustments = function _resetAdjustments() {
+      this._element.style.paddingLeft = '';
+      this._element.style.paddingRight = '';
+    };
+
+    _proto._checkScrollbar = function _checkScrollbar() {
+      var rect = document.body.getBoundingClientRect();
+      this._isBodyOverflowing = rect.left + rect.right < window.innerWidth;
+      this._scrollbarWidth = this._getScrollbarWidth();
+    };
+
+    _proto._setScrollbar = function _setScrollbar() {
+      var _this9 = this;
+
+      if (this._isBodyOverflowing) {
+        // Note: DOMNode.style.paddingRight returns the actual value or '' if not set
+        //   while $(DOMNode).css('padding-right') returns the calculated value or 0 if not set
+        var fixedContent = [].slice.call(document.querySelectorAll(Selector$5.FIXED_CONTENT));
+        var stickyContent = [].slice.call(document.querySelectorAll(Selector$5.STICKY_CONTENT)); // Adjust fixed content padding
+
+        $(fixedContent).each(function (index, element) {
+          var actualPadding = element.style.paddingRight;
+          var calculatedPadding = $(element).css('padding-right');
+          $(element).data('padding-right', actualPadding).css('padding-right', parseFloat(calculatedPadding) + _this9._scrollbarWidth + "px");
+        }); // Adjust sticky content margin
+
+        $(stickyContent).each(function (index, element) {
+          var actualMargin = element.style.marginRight;
+          var calculatedMargin = $(element).css('margin-right');
+          $(element).data('margin-right', actualMargin).css('margin-right', parseFloat(calculatedMargin) - _this9._scrollbarWidth + "px");
+        }); // Adjust body padding
+
+        var actualPadding = document.body.style.paddingRight;
+        var calculatedPadding = $(document.body).css('padding-right');
+        $(document.body).data('padding-right', actualPadding).css('padding-right', parseFloat(calculatedPadding) + this._scrollbarWidth + "px");
+      }
+
+      $(document.body).addClass(ClassName$5.OPEN);
+    };
+
+    _proto._resetScrollbar = function _resetScrollbar() {
+      // Restore fixed content padding
+      var fixedContent = [].slice.call(document.querySelectorAll(Selector$5.FIXED_CONTENT));
+      $(fixedContent).each(function (index, element) {
+        var padding = $(element).data('padding-right');
+        $(element).removeData('padding-right');
+        element.style.paddingRight = padding ? padding : '';
+      }); // Restore sticky content
+
+      var elements = [].slice.call(document.querySelectorAll("" + Selector$5.STICKY_CONTENT));
+      $(elements).each(function (index, element) {
+        var margin = $(element).data('margin-right');
+
+        if (typeof margin !== 'undefined') {
+          $(element).css('margin-right', margin).removeData('margin-right');
+        }
+      }); // Restore body padding
+
+      var padding = $(document.body).data('padding-right');
+      $(document.body).removeData('padding-right');
+      document.body.style.paddingRight = padding ? padding : '';
+    };
+
+    _proto._getScrollbarWidth = function _getScrollbarWidth() {
+      // thx d.walsh
+      var scrollDiv = document.createElement('div');
+      scrollDiv.className = ClassName$5.SCROLLBAR_MEASURER;
+      document.body.appendChild(scrollDiv);
+      var scrollbarWidth = scrollDiv.getBoundingClientRect().width - scrollDiv.clientWidth;
+      document.body.removeChild(scrollDiv);
+      return scrollbarWidth;
+    }; // Static
+
+
+    Modal._jQueryInterface = function _jQueryInterface(config, relatedTarget) {
+      return this.each(function () {
+        var data = $(this).data(DATA_KEY$5);
+
+        var _config = _objectSpread({}, Default$3, $(this).data(), typeof config === 'object' && config ? config : {});
+
+        if (!data) {
+          data = new Modal(this, _config);
+          $(this).data(DATA_KEY$5, data);
         }
 
-        this._hoverState = '';
-      };
-
-      _proto.update = function update() {
-        if (this._popper !== null) {
-          this._popper.scheduleUpdate();
-        }
-      }; // Protected
-
-
-      _proto.isWithContent = function isWithContent() {
-        return Boolean(this.getTitle());
-      };
-
-      _proto.addAttachmentClass = function addAttachmentClass(attachment) {
-        $$$1(this.getTipElement()).addClass(CLASS_PREFIX + "-" + attachment);
-      };
-
-      _proto.getTipElement = function getTipElement() {
-        this.tip = this.tip || $$$1(this.config.template)[0];
-        return this.tip;
-      };
-
-      _proto.setContent = function setContent() {
-        var tip = this.getTipElement();
-        this.setElementContent($$$1(tip.querySelectorAll(Selector.TOOLTIP_INNER)), this.getTitle());
-        $$$1(tip).removeClass(ClassName.FADE + " " + ClassName.SHOW);
-      };
-
-      _proto.setElementContent = function setElementContent($element, content) {
-        var html = this.config.html;
-
-        if (typeof content === 'object' && (content.nodeType || content.jquery)) {
-          // Content is a DOM node or a jQuery
-          if (html) {
-            if (!$$$1(content).parent().is($element)) {
-              $element.empty().append(content);
-            }
-          } else {
-            $element.text($$$1(content).text());
+        if (typeof config === 'string') {
+          if (typeof data[config] === 'undefined') {
+            throw new TypeError("No method named \"" + config + "\"");
           }
-        } else {
-          $element[html ? 'html' : 'text'](content);
+
+          data[config](relatedTarget);
+        } else if (_config.show) {
+          data.show(relatedTarget);
         }
-      };
+      });
+    };
 
-      _proto.getTitle = function getTitle() {
-        var title = this.element.getAttribute('data-original-title');
+    _createClass(Modal, null, [{
+      key: "VERSION",
+      get: function get() {
+        return VERSION$5;
+      }
+    }, {
+      key: "Default",
+      get: function get() {
+        return Default$3;
+      }
+    }]);
 
-        if (!title) {
-          title = typeof this.config.title === 'function' ? this.config.title.call(this.element) : this.config.title;
+    return Modal;
+  }();
+  /**
+   * ------------------------------------------------------------------------
+   * Data Api implementation
+   * ------------------------------------------------------------------------
+   */
+
+
+  $(document).on(Event$5.CLICK_DATA_API, Selector$5.DATA_TOGGLE, function (event) {
+    var _this10 = this;
+
+    var target;
+    var selector = Util.getSelectorFromElement(this);
+
+    if (selector) {
+      target = document.querySelector(selector);
+    }
+
+    var config = $(target).data(DATA_KEY$5) ? 'toggle' : _objectSpread({}, $(target).data(), $(this).data());
+
+    if (this.tagName === 'A' || this.tagName === 'AREA') {
+      event.preventDefault();
+    }
+
+    var $target = $(target).one(Event$5.SHOW, function (showEvent) {
+      if (showEvent.isDefaultPrevented()) {
+        // Only register focus restorer if modal will actually get shown
+        return;
+      }
+
+      $target.one(Event$5.HIDDEN, function () {
+        if ($(_this10).is(':visible')) {
+          _this10.focus();
         }
+      });
+    });
 
-        return title;
-      }; // Private
+    Modal._jQueryInterface.call($(target), config, this);
+  });
+  /**
+   * ------------------------------------------------------------------------
+   * jQuery
+   * ------------------------------------------------------------------------
+   */
+
+  $.fn[NAME$5] = Modal._jQueryInterface;
+  $.fn[NAME$5].Constructor = Modal;
+
+  $.fn[NAME$5].noConflict = function () {
+    $.fn[NAME$5] = JQUERY_NO_CONFLICT$5;
+    return Modal._jQueryInterface;
+  };
+
+  /**
+   * ------------------------------------------------------------------------
+   * Constants
+   * ------------------------------------------------------------------------
+   */
+
+  var NAME$6 = 'tooltip';
+  var VERSION$6 = '4.2.1';
+  var DATA_KEY$6 = 'bs.tooltip';
+  var EVENT_KEY$6 = "." + DATA_KEY$6;
+  var JQUERY_NO_CONFLICT$6 = $.fn[NAME$6];
+  var CLASS_PREFIX = 'bs-tooltip';
+  var BSCLS_PREFIX_REGEX = new RegExp("(^|\\s)" + CLASS_PREFIX + "\\S+", 'g');
+  var DefaultType$4 = {
+    animation: 'boolean',
+    template: 'string',
+    title: '(string|element|function)',
+    trigger: 'string',
+    delay: '(number|object)',
+    html: 'boolean',
+    selector: '(string|boolean)',
+    placement: '(string|function)',
+    offset: '(number|string)',
+    container: '(string|element|boolean)',
+    fallbackPlacement: '(string|array)',
+    boundary: '(string|element)'
+  };
+  var AttachmentMap$1 = {
+    AUTO: 'auto',
+    TOP: 'top',
+    RIGHT: 'right',
+    BOTTOM: 'bottom',
+    LEFT: 'left'
+  };
+  var Default$4 = {
+    animation: true,
+    template: '<div class="tooltip" role="tooltip">' + '<div class="arrow"></div>' + '<div class="tooltip-inner"></div></div>',
+    trigger: 'hover focus',
+    title: '',
+    delay: 0,
+    html: false,
+    selector: false,
+    placement: 'top',
+    offset: 0,
+    container: false,
+    fallbackPlacement: 'flip',
+    boundary: 'scrollParent'
+  };
+  var HoverState = {
+    SHOW: 'show',
+    OUT: 'out'
+  };
+  var Event$6 = {
+    HIDE: "hide" + EVENT_KEY$6,
+    HIDDEN: "hidden" + EVENT_KEY$6,
+    SHOW: "show" + EVENT_KEY$6,
+    SHOWN: "shown" + EVENT_KEY$6,
+    INSERTED: "inserted" + EVENT_KEY$6,
+    CLICK: "click" + EVENT_KEY$6,
+    FOCUSIN: "focusin" + EVENT_KEY$6,
+    FOCUSOUT: "focusout" + EVENT_KEY$6,
+    MOUSEENTER: "mouseenter" + EVENT_KEY$6,
+    MOUSELEAVE: "mouseleave" + EVENT_KEY$6
+  };
+  var ClassName$6 = {
+    FADE: 'fade',
+    SHOW: 'show'
+  };
+  var Selector$6 = {
+    TOOLTIP: '.tooltip',
+    TOOLTIP_INNER: '.tooltip-inner',
+    ARROW: '.arrow'
+  };
+  var Trigger = {
+    HOVER: 'hover',
+    FOCUS: 'focus',
+    CLICK: 'click',
+    MANUAL: 'manual'
+    /**
+     * ------------------------------------------------------------------------
+     * Class Definition
+     * ------------------------------------------------------------------------
+     */
+
+  };
+
+  var Tooltip =
+  /*#__PURE__*/
+  function () {
+    function Tooltip(element, config) {
+      /**
+       * Check for Popper dependency
+       * Popper - https://popper.js.org
+       */
+      if (typeof Popper === 'undefined') {
+        throw new TypeError('Bootstrap\'s tooltips require Popper.js (https://popper.js.org/)');
+      } // private
 
 
-      _proto._getAttachment = function _getAttachment(placement) {
-        return AttachmentMap[placement.toUpperCase()];
-      };
+      this._isEnabled = true;
+      this._timeout = 0;
+      this._hoverState = '';
+      this._activeTrigger = {};
+      this._popper = null; // Protected
 
-      _proto._setListeners = function _setListeners() {
-        var _this3 = this;
+      this.element = element;
+      this.config = this._getConfig(config);
+      this.tip = null;
 
-        var triggers = this.config.trigger.split(' ');
-        triggers.forEach(function (trigger) {
-          if (trigger === 'click') {
-            $$$1(_this3.element).on(_this3.constructor.Event.CLICK, _this3.config.selector, function (event) {
-              return _this3.toggle(event);
-            });
-          } else if (trigger !== Trigger.MANUAL) {
-            var eventIn = trigger === Trigger.HOVER ? _this3.constructor.Event.MOUSEENTER : _this3.constructor.Event.FOCUSIN;
-            var eventOut = trigger === Trigger.HOVER ? _this3.constructor.Event.MOUSELEAVE : _this3.constructor.Event.FOCUSOUT;
-            $$$1(_this3.element).on(eventIn, _this3.config.selector, function (event) {
-              return _this3._enter(event);
-            }).on(eventOut, _this3.config.selector, function (event) {
-              return _this3._leave(event);
-            });
-          }
+      this._setListeners();
+    } // Getters
 
-          $$$1(_this3.element).closest('.modal').on('hide.bs.modal', function () {
-            return _this3.hide();
-          });
-        });
 
-        if (this.config.selector) {
-          this.config = _objectSpread({}, this.config, {
-            trigger: 'manual',
-            selector: ''
-          });
-        } else {
-          this._fixTitle();
-        }
-      };
+    var _proto = Tooltip.prototype;
 
-      _proto._fixTitle = function _fixTitle() {
-        var titleType = typeof this.element.getAttribute('data-original-title');
+    // Public
+    _proto.enable = function enable() {
+      this._isEnabled = true;
+    };
 
-        if (this.element.getAttribute('title') || titleType !== 'string') {
-          this.element.setAttribute('data-original-title', this.element.getAttribute('title') || '');
-          this.element.setAttribute('title', '');
-        }
-      };
+    _proto.disable = function disable() {
+      this._isEnabled = false;
+    };
 
-      _proto._enter = function _enter(event, context) {
+    _proto.toggleEnabled = function toggleEnabled() {
+      this._isEnabled = !this._isEnabled;
+    };
+
+    _proto.toggle = function toggle(event) {
+      if (!this._isEnabled) {
+        return;
+      }
+
+      if (event) {
         var dataKey = this.constructor.DATA_KEY;
-        context = context || $$$1(event.currentTarget).data(dataKey);
+        var context = $(event.currentTarget).data(dataKey);
 
         if (!context) {
           context = new this.constructor(event.currentTarget, this._getDelegateConfig());
-          $$$1(event.currentTarget).data(dataKey, context);
+          $(event.currentTarget).data(dataKey, context);
         }
 
-        if (event) {
-          context._activeTrigger[event.type === 'focusin' ? Trigger.FOCUS : Trigger.HOVER] = true;
-        }
-
-        if ($$$1(context.getTipElement()).hasClass(ClassName.SHOW) || context._hoverState === HoverState.SHOW) {
-          context._hoverState = HoverState.SHOW;
-          return;
-        }
-
-        clearTimeout(context._timeout);
-        context._hoverState = HoverState.SHOW;
-
-        if (!context.config.delay || !context.config.delay.show) {
-          context.show();
-          return;
-        }
-
-        context._timeout = setTimeout(function () {
-          if (context._hoverState === HoverState.SHOW) {
-            context.show();
-          }
-        }, context.config.delay.show);
-      };
-
-      _proto._leave = function _leave(event, context) {
-        var dataKey = this.constructor.DATA_KEY;
-        context = context || $$$1(event.currentTarget).data(dataKey);
-
-        if (!context) {
-          context = new this.constructor(event.currentTarget, this._getDelegateConfig());
-          $$$1(event.currentTarget).data(dataKey, context);
-        }
-
-        if (event) {
-          context._activeTrigger[event.type === 'focusout' ? Trigger.FOCUS : Trigger.HOVER] = false;
-        }
+        context._activeTrigger.click = !context._activeTrigger.click;
 
         if (context._isWithActiveTrigger()) {
+          context._enter(null, context);
+        } else {
+          context._leave(null, context);
+        }
+      } else {
+        if ($(this.getTipElement()).hasClass(ClassName$6.SHOW)) {
+          this._leave(null, this);
+
           return;
         }
 
-        clearTimeout(context._timeout);
-        context._hoverState = HoverState.OUT;
+        this._enter(null, this);
+      }
+    };
 
-        if (!context.config.delay || !context.config.delay.hide) {
-          context.hide();
+    _proto.dispose = function dispose() {
+      clearTimeout(this._timeout);
+      $.removeData(this.element, this.constructor.DATA_KEY);
+      $(this.element).off(this.constructor.EVENT_KEY);
+      $(this.element).closest('.modal').off('hide.bs.modal');
+
+      if (this.tip) {
+        $(this.tip).remove();
+      }
+
+      this._isEnabled = null;
+      this._timeout = null;
+      this._hoverState = null;
+      this._activeTrigger = null;
+
+      if (this._popper !== null) {
+        this._popper.destroy();
+      }
+
+      this._popper = null;
+      this.element = null;
+      this.config = null;
+      this.tip = null;
+    };
+
+    _proto.show = function show() {
+      var _this = this;
+
+      if ($(this.element).css('display') === 'none') {
+        throw new Error('Please use show on visible elements');
+      }
+
+      var showEvent = $.Event(this.constructor.Event.SHOW);
+
+      if (this.isWithContent() && this._isEnabled) {
+        $(this.element).trigger(showEvent);
+        var shadowRoot = Util.findShadowRoot(this.element);
+        var isInTheDom = $.contains(shadowRoot !== null ? shadowRoot : this.element.ownerDocument.documentElement, this.element);
+
+        if (showEvent.isDefaultPrevented() || !isInTheDom) {
           return;
         }
 
-        context._timeout = setTimeout(function () {
-          if (context._hoverState === HoverState.OUT) {
-            context.hide();
-          }
-        }, context.config.delay.hide);
-      };
-
-      _proto._isWithActiveTrigger = function _isWithActiveTrigger() {
-        for (var trigger in this._activeTrigger) {
-          if (this._activeTrigger[trigger]) {
-            return true;
-          }
-        }
-
-        return false;
-      };
-
-      _proto._getConfig = function _getConfig(config) {
-        config = _objectSpread({}, this.constructor.Default, $$$1(this.element).data(), typeof config === 'object' && config ? config : {});
-
-        if (typeof config.delay === 'number') {
-          config.delay = {
-            show: config.delay,
-            hide: config.delay
-          };
-        }
-
-        if (typeof config.title === 'number') {
-          config.title = config.title.toString();
-        }
-
-        if (typeof config.content === 'number') {
-          config.content = config.content.toString();
-        }
-
-        Util.typeCheckConfig(NAME, config, this.constructor.DefaultType);
-        return config;
-      };
-
-      _proto._getDelegateConfig = function _getDelegateConfig() {
-        var config = {};
-
-        if (this.config) {
-          for (var key in this.config) {
-            if (this.constructor.Default[key] !== this.config[key]) {
-              config[key] = this.config[key];
-            }
-          }
-        }
-
-        return config;
-      };
-
-      _proto._cleanTipClass = function _cleanTipClass() {
-        var $tip = $$$1(this.getTipElement());
-        var tabClass = $tip.attr('class').match(BSCLS_PREFIX_REGEX);
-
-        if (tabClass !== null && tabClass.length) {
-          $tip.removeClass(tabClass.join(''));
-        }
-      };
-
-      _proto._handlePopperPlacementChange = function _handlePopperPlacementChange(popperData) {
-        var popperInstance = popperData.instance;
-        this.tip = popperInstance.popper;
-
-        this._cleanTipClass();
-
-        this.addAttachmentClass(this._getAttachment(popperData.placement));
-      };
-
-      _proto._fixTransition = function _fixTransition() {
         var tip = this.getTipElement();
-        var initConfigAnimation = this.config.animation;
+        var tipId = Util.getUID(this.constructor.NAME);
+        tip.setAttribute('id', tipId);
+        this.element.setAttribute('aria-describedby', tipId);
+        this.setContent();
 
-        if (tip.getAttribute('x-placement') !== null) {
-          return;
+        if (this.config.animation) {
+          $(tip).addClass(ClassName$6.FADE);
         }
 
-        $$$1(tip).removeClass(ClassName.FADE);
-        this.config.animation = false;
-        this.hide();
-        this.show();
-        this.config.animation = initConfigAnimation;
-      }; // Static
+        var placement = typeof this.config.placement === 'function' ? this.config.placement.call(this, tip, this.element) : this.config.placement;
 
+        var attachment = this._getAttachment(placement);
 
-      Tooltip._jQueryInterface = function _jQueryInterface(config) {
-        return this.each(function () {
-          var data = $$$1(this).data(DATA_KEY);
+        this.addAttachmentClass(attachment);
 
-          var _config = typeof config === 'object' && config;
+        var container = this._getContainer();
 
-          if (!data && /dispose|hide/.test(config)) {
-            return;
-          }
+        $(tip).data(this.constructor.DATA_KEY, this);
 
-          if (!data) {
-            data = new Tooltip(this, _config);
-            $$$1(this).data(DATA_KEY, data);
-          }
+        if (!$.contains(this.element.ownerDocument.documentElement, this.tip)) {
+          $(tip).appendTo(container);
+        }
 
-          if (typeof config === 'string') {
-            if (typeof data[config] === 'undefined') {
-              throw new TypeError("No method named \"" + config + "\"");
+        $(this.element).trigger(this.constructor.Event.INSERTED);
+        this._popper = new Popper(this.element, tip, {
+          placement: attachment,
+          modifiers: {
+            offset: {
+              offset: this.config.offset
+            },
+            flip: {
+              behavior: this.config.fallbackPlacement
+            },
+            arrow: {
+              element: Selector$6.ARROW
+            },
+            preventOverflow: {
+              boundariesElement: this.config.boundary
             }
-
-            data[config]();
-          }
-        });
-      };
-
-      _createClass(Tooltip, null, [{
-        key: "VERSION",
-        get: function get() {
-          return VERSION;
-        }
-      }, {
-        key: "Default",
-        get: function get() {
-          return Default;
-        }
-      }, {
-        key: "NAME",
-        get: function get() {
-          return NAME;
-        }
-      }, {
-        key: "DATA_KEY",
-        get: function get() {
-          return DATA_KEY;
-        }
-      }, {
-        key: "Event",
-        get: function get() {
-          return Event;
-        }
-      }, {
-        key: "EVENT_KEY",
-        get: function get() {
-          return EVENT_KEY;
-        }
-      }, {
-        key: "DefaultType",
-        get: function get() {
-          return DefaultType;
-        }
-      }]);
-
-      return Tooltip;
-    }();
-    /**
-     * ------------------------------------------------------------------------
-     * jQuery
-     * ------------------------------------------------------------------------
-     */
-
-
-    $$$1.fn[NAME] = Tooltip._jQueryInterface;
-    $$$1.fn[NAME].Constructor = Tooltip;
-
-    $$$1.fn[NAME].noConflict = function () {
-      $$$1.fn[NAME] = JQUERY_NO_CONFLICT;
-      return Tooltip._jQueryInterface;
-    };
-
-    return Tooltip;
-  }($, Popper);
-
-  /**
-   * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.3): popover.js
-   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
-   * --------------------------------------------------------------------------
-   */
-
-  var Popover = function ($$$1) {
-    /**
-     * ------------------------------------------------------------------------
-     * Constants
-     * ------------------------------------------------------------------------
-     */
-    var NAME = 'popover';
-    var VERSION = '4.1.3';
-    var DATA_KEY = 'bs.popover';
-    var EVENT_KEY = "." + DATA_KEY;
-    var JQUERY_NO_CONFLICT = $$$1.fn[NAME];
-    var CLASS_PREFIX = 'bs-popover';
-    var BSCLS_PREFIX_REGEX = new RegExp("(^|\\s)" + CLASS_PREFIX + "\\S+", 'g');
-
-    var Default = _objectSpread({}, Tooltip.Default, {
-      placement: 'right',
-      trigger: 'click',
-      content: '',
-      template: '<div class="popover" role="tooltip">' + '<div class="arrow"></div>' + '<h3 class="popover-header"></h3>' + '<div class="popover-body"></div></div>'
-    });
-
-    var DefaultType = _objectSpread({}, Tooltip.DefaultType, {
-      content: '(string|element|function)'
-    });
-
-    var ClassName = {
-      FADE: 'fade',
-      SHOW: 'show'
-    };
-    var Selector = {
-      TITLE: '.popover-header',
-      CONTENT: '.popover-body'
-    };
-    var Event = {
-      HIDE: "hide" + EVENT_KEY,
-      HIDDEN: "hidden" + EVENT_KEY,
-      SHOW: "show" + EVENT_KEY,
-      SHOWN: "shown" + EVENT_KEY,
-      INSERTED: "inserted" + EVENT_KEY,
-      CLICK: "click" + EVENT_KEY,
-      FOCUSIN: "focusin" + EVENT_KEY,
-      FOCUSOUT: "focusout" + EVENT_KEY,
-      MOUSEENTER: "mouseenter" + EVENT_KEY,
-      MOUSELEAVE: "mouseleave" + EVENT_KEY
-      /**
-       * ------------------------------------------------------------------------
-       * Class Definition
-       * ------------------------------------------------------------------------
-       */
-
-    };
-
-    var Popover =
-    /*#__PURE__*/
-    function (_Tooltip) {
-      _inheritsLoose(Popover, _Tooltip);
-
-      function Popover() {
-        return _Tooltip.apply(this, arguments) || this;
-      }
-
-      var _proto = Popover.prototype;
-
-      // Overrides
-      _proto.isWithContent = function isWithContent() {
-        return this.getTitle() || this._getContent();
-      };
-
-      _proto.addAttachmentClass = function addAttachmentClass(attachment) {
-        $$$1(this.getTipElement()).addClass(CLASS_PREFIX + "-" + attachment);
-      };
-
-      _proto.getTipElement = function getTipElement() {
-        this.tip = this.tip || $$$1(this.config.template)[0];
-        return this.tip;
-      };
-
-      _proto.setContent = function setContent() {
-        var $tip = $$$1(this.getTipElement()); // We use append for html objects to maintain js events
-
-        this.setElementContent($tip.find(Selector.TITLE), this.getTitle());
-
-        var content = this._getContent();
-
-        if (typeof content === 'function') {
-          content = content.call(this.element);
-        }
-
-        this.setElementContent($tip.find(Selector.CONTENT), content);
-        $tip.removeClass(ClassName.FADE + " " + ClassName.SHOW);
-      }; // Private
-
-
-      _proto._getContent = function _getContent() {
-        return this.element.getAttribute('data-content') || this.config.content;
-      };
-
-      _proto._cleanTipClass = function _cleanTipClass() {
-        var $tip = $$$1(this.getTipElement());
-        var tabClass = $tip.attr('class').match(BSCLS_PREFIX_REGEX);
-
-        if (tabClass !== null && tabClass.length > 0) {
-          $tip.removeClass(tabClass.join(''));
-        }
-      }; // Static
-
-
-      Popover._jQueryInterface = function _jQueryInterface(config) {
-        return this.each(function () {
-          var data = $$$1(this).data(DATA_KEY);
-
-          var _config = typeof config === 'object' ? config : null;
-
-          if (!data && /destroy|hide/.test(config)) {
-            return;
-          }
-
-          if (!data) {
-            data = new Popover(this, _config);
-            $$$1(this).data(DATA_KEY, data);
-          }
-
-          if (typeof config === 'string') {
-            if (typeof data[config] === 'undefined') {
-              throw new TypeError("No method named \"" + config + "\"");
+          },
+          onCreate: function onCreate(data) {
+            if (data.originalPlacement !== data.placement) {
+              _this._handlePopperPlacementChange(data);
             }
-
-            data[config]();
+          },
+          onUpdate: function onUpdate(data) {
+            return _this._handlePopperPlacementChange(data);
           }
         });
-      };
+        $(tip).addClass(ClassName$6.SHOW); // If this is a touch-enabled device we add extra
+        // empty mouseover listeners to the body's immediate children;
+        // only needed because of broken event delegation on iOS
+        // https://www.quirksmode.org/blog/archives/2014/02/mouse_event_bub.html
 
-      _createClass(Popover, null, [{
-        key: "VERSION",
-        // Getters
-        get: function get() {
-          return VERSION;
+        if ('ontouchstart' in document.documentElement) {
+          $(document.body).children().on('mouseover', null, $.noop);
         }
-      }, {
-        key: "Default",
-        get: function get() {
-          return Default;
-        }
-      }, {
-        key: "NAME",
-        get: function get() {
-          return NAME;
-        }
-      }, {
-        key: "DATA_KEY",
-        get: function get() {
-          return DATA_KEY;
-        }
-      }, {
-        key: "Event",
-        get: function get() {
-          return Event;
-        }
-      }, {
-        key: "EVENT_KEY",
-        get: function get() {
-          return EVENT_KEY;
-        }
-      }, {
-        key: "DefaultType",
-        get: function get() {
-          return DefaultType;
-        }
-      }]);
-
-      return Popover;
-    }(Tooltip);
-    /**
-     * ------------------------------------------------------------------------
-     * jQuery
-     * ------------------------------------------------------------------------
-     */
-
-
-    $$$1.fn[NAME] = Popover._jQueryInterface;
-    $$$1.fn[NAME].Constructor = Popover;
-
-    $$$1.fn[NAME].noConflict = function () {
-      $$$1.fn[NAME] = JQUERY_NO_CONFLICT;
-      return Popover._jQueryInterface;
-    };
-
-    return Popover;
-  }($);
-
-  /**
-   * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.3): scrollspy.js
-   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
-   * --------------------------------------------------------------------------
-   */
-
-  var ScrollSpy = function ($$$1) {
-    /**
-     * ------------------------------------------------------------------------
-     * Constants
-     * ------------------------------------------------------------------------
-     */
-    var NAME = 'scrollspy';
-    var VERSION = '4.1.3';
-    var DATA_KEY = 'bs.scrollspy';
-    var EVENT_KEY = "." + DATA_KEY;
-    var DATA_API_KEY = '.data-api';
-    var JQUERY_NO_CONFLICT = $$$1.fn[NAME];
-    var Default = {
-      offset: 10,
-      method: 'auto',
-      target: ''
-    };
-    var DefaultType = {
-      offset: 'number',
-      method: 'string',
-      target: '(string|element)'
-    };
-    var Event = {
-      ACTIVATE: "activate" + EVENT_KEY,
-      SCROLL: "scroll" + EVENT_KEY,
-      LOAD_DATA_API: "load" + EVENT_KEY + DATA_API_KEY
-    };
-    var ClassName = {
-      DROPDOWN_ITEM: 'dropdown-item',
-      DROPDOWN_MENU: 'dropdown-menu',
-      ACTIVE: 'active'
-    };
-    var Selector = {
-      DATA_SPY: '[data-spy="scroll"]',
-      ACTIVE: '.active',
-      NAV_LIST_GROUP: '.nav, .list-group',
-      NAV_LINKS: '.nav-link',
-      NAV_ITEMS: '.nav-item',
-      LIST_ITEMS: '.list-group-item',
-      DROPDOWN: '.dropdown',
-      DROPDOWN_ITEMS: '.dropdown-item',
-      DROPDOWN_TOGGLE: '.dropdown-toggle'
-    };
-    var OffsetMethod = {
-      OFFSET: 'offset',
-      POSITION: 'position'
-      /**
-       * ------------------------------------------------------------------------
-       * Class Definition
-       * ------------------------------------------------------------------------
-       */
-
-    };
-
-    var ScrollSpy =
-    /*#__PURE__*/
-    function () {
-      function ScrollSpy(element, config) {
-        var _this = this;
-
-        this._element = element;
-        this._scrollElement = element.tagName === 'BODY' ? window : element;
-        this._config = this._getConfig(config);
-        this._selector = this._config.target + " " + Selector.NAV_LINKS + "," + (this._config.target + " " + Selector.LIST_ITEMS + ",") + (this._config.target + " " + Selector.DROPDOWN_ITEMS);
-        this._offsets = [];
-        this._targets = [];
-        this._activeTarget = null;
-        this._scrollHeight = 0;
-        $$$1(this._scrollElement).on(Event.SCROLL, function (event) {
-          return _this._process(event);
-        });
-        this.refresh();
-
-        this._process();
-      } // Getters
-
-
-      var _proto = ScrollSpy.prototype;
-
-      // Public
-      _proto.refresh = function refresh() {
-        var _this2 = this;
-
-        var autoMethod = this._scrollElement === this._scrollElement.window ? OffsetMethod.OFFSET : OffsetMethod.POSITION;
-        var offsetMethod = this._config.method === 'auto' ? autoMethod : this._config.method;
-        var offsetBase = offsetMethod === OffsetMethod.POSITION ? this._getScrollTop() : 0;
-        this._offsets = [];
-        this._targets = [];
-        this._scrollHeight = this._getScrollHeight();
-        var targets = [].slice.call(document.querySelectorAll(this._selector));
-        targets.map(function (element) {
-          var target;
-          var targetSelector = Util.getSelectorFromElement(element);
-
-          if (targetSelector) {
-            target = document.querySelector(targetSelector);
-          }
-
-          if (target) {
-            var targetBCR = target.getBoundingClientRect();
-
-            if (targetBCR.width || targetBCR.height) {
-              // TODO (fat): remove sketch reliance on jQuery position/offset
-              return [$$$1(target)[offsetMethod]().top + offsetBase, targetSelector];
-            }
-          }
-
-          return null;
-        }).filter(function (item) {
-          return item;
-        }).sort(function (a, b) {
-          return a[0] - b[0];
-        }).forEach(function (item) {
-          _this2._offsets.push(item[0]);
-
-          _this2._targets.push(item[1]);
-        });
-      };
-
-      _proto.dispose = function dispose() {
-        $$$1.removeData(this._element, DATA_KEY);
-        $$$1(this._scrollElement).off(EVENT_KEY);
-        this._element = null;
-        this._scrollElement = null;
-        this._config = null;
-        this._selector = null;
-        this._offsets = null;
-        this._targets = null;
-        this._activeTarget = null;
-        this._scrollHeight = null;
-      }; // Private
-
-
-      _proto._getConfig = function _getConfig(config) {
-        config = _objectSpread({}, Default, typeof config === 'object' && config ? config : {});
-
-        if (typeof config.target !== 'string') {
-          var id = $$$1(config.target).attr('id');
-
-          if (!id) {
-            id = Util.getUID(NAME);
-            $$$1(config.target).attr('id', id);
-          }
-
-          config.target = "#" + id;
-        }
-
-        Util.typeCheckConfig(NAME, config, DefaultType);
-        return config;
-      };
-
-      _proto._getScrollTop = function _getScrollTop() {
-        return this._scrollElement === window ? this._scrollElement.pageYOffset : this._scrollElement.scrollTop;
-      };
-
-      _proto._getScrollHeight = function _getScrollHeight() {
-        return this._scrollElement.scrollHeight || Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
-      };
-
-      _proto._getOffsetHeight = function _getOffsetHeight() {
-        return this._scrollElement === window ? window.innerHeight : this._scrollElement.getBoundingClientRect().height;
-      };
-
-      _proto._process = function _process() {
-        var scrollTop = this._getScrollTop() + this._config.offset;
-
-        var scrollHeight = this._getScrollHeight();
-
-        var maxScroll = this._config.offset + scrollHeight - this._getOffsetHeight();
-
-        if (this._scrollHeight !== scrollHeight) {
-          this.refresh();
-        }
-
-        if (scrollTop >= maxScroll) {
-          var target = this._targets[this._targets.length - 1];
-
-          if (this._activeTarget !== target) {
-            this._activate(target);
-          }
-
-          return;
-        }
-
-        if (this._activeTarget && scrollTop < this._offsets[0] && this._offsets[0] > 0) {
-          this._activeTarget = null;
-
-          this._clear();
-
-          return;
-        }
-
-        var offsetLength = this._offsets.length;
-
-        for (var i = offsetLength; i--;) {
-          var isActiveTarget = this._activeTarget !== this._targets[i] && scrollTop >= this._offsets[i] && (typeof this._offsets[i + 1] === 'undefined' || scrollTop < this._offsets[i + 1]);
-
-          if (isActiveTarget) {
-            this._activate(this._targets[i]);
-          }
-        }
-      };
-
-      _proto._activate = function _activate(target) {
-        this._activeTarget = target;
-
-        this._clear();
-
-        var queries = this._selector.split(','); // eslint-disable-next-line arrow-body-style
-
-
-        queries = queries.map(function (selector) {
-          return selector + "[data-target=\"" + target + "\"]," + (selector + "[href=\"" + target + "\"]");
-        });
-        var $link = $$$1([].slice.call(document.querySelectorAll(queries.join(','))));
-
-        if ($link.hasClass(ClassName.DROPDOWN_ITEM)) {
-          $link.closest(Selector.DROPDOWN).find(Selector.DROPDOWN_TOGGLE).addClass(ClassName.ACTIVE);
-          $link.addClass(ClassName.ACTIVE);
-        } else {
-          // Set triggered link as active
-          $link.addClass(ClassName.ACTIVE); // Set triggered links parents as active
-          // With both <ul> and <nav> markup a parent is the previous sibling of any nav ancestor
-
-          $link.parents(Selector.NAV_LIST_GROUP).prev(Selector.NAV_LINKS + ", " + Selector.LIST_ITEMS).addClass(ClassName.ACTIVE); // Handle special case when .nav-link is inside .nav-item
-
-          $link.parents(Selector.NAV_LIST_GROUP).prev(Selector.NAV_ITEMS).children(Selector.NAV_LINKS).addClass(ClassName.ACTIVE);
-        }
-
-        $$$1(this._scrollElement).trigger(Event.ACTIVATE, {
-          relatedTarget: target
-        });
-      };
-
-      _proto._clear = function _clear() {
-        var nodes = [].slice.call(document.querySelectorAll(this._selector));
-        $$$1(nodes).filter(Selector.ACTIVE).removeClass(ClassName.ACTIVE);
-      }; // Static
-
-
-      ScrollSpy._jQueryInterface = function _jQueryInterface(config) {
-        return this.each(function () {
-          var data = $$$1(this).data(DATA_KEY);
-
-          var _config = typeof config === 'object' && config;
-
-          if (!data) {
-            data = new ScrollSpy(this, _config);
-            $$$1(this).data(DATA_KEY, data);
-          }
-
-          if (typeof config === 'string') {
-            if (typeof data[config] === 'undefined') {
-              throw new TypeError("No method named \"" + config + "\"");
-            }
-
-            data[config]();
-          }
-        });
-      };
-
-      _createClass(ScrollSpy, null, [{
-        key: "VERSION",
-        get: function get() {
-          return VERSION;
-        }
-      }, {
-        key: "Default",
-        get: function get() {
-          return Default;
-        }
-      }]);
-
-      return ScrollSpy;
-    }();
-    /**
-     * ------------------------------------------------------------------------
-     * Data Api implementation
-     * ------------------------------------------------------------------------
-     */
-
-
-    $$$1(window).on(Event.LOAD_DATA_API, function () {
-      var scrollSpys = [].slice.call(document.querySelectorAll(Selector.DATA_SPY));
-      var scrollSpysLength = scrollSpys.length;
-
-      for (var i = scrollSpysLength; i--;) {
-        var $spy = $$$1(scrollSpys[i]);
-
-        ScrollSpy._jQueryInterface.call($spy, $spy.data());
-      }
-    });
-    /**
-     * ------------------------------------------------------------------------
-     * jQuery
-     * ------------------------------------------------------------------------
-     */
-
-    $$$1.fn[NAME] = ScrollSpy._jQueryInterface;
-    $$$1.fn[NAME].Constructor = ScrollSpy;
-
-    $$$1.fn[NAME].noConflict = function () {
-      $$$1.fn[NAME] = JQUERY_NO_CONFLICT;
-      return ScrollSpy._jQueryInterface;
-    };
-
-    return ScrollSpy;
-  }($);
-
-  /**
-   * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.3): tab.js
-   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
-   * --------------------------------------------------------------------------
-   */
-
-  var Tab = function ($$$1) {
-    /**
-     * ------------------------------------------------------------------------
-     * Constants
-     * ------------------------------------------------------------------------
-     */
-    var NAME = 'tab';
-    var VERSION = '4.1.3';
-    var DATA_KEY = 'bs.tab';
-    var EVENT_KEY = "." + DATA_KEY;
-    var DATA_API_KEY = '.data-api';
-    var JQUERY_NO_CONFLICT = $$$1.fn[NAME];
-    var Event = {
-      HIDE: "hide" + EVENT_KEY,
-      HIDDEN: "hidden" + EVENT_KEY,
-      SHOW: "show" + EVENT_KEY,
-      SHOWN: "shown" + EVENT_KEY,
-      CLICK_DATA_API: "click" + EVENT_KEY + DATA_API_KEY
-    };
-    var ClassName = {
-      DROPDOWN_MENU: 'dropdown-menu',
-      ACTIVE: 'active',
-      DISABLED: 'disabled',
-      FADE: 'fade',
-      SHOW: 'show'
-    };
-    var Selector = {
-      DROPDOWN: '.dropdown',
-      NAV_LIST_GROUP: '.nav, .list-group',
-      ACTIVE: '.active',
-      ACTIVE_UL: '> li > .active',
-      DATA_TOGGLE: '[data-toggle="tab"], [data-toggle="pill"], [data-toggle="list"]',
-      DROPDOWN_TOGGLE: '.dropdown-toggle',
-      DROPDOWN_ACTIVE_CHILD: '> .dropdown-menu .active'
-      /**
-       * ------------------------------------------------------------------------
-       * Class Definition
-       * ------------------------------------------------------------------------
-       */
-
-    };
-
-    var Tab =
-    /*#__PURE__*/
-    function () {
-      function Tab(element) {
-        this._element = element;
-      } // Getters
-
-
-      var _proto = Tab.prototype;
-
-      // Public
-      _proto.show = function show() {
-        var _this = this;
-
-        if (this._element.parentNode && this._element.parentNode.nodeType === Node.ELEMENT_NODE && $$$1(this._element).hasClass(ClassName.ACTIVE) || $$$1(this._element).hasClass(ClassName.DISABLED)) {
-          return;
-        }
-
-        var target;
-        var previous;
-        var listElement = $$$1(this._element).closest(Selector.NAV_LIST_GROUP)[0];
-        var selector = Util.getSelectorFromElement(this._element);
-
-        if (listElement) {
-          var itemSelector = listElement.nodeName === 'UL' ? Selector.ACTIVE_UL : Selector.ACTIVE;
-          previous = $$$1.makeArray($$$1(listElement).find(itemSelector));
-          previous = previous[previous.length - 1];
-        }
-
-        var hideEvent = $$$1.Event(Event.HIDE, {
-          relatedTarget: this._element
-        });
-        var showEvent = $$$1.Event(Event.SHOW, {
-          relatedTarget: previous
-        });
-
-        if (previous) {
-          $$$1(previous).trigger(hideEvent);
-        }
-
-        $$$1(this._element).trigger(showEvent);
-
-        if (showEvent.isDefaultPrevented() || hideEvent.isDefaultPrevented()) {
-          return;
-        }
-
-        if (selector) {
-          target = document.querySelector(selector);
-        }
-
-        this._activate(this._element, listElement);
 
         var complete = function complete() {
-          var hiddenEvent = $$$1.Event(Event.HIDDEN, {
-            relatedTarget: _this._element
-          });
-          var shownEvent = $$$1.Event(Event.SHOWN, {
-            relatedTarget: previous
-          });
-          $$$1(previous).trigger(hiddenEvent);
-          $$$1(_this._element).trigger(shownEvent);
+          if (_this.config.animation) {
+            _this._fixTransition();
+          }
+
+          var prevHoverState = _this._hoverState;
+          _this._hoverState = null;
+          $(_this.element).trigger(_this.constructor.Event.SHOWN);
+
+          if (prevHoverState === HoverState.OUT) {
+            _this._leave(null, _this);
+          }
         };
 
-        if (target) {
-          this._activate(target, target.parentNode, complete);
+        if ($(this.tip).hasClass(ClassName$6.FADE)) {
+          var transitionDuration = Util.getTransitionDurationFromElement(this.tip);
+          $(this.tip).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
         } else {
           complete();
         }
-      };
+      }
+    };
 
-      _proto.dispose = function dispose() {
-        $$$1.removeData(this._element, DATA_KEY);
-        this._element = null;
-      }; // Private
+    _proto.hide = function hide(callback) {
+      var _this2 = this;
 
+      var tip = this.getTipElement();
+      var hideEvent = $.Event(this.constructor.Event.HIDE);
 
-      _proto._activate = function _activate(element, container, callback) {
-        var _this2 = this;
-
-        var activeElements;
-
-        if (container.nodeName === 'UL') {
-          activeElements = $$$1(container).find(Selector.ACTIVE_UL);
-        } else {
-          activeElements = $$$1(container).children(Selector.ACTIVE);
+      var complete = function complete() {
+        if (_this2._hoverState !== HoverState.SHOW && tip.parentNode) {
+          tip.parentNode.removeChild(tip);
         }
 
-        var active = activeElements[0];
-        var isTransitioning = callback && active && $$$1(active).hasClass(ClassName.FADE);
+        _this2._cleanTipClass();
 
-        var complete = function complete() {
-          return _this2._transitionComplete(element, active, callback);
-        };
+        _this2.element.removeAttribute('aria-describedby');
 
-        if (active && isTransitioning) {
-          var transitionDuration = Util.getTransitionDurationFromElement(active);
-          $$$1(active).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
-        } else {
-          complete();
-        }
-      };
+        $(_this2.element).trigger(_this2.constructor.Event.HIDDEN);
 
-      _proto._transitionComplete = function _transitionComplete(element, active, callback) {
-        if (active) {
-          $$$1(active).removeClass(ClassName.SHOW + " " + ClassName.ACTIVE);
-          var dropdownChild = $$$1(active.parentNode).find(Selector.DROPDOWN_ACTIVE_CHILD)[0];
-
-          if (dropdownChild) {
-            $$$1(dropdownChild).removeClass(ClassName.ACTIVE);
-          }
-
-          if (active.getAttribute('role') === 'tab') {
-            active.setAttribute('aria-selected', false);
-          }
-        }
-
-        $$$1(element).addClass(ClassName.ACTIVE);
-
-        if (element.getAttribute('role') === 'tab') {
-          element.setAttribute('aria-selected', true);
-        }
-
-        Util.reflow(element);
-        $$$1(element).addClass(ClassName.SHOW);
-
-        if (element.parentNode && $$$1(element.parentNode).hasClass(ClassName.DROPDOWN_MENU)) {
-          var dropdownElement = $$$1(element).closest(Selector.DROPDOWN)[0];
-
-          if (dropdownElement) {
-            var dropdownToggleList = [].slice.call(dropdownElement.querySelectorAll(Selector.DROPDOWN_TOGGLE));
-            $$$1(dropdownToggleList).addClass(ClassName.ACTIVE);
-          }
-
-          element.setAttribute('aria-expanded', true);
+        if (_this2._popper !== null) {
+          _this2._popper.destroy();
         }
 
         if (callback) {
           callback();
         }
-      }; // Static
-
-
-      Tab._jQueryInterface = function _jQueryInterface(config) {
-        return this.each(function () {
-          var $this = $$$1(this);
-          var data = $this.data(DATA_KEY);
-
-          if (!data) {
-            data = new Tab(this);
-            $this.data(DATA_KEY, data);
-          }
-
-          if (typeof config === 'string') {
-            if (typeof data[config] === 'undefined') {
-              throw new TypeError("No method named \"" + config + "\"");
-            }
-
-            data[config]();
-          }
-        });
       };
 
-      _createClass(Tab, null, [{
-        key: "VERSION",
-        get: function get() {
-          return VERSION;
-        }
-      }]);
+      $(this.element).trigger(hideEvent);
 
-      return Tab;
-    }();
-    /**
-     * ------------------------------------------------------------------------
-     * Data Api implementation
-     * ------------------------------------------------------------------------
-     */
+      if (hideEvent.isDefaultPrevented()) {
+        return;
+      }
 
+      $(tip).removeClass(ClassName$6.SHOW); // If this is a touch-enabled device we remove the extra
+      // empty mouseover listeners we added for iOS support
 
-    $$$1(document).on(Event.CLICK_DATA_API, Selector.DATA_TOGGLE, function (event) {
-      event.preventDefault();
+      if ('ontouchstart' in document.documentElement) {
+        $(document.body).children().off('mouseover', null, $.noop);
+      }
 
-      Tab._jQueryInterface.call($$$1(this), 'show');
-    });
-    /**
-     * ------------------------------------------------------------------------
-     * jQuery
-     * ------------------------------------------------------------------------
-     */
+      this._activeTrigger[Trigger.CLICK] = false;
+      this._activeTrigger[Trigger.FOCUS] = false;
+      this._activeTrigger[Trigger.HOVER] = false;
 
-    $$$1.fn[NAME] = Tab._jQueryInterface;
-    $$$1.fn[NAME].Constructor = Tab;
+      if ($(this.tip).hasClass(ClassName$6.FADE)) {
+        var transitionDuration = Util.getTransitionDurationFromElement(tip);
+        $(tip).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
+      } else {
+        complete();
+      }
 
-    $$$1.fn[NAME].noConflict = function () {
-      $$$1.fn[NAME] = JQUERY_NO_CONFLICT;
-      return Tab._jQueryInterface;
+      this._hoverState = '';
     };
 
+    _proto.update = function update() {
+      if (this._popper !== null) {
+        this._popper.scheduleUpdate();
+      }
+    }; // Protected
+
+
+    _proto.isWithContent = function isWithContent() {
+      return Boolean(this.getTitle());
+    };
+
+    _proto.addAttachmentClass = function addAttachmentClass(attachment) {
+      $(this.getTipElement()).addClass(CLASS_PREFIX + "-" + attachment);
+    };
+
+    _proto.getTipElement = function getTipElement() {
+      this.tip = this.tip || $(this.config.template)[0];
+      return this.tip;
+    };
+
+    _proto.setContent = function setContent() {
+      var tip = this.getTipElement();
+      this.setElementContent($(tip.querySelectorAll(Selector$6.TOOLTIP_INNER)), this.getTitle());
+      $(tip).removeClass(ClassName$6.FADE + " " + ClassName$6.SHOW);
+    };
+
+    _proto.setElementContent = function setElementContent($element, content) {
+      var html = this.config.html;
+
+      if (typeof content === 'object' && (content.nodeType || content.jquery)) {
+        // Content is a DOM node or a jQuery
+        if (html) {
+          if (!$(content).parent().is($element)) {
+            $element.empty().append(content);
+          }
+        } else {
+          $element.text($(content).text());
+        }
+      } else {
+        $element[html ? 'html' : 'text'](content);
+      }
+    };
+
+    _proto.getTitle = function getTitle() {
+      var title = this.element.getAttribute('data-original-title');
+
+      if (!title) {
+        title = typeof this.config.title === 'function' ? this.config.title.call(this.element) : this.config.title;
+      }
+
+      return title;
+    }; // Private
+
+
+    _proto._getContainer = function _getContainer() {
+      if (this.config.container === false) {
+        return document.body;
+      }
+
+      if (Util.isElement(this.config.container)) {
+        return $(this.config.container);
+      }
+
+      return $(document).find(this.config.container);
+    };
+
+    _proto._getAttachment = function _getAttachment(placement) {
+      return AttachmentMap$1[placement.toUpperCase()];
+    };
+
+    _proto._setListeners = function _setListeners() {
+      var _this3 = this;
+
+      var triggers = this.config.trigger.split(' ');
+      triggers.forEach(function (trigger) {
+        if (trigger === 'click') {
+          $(_this3.element).on(_this3.constructor.Event.CLICK, _this3.config.selector, function (event) {
+            return _this3.toggle(event);
+          });
+        } else if (trigger !== Trigger.MANUAL) {
+          var eventIn = trigger === Trigger.HOVER ? _this3.constructor.Event.MOUSEENTER : _this3.constructor.Event.FOCUSIN;
+          var eventOut = trigger === Trigger.HOVER ? _this3.constructor.Event.MOUSELEAVE : _this3.constructor.Event.FOCUSOUT;
+          $(_this3.element).on(eventIn, _this3.config.selector, function (event) {
+            return _this3._enter(event);
+          }).on(eventOut, _this3.config.selector, function (event) {
+            return _this3._leave(event);
+          });
+        }
+      });
+      $(this.element).closest('.modal').on('hide.bs.modal', function () {
+        if (_this3.element) {
+          _this3.hide();
+        }
+      });
+
+      if (this.config.selector) {
+        this.config = _objectSpread({}, this.config, {
+          trigger: 'manual',
+          selector: ''
+        });
+      } else {
+        this._fixTitle();
+      }
+    };
+
+    _proto._fixTitle = function _fixTitle() {
+      var titleType = typeof this.element.getAttribute('data-original-title');
+
+      if (this.element.getAttribute('title') || titleType !== 'string') {
+        this.element.setAttribute('data-original-title', this.element.getAttribute('title') || '');
+        this.element.setAttribute('title', '');
+      }
+    };
+
+    _proto._enter = function _enter(event, context) {
+      var dataKey = this.constructor.DATA_KEY;
+      context = context || $(event.currentTarget).data(dataKey);
+
+      if (!context) {
+        context = new this.constructor(event.currentTarget, this._getDelegateConfig());
+        $(event.currentTarget).data(dataKey, context);
+      }
+
+      if (event) {
+        context._activeTrigger[event.type === 'focusin' ? Trigger.FOCUS : Trigger.HOVER] = true;
+      }
+
+      if ($(context.getTipElement()).hasClass(ClassName$6.SHOW) || context._hoverState === HoverState.SHOW) {
+        context._hoverState = HoverState.SHOW;
+        return;
+      }
+
+      clearTimeout(context._timeout);
+      context._hoverState = HoverState.SHOW;
+
+      if (!context.config.delay || !context.config.delay.show) {
+        context.show();
+        return;
+      }
+
+      context._timeout = setTimeout(function () {
+        if (context._hoverState === HoverState.SHOW) {
+          context.show();
+        }
+      }, context.config.delay.show);
+    };
+
+    _proto._leave = function _leave(event, context) {
+      var dataKey = this.constructor.DATA_KEY;
+      context = context || $(event.currentTarget).data(dataKey);
+
+      if (!context) {
+        context = new this.constructor(event.currentTarget, this._getDelegateConfig());
+        $(event.currentTarget).data(dataKey, context);
+      }
+
+      if (event) {
+        context._activeTrigger[event.type === 'focusout' ? Trigger.FOCUS : Trigger.HOVER] = false;
+      }
+
+      if (context._isWithActiveTrigger()) {
+        return;
+      }
+
+      clearTimeout(context._timeout);
+      context._hoverState = HoverState.OUT;
+
+      if (!context.config.delay || !context.config.delay.hide) {
+        context.hide();
+        return;
+      }
+
+      context._timeout = setTimeout(function () {
+        if (context._hoverState === HoverState.OUT) {
+          context.hide();
+        }
+      }, context.config.delay.hide);
+    };
+
+    _proto._isWithActiveTrigger = function _isWithActiveTrigger() {
+      for (var trigger in this._activeTrigger) {
+        if (this._activeTrigger[trigger]) {
+          return true;
+        }
+      }
+
+      return false;
+    };
+
+    _proto._getConfig = function _getConfig(config) {
+      config = _objectSpread({}, this.constructor.Default, $(this.element).data(), typeof config === 'object' && config ? config : {});
+
+      if (typeof config.delay === 'number') {
+        config.delay = {
+          show: config.delay,
+          hide: config.delay
+        };
+      }
+
+      if (typeof config.title === 'number') {
+        config.title = config.title.toString();
+      }
+
+      if (typeof config.content === 'number') {
+        config.content = config.content.toString();
+      }
+
+      Util.typeCheckConfig(NAME$6, config, this.constructor.DefaultType);
+      return config;
+    };
+
+    _proto._getDelegateConfig = function _getDelegateConfig() {
+      var config = {};
+
+      if (this.config) {
+        for (var key in this.config) {
+          if (this.constructor.Default[key] !== this.config[key]) {
+            config[key] = this.config[key];
+          }
+        }
+      }
+
+      return config;
+    };
+
+    _proto._cleanTipClass = function _cleanTipClass() {
+      var $tip = $(this.getTipElement());
+      var tabClass = $tip.attr('class').match(BSCLS_PREFIX_REGEX);
+
+      if (tabClass !== null && tabClass.length) {
+        $tip.removeClass(tabClass.join(''));
+      }
+    };
+
+    _proto._handlePopperPlacementChange = function _handlePopperPlacementChange(popperData) {
+      var popperInstance = popperData.instance;
+      this.tip = popperInstance.popper;
+
+      this._cleanTipClass();
+
+      this.addAttachmentClass(this._getAttachment(popperData.placement));
+    };
+
+    _proto._fixTransition = function _fixTransition() {
+      var tip = this.getTipElement();
+      var initConfigAnimation = this.config.animation;
+
+      if (tip.getAttribute('x-placement') !== null) {
+        return;
+      }
+
+      $(tip).removeClass(ClassName$6.FADE);
+      this.config.animation = false;
+      this.hide();
+      this.show();
+      this.config.animation = initConfigAnimation;
+    }; // Static
+
+
+    Tooltip._jQueryInterface = function _jQueryInterface(config) {
+      return this.each(function () {
+        var data = $(this).data(DATA_KEY$6);
+
+        var _config = typeof config === 'object' && config;
+
+        if (!data && /dispose|hide/.test(config)) {
+          return;
+        }
+
+        if (!data) {
+          data = new Tooltip(this, _config);
+          $(this).data(DATA_KEY$6, data);
+        }
+
+        if (typeof config === 'string') {
+          if (typeof data[config] === 'undefined') {
+            throw new TypeError("No method named \"" + config + "\"");
+          }
+
+          data[config]();
+        }
+      });
+    };
+
+    _createClass(Tooltip, null, [{
+      key: "VERSION",
+      get: function get() {
+        return VERSION$6;
+      }
+    }, {
+      key: "Default",
+      get: function get() {
+        return Default$4;
+      }
+    }, {
+      key: "NAME",
+      get: function get() {
+        return NAME$6;
+      }
+    }, {
+      key: "DATA_KEY",
+      get: function get() {
+        return DATA_KEY$6;
+      }
+    }, {
+      key: "Event",
+      get: function get() {
+        return Event$6;
+      }
+    }, {
+      key: "EVENT_KEY",
+      get: function get() {
+        return EVENT_KEY$6;
+      }
+    }, {
+      key: "DefaultType",
+      get: function get() {
+        return DefaultType$4;
+      }
+    }]);
+
+    return Tooltip;
+  }();
+  /**
+   * ------------------------------------------------------------------------
+   * jQuery
+   * ------------------------------------------------------------------------
+   */
+
+
+  $.fn[NAME$6] = Tooltip._jQueryInterface;
+  $.fn[NAME$6].Constructor = Tooltip;
+
+  $.fn[NAME$6].noConflict = function () {
+    $.fn[NAME$6] = JQUERY_NO_CONFLICT$6;
+    return Tooltip._jQueryInterface;
+  };
+
+  /**
+   * ------------------------------------------------------------------------
+   * Constants
+   * ------------------------------------------------------------------------
+   */
+
+  var NAME$7 = 'popover';
+  var VERSION$7 = '4.2.1';
+  var DATA_KEY$7 = 'bs.popover';
+  var EVENT_KEY$7 = "." + DATA_KEY$7;
+  var JQUERY_NO_CONFLICT$7 = $.fn[NAME$7];
+  var CLASS_PREFIX$1 = 'bs-popover';
+  var BSCLS_PREFIX_REGEX$1 = new RegExp("(^|\\s)" + CLASS_PREFIX$1 + "\\S+", 'g');
+
+  var Default$5 = _objectSpread({}, Tooltip.Default, {
+    placement: 'right',
+    trigger: 'click',
+    content: '',
+    template: '<div class="popover" role="tooltip">' + '<div class="arrow"></div>' + '<h3 class="popover-header"></h3>' + '<div class="popover-body"></div></div>'
+  });
+
+  var DefaultType$5 = _objectSpread({}, Tooltip.DefaultType, {
+    content: '(string|element|function)'
+  });
+
+  var ClassName$7 = {
+    FADE: 'fade',
+    SHOW: 'show'
+  };
+  var Selector$7 = {
+    TITLE: '.popover-header',
+    CONTENT: '.popover-body'
+  };
+  var Event$7 = {
+    HIDE: "hide" + EVENT_KEY$7,
+    HIDDEN: "hidden" + EVENT_KEY$7,
+    SHOW: "show" + EVENT_KEY$7,
+    SHOWN: "shown" + EVENT_KEY$7,
+    INSERTED: "inserted" + EVENT_KEY$7,
+    CLICK: "click" + EVENT_KEY$7,
+    FOCUSIN: "focusin" + EVENT_KEY$7,
+    FOCUSOUT: "focusout" + EVENT_KEY$7,
+    MOUSEENTER: "mouseenter" + EVENT_KEY$7,
+    MOUSELEAVE: "mouseleave" + EVENT_KEY$7
+    /**
+     * ------------------------------------------------------------------------
+     * Class Definition
+     * ------------------------------------------------------------------------
+     */
+
+  };
+
+  var Popover =
+  /*#__PURE__*/
+  function (_Tooltip) {
+    _inheritsLoose(Popover, _Tooltip);
+
+    function Popover() {
+      return _Tooltip.apply(this, arguments) || this;
+    }
+
+    var _proto = Popover.prototype;
+
+    // Overrides
+    _proto.isWithContent = function isWithContent() {
+      return this.getTitle() || this._getContent();
+    };
+
+    _proto.addAttachmentClass = function addAttachmentClass(attachment) {
+      $(this.getTipElement()).addClass(CLASS_PREFIX$1 + "-" + attachment);
+    };
+
+    _proto.getTipElement = function getTipElement() {
+      this.tip = this.tip || $(this.config.template)[0];
+      return this.tip;
+    };
+
+    _proto.setContent = function setContent() {
+      var $tip = $(this.getTipElement()); // We use append for html objects to maintain js events
+
+      this.setElementContent($tip.find(Selector$7.TITLE), this.getTitle());
+
+      var content = this._getContent();
+
+      if (typeof content === 'function') {
+        content = content.call(this.element);
+      }
+
+      this.setElementContent($tip.find(Selector$7.CONTENT), content);
+      $tip.removeClass(ClassName$7.FADE + " " + ClassName$7.SHOW);
+    }; // Private
+
+
+    _proto._getContent = function _getContent() {
+      return this.element.getAttribute('data-content') || this.config.content;
+    };
+
+    _proto._cleanTipClass = function _cleanTipClass() {
+      var $tip = $(this.getTipElement());
+      var tabClass = $tip.attr('class').match(BSCLS_PREFIX_REGEX$1);
+
+      if (tabClass !== null && tabClass.length > 0) {
+        $tip.removeClass(tabClass.join(''));
+      }
+    }; // Static
+
+
+    Popover._jQueryInterface = function _jQueryInterface(config) {
+      return this.each(function () {
+        var data = $(this).data(DATA_KEY$7);
+
+        var _config = typeof config === 'object' ? config : null;
+
+        if (!data && /dispose|hide/.test(config)) {
+          return;
+        }
+
+        if (!data) {
+          data = new Popover(this, _config);
+          $(this).data(DATA_KEY$7, data);
+        }
+
+        if (typeof config === 'string') {
+          if (typeof data[config] === 'undefined') {
+            throw new TypeError("No method named \"" + config + "\"");
+          }
+
+          data[config]();
+        }
+      });
+    };
+
+    _createClass(Popover, null, [{
+      key: "VERSION",
+      // Getters
+      get: function get() {
+        return VERSION$7;
+      }
+    }, {
+      key: "Default",
+      get: function get() {
+        return Default$5;
+      }
+    }, {
+      key: "NAME",
+      get: function get() {
+        return NAME$7;
+      }
+    }, {
+      key: "DATA_KEY",
+      get: function get() {
+        return DATA_KEY$7;
+      }
+    }, {
+      key: "Event",
+      get: function get() {
+        return Event$7;
+      }
+    }, {
+      key: "EVENT_KEY",
+      get: function get() {
+        return EVENT_KEY$7;
+      }
+    }, {
+      key: "DefaultType",
+      get: function get() {
+        return DefaultType$5;
+      }
+    }]);
+
+    return Popover;
+  }(Tooltip);
+  /**
+   * ------------------------------------------------------------------------
+   * jQuery
+   * ------------------------------------------------------------------------
+   */
+
+
+  $.fn[NAME$7] = Popover._jQueryInterface;
+  $.fn[NAME$7].Constructor = Popover;
+
+  $.fn[NAME$7].noConflict = function () {
+    $.fn[NAME$7] = JQUERY_NO_CONFLICT$7;
+    return Popover._jQueryInterface;
+  };
+
+  /**
+   * ------------------------------------------------------------------------
+   * Constants
+   * ------------------------------------------------------------------------
+   */
+
+  var NAME$8 = 'scrollspy';
+  var VERSION$8 = '4.2.1';
+  var DATA_KEY$8 = 'bs.scrollspy';
+  var EVENT_KEY$8 = "." + DATA_KEY$8;
+  var DATA_API_KEY$6 = '.data-api';
+  var JQUERY_NO_CONFLICT$8 = $.fn[NAME$8];
+  var Default$6 = {
+    offset: 10,
+    method: 'auto',
+    target: ''
+  };
+  var DefaultType$6 = {
+    offset: 'number',
+    method: 'string',
+    target: '(string|element)'
+  };
+  var Event$8 = {
+    ACTIVATE: "activate" + EVENT_KEY$8,
+    SCROLL: "scroll" + EVENT_KEY$8,
+    LOAD_DATA_API: "load" + EVENT_KEY$8 + DATA_API_KEY$6
+  };
+  var ClassName$8 = {
+    DROPDOWN_ITEM: 'dropdown-item',
+    DROPDOWN_MENU: 'dropdown-menu',
+    ACTIVE: 'active'
+  };
+  var Selector$8 = {
+    DATA_SPY: '[data-spy="scroll"]',
+    ACTIVE: '.active',
+    NAV_LIST_GROUP: '.nav, .list-group',
+    NAV_LINKS: '.nav-link',
+    NAV_ITEMS: '.nav-item',
+    LIST_ITEMS: '.list-group-item',
+    DROPDOWN: '.dropdown',
+    DROPDOWN_ITEMS: '.dropdown-item',
+    DROPDOWN_TOGGLE: '.dropdown-toggle'
+  };
+  var OffsetMethod = {
+    OFFSET: 'offset',
+    POSITION: 'position'
+    /**
+     * ------------------------------------------------------------------------
+     * Class Definition
+     * ------------------------------------------------------------------------
+     */
+
+  };
+
+  var ScrollSpy =
+  /*#__PURE__*/
+  function () {
+    function ScrollSpy(element, config) {
+      var _this = this;
+
+      this._element = element;
+      this._scrollElement = element.tagName === 'BODY' ? window : element;
+      this._config = this._getConfig(config);
+      this._selector = this._config.target + " " + Selector$8.NAV_LINKS + "," + (this._config.target + " " + Selector$8.LIST_ITEMS + ",") + (this._config.target + " " + Selector$8.DROPDOWN_ITEMS);
+      this._offsets = [];
+      this._targets = [];
+      this._activeTarget = null;
+      this._scrollHeight = 0;
+      $(this._scrollElement).on(Event$8.SCROLL, function (event) {
+        return _this._process(event);
+      });
+      this.refresh();
+
+      this._process();
+    } // Getters
+
+
+    var _proto = ScrollSpy.prototype;
+
+    // Public
+    _proto.refresh = function refresh() {
+      var _this2 = this;
+
+      var autoMethod = this._scrollElement === this._scrollElement.window ? OffsetMethod.OFFSET : OffsetMethod.POSITION;
+      var offsetMethod = this._config.method === 'auto' ? autoMethod : this._config.method;
+      var offsetBase = offsetMethod === OffsetMethod.POSITION ? this._getScrollTop() : 0;
+      this._offsets = [];
+      this._targets = [];
+      this._scrollHeight = this._getScrollHeight();
+      var targets = [].slice.call(document.querySelectorAll(this._selector));
+      targets.map(function (element) {
+        var target;
+        var targetSelector = Util.getSelectorFromElement(element);
+
+        if (targetSelector) {
+          target = document.querySelector(targetSelector);
+        }
+
+        if (target) {
+          var targetBCR = target.getBoundingClientRect();
+
+          if (targetBCR.width || targetBCR.height) {
+            // TODO (fat): remove sketch reliance on jQuery position/offset
+            return [$(target)[offsetMethod]().top + offsetBase, targetSelector];
+          }
+        }
+
+        return null;
+      }).filter(function (item) {
+        return item;
+      }).sort(function (a, b) {
+        return a[0] - b[0];
+      }).forEach(function (item) {
+        _this2._offsets.push(item[0]);
+
+        _this2._targets.push(item[1]);
+      });
+    };
+
+    _proto.dispose = function dispose() {
+      $.removeData(this._element, DATA_KEY$8);
+      $(this._scrollElement).off(EVENT_KEY$8);
+      this._element = null;
+      this._scrollElement = null;
+      this._config = null;
+      this._selector = null;
+      this._offsets = null;
+      this._targets = null;
+      this._activeTarget = null;
+      this._scrollHeight = null;
+    }; // Private
+
+
+    _proto._getConfig = function _getConfig(config) {
+      config = _objectSpread({}, Default$6, typeof config === 'object' && config ? config : {});
+
+      if (typeof config.target !== 'string') {
+        var id = $(config.target).attr('id');
+
+        if (!id) {
+          id = Util.getUID(NAME$8);
+          $(config.target).attr('id', id);
+        }
+
+        config.target = "#" + id;
+      }
+
+      Util.typeCheckConfig(NAME$8, config, DefaultType$6);
+      return config;
+    };
+
+    _proto._getScrollTop = function _getScrollTop() {
+      return this._scrollElement === window ? this._scrollElement.pageYOffset : this._scrollElement.scrollTop;
+    };
+
+    _proto._getScrollHeight = function _getScrollHeight() {
+      return this._scrollElement.scrollHeight || Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+    };
+
+    _proto._getOffsetHeight = function _getOffsetHeight() {
+      return this._scrollElement === window ? window.innerHeight : this._scrollElement.getBoundingClientRect().height;
+    };
+
+    _proto._process = function _process() {
+      var scrollTop = this._getScrollTop() + this._config.offset;
+
+      var scrollHeight = this._getScrollHeight();
+
+      var maxScroll = this._config.offset + scrollHeight - this._getOffsetHeight();
+
+      if (this._scrollHeight !== scrollHeight) {
+        this.refresh();
+      }
+
+      if (scrollTop >= maxScroll) {
+        var target = this._targets[this._targets.length - 1];
+
+        if (this._activeTarget !== target) {
+          this._activate(target);
+        }
+
+        return;
+      }
+
+      if (this._activeTarget && scrollTop < this._offsets[0] && this._offsets[0] > 0) {
+        this._activeTarget = null;
+
+        this._clear();
+
+        return;
+      }
+
+      var offsetLength = this._offsets.length;
+
+      for (var i = offsetLength; i--;) {
+        var isActiveTarget = this._activeTarget !== this._targets[i] && scrollTop >= this._offsets[i] && (typeof this._offsets[i + 1] === 'undefined' || scrollTop < this._offsets[i + 1]);
+
+        if (isActiveTarget) {
+          this._activate(this._targets[i]);
+        }
+      }
+    };
+
+    _proto._activate = function _activate(target) {
+      this._activeTarget = target;
+
+      this._clear();
+
+      var queries = this._selector.split(',').map(function (selector) {
+        return selector + "[data-target=\"" + target + "\"]," + selector + "[href=\"" + target + "\"]";
+      });
+
+      var $link = $([].slice.call(document.querySelectorAll(queries.join(','))));
+
+      if ($link.hasClass(ClassName$8.DROPDOWN_ITEM)) {
+        $link.closest(Selector$8.DROPDOWN).find(Selector$8.DROPDOWN_TOGGLE).addClass(ClassName$8.ACTIVE);
+        $link.addClass(ClassName$8.ACTIVE);
+      } else {
+        // Set triggered link as active
+        $link.addClass(ClassName$8.ACTIVE); // Set triggered links parents as active
+        // With both <ul> and <nav> markup a parent is the previous sibling of any nav ancestor
+
+        $link.parents(Selector$8.NAV_LIST_GROUP).prev(Selector$8.NAV_LINKS + ", " + Selector$8.LIST_ITEMS).addClass(ClassName$8.ACTIVE); // Handle special case when .nav-link is inside .nav-item
+
+        $link.parents(Selector$8.NAV_LIST_GROUP).prev(Selector$8.NAV_ITEMS).children(Selector$8.NAV_LINKS).addClass(ClassName$8.ACTIVE);
+      }
+
+      $(this._scrollElement).trigger(Event$8.ACTIVATE, {
+        relatedTarget: target
+      });
+    };
+
+    _proto._clear = function _clear() {
+      [].slice.call(document.querySelectorAll(this._selector)).filter(function (node) {
+        return node.classList.contains(ClassName$8.ACTIVE);
+      }).forEach(function (node) {
+        return node.classList.remove(ClassName$8.ACTIVE);
+      });
+    }; // Static
+
+
+    ScrollSpy._jQueryInterface = function _jQueryInterface(config) {
+      return this.each(function () {
+        var data = $(this).data(DATA_KEY$8);
+
+        var _config = typeof config === 'object' && config;
+
+        if (!data) {
+          data = new ScrollSpy(this, _config);
+          $(this).data(DATA_KEY$8, data);
+        }
+
+        if (typeof config === 'string') {
+          if (typeof data[config] === 'undefined') {
+            throw new TypeError("No method named \"" + config + "\"");
+          }
+
+          data[config]();
+        }
+      });
+    };
+
+    _createClass(ScrollSpy, null, [{
+      key: "VERSION",
+      get: function get() {
+        return VERSION$8;
+      }
+    }, {
+      key: "Default",
+      get: function get() {
+        return Default$6;
+      }
+    }]);
+
+    return ScrollSpy;
+  }();
+  /**
+   * ------------------------------------------------------------------------
+   * Data Api implementation
+   * ------------------------------------------------------------------------
+   */
+
+
+  $(window).on(Event$8.LOAD_DATA_API, function () {
+    var scrollSpys = [].slice.call(document.querySelectorAll(Selector$8.DATA_SPY));
+    var scrollSpysLength = scrollSpys.length;
+
+    for (var i = scrollSpysLength; i--;) {
+      var $spy = $(scrollSpys[i]);
+
+      ScrollSpy._jQueryInterface.call($spy, $spy.data());
+    }
+  });
+  /**
+   * ------------------------------------------------------------------------
+   * jQuery
+   * ------------------------------------------------------------------------
+   */
+
+  $.fn[NAME$8] = ScrollSpy._jQueryInterface;
+  $.fn[NAME$8].Constructor = ScrollSpy;
+
+  $.fn[NAME$8].noConflict = function () {
+    $.fn[NAME$8] = JQUERY_NO_CONFLICT$8;
+    return ScrollSpy._jQueryInterface;
+  };
+
+  /**
+   * ------------------------------------------------------------------------
+   * Constants
+   * ------------------------------------------------------------------------
+   */
+
+  var NAME$9 = 'tab';
+  var VERSION$9 = '4.2.1';
+  var DATA_KEY$9 = 'bs.tab';
+  var EVENT_KEY$9 = "." + DATA_KEY$9;
+  var DATA_API_KEY$7 = '.data-api';
+  var JQUERY_NO_CONFLICT$9 = $.fn[NAME$9];
+  var Event$9 = {
+    HIDE: "hide" + EVENT_KEY$9,
+    HIDDEN: "hidden" + EVENT_KEY$9,
+    SHOW: "show" + EVENT_KEY$9,
+    SHOWN: "shown" + EVENT_KEY$9,
+    CLICK_DATA_API: "click" + EVENT_KEY$9 + DATA_API_KEY$7
+  };
+  var ClassName$9 = {
+    DROPDOWN_MENU: 'dropdown-menu',
+    ACTIVE: 'active',
+    DISABLED: 'disabled',
+    FADE: 'fade',
+    SHOW: 'show'
+  };
+  var Selector$9 = {
+    DROPDOWN: '.dropdown',
+    NAV_LIST_GROUP: '.nav, .list-group',
+    ACTIVE: '.active',
+    ACTIVE_UL: '> li > .active',
+    DATA_TOGGLE: '[data-toggle="tab"], [data-toggle="pill"], [data-toggle="list"]',
+    DROPDOWN_TOGGLE: '.dropdown-toggle',
+    DROPDOWN_ACTIVE_CHILD: '> .dropdown-menu .active'
+    /**
+     * ------------------------------------------------------------------------
+     * Class Definition
+     * ------------------------------------------------------------------------
+     */
+
+  };
+
+  var Tab =
+  /*#__PURE__*/
+  function () {
+    function Tab(element) {
+      this._element = element;
+    } // Getters
+
+
+    var _proto = Tab.prototype;
+
+    // Public
+    _proto.show = function show() {
+      var _this = this;
+
+      if (this._element.parentNode && this._element.parentNode.nodeType === Node.ELEMENT_NODE && $(this._element).hasClass(ClassName$9.ACTIVE) || $(this._element).hasClass(ClassName$9.DISABLED)) {
+        return;
+      }
+
+      var target;
+      var previous;
+      var listElement = $(this._element).closest(Selector$9.NAV_LIST_GROUP)[0];
+      var selector = Util.getSelectorFromElement(this._element);
+
+      if (listElement) {
+        var itemSelector = listElement.nodeName === 'UL' || listElement.nodeName === 'OL' ? Selector$9.ACTIVE_UL : Selector$9.ACTIVE;
+        previous = $.makeArray($(listElement).find(itemSelector));
+        previous = previous[previous.length - 1];
+      }
+
+      var hideEvent = $.Event(Event$9.HIDE, {
+        relatedTarget: this._element
+      });
+      var showEvent = $.Event(Event$9.SHOW, {
+        relatedTarget: previous
+      });
+
+      if (previous) {
+        $(previous).trigger(hideEvent);
+      }
+
+      $(this._element).trigger(showEvent);
+
+      if (showEvent.isDefaultPrevented() || hideEvent.isDefaultPrevented()) {
+        return;
+      }
+
+      if (selector) {
+        target = document.querySelector(selector);
+      }
+
+      this._activate(this._element, listElement);
+
+      var complete = function complete() {
+        var hiddenEvent = $.Event(Event$9.HIDDEN, {
+          relatedTarget: _this._element
+        });
+        var shownEvent = $.Event(Event$9.SHOWN, {
+          relatedTarget: previous
+        });
+        $(previous).trigger(hiddenEvent);
+        $(_this._element).trigger(shownEvent);
+      };
+
+      if (target) {
+        this._activate(target, target.parentNode, complete);
+      } else {
+        complete();
+      }
+    };
+
+    _proto.dispose = function dispose() {
+      $.removeData(this._element, DATA_KEY$9);
+      this._element = null;
+    }; // Private
+
+
+    _proto._activate = function _activate(element, container, callback) {
+      var _this2 = this;
+
+      var activeElements = container && (container.nodeName === 'UL' || container.nodeName === 'OL') ? $(container).find(Selector$9.ACTIVE_UL) : $(container).children(Selector$9.ACTIVE);
+      var active = activeElements[0];
+      var isTransitioning = callback && active && $(active).hasClass(ClassName$9.FADE);
+
+      var complete = function complete() {
+        return _this2._transitionComplete(element, active, callback);
+      };
+
+      if (active && isTransitioning) {
+        var transitionDuration = Util.getTransitionDurationFromElement(active);
+        $(active).removeClass(ClassName$9.SHOW).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
+      } else {
+        complete();
+      }
+    };
+
+    _proto._transitionComplete = function _transitionComplete(element, active, callback) {
+      if (active) {
+        $(active).removeClass(ClassName$9.ACTIVE);
+        var dropdownChild = $(active.parentNode).find(Selector$9.DROPDOWN_ACTIVE_CHILD)[0];
+
+        if (dropdownChild) {
+          $(dropdownChild).removeClass(ClassName$9.ACTIVE);
+        }
+
+        if (active.getAttribute('role') === 'tab') {
+          active.setAttribute('aria-selected', false);
+        }
+      }
+
+      $(element).addClass(ClassName$9.ACTIVE);
+
+      if (element.getAttribute('role') === 'tab') {
+        element.setAttribute('aria-selected', true);
+      }
+
+      Util.reflow(element);
+      $(element).addClass(ClassName$9.SHOW);
+
+      if (element.parentNode && $(element.parentNode).hasClass(ClassName$9.DROPDOWN_MENU)) {
+        var dropdownElement = $(element).closest(Selector$9.DROPDOWN)[0];
+
+        if (dropdownElement) {
+          var dropdownToggleList = [].slice.call(dropdownElement.querySelectorAll(Selector$9.DROPDOWN_TOGGLE));
+          $(dropdownToggleList).addClass(ClassName$9.ACTIVE);
+        }
+
+        element.setAttribute('aria-expanded', true);
+      }
+
+      if (callback) {
+        callback();
+      }
+    }; // Static
+
+
+    Tab._jQueryInterface = function _jQueryInterface(config) {
+      return this.each(function () {
+        var $this = $(this);
+        var data = $this.data(DATA_KEY$9);
+
+        if (!data) {
+          data = new Tab(this);
+          $this.data(DATA_KEY$9, data);
+        }
+
+        if (typeof config === 'string') {
+          if (typeof data[config] === 'undefined') {
+            throw new TypeError("No method named \"" + config + "\"");
+          }
+
+          data[config]();
+        }
+      });
+    };
+
+    _createClass(Tab, null, [{
+      key: "VERSION",
+      get: function get() {
+        return VERSION$9;
+      }
+    }]);
+
     return Tab;
-  }($);
+  }();
+  /**
+   * ------------------------------------------------------------------------
+   * Data Api implementation
+   * ------------------------------------------------------------------------
+   */
+
+
+  $(document).on(Event$9.CLICK_DATA_API, Selector$9.DATA_TOGGLE, function (event) {
+    event.preventDefault();
+
+    Tab._jQueryInterface.call($(this), 'show');
+  });
+  /**
+   * ------------------------------------------------------------------------
+   * jQuery
+   * ------------------------------------------------------------------------
+   */
+
+  $.fn[NAME$9] = Tab._jQueryInterface;
+  $.fn[NAME$9].Constructor = Tab;
+
+  $.fn[NAME$9].noConflict = function () {
+    $.fn[NAME$9] = JQUERY_NO_CONFLICT$9;
+    return Tab._jQueryInterface;
+  };
+
+  /**
+   * ------------------------------------------------------------------------
+   * Constants
+   * ------------------------------------------------------------------------
+   */
+
+  var NAME$a = 'toast';
+  var VERSION$a = '4.2.1';
+  var DATA_KEY$a = 'bs.toast';
+  var EVENT_KEY$a = "." + DATA_KEY$a;
+  var JQUERY_NO_CONFLICT$a = $.fn[NAME$a];
+  var Event$a = {
+    CLICK_DISMISS: "click.dismiss" + EVENT_KEY$a,
+    HIDE: "hide" + EVENT_KEY$a,
+    HIDDEN: "hidden" + EVENT_KEY$a,
+    SHOW: "show" + EVENT_KEY$a,
+    SHOWN: "shown" + EVENT_KEY$a
+  };
+  var ClassName$a = {
+    FADE: 'fade',
+    HIDE: 'hide',
+    SHOW: 'show',
+    SHOWING: 'showing'
+  };
+  var DefaultType$7 = {
+    animation: 'boolean',
+    autohide: 'boolean',
+    delay: 'number'
+  };
+  var Default$7 = {
+    animation: true,
+    autohide: true,
+    delay: 500
+  };
+  var Selector$a = {
+    DATA_DISMISS: '[data-dismiss="toast"]'
+    /**
+     * ------------------------------------------------------------------------
+     * Class Definition
+     * ------------------------------------------------------------------------
+     */
+
+  };
+
+  var Toast =
+  /*#__PURE__*/
+  function () {
+    function Toast(element, config) {
+      this._element = element;
+      this._config = this._getConfig(config);
+      this._timeout = null;
+
+      this._setListeners();
+    } // Getters
+
+
+    var _proto = Toast.prototype;
+
+    // Public
+    _proto.show = function show() {
+      var _this = this;
+
+      $(this._element).trigger(Event$a.SHOW);
+
+      if (this._config.animation) {
+        this._element.classList.add(ClassName$a.FADE);
+      }
+
+      var complete = function complete() {
+        _this._element.classList.remove(ClassName$a.SHOWING);
+
+        _this._element.classList.add(ClassName$a.SHOW);
+
+        $(_this._element).trigger(Event$a.SHOWN);
+
+        if (_this._config.autohide) {
+          _this.hide();
+        }
+      };
+
+      this._element.classList.remove(ClassName$a.HIDE);
+
+      this._element.classList.add(ClassName$a.SHOWING);
+
+      if (this._config.animation) {
+        var transitionDuration = Util.getTransitionDurationFromElement(this._element);
+        $(this._element).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
+      } else {
+        complete();
+      }
+    };
+
+    _proto.hide = function hide(withoutTimeout) {
+      var _this2 = this;
+
+      if (!this._element.classList.contains(ClassName$a.SHOW)) {
+        return;
+      }
+
+      $(this._element).trigger(Event$a.HIDE);
+
+      if (withoutTimeout) {
+        this._close();
+      } else {
+        this._timeout = setTimeout(function () {
+          _this2._close();
+        }, this._config.delay);
+      }
+    };
+
+    _proto.dispose = function dispose() {
+      clearTimeout(this._timeout);
+      this._timeout = null;
+
+      if (this._element.classList.contains(ClassName$a.SHOW)) {
+        this._element.classList.remove(ClassName$a.SHOW);
+      }
+
+      $(this._element).off(Event$a.CLICK_DISMISS);
+      $.removeData(this._element, DATA_KEY$a);
+      this._element = null;
+      this._config = null;
+    }; // Private
+
+
+    _proto._getConfig = function _getConfig(config) {
+      config = _objectSpread({}, Default$7, $(this._element).data(), typeof config === 'object' && config ? config : {});
+      Util.typeCheckConfig(NAME$a, config, this.constructor.DefaultType);
+      return config;
+    };
+
+    _proto._setListeners = function _setListeners() {
+      var _this3 = this;
+
+      $(this._element).on(Event$a.CLICK_DISMISS, Selector$a.DATA_DISMISS, function () {
+        return _this3.hide(true);
+      });
+    };
+
+    _proto._close = function _close() {
+      var _this4 = this;
+
+      var complete = function complete() {
+        _this4._element.classList.add(ClassName$a.HIDE);
+
+        $(_this4._element).trigger(Event$a.HIDDEN);
+      };
+
+      this._element.classList.remove(ClassName$a.SHOW);
+
+      if (this._config.animation) {
+        var transitionDuration = Util.getTransitionDurationFromElement(this._element);
+        $(this._element).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
+      } else {
+        complete();
+      }
+    }; // Static
+
+
+    Toast._jQueryInterface = function _jQueryInterface(config) {
+      return this.each(function () {
+        var $element = $(this);
+        var data = $element.data(DATA_KEY$a);
+
+        var _config = typeof config === 'object' && config;
+
+        if (!data) {
+          data = new Toast(this, _config);
+          $element.data(DATA_KEY$a, data);
+        }
+
+        if (typeof config === 'string') {
+          if (typeof data[config] === 'undefined') {
+            throw new TypeError("No method named \"" + config + "\"");
+          }
+
+          data[config](this);
+        }
+      });
+    };
+
+    _createClass(Toast, null, [{
+      key: "VERSION",
+      get: function get() {
+        return VERSION$a;
+      }
+    }, {
+      key: "DefaultType",
+      get: function get() {
+        return DefaultType$7;
+      }
+    }]);
+
+    return Toast;
+  }();
+  /**
+   * ------------------------------------------------------------------------
+   * jQuery
+   * ------------------------------------------------------------------------
+   */
+
+
+  $.fn[NAME$a] = Toast._jQueryInterface;
+  $.fn[NAME$a].Constructor = Toast;
+
+  $.fn[NAME$a].noConflict = function () {
+    $.fn[NAME$a] = JQUERY_NO_CONFLICT$a;
+    return Toast._jQueryInterface;
+  };
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.3): index.js
+   * Bootstrap (v4.2.1): index.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
 
-  (function ($$$1) {
-    if (typeof $$$1 === 'undefined') {
+  (function () {
+    if (typeof $ === 'undefined') {
       throw new TypeError('Bootstrap\'s JavaScript requires jQuery. jQuery must be included before Bootstrap\'s JavaScript.');
     }
 
-    var version = $$$1.fn.jquery.split(' ')[0].split('.');
+    var version = $.fn.jquery.split(' ')[0].split('.');
     var minMajor = 1;
     var ltMajor = 2;
     var minMinor = 9;
@@ -16806,7 +17162,7 @@ return jQuery;
     if (version[0] < ltMajor && version[1] < minMinor || version[0] === minMajor && version[1] === minMinor && version[2] < minPatch || version[0] >= maxMajor) {
       throw new Error('Bootstrap\'s JavaScript requires at least jQuery v1.9.1 but less than v4.0.0');
     }
-  })($);
+  })();
 
   exports.Util = Util;
   exports.Alert = Alert;
@@ -16818,6 +17174,7 @@ return jQuery;
   exports.Popover = Popover;
   exports.Scrollspy = ScrollSpy;
   exports.Tab = Tab;
+  exports.Toast = Toast;
   exports.Tooltip = Tooltip;
 
   Object.defineProperty(exports, '__esModule', { value: true });
@@ -20279,7 +20636,7 @@ return jQuery;
 * Copyright (c) 2016 Dmitry Semenov; */
 !function(a){"function"==typeof define&&define.amd?define(["jquery"],a):a("object"==typeof exports?require("jquery"):window.jQuery||window.Zepto)}(function(a){var b,c,d,e,f,g,h="Close",i="BeforeClose",j="AfterClose",k="BeforeAppend",l="MarkupParse",m="Open",n="Change",o="mfp",p="."+o,q="mfp-ready",r="mfp-removing",s="mfp-prevent-close",t=function(){},u=!!window.jQuery,v=a(window),w=function(a,c){b.ev.on(o+a+p,c)},x=function(b,c,d,e){var f=document.createElement("div");return f.className="mfp-"+b,d&&(f.innerHTML=d),e?c&&c.appendChild(f):(f=a(f),c&&f.appendTo(c)),f},y=function(c,d){b.ev.triggerHandler(o+c,d),b.st.callbacks&&(c=c.charAt(0).toLowerCase()+c.slice(1),b.st.callbacks[c]&&b.st.callbacks[c].apply(b,a.isArray(d)?d:[d]))},z=function(c){return c===g&&b.currTemplate.closeBtn||(b.currTemplate.closeBtn=a(b.st.closeMarkup.replace("%title%",b.st.tClose)),g=c),b.currTemplate.closeBtn},A=function(){a.magnificPopup.instance||(b=new t,b.init(),a.magnificPopup.instance=b)},B=function(){var a=document.createElement("p").style,b=["ms","O","Moz","Webkit"];if(void 0!==a.transition)return!0;for(;b.length;)if(b.pop()+"Transition"in a)return!0;return!1};t.prototype={constructor:t,init:function(){var c=navigator.appVersion;b.isLowIE=b.isIE8=document.all&&!document.addEventListener,b.isAndroid=/android/gi.test(c),b.isIOS=/iphone|ipad|ipod/gi.test(c),b.supportsTransition=B(),b.probablyMobile=b.isAndroid||b.isIOS||/(Opera Mini)|Kindle|webOS|BlackBerry|(Opera Mobi)|(Windows Phone)|IEMobile/i.test(navigator.userAgent),d=a(document),b.popupsCache={}},open:function(c){var e;if(c.isObj===!1){b.items=c.items.toArray(),b.index=0;var g,h=c.items;for(e=0;e<h.length;e++)if(g=h[e],g.parsed&&(g=g.el[0]),g===c.el[0]){b.index=e;break}}else b.items=a.isArray(c.items)?c.items:[c.items],b.index=c.index||0;if(b.isOpen)return void b.updateItemHTML();b.types=[],f="",c.mainEl&&c.mainEl.length?b.ev=c.mainEl.eq(0):b.ev=d,c.key?(b.popupsCache[c.key]||(b.popupsCache[c.key]={}),b.currTemplate=b.popupsCache[c.key]):b.currTemplate={},b.st=a.extend(!0,{},a.magnificPopup.defaults,c),b.fixedContentPos="auto"===b.st.fixedContentPos?!b.probablyMobile:b.st.fixedContentPos,b.st.modal&&(b.st.closeOnContentClick=!1,b.st.closeOnBgClick=!1,b.st.showCloseBtn=!1,b.st.enableEscapeKey=!1),b.bgOverlay||(b.bgOverlay=x("bg").on("click"+p,function(){b.close()}),b.wrap=x("wrap").attr("tabindex",-1).on("click"+p,function(a){b._checkIfClose(a.target)&&b.close()}),b.container=x("container",b.wrap)),b.contentContainer=x("content"),b.st.preloader&&(b.preloader=x("preloader",b.container,b.st.tLoading));var i=a.magnificPopup.modules;for(e=0;e<i.length;e++){var j=i[e];j=j.charAt(0).toUpperCase()+j.slice(1),b["init"+j].call(b)}y("BeforeOpen"),b.st.showCloseBtn&&(b.st.closeBtnInside?(w(l,function(a,b,c,d){c.close_replaceWith=z(d.type)}),f+=" mfp-close-btn-in"):b.wrap.append(z())),b.st.alignTop&&(f+=" mfp-align-top"),b.fixedContentPos?b.wrap.css({overflow:b.st.overflowY,overflowX:"hidden",overflowY:b.st.overflowY}):b.wrap.css({top:v.scrollTop(),position:"absolute"}),(b.st.fixedBgPos===!1||"auto"===b.st.fixedBgPos&&!b.fixedContentPos)&&b.bgOverlay.css({height:d.height(),position:"absolute"}),b.st.enableEscapeKey&&d.on("keyup"+p,function(a){27===a.keyCode&&b.close()}),v.on("resize"+p,function(){b.updateSize()}),b.st.closeOnContentClick||(f+=" mfp-auto-cursor"),f&&b.wrap.addClass(f);var k=b.wH=v.height(),n={};if(b.fixedContentPos&&b._hasScrollBar(k)){var o=b._getScrollbarSize();o&&(n.marginRight=o)}b.fixedContentPos&&(b.isIE7?a("body, html").css("overflow","hidden"):n.overflow="hidden");var r=b.st.mainClass;return b.isIE7&&(r+=" mfp-ie7"),r&&b._addClassToMFP(r),b.updateItemHTML(),y("BuildControls"),a("html").css(n),b.bgOverlay.add(b.wrap).prependTo(b.st.prependTo||a(document.body)),b._lastFocusedEl=document.activeElement,setTimeout(function(){b.content?(b._addClassToMFP(q),b._setFocus()):b.bgOverlay.addClass(q),d.on("focusin"+p,b._onFocusIn)},16),b.isOpen=!0,b.updateSize(k),y(m),c},close:function(){b.isOpen&&(y(i),b.isOpen=!1,b.st.removalDelay&&!b.isLowIE&&b.supportsTransition?(b._addClassToMFP(r),setTimeout(function(){b._close()},b.st.removalDelay)):b._close())},_close:function(){y(h);var c=r+" "+q+" ";if(b.bgOverlay.detach(),b.wrap.detach(),b.container.empty(),b.st.mainClass&&(c+=b.st.mainClass+" "),b._removeClassFromMFP(c),b.fixedContentPos){var e={marginRight:""};b.isIE7?a("body, html").css("overflow",""):e.overflow="",a("html").css(e)}d.off("keyup"+p+" focusin"+p),b.ev.off(p),b.wrap.attr("class","mfp-wrap").removeAttr("style"),b.bgOverlay.attr("class","mfp-bg"),b.container.attr("class","mfp-container"),!b.st.showCloseBtn||b.st.closeBtnInside&&b.currTemplate[b.currItem.type]!==!0||b.currTemplate.closeBtn&&b.currTemplate.closeBtn.detach(),b.st.autoFocusLast&&b._lastFocusedEl&&a(b._lastFocusedEl).focus(),b.currItem=null,b.content=null,b.currTemplate=null,b.prevHeight=0,y(j)},updateSize:function(a){if(b.isIOS){var c=document.documentElement.clientWidth/window.innerWidth,d=window.innerHeight*c;b.wrap.css("height",d),b.wH=d}else b.wH=a||v.height();b.fixedContentPos||b.wrap.css("height",b.wH),y("Resize")},updateItemHTML:function(){var c=b.items[b.index];b.contentContainer.detach(),b.content&&b.content.detach(),c.parsed||(c=b.parseEl(b.index));var d=c.type;if(y("BeforeChange",[b.currItem?b.currItem.type:"",d]),b.currItem=c,!b.currTemplate[d]){var f=b.st[d]?b.st[d].markup:!1;y("FirstMarkupParse",f),f?b.currTemplate[d]=a(f):b.currTemplate[d]=!0}e&&e!==c.type&&b.container.removeClass("mfp-"+e+"-holder");var g=b["get"+d.charAt(0).toUpperCase()+d.slice(1)](c,b.currTemplate[d]);b.appendContent(g,d),c.preloaded=!0,y(n,c),e=c.type,b.container.prepend(b.contentContainer),y("AfterChange")},appendContent:function(a,c){b.content=a,a?b.st.showCloseBtn&&b.st.closeBtnInside&&b.currTemplate[c]===!0?b.content.find(".mfp-close").length||b.content.append(z()):b.content=a:b.content="",y(k),b.container.addClass("mfp-"+c+"-holder"),b.contentContainer.append(b.content)},parseEl:function(c){var d,e=b.items[c];if(e.tagName?e={el:a(e)}:(d=e.type,e={data:e,src:e.src}),e.el){for(var f=b.types,g=0;g<f.length;g++)if(e.el.hasClass("mfp-"+f[g])){d=f[g];break}e.src=e.el.attr("data-mfp-src"),e.src||(e.src=e.el.attr("href"))}return e.type=d||b.st.type||"inline",e.index=c,e.parsed=!0,b.items[c]=e,y("ElementParse",e),b.items[c]},addGroup:function(a,c){var d=function(d){d.mfpEl=this,b._openClick(d,a,c)};c||(c={});var e="click.magnificPopup";c.mainEl=a,c.items?(c.isObj=!0,a.off(e).on(e,d)):(c.isObj=!1,c.delegate?a.off(e).on(e,c.delegate,d):(c.items=a,a.off(e).on(e,d)))},_openClick:function(c,d,e){var f=void 0!==e.midClick?e.midClick:a.magnificPopup.defaults.midClick;if(f||!(2===c.which||c.ctrlKey||c.metaKey||c.altKey||c.shiftKey)){var g=void 0!==e.disableOn?e.disableOn:a.magnificPopup.defaults.disableOn;if(g)if(a.isFunction(g)){if(!g.call(b))return!0}else if(v.width()<g)return!0;c.type&&(c.preventDefault(),b.isOpen&&c.stopPropagation()),e.el=a(c.mfpEl),e.delegate&&(e.items=d.find(e.delegate)),b.open(e)}},updateStatus:function(a,d){if(b.preloader){c!==a&&b.container.removeClass("mfp-s-"+c),d||"loading"!==a||(d=b.st.tLoading);var e={status:a,text:d};y("UpdateStatus",e),a=e.status,d=e.text,b.preloader.html(d),b.preloader.find("a").on("click",function(a){a.stopImmediatePropagation()}),b.container.addClass("mfp-s-"+a),c=a}},_checkIfClose:function(c){if(!a(c).hasClass(s)){var d=b.st.closeOnContentClick,e=b.st.closeOnBgClick;if(d&&e)return!0;if(!b.content||a(c).hasClass("mfp-close")||b.preloader&&c===b.preloader[0])return!0;if(c===b.content[0]||a.contains(b.content[0],c)){if(d)return!0}else if(e&&a.contains(document,c))return!0;return!1}},_addClassToMFP:function(a){b.bgOverlay.addClass(a),b.wrap.addClass(a)},_removeClassFromMFP:function(a){this.bgOverlay.removeClass(a),b.wrap.removeClass(a)},_hasScrollBar:function(a){return(b.isIE7?d.height():document.body.scrollHeight)>(a||v.height())},_setFocus:function(){(b.st.focus?b.content.find(b.st.focus).eq(0):b.wrap).focus()},_onFocusIn:function(c){return c.target===b.wrap[0]||a.contains(b.wrap[0],c.target)?void 0:(b._setFocus(),!1)},_parseMarkup:function(b,c,d){var e;d.data&&(c=a.extend(d.data,c)),y(l,[b,c,d]),a.each(c,function(c,d){if(void 0===d||d===!1)return!0;if(e=c.split("_"),e.length>1){var f=b.find(p+"-"+e[0]);if(f.length>0){var g=e[1];"replaceWith"===g?f[0]!==d[0]&&f.replaceWith(d):"img"===g?f.is("img")?f.attr("src",d):f.replaceWith(a("<img>").attr("src",d).attr("class",f.attr("class"))):f.attr(e[1],d)}}else b.find(p+"-"+c).html(d)})},_getScrollbarSize:function(){if(void 0===b.scrollbarSize){var a=document.createElement("div");a.style.cssText="width: 99px; height: 99px; overflow: scroll; position: absolute; top: -9999px;",document.body.appendChild(a),b.scrollbarSize=a.offsetWidth-a.clientWidth,document.body.removeChild(a)}return b.scrollbarSize}},a.magnificPopup={instance:null,proto:t.prototype,modules:[],open:function(b,c){return A(),b=b?a.extend(!0,{},b):{},b.isObj=!0,b.index=c||0,this.instance.open(b)},close:function(){return a.magnificPopup.instance&&a.magnificPopup.instance.close()},registerModule:function(b,c){c.options&&(a.magnificPopup.defaults[b]=c.options),a.extend(this.proto,c.proto),this.modules.push(b)},defaults:{disableOn:0,key:null,midClick:!1,mainClass:"",preloader:!0,focus:"",closeOnContentClick:!1,closeOnBgClick:!0,closeBtnInside:!0,showCloseBtn:!0,enableEscapeKey:!0,modal:!1,alignTop:!1,removalDelay:0,prependTo:null,fixedContentPos:"auto",fixedBgPos:"auto",overflowY:"auto",closeMarkup:'<button title="%title%" type="button" class="mfp-close">&#215;</button>',tClose:"Close (Esc)",tLoading:"Loading...",autoFocusLast:!0}},a.fn.magnificPopup=function(c){A();var d=a(this);if("string"==typeof c)if("open"===c){var e,f=u?d.data("magnificPopup"):d[0].magnificPopup,g=parseInt(arguments[1],10)||0;f.items?e=f.items[g]:(e=d,f.delegate&&(e=e.find(f.delegate)),e=e.eq(g)),b._openClick({mfpEl:e},d,f)}else b.isOpen&&b[c].apply(b,Array.prototype.slice.call(arguments,1));else c=a.extend(!0,{},c),u?d.data("magnificPopup",c):d[0].magnificPopup=c,b.addGroup(d,c);return d};var C,D,E,F="inline",G=function(){E&&(D.after(E.addClass(C)).detach(),E=null)};a.magnificPopup.registerModule(F,{options:{hiddenClass:"hide",markup:"",tNotFound:"Content not found"},proto:{initInline:function(){b.types.push(F),w(h+"."+F,function(){G()})},getInline:function(c,d){if(G(),c.src){var e=b.st.inline,f=a(c.src);if(f.length){var g=f[0].parentNode;g&&g.tagName&&(D||(C=e.hiddenClass,D=x(C),C="mfp-"+C),E=f.after(D).detach().removeClass(C)),b.updateStatus("ready")}else b.updateStatus("error",e.tNotFound),f=a("<div>");return c.inlineElement=f,f}return b.updateStatus("ready"),b._parseMarkup(d,{},c),d}}});var H,I="ajax",J=function(){H&&a(document.body).removeClass(H)},K=function(){J(),b.req&&b.req.abort()};a.magnificPopup.registerModule(I,{options:{settings:null,cursor:"mfp-ajax-cur",tError:'<a href="%url%">The content</a> could not be loaded.'},proto:{initAjax:function(){b.types.push(I),H=b.st.ajax.cursor,w(h+"."+I,K),w("BeforeChange."+I,K)},getAjax:function(c){H&&a(document.body).addClass(H),b.updateStatus("loading");var d=a.extend({url:c.src,success:function(d,e,f){var g={data:d,xhr:f};y("ParseAjax",g),b.appendContent(a(g.data),I),c.finished=!0,J(),b._setFocus(),setTimeout(function(){b.wrap.addClass(q)},16),b.updateStatus("ready"),y("AjaxContentAdded")},error:function(){J(),c.finished=c.loadError=!0,b.updateStatus("error",b.st.ajax.tError.replace("%url%",c.src))}},b.st.ajax.settings);return b.req=a.ajax(d),""}}});var L,M=function(c){if(c.data&&void 0!==c.data.title)return c.data.title;var d=b.st.image.titleSrc;if(d){if(a.isFunction(d))return d.call(b,c);if(c.el)return c.el.attr(d)||""}return""};a.magnificPopup.registerModule("image",{options:{markup:'<div class="mfp-figure"><div class="mfp-close"></div><figure><div class="mfp-img"></div><figcaption><div class="mfp-bottom-bar"><div class="mfp-title"></div><div class="mfp-counter"></div></div></figcaption></figure></div>',cursor:"mfp-zoom-out-cur",titleSrc:"title",verticalFit:!0,tError:'<a href="%url%">The image</a> could not be loaded.'},proto:{initImage:function(){var c=b.st.image,d=".image";b.types.push("image"),w(m+d,function(){"image"===b.currItem.type&&c.cursor&&a(document.body).addClass(c.cursor)}),w(h+d,function(){c.cursor&&a(document.body).removeClass(c.cursor),v.off("resize"+p)}),w("Resize"+d,b.resizeImage),b.isLowIE&&w("AfterChange",b.resizeImage)},resizeImage:function(){var a=b.currItem;if(a&&a.img&&b.st.image.verticalFit){var c=0;b.isLowIE&&(c=parseInt(a.img.css("padding-top"),10)+parseInt(a.img.css("padding-bottom"),10)),a.img.css("max-height",b.wH-c)}},_onImageHasSize:function(a){a.img&&(a.hasSize=!0,L&&clearInterval(L),a.isCheckingImgSize=!1,y("ImageHasSize",a),a.imgHidden&&(b.content&&b.content.removeClass("mfp-loading"),a.imgHidden=!1))},findImageSize:function(a){var c=0,d=a.img[0],e=function(f){L&&clearInterval(L),L=setInterval(function(){return d.naturalWidth>0?void b._onImageHasSize(a):(c>200&&clearInterval(L),c++,void(3===c?e(10):40===c?e(50):100===c&&e(500)))},f)};e(1)},getImage:function(c,d){var e=0,f=function(){c&&(c.img[0].complete?(c.img.off(".mfploader"),c===b.currItem&&(b._onImageHasSize(c),b.updateStatus("ready")),c.hasSize=!0,c.loaded=!0,y("ImageLoadComplete")):(e++,200>e?setTimeout(f,100):g()))},g=function(){c&&(c.img.off(".mfploader"),c===b.currItem&&(b._onImageHasSize(c),b.updateStatus("error",h.tError.replace("%url%",c.src))),c.hasSize=!0,c.loaded=!0,c.loadError=!0)},h=b.st.image,i=d.find(".mfp-img");if(i.length){var j=document.createElement("img");j.className="mfp-img",c.el&&c.el.find("img").length&&(j.alt=c.el.find("img").attr("alt")),c.img=a(j).on("load.mfploader",f).on("error.mfploader",g),j.src=c.src,i.is("img")&&(c.img=c.img.clone()),j=c.img[0],j.naturalWidth>0?c.hasSize=!0:j.width||(c.hasSize=!1)}return b._parseMarkup(d,{title:M(c),img_replaceWith:c.img},c),b.resizeImage(),c.hasSize?(L&&clearInterval(L),c.loadError?(d.addClass("mfp-loading"),b.updateStatus("error",h.tError.replace("%url%",c.src))):(d.removeClass("mfp-loading"),b.updateStatus("ready")),d):(b.updateStatus("loading"),c.loading=!0,c.hasSize||(c.imgHidden=!0,d.addClass("mfp-loading"),b.findImageSize(c)),d)}}});var N,O=function(){return void 0===N&&(N=void 0!==document.createElement("p").style.MozTransform),N};a.magnificPopup.registerModule("zoom",{options:{enabled:!1,easing:"ease-in-out",duration:300,opener:function(a){return a.is("img")?a:a.find("img")}},proto:{initZoom:function(){var a,c=b.st.zoom,d=".zoom";if(c.enabled&&b.supportsTransition){var e,f,g=c.duration,j=function(a){var b=a.clone().removeAttr("style").removeAttr("class").addClass("mfp-animated-image"),d="all "+c.duration/1e3+"s "+c.easing,e={position:"fixed",zIndex:9999,left:0,top:0,"-webkit-backface-visibility":"hidden"},f="transition";return e["-webkit-"+f]=e["-moz-"+f]=e["-o-"+f]=e[f]=d,b.css(e),b},k=function(){b.content.css("visibility","visible")};w("BuildControls"+d,function(){if(b._allowZoom()){if(clearTimeout(e),b.content.css("visibility","hidden"),a=b._getItemToZoom(),!a)return void k();f=j(a),f.css(b._getOffset()),b.wrap.append(f),e=setTimeout(function(){f.css(b._getOffset(!0)),e=setTimeout(function(){k(),setTimeout(function(){f.remove(),a=f=null,y("ZoomAnimationEnded")},16)},g)},16)}}),w(i+d,function(){if(b._allowZoom()){if(clearTimeout(e),b.st.removalDelay=g,!a){if(a=b._getItemToZoom(),!a)return;f=j(a)}f.css(b._getOffset(!0)),b.wrap.append(f),b.content.css("visibility","hidden"),setTimeout(function(){f.css(b._getOffset())},16)}}),w(h+d,function(){b._allowZoom()&&(k(),f&&f.remove(),a=null)})}},_allowZoom:function(){return"image"===b.currItem.type},_getItemToZoom:function(){return b.currItem.hasSize?b.currItem.img:!1},_getOffset:function(c){var d;d=c?b.currItem.img:b.st.zoom.opener(b.currItem.el||b.currItem);var e=d.offset(),f=parseInt(d.css("padding-top"),10),g=parseInt(d.css("padding-bottom"),10);e.top-=a(window).scrollTop()-f;var h={width:d.width(),height:(u?d.innerHeight():d[0].offsetHeight)-g-f};return O()?h["-moz-transform"]=h.transform="translate("+e.left+"px,"+e.top+"px)":(h.left=e.left,h.top=e.top),h}}});var P="iframe",Q="//about:blank",R=function(a){if(b.currTemplate[P]){var c=b.currTemplate[P].find("iframe");c.length&&(a||(c[0].src=Q),b.isIE8&&c.css("display",a?"block":"none"))}};a.magnificPopup.registerModule(P,{options:{markup:'<div class="mfp-iframe-scaler"><div class="mfp-close"></div><iframe class="mfp-iframe" src="//about:blank" frameborder="0" allowfullscreen></iframe></div>',srcAction:"iframe_src",patterns:{youtube:{index:"youtube.com",id:"v=",src:"//www.youtube.com/embed/%id%?autoplay=1"},vimeo:{index:"vimeo.com/",id:"/",src:"//player.vimeo.com/video/%id%?autoplay=1"},gmaps:{index:"//maps.google.",src:"%id%&output=embed"}}},proto:{initIframe:function(){b.types.push(P),w("BeforeChange",function(a,b,c){b!==c&&(b===P?R():c===P&&R(!0))}),w(h+"."+P,function(){R()})},getIframe:function(c,d){var e=c.src,f=b.st.iframe;a.each(f.patterns,function(){return e.indexOf(this.index)>-1?(this.id&&(e="string"==typeof this.id?e.substr(e.lastIndexOf(this.id)+this.id.length,e.length):this.id.call(this,e)),e=this.src.replace("%id%",e),!1):void 0});var g={};return f.srcAction&&(g[f.srcAction]=e),b._parseMarkup(d,g,c),b.updateStatus("ready"),d}}});var S=function(a){var c=b.items.length;return a>c-1?a-c:0>a?c+a:a},T=function(a,b,c){return a.replace(/%curr%/gi,b+1).replace(/%total%/gi,c)};a.magnificPopup.registerModule("gallery",{options:{enabled:!1,arrowMarkup:'<button title="%title%" type="button" class="mfp-arrow mfp-arrow-%dir%"></button>',preload:[0,2],navigateByImgClick:!0,arrows:!0,tPrev:"Previous (Left arrow key)",tNext:"Next (Right arrow key)",tCounter:"%curr% of %total%"},proto:{initGallery:function(){var c=b.st.gallery,e=".mfp-gallery";return b.direction=!0,c&&c.enabled?(f+=" mfp-gallery",w(m+e,function(){c.navigateByImgClick&&b.wrap.on("click"+e,".mfp-img",function(){return b.items.length>1?(b.next(),!1):void 0}),d.on("keydown"+e,function(a){37===a.keyCode?b.prev():39===a.keyCode&&b.next()})}),w("UpdateStatus"+e,function(a,c){c.text&&(c.text=T(c.text,b.currItem.index,b.items.length))}),w(l+e,function(a,d,e,f){var g=b.items.length;e.counter=g>1?T(c.tCounter,f.index,g):""}),w("BuildControls"+e,function(){if(b.items.length>1&&c.arrows&&!b.arrowLeft){var d=c.arrowMarkup,e=b.arrowLeft=a(d.replace(/%title%/gi,c.tPrev).replace(/%dir%/gi,"left")).addClass(s),f=b.arrowRight=a(d.replace(/%title%/gi,c.tNext).replace(/%dir%/gi,"right")).addClass(s);e.click(function(){b.prev()}),f.click(function(){b.next()}),b.container.append(e.add(f))}}),w(n+e,function(){b._preloadTimeout&&clearTimeout(b._preloadTimeout),b._preloadTimeout=setTimeout(function(){b.preloadNearbyImages(),b._preloadTimeout=null},16)}),void w(h+e,function(){d.off(e),b.wrap.off("click"+e),b.arrowRight=b.arrowLeft=null})):!1},next:function(){b.direction=!0,b.index=S(b.index+1),b.updateItemHTML()},prev:function(){b.direction=!1,b.index=S(b.index-1),b.updateItemHTML()},goTo:function(a){b.direction=a>=b.index,b.index=a,b.updateItemHTML()},preloadNearbyImages:function(){var a,c=b.st.gallery.preload,d=Math.min(c[0],b.items.length),e=Math.min(c[1],b.items.length);for(a=1;a<=(b.direction?e:d);a++)b._preloadItem(b.index+a);for(a=1;a<=(b.direction?d:e);a++)b._preloadItem(b.index-a)},_preloadItem:function(c){if(c=S(c),!b.items[c].preloaded){var d=b.items[c];d.parsed||(d=b.parseEl(c)),y("LazyLoad",d),"image"===d.type&&(d.img=a('<img class="mfp-img" />').on("load.mfploader",function(){d.hasSize=!0}).on("error.mfploader",function(){d.hasSize=!0,d.loadError=!0,y("LazyLoadError",d)}).attr("src",d.src)),d.preloaded=!0}}}});var U="retina";a.magnificPopup.registerModule(U,{options:{replaceSrc:function(a){return a.src.replace(/\.\w+$/,function(a){return"@2x"+a})},ratio:1},proto:{initRetina:function(){if(window.devicePixelRatio>1){var a=b.st.retina,c=a.ratio;c=isNaN(c)?c():c,c>1&&(w("ImageHasSize."+U,function(a,b){b.img.css({"max-width":b.img[0].naturalWidth/c,width:"100%"})}),w("ElementParse."+U,function(b,d){d.src=a.replaceSrc(d,c)}))}}}}),A()});
 /**
- * Swiper 4.4.2
+ * Swiper 4.4.6
  * Most modern mobile touch slider and framework with hardware accelerated transitions
  * http://www.idangero.us/swiper/
  *
@@ -20287,7 +20644,7 @@ return jQuery;
  *
  * Released under the MIT License
  *
- * Released on: November 1, 2018
+ * Released on: December 19, 2018
  */
 
 (function (global, factory) {
@@ -21245,7 +21602,7 @@ return jQuery;
     var testDiv = doc.createElement('div');
     return {
       touch: (win.Modernizr && win.Modernizr.touch === true) || (function checkTouch() {
-        return !!(('ontouchstart' in win) || (win.DocumentTouch && doc instanceof win.DocumentTouch));
+        return !!((win.navigator.maxTouchPoints > 0) || ('ontouchstart' in win) || (win.DocumentTouch && doc instanceof win.DocumentTouch));
       }()),
 
       pointerEvents: !!(win.navigator.pointerEnabled || win.PointerEvent || ('maxTouchPoints' in win.navigator)),
@@ -21571,7 +21928,7 @@ return jQuery;
     var slideSize;
     var slidesPerColumn = params.slidesPerColumn;
     var slidesPerRow = slidesNumberEvenToRows / slidesPerColumn;
-    var numFullColumns = slidesPerRow - ((params.slidesPerColumn * slidesPerRow) - slidesLength);
+    var numFullColumns = Math.floor(slidesLength / params.slidesPerColumn);
     for (var i = 0; i < slidesLength; i += 1) {
       slideSize = 0;
       var slide = slides.eq(i);
@@ -21630,13 +21987,29 @@ return jQuery;
         } else {
           // eslint-disable-next-line
           if (swiper.isHorizontal()) {
-            slideSize = parseFloat(slideStyles.getPropertyValue('width'))
-              + parseFloat(slideStyles.getPropertyValue('margin-left'))
-              + parseFloat(slideStyles.getPropertyValue('margin-right'));
+            var width = parseFloat(slideStyles.getPropertyValue('width'));
+            var paddingLeft = parseFloat(slideStyles.getPropertyValue('padding-left'));
+            var paddingRight = parseFloat(slideStyles.getPropertyValue('padding-right'));
+            var marginLeft = parseFloat(slideStyles.getPropertyValue('margin-left'));
+            var marginRight = parseFloat(slideStyles.getPropertyValue('margin-right'));
+            var boxSizing = slideStyles.getPropertyValue('box-sizing');
+            if (boxSizing && boxSizing === 'border-box') {
+              slideSize = width + marginLeft + marginRight;
+            } else {
+              slideSize = width + paddingLeft + paddingRight + marginLeft + marginRight;
+            }
           } else {
-            slideSize = parseFloat(slideStyles.getPropertyValue('height'))
-              + parseFloat(slideStyles.getPropertyValue('margin-top'))
-              + parseFloat(slideStyles.getPropertyValue('margin-bottom'));
+            var height = parseFloat(slideStyles.getPropertyValue('height'));
+            var paddingTop = parseFloat(slideStyles.getPropertyValue('padding-top'));
+            var paddingBottom = parseFloat(slideStyles.getPropertyValue('padding-bottom'));
+            var marginTop = parseFloat(slideStyles.getPropertyValue('margin-top'));
+            var marginBottom = parseFloat(slideStyles.getPropertyValue('margin-bottom'));
+            var boxSizing$1 = slideStyles.getPropertyValue('box-sizing');
+            if (boxSizing$1 && boxSizing$1 === 'border-box') {
+              slideSize = height + marginTop + marginBottom;
+            } else {
+              slideSize = height + paddingTop + paddingBottom + marginTop + marginBottom;
+            }
           }
         }
         if (currentTransform) {
@@ -22583,7 +22956,7 @@ return jQuery;
     var $wrapperEl = swiper.$wrapperEl;
     var params = swiper.params;
     var slides = swiper.slides;
-    $wrapperEl.children(("." + (params.slideClass) + "." + (params.slideDuplicateClass))).remove();
+    $wrapperEl.children(("." + (params.slideClass) + "." + (params.slideDuplicateClass) + ",." + (params.slideClass) + "." + (params.slideBlankClass))).remove();
     slides.removeAttr('data-swiper-slide-index');
   }
 
@@ -24475,7 +24848,7 @@ return jQuery;
         }
       }
       // Observe container
-      swiper.observer.attach(swiper.$el[0], { childList: false });
+      swiper.observer.attach(swiper.$el[0], { childList: swiper.params.observeSlideChildren });
 
       // Observe wrapper
       swiper.observer.attach(swiper.$wrapperEl[0], { attributes: false });
@@ -24494,6 +24867,7 @@ return jQuery;
     params: {
       observer: false,
       observeParents: false,
+      observeSlideChildren: false,
     },
     create: function create() {
       var swiper = this;
@@ -26075,7 +26449,7 @@ return jQuery;
       }
       if (!gesture.$imageEl || gesture.$imageEl.length === 0) { return; }
       if (Support.gestures) {
-        swiper.zoom.scale = e.scale * zoom.currentScale;
+        zoom.scale = e.scale * zoom.currentScale;
       } else {
         zoom.scale = (gesture.scaleMove / gesture.scaleStart) * zoom.currentScale;
       }
@@ -26262,12 +26636,13 @@ return jQuery;
       if (gesture.$slideEl && swiper.previousIndex !== swiper.activeIndex) {
         gesture.$imageEl.transform('translate3d(0,0,0) scale(1)');
         gesture.$imageWrapEl.transform('translate3d(0,0,0)');
-        gesture.$slideEl = undefined;
-        gesture.$imageEl = undefined;
-        gesture.$imageWrapEl = undefined;
 
         zoom.scale = 1;
         zoom.currentScale = 1;
+
+        gesture.$slideEl = undefined;
+        gesture.$imageEl = undefined;
+        gesture.$imageWrapEl = undefined;
       }
     },
     // Toggle Zoom
@@ -26490,11 +26865,27 @@ return jQuery;
           prevTime: undefined,
         },
       };
+
       ('onGestureStart onGestureChange onGestureEnd onTouchStart onTouchMove onTouchEnd onTransitionEnd toggle enable disable in out').split(' ').forEach(function (methodName) {
         zoom[methodName] = Zoom[methodName].bind(swiper);
       });
       Utils.extend(swiper, {
         zoom: zoom,
+      });
+
+      var scale = 1;
+      Object.defineProperty(swiper.zoom, 'scale', {
+        get: function get() {
+          return scale;
+        },
+        set: function set(value) {
+          if (scale !== value) {
+            var imageEl = swiper.zoom.gesture.$imageEl ? swiper.zoom.gesture.$imageEl[0] : undefined;
+            var slideEl = swiper.zoom.gesture.$slideEl ? swiper.zoom.gesture.$slideEl[0] : undefined;
+            swiper.emit('zoomChange', value, imageEl, slideEl);
+          }
+          scale = value;
+        },
       });
     },
     on: {
@@ -32193,13 +32584,13 @@ return Outlayer;
 
 !function(a){"use strict";var t={init:function(t){var o={easing:"ease",duration:700,margins:!1,setOnClick:!1,activeObj:".active",autoUpdate:!1,updateTime:100,enableHover:!0,delayOn:0,delayOff:0,enableFocus:!1,deepFocus:!1};return t=a.extend({},o,t),this.each(function(){var o=t.margins,s=t.setOnClick,m=t.activeObj,r=t.autoUpdate,p=t.updateTime,u=t.enableHover,v=t.delayOn,c=t.delayOff,d=t.enableFocus,f=t.deepFocus,h=t.duration,g=t.easing,b=a(this),T=b.children(),y=b.children(m);0===y.length&&(y=T.eq(0)),b.addClass("lavalamp").data({lavalampActive:y,isAnim:!1,settings:t});var A=a('<div class="lavalamp-object '+g+'" />').prependTo(b);T.addClass("lavalamp-item"),A.css({WebkitTransitionDuration:h/1e3+"s",msTransitionDuration:h/1e3+"s",MozTransitionDuration:h/1e3+"s",OTransitionDuration:h/1e3+"s",transitionDuration:h/1e3+"s"});var j=y.outerWidth(o),I=y.outerHeight(o),O=y.position().top,C=y.position().left,x=y.css("marginTop"),D=y.css("marginLeft");o||(D=parseInt(D),x=parseInt(x),C+=D,O+=x),A.css({width:j,height:I,transform:"translate("+C+"px,"+O+"px)"});var F=!1,H=!0;if(e=function(){var t=a(this);F=!0,setTimeout(function(){F&&H&&b.lavalamp("anim",t)},v)},i=function(a){a=b.data("lavalampActive"),F=!1,setTimeout(function(){!F&&H&&b.lavalamp("anim",a)},c)},n=function(){var t=a(this);t.hasClass("lavalamp-item")||(t=t.parents(".lavalamp-item")),H=!1,setTimeout(function(){b.lavalamp("anim",t)},v)},l=function(){H=!0;var a=b.data("lavalampActive");setTimeout(function(){b.lavalamp("anim",a)},c)},u&&(b.on("mouseenter",".lavalamp-item",e),b.on("mouseleave",".lavalamp-item",i)),d&&(b.on("focusin",".lavalamp-item",n),b.on("focusout",".lavalamp-item",l)),f&&(b.on("focusin",".lavalamp-item *",n),b.on("focusout",".lavalamp-item *",l)),s&&T.click(function(){y=a(this),b.data("lavalampActive",y).lavalamp("update")}),r){var k=setInterval(function(){var a=b.data("isAnim");F||a||b.lavalamp("update")},p);b.data("updateInterval",k)}})},destroy:function(){return this.each(function(){var t=a(this),o=t.data("settings"),s=t.children(".lavalamp-item"),m=o.enableHover,r=o.enableFocus,p=o.deepFocus,u=o.autoUpdate;if(m&&(t.off("mouseenter",".lavalamp-item",e),t.off("mouseleave",".lavalamp-item",i)),r&&(t.off("focusin",".lavalamp-item",n),t.off("focusout",".lavalamp-item",l)),p&&(t.off("focusin",".lavalamp-item *",n),t.off("focusout",".lavalamp-item *",l)),t.removeClass("lavalamp"),s.removeClass("lavalamp-item"),u){var v=t.data("updateInterval");clearInterval(v)}t.children(".lavalamp-object").remove(),t.removeData()})},update:function(){return this.each(function(){var t=a(this),e=t.children(":not(.lavalamp-object)"),i=t.data("lavalampActive");e.addClass("lavalamp-item").css({zIndex:5,position:"relative"}),t.lavalamp("anim",i)})},anim:function(a){var t=this,e=t.data("settings"),i=e.duration,n=e.margins,l=t.children(".lavalamp-object"),o=a.outerWidth(n),s=a.outerHeight(n),m=a.position().top,r=a.position().left,p=a.css("marginTop"),u=a.css("marginLeft");n||(u=parseInt(u),p=parseInt(p),r+=u,m+=p),t.data("isAnim",!0),l.css({width:o,height:s,transform:"translate("+r+"px,"+m+"px)"}),setTimeout(function(){t.data("isAnim",!1)},i)}};a.fn.lavalamp=function(e){return t[e]?t[e].apply(this,Array.prototype.slice.call(arguments,1)):"object"!=typeof e&&e?void a.error("Method "+e+" does not exist on jQuery.lavalamp"):t.init.apply(this,arguments)};var e,i,n,l}(jQuery);
 /*!
- * Bootstrap-select v1.13.3 (https://developer.snapappointments.com/bootstrap-select)
+ * Bootstrap-select v1.13.5 (https://developer.snapappointments.com/bootstrap-select)
  *
  * Copyright 2012-2018 SnapAppointments, LLC
  * Licensed under MIT (https://github.com/snapappointments/bootstrap-select/blob/master/LICENSE)
  */
 
-!function(e,t){void 0===e&&void 0!==window&&(e=window),"function"==typeof define&&define.amd?define(["jquery"],function(e){return t(e)}):"object"==typeof module&&module.exports?module.exports=t(require("jquery")):t(e.jQuery)}(this,function(e){!function(F){"use strict";var e,a,t,i=document.createElement("_");if(i.classList.toggle("c3",!1),i.classList.contains("c3")){var s=DOMTokenList.prototype.toggle;DOMTokenList.prototype.toggle=function(e,t){return 1 in arguments&&!this.contains(e)==!t?t:s.call(this,e)}}function S(e){var t,i=[],s=e&&e.options;if(e.multiple)for(var n=0,o=s.length;n<o;n++)(t=s[n]).selected&&i.push(t.value||t.text);else i=e.value;return i}String.prototype.startsWith||(e=function(){try{var e={},t=Object.defineProperty,i=t(e,e,e)&&t}catch(e){}return i}(),a={}.toString,t=function(e){if(null==this)throw new TypeError;var t=String(this);if(e&&"[object RegExp]"==a.call(e))throw new TypeError;var i=t.length,s=String(e),n=s.length,o=1<arguments.length?arguments[1]:void 0,l=o?Number(o):0;l!=l&&(l=0);var r=Math.min(Math.max(l,0),i);if(i<n+r)return!1;for(var c=-1;++c<n;)if(t.charCodeAt(r+c)!=s.charCodeAt(c))return!1;return!0},e?e(String.prototype,"startsWith",{value:t,configurable:!0,writable:!0}):String.prototype.startsWith=t),Object.keys||(Object.keys=function(e,t,i){for(t in i=[],e)i.hasOwnProperty.call(e,t)&&i.push(t);return i});var n={useDefault:!1,_set:F.valHooks.select.set};F.valHooks.select.set=function(e,t){return t&&!n.useDefault&&F(e).data("selected",!0),n._set.apply(this,arguments)};var y=null,o=function(){try{return new Event("change"),!0}catch(e){return!1}}();function $(e,t,i,s){for(var n=["content","subtext","tokens"],o=!1,l=0;l<n.length;l++){var r=n[l],c=e[r];if(c&&(c=c.toString(),"content"===r&&(c=c.replace(/<[^>]+>/g,"")),s&&(c=d(c)),c=c.toUpperCase(),o="contains"===i?0<=c.indexOf(t):c.startsWith(t)))break}return o}function z(e){return parseInt(e,10)||0}function d(e){return F.each([{re:/[\xC0-\xC6]/g,ch:"A"},{re:/[\xE0-\xE6]/g,ch:"a"},{re:/[\xC8-\xCB]/g,ch:"E"},{re:/[\xE8-\xEB]/g,ch:"e"},{re:/[\xCC-\xCF]/g,ch:"I"},{re:/[\xEC-\xEF]/g,ch:"i"},{re:/[\xD2-\xD6]/g,ch:"O"},{re:/[\xF2-\xF6]/g,ch:"o"},{re:/[\xD9-\xDC]/g,ch:"U"},{re:/[\xF9-\xFC]/g,ch:"u"},{re:/[\xC7-\xE7]/g,ch:"c"},{re:/[\xD1]/g,ch:"N"},{re:/[\xF1]/g,ch:"n"}],function(){e=e?e.replace(this.re,this.ch):""}),e}F.fn.triggerNative=function(e){var t,i=this[0];i.dispatchEvent?(o?t=new Event(e,{bubbles:!0}):(t=document.createEvent("Event")).initEvent(e,!0,!1),i.dispatchEvent(t)):i.fireEvent?((t=document.createEventObject()).eventType=e,i.fireEvent("on"+e,t)):this.trigger(e)};var l=function(t){var i=function(e){return t[e]},e="(?:"+Object.keys(t).join("|")+")",s=RegExp(e),n=RegExp(e,"g");return function(e){return e=null==e?"":""+e,s.test(e)?e.replace(n,i):e}},G=l({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#x27;","`":"&#x60;"}),m=l({"&amp;":"&","&lt;":"<","&gt;":">","&quot;":'"',"&#x27;":"'","&#x60;":"`"}),E={32:" ",48:"0",49:"1",50:"2",51:"3",52:"4",53:"5",54:"6",55:"7",56:"8",57:"9",59:";",65:"A",66:"B",67:"C",68:"D",69:"E",70:"F",71:"G",72:"H",73:"I",74:"J",75:"K",76:"L",77:"M",78:"N",79:"O",80:"P",81:"Q",82:"R",83:"S",84:"T",85:"U",86:"V",87:"W",88:"X",89:"Y",90:"Z",96:"0",97:"1",98:"2",99:"3",100:"4",101:"5",102:"6",103:"7",104:"8",105:"9"},C=27,O=13,T=32,D=9,H=38,L=40,_={success:!1,major:"3"};try{_.full=(F.fn.dropdown.Constructor.VERSION||"").split(" ")[0].split("."),_.major=_.full[0],_.success=!0}catch(e){console.warn("There was an issue retrieving Bootstrap's version. Ensure Bootstrap is being loaded before bootstrap-select and there is no namespace collision. If loading Bootstrap asynchronously, the version may need to be manually specified via $.fn.selectpicker.Constructor.BootstrapVersion.",e)}var q={DISABLED:"disabled",DIVIDER:"divider",SHOW:"open",DROPUP:"dropup",MENU:"dropdown-menu",MENURIGHT:"dropdown-menu-right",MENULEFT:"dropdown-menu-left",BUTTONCLASS:"btn-default",POPOVERHEADER:"popover-title"},N={MENU:"."+q.MENU};"4"===_.major&&(q.DIVIDER="dropdown-divider",q.SHOW="show",q.BUTTONCLASS="btn-light",q.POPOVERHEADER="popover-header");var A=new RegExp(H+"|"+L),P=new RegExp("^"+D+"$|"+C),c=(new RegExp(O+"|"+T),function(e,t){var i=this;n.useDefault||(F.valHooks.select.set=n._set,n.useDefault=!0),this.$element=F(e),this.$newElement=null,this.$button=null,this.$menu=null,this.options=t,this.selectpicker={main:{map:{newIndex:{},originalIndex:{}}},current:{map:{}},search:{map:{}},view:{},keydown:{keyHistory:"",resetKeyHistory:{start:function(){return setTimeout(function(){i.selectpicker.keydown.keyHistory=""},800)}}}},null===this.options.title&&(this.options.title=this.$element.attr("title"));var s=this.options.windowPadding;"number"==typeof s&&(this.options.windowPadding=[s,s,s,s]),this.val=c.prototype.val,this.render=c.prototype.render,this.refresh=c.prototype.refresh,this.setStyle=c.prototype.setStyle,this.selectAll=c.prototype.selectAll,this.deselectAll=c.prototype.deselectAll,this.destroy=c.prototype.destroy,this.remove=c.prototype.remove,this.show=c.prototype.show,this.hide=c.prototype.hide,this.init()});function r(e){var o,l=arguments,r=e;if([].shift.apply(l),!_.success){try{_.full=(F.fn.dropdown.Constructor.VERSION||"").split(" ")[0].split(".")}catch(e){_.full=c.BootstrapVersion.split(" ")[0].split(".")}_.major=_.full[0],_.success=!0,"4"===_.major&&(q.DIVIDER="dropdown-divider",q.SHOW="show",q.BUTTONCLASS="btn-light",c.DEFAULTS.style=q.BUTTONCLASS="btn-light",q.POPOVERHEADER="popover-header")}var t=this.each(function(){var e=F(this);if(e.is("select")){var t=e.data("selectpicker"),i="object"==typeof r&&r;if(t){if(i)for(var s in i)i.hasOwnProperty(s)&&(t.options[s]=i[s])}else{var n=F.extend({},c.DEFAULTS,F.fn.selectpicker.defaults||{},e.data(),i);n.template=F.extend({},c.DEFAULTS.template,F.fn.selectpicker.defaults?F.fn.selectpicker.defaults.template:{},e.data().template,i.template),e.data("selectpicker",t=new c(this,n))}"string"==typeof r&&(o=t[r]instanceof Function?t[r].apply(t,l):t.options[r])}});return void 0!==o?o:t}c.VERSION="1.13.3",c.BootstrapVersion=_.major,c.DEFAULTS={noneSelectedText:"Nothing selected",noneResultsText:"No results matched {0}",countSelectedText:function(e,t){return 1==e?"{0} item selected":"{0} items selected"},maxOptionsText:function(e,t){return[1==e?"Limit reached ({n} item max)":"Limit reached ({n} items max)",1==t?"Group limit reached ({n} item max)":"Group limit reached ({n} items max)"]},selectAllText:"Select All",deselectAllText:"Deselect All",doneButton:!1,doneButtonText:"Close",multipleSeparator:", ",styleBase:"btn",style:q.BUTTONCLASS,size:"auto",title:null,selectedTextFormat:"values",width:!1,container:!1,hideDisabled:!1,showSubtext:!1,showIcon:!0,showContent:!0,dropupAuto:!0,header:!1,liveSearch:!1,liveSearchPlaceholder:null,liveSearchNormalize:!1,liveSearchStyle:"contains",actionsBox:!1,iconBase:"glyphicon",tickIcon:"glyphicon-ok",showTick:!1,template:{caret:'<span class="caret"></span>'},maxOptions:!1,mobile:!1,selectOnTab:!1,dropdownAlignRight:!1,windowPadding:0,virtualScroll:600,display:!1},"4"===_.major&&(c.DEFAULTS.style="btn-light",c.DEFAULTS.iconBase="",c.DEFAULTS.tickIcon="bs-ok-default"),c.prototype={constructor:c,init:function(){var i=this,e=this.$element.attr("id");this.$element.addClass("bs-select-hidden"),this.multiple=this.$element.prop("multiple"),this.autofocus=this.$element.prop("autofocus"),this.$newElement=this.createDropdown(),this.createLi(),this.$element.after(this.$newElement).prependTo(this.$newElement),this.$button=this.$newElement.children("button"),this.$menu=this.$newElement.children(N.MENU),this.$menuInner=this.$menu.children(".inner"),this.$searchbox=this.$menu.find("input"),this.$element.removeClass("bs-select-hidden"),!0===this.options.dropdownAlignRight&&this.$menu.addClass(q.MENURIGHT),void 0!==e&&this.$button.attr("data-id",e),this.checkDisabled(),this.clickListener(),this.options.liveSearch&&this.liveSearchListener(),this.render(),this.setStyle(),this.setWidth(),this.options.container?this.selectPosition():this.$element.on("hide.bs.select",function(){if(i.isVirtual()){var e=i.$menuInner[0],t=e.firstChild.cloneNode(!1);e.replaceChild(t,e.firstChild),e.scrollTop=0}}),this.$menu.data("this",this),this.$newElement.data("this",this),this.options.mobile&&this.mobile(),this.$newElement.on({"hide.bs.dropdown":function(e){i.$menuInner.attr("aria-expanded",!1),i.$element.trigger("hide.bs.select",e)},"hidden.bs.dropdown":function(e){i.$element.trigger("hidden.bs.select",e)},"show.bs.dropdown":function(e){i.$menuInner.attr("aria-expanded",!0),i.$element.trigger("show.bs.select",e)},"shown.bs.dropdown":function(e){i.$element.trigger("shown.bs.select",e)}}),i.$element[0].hasAttribute("required")&&this.$element.on("invalid",function(){i.$button.addClass("bs-invalid"),i.$element.on({"shown.bs.select.invalid":function(){i.$element.val(i.$element.val()).off("shown.bs.select.invalid")},"rendered.bs.select":function(){this.validity.valid&&i.$button.removeClass("bs-invalid"),i.$element.off("rendered.bs.select")}}),i.$button.on("blur.bs.select",function(){i.$element.focus().blur(),i.$button.off("blur.bs.select")})}),setTimeout(function(){i.$element.trigger("loaded.bs.select")})},createDropdown:function(){var e,t=this.multiple||this.options.showTick?" show-tick":"",i=this.autofocus?" autofocus":"",s="",n="",o="",l="";return this.options.header&&(s='<div class="'+q.POPOVERHEADER+'"><button type="button" class="close" aria-hidden="true">&times;</button>'+this.options.header+"</div>"),this.options.liveSearch&&(n='<div class="bs-searchbox"><input type="text" class="form-control" autocomplete="off"'+(null===this.options.liveSearchPlaceholder?"":' placeholder="'+G(this.options.liveSearchPlaceholder)+'"')+' role="textbox" aria-label="Search"></div>'),this.multiple&&this.options.actionsBox&&(o='<div class="bs-actionsbox"><div class="btn-group btn-group-sm btn-block"><button type="button" class="actions-btn bs-select-all btn '+q.BUTTONCLASS+'">'+this.options.selectAllText+'</button><button type="button" class="actions-btn bs-deselect-all btn '+q.BUTTONCLASS+'">'+this.options.deselectAllText+"</button></div></div>"),this.multiple&&this.options.doneButton&&(l='<div class="bs-donebutton"><div class="btn-group btn-block"><button type="button" class="btn btn-sm '+q.BUTTONCLASS+'">'+this.options.doneButtonText+"</button></div></div>"),e='<div class="dropdown bootstrap-select'+t+'"><button type="button" class="'+this.options.styleBase+' dropdown-toggle" '+("static"===this.options.display?'data-display="static"':"")+'data-toggle="dropdown"'+i+' role="button"><div class="filter-option"><div class="filter-option-inner"><div class="filter-option-inner-inner"></div></div> </div>'+("4"===_.major?"":'<span class="bs-caret">'+this.options.template.caret+"</span>")+'</button><div class="'+q.MENU+" "+("4"===_.major?"":q.SHOW)+'" role="combobox">'+s+n+o+'<div class="inner '+q.SHOW+'" role="listbox" aria-expanded="false" tabindex="-1"><ul class="'+q.MENU+" inner "+("4"===_.major?q.SHOW:"")+'"></ul></div>'+l+"</div></div>",F(e)},setPositionData:function(){this.selectpicker.view.canHighlight=[];for(var e=0;e<this.selectpicker.current.data.length;e++){var t=this.selectpicker.current.data[e],i=!0;"divider"===t.type?(i=!1,t.height=this.sizeInfo.dividerHeight):"optgroup-label"===t.type?(i=!1,t.height=this.sizeInfo.dropdownHeaderHeight):t.height=this.sizeInfo.liHeight,t.disabled&&(i=!1),this.selectpicker.view.canHighlight.push(i),t.position=(0===e?0:this.selectpicker.current.data[e-1].position)+t.height}},isVirtual:function(){return!1!==this.options.virtualScroll&&this.selectpicker.main.elements.length>=this.options.virtualScroll||!0===this.options.virtualScroll},createView:function(C,e){e=e||0;var O=this;this.selectpicker.current=C?this.selectpicker.search:this.selectpicker.main;var z,T,D=[];function i(e,t){var i,s,n,o,l,r,c,a,d,h=O.selectpicker.current.elements.length,p=[],u=void 0,m=!0,f=O.isVirtual();O.selectpicker.view.scrollTop=e,!0===f&&O.sizeInfo.hasScrollBar&&O.$menu[0].offsetWidth>O.sizeInfo.totalMenuWidth&&(O.sizeInfo.menuWidth=O.$menu[0].offsetWidth,O.sizeInfo.totalMenuWidth=O.sizeInfo.menuWidth+O.sizeInfo.scrollBarWidth,O.$menu.css("min-width",O.sizeInfo.menuWidth)),i=Math.ceil(O.sizeInfo.menuInnerHeight/O.sizeInfo.liHeight*1.5),s=Math.round(h/i)||1;for(var v=0;v<s;v++){var g=(v+1)*i;if(v===s-1&&(g=h),p[v]=[v*i+(v?1:0),g],!h)break;void 0===u&&e<=O.selectpicker.current.data[g-1].position-O.sizeInfo.menuInnerHeight&&(u=v)}if(void 0===u&&(u=0),l=[O.selectpicker.view.position0,O.selectpicker.view.position1],n=Math.max(0,u-1),o=Math.min(s-1,u+1),O.selectpicker.view.position0=Math.max(0,p[n][0])||0,O.selectpicker.view.position1=Math.min(h,p[o][1])||0,r=l[0]!==O.selectpicker.view.position0||l[1]!==O.selectpicker.view.position1,void 0!==O.activeIndex&&(T=O.selectpicker.current.elements[O.selectpicker.current.map.newIndex[O.prevActiveIndex]],D=O.selectpicker.current.elements[O.selectpicker.current.map.newIndex[O.activeIndex]],z=O.selectpicker.current.elements[O.selectpicker.current.map.newIndex[O.selectedIndex]],t&&(O.activeIndex!==O.selectedIndex&&(D.classList.remove("active"),D.firstChild&&D.firstChild.classList.remove("active")),O.activeIndex=void 0),O.activeIndex&&O.activeIndex!==O.selectedIndex&&z&&z.length&&(z.classList.remove("active"),z.firstChild&&z.firstChild.classList.remove("active"))),void 0!==O.prevActiveIndex&&O.prevActiveIndex!==O.activeIndex&&O.prevActiveIndex!==O.selectedIndex&&T&&T.length&&(T.classList.remove("active"),T.firstChild&&T.firstChild.classList.remove("active")),(t||r)&&(c=O.selectpicker.view.visibleElements?O.selectpicker.view.visibleElements.slice():[],O.selectpicker.view.visibleElements=O.selectpicker.current.elements.slice(O.selectpicker.view.position0,O.selectpicker.view.position1),O.setOptionStatus(),(C||!1===f&&t)&&(a=c,d=O.selectpicker.view.visibleElements,m=!(a.length===d.length&&a.every(function(e,t){return e===d[t]}))),(t||!0===f)&&m)){var b,w,x=O.$menuInner[0],I=document.createDocumentFragment(),k=x.firstChild.cloneNode(!1),$=!0===f?O.selectpicker.view.visibleElements:O.selectpicker.current.elements;x.replaceChild(k,x.firstChild);v=0;for(var E=$.length;v<E;v++)I.appendChild($[v]);!0===f&&(b=0===O.selectpicker.view.position0?0:O.selectpicker.current.data[O.selectpicker.view.position0-1].position,w=O.selectpicker.view.position1>h-1?0:O.selectpicker.current.data[h-1].position-O.selectpicker.current.data[O.selectpicker.view.position1-1].position,x.firstChild.style.marginTop=b+"px",x.firstChild.style.marginBottom=w+"px"),x.firstChild.appendChild(I)}if(O.prevActiveIndex=O.activeIndex,O.options.liveSearch){if(C&&t){var S,y=0;O.selectpicker.view.canHighlight[y]||(y=1+O.selectpicker.view.canHighlight.slice(1).indexOf(!0)),S=O.selectpicker.view.visibleElements[y],O.selectpicker.view.currentActive&&(O.selectpicker.view.currentActive.classList.remove("active"),O.selectpicker.view.currentActive.firstChild&&O.selectpicker.view.currentActive.firstChild.classList.remove("active")),S&&(S.classList.add("active"),S.firstChild&&S.firstChild.classList.add("active")),O.activeIndex=O.selectpicker.current.map.originalIndex[y]}}else O.$menuInner.focus()}this.setPositionData(),i(e,!0),this.$menuInner.off("scroll.createView").on("scroll.createView",function(e,t){O.noScroll||i(this.scrollTop,t),O.noScroll=!1}),F(window).off("resize.createView").on("resize.createView",function(){i(O.$menuInner[0].scrollTop)})},createLi:function(){var z,T=this,D=[],H=0,L=0,N=[],A=0,P=0,R=-1;this.selectpicker.view.titleOption||(this.selectpicker.view.titleOption=document.createElement("option"));var e,W={span:document.createElement("span"),subtext:document.createElement("small"),a:document.createElement("a"),li:document.createElement("li"),whitespace:document.createTextNode(" ")},B=document.createDocumentFragment();(T.options.showTick||T.multiple)&&((e=W.span.cloneNode(!1)).className=T.options.iconBase+" "+T.options.tickIcon+" check-mark",W.a.appendChild(e)),W.a.setAttribute("role","option"),W.subtext.className="text-muted",W.text=W.span.cloneNode(!1),W.text.className="text";var M=function(e,t,i){var s=W.li.cloneNode(!1);return e&&(1===e.nodeType||11===e.nodeType?s.appendChild(e):s.innerHTML=e),void 0!==t&&""!==t&&(s.className=t),null!=i&&s.classList.add("optgroup-"+i),s},U=function(e,t,i){var s=W.a.cloneNode(!0);return e&&(11===e.nodeType?s.appendChild(e):s.insertAdjacentHTML("beforeend",e)),void 0!==t&""!==t&&(s.className=t),"4"===_.major&&s.classList.add("dropdown-item"),i&&s.setAttribute("style",i),s},V=function(e){var t,i,s=W.text.cloneNode(!1);if(e.optionContent)s.innerHTML=e.optionContent;else{if(s.textContent=e.text,e.optionIcon){var n=W.whitespace.cloneNode(!1);(i=W.span.cloneNode(!1)).className=T.options.iconBase+" "+e.optionIcon,B.appendChild(i),B.appendChild(n)}e.optionSubtext&&((t=W.subtext.cloneNode(!1)).innerHTML=e.optionSubtext,s.appendChild(t))}return B.appendChild(s),B};if(this.options.title&&!this.multiple){R--;var t=this.$element[0],i=!1,s=!this.selectpicker.view.titleOption.parentNode;if(s)this.selectpicker.view.titleOption.className="bs-title-option",this.selectpicker.view.titleOption.value="",i=void 0===F(t.options[t.selectedIndex]).attr("selected")&&void 0===this.$element.data("selected");(s||0!==this.selectpicker.view.titleOption.index)&&t.insertBefore(this.selectpicker.view.titleOption,t.firstChild),i&&(t.selectedIndex=0)}var j=this.$element.find("option");j.each(function(e){var t=F(this);if(R++,!t.hasClass("bs-title-option")){var i,s,n=t.data(),o=this.className||"",l=G(this.style.cssText),r=n.content,c=this.textContent,a=n.tokens,d=n.subtext,h=n.icon,p=t.parent(),u=p[0],m="OPTGROUP"===u.tagName,f=m&&u.disabled,v=this.disabled||f,g=this.previousElementSibling&&"OPTGROUP"===this.previousElementSibling.tagName,b=p.data();if(!0===n.hidden||T.options.hideDisabled&&(v&&!m||f)){i=n.prevHiddenIndex,t.next().data("prevHiddenIndex",void 0!==i?i:e),R--,g||void 0!==i&&(y=j[i].previousElementSibling)&&"OPTGROUP"===y.tagName&&!y.disabled&&(g=!0),g&&"divider"!==N[N.length-1].type&&(R++,D.push(M(!1,q.DIVIDER,A+"div")),N.push({type:"divider",optID:A}))}else{if(m&&!0!==n.divider){if(T.options.hideDisabled&&v){if(void 0===b.allOptionsDisabled){var w=p.children();p.data("allOptionsDisabled",w.filter(":disabled").length===w.length)}if(p.data("allOptionsDisabled"))return void R--}var x=" "+u.className||"";if(!this.previousElementSibling){A+=1;var I=u.label,k=G(I),$=b.subtext,E=b.icon;0!==e&&0<D.length&&(R++,D.push(M(!1,q.DIVIDER,A+"div")),N.push({type:"divider",optID:A})),R++;var S=function(e){var t,i,s=W.text.cloneNode(!1);if(s.innerHTML=e.labelEscaped,e.labelIcon){var n=W.whitespace.cloneNode(!1);(i=W.span.cloneNode(!1)).className=T.options.iconBase+" "+e.labelIcon,B.appendChild(i),B.appendChild(n)}return e.labelSubtext&&((t=W.subtext.cloneNode(!1)).textContent=e.labelSubtext,s.appendChild(t)),B.appendChild(s),B}({labelEscaped:k,labelSubtext:$,labelIcon:E});D.push(M(S,"dropdown-header"+x,A)),N.push({content:k,subtext:$,type:"optgroup-label",optID:A}),P=R-1}if(T.options.hideDisabled&&v||!0===n.hidden)return void R--;s=V({text:c,optionContent:r,optionSubtext:d,optionIcon:h}),D.push(M(U(s,"opt "+o+x,l),"",A)),N.push({content:r||c,subtext:d,tokens:a,type:"option",optID:A,headerIndex:P,lastIndex:P+u.childElementCount,originalIndex:e,data:n}),H++}else if(!0===n.divider)D.push(M(!1,q.DIVIDER)),N.push({type:"divider",originalIndex:e,data:n});else{var y;if(!g&&T.options.hideDisabled)if(void 0!==(i=n.prevHiddenIndex))(y=j[i].previousElementSibling)&&"OPTGROUP"===y.tagName&&!y.disabled&&(g=!0);g&&"divider"!==N[N.length-1].type&&(R++,D.push(M(!1,q.DIVIDER,A+"div")),N.push({type:"divider",optID:A})),s=V({text:c,optionContent:r,optionSubtext:d,optionIcon:h}),D.push(M(U(s,o,l))),N.push({content:r||c,subtext:d,tokens:a,type:"option",originalIndex:e,data:n}),H++}T.selectpicker.main.map.newIndex[e]=R,T.selectpicker.main.map.originalIndex[R]=e;var C=N[N.length-1];C.disabled=v;var O=0;C.content&&(O+=C.content.length),C.subtext&&(O+=C.subtext.length),h&&(O+=1),L<O&&(L=O,z=D[D.length-1])}}}),this.selectpicker.main.elements=D,this.selectpicker.main.data=N,this.selectpicker.current=this.selectpicker.main,this.selectpicker.view.widestOption=z,this.selectpicker.view.availableOptionsCount=H},findLis:function(){return this.$menuInner.find(".inner > li")},render:function(){var e=this,t=this.$element.find("option"),i=[],s=[];this.togglePlaceholder(),this.tabIndex();for(var n=0,o=this.selectpicker.main.elements.length;n<o;n++){var l=t[this.selectpicker.main.map.originalIndex[n]];if(l&&l.selected&&(i.push(l),s.length<100&&"count"!==e.options.selectedTextFormat||1===i.length)){if(e.options.hideDisabled&&(l.disabled||"OPTGROUP"===l.parentNode.tagName&&l.parentNode.disabled))return;var r,c,a=this.selectpicker.main.data[n].data,d=a.icon&&e.options.showIcon?'<i class="'+e.options.iconBase+" "+a.icon+'"></i> ':"";r=e.options.showSubtext&&a.subtext&&!e.multiple?' <small class="text-muted">'+a.subtext+"</small>":"",c=l.title?l.title:a.content&&e.options.showContent?a.content.toString():d+l.innerHTML.trim()+r,s.push(c)}}var h=this.multiple?s.join(this.options.multipleSeparator):s[0];if(50<i.length&&(h+="..."),this.multiple&&-1!==this.options.selectedTextFormat.indexOf("count")){var p=this.options.selectedTextFormat.split(">");if(1<p.length&&i.length>p[1]||1===p.length&&2<=i.length){var u=this.selectpicker.view.availableOptionsCount;h=("function"==typeof this.options.countSelectedText?this.options.countSelectedText(i.length,u):this.options.countSelectedText).replace("{0}",i.length.toString()).replace("{1}",u.toString())}}null==this.options.title&&(this.options.title=this.$element.attr("title")),"static"==this.options.selectedTextFormat&&(h=this.options.title),h||(h=void 0!==this.options.title?this.options.title:this.options.noneSelectedText),this.$button[0].title=m(h.replace(/<[^>]*>?/g,"").trim()),this.$button.find(".filter-option-inner-inner")[0].innerHTML=h,this.$element.trigger("rendered.bs.select")},setStyle:function(e,t){this.$element.attr("class")&&this.$newElement.addClass(this.$element.attr("class").replace(/selectpicker|mobile-device|bs-select-hidden|validate\[.*\]/gi,""));var i=e||this.options.style;"add"==t?this.$button.addClass(i):"remove"==t?this.$button.removeClass(i):(this.$button.removeClass(this.options.style),this.$button.addClass(i))},liHeight:function(e){if(e||!1!==this.options.size&&!this.sizeInfo){this.sizeInfo||(this.sizeInfo={});var t=document.createElement("div"),i=document.createElement("div"),s=document.createElement("div"),n=document.createElement("ul"),o=document.createElement("li"),l=document.createElement("li"),r=document.createElement("li"),c=document.createElement("a"),a=document.createElement("span"),d=this.options.header&&0<this.$menu.find("."+q.POPOVERHEADER).length?this.$menu.find("."+q.POPOVERHEADER)[0].cloneNode(!0):null,h=this.options.liveSearch?document.createElement("div"):null,p=this.options.actionsBox&&this.multiple&&0<this.$menu.find(".bs-actionsbox").length?this.$menu.find(".bs-actionsbox")[0].cloneNode(!0):null,u=this.options.doneButton&&this.multiple&&0<this.$menu.find(".bs-donebutton").length?this.$menu.find(".bs-donebutton")[0].cloneNode(!0):null,m=this.$element.find("option")[0];if(this.sizeInfo.selectWidth=this.$newElement[0].offsetWidth,a.className="text",c.className="dropdown-item "+(m?m.className:""),t.className=this.$menu[0].parentNode.className+" "+q.SHOW,t.style.width=this.sizeInfo.selectWidth+"px","auto"===this.options.width&&(i.style.minWidth=0),i.className=q.MENU+" "+q.SHOW,s.className="inner "+q.SHOW,n.className=q.MENU+" inner "+("4"===_.major?q.SHOW:""),o.className=q.DIVIDER,l.className="dropdown-header",a.appendChild(document.createTextNode("​")),c.appendChild(a),r.appendChild(c),l.appendChild(a.cloneNode(!0)),this.selectpicker.view.widestOption&&n.appendChild(this.selectpicker.view.widestOption.cloneNode(!0)),n.appendChild(r),n.appendChild(o),n.appendChild(l),d&&i.appendChild(d),h){var f=document.createElement("input");h.className="bs-searchbox",f.className="form-control",h.appendChild(f),i.appendChild(h)}p&&i.appendChild(p),s.appendChild(n),i.appendChild(s),u&&i.appendChild(u),t.appendChild(i),document.body.appendChild(t);var v,g=c.offsetHeight,b=l?l.offsetHeight:0,w=d?d.offsetHeight:0,x=h?h.offsetHeight:0,I=p?p.offsetHeight:0,k=u?u.offsetHeight:0,$=F(o).outerHeight(!0),E=!!window.getComputedStyle&&window.getComputedStyle(i),S=i.offsetWidth,y=E?null:F(i),C={vert:z(E?E.paddingTop:y.css("paddingTop"))+z(E?E.paddingBottom:y.css("paddingBottom"))+z(E?E.borderTopWidth:y.css("borderTopWidth"))+z(E?E.borderBottomWidth:y.css("borderBottomWidth")),horiz:z(E?E.paddingLeft:y.css("paddingLeft"))+z(E?E.paddingRight:y.css("paddingRight"))+z(E?E.borderLeftWidth:y.css("borderLeftWidth"))+z(E?E.borderRightWidth:y.css("borderRightWidth"))},O={vert:C.vert+z(E?E.marginTop:y.css("marginTop"))+z(E?E.marginBottom:y.css("marginBottom"))+2,horiz:C.horiz+z(E?E.marginLeft:y.css("marginLeft"))+z(E?E.marginRight:y.css("marginRight"))+2};s.style.overflowY="scroll",v=i.offsetWidth-S,document.body.removeChild(t),this.sizeInfo.liHeight=g,this.sizeInfo.dropdownHeaderHeight=b,this.sizeInfo.headerHeight=w,this.sizeInfo.searchHeight=x,this.sizeInfo.actionsHeight=I,this.sizeInfo.doneButtonHeight=k,this.sizeInfo.dividerHeight=$,this.sizeInfo.menuPadding=C,this.sizeInfo.menuExtras=O,this.sizeInfo.menuWidth=S,this.sizeInfo.totalMenuWidth=this.sizeInfo.menuWidth,this.sizeInfo.scrollBarWidth=v,this.sizeInfo.selectHeight=this.$newElement[0].offsetHeight,this.setPositionData()}},getSelectPosition:function(){var e,t=F(window),i=this.$newElement.offset(),s=F(this.options.container);this.options.container&&!s.is("body")?((e=s.offset()).top+=parseInt(s.css("borderTopWidth")),e.left+=parseInt(s.css("borderLeftWidth"))):e={top:0,left:0};var n=this.options.windowPadding;this.sizeInfo.selectOffsetTop=i.top-e.top-t.scrollTop(),this.sizeInfo.selectOffsetBot=t.height()-this.sizeInfo.selectOffsetTop-this.sizeInfo.selectHeight-e.top-n[2],this.sizeInfo.selectOffsetLeft=i.left-e.left-t.scrollLeft(),this.sizeInfo.selectOffsetRight=t.width()-this.sizeInfo.selectOffsetLeft-this.sizeInfo.selectWidth-e.left-n[1],this.sizeInfo.selectOffsetTop-=n[0],this.sizeInfo.selectOffsetLeft-=n[3]},setMenuSize:function(e){this.getSelectPosition();var t,i,s,n,o,l,r,c=this.sizeInfo.selectWidth,a=this.sizeInfo.liHeight,d=this.sizeInfo.headerHeight,h=this.sizeInfo.searchHeight,p=this.sizeInfo.actionsHeight,u=this.sizeInfo.doneButtonHeight,m=this.sizeInfo.dividerHeight,f=this.sizeInfo.menuPadding,v=0;if(this.options.dropupAuto&&(r=a*this.selectpicker.current.elements.length+f.vert,this.$newElement.toggleClass(q.DROPUP,this.sizeInfo.selectOffsetTop-this.sizeInfo.selectOffsetBot>this.sizeInfo.menuExtras.vert&&r+this.sizeInfo.menuExtras.vert+50>this.sizeInfo.selectOffsetBot)),"auto"===this.options.size)n=3<this.selectpicker.current.elements.length?3*this.sizeInfo.liHeight+this.sizeInfo.menuExtras.vert-2:0,i=this.sizeInfo.selectOffsetBot-this.sizeInfo.menuExtras.vert,s=n+d+h+p+u,l=Math.max(n-f.vert,0),this.$newElement.hasClass(q.DROPUP)&&(i=this.sizeInfo.selectOffsetTop-this.sizeInfo.menuExtras.vert),t=(o=i)-d-h-p-u-f.vert;else if(this.options.size&&"auto"!=this.options.size&&this.selectpicker.current.elements.length>this.options.size){for(var g=0;g<this.options.size;g++)"divider"===this.selectpicker.current.data[g].type&&v++;t=(i=a*this.options.size+v*m+f.vert)-f.vert,o=i+d+h+p+u,s=l=""}"auto"===this.options.dropdownAlignRight&&this.$menu.toggleClass(q.MENURIGHT,this.sizeInfo.selectOffsetLeft>this.sizeInfo.selectOffsetRight&&this.sizeInfo.selectOffsetRight<this.$menu[0].offsetWidth-c),this.$menu.css({"max-height":o+"px",overflow:"hidden","min-height":s+"px"}),this.$menuInner.css({"max-height":t+"px","overflow-y":"auto","min-height":l+"px"}),this.sizeInfo.menuInnerHeight=t,this.selectpicker.current.data.length&&this.selectpicker.current.data[this.selectpicker.current.data.length-1].position>this.sizeInfo.menuInnerHeight&&(this.sizeInfo.hasScrollBar=!0,this.sizeInfo.totalMenuWidth=this.sizeInfo.menuWidth+this.sizeInfo.scrollBarWidth,this.$menu.css("min-width",this.sizeInfo.totalMenuWidth)),this.dropdown&&this.dropdown._popper&&this.dropdown._popper.update()},setSize:function(e){if(this.liHeight(e),this.options.header&&this.$menu.css("padding-top",0),!1!==this.options.size){var t,i=this,s=F(window),n=0;this.setMenuSize(),"auto"===this.options.size?(this.$searchbox.off("input.setMenuSize propertychange.setMenuSize").on("input.setMenuSize propertychange.setMenuSize",function(){return i.setMenuSize()}),s.off("resize.setMenuSize scroll.setMenuSize").on("resize.setMenuSize scroll.setMenuSize",function(){return i.setMenuSize()})):this.options.size&&"auto"!=this.options.size&&this.selectpicker.current.elements.length>this.options.size&&(this.$searchbox.off("input.setMenuSize propertychange.setMenuSize"),s.off("resize.setMenuSize scroll.setMenuSize")),e?n=this.$menuInner[0].scrollTop:i.multiple||"number"==typeof(t=i.selectpicker.main.map.newIndex[i.$element[0].selectedIndex])&&!1!==i.options.size&&(n=(n=i.sizeInfo.liHeight*t)-i.sizeInfo.menuInnerHeight/2+i.sizeInfo.liHeight/2),i.createView(!1,n)}},setWidth:function(){var i=this;"auto"===this.options.width?requestAnimationFrame(function(){i.$menu.css("min-width","0"),i.liHeight(),i.setMenuSize();var e=i.$newElement.clone().appendTo("body"),t=e.css("width","auto").children("button").outerWidth();e.remove(),i.sizeInfo.selectWidth=Math.max(i.sizeInfo.totalMenuWidth,t),i.$newElement.css("width",i.sizeInfo.selectWidth+"px")}):"fit"===this.options.width?(this.$menu.css("min-width",""),this.$newElement.css("width","").addClass("fit-width")):this.options.width?(this.$menu.css("min-width",""),this.$newElement.css("width",this.options.width)):(this.$menu.css("min-width",""),this.$newElement.css("width","")),this.$newElement.hasClass("fit-width")&&"fit"!==this.options.width&&this.$newElement.removeClass("fit-width")},selectPosition:function(){this.$bsContainer=F('<div class="bs-container" />');var s,n,o,l=this,r=F(this.options.container),e=function(e){var t={},i=l.options.display||!!F.fn.dropdown.Constructor.Default&&F.fn.dropdown.Constructor.Default.display;l.$bsContainer.addClass(e.attr("class").replace(/form-control|fit-width/gi,"")).toggleClass(q.DROPUP,e.hasClass(q.DROPUP)),s=e.offset(),r.is("body")?n={top:0,left:0}:((n=r.offset()).top+=parseInt(r.css("borderTopWidth"))-r.scrollTop(),n.left+=parseInt(r.css("borderLeftWidth"))-r.scrollLeft()),o=e.hasClass(q.DROPUP)?0:e[0].offsetHeight,(_.major<4||"static"===i)&&(t.top=s.top-n.top+o,t.left=s.left-n.left),t.width=e[0].offsetWidth,l.$bsContainer.css(t)};this.$button.on("click.bs.dropdown.data-api",function(){l.isDisabled()||(e(l.$newElement),l.$bsContainer.appendTo(l.options.container).toggleClass(q.SHOW,!l.$button.hasClass(q.SHOW)).append(l.$menu))}),F(window).on("resize scroll",function(){e(l.$newElement)}),this.$element.on("hide.bs.select",function(){l.$menu.data("height",l.$menu.height()),l.$bsContainer.detach()})},setOptionStatus:function(){var e=this,t=this.$element.find("option");if(e.noScroll=!1,e.selectpicker.view.visibleElements&&e.selectpicker.view.visibleElements.length)for(var i=0;i<e.selectpicker.view.visibleElements.length;i++){var s=e.selectpicker.current.map.originalIndex[i+e.selectpicker.view.position0],n=t[s];if(n){var o=this.selectpicker.main.map.newIndex[s],l=this.selectpicker.main.elements[o];e.setDisabled(s,n.disabled||"OPTGROUP"===n.parentNode.tagName&&n.parentNode.disabled,o,l),e.setSelected(s,n.selected,o,l)}}},setSelected:function(e,t,i,s){var n,o,l,r=void 0!==this.activeIndex,c=this.activeIndex===e||t&&!this.multiple&&!r;i||(i=this.selectpicker.main.map.newIndex[e]),s||(s=this.selectpicker.main.elements[i]),l=s.firstChild,t&&(this.selectedIndex=e),s.classList.toggle("selected",t),s.classList.toggle("active",c),c&&(this.selectpicker.view.currentActive=s,this.activeIndex=e),l&&(l.classList.toggle("selected",t),l.classList.toggle("active",c),l.setAttribute("aria-selected",t)),c||!r&&t&&void 0!==this.prevActiveIndex&&(n=this.selectpicker.main.map.newIndex[this.prevActiveIndex],(o=this.selectpicker.main.elements[n]).classList.remove("active"),o.firstChild&&o.firstChild.classList.remove("active"))},setDisabled:function(e,t,i,s){var n;i||(i=this.selectpicker.main.map.newIndex[e]),s||(s=this.selectpicker.main.elements[i]),n=s.firstChild,s.classList.toggle(q.DISABLED,t),n&&("4"===_.major&&n.classList.toggle(q.DISABLED,t),n.setAttribute("aria-disabled",t),t?n.setAttribute("tabindex",-1):n.setAttribute("tabindex",0))},isDisabled:function(){return this.$element[0].disabled},checkDisabled:function(){var e=this;this.isDisabled()?(this.$newElement.addClass(q.DISABLED),this.$button.addClass(q.DISABLED).attr("tabindex",-1).attr("aria-disabled",!0)):(this.$button.hasClass(q.DISABLED)&&(this.$newElement.removeClass(q.DISABLED),this.$button.removeClass(q.DISABLED).attr("aria-disabled",!1)),-1!=this.$button.attr("tabindex")||this.$element.data("tabindex")||this.$button.removeAttr("tabindex")),this.$button.click(function(){return!e.isDisabled()})},togglePlaceholder:function(){var e=this.$element[0],t=e.selectedIndex,i=-1===t;i||e.options[t].value||(i=!0),this.$button.toggleClass("bs-placeholder",i)},tabIndex:function(){this.$element.data("tabindex")!==this.$element.attr("tabindex")&&-98!==this.$element.attr("tabindex")&&"-98"!==this.$element.attr("tabindex")&&(this.$element.data("tabindex",this.$element.attr("tabindex")),this.$button.attr("tabindex",this.$element.data("tabindex"))),this.$element.attr("tabindex",-98)},clickListener:function(){var E=this,t=F(document);function e(){E.options.liveSearch?E.$searchbox.focus():E.$menuInner.focus()}function i(){E.dropdown&&E.dropdown._popper&&E.dropdown._popper.state.isCreated?e():requestAnimationFrame(i)}t.data("spaceSelect",!1),this.$button.on("keyup",function(e){/(32)/.test(e.keyCode.toString(10))&&t.data("spaceSelect")&&(e.preventDefault(),t.data("spaceSelect",!1))}),this.$newElement.on("show.bs.dropdown",function(){3<_.major&&!E.dropdown&&(E.dropdown=E.$button.data("bs.dropdown"),E.dropdown._menu=E.$menu[0])}),this.$button.on("click.bs.dropdown.data-api",function(){E.$newElement.hasClass(q.SHOW)||E.setSize()}),this.$element.on("shown.bs.select",function(){E.$menuInner[0].scrollTop!==E.selectpicker.view.scrollTop&&(E.$menuInner[0].scrollTop=E.selectpicker.view.scrollTop),3<_.major?requestAnimationFrame(i):e()}),this.$menuInner.on("click","li a",function(e,t){var i=F(this),s=E.isVirtual()?E.selectpicker.view.position0:0,n=E.selectpicker.current.map.originalIndex[i.parent().index()+s],o=S(E.$element[0]),l=E.$element.prop("selectedIndex"),r=!0;if(E.multiple&&1!==E.options.maxOptions&&e.stopPropagation(),e.preventDefault(),!E.isDisabled()&&!i.parent().hasClass(q.DISABLED)){var c=E.$element.find("option"),a=c.eq(n),d=a.prop("selected"),h=a.parent("optgroup"),p=h.find("option"),u=E.options.maxOptions,m=h.data("maxOptions")||!1;if(n===E.activeIndex&&(t=!0),t||(E.prevActiveIndex=E.activeIndex,E.activeIndex=void 0),E.multiple){if(a.prop("selected",!d),E.setSelected(n,!d),i.blur(),!1!==u||!1!==m){var f=u<c.filter(":selected").length,v=m<h.find("option:selected").length;if(u&&f||m&&v)if(u&&1==u){c.prop("selected",!1),a.prop("selected",!0);for(var g=0;g<c.length;g++)E.setSelected(g,!1);E.setSelected(n,!0)}else if(m&&1==m){h.find("option:selected").prop("selected",!1),a.prop("selected",!0);for(g=0;g<p.length;g++){var b=p[g];E.setSelected(c.index(b),!1)}E.setSelected(n,!0)}else{var w="string"==typeof E.options.maxOptionsText?[E.options.maxOptionsText,E.options.maxOptionsText]:E.options.maxOptionsText,x="function"==typeof w?w(u,m):w,I=x[0].replace("{n}",u),k=x[1].replace("{n}",m),$=F('<div class="notify"></div>');x[2]&&(I=I.replace("{var}",x[2][1<u?0:1]),k=k.replace("{var}",x[2][1<m?0:1])),a.prop("selected",!1),E.$menu.append($),u&&f&&($.append(F("<div>"+I+"</div>")),r=!1,E.$element.trigger("maxReached.bs.select")),m&&v&&($.append(F("<div>"+k+"</div>")),r=!1,E.$element.trigger("maxReachedGrp.bs.select")),setTimeout(function(){E.setSelected(n,!1)},10),$.delay(750).fadeOut(300,function(){F(this).remove()})}}}else c.prop("selected",!1),a.prop("selected",!0),E.setSelected(n,!0);!E.multiple||E.multiple&&1===E.options.maxOptions?E.$button.focus():E.options.liveSearch&&E.$searchbox.focus(),r&&(o!=S(E.$element[0])&&E.multiple||l!=E.$element.prop("selectedIndex")&&!E.multiple)&&(y=[n,a.prop("selected"),o],E.$element.triggerNative("change"))}}),this.$menu.on("click","li."+q.DISABLED+" a, ."+q.POPOVERHEADER+", ."+q.POPOVERHEADER+" :not(.close)",function(e){e.currentTarget==this&&(e.preventDefault(),e.stopPropagation(),E.options.liveSearch&&!F(e.target).hasClass("close")?E.$searchbox.focus():E.$button.focus())}),this.$menuInner.on("click",".divider, .dropdown-header",function(e){e.preventDefault(),e.stopPropagation(),E.options.liveSearch?E.$searchbox.focus():E.$button.focus()}),this.$menu.on("click","."+q.POPOVERHEADER+" .close",function(){E.$button.click()}),this.$searchbox.on("click",function(e){e.stopPropagation()}),this.$menu.on("click",".actions-btn",function(e){E.options.liveSearch?E.$searchbox.focus():E.$button.focus(),e.preventDefault(),e.stopPropagation(),F(this).hasClass("bs-select-all")?E.selectAll():E.deselectAll()}),this.$element.on({change:function(){E.render(),E.$element.trigger("changed.bs.select",y),y=null},focus:function(){E.options.mobile||E.$button.focus()}})},liveSearchListener:function(){var u=this,m=document.createElement("li");this.$button.on("click.bs.dropdown.data-api",function(){u.$searchbox.val()&&u.$searchbox.val("")}),this.$searchbox.on("click.bs.dropdown.data-api focus.bs.dropdown.data-api touchend.bs.dropdown.data-api",function(e){e.stopPropagation()}),this.$searchbox.on("input propertychange",function(){var e=u.$searchbox.val();if(u.selectpicker.search.map.newIndex={},u.selectpicker.search.map.originalIndex={},u.selectpicker.search.elements=[],u.selectpicker.search.data=[],e){var t=[],i=e.toUpperCase(),s={},n=[],o=u._searchStyle(),l=u.options.liveSearchNormalize;u._$lisSelected=u.$menuInner.find(".selected");for(var r=0;r<u.selectpicker.main.data.length;r++){var c=u.selectpicker.main.data[r];s[r]||(s[r]=$(c,i,o,l)),s[r]&&void 0!==c.headerIndex&&-1===n.indexOf(c.headerIndex)&&(0<c.headerIndex&&(s[c.headerIndex-1]=!0,n.push(c.headerIndex-1)),s[c.headerIndex]=!0,n.push(c.headerIndex),s[c.lastIndex+1]=!0),s[r]&&"optgroup-label"!==c.type&&n.push(r)}r=0;for(var a=n.length;r<a;r++){var d=n[r],h=n[r-1],p=(c=u.selectpicker.main.data[d],u.selectpicker.main.data[h]);("divider"!==c.type||"divider"===c.type&&p&&"divider"!==p.type&&a-1!==r)&&(u.selectpicker.search.data.push(c),t.push(u.selectpicker.main.elements[d]),c.hasOwnProperty("originalIndex")&&(u.selectpicker.search.map.newIndex[c.originalIndex]=t.length-1,u.selectpicker.search.map.originalIndex[t.length-1]=c.originalIndex))}u.activeIndex=void 0,u.noScroll=!0,u.$menuInner.scrollTop(0),u.selectpicker.search.elements=t,u.createView(!0),t.length||(m.className="no-results",m.innerHTML=u.options.noneResultsText.replace("{0}",'"'+G(e)+'"'),u.$menuInner[0].firstChild.appendChild(m))}else u.$menuInner.scrollTop(0),u.createView(!1)})},_searchStyle:function(){return this.options.liveSearchStyle||"contains"},val:function(e){return void 0!==e?(this.$element.val(e),this.render(),this.$element.trigger("changed.bs.select",y),y=null,this.$element):this.$element.val()},changeAll:function(e){if(this.multiple){void 0===e&&(e=!0);var t=this.$element.find("option"),i=0,s=0,n=S(this.$element[0]);this.$element.addClass("bs-select-hidden");for(var o=0;o<this.selectpicker.current.elements.length;o++){var l=this.selectpicker.current.data[o],r=t[this.selectpicker.current.map.originalIndex[o]];r&&!r.disabled&&"divider"!==l.type&&(r.selected&&i++,r.selected=e,r.selected&&s++)}this.$element.removeClass("bs-select-hidden"),i!==s&&(this.setOptionStatus(),this.togglePlaceholder(),y=[null,null,n],this.$element.triggerNative("change"))}},selectAll:function(){return this.changeAll(!0)},deselectAll:function(){return this.changeAll(!1)},toggle:function(e){(e=e||window.event)&&e.stopPropagation(),this.$button.trigger("click.bs.dropdown.data-api")},keydown:function(e){var t,i,s,n,o,l=F(this),r=l.hasClass("dropdown-toggle"),c=(r?l.closest(".dropdown"):l.closest(N.MENU)).data("this"),a=c.findLis(),d=!1,h=e.which===D&&!r&&!c.options.selectOnTab,p=A.test(e.which)||h,u=c.$menuInner[0].scrollTop,m=c.isVirtual(),f=!0===m?c.selectpicker.view.position0:0;if(!(i=c.$newElement.hasClass(q.SHOW))&&(p||48<=e.which&&e.which<=57||96<=e.which&&e.which<=105||65<=e.which&&e.which<=90)&&c.$button.trigger("click.bs.dropdown.data-api"),e.which===C&&i&&(e.preventDefault(),c.$button.trigger("click.bs.dropdown.data-api").focus()),p){if(!a.length)return;void 0===(t=!0===m?a.index(a.filter(".active")):c.selectpicker.current.map.newIndex[c.activeIndex])&&(t=-1),-1!==t&&((s=c.selectpicker.current.elements[t+f]).classList.remove("active"),s.firstChild&&s.firstChild.classList.remove("active")),e.which===H?(-1!==t&&t--,t+f<0&&(t+=a.length),c.selectpicker.view.canHighlight[t+f]||-1===(t=c.selectpicker.view.canHighlight.slice(0,t+f).lastIndexOf(!0)-f)&&(t=a.length-1)):(e.which===L||h)&&(++t+f>=c.selectpicker.view.canHighlight.length&&(t=0),c.selectpicker.view.canHighlight[t+f]||(t=t+1+c.selectpicker.view.canHighlight.slice(t+f+1).indexOf(!0))),e.preventDefault();var v=f+t;e.which===H?0===f&&t===a.length-1?(c.$menuInner[0].scrollTop=c.$menuInner[0].scrollHeight,v=c.selectpicker.current.elements.length-1):d=(o=(n=c.selectpicker.current.data[v]).position-n.height)<u:(e.which===L||h)&&(0===t?v=c.$menuInner[0].scrollTop=0:d=u<(o=(n=c.selectpicker.current.data[v]).position-c.sizeInfo.menuInnerHeight)),(s=c.selectpicker.current.elements[v])&&(s.classList.add("active"),s.firstChild&&s.firstChild.classList.add("active")),c.activeIndex=c.selectpicker.current.map.originalIndex[v],c.selectpicker.view.currentActive=s,d&&(c.$menuInner[0].scrollTop=o),c.options.liveSearch?c.$searchbox.focus():l.focus()}else if(!l.is("input")&&!P.test(e.which)||e.which===T&&c.selectpicker.keydown.keyHistory){var g,b,w=[];e.preventDefault(),c.selectpicker.keydown.keyHistory+=E[e.which],c.selectpicker.keydown.resetKeyHistory.cancel&&clearTimeout(c.selectpicker.keydown.resetKeyHistory.cancel),c.selectpicker.keydown.resetKeyHistory.cancel=c.selectpicker.keydown.resetKeyHistory.start(),b=c.selectpicker.keydown.keyHistory,/^(.)\1+$/.test(b)&&(b=b.charAt(0));for(var x=0;x<c.selectpicker.current.data.length;x++){var I=c.selectpicker.current.data[x];$(I,b,"startsWith",!0)&&c.selectpicker.view.canHighlight[x]&&(I.index=x,w.push(I.originalIndex))}if(w.length){var k=0;a.removeClass("active").find("a").removeClass("active"),1===b.length&&(-1===(k=w.indexOf(c.activeIndex))||k===w.length-1?k=0:k++),g=c.selectpicker.current.map.newIndex[w[k]],0<u-(n=c.selectpicker.current.data[g]).position?(o=n.position-n.height,d=!0):(o=n.position-c.sizeInfo.menuInnerHeight,d=n.position>u+c.sizeInfo.menuInnerHeight),(s=c.selectpicker.current.elements[g]).classList.add("active"),s.firstChild&&s.firstChild.classList.add("active"),c.activeIndex=w[k],s.firstChild.focus(),d&&(c.$menuInner[0].scrollTop=o),l.focus()}}i&&(e.which===T&&!c.selectpicker.keydown.keyHistory||e.which===O||e.which===D&&c.options.selectOnTab)&&(e.which!==T&&e.preventDefault(),c.options.liveSearch&&e.which===T||(c.$menuInner.find(".active a").trigger("click",!0),l.focus(),c.options.liveSearch||(e.preventDefault(),F(document).data("spaceSelect",!0))))},mobile:function(){this.$element.addClass("mobile-device")},refresh:function(){var e=F.extend({},this.options,this.$element.data());this.options=e,this.selectpicker.main.map.newIndex={},this.selectpicker.main.map.originalIndex={},this.createLi(),this.checkDisabled(),this.render(),this.setStyle(),this.setWidth(),this.setSize(!0),this.$element.trigger("refreshed.bs.select")},hide:function(){this.$newElement.hide()},show:function(){this.$newElement.show()},remove:function(){this.$newElement.remove(),this.$element.remove()},destroy:function(){this.$newElement.before(this.$element).remove(),this.$bsContainer?this.$bsContainer.remove():this.$menu.remove(),this.$element.off(".bs.select").removeData("selectpicker").removeClass("bs-select-hidden selectpicker")}};var h=F.fn.selectpicker;F.fn.selectpicker=r,F.fn.selectpicker.Constructor=c,F.fn.selectpicker.noConflict=function(){return F.fn.selectpicker=h,this},F(document).off("keydown.bs.dropdown.data-api").on("keydown.bs.select",'.bootstrap-select [data-toggle="dropdown"], .bootstrap-select [role="listbox"], .bs-searchbox input',c.prototype.keydown).on("focusin.modal",'.bootstrap-select [data-toggle="dropdown"], .bootstrap-select [role="listbox"], .bs-searchbox input',function(e){e.stopPropagation()}),F(window).on("load.bs.select.data-api",function(){F(".selectpicker").each(function(){var e=F(this);r.call(e,e.data())})})}(e)});
+!function(e,t){void 0===e&&void 0!==window&&(e=window),"function"==typeof define&&define.amd?define(["jquery"],function(e){return t(e)}):"object"==typeof module&&module.exports?module.exports=t(require("jquery")):t(e.jQuery)}(this,function(e){!function(G){"use strict";"classList"in document.createElement("_")||function(e){if("Element"in e){var t="classList",i="prototype",n=e.Element[i],s=Object,o=function(){var i=G(this);return{add:function(e){return i.addClass(e)},remove:function(e){return i.removeClass(e)},toggle:function(e,t){return i.toggleClass(e,t)},contains:function(e){return i.hasClass(e)}}};if(s.defineProperty){var l={get:o,enumerable:!0,configurable:!0};try{s.defineProperty(n,t,l)}catch(e){void 0!==e.number&&-2146823252!==e.number||(l.enumerable=!1,s.defineProperty(n,t,l))}}else s[i].__defineGetter__&&n.__defineGetter__(t,o)}}(window);var e,c,t,i=document.createElement("_");if(i.classList.toggle("c3",!1),i.classList.contains("c3")){var n=DOMTokenList.prototype.toggle;DOMTokenList.prototype.toggle=function(e,t){return 1 in arguments&&!this.contains(e)==!t?t:n.call(this,e)}}function S(e){var t,i=[],n=e&&e.options;if(e.multiple)for(var s=0,o=n.length;s<o;s++)(t=n[s]).selected&&i.push(t.value||t.text);else i=e.value;return i}i=null,String.prototype.startsWith||(e=function(){try{var e={},t=Object.defineProperty,i=t(e,e,e)&&t}catch(e){}return i}(),c={}.toString,t=function(e){if(null==this)throw new TypeError;var t=String(this);if(e&&"[object RegExp]"==c.call(e))throw new TypeError;var i=t.length,n=String(e),s=n.length,o=1<arguments.length?arguments[1]:void 0,l=o?Number(o):0;l!=l&&(l=0);var r=Math.min(Math.max(l,0),i);if(i<s+r)return!1;for(var a=-1;++a<s;)if(t.charCodeAt(r+a)!=n.charCodeAt(a))return!1;return!0},e?e(String.prototype,"startsWith",{value:t,configurable:!0,writable:!0}):String.prototype.startsWith=t),Object.keys||(Object.keys=function(e,t,i){for(t in i=[],e)i.hasOwnProperty.call(e,t)&&i.push(t);return i});var s={useDefault:!1,_set:G.valHooks.select.set};G.valHooks.select.set=function(e,t){return t&&!s.useDefault&&G(e).data("selected",!0),s._set.apply(this,arguments)};var y=null,o=function(){try{return new Event("change"),!0}catch(e){return!1}}();function $(e,t,i,n){for(var s=["content","subtext","tokens"],o=!1,l=0;l<s.length;l++){var r=s[l],a=e[r];if(a&&(a=a.toString(),"content"===r&&(a=a.replace(/<[^>]+>/g,"")),n&&(a=m(a)),a=a.toUpperCase(),o="contains"===i?0<=a.indexOf(t):a.startsWith(t)))break}return o}function z(e){return parseInt(e,10)||0}G.fn.triggerNative=function(e){var t,i=this[0];i.dispatchEvent?(o?t=new Event(e,{bubbles:!0}):(t=document.createEvent("Event")).initEvent(e,!0,!1),i.dispatchEvent(t)):i.fireEvent?((t=document.createEventObject()).eventType=e,i.fireEvent("on"+e,t)):this.trigger(e)};var l={"\xc0":"A","\xc1":"A","\xc2":"A","\xc3":"A","\xc4":"A","\xc5":"A","\xe0":"a","\xe1":"a","\xe2":"a","\xe3":"a","\xe4":"a","\xe5":"a","\xc7":"C","\xe7":"c","\xd0":"D","\xf0":"d","\xc8":"E","\xc9":"E","\xca":"E","\xcb":"E","\xe8":"e","\xe9":"e","\xea":"e","\xeb":"e","\xcc":"I","\xcd":"I","\xce":"I","\xcf":"I","\xec":"i","\xed":"i","\xee":"i","\xef":"i","\xd1":"N","\xf1":"n","\xd2":"O","\xd3":"O","\xd4":"O","\xd5":"O","\xd6":"O","\xd8":"O","\xf2":"o","\xf3":"o","\xf4":"o","\xf5":"o","\xf6":"o","\xf8":"o","\xd9":"U","\xda":"U","\xdb":"U","\xdc":"U","\xf9":"u","\xfa":"u","\xfb":"u","\xfc":"u","\xdd":"Y","\xfd":"y","\xff":"y","\xc6":"Ae","\xe6":"ae","\xde":"Th","\xfe":"th","\xdf":"ss","\u0100":"A","\u0102":"A","\u0104":"A","\u0101":"a","\u0103":"a","\u0105":"a","\u0106":"C","\u0108":"C","\u010a":"C","\u010c":"C","\u0107":"c","\u0109":"c","\u010b":"c","\u010d":"c","\u010e":"D","\u0110":"D","\u010f":"d","\u0111":"d","\u0112":"E","\u0114":"E","\u0116":"E","\u0118":"E","\u011a":"E","\u0113":"e","\u0115":"e","\u0117":"e","\u0119":"e","\u011b":"e","\u011c":"G","\u011e":"G","\u0120":"G","\u0122":"G","\u011d":"g","\u011f":"g","\u0121":"g","\u0123":"g","\u0124":"H","\u0126":"H","\u0125":"h","\u0127":"h","\u0128":"I","\u012a":"I","\u012c":"I","\u012e":"I","\u0130":"I","\u0129":"i","\u012b":"i","\u012d":"i","\u012f":"i","\u0131":"i","\u0134":"J","\u0135":"j","\u0136":"K","\u0137":"k","\u0138":"k","\u0139":"L","\u013b":"L","\u013d":"L","\u013f":"L","\u0141":"L","\u013a":"l","\u013c":"l","\u013e":"l","\u0140":"l","\u0142":"l","\u0143":"N","\u0145":"N","\u0147":"N","\u014a":"N","\u0144":"n","\u0146":"n","\u0148":"n","\u014b":"n","\u014c":"O","\u014e":"O","\u0150":"O","\u014d":"o","\u014f":"o","\u0151":"o","\u0154":"R","\u0156":"R","\u0158":"R","\u0155":"r","\u0157":"r","\u0159":"r","\u015a":"S","\u015c":"S","\u015e":"S","\u0160":"S","\u015b":"s","\u015d":"s","\u015f":"s","\u0161":"s","\u0162":"T","\u0164":"T","\u0166":"T","\u0163":"t","\u0165":"t","\u0167":"t","\u0168":"U","\u016a":"U","\u016c":"U","\u016e":"U","\u0170":"U","\u0172":"U","\u0169":"u","\u016b":"u","\u016d":"u","\u016f":"u","\u0171":"u","\u0173":"u","\u0174":"W","\u0175":"w","\u0176":"Y","\u0177":"y","\u0178":"Y","\u0179":"Z","\u017b":"Z","\u017d":"Z","\u017a":"z","\u017c":"z","\u017e":"z","\u0132":"IJ","\u0133":"ij","\u0152":"Oe","\u0153":"oe","\u0149":"'n","\u017f":"s"},r=/[\xc0-\xd6\xd8-\xf6\xf8-\xff\u0100-\u017f]/g,a=RegExp("[\\u0300-\\u036f\\ufe20-\\ufe2f\\u20d0-\\u20ff\\u1ab0-\\u1aff\\u1dc0-\\u1dff]","g");function d(e){return l[e]}function m(e){return(e=e.toString())&&e.replace(r,d).replace(a,"")}var h=function(t){var i=function(e){return t[e]},e="(?:"+Object.keys(t).join("|")+")",n=RegExp(e),s=RegExp(e,"g");return function(e){return e=null==e?"":""+e,n.test(e)?e.replace(s,i):e}},q=h({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#x27;","`":"&#x60;"}),v=h({"&amp;":"&","&lt;":"<","&gt;":">","&quot;":'"',"&#x27;":"'","&#x60;":"`"}),E={32:" ",48:"0",49:"1",50:"2",51:"3",52:"4",53:"5",54:"6",55:"7",56:"8",57:"9",59:";",65:"A",66:"B",67:"C",68:"D",69:"E",70:"F",71:"G",72:"H",73:"I",74:"J",75:"K",76:"L",77:"M",78:"N",79:"O",80:"P",81:"Q",82:"R",83:"S",84:"T",85:"U",86:"V",87:"W",88:"X",89:"Y",90:"Z",96:"0",97:"1",98:"2",99:"3",100:"4",101:"5",102:"6",103:"7",104:"8",105:"9"},C=27,O=13,T=32,H=9,D=38,L=40,K={success:!1,major:"3"};try{K.full=(G.fn.dropdown.Constructor.VERSION||"").split(" ")[0].split("."),K.major=K.full[0],K.success=!0}catch(e){console.warn("There was an issue retrieving Bootstrap's version. Ensure Bootstrap is being loaded before bootstrap-select and there is no namespace collision. If loading Bootstrap asynchronously, the version may need to be manually specified via $.fn.selectpicker.Constructor.BootstrapVersion.",e)}var p=0,A=".bs.select",Y={DISABLED:"disabled",DIVIDER:"divider",SHOW:"open",DROPUP:"dropup",MENU:"dropdown-menu",MENURIGHT:"dropdown-menu-right",MENULEFT:"dropdown-menu-left",BUTTONCLASS:"btn-default",POPOVERHEADER:"popover-title"},N={MENU:"."+Y.MENU};"4"===K.major&&(Y.DIVIDER="dropdown-divider",Y.SHOW="show",Y.BUTTONCLASS="btn-light",Y.POPOVERHEADER="popover-header");var P=new RegExp(D+"|"+L),R=new RegExp("^"+H+"$|"+C),u=function(e,t){var i=this;s.useDefault||(G.valHooks.select.set=s._set,s.useDefault=!0),this.$element=G(e),this.$newElement=null,this.$button=null,this.$menu=null,this.options=t,this.selectpicker={main:{map:{newIndex:{},originalIndex:{}}},current:{map:{}},search:{map:{}},view:{},keydown:{keyHistory:"",resetKeyHistory:{start:function(){return setTimeout(function(){i.selectpicker.keydown.keyHistory=""},800)}}}},null===this.options.title&&(this.options.title=this.$element.attr("title"));var n=this.options.windowPadding;"number"==typeof n&&(this.options.windowPadding=[n,n,n,n]),this.val=u.prototype.val,this.render=u.prototype.render,this.refresh=u.prototype.refresh,this.setStyle=u.prototype.setStyle,this.selectAll=u.prototype.selectAll,this.deselectAll=u.prototype.deselectAll,this.destroy=u.prototype.destroy,this.remove=u.prototype.remove,this.show=u.prototype.show,this.hide=u.prototype.hide,this.init()};function f(e){var o,l=arguments,r=e;if([].shift.apply(l),!K.success){try{K.full=(G.fn.dropdown.Constructor.VERSION||"").split(" ")[0].split(".")}catch(e){K.full=u.BootstrapVersion.split(" ")[0].split(".")}K.major=K.full[0],K.success=!0,"4"===K.major&&(Y.DIVIDER="dropdown-divider",Y.SHOW="show",Y.BUTTONCLASS="btn-light",u.DEFAULTS.style=Y.BUTTONCLASS="btn-light",Y.POPOVERHEADER="popover-header")}var t=this.each(function(){var e=G(this);if(e.is("select")){var t=e.data("selectpicker"),i="object"==typeof r&&r;if(t){if(i)for(var n in i)i.hasOwnProperty(n)&&(t.options[n]=i[n])}else{var s=G.extend({},u.DEFAULTS,G.fn.selectpicker.defaults||{},e.data(),i);s.template=G.extend({},u.DEFAULTS.template,G.fn.selectpicker.defaults?G.fn.selectpicker.defaults.template:{},e.data().template,i.template),e.data("selectpicker",t=new u(this,s))}"string"==typeof r&&(o=t[r]instanceof Function?t[r].apply(t,l):t.options[r])}});return void 0!==o?o:t}u.VERSION="1.13.5",u.BootstrapVersion=K.major,u.DEFAULTS={noneSelectedText:"Nothing selected",noneResultsText:"No results matched {0}",countSelectedText:function(e,t){return 1==e?"{0} item selected":"{0} items selected"},maxOptionsText:function(e,t){return[1==e?"Limit reached ({n} item max)":"Limit reached ({n} items max)",1==t?"Group limit reached ({n} item max)":"Group limit reached ({n} items max)"]},selectAllText:"Select All",deselectAllText:"Deselect All",doneButton:!1,doneButtonText:"Close",multipleSeparator:", ",styleBase:"btn",style:Y.BUTTONCLASS,size:"auto",title:null,selectedTextFormat:"values",width:!1,container:!1,hideDisabled:!1,showSubtext:!1,showIcon:!0,showContent:!0,dropupAuto:!0,header:!1,liveSearch:!1,liveSearchPlaceholder:null,liveSearchNormalize:!1,liveSearchStyle:"contains",actionsBox:!1,iconBase:"glyphicon",tickIcon:"glyphicon-ok",showTick:!1,template:{caret:'<span class="caret"></span>'},maxOptions:!1,mobile:!1,selectOnTab:!1,dropdownAlignRight:!1,windowPadding:0,virtualScroll:600,display:!1},"4"===K.major&&(u.DEFAULTS.style="btn-light",u.DEFAULTS.iconBase="",u.DEFAULTS.tickIcon="bs-ok-default"),u.prototype={constructor:u,init:function(){var i=this,e=this.$element.attr("id");this.selectId=p++,this.$element.addClass("bs-select-hidden"),this.multiple=this.$element.prop("multiple"),this.autofocus=this.$element.prop("autofocus"),this.$newElement=this.createDropdown(),this.createLi(),this.$element.after(this.$newElement).prependTo(this.$newElement),this.$button=this.$newElement.children("button"),this.$menu=this.$newElement.children(N.MENU),this.$menuInner=this.$menu.children(".inner"),this.$searchbox=this.$menu.find("input"),this.$element.removeClass("bs-select-hidden"),!0===this.options.dropdownAlignRight&&this.$menu.addClass(Y.MENURIGHT),void 0!==e&&this.$button.attr("data-id",e),this.checkDisabled(),this.clickListener(),this.options.liveSearch&&this.liveSearchListener(),this.render(),this.setStyle(),this.setWidth(),this.options.container?this.selectPosition():this.$element.on("hide"+A,function(){if(i.isVirtual()){var e=i.$menuInner[0],t=e.firstChild.cloneNode(!1);e.replaceChild(t,e.firstChild),e.scrollTop=0}}),this.$menu.data("this",this),this.$newElement.data("this",this),this.options.mobile&&this.mobile(),this.$newElement.on({"hide.bs.dropdown":function(e){i.$menuInner.attr("aria-expanded",!1),i.$element.trigger("hide"+A,e)},"hidden.bs.dropdown":function(e){i.$element.trigger("hidden"+A,e)},"show.bs.dropdown":function(e){i.$menuInner.attr("aria-expanded",!0),i.$element.trigger("show"+A,e)},"shown.bs.dropdown":function(e){i.$element.trigger("shown"+A,e)}}),i.$element[0].hasAttribute("required")&&this.$element.on("invalid",function(){i.$button.addClass("bs-invalid"),i.$element.on("shown"+A+".invalid",function(){i.$element.val(i.$element.val()).off("shown"+A+".invalid")}).on("rendered"+A,function(){this.validity.valid&&i.$button.removeClass("bs-invalid"),i.$element.off("rendered"+A)}),i.$button.on("blur"+A,function(){i.$element.focus().blur(),i.$button.off("blur"+A)})}),setTimeout(function(){i.$element.trigger("loaded"+A)})},createDropdown:function(){var e,t=this.multiple||this.options.showTick?" show-tick":"",i=this.autofocus?" autofocus":"",n="",s="",o="",l="";return this.options.header&&(n='<div class="'+Y.POPOVERHEADER+'"><button type="button" class="close" aria-hidden="true">&times;</button>'+this.options.header+"</div>"),this.options.liveSearch&&(s='<div class="bs-searchbox"><input type="text" class="form-control" autocomplete="off"'+(null===this.options.liveSearchPlaceholder?"":' placeholder="'+q(this.options.liveSearchPlaceholder)+'"')+' role="textbox" aria-label="Search"></div>'),this.multiple&&this.options.actionsBox&&(o='<div class="bs-actionsbox"><div class="btn-group btn-group-sm btn-block"><button type="button" class="actions-btn bs-select-all btn '+Y.BUTTONCLASS+'">'+this.options.selectAllText+'</button><button type="button" class="actions-btn bs-deselect-all btn '+Y.BUTTONCLASS+'">'+this.options.deselectAllText+"</button></div></div>"),this.multiple&&this.options.doneButton&&(l='<div class="bs-donebutton"><div class="btn-group btn-block"><button type="button" class="btn btn-sm '+Y.BUTTONCLASS+'">'+this.options.doneButtonText+"</button></div></div>"),e='<div class="dropdown bootstrap-select'+t+'"><button type="button" class="'+this.options.styleBase+' dropdown-toggle" '+("static"===this.options.display?'data-display="static"':"")+'data-toggle="dropdown"'+i+' role="button"><div class="filter-option"><div class="filter-option-inner"><div class="filter-option-inner-inner"></div></div> </div>'+("4"===K.major?"":'<span class="bs-caret">'+this.options.template.caret+"</span>")+'</button><div class="'+Y.MENU+" "+("4"===K.major?"":Y.SHOW)+'" role="combobox">'+n+s+o+'<div class="inner '+Y.SHOW+'" role="listbox" aria-expanded="false" tabindex="-1"><ul class="'+Y.MENU+" inner "+("4"===K.major?Y.SHOW:"")+'"></ul></div>'+l+"</div></div>",G(e)},setPositionData:function(){this.selectpicker.view.canHighlight=[];for(var e=0;e<this.selectpicker.current.data.length;e++){var t=this.selectpicker.current.data[e],i=!0;"divider"===t.type?(i=!1,t.height=this.sizeInfo.dividerHeight):"optgroup-label"===t.type?(i=!1,t.height=this.sizeInfo.dropdownHeaderHeight):t.height=this.sizeInfo.liHeight,t.disabled&&(i=!1),this.selectpicker.view.canHighlight.push(i),t.position=(0===e?0:this.selectpicker.current.data[e-1].position)+t.height}},isVirtual:function(){return!1!==this.options.virtualScroll&&this.selectpicker.main.elements.length>=this.options.virtualScroll||!0===this.options.virtualScroll},createView:function(C,e){e=e||0;var O=this;this.selectpicker.current=C?this.selectpicker.search:this.selectpicker.main;var z,T,H=[];function i(e,t){var i,n,s,o,l,r,a,c,d,h,p=O.selectpicker.current.elements.length,u=[],f=!0,m=O.isVirtual();O.selectpicker.view.scrollTop=e,!0===m&&O.sizeInfo.hasScrollBar&&O.$menu[0].offsetWidth>O.sizeInfo.totalMenuWidth&&(O.sizeInfo.menuWidth=O.$menu[0].offsetWidth,O.sizeInfo.totalMenuWidth=O.sizeInfo.menuWidth+O.sizeInfo.scrollBarWidth,O.$menu.css("min-width",O.sizeInfo.menuWidth)),i=Math.ceil(O.sizeInfo.menuInnerHeight/O.sizeInfo.liHeight*1.5),n=Math.round(p/i)||1;for(var v=0;v<n;v++){var g=(v+1)*i;if(v===n-1&&(g=p),u[v]=[v*i+(v?1:0),g],!p)break;void 0===l&&e<=O.selectpicker.current.data[g-1].position-O.sizeInfo.menuInnerHeight&&(l=v)}if(void 0===l&&(l=0),r=[O.selectpicker.view.position0,O.selectpicker.view.position1],s=Math.max(0,l-1),o=Math.min(n-1,l+1),O.selectpicker.view.position0=Math.max(0,u[s][0])||0,O.selectpicker.view.position1=Math.min(p,u[o][1])||0,a=r[0]!==O.selectpicker.view.position0||r[1]!==O.selectpicker.view.position1,void 0!==O.activeIndex&&(T=O.selectpicker.current.elements[O.selectpicker.current.map.newIndex[O.prevActiveIndex]],H=O.selectpicker.current.elements[O.selectpicker.current.map.newIndex[O.activeIndex]],z=O.selectpicker.current.elements[O.selectpicker.current.map.newIndex[O.selectedIndex]],t&&(O.activeIndex!==O.selectedIndex&&(H.classList.remove("active"),H.firstChild&&H.firstChild.classList.remove("active")),O.activeIndex=void 0),O.activeIndex&&O.activeIndex!==O.selectedIndex&&z&&z.length&&(z.classList.remove("active"),z.firstChild&&z.firstChild.classList.remove("active"))),void 0!==O.prevActiveIndex&&O.prevActiveIndex!==O.activeIndex&&O.prevActiveIndex!==O.selectedIndex&&T&&T.length&&(T.classList.remove("active"),T.firstChild&&T.firstChild.classList.remove("active")),(t||a)&&(c=O.selectpicker.view.visibleElements?O.selectpicker.view.visibleElements.slice():[],O.selectpicker.view.visibleElements=O.selectpicker.current.elements.slice(O.selectpicker.view.position0,O.selectpicker.view.position1),O.setOptionStatus(),(C||!1===m&&t)&&(d=c,h=O.selectpicker.view.visibleElements,f=!(d.length===h.length&&d.every(function(e,t){return e===h[t]}))),(t||!0===m)&&f)){var b,w,I=O.$menuInner[0],x=document.createDocumentFragment(),k=I.firstChild.cloneNode(!1),$=!0===m?O.selectpicker.view.visibleElements:O.selectpicker.current.elements;I.replaceChild(k,I.firstChild);v=0;for(var E=$.length;v<E;v++)x.appendChild($[v]);!0===m&&(b=0===O.selectpicker.view.position0?0:O.selectpicker.current.data[O.selectpicker.view.position0-1].position,w=O.selectpicker.view.position1>p-1?0:O.selectpicker.current.data[p-1].position-O.selectpicker.current.data[O.selectpicker.view.position1-1].position,I.firstChild.style.marginTop=b+"px",I.firstChild.style.marginBottom=w+"px"),I.firstChild.appendChild(x)}if(O.prevActiveIndex=O.activeIndex,O.options.liveSearch){if(C&&t){var S,y=0;O.selectpicker.view.canHighlight[y]||(y=1+O.selectpicker.view.canHighlight.slice(1).indexOf(!0)),S=O.selectpicker.view.visibleElements[y],O.selectpicker.view.currentActive&&(O.selectpicker.view.currentActive.classList.remove("active"),O.selectpicker.view.currentActive.firstChild&&O.selectpicker.view.currentActive.firstChild.classList.remove("active")),S&&(S.classList.add("active"),S.firstChild&&S.firstChild.classList.add("active")),O.activeIndex=O.selectpicker.current.map.originalIndex[y]}}else O.$menuInner.focus()}this.setPositionData(),i(e,!0),this.$menuInner.off("scroll.createView").on("scroll.createView",function(e,t){O.noScroll||i(this.scrollTop,t),O.noScroll=!1}),G(window).off("resize"+A+"."+this.selectId+".createView").on("resize"+A+"."+this.selectId+".createView",function(){O.$newElement.hasClass(Y.SHOW)&&i(O.$menuInner[0].scrollTop)})},createLi:function(){var T,H=this,D=[],L={},A=0,N=0,P=[],R=0,W=0,B=-1;this.selectpicker.view.titleOption||(this.selectpicker.view.titleOption=document.createElement("option"));var e,M={span:document.createElement("span"),subtext:document.createElement("small"),a:document.createElement("a"),li:document.createElement("li"),whitespace:document.createTextNode("\xa0")},U=document.createDocumentFragment();(H.options.showTick||H.multiple)&&((e=M.span.cloneNode(!1)).className=H.options.iconBase+" "+H.options.tickIcon+" check-mark",M.a.appendChild(e)),M.a.setAttribute("role","option"),M.subtext.className="text-muted",M.text=M.span.cloneNode(!1),M.text.className="text";var V=function(e,t,i){var n=M.li.cloneNode(!1);return e&&(1===e.nodeType||11===e.nodeType?n.appendChild(e):n.innerHTML=e),void 0!==t&&""!==t&&(n.className=t),null!=i&&n.classList.add("optgroup-"+i),n},j=function(e,t,i){var n=M.a.cloneNode(!0);return e&&(11===e.nodeType?n.appendChild(e):n.insertAdjacentHTML("beforeend",e)),void 0!==t&&""!==t&&(n.className=t),"4"===K.major&&n.classList.add("dropdown-item"),i&&n.setAttribute("style",i),n},_=function(e){var t,i,n=M.text.cloneNode(!1);if(e.optionContent)n.innerHTML=e.optionContent;else{if(n.textContent=e.text,e.optionIcon){var s=M.whitespace.cloneNode(!1);(i=M.span.cloneNode(!1)).className=H.options.iconBase+" "+e.optionIcon,U.appendChild(i),U.appendChild(s)}e.optionSubtext&&((t=M.subtext.cloneNode(!1)).innerHTML=e.optionSubtext,n.appendChild(t))}return U.appendChild(n),U};if(this.options.title&&!this.multiple){B--;var t=this.$element[0],i=!1,n=!this.selectpicker.view.titleOption.parentNode;if(n)this.selectpicker.view.titleOption.className="bs-title-option",this.selectpicker.view.titleOption.value="",i=void 0===G(t.options[t.selectedIndex]).attr("selected")&&void 0===this.$element.data("selected");(n||0!==this.selectpicker.view.titleOption.index)&&t.insertBefore(this.selectpicker.view.titleOption,t.firstChild),i&&(t.selectedIndex=0)}var F=this.$element.find("option");F.each(function(e){var t=G(this);if(B++,!t.hasClass("bs-title-option")){var i,n,s,o,l=t.data(),r=this.className||"",a=q(this.style.cssText),c=l.content,d=this.textContent,h=l.tokens,p=l.subtext,u=l.icon,f=t.parent(),m=f[0],v="OPTGROUP"===m.tagName,g=v&&m.disabled,b=this.disabled||g,w=this.previousElementSibling&&"OPTGROUP"===this.previousElementSibling.tagName,I=f.data();if(!0===l.hidden||this.hidden||H.options.hideDisabled&&(b||g))return i=l.prevHiddenIndex,t.next().data("prevHiddenIndex",void 0!==i?i:e),B--,L[e]={type:"hidden",data:l},w||void 0!==i&&(o=F[i].previousElementSibling)&&"OPTGROUP"===o.tagName&&!o.disabled&&(w=!0),void(w&&"divider"!==P[P.length-1].type&&(B++,D.push(V(!1,Y.DIVIDER,R+"div")),P.push({type:"divider",optID:R})));if(v&&!0!==l.divider){if(H.options.hideDisabled&&b){if(void 0===I.allOptionsDisabled){var x=f.children();f.data("allOptionsDisabled",x.filter(":disabled").length===x.length)}if(f.data("allOptionsDisabled"))return void B--}var k=" "+m.className||"",$=this.previousElementSibling;if(void 0!==(i=l.prevHiddenIndex)&&($=F[i].previousElementSibling),!$){R+=1;var E=m.label,S=q(E),y=I.subtext,C=I.icon;0!==e&&0<D.length&&(B++,D.push(V(!1,Y.DIVIDER,R+"div")),P.push({type:"divider",optID:R})),B++,s=function(e){var t,i,n=M.text.cloneNode(!1);if(n.innerHTML=e.labelEscaped,e.labelIcon){var s=M.whitespace.cloneNode(!1);(i=M.span.cloneNode(!1)).className=H.options.iconBase+" "+e.labelIcon,U.appendChild(i),U.appendChild(s)}return e.labelSubtext&&((t=M.subtext.cloneNode(!1)).textContent=e.labelSubtext,n.appendChild(t)),U.appendChild(n),U}({labelEscaped:S,labelSubtext:y,labelIcon:C}),D.push(V(s,"dropdown-header"+k,R)),P.push({content:S,subtext:y,type:"optgroup-label",optID:R}),W=B-1}n=_({text:d,optionContent:c,optionSubtext:p,optionIcon:u}),D.push(V(j(n,"opt "+r+k,a),"",R)),P.push({content:c||d,subtext:p,tokens:h,type:"option",optID:R,headerIndex:W,lastIndex:W+m.childElementCount,originalIndex:e,data:l}),A++}else!0===l.divider?(D.push(V(!1,Y.DIVIDER)),P.push({type:"divider",originalIndex:e,data:l})):(!w&&H.options.hideDisabled&&void 0!==(i=l.prevHiddenIndex)&&(o=F[i].previousElementSibling)&&"OPTGROUP"===o.tagName&&!o.disabled&&(w=!0),w&&"divider"!==P[P.length-1].type&&(B++,D.push(V(!1,Y.DIVIDER,R+"div")),P.push({type:"divider",optID:R})),n=_({text:d,optionContent:c,optionSubtext:p,optionIcon:u}),D.push(V(j(n,r,a))),P.push({content:c||d,subtext:p,tokens:h,type:"option",originalIndex:e,data:l}),A++);H.selectpicker.main.map.newIndex[e]=B,H.selectpicker.main.map.originalIndex[B]=e;var O=P[P.length-1];O.disabled=b;var z=0;O.content&&(z+=O.content.length),O.subtext&&(z+=O.subtext.length),u&&(z+=1),N<z&&(N=z,T=D[D.length-1])}}),this.selectpicker.main.elements=D,this.selectpicker.main.data=P,this.selectpicker.main.hidden=L,this.selectpicker.current=this.selectpicker.main,this.selectpicker.view.widestOption=T,this.selectpicker.view.availableOptionsCount=A},findLis:function(){return this.$menuInner.find(".inner > li")},render:function(){var e=this,t=this.$element.find("option"),i=[],n=[];this.togglePlaceholder(),this.tabIndex();for(var s=0,o=t.length;s<o;s++){var l=e.selectpicker.main.map.newIndex[s],r=t[s],a=e.selectpicker.main.data[l]||e.selectpicker.main.hidden[s];if(r&&r.selected&&a&&(i.push(r),n.length<100&&"count"!==e.options.selectedTextFormat||1===i.length)){var c,d,h=a.data,p=h.icon&&e.options.showIcon?'<i class="'+e.options.iconBase+" "+h.icon+'"></i> ':"";c=e.options.showSubtext&&h.subtext&&!e.multiple?' <small class="text-muted">'+h.subtext+"</small>":"",d=r.title?r.title:h.content&&e.options.showContent?h.content.toString():p+r.innerHTML.trim()+c,n.push(d)}}var u=this.multiple?n.join(this.options.multipleSeparator):n[0];if(50<i.length&&(u+="..."),this.multiple&&-1!==this.options.selectedTextFormat.indexOf("count")){var f=this.options.selectedTextFormat.split(">");if(1<f.length&&i.length>f[1]||1===f.length&&2<=i.length){var m=this.selectpicker.view.availableOptionsCount;u=("function"==typeof this.options.countSelectedText?this.options.countSelectedText(i.length,m):this.options.countSelectedText).replace("{0}",i.length.toString()).replace("{1}",m.toString())}}null==this.options.title&&(this.options.title=this.$element.attr("title")),"static"==this.options.selectedTextFormat&&(u=this.options.title),u||(u=void 0!==this.options.title?this.options.title:this.options.noneSelectedText),this.$button[0].title=v(u.replace(/<[^>]*>?/g,"").trim()),this.$button.find(".filter-option-inner-inner")[0].innerHTML=u,this.$element.trigger("rendered"+A)},setStyle:function(e,t){this.$element.attr("class")&&this.$newElement.addClass(this.$element.attr("class").replace(/selectpicker|mobile-device|bs-select-hidden|validate\[.*\]/gi,""));var i=e||this.options.style;"add"==t?this.$button.addClass(i):"remove"==t?this.$button.removeClass(i):(this.$button.removeClass(this.options.style),this.$button.addClass(i))},liHeight:function(e){if(e||!1!==this.options.size&&!this.sizeInfo){this.sizeInfo||(this.sizeInfo={});var t=document.createElement("div"),i=document.createElement("div"),n=document.createElement("div"),s=document.createElement("ul"),o=document.createElement("li"),l=document.createElement("li"),r=document.createElement("li"),a=document.createElement("a"),c=document.createElement("span"),d=this.options.header&&0<this.$menu.find("."+Y.POPOVERHEADER).length?this.$menu.find("."+Y.POPOVERHEADER)[0].cloneNode(!0):null,h=this.options.liveSearch?document.createElement("div"):null,p=this.options.actionsBox&&this.multiple&&0<this.$menu.find(".bs-actionsbox").length?this.$menu.find(".bs-actionsbox")[0].cloneNode(!0):null,u=this.options.doneButton&&this.multiple&&0<this.$menu.find(".bs-donebutton").length?this.$menu.find(".bs-donebutton")[0].cloneNode(!0):null,f=this.$element.find("option")[0];if(this.sizeInfo.selectWidth=this.$newElement[0].offsetWidth,c.className="text",a.className="dropdown-item "+(f?f.className:""),t.className=this.$menu[0].parentNode.className+" "+Y.SHOW,t.style.width=this.sizeInfo.selectWidth+"px","auto"===this.options.width&&(i.style.minWidth=0),i.className=Y.MENU+" "+Y.SHOW,n.className="inner "+Y.SHOW,s.className=Y.MENU+" inner "+("4"===K.major?Y.SHOW:""),o.className=Y.DIVIDER,l.className="dropdown-header",c.appendChild(document.createTextNode("\u200b")),a.appendChild(c),r.appendChild(a),l.appendChild(c.cloneNode(!0)),this.selectpicker.view.widestOption&&s.appendChild(this.selectpicker.view.widestOption.cloneNode(!0)),s.appendChild(r),s.appendChild(o),s.appendChild(l),d&&i.appendChild(d),h){var m=document.createElement("input");h.className="bs-searchbox",m.className="form-control",h.appendChild(m),i.appendChild(h)}p&&i.appendChild(p),n.appendChild(s),i.appendChild(n),u&&i.appendChild(u),t.appendChild(i),document.body.appendChild(t);var v,g=a.offsetHeight,b=l?l.offsetHeight:0,w=d?d.offsetHeight:0,I=h?h.offsetHeight:0,x=p?p.offsetHeight:0,k=u?u.offsetHeight:0,$=G(o).outerHeight(!0),E=!!window.getComputedStyle&&window.getComputedStyle(i),S=i.offsetWidth,y=E?null:G(i),C={vert:z(E?E.paddingTop:y.css("paddingTop"))+z(E?E.paddingBottom:y.css("paddingBottom"))+z(E?E.borderTopWidth:y.css("borderTopWidth"))+z(E?E.borderBottomWidth:y.css("borderBottomWidth")),horiz:z(E?E.paddingLeft:y.css("paddingLeft"))+z(E?E.paddingRight:y.css("paddingRight"))+z(E?E.borderLeftWidth:y.css("borderLeftWidth"))+z(E?E.borderRightWidth:y.css("borderRightWidth"))},O={vert:C.vert+z(E?E.marginTop:y.css("marginTop"))+z(E?E.marginBottom:y.css("marginBottom"))+2,horiz:C.horiz+z(E?E.marginLeft:y.css("marginLeft"))+z(E?E.marginRight:y.css("marginRight"))+2};n.style.overflowY="scroll",v=i.offsetWidth-S,document.body.removeChild(t),this.sizeInfo.liHeight=g,this.sizeInfo.dropdownHeaderHeight=b,this.sizeInfo.headerHeight=w,this.sizeInfo.searchHeight=I,this.sizeInfo.actionsHeight=x,this.sizeInfo.doneButtonHeight=k,this.sizeInfo.dividerHeight=$,this.sizeInfo.menuPadding=C,this.sizeInfo.menuExtras=O,this.sizeInfo.menuWidth=S,this.sizeInfo.totalMenuWidth=this.sizeInfo.menuWidth,this.sizeInfo.scrollBarWidth=v,this.sizeInfo.selectHeight=this.$newElement[0].offsetHeight,this.setPositionData()}},getSelectPosition:function(){var e,t=G(window),i=this.$newElement.offset(),n=G(this.options.container);this.options.container&&!n.is("body")?((e=n.offset()).top+=parseInt(n.css("borderTopWidth")),e.left+=parseInt(n.css("borderLeftWidth"))):e={top:0,left:0};var s=this.options.windowPadding;this.sizeInfo.selectOffsetTop=i.top-e.top-t.scrollTop(),this.sizeInfo.selectOffsetBot=t.height()-this.sizeInfo.selectOffsetTop-this.sizeInfo.selectHeight-e.top-s[2],this.sizeInfo.selectOffsetLeft=i.left-e.left-t.scrollLeft(),this.sizeInfo.selectOffsetRight=t.width()-this.sizeInfo.selectOffsetLeft-this.sizeInfo.selectWidth-e.left-s[1],this.sizeInfo.selectOffsetTop-=s[0],this.sizeInfo.selectOffsetLeft-=s[3]},setMenuSize:function(e){this.getSelectPosition();var t,i,n,s,o,l,r,a=this.sizeInfo.selectWidth,c=this.sizeInfo.liHeight,d=this.sizeInfo.headerHeight,h=this.sizeInfo.searchHeight,p=this.sizeInfo.actionsHeight,u=this.sizeInfo.doneButtonHeight,f=this.sizeInfo.dividerHeight,m=this.sizeInfo.menuPadding,v=0;if(this.options.dropupAuto&&(r=c*this.selectpicker.current.elements.length+m.vert,this.$newElement.toggleClass(Y.DROPUP,this.sizeInfo.selectOffsetTop-this.sizeInfo.selectOffsetBot>this.sizeInfo.menuExtras.vert&&r+this.sizeInfo.menuExtras.vert+50>this.sizeInfo.selectOffsetBot)),"auto"===this.options.size)s=3<this.selectpicker.current.elements.length?3*this.sizeInfo.liHeight+this.sizeInfo.menuExtras.vert-2:0,i=this.sizeInfo.selectOffsetBot-this.sizeInfo.menuExtras.vert,n=s+d+h+p+u,l=Math.max(s-m.vert,0),this.$newElement.hasClass(Y.DROPUP)&&(i=this.sizeInfo.selectOffsetTop-this.sizeInfo.menuExtras.vert),t=(o=i)-d-h-p-u-m.vert;else if(this.options.size&&"auto"!=this.options.size&&this.selectpicker.current.elements.length>this.options.size){for(var g=0;g<this.options.size;g++)"divider"===this.selectpicker.current.data[g].type&&v++;t=(i=c*this.options.size+v*f+m.vert)-m.vert,o=i+d+h+p+u,n=l=""}"auto"===this.options.dropdownAlignRight&&this.$menu.toggleClass(Y.MENURIGHT,this.sizeInfo.selectOffsetLeft>this.sizeInfo.selectOffsetRight&&this.sizeInfo.selectOffsetRight<this.sizeInfo.totalMenuWidth-a),this.$menu.css({"max-height":o+"px",overflow:"hidden","min-height":n+"px"}),this.$menuInner.css({"max-height":t+"px","overflow-y":"auto","min-height":l+"px"}),this.sizeInfo.menuInnerHeight=t,this.selectpicker.current.data.length&&this.selectpicker.current.data[this.selectpicker.current.data.length-1].position>this.sizeInfo.menuInnerHeight&&(this.sizeInfo.hasScrollBar=!0,this.sizeInfo.totalMenuWidth=this.sizeInfo.menuWidth+this.sizeInfo.scrollBarWidth,this.$menu.css("min-width",this.sizeInfo.totalMenuWidth)),this.dropdown&&this.dropdown._popper&&this.dropdown._popper.update()},setSize:function(e){if(this.liHeight(e),this.options.header&&this.$menu.css("padding-top",0),!1!==this.options.size){var t,i=this,n=G(window),s=0;this.setMenuSize(),"auto"===this.options.size?(this.$searchbox.off("input.setMenuSize propertychange.setMenuSize").on("input.setMenuSize propertychange.setMenuSize",function(){return i.setMenuSize()}),n.off("resize"+A+"."+this.selectId+".setMenuSize scroll"+A+"."+this.selectId+".setMenuSize").on("resize"+A+"."+this.selectId+".setMenuSize scroll"+A+"."+this.selectId+".setMenuSize",function(){return i.setMenuSize()})):this.options.size&&"auto"!=this.options.size&&this.selectpicker.current.elements.length>this.options.size&&(this.$searchbox.off("input.setMenuSize propertychange.setMenuSize"),n.off("resize"+A+"."+this.selectId+".setMenuSize scroll"+A+"."+this.selectId+".setMenuSize")),e?s=this.$menuInner[0].scrollTop:i.multiple||"number"==typeof(t=i.selectpicker.main.map.newIndex[i.$element[0].selectedIndex])&&!1!==i.options.size&&(s=(s=i.sizeInfo.liHeight*t)-i.sizeInfo.menuInnerHeight/2+i.sizeInfo.liHeight/2),i.createView(!1,s)}},setWidth:function(){var i=this;"auto"===this.options.width?requestAnimationFrame(function(){i.$menu.css("min-width","0"),i.liHeight(),i.setMenuSize();var e=i.$newElement.clone().appendTo("body"),t=e.css("width","auto").children("button").outerWidth();e.remove(),i.sizeInfo.selectWidth=Math.max(i.sizeInfo.totalMenuWidth,t),i.$newElement.css("width",i.sizeInfo.selectWidth+"px")}):"fit"===this.options.width?(this.$menu.css("min-width",""),this.$newElement.css("width","").addClass("fit-width")):this.options.width?(this.$menu.css("min-width",""),this.$newElement.css("width",this.options.width)):(this.$menu.css("min-width",""),this.$newElement.css("width","")),this.$newElement.hasClass("fit-width")&&"fit"!==this.options.width&&this.$newElement.removeClass("fit-width")},selectPosition:function(){this.$bsContainer=G('<div class="bs-container" />');var n,s,o,l=this,r=G(this.options.container),e=function(e){var t={},i=l.options.display||!!G.fn.dropdown.Constructor.Default&&G.fn.dropdown.Constructor.Default.display;l.$bsContainer.addClass(e.attr("class").replace(/form-control|fit-width/gi,"")).toggleClass(Y.DROPUP,e.hasClass(Y.DROPUP)),n=e.offset(),r.is("body")?s={top:0,left:0}:((s=r.offset()).top+=parseInt(r.css("borderTopWidth"))-r.scrollTop(),s.left+=parseInt(r.css("borderLeftWidth"))-r.scrollLeft()),o=e.hasClass(Y.DROPUP)?0:e[0].offsetHeight,(K.major<4||"static"===i)&&(t.top=n.top-s.top+o,t.left=n.left-s.left),t.width=e[0].offsetWidth,l.$bsContainer.css(t)};this.$button.on("click.bs.dropdown.data-api",function(){l.isDisabled()||(e(l.$newElement),l.$bsContainer.appendTo(l.options.container).toggleClass(Y.SHOW,!l.$button.hasClass(Y.SHOW)).append(l.$menu))}),G(window).off("resize"+A+"."+this.selectId+" scroll"+A+"."+this.selectId).on("resize"+A+"."+this.selectId+" scroll"+A+"."+this.selectId,function(){l.$newElement.hasClass(Y.SHOW)&&e(l.$newElement)}),this.$element.on("hide"+A,function(){l.$menu.data("height",l.$menu.height()),l.$bsContainer.detach()})},setOptionStatus:function(){var e=this,t=this.$element.find("option");if(e.noScroll=!1,e.selectpicker.view.visibleElements&&e.selectpicker.view.visibleElements.length)for(var i=0;i<e.selectpicker.view.visibleElements.length;i++){var n=e.selectpicker.current.map.originalIndex[i+e.selectpicker.view.position0],s=t[n];if(s){var o=this.selectpicker.main.map.newIndex[n],l=this.selectpicker.main.elements[o];e.setDisabled(n,s.disabled||"OPTGROUP"===s.parentNode.tagName&&s.parentNode.disabled,o,l),e.setSelected(n,s.selected,o,l)}}},setSelected:function(e,t,i,n){var s,o,l,r=void 0!==this.activeIndex,a=this.activeIndex===e||t&&!this.multiple&&!r;i||(i=this.selectpicker.main.map.newIndex[e]),n||(n=this.selectpicker.main.elements[i]),l=n.firstChild,t&&(this.selectedIndex=e),n.classList.toggle("selected",t),n.classList.toggle("active",a),a&&(this.selectpicker.view.currentActive=n,this.activeIndex=e),l&&(l.classList.toggle("selected",t),l.classList.toggle("active",a),l.setAttribute("aria-selected",t)),a||!r&&t&&void 0!==this.prevActiveIndex&&(s=this.selectpicker.main.map.newIndex[this.prevActiveIndex],(o=this.selectpicker.main.elements[s]).classList.remove("active"),o.firstChild&&o.firstChild.classList.remove("active"))},setDisabled:function(e,t,i,n){var s;i||(i=this.selectpicker.main.map.newIndex[e]),n||(n=this.selectpicker.main.elements[i]),s=n.firstChild,n.classList.toggle(Y.DISABLED,t),s&&("4"===K.major&&s.classList.toggle(Y.DISABLED,t),s.setAttribute("aria-disabled",t),t?s.setAttribute("tabindex",-1):s.setAttribute("tabindex",0))},isDisabled:function(){return this.$element[0].disabled},checkDisabled:function(){var e=this;this.isDisabled()?(this.$newElement.addClass(Y.DISABLED),this.$button.addClass(Y.DISABLED).attr("tabindex",-1).attr("aria-disabled",!0)):(this.$button.hasClass(Y.DISABLED)&&(this.$newElement.removeClass(Y.DISABLED),this.$button.removeClass(Y.DISABLED).attr("aria-disabled",!1)),-1!=this.$button.attr("tabindex")||this.$element.data("tabindex")||this.$button.removeAttr("tabindex")),this.$button.click(function(){return!e.isDisabled()})},togglePlaceholder:function(){var e=this.$element[0],t=e.selectedIndex,i=-1===t;i||e.options[t].value||(i=!0),this.$button.toggleClass("bs-placeholder",i)},tabIndex:function(){this.$element.data("tabindex")!==this.$element.attr("tabindex")&&-98!==this.$element.attr("tabindex")&&"-98"!==this.$element.attr("tabindex")&&(this.$element.data("tabindex",this.$element.attr("tabindex")),this.$button.attr("tabindex",this.$element.data("tabindex"))),this.$element.attr("tabindex",-98)},clickListener:function(){var E=this,t=G(document);function e(){E.options.liveSearch?E.$searchbox.focus():E.$menuInner.focus()}function i(){E.dropdown&&E.dropdown._popper&&E.dropdown._popper.state.isCreated?e():requestAnimationFrame(i)}t.data("spaceSelect",!1),this.$button.on("keyup",function(e){/(32)/.test(e.keyCode.toString(10))&&t.data("spaceSelect")&&(e.preventDefault(),t.data("spaceSelect",!1))}),this.$newElement.on("show.bs.dropdown",function(){3<K.major&&!E.dropdown&&(E.dropdown=E.$button.data("bs.dropdown"),E.dropdown._menu=E.$menu[0])}),this.$button.on("click.bs.dropdown.data-api",function(){E.$newElement.hasClass(Y.SHOW)||E.setSize()}),this.$element.on("shown"+A,function(){E.$menuInner[0].scrollTop!==E.selectpicker.view.scrollTop&&(E.$menuInner[0].scrollTop=E.selectpicker.view.scrollTop),3<K.major?requestAnimationFrame(i):e()}),this.$menuInner.on("click","li a",function(e,t){var i=G(this),n=E.isVirtual()?E.selectpicker.view.position0:0,s=E.selectpicker.current.map.originalIndex[i.parent().index()+n],o=S(E.$element[0]),l=E.$element.prop("selectedIndex"),r=!0;if(E.multiple&&1!==E.options.maxOptions&&e.stopPropagation(),e.preventDefault(),!E.isDisabled()&&!i.parent().hasClass(Y.DISABLED)){var a=E.$element.find("option"),c=a.eq(s),d=c.prop("selected"),h=c.parent("optgroup"),p=h.find("option"),u=E.options.maxOptions,f=h.data("maxOptions")||!1;if(s===E.activeIndex&&(t=!0),t||(E.prevActiveIndex=E.activeIndex,E.activeIndex=void 0),E.multiple){if(c.prop("selected",!d),E.setSelected(s,!d),i.blur(),!1!==u||!1!==f){var m=u<a.filter(":selected").length,v=f<h.find("option:selected").length;if(u&&m||f&&v)if(u&&1==u){a.prop("selected",!1),c.prop("selected",!0);for(var g=0;g<a.length;g++)E.setSelected(g,!1);E.setSelected(s,!0)}else if(f&&1==f){h.find("option:selected").prop("selected",!1),c.prop("selected",!0);for(g=0;g<p.length;g++){var b=p[g];E.setSelected(a.index(b),!1)}E.setSelected(s,!0)}else{var w="string"==typeof E.options.maxOptionsText?[E.options.maxOptionsText,E.options.maxOptionsText]:E.options.maxOptionsText,I="function"==typeof w?w(u,f):w,x=I[0].replace("{n}",u),k=I[1].replace("{n}",f),$=G('<div class="notify"></div>');I[2]&&(x=x.replace("{var}",I[2][1<u?0:1]),k=k.replace("{var}",I[2][1<f?0:1])),c.prop("selected",!1),E.$menu.append($),u&&m&&($.append(G("<div>"+x+"</div>")),r=!1,E.$element.trigger("maxReached"+A)),f&&v&&($.append(G("<div>"+k+"</div>")),r=!1,E.$element.trigger("maxReachedGrp"+A)),setTimeout(function(){E.setSelected(s,!1)},10),$.delay(750).fadeOut(300,function(){G(this).remove()})}}}else a.prop("selected",!1),c.prop("selected",!0),E.setSelected(s,!0);!E.multiple||E.multiple&&1===E.options.maxOptions?E.$button.focus():E.options.liveSearch&&E.$searchbox.focus(),r&&(o!=S(E.$element[0])&&E.multiple||l!=E.$element.prop("selectedIndex")&&!E.multiple)&&(y=[s,c.prop("selected"),o],E.$element.triggerNative("change"))}}),this.$menu.on("click","li."+Y.DISABLED+" a, ."+Y.POPOVERHEADER+", ."+Y.POPOVERHEADER+" :not(.close)",function(e){e.currentTarget==this&&(e.preventDefault(),e.stopPropagation(),E.options.liveSearch&&!G(e.target).hasClass("close")?E.$searchbox.focus():E.$button.focus())}),this.$menuInner.on("click",".divider, .dropdown-header",function(e){e.preventDefault(),e.stopPropagation(),E.options.liveSearch?E.$searchbox.focus():E.$button.focus()}),this.$menu.on("click","."+Y.POPOVERHEADER+" .close",function(){E.$button.click()}),this.$searchbox.on("click",function(e){e.stopPropagation()}),this.$menu.on("click",".actions-btn",function(e){E.options.liveSearch?E.$searchbox.focus():E.$button.focus(),e.preventDefault(),e.stopPropagation(),G(this).hasClass("bs-select-all")?E.selectAll():E.deselectAll()}),this.$element.on({change:function(){E.render(),E.$element.trigger("changed"+A,y),y=null},focus:function(){E.options.mobile||E.$button.focus()}})},liveSearchListener:function(){var u=this,f=document.createElement("li");this.$button.on("click.bs.dropdown.data-api",function(){u.$searchbox.val()&&u.$searchbox.val("")}),this.$searchbox.on("click.bs.dropdown.data-api focus.bs.dropdown.data-api touchend.bs.dropdown.data-api",function(e){e.stopPropagation()}),this.$searchbox.on("input propertychange",function(){var e=u.$searchbox.val();if(u.selectpicker.search.map.newIndex={},u.selectpicker.search.map.originalIndex={},u.selectpicker.search.elements=[],u.selectpicker.search.data=[],e){var t=[],i=e.toUpperCase(),n={},s=[],o=u._searchStyle(),l=u.options.liveSearchNormalize;l&&(i=m(i)),u._$lisSelected=u.$menuInner.find(".selected");for(var r=0;r<u.selectpicker.main.data.length;r++){var a=u.selectpicker.main.data[r];n[r]||(n[r]=$(a,i,o,l)),n[r]&&void 0!==a.headerIndex&&-1===s.indexOf(a.headerIndex)&&(0<a.headerIndex&&(n[a.headerIndex-1]=!0,s.push(a.headerIndex-1)),n[a.headerIndex]=!0,s.push(a.headerIndex),n[a.lastIndex+1]=!0),n[r]&&"optgroup-label"!==a.type&&s.push(r)}r=0;for(var c=s.length;r<c;r++){var d=s[r],h=s[r-1],p=(a=u.selectpicker.main.data[d],u.selectpicker.main.data[h]);("divider"!==a.type||"divider"===a.type&&p&&"divider"!==p.type&&c-1!==r)&&(u.selectpicker.search.data.push(a),t.push(u.selectpicker.main.elements[d]),a.hasOwnProperty("originalIndex")&&(u.selectpicker.search.map.newIndex[a.originalIndex]=t.length-1,u.selectpicker.search.map.originalIndex[t.length-1]=a.originalIndex))}u.activeIndex=void 0,u.noScroll=!0,u.$menuInner.scrollTop(0),u.selectpicker.search.elements=t,u.createView(!0),t.length||(f.className="no-results",f.innerHTML=u.options.noneResultsText.replace("{0}",'"'+q(e)+'"'),u.$menuInner[0].firstChild.appendChild(f))}else u.$menuInner.scrollTop(0),u.createView(!1)})},_searchStyle:function(){return this.options.liveSearchStyle||"contains"},val:function(e){return void 0!==e?(this.$element.val(e).triggerNative("change"),this.$element):this.$element.val()},changeAll:function(e){if(this.multiple){void 0===e&&(e=!0);var t=this.$element.find("option"),i=0,n=0,s=S(this.$element[0]);this.$element.addClass("bs-select-hidden");for(var o=0;o<this.selectpicker.current.elements.length;o++){var l=this.selectpicker.current.data[o],r=t[this.selectpicker.current.map.originalIndex[o]];r&&!r.disabled&&"divider"!==l.type&&(r.selected&&i++,r.selected=e,r.selected&&n++)}this.$element.removeClass("bs-select-hidden"),i!==n&&(this.setOptionStatus(),this.togglePlaceholder(),y=[null,null,s],this.$element.triggerNative("change"))}},selectAll:function(){return this.changeAll(!0)},deselectAll:function(){return this.changeAll(!1)},toggle:function(e){(e=e||window.event)&&e.stopPropagation(),this.$button.trigger("click.bs.dropdown.data-api")},keydown:function(e){var t,i,n,s,o,l=G(this),r=l.hasClass("dropdown-toggle"),a=(r?l.closest(".dropdown"):l.closest(N.MENU)).data("this"),c=a.findLis(),d=!1,h=e.which===H&&!r&&!a.options.selectOnTab,p=P.test(e.which)||h,u=a.$menuInner[0].scrollTop,f=a.isVirtual(),m=!0===f?a.selectpicker.view.position0:0;if(!(i=a.$newElement.hasClass(Y.SHOW))&&(p||48<=e.which&&e.which<=57||96<=e.which&&e.which<=105||65<=e.which&&e.which<=90)&&a.$button.trigger("click.bs.dropdown.data-api"),e.which===C&&i&&(e.preventDefault(),a.$button.trigger("click.bs.dropdown.data-api").focus()),p){if(!c.length)return;void 0===(t=!0===f?c.index(c.filter(".active")):a.selectpicker.current.map.newIndex[a.activeIndex])&&(t=-1),-1!==t&&((n=a.selectpicker.current.elements[t+m]).classList.remove("active"),n.firstChild&&n.firstChild.classList.remove("active")),e.which===D?(-1!==t&&t--,t+m<0&&(t+=c.length),a.selectpicker.view.canHighlight[t+m]||-1===(t=a.selectpicker.view.canHighlight.slice(0,t+m).lastIndexOf(!0)-m)&&(t=c.length-1)):(e.which===L||h)&&(++t+m>=a.selectpicker.view.canHighlight.length&&(t=0),a.selectpicker.view.canHighlight[t+m]||(t=t+1+a.selectpicker.view.canHighlight.slice(t+m+1).indexOf(!0))),e.preventDefault();var v=m+t;e.which===D?0===m&&t===c.length-1?(a.$menuInner[0].scrollTop=a.$menuInner[0].scrollHeight,v=a.selectpicker.current.elements.length-1):d=(o=(s=a.selectpicker.current.data[v]).position-s.height)<u:(e.which===L||h)&&(0===t?v=a.$menuInner[0].scrollTop=0:d=u<(o=(s=a.selectpicker.current.data[v]).position-a.sizeInfo.menuInnerHeight)),(n=a.selectpicker.current.elements[v])&&(n.classList.add("active"),n.firstChild&&n.firstChild.classList.add("active")),a.activeIndex=a.selectpicker.current.map.originalIndex[v],a.selectpicker.view.currentActive=n,d&&(a.$menuInner[0].scrollTop=o),a.options.liveSearch?a.$searchbox.focus():l.focus()}else if(!l.is("input")&&!R.test(e.which)||e.which===T&&a.selectpicker.keydown.keyHistory){var g,b,w=[];e.preventDefault(),a.selectpicker.keydown.keyHistory+=E[e.which],a.selectpicker.keydown.resetKeyHistory.cancel&&clearTimeout(a.selectpicker.keydown.resetKeyHistory.cancel),a.selectpicker.keydown.resetKeyHistory.cancel=a.selectpicker.keydown.resetKeyHistory.start(),b=a.selectpicker.keydown.keyHistory,/^(.)\1+$/.test(b)&&(b=b.charAt(0));for(var I=0;I<a.selectpicker.current.data.length;I++){var x=a.selectpicker.current.data[I];$(x,b,"startsWith",!0)&&a.selectpicker.view.canHighlight[I]&&(x.index=I,w.push(x.originalIndex))}if(w.length){var k=0;c.removeClass("active").find("a").removeClass("active"),1===b.length&&(-1===(k=w.indexOf(a.activeIndex))||k===w.length-1?k=0:k++),g=a.selectpicker.current.map.newIndex[w[k]],0<u-(s=a.selectpicker.current.data[g]).position?(o=s.position-s.height,d=!0):(o=s.position-a.sizeInfo.menuInnerHeight,d=s.position>u+a.sizeInfo.menuInnerHeight),(n=a.selectpicker.current.elements[g]).classList.add("active"),n.firstChild&&n.firstChild.classList.add("active"),a.activeIndex=w[k],n.firstChild.focus(),d&&(a.$menuInner[0].scrollTop=o),l.focus()}}i&&(e.which===T&&!a.selectpicker.keydown.keyHistory||e.which===O||e.which===H&&a.options.selectOnTab)&&(e.which!==T&&e.preventDefault(),a.options.liveSearch&&e.which===T||(a.$menuInner.find(".active a").trigger("click",!0),l.focus(),a.options.liveSearch||(e.preventDefault(),G(document).data("spaceSelect",!0))))},mobile:function(){this.$element.addClass("mobile-device")},refresh:function(){var e=G.extend({},this.options,this.$element.data());this.options=e,this.selectpicker.main.map.newIndex={},this.selectpicker.main.map.originalIndex={},this.createLi(),this.checkDisabled(),this.render(),this.setStyle(),this.setWidth(),this.setSize(!0),this.$element.trigger("refreshed"+A)},hide:function(){this.$newElement.hide()},show:function(){this.$newElement.show()},remove:function(){this.$newElement.remove(),this.$element.remove()},destroy:function(){this.$newElement.before(this.$element).remove(),this.$bsContainer?this.$bsContainer.remove():this.$menu.remove(),this.$element.off(A).removeData("selectpicker").removeClass("bs-select-hidden selectpicker"),G(window).off(A+"."+this.selectId)}};var g=G.fn.selectpicker;G.fn.selectpicker=f,G.fn.selectpicker.Constructor=u,G.fn.selectpicker.noConflict=function(){return G.fn.selectpicker=g,this},G(document).off("keydown.bs.dropdown.data-api").on("keydown"+A,'.bootstrap-select [data-toggle="dropdown"], .bootstrap-select [role="listbox"], .bootstrap-select .bs-searchbox input',u.prototype.keydown).on("focusin.modal",'.bootstrap-select [data-toggle="dropdown"], .bootstrap-select [role="listbox"], .bootstrap-select .bs-searchbox input',function(e){e.stopPropagation()}),G(window).on("load"+A+".data-api",function(){G(".selectpicker").each(function(){var e=G(this);f.call(e,e.data())})})}(e)});
 //# sourceMappingURL=bootstrap-select.js.map
 /*!
  * clipboard.js v2.0.4
@@ -32208,1023 +32599,9 @@ return Outlayer;
  * Licensed MIT © Zeno Rocha
  */
 !function(t,e){"object"==typeof exports&&"object"==typeof module?module.exports=e():"function"==typeof define&&define.amd?define([],e):"object"==typeof exports?exports.ClipboardJS=e():t.ClipboardJS=e()}(this,function(){return function(n){var o={};function r(t){if(o[t])return o[t].exports;var e=o[t]={i:t,l:!1,exports:{}};return n[t].call(e.exports,e,e.exports,r),e.l=!0,e.exports}return r.m=n,r.c=o,r.d=function(t,e,n){r.o(t,e)||Object.defineProperty(t,e,{enumerable:!0,get:n})},r.r=function(t){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(t,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(t,"__esModule",{value:!0})},r.t=function(e,t){if(1&t&&(e=r(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var n=Object.create(null);if(r.r(n),Object.defineProperty(n,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var o in e)r.d(n,o,function(t){return e[t]}.bind(null,o));return n},r.n=function(t){var e=t&&t.__esModule?function(){return t.default}:function(){return t};return r.d(e,"a",e),e},r.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},r.p="",r(r.s=0)}([function(t,e,n){"use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t},i=function(){function o(t,e){for(var n=0;n<e.length;n++){var o=e[n];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(t,o.key,o)}}return function(t,e,n){return e&&o(t.prototype,e),n&&o(t,n),t}}(),a=o(n(1)),c=o(n(3)),u=o(n(4));function o(t){return t&&t.__esModule?t:{default:t}}var l=function(t){function o(t,e){!function(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}(this,o);var n=function(t,e){if(!t)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!e||"object"!=typeof e&&"function"!=typeof e?t:e}(this,(o.__proto__||Object.getPrototypeOf(o)).call(this));return n.resolveOptions(e),n.listenClick(t),n}return function(t,e){if("function"!=typeof e&&null!==e)throw new TypeError("Super expression must either be null or a function, not "+typeof e);t.prototype=Object.create(e&&e.prototype,{constructor:{value:t,enumerable:!1,writable:!0,configurable:!0}}),e&&(Object.setPrototypeOf?Object.setPrototypeOf(t,e):t.__proto__=e)}(o,c.default),i(o,[{key:"resolveOptions",value:function(){var t=0<arguments.length&&void 0!==arguments[0]?arguments[0]:{};this.action="function"==typeof t.action?t.action:this.defaultAction,this.target="function"==typeof t.target?t.target:this.defaultTarget,this.text="function"==typeof t.text?t.text:this.defaultText,this.container="object"===r(t.container)?t.container:document.body}},{key:"listenClick",value:function(t){var e=this;this.listener=(0,u.default)(t,"click",function(t){return e.onClick(t)})}},{key:"onClick",value:function(t){var e=t.delegateTarget||t.currentTarget;this.clipboardAction&&(this.clipboardAction=null),this.clipboardAction=new a.default({action:this.action(e),target:this.target(e),text:this.text(e),container:this.container,trigger:e,emitter:this})}},{key:"defaultAction",value:function(t){return s("action",t)}},{key:"defaultTarget",value:function(t){var e=s("target",t);if(e)return document.querySelector(e)}},{key:"defaultText",value:function(t){return s("text",t)}},{key:"destroy",value:function(){this.listener.destroy(),this.clipboardAction&&(this.clipboardAction.destroy(),this.clipboardAction=null)}}],[{key:"isSupported",value:function(){var t=0<arguments.length&&void 0!==arguments[0]?arguments[0]:["copy","cut"],e="string"==typeof t?[t]:t,n=!!document.queryCommandSupported;return e.forEach(function(t){n=n&&!!document.queryCommandSupported(t)}),n}}]),o}();function s(t,e){var n="data-clipboard-"+t;if(e.hasAttribute(n))return e.getAttribute(n)}t.exports=l},function(t,e,n){"use strict";var o,r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t},i=function(){function o(t,e){for(var n=0;n<e.length;n++){var o=e[n];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(t,o.key,o)}}return function(t,e,n){return e&&o(t.prototype,e),n&&o(t,n),t}}(),a=n(2),c=(o=a)&&o.__esModule?o:{default:o};var u=function(){function e(t){!function(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}(this,e),this.resolveOptions(t),this.initSelection()}return i(e,[{key:"resolveOptions",value:function(){var t=0<arguments.length&&void 0!==arguments[0]?arguments[0]:{};this.action=t.action,this.container=t.container,this.emitter=t.emitter,this.target=t.target,this.text=t.text,this.trigger=t.trigger,this.selectedText=""}},{key:"initSelection",value:function(){this.text?this.selectFake():this.target&&this.selectTarget()}},{key:"selectFake",value:function(){var t=this,e="rtl"==document.documentElement.getAttribute("dir");this.removeFake(),this.fakeHandlerCallback=function(){return t.removeFake()},this.fakeHandler=this.container.addEventListener("click",this.fakeHandlerCallback)||!0,this.fakeElem=document.createElement("textarea"),this.fakeElem.style.fontSize="12pt",this.fakeElem.style.border="0",this.fakeElem.style.padding="0",this.fakeElem.style.margin="0",this.fakeElem.style.position="absolute",this.fakeElem.style[e?"right":"left"]="-9999px";var n=window.pageYOffset||document.documentElement.scrollTop;this.fakeElem.style.top=n+"px",this.fakeElem.setAttribute("readonly",""),this.fakeElem.value=this.text,this.container.appendChild(this.fakeElem),this.selectedText=(0,c.default)(this.fakeElem),this.copyText()}},{key:"removeFake",value:function(){this.fakeHandler&&(this.container.removeEventListener("click",this.fakeHandlerCallback),this.fakeHandler=null,this.fakeHandlerCallback=null),this.fakeElem&&(this.container.removeChild(this.fakeElem),this.fakeElem=null)}},{key:"selectTarget",value:function(){this.selectedText=(0,c.default)(this.target),this.copyText()}},{key:"copyText",value:function(){var e=void 0;try{e=document.execCommand(this.action)}catch(t){e=!1}this.handleResult(e)}},{key:"handleResult",value:function(t){this.emitter.emit(t?"success":"error",{action:this.action,text:this.selectedText,trigger:this.trigger,clearSelection:this.clearSelection.bind(this)})}},{key:"clearSelection",value:function(){this.trigger&&this.trigger.focus(),window.getSelection().removeAllRanges()}},{key:"destroy",value:function(){this.removeFake()}},{key:"action",set:function(){var t=0<arguments.length&&void 0!==arguments[0]?arguments[0]:"copy";if(this._action=t,"copy"!==this._action&&"cut"!==this._action)throw new Error('Invalid "action" value, use either "copy" or "cut"')},get:function(){return this._action}},{key:"target",set:function(t){if(void 0!==t){if(!t||"object"!==(void 0===t?"undefined":r(t))||1!==t.nodeType)throw new Error('Invalid "target" value, use a valid Element');if("copy"===this.action&&t.hasAttribute("disabled"))throw new Error('Invalid "target" attribute. Please use "readonly" instead of "disabled" attribute');if("cut"===this.action&&(t.hasAttribute("readonly")||t.hasAttribute("disabled")))throw new Error('Invalid "target" attribute. You can\'t cut text from elements with "readonly" or "disabled" attributes');this._target=t}},get:function(){return this._target}}]),e}();t.exports=u},function(t,e){t.exports=function(t){var e;if("SELECT"===t.nodeName)t.focus(),e=t.value;else if("INPUT"===t.nodeName||"TEXTAREA"===t.nodeName){var n=t.hasAttribute("readonly");n||t.setAttribute("readonly",""),t.select(),t.setSelectionRange(0,t.value.length),n||t.removeAttribute("readonly"),e=t.value}else{t.hasAttribute("contenteditable")&&t.focus();var o=window.getSelection(),r=document.createRange();r.selectNodeContents(t),o.removeAllRanges(),o.addRange(r),e=o.toString()}return e}},function(t,e){function n(){}n.prototype={on:function(t,e,n){var o=this.e||(this.e={});return(o[t]||(o[t]=[])).push({fn:e,ctx:n}),this},once:function(t,e,n){var o=this;function r(){o.off(t,r),e.apply(n,arguments)}return r._=e,this.on(t,r,n)},emit:function(t){for(var e=[].slice.call(arguments,1),n=((this.e||(this.e={}))[t]||[]).slice(),o=0,r=n.length;o<r;o++)n[o].fn.apply(n[o].ctx,e);return this},off:function(t,e){var n=this.e||(this.e={}),o=n[t],r=[];if(o&&e)for(var i=0,a=o.length;i<a;i++)o[i].fn!==e&&o[i].fn._!==e&&r.push(o[i]);return r.length?n[t]=r:delete n[t],this}},t.exports=n},function(t,e,n){var d=n(5),h=n(6);t.exports=function(t,e,n){if(!t&&!e&&!n)throw new Error("Missing required arguments");if(!d.string(e))throw new TypeError("Second argument must be a String");if(!d.fn(n))throw new TypeError("Third argument must be a Function");if(d.node(t))return s=e,f=n,(l=t).addEventListener(s,f),{destroy:function(){l.removeEventListener(s,f)}};if(d.nodeList(t))return a=t,c=e,u=n,Array.prototype.forEach.call(a,function(t){t.addEventListener(c,u)}),{destroy:function(){Array.prototype.forEach.call(a,function(t){t.removeEventListener(c,u)})}};if(d.string(t))return o=t,r=e,i=n,h(document.body,o,r,i);throw new TypeError("First argument must be a String, HTMLElement, HTMLCollection, or NodeList");var o,r,i,a,c,u,l,s,f}},function(t,n){n.node=function(t){return void 0!==t&&t instanceof HTMLElement&&1===t.nodeType},n.nodeList=function(t){var e=Object.prototype.toString.call(t);return void 0!==t&&("[object NodeList]"===e||"[object HTMLCollection]"===e)&&"length"in t&&(0===t.length||n.node(t[0]))},n.string=function(t){return"string"==typeof t||t instanceof String},n.fn=function(t){return"[object Function]"===Object.prototype.toString.call(t)}},function(t,e,n){var a=n(7);function i(t,e,n,o,r){var i=function(e,n,t,o){return function(t){t.delegateTarget=a(t.target,n),t.delegateTarget&&o.call(e,t)}}.apply(this,arguments);return t.addEventListener(n,i,r),{destroy:function(){t.removeEventListener(n,i,r)}}}t.exports=function(t,e,n,o,r){return"function"==typeof t.addEventListener?i.apply(null,arguments):"function"==typeof n?i.bind(null,document).apply(null,arguments):("string"==typeof t&&(t=document.querySelectorAll(t)),Array.prototype.map.call(t,function(t){return i(t,e,n,o,r)}))}},function(t,e){if("undefined"!=typeof Element&&!Element.prototype.matches){var n=Element.prototype;n.matches=n.matchesSelector||n.mozMatchesSelector||n.msMatchesSelector||n.oMatchesSelector||n.webkitMatchesSelector}t.exports=function(t,e){for(;t&&9!==t.nodeType;){if("function"==typeof t.matches&&t.matches(e))return t;t=t.parentNode}}}])});
-
-/* **********************************************
-     Begin prism-core.js
-********************************************** */
-
-var _self = (typeof window !== 'undefined')
-	? window   // if in browser
-	: (
-		(typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope)
-		? self // if in worker
-		: {}   // if in node js
-	);
-
-/**
- * Prism: Lightweight, robust, elegant syntax highlighting
- * MIT license http://www.opensource.org/licenses/mit-license.php/
- * @author Lea Verou http://lea.verou.me
- */
-
-var Prism = (function(){
-
-// Private helper vars
-var lang = /\blang(?:uage)?-([\w-]+)\b/i;
-var uniqueId = 0;
-
-var _ = _self.Prism = {
-	manual: _self.Prism && _self.Prism.manual,
-	disableWorkerMessageHandler: _self.Prism && _self.Prism.disableWorkerMessageHandler,
-	util: {
-		encode: function (tokens) {
-			if (tokens instanceof Token) {
-				return new Token(tokens.type, _.util.encode(tokens.content), tokens.alias);
-			} else if (_.util.type(tokens) === 'Array') {
-				return tokens.map(_.util.encode);
-			} else {
-				return tokens.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/\u00a0/g, ' ');
-			}
-		},
-
-		type: function (o) {
-			return Object.prototype.toString.call(o).match(/\[object (\w+)\]/)[1];
-		},
-
-		objId: function (obj) {
-			if (!obj['__id']) {
-				Object.defineProperty(obj, '__id', { value: ++uniqueId });
-			}
-			return obj['__id'];
-		},
-
-		// Deep clone a language definition (e.g. to extend it)
-		clone: function (o, visited) {
-			var type = _.util.type(o);
-			visited = visited || {};
-
-			switch (type) {
-				case 'Object':
-					if (visited[_.util.objId(o)]) {
-						return visited[_.util.objId(o)];
-					}
-					var clone = {};
-					visited[_.util.objId(o)] = clone;
-
-					for (var key in o) {
-						if (o.hasOwnProperty(key)) {
-							clone[key] = _.util.clone(o[key], visited);
-						}
-					}
-
-					return clone;
-
-				case 'Array':
-					if (visited[_.util.objId(o)]) {
-						return visited[_.util.objId(o)];
-					}
-					var clone = [];
-					visited[_.util.objId(o)] = clone;
-
-					o.forEach(function (v, i) {
-						clone[i] = _.util.clone(v, visited);
-					});
-
-					return clone;
-			}
-
-			return o;
-		}
-	},
-
-	languages: {
-		extend: function (id, redef) {
-			var lang = _.util.clone(_.languages[id]);
-
-			for (var key in redef) {
-				lang[key] = redef[key];
-			}
-
-			return lang;
-		},
-
-		/**
-		 * Insert a token before another token in a language literal
-		 * As this needs to recreate the object (we cannot actually insert before keys in object literals),
-		 * we cannot just provide an object, we need anobject and a key.
-		 * @param inside The key (or language id) of the parent
-		 * @param before The key to insert before. If not provided, the function appends instead.
-		 * @param insert Object with the key/value pairs to insert
-		 * @param root The object that contains `inside`. If equal to Prism.languages, it can be omitted.
-		 */
-		insertBefore: function (inside, before, insert, root) {
-			root = root || _.languages;
-			var grammar = root[inside];
-
-			if (arguments.length == 2) {
-				insert = arguments[1];
-
-				for (var newToken in insert) {
-					if (insert.hasOwnProperty(newToken)) {
-						grammar[newToken] = insert[newToken];
-					}
-				}
-
-				return grammar;
-			}
-
-			var ret = {};
-
-			for (var token in grammar) {
-
-				if (grammar.hasOwnProperty(token)) {
-
-					if (token == before) {
-
-						for (var newToken in insert) {
-
-							if (insert.hasOwnProperty(newToken)) {
-								ret[newToken] = insert[newToken];
-							}
-						}
-					}
-
-					ret[token] = grammar[token];
-				}
-			}
-
-			// Update references in other language definitions
-			_.languages.DFS(_.languages, function(key, value) {
-				if (value === root[inside] && key != inside) {
-					this[key] = ret;
-				}
-			});
-
-			return root[inside] = ret;
-		},
-
-		// Traverse a language definition with Depth First Search
-		DFS: function(o, callback, type, visited) {
-			visited = visited || {};
-			for (var i in o) {
-				if (o.hasOwnProperty(i)) {
-					callback.call(o, i, o[i], type || i);
-
-					if (_.util.type(o[i]) === 'Object' && !visited[_.util.objId(o[i])]) {
-						visited[_.util.objId(o[i])] = true;
-						_.languages.DFS(o[i], callback, null, visited);
-					}
-					else if (_.util.type(o[i]) === 'Array' && !visited[_.util.objId(o[i])]) {
-						visited[_.util.objId(o[i])] = true;
-						_.languages.DFS(o[i], callback, i, visited);
-					}
-				}
-			}
-		}
-	},
-	plugins: {},
-
-	highlightAll: function(async, callback) {
-		_.highlightAllUnder(document, async, callback);
-	},
-
-	highlightAllUnder: function(container, async, callback) {
-		var env = {
-			callback: callback,
-			selector: 'code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code'
-		};
-
-		_.hooks.run("before-highlightall", env);
-
-		var elements = env.elements || container.querySelectorAll(env.selector);
-
-		for (var i=0, element; element = elements[i++];) {
-			_.highlightElement(element, async === true, env.callback);
-		}
-	},
-
-	highlightElement: function(element, async, callback) {
-		// Find language
-		var language, grammar, parent = element;
-
-		while (parent && !lang.test(parent.className)) {
-			parent = parent.parentNode;
-		}
-
-		if (parent) {
-			language = (parent.className.match(lang) || [,''])[1].toLowerCase();
-			grammar = _.languages[language];
-		}
-
-		// Set language on the element, if not present
-		element.className = element.className.replace(lang, '').replace(/\s+/g, ' ') + ' language-' + language;
-
-		if (element.parentNode) {
-			// Set language on the parent, for styling
-			parent = element.parentNode;
-
-			if (/pre/i.test(parent.nodeName)) {
-				parent.className = parent.className.replace(lang, '').replace(/\s+/g, ' ') + ' language-' + language;
-			}
-		}
-
-		var code = element.textContent;
-
-		var env = {
-			element: element,
-			language: language,
-			grammar: grammar,
-			code: code
-		};
-
-		_.hooks.run('before-sanity-check', env);
-
-		if (!env.code || !env.grammar) {
-			if (env.code) {
-				_.hooks.run('before-highlight', env);
-				env.element.textContent = env.code;
-				_.hooks.run('after-highlight', env);
-			}
-			_.hooks.run('complete', env);
-			return;
-		}
-
-		_.hooks.run('before-highlight', env);
-
-		if (async && _self.Worker) {
-			var worker = new Worker(_.filename);
-
-			worker.onmessage = function(evt) {
-				env.highlightedCode = evt.data;
-
-				_.hooks.run('before-insert', env);
-
-				env.element.innerHTML = env.highlightedCode;
-
-				callback && callback.call(env.element);
-				_.hooks.run('after-highlight', env);
-				_.hooks.run('complete', env);
-			};
-
-			worker.postMessage(JSON.stringify({
-				language: env.language,
-				code: env.code,
-				immediateClose: true
-			}));
-		}
-		else {
-			env.highlightedCode = _.highlight(env.code, env.grammar, env.language);
-
-			_.hooks.run('before-insert', env);
-
-			env.element.innerHTML = env.highlightedCode;
-
-			callback && callback.call(element);
-
-			_.hooks.run('after-highlight', env);
-			_.hooks.run('complete', env);
-		}
-	},
-
-	highlight: function (text, grammar, language) {
-		var env = {
-			code: text,
-			grammar: grammar,
-			language: language
-		};
-		_.hooks.run('before-tokenize', env);
-		env.tokens = _.tokenize(env.code, env.grammar);
-		_.hooks.run('after-tokenize', env);
-		return Token.stringify(_.util.encode(env.tokens), env.language);
-	},
-
-	matchGrammar: function (text, strarr, grammar, index, startPos, oneshot, target) {
-		var Token = _.Token;
-
-		for (var token in grammar) {
-			if(!grammar.hasOwnProperty(token) || !grammar[token]) {
-				continue;
-			}
-
-			if (token == target) {
-				return;
-			}
-
-			var patterns = grammar[token];
-			patterns = (_.util.type(patterns) === "Array") ? patterns : [patterns];
-
-			for (var j = 0; j < patterns.length; ++j) {
-				var pattern = patterns[j],
-					inside = pattern.inside,
-					lookbehind = !!pattern.lookbehind,
-					greedy = !!pattern.greedy,
-					lookbehindLength = 0,
-					alias = pattern.alias;
-
-				if (greedy && !pattern.pattern.global) {
-					// Without the global flag, lastIndex won't work
-					var flags = pattern.pattern.toString().match(/[imuy]*$/)[0];
-					pattern.pattern = RegExp(pattern.pattern.source, flags + "g");
-				}
-
-				pattern = pattern.pattern || pattern;
-
-				// Don’t cache length as it changes during the loop
-				for (var i = index, pos = startPos; i < strarr.length; pos += strarr[i].length, ++i) {
-
-					var str = strarr[i];
-
-					if (strarr.length > text.length) {
-						// Something went terribly wrong, ABORT, ABORT!
-						return;
-					}
-
-					if (str instanceof Token) {
-						continue;
-					}
-
-					if (greedy && i != strarr.length - 1) {
-						pattern.lastIndex = pos;
-						var match = pattern.exec(text);
-						if (!match) {
-							break;
-						}
-
-						var from = match.index + (lookbehind ? match[1].length : 0),
-						    to = match.index + match[0].length,
-						    k = i,
-						    p = pos;
-
-						for (var len = strarr.length; k < len && (p < to || (!strarr[k].type && !strarr[k - 1].greedy)); ++k) {
-							p += strarr[k].length;
-							// Move the index i to the element in strarr that is closest to from
-							if (from >= p) {
-								++i;
-								pos = p;
-							}
-						}
-
-						// If strarr[i] is a Token, then the match starts inside another Token, which is invalid
-						if (strarr[i] instanceof Token) {
-							continue;
-						}
-
-						// Number of tokens to delete and replace with the new match
-						delNum = k - i;
-						str = text.slice(pos, p);
-						match.index -= pos;
-					} else {
-						pattern.lastIndex = 0;
-
-						var match = pattern.exec(str),
-							delNum = 1;
-					}
-
-					if (!match) {
-						if (oneshot) {
-							break;
-						}
-
-						continue;
-					}
-
-					if(lookbehind) {
-						lookbehindLength = match[1] ? match[1].length : 0;
-					}
-
-					var from = match.index + lookbehindLength,
-					    match = match[0].slice(lookbehindLength),
-					    to = from + match.length,
-					    before = str.slice(0, from),
-					    after = str.slice(to);
-
-					var args = [i, delNum];
-
-					if (before) {
-						++i;
-						pos += before.length;
-						args.push(before);
-					}
-
-					var wrapped = new Token(token, inside? _.tokenize(match, inside) : match, alias, match, greedy);
-
-					args.push(wrapped);
-
-					if (after) {
-						args.push(after);
-					}
-
-					Array.prototype.splice.apply(strarr, args);
-
-					if (delNum != 1)
-						_.matchGrammar(text, strarr, grammar, i, pos, true, token);
-
-					if (oneshot)
-						break;
-				}
-			}
-		}
-	},
-
-	tokenize: function(text, grammar, language) {
-		var strarr = [text];
-
-		var rest = grammar.rest;
-
-		if (rest) {
-			for (var token in rest) {
-				grammar[token] = rest[token];
-			}
-
-			delete grammar.rest;
-		}
-
-		_.matchGrammar(text, strarr, grammar, 0, 0, false);
-
-		return strarr;
-	},
-
-	hooks: {
-		all: {},
-
-		add: function (name, callback) {
-			var hooks = _.hooks.all;
-
-			hooks[name] = hooks[name] || [];
-
-			hooks[name].push(callback);
-		},
-
-		run: function (name, env) {
-			var callbacks = _.hooks.all[name];
-
-			if (!callbacks || !callbacks.length) {
-				return;
-			}
-
-			for (var i=0, callback; callback = callbacks[i++];) {
-				callback(env);
-			}
-		}
-	}
-};
-
-var Token = _.Token = function(type, content, alias, matchedStr, greedy) {
-	this.type = type;
-	this.content = content;
-	this.alias = alias;
-	// Copy of the full string this token was created from
-	this.length = (matchedStr || "").length|0;
-	this.greedy = !!greedy;
-};
-
-Token.stringify = function(o, language, parent) {
-	if (typeof o == 'string') {
-		return o;
-	}
-
-	if (_.util.type(o) === 'Array') {
-		return o.map(function(element) {
-			return Token.stringify(element, language, o);
-		}).join('');
-	}
-
-	var env = {
-		type: o.type,
-		content: Token.stringify(o.content, language, parent),
-		tag: 'span',
-		classes: ['token', o.type],
-		attributes: {},
-		language: language,
-		parent: parent
-	};
-
-	if (o.alias) {
-		var aliases = _.util.type(o.alias) === 'Array' ? o.alias : [o.alias];
-		Array.prototype.push.apply(env.classes, aliases);
-	}
-
-	_.hooks.run('wrap', env);
-
-	var attributes = Object.keys(env.attributes).map(function(name) {
-		return name + '="' + (env.attributes[name] || '').replace(/"/g, '&quot;') + '"';
-	}).join(' ');
-
-	return '<' + env.tag + ' class="' + env.classes.join(' ') + '"' + (attributes ? ' ' + attributes : '') + '>' + env.content + '</' + env.tag + '>';
-
-};
-
-if (!_self.document) {
-	if (!_self.addEventListener) {
-		// in Node.js
-		return _self.Prism;
-	}
-
-	if (!_.disableWorkerMessageHandler) {
-		// In worker
-		_self.addEventListener('message', function (evt) {
-			var message = JSON.parse(evt.data),
-				lang = message.language,
-				code = message.code,
-				immediateClose = message.immediateClose;
-
-			_self.postMessage(_.highlight(code, _.languages[lang], lang));
-			if (immediateClose) {
-				_self.close();
-			}
-		}, false);
-	}
-
-	return _self.Prism;
-}
-
-//Get current script and highlight
-var script = document.currentScript || [].slice.call(document.getElementsByTagName("script")).pop();
-
-if (script) {
-	_.filename = script.src;
-
-	if (!_.manual && !script.hasAttribute('data-manual')) {
-		if(document.readyState !== "loading") {
-			if (window.requestAnimationFrame) {
-				window.requestAnimationFrame(_.highlightAll);
-			} else {
-				window.setTimeout(_.highlightAll, 16);
-			}
-		}
-		else {
-			document.addEventListener('DOMContentLoaded', _.highlightAll);
-		}
-	}
-}
-
-return _self.Prism;
-
-})();
-
-if (typeof module !== 'undefined' && module.exports) {
-	module.exports = Prism;
-}
-
-// hack for components to work correctly in node.js
-if (typeof global !== 'undefined') {
-	global.Prism = Prism;
-}
-
-
-/* **********************************************
-     Begin prism-markup.js
-********************************************** */
-
-Prism.languages.markup = {
-	'comment': /<!--[\s\S]*?-->/,
-	'prolog': /<\?[\s\S]+?\?>/,
-	'doctype': /<!DOCTYPE[\s\S]+?>/i,
-	'cdata': /<!\[CDATA\[[\s\S]*?]]>/i,
-	'tag': {
-		pattern: /<\/?(?!\d)[^\s>\/=$<%]+(?:\s+[^\s>\/=]+(?:=(?:("|')(?:\\[\s\S]|(?!\1)[^\\])*\1|[^\s'">=]+))?)*\s*\/?>/i,
-		greedy: true,
-		inside: {
-			'tag': {
-				pattern: /^<\/?[^\s>\/]+/i,
-				inside: {
-					'punctuation': /^<\/?/,
-					'namespace': /^[^\s>\/:]+:/
-				}
-			},
-			'attr-value': {
-				pattern: /=(?:("|')(?:\\[\s\S]|(?!\1)[^\\])*\1|[^\s'">=]+)/i,
-				inside: {
-					'punctuation': [
-						/^=/,
-						{
-							pattern: /(^|[^\\])["']/,
-							lookbehind: true
-						}
-					]
-				}
-			},
-			'punctuation': /\/?>/,
-			'attr-name': {
-				pattern: /[^\s>\/]+/,
-				inside: {
-					'namespace': /^[^\s>\/:]+:/
-				}
-			}
-
-		}
-	},
-	'entity': /&#?[\da-z]{1,8};/i
-};
-
-Prism.languages.markup['tag'].inside['attr-value'].inside['entity'] =
-	Prism.languages.markup['entity'];
-
-// Plugin to make entity title show the real entity, idea by Roman Komarov
-Prism.hooks.add('wrap', function(env) {
-
-	if (env.type === 'entity') {
-		env.attributes['title'] = env.content.replace(/&amp;/, '&');
-	}
-});
-
-Prism.languages.xml = Prism.languages.markup;
-Prism.languages.html = Prism.languages.markup;
-Prism.languages.mathml = Prism.languages.markup;
-Prism.languages.svg = Prism.languages.markup;
-
-
-/* **********************************************
-     Begin prism-css.js
-********************************************** */
-
-Prism.languages.css = {
-	'comment': /\/\*[\s\S]*?\*\//,
-	'atrule': {
-		pattern: /@[\w-]+?.*?(?:;|(?=\s*\{))/i,
-		inside: {
-			'rule': /@[\w-]+/
-			// See rest below
-		}
-	},
-	'url': /url\((?:(["'])(?:\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1|.*?)\)/i,
-	'selector': /[^{}\s][^{};]*?(?=\s*\{)/,
-	'string': {
-		pattern: /("|')(?:\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1/,
-		greedy: true
-	},
-	'property': /[-_a-z\xA0-\uFFFF][-\w\xA0-\uFFFF]*(?=\s*:)/i,
-	'important': /\B!important\b/i,
-	'function': /[-a-z0-9]+(?=\()/i,
-	'punctuation': /[(){};:]/
-};
-
-Prism.languages.css['atrule'].inside.rest = Prism.languages.css;
-
-if (Prism.languages.markup) {
-	Prism.languages.insertBefore('markup', 'tag', {
-		'style': {
-			pattern: /(<style[\s\S]*?>)[\s\S]*?(?=<\/style>)/i,
-			lookbehind: true,
-			inside: Prism.languages.css,
-			alias: 'language-css',
-			greedy: true
-		}
-	});
-
-	Prism.languages.insertBefore('inside', 'attr-value', {
-		'style-attr': {
-			pattern: /\s*style=("|')(?:\\[\s\S]|(?!\1)[^\\])*\1/i,
-			inside: {
-				'attr-name': {
-					pattern: /^\s*style/i,
-					inside: Prism.languages.markup.tag.inside
-				},
-				'punctuation': /^\s*=\s*['"]|['"]\s*$/,
-				'attr-value': {
-					pattern: /.+/i,
-					inside: Prism.languages.css
-				}
-			},
-			alias: 'language-css'
-		}
-	}, Prism.languages.markup.tag);
-}
-
-/* **********************************************
-     Begin prism-clike.js
-********************************************** */
-
-Prism.languages.clike = {
-	'comment': [
-		{
-			pattern: /(^|[^\\])\/\*[\s\S]*?(?:\*\/|$)/,
-			lookbehind: true
-		},
-		{
-			pattern: /(^|[^\\:])\/\/.*/,
-			lookbehind: true,
-			greedy: true
-		}
-	],
-	'string': {
-		pattern: /(["'])(?:\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1/,
-		greedy: true
-	},
-	'class-name': {
-		pattern: /((?:\b(?:class|interface|extends|implements|trait|instanceof|new)\s+)|(?:catch\s+\())[\w.\\]+/i,
-		lookbehind: true,
-		inside: {
-			punctuation: /[.\\]/
-		}
-	},
-	'keyword': /\b(?:if|else|while|do|for|return|in|instanceof|function|new|try|throw|catch|finally|null|break|continue)\b/,
-	'boolean': /\b(?:true|false)\b/,
-	'function': /[a-z0-9_]+(?=\()/i,
-	'number': /\b0x[\da-f]+\b|(?:\b\d+\.?\d*|\B\.\d+)(?:e[+-]?\d+)?/i,
-	'operator': /--?|\+\+?|!=?=?|<=?|>=?|==?=?|&&?|\|\|?|\?|\*|\/|~|\^|%/,
-	'punctuation': /[{}[\];(),.:]/
-};
-
-
-/* **********************************************
-     Begin prism-javascript.js
-********************************************** */
-
-Prism.languages.javascript = Prism.languages.extend('clike', {
-	'keyword': /\b(?:as|async|await|break|case|catch|class|const|continue|debugger|default|delete|do|else|enum|export|extends|finally|for|from|function|get|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|set|static|super|switch|this|throw|try|typeof|var|void|while|with|yield)\b/,
-	'number': /\b(?:0[xX][\dA-Fa-f]+|0[bB][01]+|0[oO][0-7]+|NaN|Infinity)\b|(?:\b\d+\.?\d*|\B\.\d+)(?:[Ee][+-]?\d+)?/,
-	// Allow for all non-ASCII characters (See http://stackoverflow.com/a/2008444)
-	'function': /[_$a-z\xA0-\uFFFF][$\w\xA0-\uFFFF]*(?=\s*\()/i,
-	'operator': /-[-=]?|\+[+=]?|!=?=?|<<?=?|>>?>?=?|=(?:==?|>)?|&[&=]?|\|[|=]?|\*\*?=?|\/=?|~|\^=?|%=?|\?|\.{3}/
-});
-
-Prism.languages.insertBefore('javascript', 'keyword', {
-	'regex': {
-		pattern: /((?:^|[^$\w\xA0-\uFFFF."'\])\s])\s*)\/(\[[^\]\r\n]+]|\\.|[^/\\\[\r\n])+\/[gimyu]{0,5}(?=\s*($|[\r\n,.;})\]]))/,
-		lookbehind: true,
-		greedy: true
-	},
-	// This must be declared before keyword because we use "function" inside the look-forward
-	'function-variable': {
-		pattern: /[_$a-z\xA0-\uFFFF][$\w\xA0-\uFFFF]*(?=\s*=\s*(?:function\b|(?:\([^()]*\)|[_$a-z\xA0-\uFFFF][$\w\xA0-\uFFFF]*)\s*=>))/i,
-		alias: 'function'
-	},
-	'constant': /\b[A-Z][A-Z\d_]*\b/
-});
-
-Prism.languages.insertBefore('javascript', 'string', {
-	'template-string': {
-		pattern: /`(?:\\[\s\S]|\${[^}]+}|[^\\`])*`/,
-		greedy: true,
-		inside: {
-			'interpolation': {
-				pattern: /\${[^}]+}/,
-				inside: {
-					'interpolation-punctuation': {
-						pattern: /^\${|}$/,
-						alias: 'punctuation'
-					},
-					rest: null // See below
-				}
-			},
-			'string': /[\s\S]+/
-		}
-	}
-});
-Prism.languages.javascript['template-string'].inside['interpolation'].inside.rest = Prism.languages.javascript;
-
-if (Prism.languages.markup) {
-	Prism.languages.insertBefore('markup', 'tag', {
-		'script': {
-			pattern: /(<script[\s\S]*?>)[\s\S]*?(?=<\/script>)/i,
-			lookbehind: true,
-			inside: Prism.languages.javascript,
-			alias: 'language-javascript',
-			greedy: true
-		}
-	});
-}
-
-Prism.languages.js = Prism.languages.javascript;
-
-
-/* **********************************************
-     Begin prism-file-highlight.js
-********************************************** */
-
-(function () {
-	if (typeof self === 'undefined' || !self.Prism || !self.document || !document.querySelector) {
-		return;
-	}
-
-	self.Prism.fileHighlight = function() {
-
-		var Extensions = {
-			'js': 'javascript',
-			'py': 'python',
-			'rb': 'ruby',
-			'ps1': 'powershell',
-			'psm1': 'powershell',
-			'sh': 'bash',
-			'bat': 'batch',
-			'h': 'c',
-			'tex': 'latex'
-		};
-
-		Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
-			var src = pre.getAttribute('data-src');
-
-			var language, parent = pre;
-			var lang = /\blang(?:uage)?-([\w-]+)\b/i;
-			while (parent && !lang.test(parent.className)) {
-				parent = parent.parentNode;
-			}
-
-			if (parent) {
-				language = (pre.className.match(lang) || [, ''])[1];
-			}
-
-			if (!language) {
-				var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
-				language = Extensions[extension] || extension;
-			}
-
-			var code = document.createElement('code');
-			code.className = 'language-' + language;
-
-			pre.textContent = '';
-
-			code.textContent = 'Loading…';
-
-			pre.appendChild(code);
-
-			var xhr = new XMLHttpRequest();
-
-			xhr.open('GET', src, true);
-
-			xhr.onreadystatechange = function () {
-				if (xhr.readyState == 4) {
-
-					if (xhr.status < 400 && xhr.responseText) {
-						code.textContent = xhr.responseText;
-
-						Prism.highlightElement(code);
-					}
-					else if (xhr.status >= 400) {
-						code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
-					}
-					else {
-						code.textContent = '✖ Error: File does not exist or is empty';
-					}
-				}
-			};
-
-			xhr.send(null);
-		});
-
-		if (Prism.plugins.toolbar) {
-			Prism.plugins.toolbar.registerButton('download-file', function (env) {
-				var pre = env.element.parentNode;
-				if (!pre || !/pre/i.test(pre.nodeName) || !pre.hasAttribute('data-src') || !pre.hasAttribute('data-download-link')) {
-					return;
-				}
-				var src = pre.getAttribute('data-src');
-				var a = document.createElement('a');
-				a.textContent = pre.getAttribute('data-download-link-label') || 'Download';
-				a.setAttribute('download', '');
-				a.href = src;
-				return a;
-			});
-		}
-
-	};
-
-	document.addEventListener('DOMContentLoaded', self.Prism.fileHighlight);
-
-})();
-(function(){
-	if (typeof self === 'undefined' || !self.Prism || !self.document) {
-		return;
-	}
-
-	var callbacks = [];
-	var map = {};
-	var noop = function() {};
-
-	Prism.plugins.toolbar = {};
-
-	/**
-	 * Register a button callback with the toolbar.
-	 *
-	 * @param {string} key
-	 * @param {Object|Function} opts
-	 */
-	var registerButton = Prism.plugins.toolbar.registerButton = function (key, opts) {
-		var callback;
-
-		if (typeof opts === 'function') {
-			callback = opts;
-		} else {
-			callback = function (env) {
-				var element;
-
-				if (typeof opts.onClick === 'function') {
-					element = document.createElement('button');
-					element.type = 'button';
-					element.addEventListener('click', function () {
-						opts.onClick.call(this, env);
-					});
-				} else if (typeof opts.url === 'string') {
-					element = document.createElement('a');
-					element.href = opts.url;
-				} else {
-					element = document.createElement('span');
-				}
-
-				element.textContent = opts.text;
-
-				return element;
-			};
-		}
-
-		callbacks.push(map[key] = callback);
-	};
-
-	/**
-	 * Post-highlight Prism hook callback.
-	 *
-	 * @param env
-	 */
-	var hook = Prism.plugins.toolbar.hook = function (env) {
-		// Check if inline or actual code block (credit to line-numbers plugin)
-		var pre = env.element.parentNode;
-		if (!pre || !/pre/i.test(pre.nodeName)) {
-			return;
-		}
-
-		// Autoloader rehighlights, so only do this once.
-		if (pre.parentNode.classList.contains('code-toolbar')) {
-			return;
-		}
-
-		// Create wrapper for <pre> to prevent scrolling toolbar with content
-		var wrapper = document.createElement("div");
-		wrapper.classList.add("code-toolbar");
-		pre.parentNode.insertBefore(wrapper, pre);
-		wrapper.appendChild(pre);
-
-		// Setup the toolbar
-		var toolbar = document.createElement('div');
-		toolbar.classList.add('toolbar');
-
-		if (document.body.hasAttribute('data-toolbar-order')) {
-			callbacks = document.body.getAttribute('data-toolbar-order').split(',').map(function(key) {
-				return map[key] || noop;
-			});
-		}
-
-		callbacks.forEach(function(callback) {
-			var element = callback(env);
-
-			if (!element) {
-				return;
-			}
-
-			var item = document.createElement('div');
-			item.classList.add('toolbar-item');
-
-			item.appendChild(element);
-			toolbar.appendChild(item);
-		});
-
-		// Add our toolbar to the currently created wrapper of <pre> tag
-		wrapper.appendChild(toolbar);
-	};
-
-	registerButton('label', function(env) {
-		var pre = env.element.parentNode;
-		if (!pre || !/pre/i.test(pre.nodeName)) {
-			return;
-		}
-
-		if (!pre.hasAttribute('data-label')) {
-			return;
-		}
-
-		var element, template;
-		var text = pre.getAttribute('data-label');
-		try {
-			// Any normal text will blow up this selector.
-			template = document.querySelector('template#' + text);
-		} catch (e) {}
-
-		if (template) {
-			element = template.content;
-		} else {
-			if (pre.hasAttribute('data-url')) {
-				element = document.createElement('a');
-				element.href = pre.getAttribute('data-url');
-			} else {
-				element = document.createElement('span');
-			}
-
-			element.textContent = text;
-		}
-
-		return element;
-	});
-
-	/**
-	 * Register the toolbar with Prism.
-	 */
-	Prism.hooks.add('complete', hook);
-})();
-
-!function(){if("undefined"!=typeof self&&self.Prism&&self.document){if(!Prism.plugins.toolbar)return console.warn("Copy to Clipboard plugin loaded before Toolbar plugin."),void 0;var o=window.ClipboardJS||void 0;o||"function"!=typeof require||(o=require("clipboard"));var e=[];if(!o){var t=document.createElement("script"),n=document.querySelector("head");t.onload=function(){if(o=window.ClipboardJS)for(;e.length;)e.pop()()},t.src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js",n.appendChild(t)}Prism.plugins.toolbar.registerButton("copy-to-clipboard",function(t){function n(){var e=new o(i,{text:function(){return t.code}});e.on("success",function(){i.textContent="Copied!",r()}),e.on("error",function(){i.textContent="Press Ctrl+C to copy",r()})}function r(){setTimeout(function(){i.textContent="Copy"},5e3)}var i=document.createElement("a");return i.textContent="Copy",o?n():e.push(n),i})}}();
 /**
  * @license
- * Video.js 7.3.0 <http://videojs.com/>
+ * Video.js 7.4.1 <http://videojs.com/>
  * Copyright Brightcove, Inc. <https://www.brightcove.com/>
  * Available under Apache License Version 2.0
  * <https://github.com/videojs/video.js/blob/master/LICENSE>
@@ -33235,14 +32612,14 @@ Prism.languages.js = Prism.languages.javascript;
  */
 
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('global/window'), require('global/document')) :
-  typeof define === 'function' && define.amd ? define(['global/window', 'global/document'], factory) :
-  (global.videojs = factory(global.window,global.document));
-}(this, (function (window$1,document) {
-  window$1 = window$1 && window$1.hasOwnProperty('default') ? window$1['default'] : window$1;
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('global/document'), require('global/window')) :
+  typeof define === 'function' && define.amd ? define(['global/document', 'global/window'], factory) :
+  (global.videojs = factory(global.document,global.window));
+}(this, (function (document,window$1) {
   document = document && document.hasOwnProperty('default') ? document['default'] : document;
+  window$1 = window$1 && window$1.hasOwnProperty('default') ? window$1['default'] : window$1;
 
-  var version = "7.3.0";
+  var version = "7.4.1";
 
   function _inheritsLoose(subClass, superClass) {
     subClass.prototype = Object.create(superClass.prototype);
@@ -35718,6 +35095,27 @@ Prism.languages.js = Prism.languages.javascript;
     });
   };
   /**
+   * Adds a callback to run after the evented mixin applied.
+   *
+   * @param  {Object} object
+   *         An object to Add
+   * @param  {Function} callback
+   *         The callback to run.
+   */
+
+
+  var addEventedCallback = function addEventedCallback(target, callback) {
+    if (isEvented(target)) {
+      callback();
+    } else {
+      if (!target.eventedCallbacks) {
+        target.eventedCallbacks = [];
+      }
+
+      target.eventedCallbacks.push(callback);
+    }
+  };
+  /**
    * Whether a value is a valid event type - non-empty string or array.
    *
    * @private
@@ -36094,7 +35492,14 @@ Prism.languages.js = Prism.languages.javascript;
       });
     }
 
-    assign(target, EventedMixin); // When any evented object is disposed, it removes all its listeners.
+    assign(target, EventedMixin);
+
+    if (target.eventedCallbacks) {
+      target.eventedCallbacks.forEach(function (callback) {
+        callback();
+      });
+    } // When any evented object is disposed, it removes all its listeners.
+
 
     target.on('dispose', function () {
       target.off();
@@ -38409,9 +37814,9 @@ Prism.languages.js = Prism.languages.javascript;
    * @enum {array}
    * @readonly
    * @property {string} 0 - MEDIA_ERR_CUSTOM
-   * @property {string} 1 - MEDIA_ERR_CUSTOM
-   * @property {string} 2 - MEDIA_ERR_ABORTED
-   * @property {string} 3 - MEDIA_ERR_NETWORK
+   * @property {string} 1 - MEDIA_ERR_ABORTED
+   * @property {string} 2 - MEDIA_ERR_NETWORK
+   * @property {string} 3 - MEDIA_ERR_DECODE
    * @property {string} 4 - MEDIA_ERR_SRC_NOT_SUPPORTED
    * @property {string} 5 - MEDIA_ERR_ENCRYPTED
    */
@@ -45609,7 +45014,7 @@ Prism.languages.js = Prism.languages.javascript;
       var updateDisplayHandler = bind(_assertThisInitialized(_assertThisInitialized(_this)), _this.updateDisplay);
       player.on('loadstart', bind(_assertThisInitialized(_assertThisInitialized(_this)), _this.toggleDisplay));
       player.on('texttrackchange', updateDisplayHandler);
-      player.on('loadstart', bind(_assertThisInitialized(_assertThisInitialized(_this)), _this.preselectTrack)); // This used to be called during player init, but was causing an error
+      player.on('loadedmetadata', bind(_assertThisInitialized(_assertThisInitialized(_this)), _this.preselectTrack)); // This used to be called during player init, but was causing an error
       // if a track should show by default and the display hadn't loaded yet.
       // Should probably be moved to an external track loader when we support
       // tracks that don't need a display.
@@ -45663,7 +45068,7 @@ Prism.languages.js = Prism.languages.javascript;
       for (var i = 0; i < trackList.length; i++) {
         var track = trackList[i];
 
-        if (userPref && userPref.enabled && userPref.language === track.language) {
+        if (userPref && userPref.enabled && userPref.language && userPref.language === track.language && track.kind in modes) {
           // Always choose the track that matches both language and kind
           if (track.kind === userPref.kind) {
             preferredTrack = track; // or choose the first track that matches language
@@ -46252,19 +45657,27 @@ Prism.languages.js = Prism.languages.javascript;
      * @param {Player} player
      *        The `Player` that this class should be attached to.
      *
-     * @param {Object} [options]
+     * @param {Object} [options={}]
      *        The key/value store of player options.
      */
     function PlayToggle(player, options) {
       var _this;
 
-      _this = _Button.call(this, player, options) || this;
+      if (options === void 0) {
+        options = {};
+      }
+
+      _this = _Button.call(this, player, options) || this; // show or hide replay icon
+
+      options.replay = options.replay === undefined || options.replay;
 
       _this.on(player, 'play', _this.handlePlay);
 
       _this.on(player, 'pause', _this.handlePause);
 
-      _this.on(player, 'ended', _this.handleEnded);
+      if (options.replay) {
+        _this.on(player, 'ended', _this.handleEnded);
+      }
 
       return _this;
     }
@@ -46480,7 +45893,7 @@ Prism.languages.js = Prism.languages.javascript;
   }
 
   /**
-   * Displays the time left in the video
+   * Displays time information about the video
    *
    * @extends Component
    */
@@ -46524,14 +45937,19 @@ Prism.languages.js = Prism.languages.javascript;
 
       var el = _Component.prototype.createEl.call(this, 'div', {
         className: className + " vjs-time-control vjs-control",
-        innerHTML: "<span class=\"vjs-control-text\">" + this.localize(this.labelText_) + "\xA0</span>"
+        innerHTML: "<span class=\"vjs-control-text\" role=\"presentation\">" + this.localize(this.labelText_) + "\xA0</span>"
       });
 
       this.contentEl_ = createEl('span', {
         className: className + "-display"
       }, {
         // tell screen readers not to automatically read the time as it changes
-        'aria-live': 'off'
+        'aria-live': 'off',
+        // span elements have no implicit role, but some screen readers (notably VoiceOver)
+        // treat them as a break between items in the DOM when using arrow keys
+        // (or left-to-right swipes on iOS) to read contents of a page. Using
+        // role='presentation' causes VoiceOver to NOT treat this span as a break.
+        'role': 'presentation'
       });
       this.updateTextNode_();
       el.appendChild(this.contentEl_);
@@ -46764,7 +46182,12 @@ Prism.languages.js = Prism.languages.javascript;
       // as they should always display the changed duration as
       // it has changed
 
-      _this.on(player, 'durationchange', _this.updateContent); // Also listen for timeupdate (in the parent) and loadedmetadata because removing those
+      _this.on(player, 'durationchange', _this.updateContent); // Listen to loadstart because the player duration is reset when a new media element is loaded,
+      // but the durationchange on the user agent will not fire.
+      // @see [Spec]{@link https://www.w3.org/TR/2011/WD-html5-20110113/video.html#media-element-load-algorithm}
+
+
+      _this.on(player, 'loadstart', _this.updateContent); // Also listen for timeupdate (in the parent) and loadedmetadata because removing those
       // listeners could have broken dependent applications/libraries. These
       // can likely be removed for 7.0.
 
@@ -46802,7 +46225,7 @@ Prism.languages.js = Prism.languages.javascript;
     _proto.updateContent = function updateContent(event) {
       var duration = this.player_.duration();
 
-      if (duration && this.duration_ !== duration) {
+      if (this.duration_ !== duration) {
         this.duration_ = duration;
         this.updateFormattedTime_(duration);
       }
@@ -46859,6 +46282,11 @@ Prism.languages.js = Prism.languages.javascript;
       return _Component.prototype.createEl.call(this, 'div', {
         className: 'vjs-time-control vjs-time-divider',
         innerHTML: '<div><span>/</span></div>'
+      }, {
+        // this element and its contents can be hidden from assistive techs since
+        // it is made extraneous by the announcement of the control text
+        // for the current time and duration displays
+        'aria-hidden': true
       });
     };
 
@@ -47079,6 +46507,112 @@ Prism.languages.js = Prism.languages.javascript;
   }(Component);
 
   Component.registerComponent('LiveDisplay', LiveDisplay);
+
+  /**
+   * Displays the live indicator when duration is Infinity.
+   *
+   * @extends Component
+   */
+
+  var SeekToLive =
+  /*#__PURE__*/
+  function (_Button) {
+    _inheritsLoose(SeekToLive, _Button);
+
+    /**
+     * Creates an instance of this class.
+     *
+     * @param {Player} player
+     *        The `Player` that this class should be attached to.
+     *
+     * @param {Object} [options]
+     *        The key/value store of player options.
+     */
+    function SeekToLive(player, options) {
+      var _this;
+
+      _this = _Button.call(this, player, options) || this;
+
+      _this.updateLiveEdgeStatus();
+
+      if (_this.player_.liveTracker) {
+        _this.on(_this.player_.liveTracker, 'liveedgechange', _this.updateLiveEdgeStatus);
+      }
+
+      return _this;
+    }
+    /**
+     * Create the `Component`'s DOM element
+     *
+     * @return {Element}
+     *         The element that was created.
+     */
+
+
+    var _proto = SeekToLive.prototype;
+
+    _proto.createEl = function createEl$$1() {
+      var el = _Button.prototype.createEl.call(this, 'button', {
+        className: 'vjs-seek-to-live-control vjs-control'
+      });
+
+      this.textEl_ = createEl('span', {
+        className: 'vjs-seek-to-live-text',
+        innerHTML: this.localize('LIVE')
+      }, {
+        'aria-hidden': 'true'
+      });
+      el.appendChild(this.textEl_);
+      return el;
+    };
+    /**
+     * Update the state of this button if we are at the live edge
+     * or not
+     */
+
+
+    _proto.updateLiveEdgeStatus = function updateLiveEdgeStatus(e) {
+      // default to live edge
+      if (!this.player_.liveTracker || this.player_.liveTracker.atLiveEdge()) {
+        this.setAttribute('aria-disabled', true);
+        this.addClass('vjs-at-live-edge');
+        this.controlText('Seek to live, currently playing live');
+      } else {
+        this.setAttribute('aria-disabled', false);
+        this.removeClass('vjs-at-live-edge');
+        this.controlText('Seek to live, currently behind live');
+      }
+    };
+    /**
+     * On click bring us as near to the live point as possible.
+     * This requires that we wait for the next `live-seekable-change`
+     * event which will happen every segment length seconds.
+     */
+
+
+    _proto.handleClick = function handleClick() {
+      this.player_.liveTracker.seekToLiveEdge();
+    };
+    /**
+     * Dispose of the element and stop tracking
+     */
+
+
+    _proto.dispose = function dispose() {
+      if (this.player_.liveTracker) {
+        this.off(this.player_.liveTracker, 'liveedgechange', this.updateLiveEdgeStatus);
+      }
+
+      this.textEl_ = null;
+
+      _Button.prototype.dispose.call(this);
+    };
+
+    return SeekToLive;
+  }(Button);
+
+  SeekToLive.prototype.controlText_ = 'Seek to live, currently playing live';
+  Component.registerComponent('SeekToLive', SeekToLive);
 
   /**
    * The base functionality for a slider. Can be vertical or horizontal.
@@ -47514,7 +47048,7 @@ Prism.languages.js = Prism.languages.javascript;
     _proto.createEl = function createEl$$1() {
       return _Component.prototype.createEl.call(this, 'div', {
         className: 'vjs-load-progress',
-        innerHTML: "<span class=\"vjs-control-text\"><span>" + this.localize('Loaded') + "</span>: 0%</span>"
+        innerHTML: "<span class=\"vjs-control-text\"><span>" + this.localize('Loaded') + "</span>: <span class=\"vjs-control-text-loaded-percentage\">0%</span></span>"
       });
     };
 
@@ -47534,19 +47068,29 @@ Prism.languages.js = Prism.languages.javascript;
 
 
     _proto.update = function update(event) {
+      var liveTracker = this.player_.liveTracker;
       var buffered = this.player_.buffered();
-      var duration = this.player_.duration();
+      var duration = liveTracker && liveTracker.isLive() ? liveTracker.seekableEnd() : this.player_.duration();
       var bufferedEnd = this.player_.bufferedEnd();
-      var children = this.partEls_; // get the percent width of a time compared to the total end
+      var children = this.partEls_;
+      var controlTextPercentage = this.$('.vjs-control-text-loaded-percentage'); // get the percent width of a time compared to the total end
 
-      var percentify = function percentify(time, end) {
+      var percentify = function percentify(time, end, rounded) {
         // no NaN
         var percent = time / end || 0;
-        return (percent >= 1 ? 1 : percent) * 100 + '%';
+        percent = (percent >= 1 ? 1 : percent) * 100;
+
+        if (rounded) {
+          percent = percent.toFixed(2);
+        }
+
+        return percent + '%';
       }; // update the width of the progress bar
 
 
-      this.el_.style.width = percentify(bufferedEnd, duration); // add child elements to represent the individual buffered time ranges
+      this.el_.style.width = percentify(bufferedEnd, duration); // update the control-text
+
+      textContent(controlTextPercentage, percentify(bufferedEnd, duration, true)); // add child elements to represent the individual buffered time ranges
 
       for (var i = 0; i < buffered.length; i++) {
         var start = buffered.start(i);
@@ -47602,6 +47146,8 @@ Prism.languages.js = Prism.languages.javascript;
     _proto.createEl = function createEl$$1() {
       return _Component.prototype.createEl.call(this, 'div', {
         className: 'vjs-time-tooltip'
+      }, {
+        'aria-hidden': 'true'
       });
     };
     /**
@@ -47659,6 +47205,54 @@ Prism.languages.js = Prism.languages.javascript;
       this.el_.style.right = "-" + pullTooltipBy + "px";
       textContent(this.el_, content);
     };
+    /**
+     * Updates the position of the time tooltip relative to the `SeekBar`.
+     *
+     * @param {Object} seekBarRect
+     *        The `ClientRect` for the {@link SeekBar} element.
+     *
+     * @param {number} seekBarPoint
+     *        A number from 0 to 1, representing a horizontal reference point
+     *        from the left edge of the {@link SeekBar}
+     *
+     * @param {number} time
+     *        The time to update the tooltip to, not used during live playback
+     *
+     * @param {Function} cb
+     *        A function that will be called during the request animation frame
+     *        for tooltips that need to do additional animations from the default
+     */
+
+
+    _proto.updateTime = function updateTime(seekBarRect, seekBarPoint, time, cb) {
+      var _this = this;
+
+      // If there is an existing rAF ID, cancel it so we don't over-queue.
+      if (this.rafId_) {
+        this.cancelAnimationFrame(this.rafId_);
+      }
+
+      this.rafId_ = this.requestAnimationFrame(function () {
+        var content;
+
+        var duration = _this.player_.duration();
+
+        if (_this.player_.liveTracker && _this.player_.liveTracker.isLive()) {
+          var liveWindow = _this.player_.liveTracker.liveWindow();
+
+          var secondsBehind = liveWindow - seekBarPoint * liveWindow;
+          content = (secondsBehind < 1 ? '' : '-') + formatTime(secondsBehind, liveWindow);
+        } else {
+          content = formatTime(time, duration);
+        }
+
+        _this.update(seekBarRect, seekBarPoint, content);
+
+        if (cb) {
+          cb();
+        }
+      });
+    };
 
     return TimeTooltip;
   }(Component);
@@ -47691,8 +47285,9 @@ Prism.languages.js = Prism.languages.javascript;
      */
     _proto.createEl = function createEl() {
       return _Component.prototype.createEl.call(this, 'div', {
-        className: 'vjs-play-progress vjs-slider-bar',
-        innerHTML: "<span class=\"vjs-control-text\"><span>" + this.localize('Progress') + "</span>: 0%</span>"
+        className: 'vjs-play-progress vjs-slider-bar'
+      }, {
+        'aria-hidden': 'true'
       });
     };
     /**
@@ -47709,23 +47304,14 @@ Prism.languages.js = Prism.languages.javascript;
 
 
     _proto.update = function update(seekBarRect, seekBarPoint) {
-      var _this = this;
+      var timeTooltip = this.getChild('timeTooltip');
 
-      // If there is an existing rAF ID, cancel it so we don't over-queue.
-      if (this.rafId_) {
-        this.cancelAnimationFrame(this.rafId_);
+      if (!timeTooltip) {
+        return;
       }
 
-      this.rafId_ = this.requestAnimationFrame(function () {
-        var time = _this.player_.scrubbing() ? _this.player_.getCache().currentTime : _this.player_.currentTime();
-        var content = formatTime(time, _this.player_.duration());
-
-        var timeTooltip = _this.getChild('timeTooltip');
-
-        if (timeTooltip) {
-          timeTooltip.update(seekBarRect, seekBarPoint, content);
-        }
-      });
+      var time = this.player_.scrubbing() ? this.player_.getCache().currentTime : this.player_.currentTime();
+      timeTooltip.updateTime(seekBarRect, seekBarPoint, time);
     };
 
     return PlayProgressBar;
@@ -47809,18 +47395,9 @@ Prism.languages.js = Prism.languages.javascript;
     _proto.update = function update(seekBarRect, seekBarPoint) {
       var _this2 = this;
 
-      // If there is an existing rAF ID, cancel it so we don't over-queue.
-      if (this.rafId_) {
-        this.cancelAnimationFrame(this.rafId_);
-      }
-
-      this.rafId_ = this.requestAnimationFrame(function () {
-        var duration = _this2.player_.duration();
-
-        var content = formatTime(seekBarPoint * duration, duration);
+      var time = seekBarPoint * this.player_.duration();
+      this.getChild('timeTooltip').updateTime(seekBarRect, seekBarPoint, time, function () {
         _this2.el_.style.left = seekBarRect.width * seekBarPoint + "px";
-
-        _this2.getChild('timeTooltip').update(seekBarRect, seekBarPoint, content);
       });
     };
 
@@ -47886,8 +47463,14 @@ Prism.languages.js = Prism.languages.javascript;
 
       this.update = throttle(bind(this, this.update), UPDATE_REFRESH_INTERVAL);
       this.on(this.player_, 'timeupdate', this.update);
-      this.on(this.player_, 'ended', this.handleEnded); // when playing, let's ensure we smoothly update the play progress bar
+      this.on(this.player_, 'ended', this.handleEnded);
+      this.on(this.player_, 'durationchange', this.update);
+
+      if (this.player_.liveTracker) {
+        this.on(this.player_.liveTracker, 'liveedgechange', this.update);
+      } // when playing, let's ensure we smoothly update the play progress bar
       // via an interval
+
 
       this.updateInterval = null;
       this.on(this.player_, ['playing'], function () {
@@ -47899,7 +47482,11 @@ Prism.languages.js = Prism.languages.javascript;
           });
         }, UPDATE_REFRESH_INTERVAL);
       });
-      this.on(this.player_, ['ended', 'pause', 'waiting'], function () {
+      this.on(this.player_, ['ended', 'pause', 'waiting'], function (e) {
+        if (_this2.player_.liveTracker && _this2.player_.liveTracker.isLive() && e.type !== 'ended') {
+          return;
+        }
+
         _this2.clearInterval(_this2.updateInterval);
       });
       this.on(this.player_, ['timeupdate', 'ended'], this.update);
@@ -47934,7 +47521,19 @@ Prism.languages.js = Prism.languages.javascript;
 
 
     _proto.update_ = function update_(currentTime, percent) {
-      var duration = this.player_.duration(); // machine readable value of progress bar (percentage complete)
+      var liveTracker = this.player_.liveTracker;
+      var duration = this.player_.duration();
+
+      if (liveTracker && liveTracker.isLive()) {
+        duration = this.player_.liveTracker.liveCurrentTime();
+      }
+
+      if (liveTracker && liveTracker.seekableEnd() === Infinity) {
+        this.disable();
+      } else {
+        this.enable();
+      } // machine readable value of progress bar (percentage complete)
+
 
       this.el_.setAttribute('aria-valuenow', (percent * 100).toFixed(2)); // human readable value of progress bar (time complete)
 
@@ -47998,7 +47597,20 @@ Prism.languages.js = Prism.languages.javascript;
 
 
     _proto.getPercent = function getPercent() {
-      var percent = this.getCurrentTime_() / this.player_.duration();
+      var currentTime = this.getCurrentTime_();
+      var percent;
+      var liveTracker = this.player_.liveTracker;
+
+      if (liveTracker && liveTracker.isLive()) {
+        percent = (currentTime - liveTracker.seekableStart()) / liveTracker.liveWindow(); // prevent the percent from changing at the live edge
+
+        if (liveTracker.atLiveEdge()) {
+          percent = 1;
+        }
+      } else {
+        percent = currentTime / this.player_.duration();
+      }
+
       return percent >= 1 ? 1 : percent || 0;
     };
     /**
@@ -48039,10 +47651,37 @@ Prism.languages.js = Prism.languages.javascript;
         return;
       }
 
-      var newTime = this.calculateDistance(event) * this.player_.duration(); // Don't let video end while scrubbing.
+      var newTime;
+      var distance = this.calculateDistance(event);
+      var liveTracker = this.player_.liveTracker;
 
-      if (newTime === this.player_.duration()) {
-        newTime = newTime - 0.1;
+      if (!liveTracker || !liveTracker.isLive()) {
+        newTime = distance * this.player_.duration(); // Don't let video end while scrubbing.
+
+        if (newTime === this.player_.duration()) {
+          newTime = newTime - 0.1;
+        }
+      } else {
+        var seekableStart = liveTracker.seekableStart();
+        var seekableEnd = liveTracker.liveCurrentTime();
+        newTime = seekableStart + distance * liveTracker.liveWindow(); // Don't let video end while scrubbing.
+
+        if (newTime >= seekableEnd) {
+          newTime = seekableEnd;
+        } // Compensate for precision differences so that currentTime is not less
+        // than seekable start
+
+
+        if (newTime <= seekableStart) {
+          newTime = seekableStart + 0.1;
+        } // On android seekableEnd can be Infinity sometimes,
+        // this will cause newTime to be Infinity, which is
+        // not a valid currentTime.
+
+
+        if (newTime === Infinity) {
+          return;
+        }
       } // Set new time (tell player to seek to new time)
 
 
@@ -49291,7 +48930,8 @@ Prism.languages.js = Prism.languages.javascript;
 
     _proto.addItem = function addItem(component) {
       this.addChild(component);
-      component.on('click', bind(this, function (event) {
+      component.on('blur', bind(this, this.handleBlur));
+      component.on(['tap', 'click'], bind(this, function (event) {
         // Unpress the associated MenuButton, and move focus back to it
         if (this.menuButton_) {
           this.menuButton_.unpressButton(); // don't focus menu button if item is a caption settings item
@@ -49337,6 +48977,29 @@ Prism.languages.js = Prism.languages.javascript;
       this.contentEl_ = null;
 
       _Component.prototype.dispose.call(this);
+    };
+    /**
+     * Called when a `MenuItem` loses focus.
+     *
+     * @param {EventTarget~Event} event
+     *        The `blur` event that caused this function to be called.
+     *
+     * @listens blur
+     */
+
+
+    _proto.handleBlur = function handleBlur(event) {
+      var relatedTarget = event.relatedTarget || document.activeElement; // Close menu popup when a user clicks outside the menu
+
+      if (!this.children().some(function (element) {
+        return element.el() === relatedTarget;
+      })) {
+        var btn = this.menuButton_;
+
+        if (btn && btn.buttonPressed_ && relatedTarget !== btn.el().firstChild) {
+          btn.unpressButton();
+        }
+      }
     };
     /**
      * Handle a `keydown` event on this menu. This listener is added in the constructor.
@@ -49476,6 +49139,10 @@ Prism.languages.js = Prism.languages.javascript;
       _this.on(_this.menuButton_, 'focus', _this.handleFocus);
 
       _this.on(_this.menuButton_, 'blur', _this.handleBlur);
+
+      _this.on(_this.menuButton_, 'mouseenter', function () {
+        _this.menu.show();
+      });
 
       _this.on('keydown', _this.handleSubmenuKeyPress);
 
@@ -49657,14 +49324,6 @@ Prism.languages.js = Prism.languages.javascript;
 
 
     _proto.handleClick = function handleClick(event) {
-      // When you click the button it adds focus, which will show the menu.
-      // So we'll remove focus when the mouse leaves the button. Focus is needed
-      // for tab navigation.
-      this.one(this.menu.contentEl(), 'mouseleave', bind(this, function (e) {
-        this.unpressButton();
-        this.el_.blur();
-      }));
-
       if (this.buttonPressed_) {
         this.unpressButton();
       } else {
@@ -49739,9 +49398,9 @@ Prism.languages.js = Prism.languages.javascript;
           event.preventDefault(); // Set focus back to the menu button's button
 
           this.menuButton_.el_.focus();
-        } // Up (38) key or Down (40) key press the 'button'
+        } // Enter (13) or Up (38) key or Down (40) key press the 'button'
 
-      } else if (event.which === 38 || event.which === 40) {
+      } else if (event.which === 13 || event.which === 38 || event.which === 40) {
         if (!this.buttonPressed_) {
           this.pressButton();
           event.preventDefault();
@@ -49782,6 +49441,7 @@ Prism.languages.js = Prism.languages.javascript;
     _proto.pressButton = function pressButton() {
       if (this.enabled_) {
         this.buttonPressed_ = true;
+        this.menu.show();
         this.menu.lockShowing();
         this.menuButton_.el_.setAttribute('aria-expanded', 'true'); // set the focus into the submenu, except on iOS where it is resulting in
         // undesired scrolling behavior when the player is in an iframe
@@ -49803,6 +49463,7 @@ Prism.languages.js = Prism.languages.javascript;
       if (this.enabled_) {
         this.buttonPressed_ = false;
         this.menu.unlockShowing();
+        this.menu.hide();
         this.menuButton_.el_.setAttribute('aria-expanded', 'false');
       }
     };
@@ -51748,7 +51409,7 @@ Prism.languages.js = Prism.languages.javascript;
 
 
   ControlBar.prototype.options_ = {
-    children: ['playToggle', 'volumePanel', 'currentTimeDisplay', 'timeDivider', 'durationDisplay', 'progressControl', 'liveDisplay', 'remainingTimeDisplay', 'customControlSpacer', 'playbackRateMenuButton', 'chaptersButton', 'descriptionsButton', 'subsCapsButton', 'audioTrackButton', 'fullscreenToggle']
+    children: ['playToggle', 'volumePanel', 'currentTimeDisplay', 'timeDivider', 'durationDisplay', 'progressControl', 'liveDisplay', 'seekToLive', 'remainingTimeDisplay', 'customControlSpacer', 'playbackRateMenuButton', 'chaptersButton', 'descriptionsButton', 'subsCapsButton', 'audioTrackButton', 'fullscreenToggle']
   };
   Component.registerComponent('ControlBar', ControlBar);
 
@@ -52467,6 +52128,289 @@ Prism.languages.js = Prism.languages.javascript;
   }(Component);
 
   Component.registerComponent('ResizeManager', ResizeManager);
+
+  /* track when we are at the live edge, and other helpers for live playback */
+
+  var LiveTracker =
+  /*#__PURE__*/
+  function (_Component) {
+    _inheritsLoose(LiveTracker, _Component);
+
+    function LiveTracker(player, options) {
+      var _this;
+
+      // LiveTracker does not need an element
+      var options_ = mergeOptions({
+        createEl: false
+      }, options);
+      _this = _Component.call(this, player, options_) || this;
+
+      _this.reset_();
+
+      _this.on(_this.player_, 'durationchange', _this.handleDurationchange);
+
+      return _this;
+    }
+
+    var _proto = LiveTracker.prototype;
+
+    _proto.isBehind_ = function isBehind_() {
+      // don't report that we are behind until a timeupdate has been seen
+      if (!this.timeupdateSeen_) {
+        return false;
+      }
+
+      var liveCurrentTime = this.liveCurrentTime();
+      var currentTime = this.player_.currentTime();
+      var seekableIncrement = this.seekableIncrement_; // the live edge window is the amount of seconds away from live
+      // that a player can be, but still be considered live.
+      // we add 0.07 because the live tracking happens every 30ms
+      // and we want some wiggle room for short segment live playback
+
+      var liveEdgeWindow = seekableIncrement * 2 + 0.07; // on Android liveCurrentTime can bee Infinity, because seekableEnd
+      // can be Infinity, so we handle that case.
+
+      return liveCurrentTime !== Infinity && liveCurrentTime - liveEdgeWindow >= currentTime;
+    }; // all the functionality for tracking when seek end changes
+    // and for tracking how far past seek end we should be
+
+
+    _proto.trackLive_ = function trackLive_() {
+      this.pastSeekEnd_ = this.pastSeekEnd_;
+      var seekable = this.player_.seekable(); // skip undefined seekable
+
+      if (!seekable || !seekable.length) {
+        return;
+      }
+
+      var newSeekEnd = this.seekableEnd(); // we can only tell if we are behind live, when seekable changes
+      // once we detect that seekable has changed we check the new seek
+      // end against current time, with a fudge value of half a second.
+
+      if (newSeekEnd !== this.lastSeekEnd_) {
+        if (this.lastSeekEnd_) {
+          this.seekableIncrement_ = Math.abs(newSeekEnd - this.lastSeekEnd_);
+        }
+
+        this.pastSeekEnd_ = 0;
+        this.lastSeekEnd_ = newSeekEnd;
+        this.trigger('seekableendchange');
+      }
+
+      this.pastSeekEnd_ = this.pastSeekEnd() + 0.03;
+
+      if (this.isBehind_() !== this.behindLiveEdge()) {
+        this.behindLiveEdge_ = this.isBehind_();
+        this.trigger('liveedgechange');
+      }
+    };
+    /**
+     * handle a durationchange event on the player
+     * and start/stop tracking accordingly.
+     */
+
+
+    _proto.handleDurationchange = function handleDurationchange() {
+      if (this.player_.duration() === Infinity) {
+        this.startTracking();
+      } else {
+        this.stopTracking();
+      }
+    };
+    /**
+     * start tracking live playback
+     */
+
+
+    _proto.startTracking = function startTracking() {
+      var _this2 = this;
+
+      if (this.isTracking()) {
+        return;
+      }
+
+      this.trackingInterval_ = this.setInterval(this.trackLive_, 30);
+      this.trackLive_();
+      this.on(this.player_, 'play', this.trackLive_);
+      this.on(this.player_, 'pause', this.trackLive_);
+      this.one(this.player_, 'play', this.handlePlay); // this is to prevent showing that we are not live
+      // before a video starts to play
+
+      if (!this.timeupdateSeen_) {
+        this.handleTimeupdate = function () {
+          _this2.timeupdateSeen_ = true;
+          _this2.handleTimeupdate = null;
+        };
+
+        this.one(this.player_, 'timeupdate', this.handleTimeupdate);
+      }
+    };
+
+    _proto.handlePlay = function handlePlay() {
+      this.one(this.player_, 'timeupdate', this.seekToLiveEdge);
+    };
+    /**
+     * Stop tracking, and set all internal variables to
+     * their initial value.
+     */
+
+
+    _proto.reset_ = function reset_() {
+      this.pastSeekEnd_ = 0;
+      this.lastSeekEnd_ = null;
+      this.behindLiveEdge_ = null;
+      this.timeupdateSeen_ = false;
+      this.clearInterval(this.trackingInterval_);
+      this.trackingInterval_ = null;
+      this.seekableIncrement_ = 12;
+      this.off(this.player_, 'play', this.trackLive_);
+      this.off(this.player_, 'pause', this.trackLive_);
+      this.off(this.player_, 'play', this.handlePlay);
+      this.off(this.player_, 'timeupdate', this.seekToLiveEdge);
+
+      if (this.handleTimeupdate) {
+        this.off(this.player_, 'timeupdate', this.handleTimeupdate);
+        this.handleTimeupdate = null;
+      }
+    };
+    /**
+     * stop tracking live playback
+     */
+
+
+    _proto.stopTracking = function stopTracking() {
+      if (!this.isTracking()) {
+        return;
+      }
+
+      this.reset_();
+    };
+    /**
+     * A helper to get the player seekable end
+     * so that we don't have to null check everywhere
+     */
+
+
+    _proto.seekableEnd = function seekableEnd() {
+      var seekable = this.player_.seekable();
+      var seekableEnds = [];
+      var i = seekable ? seekable.length : 0;
+
+      while (i--) {
+        seekableEnds.push(seekable.end(i));
+      } // grab the furthest seekable end after sorting, or if there are none
+      // default to Infinity
+
+
+      return seekableEnds.length ? seekableEnds.sort()[seekableEnds.length - 1] : Infinity;
+    };
+    /**
+     * A helper to get the player seekable start
+     * so that we don't have to null check everywhere
+     */
+
+
+    _proto.seekableStart = function seekableStart() {
+      var seekable = this.player_.seekable();
+      var seekableStarts = [];
+      var i = seekable ? seekable.length : 0;
+
+      while (i--) {
+        seekableStarts.push(seekable.start(i));
+      } // grab the first seekable start after sorting, or if there are none
+      // default to 0
+
+
+      return seekableStarts.length ? seekableStarts.sort()[0] : 0;
+    };
+    /**
+     * Get the live time window
+     */
+
+
+    _proto.liveWindow = function liveWindow() {
+      var liveCurrentTime = this.liveCurrentTime();
+
+      if (liveCurrentTime === Infinity) {
+        return Infinity;
+      }
+
+      return liveCurrentTime - this.seekableStart();
+    };
+    /**
+     * Determines if the player is live, only checks if this component
+     * is tracking live playback or not
+     */
+
+
+    _proto.isLive = function isLive() {
+      return this.isTracking();
+    };
+    /**
+     * Determines if currentTime is at the live edge and won't fall behind
+     * on each seekableendchange
+     */
+
+
+    _proto.atLiveEdge = function atLiveEdge() {
+      return !this.behindLiveEdge();
+    };
+    /**
+     * get what we expect the live current time to be
+     */
+
+
+    _proto.liveCurrentTime = function liveCurrentTime() {
+      return this.pastSeekEnd() + this.seekableEnd();
+    };
+    /**
+     * Returns how far past seek end we expect current time to be
+     */
+
+
+    _proto.pastSeekEnd = function pastSeekEnd() {
+      return this.pastSeekEnd_;
+    };
+    /**
+     * If we are currently behind the live edge, aka currentTime will be
+     * behind on a seekableendchange
+     */
+
+
+    _proto.behindLiveEdge = function behindLiveEdge() {
+      return this.behindLiveEdge_;
+    };
+
+    _proto.isTracking = function isTracking() {
+      return typeof this.trackingInterval_ === 'number';
+    };
+    /**
+     * Seek to the live edge if we are behind the live edge
+     */
+
+
+    _proto.seekToLiveEdge = function seekToLiveEdge() {
+      if (this.atLiveEdge()) {
+        return;
+      }
+
+      this.player_.currentTime(this.liveCurrentTime());
+
+      if (this.player_.paused()) {
+        this.player_.play();
+      }
+    };
+
+    _proto.dispose = function dispose() {
+      this.stopTracking();
+
+      _Component.prototype.dispose.call(this);
+    };
+
+    return LiveTracker;
+  }(Component);
+
+  Component.registerComponent('LiveTracker', LiveTracker);
 
   /**
    * This function is used to fire a sourceset when there is something
@@ -55050,10 +54994,15 @@ Prism.languages.js = Prism.languages.javascript;
 
       evented(_assertThisInitialized(_assertThisInitialized(_this)), {
         eventBusKey: 'el_'
-      }); // We also want to pass the original player options to each component and plugin
+      });
+
+      if (_this.fluid_) {
+        _this.on('playerreset', _this.updateStyleEl_);
+      } // We also want to pass the original player options to each component and plugin
       // as well so they don't need to reach back into the player for options later.
       // We also need to do another copy of this.options_ so we don't end up with
       // an infinite loop.
+
 
       var playerOptionsCopy = mergeOptions(_this.options_); // Load plugins
 
@@ -55431,9 +55380,16 @@ Prism.languages.js = Prism.languages.javascript;
 
       this.fluid_ = !!bool;
 
+      if (isEvented(this)) {
+        this.off('playerreset', this.updateStyleEl_);
+      }
+
       if (bool) {
         this.addClass('vjs-fluid');
         this.fill(false);
+        addEventedCallback(function () {
+          this.on('playerreset', this.updateStyleEl_);
+        });
       } else {
         this.removeClass('vjs-fluid');
       }
@@ -55863,7 +55819,9 @@ Prism.languages.js = Prism.languages.javascript;
       this.removeClass('vjs-ended');
       this.removeClass('vjs-seeking'); // reset the error state
 
-      this.error(null); // If it's already playing we want to trigger a firstplay event now.
+      this.error(null); // Update the duration
+
+      this.handleTechDurationChange_(); // If it's already playing we want to trigger a firstplay event now.
       // The firstplay event relies on both the play and loadstart events
       // which can happen in any order for a new source
 
@@ -56220,10 +56178,20 @@ Prism.languages.js = Prism.languages.javascript;
        * @type {EventTarget~Event}
        */
 
-      this.trigger('waiting');
-      this.one('timeupdate', function () {
-        return _this6.removeClass('vjs-waiting');
-      });
+      this.trigger('waiting'); // Browsers may emit a timeupdate event after a waiting event. In order to prevent
+      // premature removal of the waiting class, wait for the time to change.
+
+      var timeWhenWaiting = this.currentTime();
+
+      var timeUpdateListener = function timeUpdateListener() {
+        if (timeWhenWaiting !== _this6.currentTime()) {
+          _this6.removeClass('vjs-waiting');
+
+          _this6.off('timeupdate', timeUpdateListener);
+        }
+      };
+
+      this.on('timeupdate', timeUpdateListener);
     };
     /**
      * Retrigger the `canplay` event that was triggered by the {@link Tech}.
@@ -56922,16 +56890,25 @@ Prism.languages.js = Prism.languages.javascript;
 
         if (seconds === Infinity) {
           this.addClass('vjs-live');
+
+          if (this.options_.liveui && this.player_.liveTracker) {
+            this.addClass('vjs-liveui');
+          }
         } else {
           this.removeClass('vjs-live');
+          this.removeClass('vjs-liveui');
         }
-        /**
-         * @event Player#durationchange
-         * @type {EventTarget~Event}
-         */
 
+        if (!isNaN(seconds)) {
+          // Do not fire durationchange unless the duration value is known.
+          // @see [Spec]{@link https://www.w3.org/TR/2011/WD-html5-20110113/video.html#media-element-load-algorithm}
 
-        this.trigger('durationchange');
+          /**
+           * @event Player#durationchange
+           * @type {EventTarget~Event}
+           */
+          this.trigger('durationchange');
+        }
       }
     };
     /**
@@ -57590,6 +57567,10 @@ Prism.languages.js = Prism.languages.javascript;
 
       this.loadTech_(this.options_.techOrder[0], null);
       this.techCall_('reset');
+
+      if (isEvented(this)) {
+        this.trigger('playerreset');
+      }
     };
     /**
      * Returns all of the current source objects.
@@ -58782,8 +58763,9 @@ Prism.languages.js = Prism.languages.javascript;
     playbackRates: [],
     // Add playback rate selection by adding rates
     // 'playbackRates': [0.5, 1, 1.5, 2],
+    liveui: false,
     // Included control sets
-    children: ['mediaLoader', 'posterImage', 'textTrackDisplay', 'loadingSpinner', 'bigPlayButton', 'controlBar', 'errorDisplay', 'textTrackSettings', 'resizeManager'],
+    children: ['mediaLoader', 'posterImage', 'textTrackDisplay', 'loadingSpinner', 'bigPlayButton', 'liveTracker', 'controlBar', 'errorDisplay', 'textTrackSettings', 'resizeManager'],
     language: navigator && (navigator.languages && navigator.languages[0] || navigator.userLanguage || navigator.language) || 'en',
     // locales and their language translations
     languages: {},
@@ -64515,7 +64497,221 @@ Prism.languages.js = Prism.languages.javascript;
     concatenateNalData: concatenateNalData
   };
 
-  var ONE_SECOND_IN_TS = 90000; // 90kHz clock
+  var highPrefix = [33, 16, 5, 32, 164, 27];
+  var lowPrefix = [33, 65, 108, 84, 1, 2, 4, 8, 168, 2, 4, 8, 17, 191, 252];
+
+  var zeroFill = function zeroFill(count) {
+    var a = [];
+
+    while (count--) {
+      a.push(0);
+    }
+
+    return a;
+  };
+
+  var makeTable = function makeTable(metaTable) {
+    return Object.keys(metaTable).reduce(function (obj, key) {
+      obj[key] = new Uint8Array(metaTable[key].reduce(function (arr, part) {
+        return arr.concat(part);
+      }, []));
+      return obj;
+    }, {});
+  }; // Frames-of-silence to use for filling in missing AAC frames
+
+
+  var coneOfSilence = {
+    96000: [highPrefix, [227, 64], zeroFill(154), [56]],
+    88200: [highPrefix, [231], zeroFill(170), [56]],
+    64000: [highPrefix, [248, 192], zeroFill(240), [56]],
+    48000: [highPrefix, [255, 192], zeroFill(268), [55, 148, 128], zeroFill(54), [112]],
+    44100: [highPrefix, [255, 192], zeroFill(268), [55, 163, 128], zeroFill(84), [112]],
+    32000: [highPrefix, [255, 192], zeroFill(268), [55, 234], zeroFill(226), [112]],
+    24000: [highPrefix, [255, 192], zeroFill(268), [55, 255, 128], zeroFill(268), [111, 112], zeroFill(126), [224]],
+    16000: [highPrefix, [255, 192], zeroFill(268), [55, 255, 128], zeroFill(268), [111, 255], zeroFill(269), [223, 108], zeroFill(195), [1, 192]],
+    12000: [lowPrefix, zeroFill(268), [3, 127, 248], zeroFill(268), [6, 255, 240], zeroFill(268), [13, 255, 224], zeroFill(268), [27, 253, 128], zeroFill(259), [56]],
+    11025: [lowPrefix, zeroFill(268), [3, 127, 248], zeroFill(268), [6, 255, 240], zeroFill(268), [13, 255, 224], zeroFill(268), [27, 255, 192], zeroFill(268), [55, 175, 128], zeroFill(108), [112]],
+    8000: [lowPrefix, zeroFill(268), [3, 121, 16], zeroFill(47), [7]]
+  };
+  var silence = makeTable(coneOfSilence);
+
+  var ONE_SECOND_IN_TS = 90000,
+      // 90kHz clock
+  secondsToVideoTs,
+      secondsToAudioTs,
+      videoTsToSeconds,
+      audioTsToSeconds,
+      audioTsToVideoTs,
+      videoTsToAudioTs;
+
+  secondsToVideoTs = function secondsToVideoTs(seconds) {
+    return seconds * ONE_SECOND_IN_TS;
+  };
+
+  secondsToAudioTs = function secondsToAudioTs(seconds, sampleRate) {
+    return seconds * sampleRate;
+  };
+
+  videoTsToSeconds = function videoTsToSeconds(timestamp) {
+    return timestamp / ONE_SECOND_IN_TS;
+  };
+
+  audioTsToSeconds = function audioTsToSeconds(timestamp, sampleRate) {
+    return timestamp / sampleRate;
+  };
+
+  audioTsToVideoTs = function audioTsToVideoTs(timestamp, sampleRate) {
+    return secondsToVideoTs(audioTsToSeconds(timestamp, sampleRate));
+  };
+
+  videoTsToAudioTs = function videoTsToAudioTs(timestamp, sampleRate) {
+    return secondsToAudioTs(videoTsToSeconds(timestamp), sampleRate);
+  };
+
+  var clock = {
+    secondsToVideoTs: secondsToVideoTs,
+    secondsToAudioTs: secondsToAudioTs,
+    videoTsToSeconds: videoTsToSeconds,
+    audioTsToSeconds: audioTsToSeconds,
+    audioTsToVideoTs: audioTsToVideoTs,
+    videoTsToAudioTs: videoTsToAudioTs
+  };
+
+  var ONE_SECOND_IN_TS$1 = 90000; // 90kHz clock
+
+  /**
+   * Sum the `byteLength` properties of the data in each AAC frame
+   */
+
+  var sumFrameByteLengths = function sumFrameByteLengths(array) {
+    var i,
+        currentObj,
+        sum = 0; // sum the byteLength's all each nal unit in the frame
+
+    for (i = 0; i < array.length; i++) {
+      currentObj = array[i];
+      sum += currentObj.data.byteLength;
+    }
+
+    return sum;
+  }; // Possibly pad (prefix) the audio track with silence if appending this track
+  // would lead to the introduction of a gap in the audio buffer
+
+
+  var prefixWithSilence = function prefixWithSilence(track, frames, audioAppendStartTs, videoBaseMediaDecodeTime) {
+    var baseMediaDecodeTimeTs,
+        frameDuration = 0,
+        audioGapDuration = 0,
+        audioFillFrameCount = 0,
+        audioFillDuration = 0,
+        silentFrame,
+        i;
+
+    if (!frames.length) {
+      return;
+    }
+
+    baseMediaDecodeTimeTs = clock.audioTsToVideoTs(track.baseMediaDecodeTime, track.samplerate); // determine frame clock duration based on sample rate, round up to avoid overfills
+
+    frameDuration = Math.ceil(ONE_SECOND_IN_TS$1 / (track.samplerate / 1024));
+
+    if (audioAppendStartTs && videoBaseMediaDecodeTime) {
+      // insert the shortest possible amount (audio gap or audio to video gap)
+      audioGapDuration = baseMediaDecodeTimeTs - Math.max(audioAppendStartTs, videoBaseMediaDecodeTime); // number of full frames in the audio gap
+
+      audioFillFrameCount = Math.floor(audioGapDuration / frameDuration);
+      audioFillDuration = audioFillFrameCount * frameDuration;
+    } // don't attempt to fill gaps smaller than a single frame or larger
+    // than a half second
+
+
+    if (audioFillFrameCount < 1 || audioFillDuration > ONE_SECOND_IN_TS$1 / 2) {
+      return;
+    }
+
+    silentFrame = silence[track.samplerate];
+
+    if (!silentFrame) {
+      // we don't have a silent frame pregenerated for the sample rate, so use a frame
+      // from the content instead
+      silentFrame = frames[0].data;
+    }
+
+    for (i = 0; i < audioFillFrameCount; i++) {
+      frames.splice(i, 0, {
+        data: silentFrame
+      });
+    }
+
+    track.baseMediaDecodeTime -= Math.floor(clock.videoTsToAudioTs(audioFillDuration, track.samplerate));
+  }; // If the audio segment extends before the earliest allowed dts
+  // value, remove AAC frames until starts at or after the earliest
+  // allowed DTS so that we don't end up with a negative baseMedia-
+  // DecodeTime for the audio track
+
+
+  var trimAdtsFramesByEarliestDts = function trimAdtsFramesByEarliestDts(adtsFrames, track, earliestAllowedDts) {
+    if (track.minSegmentDts >= earliestAllowedDts) {
+      return adtsFrames;
+    } // We will need to recalculate the earliest segment Dts
+
+
+    track.minSegmentDts = Infinity;
+    return adtsFrames.filter(function (currentFrame) {
+      // If this is an allowed frame, keep it and record it's Dts
+      if (currentFrame.dts >= earliestAllowedDts) {
+        track.minSegmentDts = Math.min(track.minSegmentDts, currentFrame.dts);
+        track.minSegmentPts = track.minSegmentDts;
+        return true;
+      } // Otherwise, discard it
+
+
+      return false;
+    });
+  }; // generate the track's raw mdat data from an array of frames
+
+
+  var generateSampleTable$1 = function generateSampleTable(frames) {
+    var i,
+        currentFrame,
+        samples = [];
+
+    for (i = 0; i < frames.length; i++) {
+      currentFrame = frames[i];
+      samples.push({
+        size: currentFrame.data.byteLength,
+        duration: 1024 // For AAC audio, all samples contain 1024 samples
+
+      });
+    }
+
+    return samples;
+  }; // generate the track's sample table from an array of frames
+
+
+  var concatenateFrameData = function concatenateFrameData(frames) {
+    var i,
+        currentFrame,
+        dataOffset = 0,
+        data = new Uint8Array(sumFrameByteLengths(frames));
+
+    for (i = 0; i < frames.length; i++) {
+      currentFrame = frames[i];
+      data.set(currentFrame.data, dataOffset);
+      dataOffset += currentFrame.data.byteLength;
+    }
+
+    return data;
+  };
+
+  var audioFrameUtils = {
+    prefixWithSilence: prefixWithSilence,
+    trimAdtsFramesByEarliestDts: trimAdtsFramesByEarliestDts,
+    generateSampleTable: generateSampleTable$1,
+    concatenateFrameData: concatenateFrameData
+  };
+
+  var ONE_SECOND_IN_TS$2 = 90000; // 90kHz clock
 
   /**
    * Store information about the start and end of the track and the
@@ -64602,7 +64798,7 @@ Prism.languages.js = Prism.languages.javascript;
     if (track.type === 'audio') {
       // Audio has a different clock equal to the sampling_rate so we need to
       // scale the PTS values into the clock rate of the track
-      scale = track.samplerate / ONE_SECOND_IN_TS;
+      scale = track.samplerate / ONE_SECOND_IN_TS$2;
       baseMediaDecodeTime *= scale;
       baseMediaDecodeTime = Math.floor(baseMediaDecodeTime);
     }
@@ -65308,6 +65504,13 @@ Prism.languages.js = Prism.languages.javascript;
         var row = ROWS.indexOf(data & 0x1f20); // Configure the caption window if we're in roll-up mode
 
         if (this.mode_ === 'rollUp') {
+          // This implies that the base row is incorrectly set.
+          // As per the recommendation in CEA-608(Base Row Implementation), defer to the number
+          // of roll-up rows set.
+          if (row - this.rollUpRows_ + 1 < 0) {
+            row = this.rollUpRows_ - 1;
+          }
+
           this.setRollUp(packet.pts, row);
         }
 
@@ -65361,7 +65564,16 @@ Prism.languages.js = Prism.languages.javascript;
   Cea608Stream.prototype.flushDisplayed = function (pts) {
     var content = this.displayed_ // remove spaces from the start and end of the string
     .map(function (row) {
-      return row.trim();
+      try {
+        return row.trim();
+      } catch (e) {
+        // Ordinarily, this shouldn't happen. However, caption
+        // parsing errors should not throw exceptions and
+        // break playback.
+        // eslint-disable-next-line no-console
+        console.error('Skipping malformed caption.');
+        return '';
+      }
     }) // combine all text rows to display in one cue
     .join('\n') // and remove blank rows from the start and end, but not the middle
     .replace(/^\n+|\n+$/g, '');
@@ -67219,6 +67431,155 @@ Prism.languages.js = Prism.languages.javascript;
     NalByteStream: _NalByteStream
   };
 
+  /**
+   * mux.js
+   *
+   * Copyright (c) 2016 Brightcove
+   * All rights reserved.
+   *
+   * Utilities to detect basic properties and metadata about Aac data.
+   */
+
+  var ADTS_SAMPLING_FREQUENCIES$1 = [96000, 88200, 64000, 48000, 44100, 32000, 24000, 22050, 16000, 12000, 11025, 8000, 7350];
+
+  var isLikelyAacData = function isLikelyAacData(data) {
+    if (data[0] === 'I'.charCodeAt(0) && data[1] === 'D'.charCodeAt(0) && data[2] === '3'.charCodeAt(0)) {
+      return true;
+    }
+
+    return false;
+  };
+
+  var parseSyncSafeInteger$1 = function parseSyncSafeInteger(data) {
+    return data[0] << 21 | data[1] << 14 | data[2] << 7 | data[3];
+  }; // return a percent-encoded representation of the specified byte range
+  // @see http://en.wikipedia.org/wiki/Percent-encoding
+
+
+  var percentEncode$1 = function percentEncode(bytes, start, end) {
+    var i,
+        result = '';
+
+    for (i = start; i < end; i++) {
+      result += '%' + ('00' + bytes[i].toString(16)).slice(-2);
+    }
+
+    return result;
+  }; // return the string representation of the specified byte range,
+  // interpreted as ISO-8859-1.
+
+
+  var parseIso88591$1 = function parseIso88591(bytes, start, end) {
+    return unescape(percentEncode$1(bytes, start, end)); // jshint ignore:line
+  };
+
+  var parseId3TagSize = function parseId3TagSize(header, byteIndex) {
+    var returnSize = header[byteIndex + 6] << 21 | header[byteIndex + 7] << 14 | header[byteIndex + 8] << 7 | header[byteIndex + 9],
+        flags = header[byteIndex + 5],
+        footerPresent = (flags & 16) >> 4;
+
+    if (footerPresent) {
+      return returnSize + 20;
+    }
+
+    return returnSize + 10;
+  };
+
+  var parseAdtsSize = function parseAdtsSize(header, byteIndex) {
+    var lowThree = (header[byteIndex + 5] & 0xE0) >> 5,
+        middle = header[byteIndex + 4] << 3,
+        highTwo = header[byteIndex + 3] & 0x3 << 11;
+    return highTwo | middle | lowThree;
+  };
+
+  var parseType$1 = function parseType(header, byteIndex) {
+    if (header[byteIndex] === 'I'.charCodeAt(0) && header[byteIndex + 1] === 'D'.charCodeAt(0) && header[byteIndex + 2] === '3'.charCodeAt(0)) {
+      return 'timed-metadata';
+    } else if (header[byteIndex] & 0xff === 0xff && (header[byteIndex + 1] & 0xf0) === 0xf0) {
+      return 'audio';
+    }
+
+    return null;
+  };
+
+  var parseSampleRate = function parseSampleRate(packet) {
+    var i = 0;
+
+    while (i + 5 < packet.length) {
+      if (packet[i] !== 0xFF || (packet[i + 1] & 0xF6) !== 0xF0) {
+        // If a valid header was not found,  jump one forward and attempt to
+        // find a valid ADTS header starting at the next byte
+        i++;
+        continue;
+      }
+
+      return ADTS_SAMPLING_FREQUENCIES$1[(packet[i + 2] & 0x3c) >>> 2];
+    }
+
+    return null;
+  };
+
+  var parseAacTimestamp = function parseAacTimestamp(packet) {
+    var frameStart, frameSize, frame, frameHeader; // find the start of the first frame and the end of the tag
+
+    frameStart = 10;
+
+    if (packet[5] & 0x40) {
+      // advance the frame start past the extended header
+      frameStart += 4; // header size field
+
+      frameStart += parseSyncSafeInteger$1(packet.subarray(10, 14));
+    } // parse one or more ID3 frames
+    // http://id3.org/id3v2.3.0#ID3v2_frame_overview
+
+
+    do {
+      // determine the number of bytes in this frame
+      frameSize = parseSyncSafeInteger$1(packet.subarray(frameStart + 4, frameStart + 8));
+
+      if (frameSize < 1) {
+        return null;
+      }
+
+      frameHeader = String.fromCharCode(packet[frameStart], packet[frameStart + 1], packet[frameStart + 2], packet[frameStart + 3]);
+
+      if (frameHeader === 'PRIV') {
+        frame = packet.subarray(frameStart + 10, frameStart + frameSize + 10);
+
+        for (var i = 0; i < frame.byteLength; i++) {
+          if (frame[i] === 0) {
+            var owner = parseIso88591$1(frame, 0, i);
+
+            if (owner === 'com.apple.streaming.transportStreamTimestamp') {
+              var d = frame.subarray(i + 1);
+              var size = (d[3] & 0x01) << 30 | d[4] << 22 | d[5] << 14 | d[6] << 6 | d[7] >>> 2;
+              size *= 4;
+              size += d[7] & 0x03;
+              return size;
+            }
+
+            break;
+          }
+        }
+      }
+
+      frameStart += 10; // advance past the frame header
+
+      frameStart += frameSize; // advance past the frame body
+    } while (frameStart < packet.byteLength);
+
+    return null;
+  };
+
+  var utils = {
+    isLikelyAacData: isLikelyAacData,
+    parseId3TagSize: parseId3TagSize,
+    parseAdtsSize: parseAdtsSize,
+    parseType: parseType$1,
+    parseSampleRate: parseSampleRate,
+    parseAacTimestamp: parseAacTimestamp
+  };
+
   var _AacStream;
   /**
    * Splits an incoming stream of binary data into ADTS and ID3 Frames.
@@ -67233,25 +67594,6 @@ Prism.languages.js = Prism.languages.javascript;
 
     this.setTimestamp = function (timestamp) {
       timeStamp = timestamp;
-    };
-
-    this.parseId3TagSize = function (header, byteIndex) {
-      var returnSize = header[byteIndex + 6] << 21 | header[byteIndex + 7] << 14 | header[byteIndex + 8] << 7 | header[byteIndex + 9],
-          flags = header[byteIndex + 5],
-          footerPresent = (flags & 16) >> 4;
-
-      if (footerPresent) {
-        return returnSize + 20;
-      }
-
-      return returnSize + 10;
-    };
-
-    this.parseAdtsSize = function (header, byteIndex) {
-      var lowThree = (header[byteIndex + 5] & 0xE0) >> 5,
-          middle = header[byteIndex + 4] << 3,
-          highTwo = header[byteIndex + 3] & 0x3 << 11;
-      return highTwo | middle | lowThree;
     };
 
     this.push = function (bytes) {
@@ -67281,10 +67623,11 @@ Prism.languages.js = Prism.languages.javascript;
           } // check framesize
 
 
-          frameSize = this.parseId3TagSize(everything, byteIndex); // Exit early if we don't have enough in the buffer
+          frameSize = utils.parseId3TagSize(everything, byteIndex); // Exit early if we don't have enough in the buffer
           // to emit a full packet
+          // Add to byteIndex to support multiple ID3 tags in sequence
 
-          if (frameSize > everything.length) {
+          if (byteIndex + frameSize > everything.length) {
             break;
           }
 
@@ -67295,17 +67638,17 @@ Prism.languages.js = Prism.languages.javascript;
           this.trigger('data', chunk);
           byteIndex += frameSize;
           continue;
-        } else if (everything[byteIndex] & 0xff === 0xff && (everything[byteIndex + 1] & 0xf0) === 0xf0) {
+        } else if ((everything[byteIndex] & 0xff) === 0xff && (everything[byteIndex + 1] & 0xf0) === 0xf0) {
           // Exit early because we don't have enough to parse
           // the ADTS frame header
           if (everything.length - byteIndex < 7) {
             break;
           }
 
-          frameSize = this.parseAdtsSize(everything, byteIndex); // Exit early if we don't have enough in the buffer
+          frameSize = utils.parseAdtsSize(everything, byteIndex); // Exit early if we don't have enough in the buffer
           // to emit a full packet
 
-          if (frameSize > everything.length) {
+          if (byteIndex + frameSize > everything.length) {
             break;
           }
 
@@ -67336,111 +67679,19 @@ Prism.languages.js = Prism.languages.javascript;
   _AacStream.prototype = new stream();
   var aac = _AacStream;
 
-  var highPrefix = [33, 16, 5, 32, 164, 27];
-  var lowPrefix = [33, 65, 108, 84, 1, 2, 4, 8, 168, 2, 4, 8, 17, 191, 252];
-
-  var zeroFill = function zeroFill(count) {
-    var a = [];
-
-    while (count--) {
-      a.push(0);
-    }
-
-    return a;
-  };
-
-  var makeTable = function makeTable(metaTable) {
-    return Object.keys(metaTable).reduce(function (obj, key) {
-      obj[key] = new Uint8Array(metaTable[key].reduce(function (arr, part) {
-        return arr.concat(part);
-      }, []));
-      return obj;
-    }, {});
-  }; // Frames-of-silence to use for filling in missing AAC frames
-
-
-  var coneOfSilence = {
-    96000: [highPrefix, [227, 64], zeroFill(154), [56]],
-    88200: [highPrefix, [231], zeroFill(170), [56]],
-    64000: [highPrefix, [248, 192], zeroFill(240), [56]],
-    48000: [highPrefix, [255, 192], zeroFill(268), [55, 148, 128], zeroFill(54), [112]],
-    44100: [highPrefix, [255, 192], zeroFill(268), [55, 163, 128], zeroFill(84), [112]],
-    32000: [highPrefix, [255, 192], zeroFill(268), [55, 234], zeroFill(226), [112]],
-    24000: [highPrefix, [255, 192], zeroFill(268), [55, 255, 128], zeroFill(268), [111, 112], zeroFill(126), [224]],
-    16000: [highPrefix, [255, 192], zeroFill(268), [55, 255, 128], zeroFill(268), [111, 255], zeroFill(269), [223, 108], zeroFill(195), [1, 192]],
-    12000: [lowPrefix, zeroFill(268), [3, 127, 248], zeroFill(268), [6, 255, 240], zeroFill(268), [13, 255, 224], zeroFill(268), [27, 253, 128], zeroFill(259), [56]],
-    11025: [lowPrefix, zeroFill(268), [3, 127, 248], zeroFill(268), [6, 255, 240], zeroFill(268), [13, 255, 224], zeroFill(268), [27, 255, 192], zeroFill(268), [55, 175, 128], zeroFill(108), [112]],
-    8000: [lowPrefix, zeroFill(268), [3, 121, 16], zeroFill(47), [7]]
-  };
-  var silence = makeTable(coneOfSilence);
-
-  var ONE_SECOND_IN_TS$1 = 90000,
-      // 90kHz clock
-  secondsToVideoTs,
-      secondsToAudioTs,
-      videoTsToSeconds,
-      audioTsToSeconds,
-      audioTsToVideoTs,
-      videoTsToAudioTs;
-
-  secondsToVideoTs = function secondsToVideoTs(seconds) {
-    return seconds * ONE_SECOND_IN_TS$1;
-  };
-
-  secondsToAudioTs = function secondsToAudioTs(seconds, sampleRate) {
-    return seconds * sampleRate;
-  };
-
-  videoTsToSeconds = function videoTsToSeconds(timestamp) {
-    return timestamp / ONE_SECOND_IN_TS$1;
-  };
-
-  audioTsToSeconds = function audioTsToSeconds(timestamp, sampleRate) {
-    return timestamp / sampleRate;
-  };
-
-  audioTsToVideoTs = function audioTsToVideoTs(timestamp, sampleRate) {
-    return secondsToVideoTs(audioTsToSeconds(timestamp, sampleRate));
-  };
-
-  videoTsToAudioTs = function videoTsToAudioTs(timestamp, sampleRate) {
-    return secondsToAudioTs(videoTsToSeconds(timestamp), sampleRate);
-  };
-
-  var clock = {
-    secondsToVideoTs: secondsToVideoTs,
-    secondsToAudioTs: secondsToAudioTs,
-    videoTsToSeconds: videoTsToSeconds,
-    audioTsToSeconds: audioTsToSeconds,
-    audioTsToVideoTs: audioTsToVideoTs,
-    videoTsToAudioTs: videoTsToAudioTs
-  };
-
-  var H264Stream = h264.H264Stream; // constants
+  var H264Stream = h264.H264Stream;
+  var isLikelyAacData$1 = utils.isLikelyAacData; // constants
 
   var AUDIO_PROPERTIES = ['audioobjecttype', 'channelcount', 'samplerate', 'samplingfrequencyindex', 'samplesize'];
-  var VIDEO_PROPERTIES = ['width', 'height', 'profileIdc', 'levelIdc', 'profileCompatibility'];
-  var ONE_SECOND_IN_TS$2 = 90000; // 90kHz clock
-  // object types
+  var VIDEO_PROPERTIES = ['width', 'height', 'profileIdc', 'levelIdc', 'profileCompatibility']; // object types
 
-  var _VideoSegmentStream, _AudioSegmentStream, _Transmuxer, _CoalesceStream; // Helper functions
-
-
-  var isLikelyAacData, arrayEquals, sumFrameByteLengths;
-
-  isLikelyAacData = function isLikelyAacData(data) {
-    if (data[0] === 'I'.charCodeAt(0) && data[1] === 'D'.charCodeAt(0) && data[2] === '3'.charCodeAt(0)) {
-      return true;
-    }
-
-    return false;
-  };
+  var _VideoSegmentStream, _AudioSegmentStream, _Transmuxer, _CoalesceStream;
   /**
    * Compare two arrays (even typed) for same-ness
    */
 
 
-  arrayEquals = function arrayEquals(a, b) {
+  var arrayEquals = function arrayEquals(a, b) {
     var i;
 
     if (a.length !== b.length) {
@@ -67455,23 +67706,6 @@ Prism.languages.js = Prism.languages.javascript;
     }
 
     return true;
-  };
-  /**
-   * Sum the `byteLength` properties of the data in each AAC frame
-   */
-
-
-  sumFrameByteLengths = function sumFrameByteLengths(array) {
-    var i,
-        currentObj,
-        sum = 0; // sum the byteLength's all each nal unit in the frame
-
-    for (i = 0; i < array.length; i++) {
-      currentObj = array[i];
-      sum += currentObj.data.byteLength;
-    }
-
-    return sum;
   };
   /**
    * Constructs a single-track, ISO BMFF media segment from AAC data
@@ -67527,14 +67761,14 @@ Prism.languages.js = Prism.languages.javascript;
         return;
       }
 
-      frames = this.trimAdtsFramesByEarliestDts_(adtsFrames);
+      frames = audioFrameUtils.trimAdtsFramesByEarliestDts(adtsFrames, track, earliestAllowedDts);
       track.baseMediaDecodeTime = trackDecodeInfo.calculateTrackBaseMediaDecodeTime(track, options.keepOriginalTimestamps);
-      this.prefixWithSilence_(track, frames); // we have to build the index from byte locations to
+      audioFrameUtils.prefixWithSilence(track, frames, audioAppendStartTs, videoBaseMediaDecodeTime); // we have to build the index from byte locations to
       // samples (that is, adts frames) in the audio data
 
-      track.samples = this.generateSampleTable_(frames); // concatenate the audio data to constuct the mdat
+      track.samples = audioFrameUtils.generateSampleTable(frames); // concatenate the audio data to constuct the mdat
 
-      mdat = mp4Generator.mdat(this.concatenateFrameData_(frames));
+      mdat = mp4Generator.mdat(audioFrameUtils.concatenateFrameData(frames));
       adtsFrames = [];
       moof = mp4Generator.moof(sequenceNumber, [track]);
       boxes = new Uint8Array(moof.byteLength + mdat.byteLength); // bump the sequence number for next time
@@ -67548,114 +67782,6 @@ Prism.languages.js = Prism.languages.javascript;
         boxes: boxes
       });
       this.trigger('done', 'AudioSegmentStream');
-    }; // Possibly pad (prefix) the audio track with silence if appending this track
-    // would lead to the introduction of a gap in the audio buffer
-
-
-    this.prefixWithSilence_ = function (track, frames) {
-      var baseMediaDecodeTimeTs,
-          frameDuration = 0,
-          audioGapDuration = 0,
-          audioFillFrameCount = 0,
-          audioFillDuration = 0,
-          silentFrame,
-          i;
-
-      if (!frames.length) {
-        return;
-      }
-
-      baseMediaDecodeTimeTs = clock.audioTsToVideoTs(track.baseMediaDecodeTime, track.samplerate); // determine frame clock duration based on sample rate, round up to avoid overfills
-
-      frameDuration = Math.ceil(ONE_SECOND_IN_TS$2 / (track.samplerate / 1024));
-
-      if (audioAppendStartTs && videoBaseMediaDecodeTime) {
-        // insert the shortest possible amount (audio gap or audio to video gap)
-        audioGapDuration = baseMediaDecodeTimeTs - Math.max(audioAppendStartTs, videoBaseMediaDecodeTime); // number of full frames in the audio gap
-
-        audioFillFrameCount = Math.floor(audioGapDuration / frameDuration);
-        audioFillDuration = audioFillFrameCount * frameDuration;
-      } // don't attempt to fill gaps smaller than a single frame or larger
-      // than a half second
-
-
-      if (audioFillFrameCount < 1 || audioFillDuration > ONE_SECOND_IN_TS$2 / 2) {
-        return;
-      }
-
-      silentFrame = silence[track.samplerate];
-
-      if (!silentFrame) {
-        // we don't have a silent frame pregenerated for the sample rate, so use a frame
-        // from the content instead
-        silentFrame = frames[0].data;
-      }
-
-      for (i = 0; i < audioFillFrameCount; i++) {
-        frames.splice(i, 0, {
-          data: silentFrame
-        });
-      }
-
-      track.baseMediaDecodeTime -= Math.floor(clock.videoTsToAudioTs(audioFillDuration, track.samplerate));
-    }; // If the audio segment extends before the earliest allowed dts
-    // value, remove AAC frames until starts at or after the earliest
-    // allowed DTS so that we don't end up with a negative baseMedia-
-    // DecodeTime for the audio track
-
-
-    this.trimAdtsFramesByEarliestDts_ = function (adtsFrames) {
-      if (track.minSegmentDts >= earliestAllowedDts) {
-        return adtsFrames;
-      } // We will need to recalculate the earliest segment Dts
-
-
-      track.minSegmentDts = Infinity;
-      return adtsFrames.filter(function (currentFrame) {
-        // If this is an allowed frame, keep it and record it's Dts
-        if (currentFrame.dts >= earliestAllowedDts) {
-          track.minSegmentDts = Math.min(track.minSegmentDts, currentFrame.dts);
-          track.minSegmentPts = track.minSegmentDts;
-          return true;
-        } // Otherwise, discard it
-
-
-        return false;
-      });
-    }; // generate the track's raw mdat data from an array of frames
-
-
-    this.generateSampleTable_ = function (frames) {
-      var i,
-          currentFrame,
-          samples = [];
-
-      for (i = 0; i < frames.length; i++) {
-        currentFrame = frames[i];
-        samples.push({
-          size: currentFrame.data.byteLength,
-          duration: 1024 // For AAC audio, all samples contain 1024 samples
-
-        });
-      }
-
-      return samples;
-    }; // generate the track's sample table from an array of frames
-
-
-    this.concatenateFrameData_ = function (frames) {
-      var i,
-          currentFrame,
-          dataOffset = 0,
-          data = new Uint8Array(sumFrameByteLengths(frames));
-
-      for (i = 0; i < frames.length; i++) {
-        currentFrame = frames[i];
-        data.set(currentFrame.data, dataOffset);
-        dataOffset += currentFrame.data.byteLength;
-      }
-
-      return data;
     };
   };
 
@@ -68040,6 +68166,9 @@ Prism.languages.js = Prism.languages.javascript;
    * A Stream that can combine multiple streams (ie. audio & video)
    * into a single output segment for MSE. Also supports audio-only
    * and video-only streams.
+   * @param options {object} transmuxer options object
+   * @param options.keepOriginalTimestamps {boolean} If true, keep the timestamps
+   *        in the source; false to adjust the first segment to start at media timeline start.
    */
 
   _CoalesceStream = function CoalesceStream(options, metadataStream) {
@@ -68048,11 +68177,16 @@ Prism.languages.js = Prism.languages.javascript;
     // tracks into a single segment
     this.numberOfTracks = 0;
     this.metadataStream = metadataStream;
+    options = options || {};
 
     if (typeof options.remux !== 'undefined') {
       this.remuxTracks = !!options.remux;
     } else {
       this.remuxTracks = true;
+    }
+
+    if (typeof options.keepOriginalTimestamps === 'boolean') {
+      this.keepOriginalTimestamps = options.keepOriginalTimestamps;
     }
 
     this.pendingTracks = [];
@@ -68170,25 +68304,40 @@ Prism.languages.js = Prism.languages.javascript;
     for (i = 0; i < this.pendingBoxes.length; i++) {
       event.data.set(this.pendingBoxes[i], offset);
       offset += this.pendingBoxes[i].byteLength;
-    } // Translate caption PTS times into second offsets into the
+    } // Translate caption PTS times into second offsets to match the
     // video timeline for the segment, and add track info
 
 
     for (i = 0; i < this.pendingCaptions.length; i++) {
       caption = this.pendingCaptions[i];
-      caption.startTime = caption.startPts - timelineStartPts;
+      caption.startTime = caption.startPts;
+
+      if (!this.keepOriginalTimestamps) {
+        caption.startTime -= timelineStartPts;
+      }
+
       caption.startTime /= 90e3;
-      caption.endTime = caption.endPts - timelineStartPts;
+      caption.endTime = caption.endPts;
+
+      if (!this.keepOriginalTimestamps) {
+        caption.endTime -= timelineStartPts;
+      }
+
       caption.endTime /= 90e3;
       event.captionStreams[caption.stream] = true;
       event.captions.push(caption);
-    } // Translate ID3 frame PTS times into second offsets into the
+    } // Translate ID3 frame PTS times into second offsets to match the
     // video timeline for the segment
 
 
     for (i = 0; i < this.pendingMetadata.length; i++) {
       id3 = this.pendingMetadata[i];
-      id3.cueTime = id3.pts - timelineStartPts;
+      id3.cueTime = id3.pts;
+
+      if (!this.keepOriginalTimestamps) {
+        id3.cueTime -= timelineStartPts;
+      }
+
       id3.cueTime /= 90e3;
       event.metadata.push(id3);
     } // We add this to every single emitted segment even though we only need
@@ -68357,13 +68506,19 @@ Prism.languages.js = Prism.languages.javascript;
 
     this.setBaseMediaDecodeTime = function (baseMediaDecodeTime) {
       var pipeline = this.transmuxPipeline_;
-      this.baseMediaDecodeTime = baseMediaDecodeTime;
+
+      if (!options.keepOriginalTimestamps) {
+        this.baseMediaDecodeTime = baseMediaDecodeTime;
+      }
 
       if (audioTrack) {
         audioTrack.timelineStartInfo.dts = undefined;
         audioTrack.timelineStartInfo.pts = undefined;
         trackDecodeInfo.clearDtsInfo(audioTrack);
-        audioTrack.timelineStartInfo.baseMediaDecodeTime = baseMediaDecodeTime;
+
+        if (!options.keepOriginalTimestamps) {
+          audioTrack.timelineStartInfo.baseMediaDecodeTime = baseMediaDecodeTime;
+        }
 
         if (pipeline.audioTimestampRolloverStream) {
           pipeline.audioTimestampRolloverStream.discontinuity();
@@ -68380,7 +68535,10 @@ Prism.languages.js = Prism.languages.javascript;
         videoTrack.timelineStartInfo.pts = undefined;
         trackDecodeInfo.clearDtsInfo(videoTrack);
         pipeline.captionStream.reset();
-        videoTrack.timelineStartInfo.baseMediaDecodeTime = baseMediaDecodeTime;
+
+        if (!options.keepOriginalTimestamps) {
+          videoTrack.timelineStartInfo.baseMediaDecodeTime = baseMediaDecodeTime;
+        }
       }
 
       if (pipeline.timedMetadataTimestampRolloverStream) {
@@ -68403,7 +68561,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     this.push = function (data) {
       if (hasFlushed) {
-        var isAac = isLikelyAacData(data);
+        var isAac = isLikelyAacData$1(data);
 
         if (isAac && this.transmuxPipeline_.type !== 'aac') {
           this.setupAacPipeline();
@@ -68443,7 +68601,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   var inspectMp4,
       _textifyMp,
-      parseType$1 = probe.parseType,
+      parseType$2 = probe.parseType,
       parseMp4Date = function parseMp4Date(seconds) {
     return new Date(seconds * 1000 - 2082844800000);
   },
@@ -68596,14 +68754,14 @@ Prism.languages.js = Prism.languages.javascript;
     ftyp: function ftyp(data) {
       var view = new DataView(data.buffer, data.byteOffset, data.byteLength),
           result = {
-        majorBrand: parseType$1(data.subarray(0, 4)),
+        majorBrand: parseType$2(data.subarray(0, 4)),
         minorVersion: view.getUint32(4),
         compatibleBrands: []
       },
           i = 8;
 
       while (i < data.byteLength) {
-        result.compatibleBrands.push(parseType$1(data.subarray(i, i + 4)));
+        result.compatibleBrands.push(parseType$2(data.subarray(i, i + 4)));
         i += 4;
       }
 
@@ -68626,7 +68784,7 @@ Prism.languages.js = Prism.languages.javascript;
           result = {
         version: view.getUint8(0),
         flags: new Uint8Array(data.subarray(1, 4)),
-        handlerType: parseType$1(data.subarray(8, 12)),
+        handlerType: parseType$2(data.subarray(8, 12)),
         name: ''
       },
           i = 8; // parse out the name field
@@ -69212,7 +69370,7 @@ Prism.languages.js = Prism.languages.javascript;
     while (i < data.byteLength) {
       // parse box data
       size = view.getUint32(i);
-      type = parseType$1(data.subarray(i + 4, i + 8));
+      type = parseType$2(data.subarray(i + 4, i + 8));
       end = size > 1 ? i + size : data.byteLength; // parse type-specific data
 
       box = (parse$1[type] || function (data) {
@@ -69751,7 +69909,7 @@ Prism.languages.js = Prism.languages.javascript;
     return offset;
   };
 
-  var parseType$2 = function parseType(packet, pmtPid) {
+  var parseType$3 = function parseType(packet, pmtPid) {
     var pid = parsePid(packet);
 
     if (pid === 0) {
@@ -70005,7 +70163,7 @@ Prism.languages.js = Prism.languages.javascript;
   };
 
   var probe$1 = {
-    parseType: parseType$2,
+    parseType: parseType$3,
     parsePat: parsePat,
     parsePmt: parsePmt,
     parsePayloadUnitStartIndicator: parsePayloadUnitStartIndicator,
@@ -70014,167 +70172,18 @@ Prism.languages.js = Prism.languages.javascript;
     videoPacketContainsKeyFrame: videoPacketContainsKeyFrame
   };
 
-  /**
-   * mux.js
-   *
-   * Copyright (c) 2016 Brightcove
-   * All rights reserved.
-   *
-   * Utilities to detect basic properties and metadata about Aac data.
-   */
-
-  var ADTS_SAMPLING_FREQUENCIES$1 = [96000, 88200, 64000, 48000, 44100, 32000, 24000, 22050, 16000, 12000, 11025, 8000, 7350];
-
-  var parseSyncSafeInteger$1 = function parseSyncSafeInteger(data) {
-    return data[0] << 21 | data[1] << 14 | data[2] << 7 | data[3];
-  }; // return a percent-encoded representation of the specified byte range
-  // @see http://en.wikipedia.org/wiki/Percent-encoding
-
-
-  var percentEncode$1 = function percentEncode(bytes, start, end) {
-    var i,
-        result = '';
-
-    for (i = start; i < end; i++) {
-      result += '%' + ('00' + bytes[i].toString(16)).slice(-2);
-    }
-
-    return result;
-  }; // return the string representation of the specified byte range,
-  // interpreted as ISO-8859-1.
-
-
-  var parseIso88591$1 = function parseIso88591(bytes, start, end) {
-    return unescape(percentEncode$1(bytes, start, end)); // jshint ignore:line
-  };
-
-  var parseId3TagSize = function parseId3TagSize(header, byteIndex) {
-    var returnSize = header[byteIndex + 6] << 21 | header[byteIndex + 7] << 14 | header[byteIndex + 8] << 7 | header[byteIndex + 9],
-        flags = header[byteIndex + 5],
-        footerPresent = (flags & 16) >> 4;
-
-    if (footerPresent) {
-      return returnSize + 20;
-    }
-
-    return returnSize + 10;
-  };
-
-  var parseAdtsSize = function parseAdtsSize(header, byteIndex) {
-    var lowThree = (header[byteIndex + 5] & 0xE0) >> 5,
-        middle = header[byteIndex + 4] << 3,
-        highTwo = header[byteIndex + 3] & 0x3 << 11;
-    return highTwo | middle | lowThree;
-  };
-
-  var parseType$3 = function parseType(header, byteIndex) {
-    if (header[byteIndex] === 'I'.charCodeAt(0) && header[byteIndex + 1] === 'D'.charCodeAt(0) && header[byteIndex + 2] === '3'.charCodeAt(0)) {
-      return 'timed-metadata';
-    } else if (header[byteIndex] & 0xff === 0xff && (header[byteIndex + 1] & 0xf0) === 0xf0) {
-      return 'audio';
-    }
-
-    return null;
-  };
-
-  var parseSampleRate = function parseSampleRate(packet) {
-    var i = 0;
-
-    while (i + 5 < packet.length) {
-      if (packet[i] !== 0xFF || (packet[i + 1] & 0xF6) !== 0xF0) {
-        // If a valid header was not found,  jump one forward and attempt to
-        // find a valid ADTS header starting at the next byte
-        i++;
-        continue;
-      }
-
-      return ADTS_SAMPLING_FREQUENCIES$1[(packet[i + 2] & 0x3c) >>> 2];
-    }
-
-    return null;
-  };
-
-  var parseAacTimestamp = function parseAacTimestamp(packet) {
-    var frameStart, frameSize, frame, frameHeader; // find the start of the first frame and the end of the tag
-
-    frameStart = 10;
-
-    if (packet[5] & 0x40) {
-      // advance the frame start past the extended header
-      frameStart += 4; // header size field
-
-      frameStart += parseSyncSafeInteger$1(packet.subarray(10, 14));
-    } // parse one or more ID3 frames
-    // http://id3.org/id3v2.3.0#ID3v2_frame_overview
-
-
-    do {
-      // determine the number of bytes in this frame
-      frameSize = parseSyncSafeInteger$1(packet.subarray(frameStart + 4, frameStart + 8));
-
-      if (frameSize < 1) {
-        return null;
-      }
-
-      frameHeader = String.fromCharCode(packet[frameStart], packet[frameStart + 1], packet[frameStart + 2], packet[frameStart + 3]);
-
-      if (frameHeader === 'PRIV') {
-        frame = packet.subarray(frameStart + 10, frameStart + frameSize + 10);
-
-        for (var i = 0; i < frame.byteLength; i++) {
-          if (frame[i] === 0) {
-            var owner = parseIso88591$1(frame, 0, i);
-
-            if (owner === 'com.apple.streaming.transportStreamTimestamp') {
-              var d = frame.subarray(i + 1);
-              var size = (d[3] & 0x01) << 30 | d[4] << 22 | d[5] << 14 | d[6] << 6 | d[7] >>> 2;
-              size *= 4;
-              size += d[7] & 0x03;
-              return size;
-            }
-
-            break;
-          }
-        }
-      }
-
-      frameStart += 10; // advance past the frame header
-
-      frameStart += frameSize; // advance past the frame body
-    } while (frameStart < packet.byteLength);
-
-    return null;
-  };
-
-  var probe$2 = {
-    parseId3TagSize: parseId3TagSize,
-    parseAdtsSize: parseAdtsSize,
-    parseType: parseType$3,
-    parseSampleRate: parseSampleRate,
-    parseAacTimestamp: parseAacTimestamp
-  };
-
   var handleRollover$1 = timestampRolloverStream.handleRollover;
-  var probe$3 = {};
-  probe$3.ts = probe$1;
-  probe$3.aac = probe$2;
+  var probe$2 = {};
+  probe$2.ts = probe$1;
+  probe$2.aac = utils;
   var PES_TIMESCALE = 90000,
       MP2T_PACKET_LENGTH$1 = 188,
       // bytes
   SYNC_BYTE$1 = 0x47;
-
-  var isLikelyAacData$1 = function isLikelyAacData(data) {
-    if (data[0] === 'I'.charCodeAt(0) && data[1] === 'D'.charCodeAt(0) && data[2] === '3'.charCodeAt(0)) {
-      return true;
-    }
-
-    return false;
-  };
   /**
    * walks through segment data looking for pat and pmt packets to parse out
    * program map table information
    */
-
 
   var parsePsi_ = function parsePsi_(bytes, pmt) {
     var startIndex = 0,
@@ -70187,19 +70196,19 @@ Prism.languages.js = Prism.languages.javascript;
       if (bytes[startIndex] === SYNC_BYTE$1 && bytes[endIndex] === SYNC_BYTE$1) {
         // We found a packet
         packet = bytes.subarray(startIndex, endIndex);
-        type = probe$3.ts.parseType(packet, pmt.pid);
+        type = probe$2.ts.parseType(packet, pmt.pid);
 
         switch (type) {
           case 'pat':
             if (!pmt.pid) {
-              pmt.pid = probe$3.ts.parsePat(packet);
+              pmt.pid = probe$2.ts.parsePat(packet);
             }
 
             break;
 
           case 'pmt':
             if (!pmt.table) {
-              pmt.table = probe$3.ts.parsePmt(packet);
+              pmt.table = probe$2.ts.parsePmt(packet);
             }
 
             break;
@@ -70241,20 +70250,20 @@ Prism.languages.js = Prism.languages.javascript;
         parsed;
     var endLoop = false; // Start walking from start of segment to get first audio packet
 
-    while (endIndex < bytes.byteLength) {
+    while (endIndex <= bytes.byteLength) {
       // Look for a pair of start and end sync bytes in the data..
-      if (bytes[startIndex] === SYNC_BYTE$1 && bytes[endIndex] === SYNC_BYTE$1) {
+      if (bytes[startIndex] === SYNC_BYTE$1 && (bytes[endIndex] === SYNC_BYTE$1 || endIndex === bytes.byteLength)) {
         // We found a packet
         packet = bytes.subarray(startIndex, endIndex);
-        type = probe$3.ts.parseType(packet, pmt.pid);
+        type = probe$2.ts.parseType(packet, pmt.pid);
 
         switch (type) {
           case 'pes':
-            pesType = probe$3.ts.parsePesType(packet, pmt.table);
-            pusi = probe$3.ts.parsePayloadUnitStartIndicator(packet);
+            pesType = probe$2.ts.parsePesType(packet, pmt.table);
+            pusi = probe$2.ts.parsePayloadUnitStartIndicator(packet);
 
             if (pesType === 'audio' && pusi) {
-              parsed = probe$3.ts.parsePesTime(packet);
+              parsed = probe$2.ts.parsePesTime(packet);
 
               if (parsed) {
                 parsed.type = 'audio';
@@ -70292,18 +70301,18 @@ Prism.languages.js = Prism.languages.javascript;
 
     while (startIndex >= 0) {
       // Look for a pair of start and end sync bytes in the data..
-      if (bytes[startIndex] === SYNC_BYTE$1 && bytes[endIndex] === SYNC_BYTE$1) {
+      if (bytes[startIndex] === SYNC_BYTE$1 && (bytes[endIndex] === SYNC_BYTE$1 || endIndex === bytes.byteLength)) {
         // We found a packet
         packet = bytes.subarray(startIndex, endIndex);
-        type = probe$3.ts.parseType(packet, pmt.pid);
+        type = probe$2.ts.parseType(packet, pmt.pid);
 
         switch (type) {
           case 'pes':
-            pesType = probe$3.ts.parsePesType(packet, pmt.table);
-            pusi = probe$3.ts.parsePayloadUnitStartIndicator(packet);
+            pesType = probe$2.ts.parsePesType(packet, pmt.table);
+            pusi = probe$2.ts.parsePayloadUnitStartIndicator(packet);
 
             if (pesType === 'audio' && pusi) {
-              parsed = probe$3.ts.parsePesTime(packet);
+              parsed = probe$2.ts.parsePesTime(packet);
 
               if (parsed) {
                 parsed.type = 'audio';
@@ -70363,16 +70372,16 @@ Prism.languages.js = Prism.languages.javascript;
       if (bytes[startIndex] === SYNC_BYTE$1 && bytes[endIndex] === SYNC_BYTE$1) {
         // We found a packet
         packet = bytes.subarray(startIndex, endIndex);
-        type = probe$3.ts.parseType(packet, pmt.pid);
+        type = probe$2.ts.parseType(packet, pmt.pid);
 
         switch (type) {
           case 'pes':
-            pesType = probe$3.ts.parsePesType(packet, pmt.table);
-            pusi = probe$3.ts.parsePayloadUnitStartIndicator(packet);
+            pesType = probe$2.ts.parsePesType(packet, pmt.table);
+            pusi = probe$2.ts.parsePayloadUnitStartIndicator(packet);
 
             if (pesType === 'video') {
               if (pusi && !endLoop) {
-                parsed = probe$3.ts.parsePesTime(packet);
+                parsed = probe$2.ts.parsePesTime(packet);
 
                 if (parsed) {
                   parsed.type = 'video';
@@ -70393,8 +70402,8 @@ Prism.languages.js = Prism.languages.javascript;
                       i += pes.byteLength;
                     }
 
-                    if (probe$3.ts.videoPacketContainsKeyFrame(frame)) {
-                      result.firstKeyFrame = probe$3.ts.parsePesTime(frame);
+                    if (probe$2.ts.videoPacketContainsKeyFrame(frame)) {
+                      result.firstKeyFrame = probe$2.ts.parsePesTime(frame);
                       result.firstKeyFrame.type = 'video';
                     }
 
@@ -70439,15 +70448,15 @@ Prism.languages.js = Prism.languages.javascript;
       if (bytes[startIndex] === SYNC_BYTE$1 && bytes[endIndex] === SYNC_BYTE$1) {
         // We found a packet
         packet = bytes.subarray(startIndex, endIndex);
-        type = probe$3.ts.parseType(packet, pmt.pid);
+        type = probe$2.ts.parseType(packet, pmt.pid);
 
         switch (type) {
           case 'pes':
-            pesType = probe$3.ts.parsePesType(packet, pmt.table);
-            pusi = probe$3.ts.parsePayloadUnitStartIndicator(packet);
+            pesType = probe$2.ts.parsePesType(packet, pmt.table);
+            pusi = probe$2.ts.parsePayloadUnitStartIndicator(packet);
 
             if (pesType === 'video' && pusi) {
-              parsed = probe$3.ts.parsePesTime(packet);
+              parsed = probe$2.ts.parsePesTime(packet);
 
               if (parsed) {
                 parsed.type = 'video';
@@ -70541,7 +70550,7 @@ Prism.languages.js = Prism.languages.javascript;
         packet;
 
     while (bytes.length - byteIndex >= 3) {
-      var type = probe$3.aac.parseType(bytes, byteIndex);
+      var type = probe$2.aac.parseType(bytes, byteIndex);
 
       switch (type) {
         case 'timed-metadata':
@@ -70552,7 +70561,7 @@ Prism.languages.js = Prism.languages.javascript;
             break;
           }
 
-          frameSize = probe$3.aac.parseId3TagSize(bytes, byteIndex); // Exit early if we don't have enough in the buffer
+          frameSize = probe$2.aac.parseId3TagSize(bytes, byteIndex); // Exit early if we don't have enough in the buffer
           // to emit a full packet
 
           if (frameSize > bytes.length) {
@@ -70562,7 +70571,7 @@ Prism.languages.js = Prism.languages.javascript;
 
           if (timestamp === null) {
             packet = bytes.subarray(byteIndex, byteIndex + frameSize);
-            timestamp = probe$3.aac.parseAacTimestamp(packet);
+            timestamp = probe$2.aac.parseAacTimestamp(packet);
           }
 
           byteIndex += frameSize;
@@ -70576,7 +70585,7 @@ Prism.languages.js = Prism.languages.javascript;
             break;
           }
 
-          frameSize = probe$3.aac.parseAdtsSize(bytes, byteIndex); // Exit early if we don't have enough in the buffer
+          frameSize = probe$2.aac.parseAdtsSize(bytes, byteIndex); // Exit early if we don't have enough in the buffer
           // to emit a full packet
 
           if (frameSize > bytes.length) {
@@ -70586,7 +70595,7 @@ Prism.languages.js = Prism.languages.javascript;
 
           if (sampleRate === null) {
             packet = bytes.subarray(byteIndex, byteIndex + frameSize);
-            sampleRate = probe$3.aac.parseSampleRate(packet);
+            sampleRate = probe$2.aac.parseSampleRate(packet);
           }
 
           audioCount++;
@@ -70680,7 +70689,7 @@ Prism.languages.js = Prism.languages.javascript;
 
 
   var inspect = function inspect(bytes, baseTimestamp) {
-    var isAacData = isLikelyAacData$1(bytes);
+    var isAacData = probe$2.aac.isLikelyAacData(bytes);
     var result;
 
     if (isAacData) {
@@ -70698,7 +70707,8 @@ Prism.languages.js = Prism.languages.javascript;
   };
 
   var tsInspector = {
-    inspect: inspect
+    inspect: inspect,
+    parseAudioPes_: parseAudioPes_
   };
 
   /*
@@ -71315,7 +71325,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   /**
    * @videojs/http-streaming
-   * @version 1.4.1
+   * @version 1.5.1
    * @copyright 2018 Brightcove, Inc
    * @license Apache-2.0
    */
@@ -72804,7 +72814,7 @@ Prism.languages.js = Prism.languages.javascript;
     return result;
   };
 
-  var utils =
+  var utils$1 =
   /*#__PURE__*/
   Object.freeze({
     createTransferableMessage: createTransferableMessage,
@@ -72814,12 +72824,345 @@ Prism.languages.js = Prism.languages.javascript;
     textRanges: textRanges
   });
   /**
+   * @file time.js
+   */
+
+  /**
+   * Checks whether a given time is within a segment based on its start time
+   * and duration. For playerTime, the requested time is in seconds, for
+   * streamTime, the time is a Date object.
+   *
+   * @param {Date|Number} requestedTime Time to check is within a segment
+   * @param {"stream" | "player"} type Whether passing in a playerTime or streamTime
+   * @param {Date|Number} segmentStart The start time of the segment
+   * @param {Number} duration Segment duration in seconds
+   */
+
+  var timeWithinSegment = function timeWithinSegment(requestedTime, type, segmentStart, duration) {
+    var endTime = void 0;
+
+    if (type === 'stream') {
+      endTime = new Date(duration * 1000 + segmentStart.getTime());
+      var requestedTimeString = requestedTime.toISOString();
+      var segmentTimeString = segmentStart.toISOString();
+      var endTimeString = endTime.toISOString();
+      return segmentTimeString <= requestedTimeString && requestedTimeString <= endTimeString;
+    } else if (type === 'player') {
+      endTime = duration + segmentStart;
+      return segmentStart <= requestedTime && requestedTime <= endTime;
+    }
+  };
+  /**
+   * Finds a segment that contains the time requested. This might be an estimate or
+   * an accurate match.
+   *
+   * @param {Date|Number} time The streamTime or playerTime to find a matching segment for
+   * @param {"stream" | "player"} type Either the playerTime or streamTime
+   * @param {Object} playlist A playlist object
+   * @return {Object} match
+   * @return {Object} match.segment The matched segment from the playlist
+   * @return {Date|Number} match.estimatedStart The estimated start time of the segment
+   * @return {"accurate" | "estimate"} match.type Whether the match is estimated or accurate
+   */
+
+
+  var findSegmentForTime = function findSegmentForTime(time, type, playlist) {
+    if (!playlist.segments || playlist.segments.length === 0) {
+      return null;
+    }
+
+    if (type !== 'player' && type !== 'stream') {
+      return null;
+    }
+
+    var manifestTime = 0;
+
+    for (var i = 0; i < playlist.segments.length; i++) {
+      var segment = playlist.segments[i];
+      var estimatedEnd = manifestTime + segment.duration;
+      var segmentStart = void 0;
+      var estimatedStart = void 0;
+
+      if (type === 'player') {
+        segmentStart = segment.start;
+        estimatedStart = manifestTime;
+      } else {
+        // we can rely on the program date time being accurate
+        segmentStart = segment.dateTimeObject;
+        estimatedStart = segment.dateTimeObject;
+      }
+
+      var timeWithinSegmentEnd = typeof segment.start !== 'undefined' && typeof segment.end !== 'undefined' && timeWithinSegment(time, type, segmentStart, segment.end - segment.start);
+      var timeWithinSegmentDuration = timeWithinSegment(time, type, estimatedStart, segment.duration);
+
+      if (timeWithinSegmentEnd) {
+        return {
+          segment: segment,
+          estimatedStart: estimatedStart,
+          type: 'accurate'
+        };
+      } else if (timeWithinSegmentDuration) {
+        return {
+          segment: segment,
+          estimatedStart: estimatedStart,
+          type: 'estimate'
+        };
+      }
+
+      manifestTime = estimatedEnd;
+    }
+
+    return null;
+  };
+  /**
+   * Finds a segment that contains the given player time(in seconds).
+   *
+   * @param {Number} time The player time to find a match for
+   * @param {Object} playlist A playlist object to search within
+   */
+
+
+  var findSegmentForPlayerTime = function findSegmentForPlayerTime(time, playlist) {
+    // Assumptions:
+    // - there will always be a segment.duration
+    // - we can start from zero
+    // - segments are in time order
+    // - segment.start and segment.end only come
+    //    from syncController
+    return findSegmentForTime(time, 'player', playlist);
+  };
+  /**
+   * Finds a segment that contains the stream time give as an ISO-8601 string.
+   *
+   * @param {String} streamTime The ISO-8601 streamTime to find a match for
+   * @param {Object} playlist A playlist object to search within
+   */
+
+
+  var findSegmentForStreamTime = function findSegmentForStreamTime(streamTime, playlist) {
+    var dateTimeObject = void 0;
+
+    try {
+      dateTimeObject = new Date(streamTime);
+    } catch (e) {
+      // TODO something here?
+      return null;
+    } // Assumptions:
+    //  - verifyProgramDateTimeTags has already been run
+    //  - live streams have been started
+
+
+    return findSegmentForTime(dateTimeObject, 'stream', playlist);
+  };
+  /**
+   * Gives the offset of the comparisonTimestamp from the streamTime timestamp in seconds.
+   * If the offset returned is positive, the streamTime occurs before the comparisonTimestamp.
+   * If the offset is negative, the streamTime occurs before the comparisonTimestamp.
+   *
+   * @param {String} comparisonTimeStamp An ISO-8601 timestamp to compare against
+   * @param {String} streamTime The streamTime as an ISO-8601 string
+   * @return {Number} offset
+   */
+
+
+  var getOffsetFromTimestamp = function getOffsetFromTimestamp(comparisonTimeStamp, streamTime) {
+    var segmentDateTime = void 0;
+    var streamDateTime = void 0;
+
+    try {
+      segmentDateTime = new Date(comparisonTimeStamp);
+      streamDateTime = new Date(streamTime);
+    } catch (e) {// TODO handle error
+    }
+
+    var segmentTimeEpoch = segmentDateTime.getTime();
+    var streamTimeEpoch = streamDateTime.getTime();
+    return (streamTimeEpoch - segmentTimeEpoch) / 1000;
+  };
+  /**
+   * Checks that all segments in this playlist have programDateTime tags.
+   *
+   * @param {Object} playlist A playlist object
+   */
+
+
+  var verifyProgramDateTimeTags = function verifyProgramDateTimeTags(playlist) {
+    if (!playlist.segments || playlist.segments.length === 0) {
+      return false;
+    }
+
+    for (var i = 0; i < playlist.segments.length; i++) {
+      var segment = playlist.segments[i];
+
+      if (!segment.dateTimeObject) {
+        return false;
+      }
+    }
+
+    return true;
+  };
+  /**
+   * Returns the streamTime  of the media given a playlist and a playerTime.
+   * The playlist must have programDateTime tags for a programDateTime tag to be returned.
+   * If the segments containing the time requested have not been buffered yet, an estimate
+   * may be returned to the callback.
+   *
+   * @param {Object} args
+   * @param {Object} args.playlist A playlist object to search within
+   * @param {Number} time A playerTime in seconds
+   * @param {Function} callback(err, streamTime)
+   * @returns {String} err.message A detailed error message
+   * @returns {Object} streamTime
+   * @returns {Number} streamTime.mediaSeconds The streamTime in seconds
+   * @returns {String} streamTime.programDateTime The streamTime as an ISO-8601 String
+   */
+
+
+  var getStreamTime = function getStreamTime(_ref) {
+    var playlist = _ref.playlist,
+        _ref$time = _ref.time,
+        time = _ref$time === undefined ? undefined : _ref$time,
+        callback = _ref.callback;
+
+    if (!callback) {
+      throw new Error('getStreamTime: callback must be provided');
+    }
+
+    if (!playlist || time === undefined) {
+      return callback({
+        message: 'getStreamTime: playlist and time must be provided'
+      });
+    }
+
+    var matchedSegment = findSegmentForPlayerTime(time, playlist);
+
+    if (!matchedSegment) {
+      return callback({
+        message: 'valid streamTime was not found'
+      });
+    }
+
+    if (matchedSegment.type === 'estimate') {
+      return callback({
+        message: 'Accurate streamTime could not be determined. Please seek to e.seekTime and try again',
+        seekTime: matchedSegment.estimatedStart
+      });
+    }
+
+    var streamTime = {
+      mediaSeconds: time
+    };
+
+    if (matchedSegment.segment.dateTimeObject) {
+      // TODO this is currently the time of the beginning of the
+      // segment. This still needs to be modified to be offset
+      // by the time requested.
+      streamTime.programDateTime = matchedSegment.segment.dateTimeObject.toISOString();
+    }
+
+    return callback(null, streamTime);
+  };
+  /**
+   * Seeks in the player to a time that matches the given streamTime ISO-8601 string.
+   *
+   * @param {Object} args
+   * @param {String} args.streamTime A streamTime to seek to as an ISO-8601 String
+   * @param {Object} args.playlist A playlist to look within
+   * @param {Number} args.retryCount The number of times to try for an accurate seek. Default is 2.
+   * @param {Function} args.seekTo A method to perform a seek
+   * @param {Boolean} args.pauseAfterSeek Whether to end in a paused state after seeking. Default is true.
+   * @param {Object} args.tech The tech to seek on
+   * @param {Function} args.callback(err, newTime) A callback to return the new time to
+   * @returns {String} err.message A detailed error message
+   * @returns {Number} newTime The exact time that was seeked to in seconds
+   */
+
+
+  var seekToStreamTime = function seekToStreamTime(_ref2) {
+    var streamTime = _ref2.streamTime,
+        playlist = _ref2.playlist,
+        _ref2$retryCount = _ref2.retryCount,
+        retryCount = _ref2$retryCount === undefined ? 2 : _ref2$retryCount,
+        seekTo = _ref2.seekTo,
+        _ref2$pauseAfterSeek = _ref2.pauseAfterSeek,
+        pauseAfterSeek = _ref2$pauseAfterSeek === undefined ? true : _ref2$pauseAfterSeek,
+        tech = _ref2.tech,
+        callback = _ref2.callback;
+
+    if (!callback) {
+      throw new Error('seekToStreamTime: callback must be provided');
+    }
+
+    if (typeof streamTime === 'undefined' || !playlist || !seekTo) {
+      return callback({
+        message: 'seekToStreamTime: streamTime, seekTo and playlist must be provided'
+      });
+    }
+
+    if (!playlist.endList && !tech.hasStarted_) {
+      return callback({
+        message: 'player must be playing a live stream to start buffering'
+      });
+    }
+
+    if (!verifyProgramDateTimeTags(playlist)) {
+      return callback({
+        message: 'programDateTime tags must be provided in the manifest ' + playlist.resolvedUri
+      });
+    }
+
+    var matchedSegment = findSegmentForStreamTime(streamTime, playlist); // no match
+
+    if (!matchedSegment) {
+      return callback({
+        message: streamTime + ' was not found in the stream'
+      });
+    }
+
+    if (matchedSegment.type === 'estimate') {
+      // we've run out of retries
+      if (retryCount === 0) {
+        return callback({
+          message: streamTime + ' is not buffered yet. Try again'
+        });
+      }
+
+      return seekToStreamTime({
+        streamTime: streamTime,
+        playlist: playlist,
+        retryCount: retryCount - 1,
+        seekTo: seekTo,
+        pauseAfterSeek: pauseAfterSeek,
+        tech: tech,
+        callback: callback
+      });
+    }
+
+    var segment = matchedSegment.segment;
+    var mediaOffset = getOffsetFromTimestamp(segment.dateTimeObject, streamTime);
+    var seekToTime = segment.start + mediaOffset;
+
+    var seekedCallback = function seekedCallback() {
+      return callback(null, tech.currentTime());
+    }; // listen for seeked event
+
+
+    tech.one('seeked', seekedCallback); // pause before seeking as video.js will restore this state
+
+    if (pauseAfterSeek) {
+      tech.pause();
+    }
+
+    seekTo(seekToTime);
+  };
+  /**
    * ranges
    *
    * Utilities for working with TimeRanges.
    *
    */
   // Fudge factor to account for TimeRanges rounding
+
 
   var TIME_FUDGE_FACTOR = 1 / 30; // Comparisons between time values such as current time and the end of the buffered range
   // can be misleading because of precision differences or when the current media has poorly
@@ -74435,7 +74778,218 @@ Prism.languages.js = Prism.languages.javascript;
         generateSampleTable: generateSampleTable,
         concatenateNalData: concatenateNalData
       };
-      var ONE_SECOND_IN_TS = 90000; // 90kHz clock
+      var highPrefix = [33, 16, 5, 32, 164, 27];
+      var lowPrefix = [33, 65, 108, 84, 1, 2, 4, 8, 168, 2, 4, 8, 17, 191, 252];
+
+      var zeroFill = function zeroFill(count) {
+        var a = [];
+
+        while (count--) {
+          a.push(0);
+        }
+
+        return a;
+      };
+
+      var makeTable = function makeTable(metaTable) {
+        return Object.keys(metaTable).reduce(function (obj, key) {
+          obj[key] = new Uint8Array(metaTable[key].reduce(function (arr, part) {
+            return arr.concat(part);
+          }, []));
+          return obj;
+        }, {});
+      }; // Frames-of-silence to use for filling in missing AAC frames
+
+
+      var coneOfSilence = {
+        96000: [highPrefix, [227, 64], zeroFill(154), [56]],
+        88200: [highPrefix, [231], zeroFill(170), [56]],
+        64000: [highPrefix, [248, 192], zeroFill(240), [56]],
+        48000: [highPrefix, [255, 192], zeroFill(268), [55, 148, 128], zeroFill(54), [112]],
+        44100: [highPrefix, [255, 192], zeroFill(268), [55, 163, 128], zeroFill(84), [112]],
+        32000: [highPrefix, [255, 192], zeroFill(268), [55, 234], zeroFill(226), [112]],
+        24000: [highPrefix, [255, 192], zeroFill(268), [55, 255, 128], zeroFill(268), [111, 112], zeroFill(126), [224]],
+        16000: [highPrefix, [255, 192], zeroFill(268), [55, 255, 128], zeroFill(268), [111, 255], zeroFill(269), [223, 108], zeroFill(195), [1, 192]],
+        12000: [lowPrefix, zeroFill(268), [3, 127, 248], zeroFill(268), [6, 255, 240], zeroFill(268), [13, 255, 224], zeroFill(268), [27, 253, 128], zeroFill(259), [56]],
+        11025: [lowPrefix, zeroFill(268), [3, 127, 248], zeroFill(268), [6, 255, 240], zeroFill(268), [13, 255, 224], zeroFill(268), [27, 255, 192], zeroFill(268), [55, 175, 128], zeroFill(108), [112]],
+        8000: [lowPrefix, zeroFill(268), [3, 121, 16], zeroFill(47), [7]]
+      };
+      var silence = makeTable(coneOfSilence);
+      var ONE_SECOND_IN_TS = 90000,
+          // 90kHz clock
+      secondsToVideoTs,
+          secondsToAudioTs,
+          videoTsToSeconds,
+          audioTsToSeconds,
+          audioTsToVideoTs,
+          videoTsToAudioTs;
+
+      secondsToVideoTs = function secondsToVideoTs(seconds) {
+        return seconds * ONE_SECOND_IN_TS;
+      };
+
+      secondsToAudioTs = function secondsToAudioTs(seconds, sampleRate) {
+        return seconds * sampleRate;
+      };
+
+      videoTsToSeconds = function videoTsToSeconds(timestamp) {
+        return timestamp / ONE_SECOND_IN_TS;
+      };
+
+      audioTsToSeconds = function audioTsToSeconds(timestamp, sampleRate) {
+        return timestamp / sampleRate;
+      };
+
+      audioTsToVideoTs = function audioTsToVideoTs(timestamp, sampleRate) {
+        return secondsToVideoTs(audioTsToSeconds(timestamp, sampleRate));
+      };
+
+      videoTsToAudioTs = function videoTsToAudioTs(timestamp, sampleRate) {
+        return secondsToAudioTs(videoTsToSeconds(timestamp), sampleRate);
+      };
+
+      var clock = {
+        secondsToVideoTs: secondsToVideoTs,
+        secondsToAudioTs: secondsToAudioTs,
+        videoTsToSeconds: videoTsToSeconds,
+        audioTsToSeconds: audioTsToSeconds,
+        audioTsToVideoTs: audioTsToVideoTs,
+        videoTsToAudioTs: videoTsToAudioTs
+      };
+      var ONE_SECOND_IN_TS$1 = 90000; // 90kHz clock
+
+      /**
+       * Sum the `byteLength` properties of the data in each AAC frame
+       */
+
+      var sumFrameByteLengths = function sumFrameByteLengths(array) {
+        var i,
+            currentObj,
+            sum = 0; // sum the byteLength's all each nal unit in the frame
+
+        for (i = 0; i < array.length; i++) {
+          currentObj = array[i];
+          sum += currentObj.data.byteLength;
+        }
+
+        return sum;
+      }; // Possibly pad (prefix) the audio track with silence if appending this track
+      // would lead to the introduction of a gap in the audio buffer
+
+
+      var prefixWithSilence = function prefixWithSilence(track, frames, audioAppendStartTs, videoBaseMediaDecodeTime) {
+        var baseMediaDecodeTimeTs,
+            frameDuration = 0,
+            audioGapDuration = 0,
+            audioFillFrameCount = 0,
+            audioFillDuration = 0,
+            silentFrame,
+            i;
+
+        if (!frames.length) {
+          return;
+        }
+
+        baseMediaDecodeTimeTs = clock.audioTsToVideoTs(track.baseMediaDecodeTime, track.samplerate); // determine frame clock duration based on sample rate, round up to avoid overfills
+
+        frameDuration = Math.ceil(ONE_SECOND_IN_TS$1 / (track.samplerate / 1024));
+
+        if (audioAppendStartTs && videoBaseMediaDecodeTime) {
+          // insert the shortest possible amount (audio gap or audio to video gap)
+          audioGapDuration = baseMediaDecodeTimeTs - Math.max(audioAppendStartTs, videoBaseMediaDecodeTime); // number of full frames in the audio gap
+
+          audioFillFrameCount = Math.floor(audioGapDuration / frameDuration);
+          audioFillDuration = audioFillFrameCount * frameDuration;
+        } // don't attempt to fill gaps smaller than a single frame or larger
+        // than a half second
+
+
+        if (audioFillFrameCount < 1 || audioFillDuration > ONE_SECOND_IN_TS$1 / 2) {
+          return;
+        }
+
+        silentFrame = silence[track.samplerate];
+
+        if (!silentFrame) {
+          // we don't have a silent frame pregenerated for the sample rate, so use a frame
+          // from the content instead
+          silentFrame = frames[0].data;
+        }
+
+        for (i = 0; i < audioFillFrameCount; i++) {
+          frames.splice(i, 0, {
+            data: silentFrame
+          });
+        }
+
+        track.baseMediaDecodeTime -= Math.floor(clock.videoTsToAudioTs(audioFillDuration, track.samplerate));
+      }; // If the audio segment extends before the earliest allowed dts
+      // value, remove AAC frames until starts at or after the earliest
+      // allowed DTS so that we don't end up with a negative baseMedia-
+      // DecodeTime for the audio track
+
+
+      var trimAdtsFramesByEarliestDts = function trimAdtsFramesByEarliestDts(adtsFrames, track, earliestAllowedDts) {
+        if (track.minSegmentDts >= earliestAllowedDts) {
+          return adtsFrames;
+        } // We will need to recalculate the earliest segment Dts
+
+
+        track.minSegmentDts = Infinity;
+        return adtsFrames.filter(function (currentFrame) {
+          // If this is an allowed frame, keep it and record it's Dts
+          if (currentFrame.dts >= earliestAllowedDts) {
+            track.minSegmentDts = Math.min(track.minSegmentDts, currentFrame.dts);
+            track.minSegmentPts = track.minSegmentDts;
+            return true;
+          } // Otherwise, discard it
+
+
+          return false;
+        });
+      }; // generate the track's raw mdat data from an array of frames
+
+
+      var generateSampleTable$1 = function generateSampleTable(frames) {
+        var i,
+            currentFrame,
+            samples = [];
+
+        for (i = 0; i < frames.length; i++) {
+          currentFrame = frames[i];
+          samples.push({
+            size: currentFrame.data.byteLength,
+            duration: 1024 // For AAC audio, all samples contain 1024 samples
+
+          });
+        }
+
+        return samples;
+      }; // generate the track's sample table from an array of frames
+
+
+      var concatenateFrameData = function concatenateFrameData(frames) {
+        var i,
+            currentFrame,
+            dataOffset = 0,
+            data = new Uint8Array(sumFrameByteLengths(frames));
+
+        for (i = 0; i < frames.length; i++) {
+          currentFrame = frames[i];
+          data.set(currentFrame.data, dataOffset);
+          dataOffset += currentFrame.data.byteLength;
+        }
+
+        return data;
+      };
+
+      var audioFrameUtils = {
+        prefixWithSilence: prefixWithSilence,
+        trimAdtsFramesByEarliestDts: trimAdtsFramesByEarliestDts,
+        generateSampleTable: generateSampleTable$1,
+        concatenateFrameData: concatenateFrameData
+      };
+      var ONE_SECOND_IN_TS$2 = 90000; // 90kHz clock
 
       /**
        * Store information about the start and end of the track and the
@@ -74522,7 +75076,7 @@ Prism.languages.js = Prism.languages.javascript;
         if (track.type === 'audio') {
           // Audio has a different clock equal to the sampling_rate so we need to
           // scale the PTS values into the clock rate of the track
-          scale = track.samplerate / ONE_SECOND_IN_TS;
+          scale = track.samplerate / ONE_SECOND_IN_TS$2;
           baseMediaDecodeTime *= scale;
           baseMediaDecodeTime = Math.floor(baseMediaDecodeTime);
         }
@@ -75226,6 +75780,13 @@ Prism.languages.js = Prism.languages.javascript;
             var row = ROWS.indexOf(data & 0x1f20); // Configure the caption window if we're in roll-up mode
 
             if (this.mode_ === 'rollUp') {
+              // This implies that the base row is incorrectly set.
+              // As per the recommendation in CEA-608(Base Row Implementation), defer to the number
+              // of roll-up rows set.
+              if (row - this.rollUpRows_ + 1 < 0) {
+                row = this.rollUpRows_ - 1;
+              }
+
               this.setRollUp(packet.pts, row);
             }
 
@@ -75279,7 +75840,16 @@ Prism.languages.js = Prism.languages.javascript;
       Cea608Stream.prototype.flushDisplayed = function (pts) {
         var content = this.displayed_ // remove spaces from the start and end of the string
         .map(function (row) {
-          return row.trim();
+          try {
+            return row.trim();
+          } catch (e) {
+            // Ordinarily, this shouldn't happen. However, caption
+            // parsing errors should not throw exceptions and
+            // break playback.
+            // eslint-disable-next-line no-console
+            console.error('Skipping malformed caption.');
+            return '';
+          }
         }) // combine all text rows to display in one cue
         .join('\n') // and remove blank rows from the start and end, but not the middle
         .replace(/^\n+|\n+$/g, '');
@@ -77131,6 +77701,154 @@ Prism.languages.js = Prism.languages.javascript;
       var h264 = {
         H264Stream: _H264Stream,
         NalByteStream: _NalByteStream
+      };
+      /**
+       * mux.js
+       *
+       * Copyright (c) 2016 Brightcove
+       * All rights reserved.
+       *
+       * Utilities to detect basic properties and metadata about Aac data.
+       */
+
+      var ADTS_SAMPLING_FREQUENCIES$1 = [96000, 88200, 64000, 48000, 44100, 32000, 24000, 22050, 16000, 12000, 11025, 8000, 7350];
+
+      var isLikelyAacData = function isLikelyAacData(data) {
+        if (data[0] === 'I'.charCodeAt(0) && data[1] === 'D'.charCodeAt(0) && data[2] === '3'.charCodeAt(0)) {
+          return true;
+        }
+
+        return false;
+      };
+
+      var parseSyncSafeInteger$1 = function parseSyncSafeInteger(data) {
+        return data[0] << 21 | data[1] << 14 | data[2] << 7 | data[3];
+      }; // return a percent-encoded representation of the specified byte range
+      // @see http://en.wikipedia.org/wiki/Percent-encoding
+
+
+      var percentEncode$1 = function percentEncode(bytes, start, end) {
+        var i,
+            result = '';
+
+        for (i = start; i < end; i++) {
+          result += '%' + ('00' + bytes[i].toString(16)).slice(-2);
+        }
+
+        return result;
+      }; // return the string representation of the specified byte range,
+      // interpreted as ISO-8859-1.
+
+
+      var parseIso88591$1 = function parseIso88591(bytes, start, end) {
+        return unescape(percentEncode$1(bytes, start, end)); // jshint ignore:line
+      };
+
+      var parseId3TagSize = function parseId3TagSize(header, byteIndex) {
+        var returnSize = header[byteIndex + 6] << 21 | header[byteIndex + 7] << 14 | header[byteIndex + 8] << 7 | header[byteIndex + 9],
+            flags = header[byteIndex + 5],
+            footerPresent = (flags & 16) >> 4;
+
+        if (footerPresent) {
+          return returnSize + 20;
+        }
+
+        return returnSize + 10;
+      };
+
+      var parseAdtsSize = function parseAdtsSize(header, byteIndex) {
+        var lowThree = (header[byteIndex + 5] & 0xE0) >> 5,
+            middle = header[byteIndex + 4] << 3,
+            highTwo = header[byteIndex + 3] & 0x3 << 11;
+        return highTwo | middle | lowThree;
+      };
+
+      var parseType$1 = function parseType(header, byteIndex) {
+        if (header[byteIndex] === 'I'.charCodeAt(0) && header[byteIndex + 1] === 'D'.charCodeAt(0) && header[byteIndex + 2] === '3'.charCodeAt(0)) {
+          return 'timed-metadata';
+        } else if (header[byteIndex] & 0xff === 0xff && (header[byteIndex + 1] & 0xf0) === 0xf0) {
+          return 'audio';
+        }
+
+        return null;
+      };
+
+      var parseSampleRate = function parseSampleRate(packet) {
+        var i = 0;
+
+        while (i + 5 < packet.length) {
+          if (packet[i] !== 0xFF || (packet[i + 1] & 0xF6) !== 0xF0) {
+            // If a valid header was not found,  jump one forward and attempt to
+            // find a valid ADTS header starting at the next byte
+            i++;
+            continue;
+          }
+
+          return ADTS_SAMPLING_FREQUENCIES$1[(packet[i + 2] & 0x3c) >>> 2];
+        }
+
+        return null;
+      };
+
+      var parseAacTimestamp = function parseAacTimestamp(packet) {
+        var frameStart, frameSize, frame, frameHeader; // find the start of the first frame and the end of the tag
+
+        frameStart = 10;
+
+        if (packet[5] & 0x40) {
+          // advance the frame start past the extended header
+          frameStart += 4; // header size field
+
+          frameStart += parseSyncSafeInteger$1(packet.subarray(10, 14));
+        } // parse one or more ID3 frames
+        // http://id3.org/id3v2.3.0#ID3v2_frame_overview
+
+
+        do {
+          // determine the number of bytes in this frame
+          frameSize = parseSyncSafeInteger$1(packet.subarray(frameStart + 4, frameStart + 8));
+
+          if (frameSize < 1) {
+            return null;
+          }
+
+          frameHeader = String.fromCharCode(packet[frameStart], packet[frameStart + 1], packet[frameStart + 2], packet[frameStart + 3]);
+
+          if (frameHeader === 'PRIV') {
+            frame = packet.subarray(frameStart + 10, frameStart + frameSize + 10);
+
+            for (var i = 0; i < frame.byteLength; i++) {
+              if (frame[i] === 0) {
+                var owner = parseIso88591$1(frame, 0, i);
+
+                if (owner === 'com.apple.streaming.transportStreamTimestamp') {
+                  var d = frame.subarray(i + 1);
+                  var size = (d[3] & 0x01) << 30 | d[4] << 22 | d[5] << 14 | d[6] << 6 | d[7] >>> 2;
+                  size *= 4;
+                  size += d[7] & 0x03;
+                  return size;
+                }
+
+                break;
+              }
+            }
+          }
+
+          frameStart += 10; // advance past the frame header
+
+          frameStart += frameSize; // advance past the frame body
+        } while (frameStart < packet.byteLength);
+
+        return null;
+      };
+
+      var utils = {
+        isLikelyAacData: isLikelyAacData,
+        parseId3TagSize: parseId3TagSize,
+        parseAdtsSize: parseAdtsSize,
+        parseType: parseType$1,
+        parseSampleRate: parseSampleRate,
+        parseAacTimestamp: parseAacTimestamp
       }; // Constants
 
       var _AacStream;
@@ -77147,25 +77865,6 @@ Prism.languages.js = Prism.languages.javascript;
 
         this.setTimestamp = function (timestamp) {
           timeStamp = timestamp;
-        };
-
-        this.parseId3TagSize = function (header, byteIndex) {
-          var returnSize = header[byteIndex + 6] << 21 | header[byteIndex + 7] << 14 | header[byteIndex + 8] << 7 | header[byteIndex + 9],
-              flags = header[byteIndex + 5],
-              footerPresent = (flags & 16) >> 4;
-
-          if (footerPresent) {
-            return returnSize + 20;
-          }
-
-          return returnSize + 10;
-        };
-
-        this.parseAdtsSize = function (header, byteIndex) {
-          var lowThree = (header[byteIndex + 5] & 0xE0) >> 5,
-              middle = header[byteIndex + 4] << 3,
-              highTwo = header[byteIndex + 3] & 0x3 << 11;
-          return highTwo | middle | lowThree;
         };
 
         this.push = function (bytes) {
@@ -77195,10 +77894,11 @@ Prism.languages.js = Prism.languages.javascript;
               } // check framesize
 
 
-              frameSize = this.parseId3TagSize(everything, byteIndex); // Exit early if we don't have enough in the buffer
+              frameSize = utils.parseId3TagSize(everything, byteIndex); // Exit early if we don't have enough in the buffer
               // to emit a full packet
+              // Add to byteIndex to support multiple ID3 tags in sequence
 
-              if (frameSize > everything.length) {
+              if (byteIndex + frameSize > everything.length) {
                 break;
               }
 
@@ -77209,17 +77909,17 @@ Prism.languages.js = Prism.languages.javascript;
               this.trigger('data', chunk);
               byteIndex += frameSize;
               continue;
-            } else if (everything[byteIndex] & 0xff === 0xff && (everything[byteIndex + 1] & 0xf0) === 0xf0) {
+            } else if ((everything[byteIndex] & 0xff) === 0xff && (everything[byteIndex + 1] & 0xf0) === 0xf0) {
               // Exit early because we don't have enough to parse
               // the ADTS frame header
               if (everything.length - byteIndex < 7) {
                 break;
               }
 
-              frameSize = this.parseAdtsSize(everything, byteIndex); // Exit early if we don't have enough in the buffer
+              frameSize = utils.parseAdtsSize(everything, byteIndex); // Exit early if we don't have enough in the buffer
               // to emit a full packet
 
-              if (frameSize > everything.length) {
+              if (byteIndex + frameSize > everything.length) {
                 break;
               }
 
@@ -77249,109 +77949,19 @@ Prism.languages.js = Prism.languages.javascript;
 
       _AacStream.prototype = new stream();
       var aac = _AacStream;
-      var highPrefix = [33, 16, 5, 32, 164, 27];
-      var lowPrefix = [33, 65, 108, 84, 1, 2, 4, 8, 168, 2, 4, 8, 17, 191, 252];
-
-      var zeroFill = function zeroFill(count) {
-        var a = [];
-
-        while (count--) {
-          a.push(0);
-        }
-
-        return a;
-      };
-
-      var makeTable = function makeTable(metaTable) {
-        return Object.keys(metaTable).reduce(function (obj, key) {
-          obj[key] = new Uint8Array(metaTable[key].reduce(function (arr, part) {
-            return arr.concat(part);
-          }, []));
-          return obj;
-        }, {});
-      }; // Frames-of-silence to use for filling in missing AAC frames
-
-
-      var coneOfSilence = {
-        96000: [highPrefix, [227, 64], zeroFill(154), [56]],
-        88200: [highPrefix, [231], zeroFill(170), [56]],
-        64000: [highPrefix, [248, 192], zeroFill(240), [56]],
-        48000: [highPrefix, [255, 192], zeroFill(268), [55, 148, 128], zeroFill(54), [112]],
-        44100: [highPrefix, [255, 192], zeroFill(268), [55, 163, 128], zeroFill(84), [112]],
-        32000: [highPrefix, [255, 192], zeroFill(268), [55, 234], zeroFill(226), [112]],
-        24000: [highPrefix, [255, 192], zeroFill(268), [55, 255, 128], zeroFill(268), [111, 112], zeroFill(126), [224]],
-        16000: [highPrefix, [255, 192], zeroFill(268), [55, 255, 128], zeroFill(268), [111, 255], zeroFill(269), [223, 108], zeroFill(195), [1, 192]],
-        12000: [lowPrefix, zeroFill(268), [3, 127, 248], zeroFill(268), [6, 255, 240], zeroFill(268), [13, 255, 224], zeroFill(268), [27, 253, 128], zeroFill(259), [56]],
-        11025: [lowPrefix, zeroFill(268), [3, 127, 248], zeroFill(268), [6, 255, 240], zeroFill(268), [13, 255, 224], zeroFill(268), [27, 255, 192], zeroFill(268), [55, 175, 128], zeroFill(108), [112]],
-        8000: [lowPrefix, zeroFill(268), [3, 121, 16], zeroFill(47), [7]]
-      };
-      var silence = makeTable(coneOfSilence);
-      var ONE_SECOND_IN_TS$1 = 90000,
-          // 90kHz clock
-      secondsToVideoTs,
-          secondsToAudioTs,
-          videoTsToSeconds,
-          audioTsToSeconds,
-          audioTsToVideoTs,
-          videoTsToAudioTs;
-
-      secondsToVideoTs = function secondsToVideoTs(seconds) {
-        return seconds * ONE_SECOND_IN_TS$1;
-      };
-
-      secondsToAudioTs = function secondsToAudioTs(seconds, sampleRate) {
-        return seconds * sampleRate;
-      };
-
-      videoTsToSeconds = function videoTsToSeconds(timestamp) {
-        return timestamp / ONE_SECOND_IN_TS$1;
-      };
-
-      audioTsToSeconds = function audioTsToSeconds(timestamp, sampleRate) {
-        return timestamp / sampleRate;
-      };
-
-      audioTsToVideoTs = function audioTsToVideoTs(timestamp, sampleRate) {
-        return secondsToVideoTs(audioTsToSeconds(timestamp, sampleRate));
-      };
-
-      videoTsToAudioTs = function videoTsToAudioTs(timestamp, sampleRate) {
-        return secondsToAudioTs(videoTsToSeconds(timestamp), sampleRate);
-      };
-
-      var clock = {
-        secondsToVideoTs: secondsToVideoTs,
-        secondsToAudioTs: secondsToAudioTs,
-        videoTsToSeconds: videoTsToSeconds,
-        audioTsToSeconds: audioTsToSeconds,
-        audioTsToVideoTs: audioTsToVideoTs,
-        videoTsToAudioTs: videoTsToAudioTs
-      };
-      var H264Stream = h264.H264Stream; // constants
+      var H264Stream = h264.H264Stream;
+      var isLikelyAacData$1 = utils.isLikelyAacData; // constants
 
       var AUDIO_PROPERTIES = ['audioobjecttype', 'channelcount', 'samplerate', 'samplingfrequencyindex', 'samplesize'];
-      var VIDEO_PROPERTIES = ['width', 'height', 'profileIdc', 'levelIdc', 'profileCompatibility'];
-      var ONE_SECOND_IN_TS$2 = 90000; // 90kHz clock
-      // object types
+      var VIDEO_PROPERTIES = ['width', 'height', 'profileIdc', 'levelIdc', 'profileCompatibility']; // object types
 
-      var _VideoSegmentStream, _AudioSegmentStream, _Transmuxer, _CoalesceStream; // Helper functions
-
-
-      var isLikelyAacData, arrayEquals, sumFrameByteLengths;
-
-      isLikelyAacData = function isLikelyAacData(data) {
-        if (data[0] === 'I'.charCodeAt(0) && data[1] === 'D'.charCodeAt(0) && data[2] === '3'.charCodeAt(0)) {
-          return true;
-        }
-
-        return false;
-      };
+      var _VideoSegmentStream, _AudioSegmentStream, _Transmuxer, _CoalesceStream;
       /**
        * Compare two arrays (even typed) for same-ness
        */
 
 
-      arrayEquals = function arrayEquals(a, b) {
+      var arrayEquals = function arrayEquals(a, b) {
         var i;
 
         if (a.length !== b.length) {
@@ -77366,23 +77976,6 @@ Prism.languages.js = Prism.languages.javascript;
         }
 
         return true;
-      };
-      /**
-       * Sum the `byteLength` properties of the data in each AAC frame
-       */
-
-
-      sumFrameByteLengths = function sumFrameByteLengths(array) {
-        var i,
-            currentObj,
-            sum = 0; // sum the byteLength's all each nal unit in the frame
-
-        for (i = 0; i < array.length; i++) {
-          currentObj = array[i];
-          sum += currentObj.data.byteLength;
-        }
-
-        return sum;
       };
       /**
        * Constructs a single-track, ISO BMFF media segment from AAC data
@@ -77438,14 +78031,14 @@ Prism.languages.js = Prism.languages.javascript;
             return;
           }
 
-          frames = this.trimAdtsFramesByEarliestDts_(adtsFrames);
+          frames = audioFrameUtils.trimAdtsFramesByEarliestDts(adtsFrames, track, earliestAllowedDts);
           track.baseMediaDecodeTime = trackDecodeInfo.calculateTrackBaseMediaDecodeTime(track, options.keepOriginalTimestamps);
-          this.prefixWithSilence_(track, frames); // we have to build the index from byte locations to
+          audioFrameUtils.prefixWithSilence(track, frames, audioAppendStartTs, videoBaseMediaDecodeTime); // we have to build the index from byte locations to
           // samples (that is, adts frames) in the audio data
 
-          track.samples = this.generateSampleTable_(frames); // concatenate the audio data to constuct the mdat
+          track.samples = audioFrameUtils.generateSampleTable(frames); // concatenate the audio data to constuct the mdat
 
-          mdat = mp4Generator.mdat(this.concatenateFrameData_(frames));
+          mdat = mp4Generator.mdat(audioFrameUtils.concatenateFrameData(frames));
           adtsFrames = [];
           moof = mp4Generator.moof(sequenceNumber, [track]);
           boxes = new Uint8Array(moof.byteLength + mdat.byteLength); // bump the sequence number for next time
@@ -77459,114 +78052,6 @@ Prism.languages.js = Prism.languages.javascript;
             boxes: boxes
           });
           this.trigger('done', 'AudioSegmentStream');
-        }; // Possibly pad (prefix) the audio track with silence if appending this track
-        // would lead to the introduction of a gap in the audio buffer
-
-
-        this.prefixWithSilence_ = function (track, frames) {
-          var baseMediaDecodeTimeTs,
-              frameDuration = 0,
-              audioGapDuration = 0,
-              audioFillFrameCount = 0,
-              audioFillDuration = 0,
-              silentFrame,
-              i;
-
-          if (!frames.length) {
-            return;
-          }
-
-          baseMediaDecodeTimeTs = clock.audioTsToVideoTs(track.baseMediaDecodeTime, track.samplerate); // determine frame clock duration based on sample rate, round up to avoid overfills
-
-          frameDuration = Math.ceil(ONE_SECOND_IN_TS$2 / (track.samplerate / 1024));
-
-          if (audioAppendStartTs && videoBaseMediaDecodeTime) {
-            // insert the shortest possible amount (audio gap or audio to video gap)
-            audioGapDuration = baseMediaDecodeTimeTs - Math.max(audioAppendStartTs, videoBaseMediaDecodeTime); // number of full frames in the audio gap
-
-            audioFillFrameCount = Math.floor(audioGapDuration / frameDuration);
-            audioFillDuration = audioFillFrameCount * frameDuration;
-          } // don't attempt to fill gaps smaller than a single frame or larger
-          // than a half second
-
-
-          if (audioFillFrameCount < 1 || audioFillDuration > ONE_SECOND_IN_TS$2 / 2) {
-            return;
-          }
-
-          silentFrame = silence[track.samplerate];
-
-          if (!silentFrame) {
-            // we don't have a silent frame pregenerated for the sample rate, so use a frame
-            // from the content instead
-            silentFrame = frames[0].data;
-          }
-
-          for (i = 0; i < audioFillFrameCount; i++) {
-            frames.splice(i, 0, {
-              data: silentFrame
-            });
-          }
-
-          track.baseMediaDecodeTime -= Math.floor(clock.videoTsToAudioTs(audioFillDuration, track.samplerate));
-        }; // If the audio segment extends before the earliest allowed dts
-        // value, remove AAC frames until starts at or after the earliest
-        // allowed DTS so that we don't end up with a negative baseMedia-
-        // DecodeTime for the audio track
-
-
-        this.trimAdtsFramesByEarliestDts_ = function (adtsFrames) {
-          if (track.minSegmentDts >= earliestAllowedDts) {
-            return adtsFrames;
-          } // We will need to recalculate the earliest segment Dts
-
-
-          track.minSegmentDts = Infinity;
-          return adtsFrames.filter(function (currentFrame) {
-            // If this is an allowed frame, keep it and record it's Dts
-            if (currentFrame.dts >= earliestAllowedDts) {
-              track.minSegmentDts = Math.min(track.minSegmentDts, currentFrame.dts);
-              track.minSegmentPts = track.minSegmentDts;
-              return true;
-            } // Otherwise, discard it
-
-
-            return false;
-          });
-        }; // generate the track's raw mdat data from an array of frames
-
-
-        this.generateSampleTable_ = function (frames) {
-          var i,
-              currentFrame,
-              samples = [];
-
-          for (i = 0; i < frames.length; i++) {
-            currentFrame = frames[i];
-            samples.push({
-              size: currentFrame.data.byteLength,
-              duration: 1024 // For AAC audio, all samples contain 1024 samples
-
-            });
-          }
-
-          return samples;
-        }; // generate the track's sample table from an array of frames
-
-
-        this.concatenateFrameData_ = function (frames) {
-          var i,
-              currentFrame,
-              dataOffset = 0,
-              data = new Uint8Array(sumFrameByteLengths(frames));
-
-          for (i = 0; i < frames.length; i++) {
-            currentFrame = frames[i];
-            data.set(currentFrame.data, dataOffset);
-            dataOffset += currentFrame.data.byteLength;
-          }
-
-          return data;
         };
       };
 
@@ -77951,6 +78436,9 @@ Prism.languages.js = Prism.languages.javascript;
        * A Stream that can combine multiple streams (ie. audio & video)
        * into a single output segment for MSE. Also supports audio-only
        * and video-only streams.
+       * @param options {object} transmuxer options object
+       * @param options.keepOriginalTimestamps {boolean} If true, keep the timestamps
+       *        in the source; false to adjust the first segment to start at media timeline start.
        */
 
       _CoalesceStream = function CoalesceStream(options, metadataStream) {
@@ -77959,11 +78447,16 @@ Prism.languages.js = Prism.languages.javascript;
         // tracks into a single segment
         this.numberOfTracks = 0;
         this.metadataStream = metadataStream;
+        options = options || {};
 
         if (typeof options.remux !== 'undefined') {
           this.remuxTracks = !!options.remux;
         } else {
           this.remuxTracks = true;
+        }
+
+        if (typeof options.keepOriginalTimestamps === 'boolean') {
+          this.keepOriginalTimestamps = options.keepOriginalTimestamps;
         }
 
         this.pendingTracks = [];
@@ -78081,25 +78574,40 @@ Prism.languages.js = Prism.languages.javascript;
         for (i = 0; i < this.pendingBoxes.length; i++) {
           event.data.set(this.pendingBoxes[i], offset);
           offset += this.pendingBoxes[i].byteLength;
-        } // Translate caption PTS times into second offsets into the
+        } // Translate caption PTS times into second offsets to match the
         // video timeline for the segment, and add track info
 
 
         for (i = 0; i < this.pendingCaptions.length; i++) {
           caption = this.pendingCaptions[i];
-          caption.startTime = caption.startPts - timelineStartPts;
+          caption.startTime = caption.startPts;
+
+          if (!this.keepOriginalTimestamps) {
+            caption.startTime -= timelineStartPts;
+          }
+
           caption.startTime /= 90e3;
-          caption.endTime = caption.endPts - timelineStartPts;
+          caption.endTime = caption.endPts;
+
+          if (!this.keepOriginalTimestamps) {
+            caption.endTime -= timelineStartPts;
+          }
+
           caption.endTime /= 90e3;
           event.captionStreams[caption.stream] = true;
           event.captions.push(caption);
-        } // Translate ID3 frame PTS times into second offsets into the
+        } // Translate ID3 frame PTS times into second offsets to match the
         // video timeline for the segment
 
 
         for (i = 0; i < this.pendingMetadata.length; i++) {
           id3 = this.pendingMetadata[i];
-          id3.cueTime = id3.pts - timelineStartPts;
+          id3.cueTime = id3.pts;
+
+          if (!this.keepOriginalTimestamps) {
+            id3.cueTime -= timelineStartPts;
+          }
+
           id3.cueTime /= 90e3;
           event.metadata.push(id3);
         } // We add this to every single emitted segment even though we only need
@@ -78268,13 +78776,19 @@ Prism.languages.js = Prism.languages.javascript;
 
         this.setBaseMediaDecodeTime = function (baseMediaDecodeTime) {
           var pipeline = this.transmuxPipeline_;
-          this.baseMediaDecodeTime = baseMediaDecodeTime;
+
+          if (!options.keepOriginalTimestamps) {
+            this.baseMediaDecodeTime = baseMediaDecodeTime;
+          }
 
           if (audioTrack) {
             audioTrack.timelineStartInfo.dts = undefined;
             audioTrack.timelineStartInfo.pts = undefined;
             trackDecodeInfo.clearDtsInfo(audioTrack);
-            audioTrack.timelineStartInfo.baseMediaDecodeTime = baseMediaDecodeTime;
+
+            if (!options.keepOriginalTimestamps) {
+              audioTrack.timelineStartInfo.baseMediaDecodeTime = baseMediaDecodeTime;
+            }
 
             if (pipeline.audioTimestampRolloverStream) {
               pipeline.audioTimestampRolloverStream.discontinuity();
@@ -78291,7 +78805,10 @@ Prism.languages.js = Prism.languages.javascript;
             videoTrack.timelineStartInfo.pts = undefined;
             trackDecodeInfo.clearDtsInfo(videoTrack);
             pipeline.captionStream.reset();
-            videoTrack.timelineStartInfo.baseMediaDecodeTime = baseMediaDecodeTime;
+
+            if (!options.keepOriginalTimestamps) {
+              videoTrack.timelineStartInfo.baseMediaDecodeTime = baseMediaDecodeTime;
+            }
           }
 
           if (pipeline.timedMetadataTimestampRolloverStream) {
@@ -78314,7 +78831,7 @@ Prism.languages.js = Prism.languages.javascript;
 
         this.push = function (data) {
           if (hasFlushed) {
-            var isAac = isLikelyAacData(data);
+            var isAac = isLikelyAacData$1(data);
 
             if (isAac && this.transmuxPipeline_.type !== 'aac') {
               this.setupAacPipeline();
@@ -78354,7 +78871,7 @@ Prism.languages.js = Prism.languages.javascript;
 
       var inspectMp4,
           _textifyMp,
-          parseType$1 = probe$$1.parseType,
+          parseType$2 = probe$$1.parseType,
           parseMp4Date = function parseMp4Date(seconds) {
         return new Date(seconds * 1000 - 2082844800000);
       },
@@ -78507,14 +79024,14 @@ Prism.languages.js = Prism.languages.javascript;
         ftyp: function ftyp(data) {
           var view = new DataView(data.buffer, data.byteOffset, data.byteLength),
               result = {
-            majorBrand: parseType$1(data.subarray(0, 4)),
+            majorBrand: parseType$2(data.subarray(0, 4)),
             minorVersion: view.getUint32(4),
             compatibleBrands: []
           },
               i = 8;
 
           while (i < data.byteLength) {
-            result.compatibleBrands.push(parseType$1(data.subarray(i, i + 4)));
+            result.compatibleBrands.push(parseType$2(data.subarray(i, i + 4)));
             i += 4;
           }
 
@@ -78537,7 +79054,7 @@ Prism.languages.js = Prism.languages.javascript;
               result = {
             version: view.getUint8(0),
             flags: new Uint8Array(data.subarray(1, 4)),
-            handlerType: parseType$1(data.subarray(8, 12)),
+            handlerType: parseType$2(data.subarray(8, 12)),
             name: ''
           },
               i = 8; // parse out the name field
@@ -79123,7 +79640,7 @@ Prism.languages.js = Prism.languages.javascript;
         while (i < data.byteLength) {
           // parse box data
           size = view.getUint32(i);
-          type = parseType$1(data.subarray(i + 4, i + 8));
+          type = parseType$2(data.subarray(i + 4, i + 8));
           end = size > 1 ? i + size : data.byteLength; // parse type-specific data
 
           box = (parse$$1[type] || function (data) {
@@ -81125,8 +81642,13 @@ Prism.languages.js = Prism.languages.javascript;
           return;
         }
 
-        _this.player_ = videojs$1(video.parentNode); // hls-reset is fired by videojs.Hls on to the tech after the main SegmentLoader
+        _this.player_ = videojs$1(video.parentNode);
+
+        if (!_this.player_) {
+          return;
+        } // hls-reset is fired by videojs.Hls on to the tech after the main SegmentLoader
         // resets its state and flushes the buffer
+
 
         _this.player_.tech_.on('hls-reset', _this.onHlsReset_); // hls-segment-time-mapping is fired by videojs.Hls on to the tech after the main
         // SegmentLoader inspects an MTS segment and has an accurate stream to display
@@ -81185,6 +81707,9 @@ Prism.languages.js = Prism.languages.javascript;
 
         if (this.player_.el_) {
           this.player_.off('mediachange', this.onPlayerMediachange_);
+        }
+
+        if (this.player_.tech_ && this.player_.tech_.el_) {
           this.player_.tech_.off('hls-reset', this.onHlsReset_);
           this.player_.tech_.off('hls-segment-time-mapping', this.onHlsSegmentTimeMapping_);
         }
@@ -81541,6 +82066,7 @@ Prism.languages.js = Prism.languages.javascript;
       key: 'pause',
       value: function pause() {
         this.stopRequest();
+        window$1.clearTimeout(this.mediaUpdateTimeout);
 
         if (this.state === 'HAVE_NOTHING') {
           // If we pause the loader before any data has been retrieved, its as if we never
@@ -81550,9 +82076,22 @@ Prism.languages.js = Prism.languages.javascript;
       }
     }, {
       key: 'load',
-      value: function load() {
-        // because the playlists are internal to the manifest, load should either load the
+      value: function load(isFinalRendition) {
+        var _this2 = this;
+
+        window$1.clearTimeout(this.mediaUpdateTimeout);
+        var media = this.media();
+
+        if (isFinalRendition) {
+          var delay = media ? media.targetDuration / 2 * 1000 : 5 * 1000;
+          this.mediaUpdateTimeout = window$1.setTimeout(function () {
+            return _this2.load();
+          }, delay);
+          return;
+        } // because the playlists are internal to the manifest, load should either load the
         // main manifest, or do nothing but trigger an event
+
+
         if (!this.started) {
           this.start();
           return;
@@ -81603,7 +82142,7 @@ Prism.languages.js = Prism.languages.javascript;
     }, {
       key: 'start',
       value: function start() {
-        var _this2 = this;
+        var _this3 = this;
 
         this.started = true; // request the specified URL
 
@@ -81612,38 +82151,38 @@ Prism.languages.js = Prism.languages.javascript;
           withCredentials: this.withCredentials
         }, function (error, req) {
           // disposed
-          if (!_this2.request) {
+          if (!_this3.request) {
             return;
           } // clear the loader's request reference
 
 
-          _this2.request = null;
+          _this3.request = null;
 
           if (error) {
-            _this2.error = {
+            _this3.error = {
               status: req.status,
-              message: 'DASH playlist request error at URL: ' + _this2.srcUrl,
+              message: 'DASH playlist request error at URL: ' + _this3.srcUrl,
               responseText: req.responseText,
               // MEDIA_ERR_NETWORK
               code: 2
             };
 
-            if (_this2.state === 'HAVE_NOTHING') {
-              _this2.started = false;
+            if (_this3.state === 'HAVE_NOTHING') {
+              _this3.started = false;
             }
 
-            return _this2.trigger('error');
+            return _this3.trigger('error');
           }
 
-          _this2.masterXml_ = req.responseText;
+          _this3.masterXml_ = req.responseText;
 
           if (req.responseHeaders && req.responseHeaders.date) {
-            _this2.masterLoaded_ = Date.parse(req.responseHeaders.date);
+            _this3.masterLoaded_ = Date.parse(req.responseHeaders.date);
           } else {
-            _this2.masterLoaded_ = Date.now();
+            _this3.masterLoaded_ = Date.now();
           }
 
-          _this2.syncClientServerClock_(_this2.onClientServerClockSync_.bind(_this2));
+          _this3.syncClientServerClock_(_this3.onClientServerClockSync_.bind(_this3));
         });
       }
       /**
@@ -81657,7 +82196,7 @@ Prism.languages.js = Prism.languages.javascript;
     }, {
       key: 'syncClientServerClock_',
       value: function syncClientServerClock_(done) {
-        var _this3 = this;
+        var _this4 = this;
 
         var utcTiming = parseUTCTiming(this.masterXml_); // No UTCTiming element found in the mpd. Use Date header from mpd request as the
         // server clock
@@ -81678,14 +82217,14 @@ Prism.languages.js = Prism.languages.javascript;
           withCredentials: this.withCredentials
         }, function (error, req) {
           // disposed
-          if (!_this3.request) {
+          if (!_this4.request) {
             return;
           }
 
           if (error) {
             // sync request failed, fall back to using date header from mpd
             // TODO: log warning
-            _this3.clientOffset_ = _this3.masterLoaded_ - Date.now();
+            _this4.clientOffset_ = _this4.masterLoaded_ - Date.now();
             return done();
           }
 
@@ -81695,7 +82234,7 @@ Prism.languages.js = Prism.languages.javascript;
             if (!req.responseHeaders || !req.responseHeaders.date) {
               // expected date header not preset, fall back to using date header from mpd
               // TODO: log warning
-              serverTime = _this3.masterLoaded_;
+              serverTime = _this4.masterLoaded_;
             } else {
               serverTime = Date.parse(req.responseHeaders.date);
             }
@@ -81703,7 +82242,7 @@ Prism.languages.js = Prism.languages.javascript;
             serverTime = Date.parse(req.responseText);
           }
 
-          _this3.clientOffset_ = serverTime - Date.now();
+          _this4.clientOffset_ = serverTime - Date.now();
           done();
         });
       }
@@ -81715,7 +82254,7 @@ Prism.languages.js = Prism.languages.javascript;
     }, {
       key: 'onClientServerClockSync_',
       value: function onClientServerClockSync_() {
-        var _this4 = this;
+        var _this5 = this;
 
         this.master = this.parseMasterXml();
         this.state = 'HAVE_MASTER';
@@ -81730,7 +82269,7 @@ Prism.languages.js = Prism.languages.javascript;
 
 
         window$1.setTimeout(function () {
-          _this4.trigger('loadedmetadata');
+          _this5.trigger('loadedmetadata');
         }, 0); // TODO: minimumUpdatePeriod can have a value of 0. Currently the manifest will not
         // be refreshed when this is the case. The inter-op guide says that when the
         // minimumUpdatePeriod is 0, the manifest should outline all currently available
@@ -81740,7 +82279,7 @@ Prism.languages.js = Prism.languages.javascript;
 
         if (this.master.minimumUpdatePeriod) {
           window$1.setTimeout(function () {
-            _this4.trigger('minimumUpdatePeriod');
+            _this5.trigger('minimumUpdatePeriod');
           }, this.master.minimumUpdatePeriod);
         }
       }
@@ -81752,44 +82291,44 @@ Prism.languages.js = Prism.languages.javascript;
     }, {
       key: 'refreshXml_',
       value: function refreshXml_() {
-        var _this5 = this;
+        var _this6 = this;
 
         this.request = this.hls_.xhr({
           uri: this.srcUrl,
           withCredentials: this.withCredentials
         }, function (error, req) {
           // disposed
-          if (!_this5.request) {
+          if (!_this6.request) {
             return;
           } // clear the loader's request reference
 
 
-          _this5.request = null;
+          _this6.request = null;
 
           if (error) {
-            _this5.error = {
+            _this6.error = {
               status: req.status,
-              message: 'DASH playlist request error at URL: ' + _this5.srcUrl,
+              message: 'DASH playlist request error at URL: ' + _this6.srcUrl,
               responseText: req.responseText,
               // MEDIA_ERR_NETWORK
               code: 2
             };
 
-            if (_this5.state === 'HAVE_NOTHING') {
-              _this5.started = false;
+            if (_this6.state === 'HAVE_NOTHING') {
+              _this6.started = false;
             }
 
-            return _this5.trigger('error');
+            return _this6.trigger('error');
           }
 
-          _this5.masterXml_ = req.responseText;
+          _this6.masterXml_ = req.responseText;
 
-          var newMaster = _this5.parseMasterXml();
+          var newMaster = _this6.parseMasterXml();
 
-          _this5.master = updateMaster$1(_this5.master, newMaster);
+          _this6.master = updateMaster$1(_this6.master, newMaster);
           window$1.setTimeout(function () {
-            _this5.trigger('minimumUpdatePeriod');
-          }, _this5.master.minimumUpdatePeriod);
+            _this6.trigger('minimumUpdatePeriod');
+          }, _this6.master.minimumUpdatePeriod);
         });
       }
       /**
@@ -81801,7 +82340,7 @@ Prism.languages.js = Prism.languages.javascript;
     }, {
       key: 'refreshMedia_',
       value: function refreshMedia_() {
-        var _this6 = this;
+        var _this7 = this;
 
         var oldMaster = void 0;
         var newMaster = void 0;
@@ -81830,7 +82369,7 @@ Prism.languages.js = Prism.languages.javascript;
 
         if (!this.media().endList) {
           this.mediaUpdateTimeout = window$1.setTimeout(function () {
-            _this6.trigger('mediaupdatetimeout');
+            _this7.trigger('mediaupdatetimeout');
           }, refreshDelay(this.media(), !!updatedMaster));
         }
 
@@ -82391,19 +82930,6 @@ Prism.languages.js = Prism.languages.javascript;
     }), [segment.encryptedBytes.buffer, segment.key.bytes.buffer]);
   };
   /**
-   * The purpose of this function is to get the most pertinent error from the
-   * array of errors.
-   * For instance if a timeout and two aborts occur, then the aborts were
-   * likely triggered by the timeout so return that error object.
-   */
-
-
-  var getMostImportantError = function getMostImportantError(errors) {
-    return errors.reduce(function (prev, err) {
-      return err.code > prev.code ? err : prev;
-    });
-  };
-  /**
    * This function waits for all XHRs to finish (with either success or failure)
    * before continueing processing via it's callback. The function gathers errors
    * from each request into a single errors array so that the error status for
@@ -82417,13 +82943,29 @@ Prism.languages.js = Prism.languages.javascript;
 
 
   var waitForCompletion = function waitForCompletion(activeXhrs, decrypter, doneFn) {
-    var errors = [];
     var count = 0;
+    var didError = false;
     return function (error, segment) {
+      if (didError) {
+        return;
+      }
+
       if (error) {
-        // If there are errors, we have to abort any outstanding requests
-        abortAll(activeXhrs);
-        errors.push(error);
+        didError = true; // If there are errors, we have to abort any outstanding requests
+
+        abortAll(activeXhrs); // Even though the requests above are aborted, and in theory we could wait until we
+        // handle the aborted events from those requests, there are some cases where we may
+        // never get an aborted event. For instance, if the network connection is lost and
+        // there were two requests, the first may have triggered an error immediately, while
+        // the second request remains unsent. In that case, the aborted algorithm will not
+        // trigger an abort: see https://xhr.spec.whatwg.org/#the-abort()-method
+        //
+        // We also can't rely on the ready state of the XHR, since the request that
+        // triggered the connection error may also show as a ready state of 0 (unsent).
+        // Therefore, we have to finish this group of requests immediately after the first
+        // seen error.
+
+        return doneFn(error, segment);
       }
 
       count += 1;
@@ -82431,11 +82973,6 @@ Prism.languages.js = Prism.languages.javascript;
       if (count === activeXhrs.length) {
         // Keep track of when *all* of the requests have completed
         segment.endOfAllRequests = Date.now();
-
-        if (errors.length > 0) {
-          var worstError = getMostImportantError(errors);
-          return doneFn(worstError, segment);
-        }
 
         if (segment.encryptedBytes) {
           return decryptSegment(decrypter, segment, doneFn);
@@ -84323,6 +84860,8 @@ Prism.languages.js = Prism.languages.javascript;
         removeCuesFromTrack(start, end, this.segmentMetadataTrack_);
         var Cue = window$1.WebKitDataCue || window$1.VTTCue;
         var value = {
+          dateTimeObject: segment.dateTimeObject,
+          dateTimeString: segment.dateTimeString,
           bandwidth: segmentInfo.playlist.attributes.BANDWIDTH,
           resolution: segmentInfo.playlist.attributes.RESOLUTION,
           codecs: segmentInfo.playlist.attributes.CODECS,
@@ -88683,7 +89222,7 @@ Prism.languages.js = Prism.languages.javascript;
     initPlugin(this, options);
   };
 
-  var version$3 = "1.4.1"; // since VHS handles HLS and DASH (and in the future, more types), use * to capture all
+  var version$3 = "1.5.1"; // since VHS handles HLS and DASH (and in the future, more types), use * to capture all
 
   videojs$1.use('*', function (player) {
     return {
@@ -88726,7 +89265,7 @@ Prism.languages.js = Prism.languages.javascript;
     Decrypter: Decrypter,
     AsyncStream: AsyncStream,
     decrypt: decrypt,
-    utils: utils,
+    utils: utils$1,
     STANDARD_PLAYLIST_SELECTOR: lastBandwidthSelector,
     INITIAL_PLAYLIST_SELECTOR: lowestBitrateCompatibleVariantSelector,
     comparePlaylistBandwidth: comparePlaylistBandwidth,
@@ -88752,6 +89291,7 @@ Prism.languages.js = Prism.languages.javascript;
       }
     });
   });
+  var LOCAL_STORAGE_KEY$1 = 'videojs-vhs';
 
   var simpleTypeFromSourceType = function simpleTypeFromSourceType(type) {
     var mpegurlRE = /^(audio|video|application)\/(x-|vnd\.apple\.)?mpegurl/i;
@@ -88863,6 +89403,46 @@ Prism.languages.js = Prism.languages.javascript;
       }
     }
   };
+
+  var getVhsLocalStorage = function getVhsLocalStorage() {
+    if (!window.localStorage) {
+      return null;
+    }
+
+    var storedObject = window.localStorage.getItem(LOCAL_STORAGE_KEY$1);
+
+    if (!storedObject) {
+      return null;
+    }
+
+    try {
+      return JSON.parse(storedObject);
+    } catch (e) {
+      // someone may have tampered with the value
+      return null;
+    }
+  };
+
+  var updateVhsLocalStorage = function updateVhsLocalStorage(options) {
+    if (!window.localStorage) {
+      return false;
+    }
+
+    var objectToStore = getVhsLocalStorage();
+    objectToStore = objectToStore ? videojs$1.mergeOptions(objectToStore, options) : options;
+
+    try {
+      window.localStorage.setItem(LOCAL_STORAGE_KEY$1, JSON.stringify(objectToStore));
+    } catch (e) {
+      // Throws if storage is full (e.g., always on iOS 5+ Safari private mode, where
+      // storage is set to 0).
+      // https://developer.mozilla.org/en-US/docs/Web/API/Storage/setItem#Exceptions
+      // No need to perform any operation.
+      return false;
+    }
+
+    return objectToStore;
+  };
   /**
    * Whether the browser has built-in HLS support.
    */
@@ -88949,7 +89529,8 @@ Prism.languages.js = Prism.languages.javascript;
                 name: 'hls-player-access'
               });
               return _this;
-            }
+            },
+            configurable: true
           });
         } // Set up a reference to the HlsHandler from player.vhs. This allows users to start
         // migrating from player.tech_.hls... to player.vhs... for API access. Although this
@@ -88961,6 +89542,7 @@ Prism.languages.js = Prism.languages.javascript;
         _player.vhs = _this; // deprecated, for backwards compatibility
 
         _player.dash = _this;
+        _this.player_ = _player;
       }
 
       _this.tech_ = tech;
@@ -89015,11 +89597,34 @@ Prism.languages.js = Prism.languages.javascript;
         this.options_.withCredentials = this.options_.withCredentials || false;
         this.options_.limitRenditionByPlayerDimensions = this.options_.limitRenditionByPlayerDimensions === false ? false : true;
         this.options_.smoothQualityChange = this.options_.smoothQualityChange || false;
+        this.options_.useBandwidthFromLocalStorage = typeof this.source_.useBandwidthFromLocalStorage !== 'undefined' ? this.source_.useBandwidthFromLocalStorage : this.options_.useBandwidthFromLocalStorage || false;
 
         if (typeof this.options_.blacklistDuration !== 'number') {
           this.options_.blacklistDuration = 5 * 60;
-        } // start playlist selection at a reasonable bandwidth for
-        // broadband internet (0.5 MB/s) or mobile (0.0625 MB/s)
+        }
+
+        if (typeof this.options_.bandwidth !== 'number') {
+          if (this.options_.useBandwidthFromLocalStorage) {
+            var storedObject = getVhsLocalStorage();
+
+            if (storedObject && storedObject.bandwidth) {
+              this.options_.bandwidth = storedObject.bandwidth;
+              this.tech_.trigger({
+                type: 'usage',
+                name: 'hls-bandwidth-from-local-storage'
+              });
+            }
+
+            if (storedObject && storedObject.throughput) {
+              this.options_.throughput = storedObject.throughput;
+              this.tech_.trigger({
+                type: 'usage',
+                name: 'hls-throughput-from-local-storage'
+              });
+            }
+          }
+        } // if bandwidth was not set by options or pulled from local storage, start playlist
+        // selection at a reasonable bandwidth
 
 
         if (typeof this.options_.bandwidth !== 'number') {
@@ -89035,7 +89640,6 @@ Prism.languages.js = Prism.languages.javascript;
             _this2.options_[option] = _this2.source_[option];
           }
         });
-        this.bandwidth = this.options_.bandwidth;
         this.limitRenditionByPlayerDimensions = this.options_.limitRenditionByPlayerDimensions;
       }
       /**
@@ -89153,6 +89757,15 @@ Prism.languages.js = Prism.languages.javascript;
             }
           }
         });
+
+        if (this.options_.bandwidth) {
+          this.bandwidth = this.options_.bandwidth;
+        }
+
+        if (this.options_.throughput) {
+          this.throughput = this.options_.throughput;
+        }
+
         Object.defineProperties(this.stats, {
           bandwidth: {
             get: function get$$1() {
@@ -89264,6 +89877,14 @@ Prism.languages.js = Prism.languages.javascript;
           }
         });
         this.tech_.one('canplay', this.masterPlaylistController_.setupFirstPlay.bind(this.masterPlaylistController_));
+        this.tech_.on('bandwidthupdate', function () {
+          if (_this3.options_.useBandwidthFromLocalStorage) {
+            updateVhsLocalStorage({
+              bandwidth: _this3.bandwidth,
+              throughput: Math.round(_this3.throughput)
+            });
+          }
+        });
         this.masterPlaylistController_.on('selectedinitialmedia', function () {
           // Add the manual rendition mix-in to HlsHandler
           renditionSelectionMixin(_this3);
@@ -89364,7 +89985,42 @@ Prism.languages.js = Prism.languages.javascript;
           this.qualityLevels_.dispose();
         }
 
+        if (this.player_) {
+          delete this.player_.vhs;
+          delete this.player_.dash;
+          delete this.player_.hls;
+        }
+
+        if (this.tech_ && this.tech_.hls) {
+          delete this.tech_.hls;
+        }
+
         get$1(HlsHandler.prototype.__proto__ || Object.getPrototypeOf(HlsHandler.prototype), 'dispose', this).call(this);
+      }
+    }, {
+      key: 'convertToStreamTime',
+      value: function convertToStreamTime(time, callback) {
+        return getStreamTime({
+          playlist: this.masterPlaylistController_.media(),
+          time: time,
+          callback: callback
+        });
+      } // the player must be playing before calling this
+
+    }, {
+      key: 'seekToStreamTime',
+      value: function seekToStreamTime$$1(streamTime, callback) {
+        var pauseAfterSeek = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+        var retryCount = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 2;
+        return seekToStreamTime({
+          streamTime: streamTime,
+          playlist: this.masterPlaylistController_.media(),
+          retryCount: retryCount,
+          pauseAfterSeek: pauseAfterSeek,
+          seekTo: this.options_.seekTo,
+          tech: this.options_.tech,
+          callback: callback
+        });
       }
     }]);
     return HlsHandler;
@@ -90230,7 +90886,4 @@ THE SOFTWARE. */
   }
 }));
 
-/*! modernizr 3.6.0 (Custom Build) | MIT *
- * https://modernizr.com/download/?-cssmask-setclasses !*/
-!function(e,n,t){function r(e,n){return typeof e===n}function o(){var e,n,t,o,s,i,l;for(var a in S)if(S.hasOwnProperty(a)){if(e=[],n=S[a],n.name&&(e.push(n.name.toLowerCase()),n.options&&n.options.aliases&&n.options.aliases.length))for(t=0;t<n.options.aliases.length;t++)e.push(n.options.aliases[t].toLowerCase());for(o=r(n.fn,"function")?n.fn():n.fn,s=0;s<e.length;s++)i=e[s],l=i.split("."),1===l.length?Modernizr[l[0]]=o:(!Modernizr[l[0]]||Modernizr[l[0]]instanceof Boolean||(Modernizr[l[0]]=new Boolean(Modernizr[l[0]])),Modernizr[l[0]][l[1]]=o),C.push((o?"":"no-")+l.join("-"))}}function s(e){var n=_.className,t=Modernizr._config.classPrefix||"";if(x&&(n=n.baseVal),Modernizr._config.enableJSClass){var r=new RegExp("(^|\\s)"+t+"no-js(\\s|$)");n=n.replace(r,"$1"+t+"js$2")}Modernizr._config.enableClasses&&(n+=" "+t+e.join(" "+t),x?_.className.baseVal=n:_.className=n)}function i(){return"function"!=typeof n.createElement?n.createElement(arguments[0]):x?n.createElementNS.call(n,"http://www.w3.org/2000/svg",arguments[0]):n.createElement.apply(n,arguments)}function l(e,n){return!!~(""+e).indexOf(n)}function a(e){return e.replace(/([A-Z])/g,function(e,n){return"-"+n.toLowerCase()}).replace(/^ms-/,"-ms-")}function u(n,t,r){var o;if("getComputedStyle"in e){o=getComputedStyle.call(e,n,t);var s=e.console;if(null!==o)r&&(o=o.getPropertyValue(r));else if(s){var i=s.error?"error":"log";s[i].call(s,"getComputedStyle returning null, its possible modernizr test results are inaccurate")}}else o=!t&&n.currentStyle&&n.currentStyle[r];return o}function f(){var e=n.body;return e||(e=i(x?"svg":"body"),e.fake=!0),e}function c(e,t,r,o){var s,l,a,u,c="modernizr",p=i("div"),d=f();if(parseInt(r,10))for(;r--;)a=i("div"),a.id=o?o[r]:c+(r+1),p.appendChild(a);return s=i("style"),s.type="text/css",s.id="s"+c,(d.fake?d:p).appendChild(s),d.appendChild(p),s.styleSheet?s.styleSheet.cssText=e:s.appendChild(n.createTextNode(e)),p.id=c,d.fake&&(d.style.background="",d.style.overflow="hidden",u=_.style.overflow,_.style.overflow="hidden",_.appendChild(d)),l=t(p,e),d.fake?(d.parentNode.removeChild(d),_.style.overflow=u,_.offsetHeight):p.parentNode.removeChild(p),!!l}function p(n,r){var o=n.length;if("CSS"in e&&"supports"in e.CSS){for(;o--;)if(e.CSS.supports(a(n[o]),r))return!0;return!1}if("CSSSupportsRule"in e){for(var s=[];o--;)s.push("("+a(n[o])+":"+r+")");return s=s.join(" or "),c("@supports ("+s+") { #modernizr { position: absolute; } }",function(e){return"absolute"==u(e,null,"position")})}return t}function d(e){return e.replace(/([a-z])-([a-z])/g,function(e,n,t){return n+t.toUpperCase()}).replace(/^-/,"")}function m(e,n,o,s){function a(){f&&(delete N.style,delete N.modElem)}if(s=r(s,"undefined")?!1:s,!r(o,"undefined")){var u=p(e,o);if(!r(u,"undefined"))return u}for(var f,c,m,y,v,g=["modernizr","tspan","samp"];!N.style&&g.length;)f=!0,N.modElem=i(g.shift()),N.style=N.modElem.style;for(m=e.length,c=0;m>c;c++)if(y=e[c],v=N.style[y],l(y,"-")&&(y=d(y)),N.style[y]!==t){if(s||r(o,"undefined"))return a(),"pfx"==n?y:!0;try{N.style[y]=o}catch(h){}if(N.style[y]!=v)return a(),"pfx"==n?y:!0}return a(),!1}function y(e,n){return function(){return e.apply(n,arguments)}}function v(e,n,t){var o;for(var s in e)if(e[s]in n)return t===!1?e[s]:(o=n[e[s]],r(o,"function")?y(o,t||n):o);return!1}function g(e,n,t,o,s){var i=e.charAt(0).toUpperCase()+e.slice(1),l=(e+" "+P.join(i+" ")+i).split(" ");return r(n,"string")||r(n,"undefined")?m(l,n,o,s):(l=(e+" "+z.join(i+" ")+i).split(" "),v(l,n,t))}function h(e,n,r){return g(e,t,t,n,r)}var C=[],S=[],w={_version:"3.6.0",_config:{classPrefix:"",enableClasses:!0,enableJSClass:!0,usePrefixes:!0},_q:[],on:function(e,n){var t=this;setTimeout(function(){n(t[e])},0)},addTest:function(e,n,t){S.push({name:e,fn:n,options:t})},addAsyncTest:function(e){S.push({name:null,fn:e})}},Modernizr=function(){};Modernizr.prototype=w,Modernizr=new Modernizr;var _=n.documentElement,x="svg"===_.nodeName.toLowerCase(),b="Moz O ms Webkit",P=w._config.usePrefixes?b.split(" "):[];w._cssomPrefixes=P;var z=w._config.usePrefixes?b.toLowerCase().split(" "):[];w._domPrefixes=z;var E={elem:i("modernizr")};Modernizr._q.push(function(){delete E.elem});var N={style:E.elem.style};Modernizr._q.unshift(function(){delete N.style}),w.testAllProps=g,w.testAllProps=h,Modernizr.addTest("cssmask",h("maskRepeat","repeat-x",!0)),o(),s(C),delete w.addTest,delete w.addAsyncTest;for(var k=0;k<Modernizr._q.length;k++)Modernizr._q[k]();e.Modernizr=Modernizr}(window,document);
 //# sourceMappingURL=vendor.js.map

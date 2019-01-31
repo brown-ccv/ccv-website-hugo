@@ -8,7 +8,7 @@ icon: jupyter.svg
 ---
 
 {{% alert info %}}
-## **JupyterHub** is in a **pilot** phase, we are testing the service with a few courses during Spring 2019. 
+## **JupyterHub** is in a **pilot** phase, we are testing the service with a few courses during Spring 2019.
 {{% /alert %}}   
 
 
@@ -31,5 +31,3 @@ Once connected to your server, you are provided an isolated workspace where you 
 # How Do You Get Started?
 
 In order to get started using your own JupyterHub notebook server, please follow the instructions provided in the [Getting Started - Sign In](getting-started/untitled.md) section of this document.
-
-{{% sign email="fer@brown.edu" twitter="1" github="fernandogelin" %}}
