@@ -207,10 +207,11 @@ You can wrap your code in code fences (three backticks), with the opening bactic
 followed by the language:
 
 ```markdown
-```julia
+(open backticks)julia
 code
 (close backticks)
 ```
+
 ```julia
 function hello(name)
    println("Hello, $(name)!")
