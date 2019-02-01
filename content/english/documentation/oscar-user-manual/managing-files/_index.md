@@ -9,8 +9,10 @@ subitems:
     ref: "filesystem"
   - subsection: "Transfering files to and from Oscar"
     ref: "filetransfer"
-  - subsection: "Restoring files"
-    ref: "compiling"
+  - subsection: "Transfering files between Oscar and files.brown.edu"
+    ref: "filetransfer-isilon"
+  - subsection: "Restoring deleted files"
+    ref: "restore"
   - subsection: "Best practices for IO"
     ref: "io-best-practices"
 ---

@@ -12,6 +12,6 @@ subitems:
   - subsection: "Compiling CUDA"
     ref: "cuda-compiling"
   - subsection: "Mixing MPI and CUDA"
-    ref: "mixing MPI and CUDA"
+    ref: "mpi-cuda"
 ---
 

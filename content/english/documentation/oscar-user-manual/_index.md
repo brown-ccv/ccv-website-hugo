@@ -8,7 +8,7 @@ icon: jupyter.svg
 
 # Introduction
 
-Welcome to the CCV Oscar Documentation & Quickstart Guide. This document is designed to help you get started using Oscar. For any questions/comments/concerns regarding this service, please contact CCV by emailing support@ccv.brown.edu
+Welcome to the CCV Oscar User Manual. 
 
 # Oscar
 
