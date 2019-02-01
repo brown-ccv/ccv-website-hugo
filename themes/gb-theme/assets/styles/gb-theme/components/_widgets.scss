@@ -51,11 +51,11 @@
 
 
 // type component
-.type {  
+.type {
   @extend %equal;
 
-  > * { 
-    padding: $card-spacer-x; 
+  > * {
+    padding: $card-spacer-x;
 
     @include media-breakpoint-down(sm) {
       padding: $card-spacer-y;
@@ -150,25 +150,28 @@
 
 // file tree
 .file-tree {
-  margin-bottom: 0;
   padding-left: 20px;
   list-style: none;
   overflow: hidden;
+
+  p {
+    display: none;
+  }
 
   ul {
     list-style: none;
     display: none;
     padding-left: $card-spacer-x;
   }
-  
+
   li {
     position: relative;
-    padding: 5px 0;
+    padding: 1px 0;
     border-radius: $border-radius;
     cursor: auto;
     white-space: nowrap;
-    font-size: $font-size-sm;
-    font-weight: 600;
+    font-size: $font-size-sm * 0.8;
+    font-weight: 100;
 
     &::before {
       content: "\f15b";
@@ -254,7 +257,7 @@
     }
 
     &.active {
-      color: $primary; 
+      color: $primary;
       border-color: $primary;
 
       + ul {

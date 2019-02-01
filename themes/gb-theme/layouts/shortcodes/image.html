@@ -1,0 +1,4 @@
+<figure class="justify-content-{{.Get `align`}} d-flex">
+  <img src="{{ .Page.Parent.Permalink }}{{.Get `src`}}" height={{.Get "height"}} width={{.Get "width"}}>
+  <figcaption>{{.Get "caption"}}</figcaption>
+</figure>

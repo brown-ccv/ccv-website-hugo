@@ -25,7 +25,9 @@
     {{ if eq .Params.level "Main" }}
     <li class="mx-1 nav-item bg-white lift my-1">
         <a class="nav-link" href="{{ .Permalink }}">
+            {{ if .Params.icon }}
             {{ readFile (printf "/themes/gb-theme/static/images/%s" .Params.icon ) | safeHTML }}
+            {{ end }}
             <span class="text-dark fs-20">{{ .Title }}</span>
             <span class="badge badge-red">{{ .Params.version }}</span>
         </a>
