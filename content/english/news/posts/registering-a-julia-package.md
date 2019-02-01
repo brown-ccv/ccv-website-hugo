@@ -7,6 +7,7 @@ tags: ["machine learning", "data science", "pytorch"]
 authors: ["Isabel Restrepo"]
 ---
 
+
 {{% lead %}}
 Scientific computing has traditionally required the highest performance, yet domain experts have largely moved to slower dynamic languages for daily work. We believe there are many good reasons to prefer dynamic languages for these applications, and we do not expect their use to diminish. Fortunately, modern language design and compiler techniques make it possible to mostly eliminate the performance trade-off and provide a single environment productive enough for prototyping and efficient enough for deploying performance-intensive applications. The Julia programming language fills this role: it is a flexible dynamic language, appropriate for scientific and numerical computing, with performance comparable to traditional statically-typed languages.
 {{% /lead %}}
@@ -124,6 +125,8 @@ def die(*messages):
 
 Start Julia again and publish your package! (step 4)
 At this point you could reset your metadata-v2 branch if you need to.
+
+{{< cite "10.3354/meps12568">}}
 
 
 {{% sign email="fer@brown.edu" twitter="1" github="fernandogelin" %}}

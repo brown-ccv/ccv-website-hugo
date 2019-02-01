@@ -5,3 +5,7 @@ article {
     font-size: $h1-font-size * 0.7;
   }
 }
+
+.line-height-short span {
+  line-height: $line-height-sm * 0.1 !important;
+}

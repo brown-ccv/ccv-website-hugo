@@ -1,0 +1,24 @@
+{{ $doi := (.Get 0)}}
+{{ range .Site.Data.citations }}
+{{ if eq .doi $doi }}
+<p>
+  {{ $last := sub (len .author) 1 }}
+  {{ range $index, $author := .author }}
+  <span>{{ $author.family }}, {{ $author.given }}
+  {{if ne $index $last}}
+  ,
+  {{ else }}
+  .
+  {{ end }}
+  </span>
+  {{ end }}
+  <i>{{ .title }}.</i>
+  <span>{{ if .page}}{{ .page }}.{{end}}</span>
+  <span>{{if .volume}}{{ .volume }}.{{end}}</span>
+  <span class="font-weight-bold">{{if .journal}}{{.journal}}.{{end}}</span>
+  <span>{{if .publisher}}{{ .publisher }}.{{end}}</span>
+  <span class="font-weight-bold">{{if .pubyear}}{{ .pubyear }}.{{end}}</span>
+  {{if .URL}}<a href="{{.URL}}">{{ .URL }}.</a>{{end}}
+</p>
+{{ end }}
+{{ end }}
