@@ -18,9 +18,11 @@ install:
   - npm install
 
 script:
+  - node index.js
   - hugo
 
 before_deploy:
+  - node index.js
   - hugo
 
 deploy:
