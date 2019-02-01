@@ -1,0 +1,7 @@
+<li class="file-tree-folder {{if eq (.Get `open`) `true` }}open{{end}}">
+{{ .Get "name" }}
+<span class="description">{{ .Get "description"}}</span>
+<ul>
+{{ .Inner }}
+</ul>
+</li>
