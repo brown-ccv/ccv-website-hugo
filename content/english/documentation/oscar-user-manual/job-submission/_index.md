@@ -13,6 +13,8 @@ subitems:
     ref: "interact"
   - subsection: "batch jobs"
     ref: "batch"
+  - subsection: "managing jobs"
+    ref: "managing-jobs"
   - subsection: "array jobs"
     ref: "array"
 ---
