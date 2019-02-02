@@ -167,17 +167,15 @@ content. All posts should have a preface with a bigger font-size, and to accompl
 that we use the `lead` shortcode. Just wrap your text between the shortcode tags:
 
 ```go
-\{\{% lead %}}
+{{%/* lead */%}}
 Lead paragraph.
-\{\{% /lead %}}
+{{%/* /lead */%}}
 ```
 
 {{% alert info %}}
 Shortcodes can use `%` or `<>`. When you use the `%` notation, the text within the
 tags can be written in Markdown. If you use `<>` the shortcode will get the plain
 text.
-Also, note that the `\` before each `{` in the beginning of the shortcode are not
-necessary. Hugo treats them as literal, even inside of a code block.
 {{% /alert %}}
 
 ## Images
@@ -187,7 +185,7 @@ To add images to your content, simply add the image to the same folder as the
 the image:
 
 ```go  
-  \{\{< image src="path/dogs.png" height="400" align="center">}}
+  {{</* image src="path/dogs.png" height="400" align="center" */>}}
 ```
 
 {{< image src="images/dogs.png" height="400" align="center">}}
@@ -195,10 +193,10 @@ the image:
 If you want to use an image from the internet, use the shortcode `figure` instead:
 
 ```go
-  \{\{< figure src="https://www.kody.dog/images/kody-locks.jpg" height="400" class="d-flex justify-content-center">}}
+  {{</* figure src="https://www.kody.dog/images/kody-locks.jpg" height="400" class="d-flex justify-content-center" */>}}
 ```
 
-{{< figure src="https://www.kody.dog/images/kody-locks.jpg" height="400" class="d-flex justify-content-center">}}
+{{< figure src="https://www.kody.dog/images/kody-locks.jpg" height="400" class="d-flex justify-content-center" >}}
 
 ## Code blocks
 
@@ -207,9 +205,9 @@ You can wrap your code in code fences (three backticks), with the opening bactic
 followed by the language:
 
 ```markdown
-(open backticks)julia
+"```julia
 code
-(close backticks)
+```"
 ```
 
 ```julia
@@ -227,11 +225,11 @@ display the lines as table (the other option is `inline`), it will highlight
 lines 2 and 4, and will start at line 101.
 
 ```go
-\{\{< highlight julia "linenos=table, hl_lines=2 4, linenostart=101">}}
+{{</* highlight julia "linenos=table, hl_lines=2 4, linenostart=101" */>}}
 
 code ...
 
-\{\{< /highlight >}}
+{{</* /highlight */>}}
 ```
 
 {{< highlight julia "linenos=table, hl_lines=2 4, linenostart=101">}}
@@ -263,8 +261,9 @@ The `alert` shortcode is used for that, and it takes one positional argument:
 info, success, warning, or danger.
 
 ```go
-\{\{% alert danger %}}
-\{\{% /alert %}}
+{{%/* alert danger */%}}
+content
+{{%/* /alert */%}}
 
 ```
 
@@ -280,7 +279,7 @@ You can easily include citations to your content. Just use the shortcode `cite`
 and pass a positional argument with the article's DOI.
 
 ```go
-\{\{< cite "10.1016/j.actamat.2016.11.003" >}}
+{{</* cite "10.1016/j.actamat.2016.11.003" */>}}
 ```
 
 The shortcode will render the citation:
@@ -312,9 +311,9 @@ shortcodes involved.
    folders and files should be within this shortcode:
 
 ```go
-\{\{< file-tree >}}
+{{</* file-tree */>}}
 other shortcodes go here
-\{\{< /file-tree >}}
+{{</* /file-tree */>}}
 ```
 
   - **Folders** - `dir`: this will create a folder with contents in it. Also needs an
@@ -322,45 +321,45 @@ other shortcodes go here
   of the folder on load.
 
 ```go
-  \{\{% file-tree %}}
-  \{\{% dir name="content" open="true" %}}
+  {{</* file-tree */>}}
+  {{</* dir name="content" open="true" */>}}
 
-  \{\{% file name="file_name.md"%}}
+  {{</* file name="file_name.md" */>}}
 
-  \{\{% /dir %}}
-  \{\{% /file-tree %}}
+  {{</* /dir */>}}
+  {{</* /file-tree */>}}}
 ```
-{{% file-tree %}}
-{{% dir name="content" open="true" %}}
-{{% file name="file_name.md"%}}
+{{< file-tree >}}
+{{< dir name="content" open="true" >}}
+{{< file name="file_name.md" >}}
 
-{{% /dir %}}
-{{% /file-tree %}}
+{{< /dir >}}
+{{< /file-tree >}}
   - **Empty folders** - `folder`: this will create an item with folder icon, but not
   expandable.
 
 ```go
-\{\{% file-tree %}}
-\{\{% folder name="content"%}}
+{{</* file-tree */>}}
+{{</* folder name="content" */>}}
 
-\{\{% /file-tree %}}
+{{</* /file-tree */>}}
 ```
-{{% file-tree %}}
-{{% folder name="content"%}}
+{{< file-tree >}}
+{{< folder name="content" >}}
 
-{{% /file-tree %}}
+{{< /file-tree >}}
 - **Files** - `file`: this will create an item with file icon. Files are not expandable.
 
 ```go
-\{\{% file-tree %}}
-\{\{% file name="file_name.md"%}}
+{{</* file-tree */>}}
+{{</* file name="file_name.md" */>}}
 
-\{\{% /file-tree %}}
+{{</* /file-tree */>}}
 ```
-{{% file-tree %}}
-{{% file name="file_name.md"%}}
+{{< file-tree >}}
+{{< file name="file_name.md" >}}
 
-{{% /file-tree %}}
+{{< /file-tree >}}
 The shortcodes `dir`, `folder`, and `file` take a `description` argument, that will
 add a small description after the object name.
 
@@ -372,9 +371,9 @@ content. They both take two positional arguments. The first is the icon name (ch
 the second is the size, with size not being required. Note that only the free icons are available.
 
 ```go
-\{\{< fas clock >}}
-\{\{< fas users 2 >}}
-\{\{< fab google-drive 3 >}}
+{{</* fas clock */>}}
+{{</* fas users 2 */>}}
+{{</* fab google-drive 3 */>}}
 
 ```
 
