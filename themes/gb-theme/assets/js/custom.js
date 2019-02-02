@@ -27,4 +27,8 @@ $(function () {
 //         $(`${targetId}`).removeClass('show');
 //         $(`${targetId}`).addClass('collapse');
 //     })
+
+// Add table class
+    $('table').addClass('table');
+    $('table').addClass('w-50');
 });
