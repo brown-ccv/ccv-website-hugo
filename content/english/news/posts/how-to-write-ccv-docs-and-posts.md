@@ -376,8 +376,16 @@ The shortcode will render the citation:
 {{< cite "10.1016/j.actamat.2016.11.003" >}}
 
 {{% alert warning %}}
-For the `cite` shortcode to work, you need to add the DOI in a yaml list in the
-file `data/_citations.yaml`. Or, if you are not an admin, leave a note on your pull
+For the `cite` shortcode to work, you need to add the DOI to a yaml list in the
+file `data/_citations.yaml`, then restart the server or build the site:
+```bash
+# to start the server:
+npm run serve
+
+# to build the site:
+npm run build
+```
+Or, if you are not an admin, leave a note on your pull
 request so the admin can set it up before the post is published.
 {{% /alert %}}
 

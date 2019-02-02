@@ -9,6 +9,8 @@
   },
   "devDependencies": {},
   "scripts": {
+    "serve": "node index.js && hugo serve",
+    "build": "node index.js && hugo",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
