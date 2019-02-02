@@ -202,13 +202,7 @@ If you want to use an image from the internet, use the shortcode `figure` instea
 
 There are two possible ways to create a code block within a markdown file in Hugo.
 You can wrap your code in code fences (three backticks), with the opening bacticks
-followed by the language:
-
-```markdown
-"```julia
-code
-```"
-```
+followed by the language.
 
 ```julia
 function hello(name)
