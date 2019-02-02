@@ -347,7 +347,7 @@ There are 4 types of alert boxes:
 {{% /alert %}}
 
 The `alert` shortcode is used for that, and it takes one positional argument:
-info, success, warning, or danger.
+`info`, `success`, `warning`, `danger`, or `note`.
 
 ```go
 {{%/* alert danger */%}}
