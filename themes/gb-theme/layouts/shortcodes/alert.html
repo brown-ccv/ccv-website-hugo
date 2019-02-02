@@ -1,4 +1,4 @@
-<div class="alert alert-{{.Get 0}} lift p-2" role="alert">
+<div class="alert {{if eq (.Get 0) `note`}}border border-primary text-blue{{else}}alert-{{.Get 0}}{{ end }} lift p-2" role="alert">
   {{ if (eq (.Get 0) "info") }}
   <i class="icon-life-buoy2"></i>
   {{ else if (eq (.Get 0) "danger")}}
@@ -7,6 +7,8 @@
   <i class="icon-check2"></i>
   {{ else if (eq (.Get 0) "warning")}}
   <i class="icon-alert-circle"></i>
+  {{ else if (eq (.Get 0) "note")}}
+  <i class="icon-pencil"></i>
   {{ end }}
   <h4 class="fs-26 text-{{.Get 0}}">
     <strong>{{ humanize (.Get 0)}}</strong>
