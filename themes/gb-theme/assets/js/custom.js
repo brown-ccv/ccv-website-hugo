@@ -30,5 +30,5 @@ $(function () {
 
 // Add table class
     $('table').addClass('table');
-    $('table').addClass('w-50');
+    $('.dark-thead > table > thead').addClass('thead-dark');
 });

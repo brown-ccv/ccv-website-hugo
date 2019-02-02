@@ -198,6 +198,80 @@ If you want to use an image from the internet, use the shortcode `figure` instea
 
 {{< figure src="https://www.kody.dog/images/kody-locks.jpg" height="400" class="d-flex justify-content-center" >}}
 
+
+## Tables
+
+You can add tables to your content in a standard Markdown format to get a simple
+table with a default style.
+
+```markdown
+Name    | Age
+--------|------
+Bob     | 27
+Alice   | 23
+
+```
+
+Name    | Age
+--------|------
+Bob     | 27
+Alice   | 23
+
+If you want to modify the style of the table, you can use the shortcode `table`.
+This shorcode takes the argument `c` for color, with the options `dark` and `light`;
+the argument `hover`, either `true` or `false`; the argument `w` for width, 25,
+50, 75, 100, and auto corresponding to the percentage of the div; and the argument
+`head`, that defines the color of the header, either `dark` or `light`. See examples
+below:
+
+```go
+{{%/* table c="light" hover="true" w="50" head="light" */%}}
+Name    | Age
+--------|------
+Bob     | 27
+Alice   | 23
+{{%/* /table */%}}
+
+```
+{{% table c="light" hover="true" w="50" head="light" %}}
+Name    | Age
+--------|------
+Bob     | 27
+Alice   | 23
+{{% /table %}}
+
+
+```go
+{{%/* table c="dark" hover="true" w="75" */%}}
+Name    | Age
+--------|------
+Bob     | 27
+Alice   | 23
+{{%/* /table */%}}
+
+```
+{{% table c="dark" hover="true" w="75" %}}
+Name    | Age
+--------|------
+Bob     | 27
+Alice   | 23
+{{% /table %}}
+
+```go
+{{%/* table c="light" hover="false" w="100" head="dark" */%}}
+Name    | Age
+--------|------
+Bob     | 27
+Alice   | 23
+{{%/* /table */%}}
+
+```
+{{% table c="light" hover="false" w="100" head="dark" %}}
+Name    | Age
+--------|------
+Bob     | 27
+Alice   | 23
+{{% /table %}}
 ## Code blocks
 
 There are two possible ways to create a code block within a markdown file in Hugo.

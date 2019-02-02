@@ -1,0 +1,3 @@
+<div class="table-{{.Get `c`}} {{ if eq (.Get `hover`) `true`}}table-hover{{end}} w-{{.Get `w`}} {{if eq (.Get `head`) `dark`}}dark-thead{{ end }}">
+{{ .Inner }}
+</div>
