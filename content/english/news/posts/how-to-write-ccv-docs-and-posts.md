@@ -356,7 +356,7 @@ content
 
 ```
 
-Also, note that for code blocks and alert boxes, we need a closing tag.
+Also, note that for code blocks, alert boxes, and tables we need a closing tag.
 That is only the case when there's content inside of the element. For images,
 for example, we pass the arguments directly to the the shortcode
 so there's no need to add the closing tag.
@@ -423,7 +423,8 @@ other shortcodes go here
 {{< file name="file_name.md" >}}
 
 {{< /dir >}}
-{{< /file-tree >}}
+{{< /file-tree >}}  
+
   - **Empty folders** - `folder`: this will create an item with folder icon, but not
   expandable.
 
@@ -436,8 +437,9 @@ other shortcodes go here
 {{< file-tree >}}
 {{< folder name="content" >}}
 
-{{< /file-tree >}}
-- **Files** - `file`: this will create an item with file icon. Files are not expandable.
+{{< /file-tree >}}  
+
+  - **Files** - `file`: this will create an item with file icon. Files are not expandable.
 
 ```go
 {{</* file-tree */>}}
