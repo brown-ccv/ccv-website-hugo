@@ -13,7 +13,8 @@
 </div>
 
 <!-- table of contents -->
-<div class="container col-md-6 overlay-top">
+<div class="container-fluid overlay-top justify-content-center d-flex">
+  <div class="col-lg-6 col-md-10 col-sm-12">
     <ul class="nav nav-toc-page flex-column boxed">
       {{ range $key, $value := .Site.Taxonomies.category }}
       {{ range first 1 $value.Pages }}
@@ -33,19 +34,18 @@
         {{ end }}
         {{ end }}
     </ul>
+    </div>
   </div>
 
 <!-- content -->
-<div class="container">
-  <div class="container py-10">
-    <div class="row justify-content-center">
-      <div class="col-md-12">
+<div class="container-fluid d-flex justify-content-center px-0">
+  <div class="col-lg-9 col-md-11 col-sm-12 py-10">
 
       {{ range $key, $value := .Site.Taxonomies.category }}
       {{ range first 1 $value.Pages }}
       {{ if eq .Section $current_section }}
         <header id="{{$key}}" class="d-flex align-items-center">
-          <span class="btn-{{ if eq .Section `resources`}}yellow{{else if eq .Section `support`}}primary{{end}} btn-ico btn-lg btn-rounded"><i class="icon-{{ .Params.icon }} fs-40"></i></span>
+          <span class="btn-blue btn-ico btn-lg btn-rounded"><i class="icon-{{ .Params.icon }} fs-40"></i></span>
           <h1 class="mx-4 text-secondary">{{ humanize $key }}</h1>
           <hr class="bg-dark w-40"/>
         </header>
@@ -70,8 +70,6 @@
       {{ end }}
       {{ end }}
       {{ end }}
-    </div>
-  </div>
 </div>
 
 {{ end }}

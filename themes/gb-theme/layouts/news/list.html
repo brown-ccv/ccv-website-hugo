@@ -12,32 +12,34 @@
 </div>
 </div>
 
-<div class="container col-md-5 col-sm-10 overlay-top">
-  <ul class="nav nav-toc-page flex-column boxed">
-    {{ range $key, $value := .Site.Taxonomies.types }}
-    {{ range first 1 $value.Pages }}
-    {{ if eq .Section $current_section }}
-      <li class="mx-1 nav-item bg-white lift my-1">
-          <a class="nav-link" href="{{.Site.BaseURL }}/{{ .Section }}/{{$key}}">
-              {{if eq `posts` $key}}
-              <span class="text-dark fas fa-blog pr-1 fs-28 text-green"></span>
-              {{ else if eq `events` $key}}
-              <span class="text-dark fas fa-calendar-day pr-1 fs-28 text-green"></span>
-              {{ else }}
-              <span class="text-dark fas fa-chalkboard-teacher pr-1 fs-28 text-green"></span>
-              {{ end }}
-              <span class="text-dark fs-20">{{ humanize $key }}</span>
-          </a>
-      </li>
-      {{ end }}
-      {{ end }}
-      {{ end }}
-  </ul>
+<div class="container-fluid overlay-top justify-content-center d-flex">
+  <div class="col-lg-6 col-md-10 col-sm-12">
+      <ul class="nav nav-toc-page flex-column boxed">
+        {{ range $key, $value := .Site.Taxonomies.types }}
+        {{ range first 1 $value.Pages }}
+        {{ if eq .Section $current_section }}
+          <li class="mx-1 nav-item bg-white lift my-1">
+              <a class="nav-link" href="{{.Site.BaseURL }}/{{ .Section }}/{{$key}}">
+                  {{if eq `posts` $key}}
+                  <span class="text-dark fas fa-blog pr-1 fs-28 text-green"></span>
+                  {{ else if eq `events` $key}}
+                  <span class="text-dark fas fa-calendar-day pr-1 fs-28 text-green"></span>
+                  {{ else }}
+                  <span class="text-dark fas fa-chalkboard-teacher pr-1 fs-28 text-green"></span>
+                  {{ end }}
+                  <span class="text-dark fs-20">{{ humanize $key }}</span>
+              </a>
+          </li>
+          {{ end }}
+          {{ end }}
+          {{ end }}
+      </ul>
+    </div>
 </div>
 
 <div class="container-fluid">
-    <div class="row">
-    <section class="my-2 bg-light col-md-9 col-sm-12">
+    <div class="row d-flex justify-content-center">
+    <section class="my-2 bg-light col-md-7 col-sm-12">
     <!-- News front page -->
     {{ if eq .Title "News" }}
     {{ range $key, $value := .Site.Taxonomies.types }}

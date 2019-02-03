@@ -14,7 +14,8 @@
 
 
 <!-- table of contents -->
-  <div class="container col-lg-6 overlay-top">
+  <div class="container-fluid overlay-top justify-content-center d-flex">
+    <div class="col-lg-6 col-md-10 col-sm-12">
     <ul class="nav nav-toc-page flex-column boxed">
       {{ range .Params.items }}
         <li class="mx-1 nav-item bg-white lift my-1">
@@ -25,10 +26,11 @@
         </li>
         {{ end }}
     </ul>
+    </div>
   </div>
 
 
-    <div class="container-fluid d-flex justify-content-center py-10">
+    <div class="container-fluid d-flex justify-content-center py-10 px-0">
         <div class="col-lg-9 col-md-11 col-sm-12">
 
           <!-- Overview -->

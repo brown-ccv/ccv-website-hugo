@@ -19,22 +19,24 @@
 </aside>
 
 <!-- table of contents -->
-<div class="container col-md-6 overlay-top">
-<ul class="nav nav-toc-page flex-column boxed">
-    {{ range where $.Site.Pages "Section" "documentation" }}
-    {{ if eq .Params.level "Main" }}
-    <li class="mx-1 nav-item bg-white lift my-1">
-        <a class="nav-link" href="{{ .Permalink }}">
-            {{ if .Params.icon }}
-            {{ readFile (printf "/themes/gb-theme/static/images/%s" .Params.icon ) | safeHTML }}
-            {{ end }}
-            <span class="text-dark fs-20">{{ .Title }}</span>
-            <span class="badge badge-red">{{ .Params.version }}</span>
-        </a>
-    </li>
-    {{ end }}
-    {{ end }}
-</ul>
+<div class="container-fluid overlay-top justify-content-center d-flex">
+  <div class="col-lg-6 col-md-10 col-sm-12">
+    <ul class="nav nav-toc-page flex-column boxed">
+        {{ range where $.Site.Pages "Section" "documentation" }}
+        {{ if eq .Params.level "Main" }}
+        <li class="mx-1 nav-item bg-white lift my-1">
+            <a class="nav-link" href="{{ .Permalink }}">
+                {{ if .Params.icon }}
+                {{ readFile (printf "/themes/gb-theme/static/images/%s" .Params.icon ) | safeHTML }}
+                {{ end }}
+                <span class="text-dark fs-20">{{ .Title }}</span>
+                <span class="badge badge-red">{{ .Params.version }}</span>
+            </a>
+        </li>
+        {{ end }}
+        {{ end }}
+    </ul>
+  </div>
 </div>
 
 <aside id="menu" class="col-lg-3 col-xxl-2 p-3 bg-white shadow">
