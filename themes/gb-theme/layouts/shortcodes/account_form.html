@@ -1,0 +1,70 @@
+<div class="d-flex justify-content-center">
+  <h1 class="my-4">Request an Account on Oscar</h1>
+</div>
+<form>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputPassword4">Name</label>
+      <input type="text" class="form-control" id="inputName4" placeholder="Name">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputAddress">Mobile number</label>
+      <input type="tel" class="form-control" id="inputTel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+             placeholder="123-456-7890">
+      <label>
+        A temporary password will be texted to this number.
+      </label>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">Email</label>
+      <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputPassword4">Brown username</label>
+      <input type="text" class="form-control" id="inputUsername4" placeholder="username">
+    </div>
+
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputState">User Type</label>
+      <select id="inputState" class="form-control">
+        <option selected>Choose...</option>
+        <option>Faculty</option>
+        <option>Staff</option>
+        <option>Graduate</option>
+        <option>Undergrad</option>
+        <option>External</option>
+      </select>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputState">Account Type</label>
+      <select id="inputState" class="form-control">
+        <option selected>Choose...</option>
+        <option>Exploratory (free; recommended if unsure)</option>
+        <option>Premium</option>
+        <option>Add to PI's condo queue</option>
+      </select>
+      <label><a href="/">click for premium rates</a></label>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Intended Use</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+  </div>
+  <div class="form-row">
+
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">Advisor or PI</label>
+      <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputPassword4">Advisor or PI's email address</label>
+      <input type="text" class="form-control" id="inputUsername4" placeholder="username">
+      <label>we ask for email approval from a PI before creating accounts associated with their group.</label>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>

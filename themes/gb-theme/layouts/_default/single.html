@@ -4,8 +4,8 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12 d-flex flex-column pt-6 pb-10">
-          <h1 class="fs-60"> {{ humanize .Title }} </h1>
-          <p class="fs-30 text-beige">{{ .Params.lead }}</p>
+          <h1 class="fs-60"> {{ humanize .Title | markdownify }} </h1>
+          <p class="fs-30 text-beige">{{ .Params.lead | markdownify }}</p>
 
         </div>
     </div>
@@ -20,7 +20,7 @@
     <div class="row justify-content-center">
       <div class="col-md-9">
 
-      {{ .Content  }}
+      {{ .Content }}
     </div>
   </div>
 </div>

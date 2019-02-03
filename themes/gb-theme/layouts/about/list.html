@@ -28,10 +28,8 @@
   </div>
 
 
-  <div class="container">
-    <div class="container py-10">
-      <div class="row justify-content-center">
-        <div class="col-md-12">
+    <div class="container-fluid d-flex justify-content-center py-10">
+        <div class="col-lg-9 col-md-11 col-sm-12">
 
           <!-- Overview -->
           <header id="overview" class="d-flex align-items-center">
@@ -55,21 +53,21 @@
         </article>
 
         <!-- People -->
-        <header id="overview" class="d-flex align-items-center">
+        <header id="people" class="d-flex align-items-center">
           <span class="btn-red btn-ico btn-lg btn-rounded"><i class="fas fa-person-booth fs-40"></i></span>
           <h1 class="mx-4 text-secondary">People</h1>
           <hr class="bg-dark w-40"/>
         </header>
 
-        <article class="d-flex py-6 justify-content-between flex-wrap">
+        <article class="container-fluid row py-4">
           {{ range where $.Site.Pages "Section" "people"}}
           {{ if .Params }}
-          <div class="card card-background mb-0 mx-0" style="max-width: 25%; max-height: 16rem;">
+          <div class="col-xl-3 col-md-4 col-sm-6 col-xs-12 card card-background mb-0 mx-0" >
             <div class="image" style="background-image:url('{{"/images/people/gelin.png" | absURL }}')"></div>
             <div class="card-body">
-              <h2 class="card-title mb-0">{{ .Params.name }}</h2>
-              <p class="card-text">{{ .Params.title }}</p>
-              <small class="font-weight-bold text-beige"><span class="icon-users2 pr-1"></span>{{ .Params.team }}</small>
+              <h2 class="card-title mb-0 fs-20">{{ .Params.name }}</h2>
+              <p class="card-text fs-18">{{ .Params.title }}</p>
+              <p class="font-weight-bold text-beige text-small"><span class="icon-users2 pr-1"></span>{{ .Params.team }}</p>
             </div>
           </div>
           {{ end }}
@@ -119,5 +117,4 @@
 
       </div>
     </div>
-  </div>
 {{ end }}

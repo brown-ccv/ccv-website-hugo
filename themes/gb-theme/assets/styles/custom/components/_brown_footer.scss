@@ -1,7 +1,7 @@
 /* Footer */
 #brown-footer {
-  color: $dark;
-  background-color: $green;
+  color: $light;
+  background-color: $brown;
   padding: 0; }
   #brown-footer .marginator {
     width: 100%; }
@@ -14,7 +14,7 @@
       text-indent: -999em;
       height: 25px;
       width: 125px;
-      background: transparent url("../i/brown-logo-footer.svg") -2px 0 no-repeat;
+      background: transparent url("/images/brown-logo-footer.svg") -2px 0 no-repeat;
       background-size: contain;
       margin: 2rem auto 1em auto;
       order: 1; }
@@ -55,7 +55,7 @@
         #brown-footer #brown-contact .contact-location li:last-of-type {
           margin-right: 0; }
         #brown-footer #brown-contact .contact-location li a {
-          color: $dark;
+          color: $light;
           text-decoration: none; }
           #brown-footer #brown-contact .contact-location li a:hover {
             color: #FFC72C;
@@ -84,7 +84,7 @@
           margin-right: 15px;
           cursor: pointer; }
           #brown-footer #social-media ul li a:hover {
-            color: $dark; }
+            color: $light; }
     #brown-footer #social-media .social-link {
       display: inline-block;
       float: right;
@@ -93,7 +93,7 @@
       #brown-footer #social-media .social-link a {
         display: block;
         width: 100%;
-        color: $dark;
+        color: $light;
         text-transform: uppercase;
         letter-spacing: 1px;
         text-align: center;
@@ -128,7 +128,7 @@
     #brown-footer #footer-copyright p {
       font-size: .9em;
       text-align: center;
-      color: $dark; }
+      color: $light; }
       #brown-footer #footer-copyright p .copyright {
         font-family: Circular-Book, Arial, Helvetica, sans-serif;
         padding-right: 15px; }
@@ -136,13 +136,13 @@
         display: inline;
         font-family: Circular-Book, Circular-Book, Arial, Helvetica, sans-serif;
         text-decoration: none;
-        color: $dark;
+        color: $light;
         padding-left: 15px; }
         #brown-footer #footer-copyright p .link-top:hover {
           color: #FFC72C; }
         #brown-footer #footer-copyright p .link-top .i-arrow-up-line {
           color: #FFC72C; }
-
+f
 .university-nav-red #brown-footer {
   background-color: #C00404; }
   .university-nav-red #brown-footer section #give-to-brown .giving-footer {

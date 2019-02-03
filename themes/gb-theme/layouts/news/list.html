@@ -12,7 +12,7 @@
 </div>
 </div>
 
-<div class="container col-md-5 overlay-top">
+<div class="container col-md-5 col-sm-10 overlay-top">
   <ul class="nav nav-toc-page flex-column boxed">
     {{ range $key, $value := .Site.Taxonomies.types }}
     {{ range first 1 $value.Pages }}
@@ -35,9 +35,9 @@
   </ul>
 </div>
 
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-    <section class="my-2 bg-light col-md-9">
+    <section class="my-2 bg-light col-md-9 col-sm-12">
     <!-- News front page -->
     {{ if eq .Title "News" }}
     {{ range $key, $value := .Site.Taxonomies.types }}
