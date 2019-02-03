@@ -52,22 +52,23 @@
       <!-- / navigation -->
 
       <!-- content -->
-      <article class="col-lg-9 col-xxl-10 doc-content">
+      <article class="col-lg-9 col-md-12 col-sm-12 doc-content">
 
         <div class="row justify-content-between doc-content-body">
-          <article class="col-md-9 col-xxl-8">
+          <article class="col-md-9 ">
             {{ .Content | markdownify }}
           </article>
-          <aside class="col-md-3 col-xxl-3 d-none d-md-block">
+          <aside class="col-md-3 d-none d-md-block">
             <div class="sticky">
               {{ .TableOfContents }}
             </div>
           </aside>
-          <aside id="menu" class="col-lg-3 col-xxl-2 p-3 bg-white">
-          {{ partial "blocks/menu" . }}
-          </aside>
         </div>
       </article>
+
+      <aside id="menu" class="col-lg-2 p-3 bg-white">
+      {{ partial "blocks/menu" . }}
+      </aside>
       <!-- / content -->
     </div>
   </div>

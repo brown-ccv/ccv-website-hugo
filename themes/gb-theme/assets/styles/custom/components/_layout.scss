@@ -1,4 +1,10 @@
 // sections
+footer {
+  .ccv-logo {
+    height: 2.5rem !important;
+  }
+}
+
 section, footer {
   .ccv-logo {
     height: 4rem;
@@ -22,6 +28,7 @@ section, footer {
     }
   }
 }
+
 .news {
   article {
     h1 {

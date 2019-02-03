@@ -50,18 +50,16 @@
       <!-- / navigation -->
 
       <!-- content -->
-      <article class="col-lg-9 col-xxl-10 doc-content">
+      <article class="col-lg-9 doc-content">
 
         <div class="row justify-content-between doc-content-body">
-          <article class="col-md-9 col-xxl-8">
-            <div class="row">
+          <article class="col-md-9">
+            <div>
               <h1><strong>{{ .Title }}</strong></h1>
-            </div>
-            <div class="row">
                 {{ .Content | markdownify }}
               </div>
             <div class="row">
-            <div class="col-md-12 col-xxl-8">
+            <div class="col-md-12">
               <ul class="list-group list-group-lines">
                 {{ range .Pages }}
                 <a href="{{ .Permalink }}">

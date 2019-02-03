@@ -17,7 +17,7 @@ quick_links:
       weight: 1
     - name: Oscar
       icon: desktop
-      text: Some text goes here
+      text: Create an account
       href:
       weight: 0
     - name: High Performance Computing
@@ -25,31 +25,11 @@ quick_links:
       text: Some text goes here
       href:
       weight:
-    - name: Data Visualization
-      icon: bar-chart2
-      text: Some text goes here
-      href:  
-      weight: 4
-    - name: User Manuals
-      icon: book
-      text: See our documentation
-      href:
-      weight: 2
-    - name: Support
-      icon: ticket
-      text: submit a ticket
-      href:
-      weight: 3
-    - name: Advanced Research Computing
-      icon: code
-      text: Some text goes here
-      href:
-      weight: 5
     - name: Institutional Data
       icon: university
       text: Some text goes here
-      href:
-      weight: 6
+      href:  
+      weight: 4
 showcase:
   title: "CCV @ Brown"
   items:
