@@ -8,17 +8,6 @@ weight: 0
 icon: check
 ---
 
-# File transfer
-
-{{< alert info >}}
-
-Oscar has transfer nodes with a high speed conection for quickly moving
-data.  To use the transfer nodes use `transfer.ccv.brown.edu` as the 
-host address.
-
-{{</ alert >}}
-
-
 # Moving files from files.brown.edu
 
 The department file servers (also known as Isilon) are:

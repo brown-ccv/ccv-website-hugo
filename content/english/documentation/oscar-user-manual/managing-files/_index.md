@@ -5,7 +5,7 @@ section: Managing files
 version: 1.0.0
 weight: 2 
 subitems:
-  - subsection: "Oscar files system"
+  - subsection: "Oscar filesystem"
     ref: "filesystem"
   - subsection: "Transfering files to and from Oscar"
     ref: "filetransfer"

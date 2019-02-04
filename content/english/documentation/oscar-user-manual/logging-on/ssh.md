@@ -57,3 +57,9 @@ Oscar. In your terminal you will see a prompt like this:
 ````
 
 Congratulations, you are now on one of the Oscar login nodes.  The login nodes are for administrative tasks such as editing files and compiling code.  To use Oscar for computation you will need to use the compute nodes.  To get to the compute nodes from the login nodes you can either start an interactive session on a compute node, or submit a batch job.  
+
+{{< alert warning >}}
+Please do not run CPU-intense or long-running programs directly on
+the login nodes! The login nodes are shared by many users, and you will
+interrupt other users' work.
+{{</ alert >}}

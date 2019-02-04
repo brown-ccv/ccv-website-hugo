@@ -6,48 +6,16 @@ weight: 0
 icon: jupyter.svg
 ---
 
-# Introduction
+Welcome to the CCV Oscar User Manual. Oscar is Brown University's supercomputer. 
 
-Welcome to the CCV Oscar User Manual. 
+{{< alert info >}}
 
-# Oscar
+ Anyone with a Brown account get an exploratory account on 
+ Oscar for free.
+  
+{{</ alert >}}
 
-Oscar is Brown University's supercomputer.  Anyone with a Brown account get access to Oscar for free. 
-
-# Connecting to Oscar for the first time
-
-To log in to Oscar you need Secure Shell (SSH) on your computer. 
-
-## Mac and Linux
-
-To login in to Oscar, open a terminal and type
-
-````
-    ssh username@ssh.ccv.brown.edu
-````
-
-## Windows
-
-Windows users need to install an SSH client. We recommend
-[PuTTY](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html),
-a free SSH client for Windows. In PuTTY, use
-`username@ssh.ccv.brown.edu` the Host Name.
-
-The first time you connect to Oscar you will see a message like:
-
-````
-    The authenticity of host 'ssh.ccv.brown.edu (138.16.172.8)' can't be established.
-    RSA key fingerprint is SHA256:Nt***************vL3cH7A.
-    Are you sure you want to continue connecting (yes/no)? 
-````
-
-You can type `yes` . You will be prompted for your password. Note
-nothing will show up on the screen when you type in your password, just
-type it in and press enter. You will now be in your home directory on
-Oscar. In your terminal you will see a prompt like this:
-
-````
-    [mhamilton@login004 ~]$ 
-````
-
-Congratulations, you are now on one of the Oscar login nodes.
+This user manual assumes you already have an Oscar account.  To request an
+Oscar account, fill in the [new user acccount](account) form.  People external
+to Brown can get access to Oscar by having a sponsed Brown account.  Please work
+with your department to get sponsored Brown accounts for any external collaborators

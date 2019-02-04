@@ -16,7 +16,7 @@ nodes allow users to connect remotely to a graphical desktop environment
 running on an Oscar compute node.
 
 Using VNC, you can run GUI applications such as Matlab, Mathematica and Rstudio. 
-You  have fast access to Oscar's high performance file system. This allows you
+with fast access to Oscar's high performance file system. This allows you
 to analyze and visualize large data files without the need to move the data off Oscar.
 
 The CCV VNC requires that you download a client onto your machine.
