@@ -2,6 +2,7 @@
 title: "Filetransfer"
 date: 2019-01-31T17:06:52-05:00
 draft: false
+project: Oscar
 category: ""
 lead: ""
 weight: 0
@@ -32,7 +33,7 @@ window if you disconnect.
     screen
 ````
 
-3\) Use Oscar's  high speed connection to files.brown.edu 
+3\) Use Oscar's  high speed connection to files.brown.edu
 
 
 
@@ -89,4 +90,3 @@ You can toggle recursion ON/OFF with:
 You can toggle prompt OFF/ON with:
 
 `prompt`
-

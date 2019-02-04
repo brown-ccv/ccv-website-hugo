@@ -2,6 +2,7 @@
 title: "Cifs"
 date: 2019-01-31T17:06:09-05:00
 draft: false
+project: Oscar
 category: ""
 lead: ""
 weight: 0
@@ -11,10 +12,10 @@ icon: check
 # Mounting the Oscar filesystem on your machine
 
 CCV users can access their home, data and scratch directories as a local
-mount on their own Windows, Mac, or Linux system using the Common 
+mount on their own Windows, Mac, or Linux system using the Common
 Internet File System (CIFS) protocol (also called Samba). This allows you
-to use applications on your machine to open files on Oscar.  It is a 
-convienient way to drag and drop files from your machine to Oscar and 
+to use applications on your machine to open files on Oscar.  It is a
+convienient way to drag and drop files from your machine to Oscar and
 vise versa.
 
 {{< alert info >}}
@@ -40,7 +41,7 @@ password here as for your Oscar account.
 {{< alert warning >}}
 smbpasswd does not change your SSH login password... and
 changing the SSH login password does not change the CIFS password.
-A password reset will change both your smbpasswd and SSH login password 
+A password reset will change both your smbpasswd and SSH login password
 to the same reset value.
 {{</ alert >}}
 
@@ -124,5 +125,4 @@ Linux
 
 -   Mount the share:
 
-        $ mount -a 
-
+        $ mount -a

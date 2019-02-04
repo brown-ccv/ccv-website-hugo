@@ -2,6 +2,7 @@
 title: "Submit Gpu"
 date: 2019-01-31T17:03:37-05:00
 draft: false
+project: Oscar
 category: ""
 lead: ""
 weight: 0
@@ -13,7 +14,7 @@ icon: check
 The Oscar GPUs are in a separate partition to the regular compute nodes.  The partition is called `gpu`. To see how many jobs are running and pending in the gpu partition, use
 
 ````
-    allq gpu 
+    allq gpu
 ````
 
 ## Interactive use
@@ -44,7 +45,7 @@ Here is an example batch script for a cuda job that uses 1 gpu and 1 cpu for 5 m
 # Load a CUDA module
 module load cuda
 
-# Run program 
+# Run program
 ./my_cuda_program
 ````
 

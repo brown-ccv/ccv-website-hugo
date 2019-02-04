@@ -2,6 +2,7 @@
 title: "Matlab Gui"
 date: 2019-01-31T17:07:31-05:00
 draft: false
+project: Oscar
 category: ""
 lead: ""
 weight: 0
@@ -68,4 +69,3 @@ Oscar, this might be a quick way to do post-processing on the data
 instead of having to move the data to your computer or using the Matlab
 GUI on Oscar. Note that users can connect to CIFS only from Brown
 computers or on Brown WiFi.
-

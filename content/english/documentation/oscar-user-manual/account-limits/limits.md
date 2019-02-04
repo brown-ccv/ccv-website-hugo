@@ -2,6 +2,7 @@
 title: "Limits"
 date: 2019-01-31T17:01:46-05:00
 draft: false
+project: Oscar
 category: ""
 lead: ""
 weight: 0
@@ -17,13 +18,13 @@ You can email support@ccv.brown.edu if you need advice on which paritions to use
 
 Oscar has the following slurm partitions
 
-Name       | Purpose 
+Name       | Purpose
 -----------|------
 batch      | general purpose computing
-debug      | short wait time, short run time partition for debugging 
+debug      | short wait time, short run time partition for debugging
 gpu        | GPU nodes
 gpu-debug  | short wait time, short run time partition for gpu debugging
-bigmem     | large memory nodes 
+bigmem     | large memory nodes
 smp        | older large memory nodes
 
 
@@ -37,23 +38,23 @@ to lowest: Condo, priority, exploratory
 Limits                                 | Exploratory (free) account| Premium account | Condo
 ---------------------------------------|---------------------------|-----------------|-------
 Maximum number of cores in use at once | 16 | 208 |  condo size                             
-Per job limit                          | only limited by total cores*times limit | only limited by total cores*times limit | only limited by number of condo cores 
+Per job limit                          | only limited by total cores*times limit | only limited by total cores*times limit | only limited by number of condo cores
 Max number of jobs                     | 16 | 208 | condo size
-Total ‘cores*time’ limit (sum of all jobs)    | 16 cores * 48 hours = 46080 core minutes | 208 cores * 80 hours =998400 core minutes | only limited by number of condo cores 
+Total ‘cores*time’ limit (sum of all jobs)    | 16 cores * 48 hours = 46080 core minutes | 208 cores * 80 hours =998400 core minutes | only limited by number of condo cores
 Total memory limit (sum of all jobs)   | 123GB | 1024GB | condo memory limit
 
-Condo limits are by group so are the sum of all users on the condo. 
+Condo limits are by group so are the sum of all users on the condo.
 Condo users can check the limits on their condo with the command `condos`
 
 {{< alert warning >}}
 There is no limit on the time for condo jobs, but users should be aware that there may be CCV planned maintenance on the machine with one month’s notice given.
-{{</ alert >}} 
+{{</ alert >}}
 
 
 # debug partition
 
 * Short wait time, short run time access for debugging.
-* No premium or condo access to the debug partition.  All users have the same limits and priority on the debug partition. 
+* No premium or condo access to the debug partition.  All users have the same limits and priority on the debug partition.
 
  Limis                                 | all users
 ---------------------------------------|-----------------
@@ -86,7 +87,7 @@ Limits                             |  all users
 Max number of GPUs in use at once  | 1
 Max number of CPUs in use at once  | 2
 Max Memory                         | 23GB
-Total gpu*time limit (sum of all jobs) | 1 GPU * 4 hours 
+Total gpu*time limit (sum of all jobs) | 1 GPU * 4 hours
 
 
 # smp partition
@@ -113,7 +114,3 @@ Maximum number of jobs  | 1                          |  2
 Total memory limit (sum of all running jobs in the partition) | 750 GB | 750GB
 Wall clock limit        | 24 hours                   | 96 hours
 Total ‘cores*time’ limit (sum of all jobs) | 32 cores*24 hours = 1 bigmem node for 1 day |  32 cores * 96 hours = 1 bigmem node for 4 day
-
-
-
-

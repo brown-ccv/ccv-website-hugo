@@ -2,15 +2,16 @@
 title: "Matlab Batch"
 date: 2019-01-31T17:07:36-05:00
 draft: false
+project: Oscar
 category: ""
 lead: ""
 weight: 0
 icon: check
 ---
 
-# Submit Matlab batch jobs 
+# Submit Matlab batch jobs
 
-Matlab can be used within a batch script. Here is an example batch script 
+Matlab can be used within a batch script. Here is an example batch script
 for running a serial Matlab program on
 an Oscar compute node:
 
@@ -57,4 +58,3 @@ job can be submitted using the following command:
 ````
     sbatch matlab-serial.sh
 ````
-

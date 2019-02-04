@@ -2,6 +2,7 @@
 title: "Filetransfer"
 date: 2019-01-31T17:06:52-05:00
 draft: false
+project: Oscar
 category: ""
 lead: ""
 weight: 0
@@ -13,16 +14,16 @@ icon: check
 {{< alert info >}}
 
 Oscar has transfer nodes with a high speed conection for quickly moving
-data.  To use the transfer nodes use `transfer.ccv.brown.edu` as the 
+data.  To use the transfer nodes use `transfer.ccv.brown.edu` as the
 host address.
 
 {{</ alert >}}
 
 # Moving files between your machine and Oscar
 
-There are several ways to move files between your machine and Oscar.  Which 
+There are several ways to move files between your machine and Oscar.  Which
 method you choose will depend on how much data you need to move and your
-personal preference for each method. 
+personal preference for each method.
 
   1. CIFS
   2. comand line
@@ -31,7 +32,7 @@ personal preference for each method.
 
 1.\)  CIFS
 
-You can drag and drop files from your machine to the Oscar filesystem with CIFS. 
+You can drag and drop files from your machine to the Oscar filesystem with CIFS.
 This is an easy method for a small number of files.
 
 2.\) Command line
@@ -61,7 +62,7 @@ function from the terminal.
 
 4.\) [Globus online](https://www.globus.org/)
 
-Globus is a secure, reliable research data management service.  If you are 
+Globus is a secure, reliable research data management service.  If you are
 moving data from another institution that has a Globus endpoint, you can move data
 directory to Oscar.  Oscar has two Globus endpoints
 

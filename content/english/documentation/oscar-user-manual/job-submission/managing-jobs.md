@@ -2,6 +2,7 @@
 title: "Managing Jobs"
 date: 2019-02-01T12:16:32-05:00
 draft: false
+project: Oscar
 category: ""
 lead: ""
 weight: 0
@@ -73,4 +74,3 @@ conservative amount based on how much was used.
      A 'c' at the end of number represents Memory Per CPU, a 'n' represents Memory Per Node.
     'MaxRSS' is the maximum memory used on any one node.
     Note that memory specified to sbatch using '--mem' is Per Node.
-

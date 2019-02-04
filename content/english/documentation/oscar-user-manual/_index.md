@@ -1,18 +1,18 @@
 ---
 Title: Oscar
-type: Oscar 
+type: Oscar
 level: Main
 weight: 0
-icon: jupyter.svg
+icon: 
 ---
 
-Welcome to the CCV Oscar User Manual. Oscar is Brown University's supercomputer. 
+Welcome to the CCV Oscar User Manual. Oscar is Brown University's supercomputer.
 
 {{< alert info >}}
 
- Anyone with a Brown account get an exploratory account on 
+ Anyone with a Brown account get an exploratory account on
  Oscar for free.
-  
+
 {{</ alert >}}
 
 This user manual assumes you already have an Oscar account.  To request an

@@ -2,6 +2,7 @@
 title: "Vnc"
 date: 2019-01-31T17:06:05-05:00
 draft: false
+project: Oscar
 category: ""
 lead: ""
 weight: 0
@@ -15,7 +16,7 @@ Computing](http://en.wikipedia.org/wiki/Virtual_Network_Computing) (VNC)
 nodes allow users to connect remotely to a graphical desktop environment
 running on an Oscar compute node.
 
-Using VNC, you can run GUI applications such as Matlab, Mathematica and Rstudio. 
+Using VNC, you can run GUI applications such as Matlab, Mathematica and Rstudio.
 with fast access to Oscar's high performance file system. This allows you
 to analyze and visualize large data files without the need to move the data off Oscar.
 

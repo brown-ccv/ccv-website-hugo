@@ -2,6 +2,7 @@
 title: "Python Installs"
 date: 2019-01-30T12:51:11-05:00
 draft: false
+project: Oscar
 category: ""
 lead: ""
 weight: 0
@@ -14,15 +15,15 @@ icon: check
 We use angular brackets `<>` to denote command line options that you should replace with an appropriate value
 {{< /alert >}}
 
-Users can install python packages 
- 
+Users can install python packages
+
   * into their home directory
   * into a custom location
   * using a virtual environment
   * from source into a custom location
 
 
-## Install into your home directory 
+## Install into your home directory
 
 The `--user` flag will instruct pip to install to you home directory
 
@@ -36,7 +37,7 @@ directory:
     ~/.local/lib/python<version>/site-packages
 
 {{< alert warning >}}
-If you omit the `--user` flag you will see 
+If you omit the `--user` flag you will see
 
     IOError: [Errno 13] Permission denied: '/gpfs/runtime/opt/python/2.7.3/lib/python2.7/site-packages/ordereddict.py'
 
@@ -97,7 +98,7 @@ installed by pip. Or, you may want to use the development version which
 has not been packaged. In this case, the python package can be installed
 by downloading the source code itself. Most python packages can be
 installed by running the `setup.py` script that should be included in
-the downloaded files. 
+the downloaded files.
 
 {{< alert warning>}}
 You will need to provide a "prefix path" for the install location

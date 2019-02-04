@@ -2,6 +2,7 @@
 title: "Shared Machine"
 date: 2019-01-31T17:04:43-05:00
 draft: false
+project: Oscar
 category: ""
 lead: ""
 weight: 0
@@ -10,10 +11,10 @@ icon: check
 
 # Oscar is a shared resource
 
-Oscar is a shared machine used by hundreds of users at once. User 
-requests are called jobs.  A "job" is the combination of the resource 
-requested and the program you want to run on the compute nodes of 
-the Oscar cluster. On Oscar **slurm** is used to schedule and 
+Oscar is a shared machine used by hundreds of users at once. User
+requests are called jobs.  A "job" is the combination of the resource
+requested and the program you want to run on the compute nodes of
+the Oscar cluster. On Oscar **slurm** is used to schedule and
 manage jobs.
 
 Jobs are scheduled to run on the cluster according to your account
@@ -39,4 +40,3 @@ Jobs can be run on Oscar in two different ways:
     time in the background, so you don't need to be connected to Oscar.
     The output of your program is continuously written to an output file
     that you can view both during and after your program runs.
-

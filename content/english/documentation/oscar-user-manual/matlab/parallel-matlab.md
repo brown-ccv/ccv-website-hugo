@@ -2,6 +2,7 @@
 title: "Parallel Matlab"
 date: 2019-01-31T17:07:49-05:00
 draft: false
+project: Oscar
 category: ""
 lead: ""
 weight: 0
@@ -17,7 +18,7 @@ can benefit from massively parallel computations:
     GPUs](http://www.mathworks.com/discovery/matlab-gpu.html)
 
 Finally, parallel computing features like `parfor` and `spmd` can be
-used by launching a pool of workers on a node. 
+used by launching a pool of workers on a node.
 
 {{< alert info >}}
 Note that the Parallel

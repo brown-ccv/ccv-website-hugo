@@ -2,6 +2,7 @@
 title: "Filesystem"
 date: 2019-01-31T17:06:44-05:00
 draft: false
+project: Oscar
 category: ""
 lead: ""
 weight: 0
@@ -10,11 +11,11 @@ icon: check
 
 # File system
 
-CCV uses IBM's General Parallel File System (GPFS).  Users have a home, data, 
+CCV uses IBM's General Parallel File System (GPFS).  Users have a home, data,
 and scratch space.
 
 
- **home** `~` 
+ **home** `~`
 
  * 10GB of space
  * Optimized for many small files

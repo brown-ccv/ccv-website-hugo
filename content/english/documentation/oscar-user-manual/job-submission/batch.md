@@ -2,6 +2,7 @@
 title: "Batch"
 date: 2019-01-31T17:04:57-05:00
 draft: false
+project: Oscar
 category: ""
 lead: ""
 weight: 0
@@ -73,7 +74,7 @@ Useful `sbatch` options:
 
 option                             | purpose
 -----------------------------------|-----------------------------------
- `-J`                              | Specify the job name that will be 
+ `-J`                              | Specify the job name that will be
                                    | displayed when listing the job.   
  `-n`                              | Number of tasks (= number of      
                                    | cores, if "--cpus-per-task" or    
@@ -84,7 +85,7 @@ option                             | purpose
  `-t`                              | Runtime, as HH:MM:SS.             
  `--mem=`                          | Requested memory per node.        
  `-p`                              | Request a specific partition.     
- `-o`                              | Filename for standard output from 
+ `-o`                              | Filename for standard output from
                                    | the job.                          
  `-e`                              | Filename for standard error from  
                                    | the job.                          
@@ -104,4 +105,3 @@ You can read the full list of options at
 <http://slurm.schedmd.com/sbatch.html> or with the command:
 
     $ man sbatch
-
