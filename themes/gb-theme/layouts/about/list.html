@@ -102,7 +102,7 @@
             <span class="font-weight-bold">{{if .journal}}{{.journal}}.{{end}}</span>
             <span>{{if .publisher}}{{ .publisher }}.{{end}}</span>
             <span class="font-weight-bold">{{if .pubyear}}{{ .pubyear }}.{{end}}</span>
-            {{if .URL}}<a href="{{.URL}}">{{ .URL }}.</a>{{end}}
+            {{if .URL}}<a href="{{.URL}}"><span class="fas fa-external-link-square-alt fs-18"></span></a>{{end}}
           </p>
           {{ end }}
         </div>

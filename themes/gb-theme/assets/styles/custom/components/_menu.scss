@@ -6,10 +6,10 @@
 }
 
 #menu {
-  -moz-transform: translateX(22em);
-  -webkit-transform: translateX(22em);
-  -ms-transform: translateX(22em);
-  transform: translateX(22em);
+  -moz-transform: translateX(17em);
+  -webkit-transform: translateX(17em);
+  -ms-transform: translateX(17em);
+  transform: translateX(17em);
   -moz-transition: -moz-transform 0.45s ease, visibility 0.45s;
   -webkit-transition: -webkit-transform 0.45s ease, visibility 0.45s;
   -ms-transition: -ms-transform 0.45s ease, visibility 0.45s;
@@ -17,7 +17,7 @@
   position: fixed;
   top: 0;
   right: 0;
-  width: 22em;
+  width: 17em;
   max-width: 80%;
   height: 100%;
   -webkit-overflow-scrolling: touch;
