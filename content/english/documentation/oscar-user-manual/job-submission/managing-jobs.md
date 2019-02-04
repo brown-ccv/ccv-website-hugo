@@ -3,8 +3,7 @@ title: "Managing Jobs"
 date: 2019-02-01T12:16:32-05:00
 draft: false
 project: Oscar
-category: ""
-lead: ""
+section: Submitting jobs
 weight: 0
 icon: check
 ---

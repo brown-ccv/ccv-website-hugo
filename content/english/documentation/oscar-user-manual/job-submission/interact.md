@@ -3,8 +3,7 @@ title: "Interact"
 date: 2019-01-31T17:04:53-05:00
 draft: false
 project: Oscar
-category: ""
-lead: ""
+section: Submitting jobs
 weight: 0
 icon: check
 ---

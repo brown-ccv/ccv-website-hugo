@@ -3,8 +3,7 @@ title: "Python Installs"
 date: 2019-01-30T12:51:11-05:00
 draft: false
 project: Oscar
-category: ""
-lead: ""
+section: Software
 weight: 0
 icon: check
 ---

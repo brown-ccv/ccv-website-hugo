@@ -3,8 +3,7 @@ title: "Restore"
 date: 2019-02-01T08:43:12-05:00
 draft: false
 project: Oscar
-category: ""
-lead: ""
+section: Managing files
 weight: 0
 icon: check
 ---

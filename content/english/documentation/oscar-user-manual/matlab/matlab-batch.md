@@ -3,8 +3,7 @@ title: "Matlab Batch"
 date: 2019-01-31T17:07:36-05:00
 draft: false
 project: Oscar
-category: ""
-lead: ""
+section: MATLAB
 weight: 0
 icon: check
 ---

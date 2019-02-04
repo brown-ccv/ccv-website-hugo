@@ -3,20 +3,21 @@ title: "Account Types"
 date: 2019-01-31T17:01:25-05:00
 draft: false
 project: Oscar
+section: Account Limits
 category: ""
 lead: ""
 weight: 0
 icon: check
 ---
 
-# Account Types
+# Account Types  
 
-There are four catagories of accounts on Oscar.
+There are four categories of accounts on Oscar.  
 
-* exploratory (free)
-* premium
-* condo
-* class
+  * exploratory (free)  
+  * premium  
+  * condo  
+  * class  
 
 
 ## Exploratory accounts

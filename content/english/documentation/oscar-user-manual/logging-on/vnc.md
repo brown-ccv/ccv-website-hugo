@@ -3,8 +3,7 @@ title: "Vnc"
 date: 2019-01-31T17:06:05-05:00
 draft: false
 project: Oscar
-category: ""
-lead: ""
+section: Connecting to Oscar
 weight: 0
 icon: check
 ---

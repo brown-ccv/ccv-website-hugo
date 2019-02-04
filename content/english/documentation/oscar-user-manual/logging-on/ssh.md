@@ -3,8 +3,7 @@ title: "Ssh"
 date: 2019-01-31T17:06:00-05:00
 draft: false
 project: Oscar
-category: ""
-lead: ""
+section: Connecting to Oscar
 weight: 0
 icon: check
 ---
@@ -30,7 +29,7 @@ Windows users need to install an SSH client. We recommend [PuTTY](http://www.chi
 
 In PuTTY, use `username@ssh.ccv.brown.edu` as the Host Name.
 
-{{< alert info >}}
+{{% alert info %}}
 The first time you connect to Oscar you will see a message about the authenticity of the host:
 ```shell
     The authenticity of host 'ssh.ccv.brown.edu (138.16.172.8)' can't be established.
@@ -40,7 +39,7 @@ The first time you connect to Oscar you will see a message about the authenticit
 
 You can type `yes` and press return. On subsequent logins you should not see this message.
 
-{{</ alert >}}
+{{% /alert %}}
 
 You will then  be prompted for your password.
 

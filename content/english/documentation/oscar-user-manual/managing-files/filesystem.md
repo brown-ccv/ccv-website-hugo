@@ -3,8 +3,7 @@ title: "Filesystem"
 date: 2019-01-31T17:06:44-05:00
 draft: false
 project: Oscar
-category: ""
-lead: ""
+section: Managing files
 weight: 0
 icon: check
 ---

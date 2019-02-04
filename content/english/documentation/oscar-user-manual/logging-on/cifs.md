@@ -3,8 +3,7 @@ title: "Cifs"
 date: 2019-01-31T17:06:09-05:00
 draft: false
 project: Oscar
-category: ""
-lead: ""
+section: Connecting to Oscar
 weight: 0
 icon: check
 ---
