@@ -62,19 +62,18 @@
         </header>
 
         <article class="container-fluid row py-4">
-          {{ range where $.Site.Pages "Section" "people"}}
-          {{ if .Params }}
+          {{ range .Site.Data.people }}
           <div class="col-xl-3 col-md-4 col-sm-6 col-xs-12 card card-background mb-0 mx-0" >
             <div class="image" style="background-image:url('{{"/images/people/gelin.png" | absURL }}')"></div>
             <div class="card-body">
-              <h2 class="card-title mb-0 fs-20">{{ .Params.name }}</h2>
-              <p class="card-text fs-18">{{ .Params.title }}</p>
-              <p class="font-weight-bold text-beige text-small"><span class="icon-users2 pr-1"></span>{{ .Params.team }}</p>
+              <h2 class="card-title mb-0 fs-20">{{ .name }}</h2>
+              <p class="card-text fs-18">{{ .title }}</p>
+              <p class="font-weight-bold text-beige text-small"><span class="icon-users2 pr-1"></span>{{ .team }}</p>
             </div>
           </div>
           {{ end }}
-          {{ end }}
         </article>
+
 
         <!-- Publications -->
         <header id="overview" class="d-flex align-items-center">
