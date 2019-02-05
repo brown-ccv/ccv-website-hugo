@@ -18,8 +18,8 @@
         {{ range $key, $value := .Site.Taxonomies.types }}
         {{ range first 1 $value.Pages }}
         {{ if eq .Section $current_section }}
-          <li class="mx-1 nav-item bg-white lift my-1">
-              <a class="nav-link" href="{{.Site.BaseURL }}/{{ .Section }}/{{$key}}">
+          <li class="mx-1 nav-item bg-white my-1">
+              <a class="nav-link" href="{{.Site.BaseURL }}/{{ .Section }}/{{$key}}/">
                   {{if eq `posts` $key}}
                   <span class="text-dark fas fa-blog pr-1 fs-28 text-green"></span>
                   {{ else if eq `events` $key}}

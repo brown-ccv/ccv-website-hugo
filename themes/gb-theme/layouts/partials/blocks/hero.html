@@ -2,7 +2,7 @@
 <!-- yellow banner -->
 <section id="hero" class="position-relative">
 
-  <div class="hero-content-container bg-yellow">
+  <div class="hero-content-container bg-yellow" style="background-image: url('{{$.Site.BaseURL}}/images/background-art.svg');">
     <div class="hero-content pl-10 d-flex flex-column">
       <h1 class="text-dark">{{ upper .Params.hero.title }}</h1>
       <p class="fs-30 text-medium-brown">{{ .Params.hero.lead }}</p>
@@ -11,7 +11,7 @@
           {{ $currentPage := . }}
           {{ range .Site.Menus.main }}
           {{ if eq "Services" .Name }}
-          <li class="mx-1 nav-item  bg-green shadow lift">
+          <li class="mx-1 nav-item  bg-green shadow">
             <a class="nav-link" href="{{ .URL }}">
               {{ .Pre }}
               <span class="text-beige fs-28 font-weight-bold">Learn About CCV {{ .Name }}</span>
@@ -25,7 +25,9 @@
   </div>
 
   <!-- floating button -->
-  <button type="button" class="btn btn-outline-white btn-ico btn-rounded position-absolute left-5 bottom-10"><i class="icon-arrow-down2 fs-26"></i></button>
+  <a href="#section-1" class="z-10 position-absolute left-5 bottom-10">
+  <button type="button" class="btn btn-outline-white btn-ico btn-rounded "><i class="icon-arrow-down2 fs-26"></i></button>
+  </a>
 
   <!-- floating graphic -->
   <div class="right-1 bottom-6 position-absolute z-10">

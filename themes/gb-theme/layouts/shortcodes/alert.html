@@ -1,4 +1,4 @@
-<div class="alert {{if eq (.Get 0) `note`}}border border-primary text-blue{{else}}alert-{{.Get 0}}{{ end }} lift p-2" role="alert">
+<div class="alert {{if eq (.Get 0) `note`}}border border-primary text-blue{{else}}alert-{{.Get 0}}{{ end }} p-2" role="alert">
   {{ if (eq (.Get 0) "info") }}
   <i class="icon-life-buoy2"></i>
   {{ else if (eq (.Get 0) "danger")}}

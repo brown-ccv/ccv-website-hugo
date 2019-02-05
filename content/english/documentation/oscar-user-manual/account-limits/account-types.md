@@ -4,8 +4,6 @@ date: 2019-01-31T17:01:25-05:00
 draft: false
 project: Oscar
 section: Account Limits
-category: ""
-lead: ""
 weight: 0
 icon: check
 ---

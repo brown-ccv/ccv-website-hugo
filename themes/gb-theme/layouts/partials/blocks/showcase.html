@@ -1,4 +1,4 @@
-<section id="section-3" class="bg-white showcase">
+<section id="section-3" class="bg-light showcase">
   <section>
 
   <div class="container">
@@ -18,19 +18,19 @@
     </div>
   </div>
 </section>
-<section class="bg-white row">
+<section class="bg-light row">
 <div class="owl-carousel
             owl-carousel-showcase
             owl-carousel-fluid
             owl-loaded owl-drag
             skrollable
             skrollable-before"
-      data-items="[2,2,1]"
+      data-items="[3,2,1]"
       data-center="true"
-      data-nav="false"
+      data-nav="true"
       data-margin="20"
       data-loop="true"
-      data-dots="true"
+      data-dots="false"
       >
   {{ range $index, $item := .Params.showcase.items }}
   <figure class="photo">

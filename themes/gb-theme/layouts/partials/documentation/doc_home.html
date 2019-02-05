@@ -24,7 +24,7 @@
     <ul class="nav nav-toc-page flex-column boxed">
         {{ range where $.Site.Pages "Section" "documentation" }}
         {{ if eq .Params.level "Main" }}
-        <li class="mx-1 nav-item bg-white lift my-1">
+        <li class="mx-1 nav-item bg-white my-1">
             <a class="nav-link" href="{{ .Permalink }}">
                 {{ if .Params.icon }}
                 {{ readFile (printf "/themes/gb-theme/static/images/%s" .Params.icon ) | safeHTML }}

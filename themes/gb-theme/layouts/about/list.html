@@ -18,8 +18,8 @@
     <div class="col-lg-6 col-md-10 col-sm-12">
     <ul class="nav nav-toc-page flex-column boxed">
       {{ range .Params.items }}
-        <li class="mx-1 nav-item bg-white lift my-1">
-            <a class="nav-link" href="{{.Site.BaseURL }}about/#{{.name}}">
+        <li class="mx-1 nav-item bg-white my-1">
+            <a class="nav-link" href="#{{.name}}">
                 <span class="text-dark fas fa-{{ .icon }} pr-1 fs-24"></span>
                 <span class="text-dark fs-20">{{ humanize .name }}</span>
             </a>
@@ -64,7 +64,8 @@
         <article class="container-fluid row py-4">
           {{ range .Site.Data.people }}
           <div class="col-xl-3 col-md-4 col-sm-6 col-xs-12 card card-background mb-0 mx-0" >
-            <div class="image" style="background-image:url('{{"/images/people/gelin.png" | absURL }}')"></div>
+
+            <div class="image" style="background-image:url('{{$.Site.BaseURL}}/images/people/gelin.png')"></div>
             <div class="card-body">
               <h2 class="card-title mb-0 fs-20">{{ .name }}</h2>
               <p class="card-text fs-18">{{ .title }}</p>
@@ -76,7 +77,7 @@
 
 
         <!-- Publications -->
-        <header id="overview" class="d-flex align-items-center">
+        <header id="publications" class="d-flex align-items-center">
           <span class="btn-red btn-ico btn-lg btn-rounded"><i class="fas fa-book-dead fs-40"></i></span>
           <h1 class="mx-4 text-secondary">Publications</h1>
           <hr class="bg-dark w-40"/>
@@ -109,7 +110,7 @@
 
 
         <!-- Opportunities -->
-        <header id="overview" class="d-flex align-items-center">
+        <header id="opportunities" class="d-flex align-items-center">
           <span class="btn-red btn-ico btn-lg btn-rounded"><i class="fas fa-user-circle fs-40"></i></span>
           <h1 class="mx-4 text-secondary">Opportunities</h1>
           <hr class="bg-dark w-40"/>

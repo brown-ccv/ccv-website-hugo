@@ -19,8 +19,8 @@
       {{ range $key, $value := .Site.Taxonomies.category }}
       {{ range first 1 $value.Pages }}
       {{ if eq .Section $current_section }}
-        <li class="mx-1 nav-item bg-white lift my-1">
-            <a class="nav-link" href="{{.Site.BaseURL }}/{{ .Section }}#{{$key}}">
+        <li class="mx-1 nav-item bg-white my-1">
+            <a class="nav-link" href="#{{$key}}">
                 <span class="text-dark icon-{{.Params.icon}} pr-1 fs-24"></span>
                 <span class="text-dark fs-20">{{ humanize $key }}</span>
                 {{ if .Params.haas }}
@@ -54,7 +54,7 @@
           {{ if eq (.Params.category | urlize) $key }}
           {{ $weight := .Params.weight }}
           <div class="col-md-6 py-3">
-            <div class="card p-4 lift">
+            <div class="card p-4">
               <div class="d-flex">
               <h1>{{ .Title | markdownify }}</h1>
               <span class="badge-red badge h-50 ml-1">{{ .Params.version }}</span>

@@ -15,7 +15,7 @@
   <ul class="nav nav-toc-page flex-column boxed">
     {{ range $key, $value := .Site.Taxonomies.types }}
     {{ range first 1 $value.Pages }}
-      <li class="mx-1 nav-item bg-white lift my-1">
+      <li class="mx-1 nav-item bg-white my-1">
           <a class="nav-link" href="{{ .Site.BaseURL }}/{{ .Section }}/{{$key}}">
               {{if eq `posts` $key}}
               <span class="text-dark fas fa-blog pr-1 fs-28 text-green"></span>

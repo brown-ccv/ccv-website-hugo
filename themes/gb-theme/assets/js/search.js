@@ -26,10 +26,8 @@ if(searchQuery){
   $('#search-results').append("<p>Please enter a word or phrase above</p>");
 }
 
-
-
 function executeSearch(searchQuery){
-  $.getJSON( "index.json", function( data ) {
+  $.getJSON( "ccv-dev/index.json", function( data ) {
     var pages = data;
     var fuse = new Fuse(pages, fuseOptions);
     var result = fuse.search(searchQuery);
