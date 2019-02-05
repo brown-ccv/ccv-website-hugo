@@ -26,20 +26,20 @@ Users can install python packages
 
 The `--user` flag will instruct pip to install to you home directory
 
-````
+```shell
     pip install --user <package>
-````
+```
 
 This will install the package under the following path in user's HOME
 directory:
-
+```shell
     ~/.local/lib/python<version>/site-packages
-
+```
 {{< alert warning >}}
 If you omit the `--user` flag you will see
-
+```shell
     IOError: [Errno 13] Permission denied: '/gpfs/runtime/opt/python/2.7.3/lib/python2.7/site-packages/ordereddict.py'
-
+```
 This is because users do not have access to the default locations where software is installed.
 {{< /alert >}}
 
@@ -51,17 +51,17 @@ users might want to use their data directory instead for installing
 software. Another motivation to do that is to have shared access to the
 software among the whole research group.
 
-````
+```shell
  pip install --target=</path/to/install/location> <package>
-````
+```
 
 This path to install location will have to be added to the
 **PYTHONPATH** environment variable so that python can find the python
 modules to be used. This is not necessary for software installed using
 the `--user` option.
-
+```shell
     export PYTHONPATH=</path/to/install/location>:$PYTHONPATH
-
+```
 This can be added at the end of your `.bashrc` file in your home
 directory. This will update the PYTHONPATH environment variable each
 time during startup. Alternatively, you can update PYTHONPATH in your
@@ -101,13 +101,15 @@ the downloaded files.
 
 {{< alert warning>}}
 You will need to provide a "prefix path" for the install location
-
+```shell
     python setup.py install --prefix=</path/to/install/location>
+```
 {{< /alert >}}
 
 This will create the sub-directories `bin`, `lib`, etc. at the location
 provided above and install the packages there. The environment will have
 to be set up accordingly to use the package:
-
+```shell
     export PATH=</path/to/install/location>/bin:$PATH
     export PYTHONPATH=</path/to/install/location>/lib/python<version>/site-packages:$PYTHONPATH
+```

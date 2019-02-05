@@ -21,24 +21,24 @@ You can transfer files between Department File Servers and Oscar using
 
 1\) Log into our dedicated system for transferring files in/out of Oscar:
 
-````
+```shell
    ssh transfer.ccv.brown.edu
-````
+```
 
 2\) Start a screen session. This will allow you reattach to your terminal
 window if you disconnect.
 
-````
+```shell
     screen
-````
+```
 
 3\) Use Oscar's  high speed connection to files.brown.edu
 
 
 
-````
+```shell
     smbclient "//hpcsmb.isi.ccv.brown.edu/SHARE_NAME" -D DIRECTORY_NAME -U "ad\BROWN_ID"`
-````
+```
 
 Replace SHARE\_NAME, DIRECTORY\_NAME, and BROWN\_ID. DIRECTORY\_NAME is an optional
 parameter.  The password required is your **Brown** password.
@@ -46,16 +46,16 @@ parameter.  The password required is your **Brown** password.
 4\) Upload/download your data using the FTP "put"/"get" commands. Replace
 DIRECTORY\_NAME with the folder you'd like to upload.
 
-````
+```shell
    put DIRECTORY_NAME
-````
+```
 
 5\) You can detach from the screen session with a "CTRL+A D" keypress. To
 reattach to your session:
 
-````
+```shell
    screen -r
-````
+```
 
 ## smbclient basics
 
@@ -84,8 +84,12 @@ subdirectories
 
 You can toggle recursion ON/OFF with:
 
-`recurse`
+```shell
+recurse
+```
 
 You can toggle prompt OFF/ON with:
 
-`prompt`
+```shell
+prompt
+```

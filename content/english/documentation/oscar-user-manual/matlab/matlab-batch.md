@@ -14,7 +14,7 @@ Matlab can be used within a batch script. Here is an example batch script
 for running a serial Matlab program on
 an Oscar compute node:
 
-````
+```shell
     #!/bin/bash
 
     # Request an hour of runtime:
@@ -34,13 +34,13 @@ an Oscar compute node:
 
     # Run a matlab function called 'foo.m' in the same directory as this batch script.
     matlab -r "foo(1), exit"
-````
+```
 
 This is also available in your home directory as the file:
 
-````
+```shell
     ~/batch_scripts/matlab-serial.sh
-````
+```
 
 Note the `exit` command at the end which is very important to include
 either there or in the Matlab function/script itself. If you don't make
@@ -54,6 +54,6 @@ and also blocks up your other jobs.
 If the name of your batch script file is `matlab-serial.sh`, the batch
 job can be submitted using the following command:
 
-````
+```shell
     sbatch matlab-serial.sh
-````
+```

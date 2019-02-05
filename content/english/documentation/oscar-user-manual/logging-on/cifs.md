@@ -28,9 +28,9 @@ their machine, e.g. for mac 'set time and date automatically'
 Use SSH to [connect to Oscar](/doc/getting-started) to set your CIFS
 password. Once logged in, run the command:
 
-````
+```shell
      smbpasswd
-````
+```
 
 You will first be prompted for your "old" password, which is the
 temporary password you were given by CCV when your account was created.
@@ -47,10 +47,10 @@ to the same reset value.
 Now you are ready to mount your CCV directories locally using the
 following instructions based on your operating system:
 
-------------------------------------------------------------------------
 
-Windows
--------
+
+## Windows
+
 
 -   Right-click "Computer" and select "Map Network Drive".
 -   Select an unassigned drive letter.
@@ -64,10 +64,9 @@ You can now access your home directory through Windows Explorer with the
 assigned drive letter. Your data and scratch directories are available
 as the subdirectories (`~/data` and `~/scratch`) of your home directory.
 
-------------------------------------------------------------------------
 
-Mac OS X
---------
+
+## Mac OS X
 
 -   In the Finder, press "Command + K" or select "Connect to Server..."
     from the "Go" menu.
@@ -86,10 +85,10 @@ startup:
 -   Drag your data share from the "Finder" window to the "Login Items"
     window.
 
-------------------------------------------------------------------------
 
-Linux
------
+
+## Linux
+
 
 -   Install the `cifs-utils` package:
 
@@ -102,26 +101,31 @@ Linux
 
 -   Create a credentials file and add your CCV account information (use
     the CIFS password):
-
+```bash
         $ sudo gedit /etc/cifspw
 
         username=<user>
         password=<password>
-
+```
 -   Allow only root access to the credentials files:
+```bash
 
         $ sudo chmod 0600 /etc/cifspw
-
+```
 -   Add an entry to the `fstab`:
+```bash
 
         $ sudo gedit /etc/fstab
-
+```
     The `fstab` entry is the single line:
+    ```bash
 
          `//oscarcifs.ccv.brown.edu/<user> /mnt/rdata cifs credentials=/etc/cifspw,vers=1.0,nounix,uid=<localUser> 0 0`
-
+```
     Change `<localUser>` to the login used on your Linux workstation.
 
 -   Mount the share:
+```bash
 
         $ mount -a
+```

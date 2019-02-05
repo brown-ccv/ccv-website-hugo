@@ -17,17 +17,17 @@ way to pack multiple Matlab scripts onto the Oscar compute nodes.
 To run the actual multi-threaded version with JVM and Display enabled,
 use:
 
-````
+```shell
     matlab-threaded
-````
+```
 
 Similarly, to run this without the display enabled:
 
-````
+```shell
     matlab-threaded -nodisplay
-````
+```
 
-{{< alert warning >}}
+{{< alert danger >}}
 Do **not** run Matlab on the Oscar login nodes.  Request a compute node
 either with an interactive session, a batch script, or using the VNC.
 {{</ alert >}}
@@ -39,13 +39,13 @@ by CCV is the best way to launch GUI applications on Oscar, including
 Matlab. From the terminal emulator in VNC use the
 `matlab-threaded` command to launch the Matlab GUI. For example,
 
-````
+```shell
     matlab-threaded
-````
+```
 
 Here is a snapshot of what it looks like:
 
-![](https://web1.ccv.brown.edu/sites/default/files/Picture1_0.png){width="750"}
+![](https://web1.ccv.brown.edu/sites/default/files/Picture1_0.png)
 
 ## X11 Forwarding
 

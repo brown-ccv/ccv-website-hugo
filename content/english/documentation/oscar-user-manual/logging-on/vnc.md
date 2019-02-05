@@ -30,12 +30,12 @@ The CCV VNC requires that you download a client onto your machine.
     Page](http://www.oracle.com/technetwork/java/javase/downloads/).
 
 3.  If Java has been installed correctly you can now run
-    CCV\_VNC\_2.x.jar by double clicking on it. On MAC, you may need to
+    `CCV\_VNC\_2.x.jar` by double clicking on it. On MAC, you may need to
     first right click on the jar and chose "Open", and give the jar
     permission to run.
 
 4.  In the "Username" and "Password" field, enter your Oscar username
-    and password. The server should remain "desktop.ccv.brown.edu".
+    and password. The server should remain `desktop.ccv.brown.edu`.
     Press "Connect."
 
 5.  On the window that pops up, select the memory/CPU parameters for
@@ -62,8 +62,10 @@ forwarded to your existing VNC session.
 **Kill VNC session** closes the client and stops your VNC session from
 running.
 
-Note: Closing the VNC window will only disconnect from the VNC session,
-it will not kill it.
+{{% alert warning %}}
+Closing the VNC window will only disconnect from the VNC session,
+it will not kill it.  
 
 Sessions are limited to 7 days for all users, depending on resources
 selected. After this time, the session will expire.
+{{% /alert %}}

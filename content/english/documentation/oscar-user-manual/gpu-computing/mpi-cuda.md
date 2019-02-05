@@ -22,61 +22,64 @@ following example.
 These two source files can be compiled and linked with both a C and C++
 compiler into a single executable on Oscar using:
 
-````
+```shell
      module load mpi cuda
      mpicc -c main.c -o main.o
      nvcc -c multiply.cu -o multiply.o
      mpicc main.o multiply.o -lcudart
-````
+```
 
 The CUDA/C++ compiler `nvcc` is used only to compile the CUDA source
 file, and the MPI C compiler `mpicc` is used to compile the C code and
 to perform the linking.
+{{< highlight c "linenos=table, linenostart=1">}}
+ /* multiply.cu */
 
-    01. /* multiply.cu */
-    02.
-    03. #include <cuda.h>
-    04. #include <cuda_runtime.h>
-    05.
-    06. __global__ void __multiply__ (const float *a, float *b)
-    07. {
-    08. const int i = threadIdx.x + blockIdx.x * blockDim.x;
-    09.     b[i] *= a[i];
-    10. }
-    11.
-    12. extern "C" void launch_multiply(const float *a, const *b)
-    13. {
-    14.     /* ... load CPU data into GPU buffers a_gpu and b_gpu */
-    15.
-    16.     __multiply__ <<< ...block configuration... >>> (a_gpu, b_gpu);
-    17.
-    18.     safecall(cudaThreadSynchronize());
-    19.     safecall(cudaGetLastError());
-    20.
-    21.     /* ... transfer data from GPU to CPU */
+ #include <cuda.h>
+ #include <cuda_runtime.h>
+
+ __global__ void __multiply__ (const float *a, float *b)
+ {
+ const int i = threadIdx.x + blockIdx.x * blockDim.x;
+     b[i] *= a[i];
+ }
+
+ extern "C" void launch_multiply(const float *a, const *b)
+ {
+     /* ... load CPU data into GPU buffers a_gpu and b_gpu */
+
+     __multiply__ <<< ...block configuration... >>> (a_gpu, b_gpu);
+
+     safecall(cudaThreadSynchronize());
+     safecall(cudaGetLastError());
+
+     /* ... transfer data from GPU to CPU */
+{{< /highlight >}}
 
 Note the use of `extern "C"` around the function `launch_multiply`,
 which instructs the C++ compiler (`nvcc` in this case) to make that
 function callable from the C runtime. The following C code shows how the
 function could be called from an MPI task.
+{{< highlight c "linenos=table, linenostart=1">}}
 
-    01. /* main.c */
-    02.
-    03. #include <mpi.h>
-    04.
-    05. void launch_multiply(const float *a, float *b);
-    06.
-    07. int main (int argc, char **argv)
-    08. {
-    09.        int rank, nprocs;
-    10.     MPI_Init (&argc, &argv);
-    11.     MPI_Comm_rank (MPI_COMM_WORLD, &rank);
-    12.     MPI_Comm_size (MPI_COMM_WORLD, &nprocs);
-    13.
-    14.     /* ... prepare arrays a and b */
-    15.
-    16.     launch_multiply (a, b);
-    17.
-    18.     MPI_Finalize();
-    19.        return 1;
-    20. }
+ /* main.c */
+
+ #include <mpi.h>
+
+ void launch_multiply(const float *a, float *b);
+
+ int main (int argc, char **argv)
+ {
+        int rank, nprocs;
+     MPI_Init (&argc, &argv);
+     MPI_Comm_rank (MPI_COMM_WORLD, &rank);
+     MPI_Comm_size (MPI_COMM_WORLD, &nprocs);
+
+     /* ... prepare arrays a and b */
+
+     launch_multiply (a, b);
+
+     MPI_Finalize();
+        return 1;
+ }
+{{< /highlight >}}

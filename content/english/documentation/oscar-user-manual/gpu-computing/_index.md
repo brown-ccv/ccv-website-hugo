@@ -6,12 +6,11 @@ version: 1.0.0
 weight: 4
 subitems:
   - subsection: "GPUs on Oscar"
-    ref: "gpus"
+    ref: "gpus/"
   - subsection: "Submitting GPU jobs"
-    ref: "submit-gpu"
+    ref: "submit-gpu/"
   - subsection: "Compiling CUDA"
-    ref: "cuda-compiling"
+    ref: "cuda-compiling/"
   - subsection: "Mixing MPI and CUDA"
-    ref: "mpi-cuda"
+    ref: "mpi-cuda/"
 ---
-

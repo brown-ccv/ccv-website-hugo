@@ -40,13 +40,13 @@ This is an easy method for a small number of files.
 
 You can use `scp` to transfer files. For example to copy a file
 from your computer to Oscar:
-
+```shell
      scp /path/to/source/file <username>@transfer.ccv.brown.edu:/path/to/destination/file
-
+```
 To copy a file from Oscar to your computer:
-
+```shell
      scp <username>@transfer.ccv.brown.edu:/path/to/source/file /path/to/destination/file
-
+```
 **Windows**
 On Windows, if you have PuTTY installed, you can use it's `pscp`
 function from the terminal.
@@ -63,12 +63,12 @@ function from the terminal.
 
 Globus is a secure, reliable research data management service.  If you are
 moving data from another institution that has a Globus endpoint, you can move data
-directory to Oscar.  Oscar has two Globus endpoints
+directory to Oscar.  Oscar has two Globus endpoints:
 
-````
+```
     brownccv#Brown-CCV-oscar-1
     brownccv#Brown-CCV-oscar-2
-````
+```
 
 You can use either endoint to move data to/from Oscar to another Globus endpoint.  
 If you want to use Globus Online to move data to/from you own machine,

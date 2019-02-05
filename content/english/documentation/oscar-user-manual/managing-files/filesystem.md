@@ -13,7 +13,13 @@ icon: check
 CCV uses IBM's General Parallel File System (GPFS).  Users have a home, data,
 and scratch space.
 
+{{< file-tree >}}
+{{< dir name="home" open="true" description="10GB">}}
+{{< folder name="data" description="256GB">}}
+{{< folder name="scratch" description="521GB">}}
 
+{{< /dir >}}
+{{< /file-tree >}}
  **home** `~`
 
  * 10GB of space
@@ -34,11 +40,11 @@ and scratch space.
  * Optimized for reading/writing large files
  * NO BACKUPS
  * Purging: files not accessed for 30 days may be deleted
- * Quota is per indivual user
+ * Quota is per individual user
 
 {{< alert warning >}}
 Files not accessed for 30 days may be deleted from your scratch directory.  
-This is because scratch is high perforamce space. The fuller scratch is the worse
+This is because scratch is high performance space. The fuller scratch is the worse
 the read/write performance.  Use ~/data for files you need to keep long term.
 
 {{</ alert >}}
@@ -53,21 +59,22 @@ Note: class or temporary accounts may not have a `~/data` directory!
 To see how much space you have on Oscar you can use the command
 `myquota`. Below is an example output
 
+```shell
                        Block Limits                              |           File Limits              
     Type    Filesystem           Used    Quota   HLIMIT    Grace |    Files    Quota   HLIMIT    Grace
     -------------------------------------------------------------|--------------------------------------
     USR     home               8.401G      10G      20G        - |    61832   524288  1048576        -
     USR     scratch              332G     512G      12T        - |    14523   323539  4194304        -
     FILESET data+apollo        11.05T      20T      24T        - |   459764  4194304  8388608        -
+```
 
-{{< alert info >}}
-
+{{< alert warning >}}
 There is a quota for space used and for number of files.  If you hit the hard limit
 on **either** of these you will be unable to write any more files until you are back under quota.
 
-{{</ alert >}}
 
 You can go over your quota up to the hard limit for a grace period
 (14 days). This grace period is to give you time to manage your files.
 When the grace period expires you will be unable to write any files
 until you are back under quota.
+{{</ alert >}}

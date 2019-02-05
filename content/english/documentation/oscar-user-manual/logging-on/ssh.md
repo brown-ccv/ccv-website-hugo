@@ -17,9 +17,9 @@ To log in to Oscar you need Secure Shell (SSH) on your computer.
 
 To login in to Oscar, open a terminal and type
 
-````
+```shell
     ssh -X  username@ssh.ccv.brown.edu
-````
+```
 
 The `-X` allows Oscar to display windows on your machine, e.g. opening a GUI text editor such as `gedit`.
 
@@ -43,7 +43,7 @@ You can type `yes` and press return. On subsequent logins you should not see thi
 
 You will then  be prompted for your password.
 
-{{< alert info >}}
+{{< alert note >}}
 Note nothing will show up on the screen when you type in your password, just
 type it in and press enter.
 

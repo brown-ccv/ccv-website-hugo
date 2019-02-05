@@ -23,37 +23,37 @@ Snapshots can be found in the following directories.
 
 **Home** directory snapshot
 
-`````
+```shell
     /gpfs_home/.snapshots/<date>/<username>/<path_to_file>
-`````
+```
 
 **Data** directory snapshot
-````
+```shell
     /gpfs/.snapshots/<date>/data/<groupname>/<path_to_file>
-````
+```
 
 **Scratch** directory snapshot
-````
+```shell
     /gpfs/.snapshots/<date>/scratch/<username>/<path_to_file>
-````
+```
 
 To restore a file copy the file from the snapshot.
 
-{{< alert warning>}}
+{{< alert danger>}}
 Do **not** use the links in your home directory snapshot to try and
 retrieve snapshots of data and scratch. The links will always point to
 the current versions of these files. An easy way to check what a link is
 pointing to is to use `ls -l`
 {{</ alert >}}
 
-e.g.
+*e.g.*:
 
-````
+```shell
     ls -l /gpfs_home/.snapshots/April_03/ghopper/data
     lrwxrwxrwx 1 ghopper navy 22 Mar  1  2016 /gpfs_home/.snapshots/April_03/ghopper/scratch -> /gpfs/data/navy
-````
+```
 
-{{< alert info >}}
+{{< alert warning >}}
 If files to be restored were modified/deleted more than 7 days (and less
 than 30 days) ago and were in the HOME or DATA directory, you may
 contact us to retrieve them from nightly backups by providing the full

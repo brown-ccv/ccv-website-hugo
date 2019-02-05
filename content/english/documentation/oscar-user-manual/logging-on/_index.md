@@ -6,9 +6,9 @@ version: 1.0.0
 weight: 1
 subitems:
   - subsection: "ssh command line login"
-    ref: "ssh"
+    ref: "ssh/"
   - subsection: "VNC Desktop login"
-    ref: "vnc"
+    ref: "vnc/"
   - subsection: "Connecting to Oscar's filesystem using CIFS"
-    ref: "cifs"
+    ref: "cifs/"
 ---
