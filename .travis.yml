@@ -8,7 +8,6 @@ sudo: required
 before_install:
 - sudo apt-get update
 - sudo apt-get install node -y
-- sudo apt sshpass
 - go get -u -v github.com/gohugoio/hugo
 
 install:
@@ -17,6 +16,9 @@ install:
 script:
 - node index.js
 - hugo
+
+addons:
+  ssh_known_hosts: $HOST
 
 before_deploy:
 - openssl aes-256-cbc -K $encrypted_34f7b1804be1_key -iv $encrypted_34f7b1804be1_iv
@@ -30,6 +32,6 @@ before_deploy:
 deploy:
 - provider: script
   skip_cleanup: true
-  script: sshpass -p $PASSWORD scp -r $TRAVIS_BUILD_DIR/public $USERNAME@$HOST:ccv/dev/travis_test
+  script: rsync -r --delete-after $TRAVIS_BUILD_DIR/public $USERNAME@$HOST:ccv/dev/travis_test
   on:
     branch: develop
