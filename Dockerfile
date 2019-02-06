@@ -17,6 +17,7 @@ COPY ./ /site
 
 WORKDIR /site
 
+RUN npm install
 RUN node index.js
 
 FROM nginx
