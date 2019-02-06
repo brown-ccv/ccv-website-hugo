@@ -22,4 +22,4 @@ RUN node index.js
 
 FROM nginx
 
-COPY public /usr/share/nginx/html
+COPY /site/public /usr/share/nginx/html
