@@ -12,23 +12,23 @@ quick_links:
   cards:
     - name: Stronghold
       icon: lock
-      text: Some text goes here
-      href:
+      text: Learn more
+      href: "/services/haas/stronghold/"
       weight: 1
-    - name: Oscar
+    - name: Oscar Account
       icon: desktop
-      text: Create an account
-      href:
+      text: click here to open an account
+      href: "/services/haas/oscar/"
       weight: 0
-    - name: High Performance Computing
+    - name: User Manuals
       icon: server2
-      text: Some text goes here
-      href:
+      text: See all our documentation
+      href: "/documentation/"
       weight:
-    - name: Institutional Data
-      icon: university
+    - name: Consultations
+      icon: user2
       text: Some text goes here
-      href:  
+      href:  "/services#consulting/"
       weight: 4
 showcase:
   title: "CCV @ Brown"

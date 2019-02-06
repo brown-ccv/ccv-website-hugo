@@ -4,34 +4,34 @@ go:
 git:
   depth: 10
 sudo: required
-
 before_install:
 - sudo apt-get update
 - sudo apt-get install node -y
 - go get -u -v github.com/gohugoio/hugo
-
 install:
 - npm install
-
 script:
 - node index.js
 - hugo
-
-# addons:
-#   ssh_known_hosts: $HOST
-#
-# before_deploy:
-# - openssl aes-256-cbc -K $encrypted_34f7b1804be1_key -iv $encrypted_34f7b1804be1_iv
-#   -in deploy_rsa.enc -out /tmp/deploy_rsa -d
-# - eval "$(ssh-agent -s)"
-# - chmod 600 /tmp/deploy_rsa
-# - ssh-add /tmp/deploy_rsa
-# - node index.js
-# - hugo
-#
-# deploy:
-# - provider: script
-#   skip_cleanup: true
-#   script: rsync -r --delete-after $TRAVIS_BUILD_DIR/public $USERNAME@$HOST:ccv/dev/travis_test
-#   on:
-#     branch: develop
+deploy:
+- provider: script
+  script:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker build -t ccv_website_dev .
+  - docker tag ccv_website_dev $DOCKER_ORGANIZATION/ccv_website_dev
+  - docker push $DOCKER_ORGANIZATION/ccv_website_dev
+  on:
+    branch: develop
+- provider: script
+  script:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker build -t ccv_website_prod .
+  - docker tag ccv_website_prod $DOCKER_ORGANIZATION/ccv_website_prod
+  - docker push $DOCKER_ORGANIZATION/ccv_website_prod
+  on:
+    branch: master
+env:
+  global:
+  - secure: RLSKxs+HEP4OUSkjrJDsuB6NISw0IODCeYvOGICEzHnZBzlDkD999W+REZhcof3TpDnk38XeGiY8JDydQ4LjZ4N3pqlPBA3cm1pYf9CBbHnYeDuqxOUUP+XkbG/wvHTFahYmk5y2SCbTf9QjAtEX/Ny3p6TOf2yoUzXH6qm9Pm75z+xzyPEczQLE0YiWFIB9O2iNBU0JRKhzh/F1jD2a/5wXmlXfCVQaJe4VrivdhKR7YnWk9eHr7ZuoOdczJjI/yoNTBRhA53NZ74N+QwsJbxBZoP8PHaJSg01FU/LGH5VGFUpYBt0+XotWcxYNHMRPekgfAvNZQTmi2PUei8kaP7k0peFz87ocGpAdjgB3CgAeKrK35cy73PhnTcapugqlXoanqC9cu6jO18pQ8+0jUByXKtvhFjxXKlhxBq9KdHwkzhPCSJkpzrhqO134ycGBYHMH9T0WQt6JkkfR9zx9jicVAdCycpJ26FJPQCReocsscOYYlkvzlDqGeG5Z3vCohEmPUIKwSsAdKCXX2g368jpQIjfNfA6jktwlEVvnO6zCXF0PfBd670udme7ACQXOfVRnDaMOFu7d9fPU5MGLpjZnovIMpaVdCJ+h6KUwPxg8tIVmh0yr3W3uKDDDf0C6HKCNUDDO2xpTUmAZiAf3J0X2xjuJTlVy2K1xRxuJAoA=
+  - secure: S7/rwq+8KQAHCaG8j29zN9+i6NmBw2LTvobXtah1c+xAdlx8FaCzYH5nVwRJNnD4jfC4hDKdAUJTgwBfilMphbWBo+MGJKtdVhMUnPEaSOHksALmiWkZHXDWBnzEy0K2I2CH44QQkXqZSC/0jwawvQiEbQW6FAD2lffyxuUan5qvoaBbzQ/oDs8SBVpv4OReH6MMiYDIu2AfqOXi9Rg9Gk05CpTSJwYMj68UwSObNZbk7l2teEuf4XQFb13kVeVhuqYnzftoiwie644NntAa6sJPq+ByYsFDDPQ4kuDcPa1CM9GGn12DSEQga/fqI3/eLvrELz1Yntamlu9YkIw7bHWhmi2bD4LFwcXVthHpCwe0ApK6znxzVMTw6WAcXThMgOrIwThd7YsyVOmqxLHbbrpQN3F7m/ChYC2JqOLQxVZdQg8dLcLjk4TlS86lQEDntbOB+81+r0B0Zx437PqhR6NfvsslaoCp4oLCOu+GjkpwafTb+zQm0dS2MQ2DtnB6b95jfsoMGFsjidq46vCDNqcbcTfOt+wsgPKln6Why6ZerLLPYGqMW++Na/geP7i2nLB2qMRmD6SOEP60wYpGhovVDWjLMrckZdqXhrvb4FWbyvHWiZ1u5XPbtdHJ9NqbjfbQBEbL81Z6AVLGuJGNBeUGoIHtMpbEa7E7QEudcOM=
+  - secure: kydoOxnulLib0IzDLYTD/ajndTXrVaAM7wI42+NkW21Tcj64DvteCywrIGH4mWUofqIMgdd8sUYx/gnv/eyZ2Dezmi/wC/6LN2QdX35lqOypgehQmwSG8Gp0F5DipQMyf9izit9kB41FU5jCvYKUxFpf2s+9TBy3pnlyuRRnb1ByVQHdRdIrJDzmV1S3gL9sc+fKcbNB/7xymvJjKXyP9BU3pQ+Qh5Jo8sdaUYAv1DtysWy47fyJEncs5Z+Z8eFI3YwOhcjYBcShp6gZsDfG7VYhl9p3r9KTxvWdSP5bJbA1TTRSMTDHtWmlRqeG8k2zX3JEEHqM1WSWage9/mTPFXDACxmIg+SJ9xaIluwhXjBVKBV+1w7JyOWULjR/yPqEgam6qcv9dOTGCnrhINxckBb1jY+uGrNzDQT3zNW1qQLPIbzC1u7wDtOFePAjYLF4dGjUYX71oJ9mB3/9PgQV+qKrqeK9HtYdZU4OcgNCGU0i9ALwLKoQ8WGhUQZSULGsfkPcTflXjSOmzy58ZHstxAX+rCzHZXxAi7dG99nCLss42Ao51vZdGniHtHO22KjJG8aN/gAsUxd/qyiR4uNPyBGFZf5W/3hV5LNOttAMYjwh/xgPn7y5HqhBrYtmG9iQzouuTbo9DrA3k3NVVCdR1CayJWkETRutZYQ1NORLOWk=
