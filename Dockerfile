@@ -22,4 +22,4 @@ RUN npm run build
 
 FROM nginx
 
-COPY public /usr/share/nginx/html
+COPY --from=0 /site/public /usr/share/nginx/html
