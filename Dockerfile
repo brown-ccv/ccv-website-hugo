@@ -18,7 +18,7 @@ COPY ./ /site
 WORKDIR /site
 
 RUN npm install
-RUN npm build
+RUN npm run build
 
 FROM nginx
 
