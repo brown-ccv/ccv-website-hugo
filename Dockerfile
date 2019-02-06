@@ -18,8 +18,8 @@ COPY ./ /site
 WORKDIR /site
 
 RUN npm install
-RUN node index.js
+RUN npm build
 
 FROM nginx
 
-COPY /site/public /usr/share/nginx/html
+COPY public /usr/share/nginx/html
