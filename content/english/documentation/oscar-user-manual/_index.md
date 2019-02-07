@@ -3,7 +3,7 @@ Title: Oscar
 type: Oscar
 level: Main
 weight: 0
-icon: 
+icon: oscar.svg
 ---
 
 Welcome to the CCV Oscar User Manual. Oscar is Brown University's supercomputer.
