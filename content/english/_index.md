@@ -25,8 +25,8 @@ quick_links:
       text: See all our documentation
       href: "/documentation/"
       weight:
-    - name: Consultations
-      icon: user2
+    - name: Data Science
+      icon: database
       text: Some text goes here
       href:  "/services#consulting/"
       weight: 4
