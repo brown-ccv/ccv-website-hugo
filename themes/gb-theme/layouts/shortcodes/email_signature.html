@@ -1,0 +1,17 @@
+<div class="container row d-flex">
+<figure class="col-md-4">
+<a href="http://ccv.brown.edu"><img src="/images/ccv-logo-144ppi.png"></a>
+</figure>
+<section class="col-md-8">
+  <p class="fs-22 font-weight-bold" style="line-height:0;">
+    {{ .Get "name" }}
+    <a class="ml-10" href="https://github.com/{{.Get `github`}}"><span class="fab fa-github text-gray"></span></a>
+    <a class="ml-1" href="http://directory.brown.edu/uuid/{{ .Get `uuid` }}"><span class="fas fa-info-circle text-gray"></span></a>
+  </p>
+  <hr>
+  <p class="fs-18" style="line-height:0;">{{ .Get "title" }}</p>
+  <p class="fs-14" style="line-height:0; margin-top:30px;">Center for Computation and Visualization</p>
+  <p class="fs-14" style="line-height:0;">Brown University</p>
+
+</section>
+</div>
