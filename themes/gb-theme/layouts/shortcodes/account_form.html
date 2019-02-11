@@ -1,15 +1,24 @@
 <div class="d-flex justify-content-center">
   <h1 class="my-4">Request an Account on Oscar</h1>
 </div>
-<form class="needs-validation">
+<!-- <a class="btn btn-primary mb-2" href='https://accounts.google.com/ServiceLogin/signinchooser' target="_blank"><span class="fab fa-google mr-1"></span>Sign in</a> -->
+<div class="g-signin2" data-onsuccess="onSignIn"></div>
+<form class="needs-validation"
+      action="https://docs.google.com/forms/d/e/1FAIpQLSfhgHgf_Zm8KJQLgqoMpaXVnKm2uuEZVE6ClIwmANdir3zSQA/formResponse?embedded=true"
+      target="_self"
+      method="POST"
+      id="mG61Hd">
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputPassword4">Name</label>
       <input type="text"
              class="form-control"
              id="inputName4"
-             placeholder="Name"
-             required>
+             placeholder="Full Name"
+             required
+             data-item-id="1826071030"
+             data-required="true"
+             name="entry.350874798">
     </div>
     <div class="form-group col-md-6">
       <label for="inputAddress">Mobile number</label>
@@ -18,7 +27,10 @@
              id="inputTel"
              pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
              placeholder="123-456-7890"
-             required>
+             required
+             data-item-id="73404267"
+             data-required="true"
+             name="entry.1606536442">
       <label>
         A temporary password will be texted to this number.
       </label>
@@ -29,8 +41,11 @@
              class="form-control"
              id="inputEmail4"
              placeholder="Email"
-             pattern=""
-             required>
+             pattern="([a-z0-9])\w+@((\buri\b)|(\bbrown\b)).edu"
+             required
+             data-item-id="1043048528"
+             data-required="true"
+             name="entry.188893251">
     </div>
     <div class="form-group col-md-6">
       <label for="inputPassword4">Brown username</label>
@@ -38,15 +53,22 @@
              class="form-control"
              id="inputUsername4"
              placeholder="username"
-             required>
+             required
+             data-item-id="1328947044"
+             data-required="true"
+             name="entry.1540659038">
     </div>
-
   </div>
 
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputState">User Type</label>
-      <select id="inputState" class="form-control" required>
+      <select id="inputState"
+              class="form-control"
+              required
+              data-item-id="1828953716"
+              data-required="true"
+              name="entry.2078386885">
         <option selected>Choose...</option>
         <option>Faculty</option>
         <option>Staff</option>
@@ -57,7 +79,12 @@
     </div>
     <div class="form-group col-md-6">
       <label for="inputState">Account Type</label>
-      <select id="inputState" class="form-control" required>
+      <select id="inputState"
+              class="form-control"
+              required
+              data-item-id="484406619"
+              data-required="true"
+              name="entry.860085472">
         <option selected>Choose...</option>
         <option>Exploratory (free; recommended if unsure)</option>
         <option>Premium</option>
@@ -68,7 +95,12 @@
   </div>
   <div class="form-group">
     <label for="exampleFormControlTextarea1">Intended Use</label>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    <textarea class="form-control"
+              id="exampleFormControlTextarea1"
+              rows="3"
+              data-item-id="437137239"
+              data-required="true"
+              name="entry.1947135603"></textarea>
   </div>
   <div class="form-row">
 
@@ -77,14 +109,21 @@
       <input type="text"
              class="form-control"
              id="inputEmail4"
-             required>
+             required
+             data-item-id="1618801604"
+             data-required="true"
+             name="entry.637913206">
     </div>
     <div class="form-group col-md-6">
       <label for="inputPassword4">Advisor or PI's email address</label>
       <input type="email"
              class="form-control"
              id="inputUsername4"
-             required>
+             pattern="([a-z0-9])\w+@((\buri\b)|(\bbrown\b)).edu"
+             required
+             data-item-id="542373747"
+             data-required="true"
+             name="entry.1715736963">
       <label>we ask for email approval from a PI before creating accounts associated with their group.</label>
     </div>
   </div>
@@ -92,9 +131,15 @@
     <input type="checkbox"
            class="custom-control-input"
            id="customControlValidation1"
-           required>
+           required
+           data-item-id="1227668249"
+           data-required="true"
+           name="entry.963437811">
     <label class="custom-control-label" for="customControlValidation1">I have read and accepted the <a href="{{.Site.BaseURL}}/services/haas/terms-and-conditions/">General Terms and Conditions.</a></label>
     <div class="invalid-feedback">This is required.</div>
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
+
+  <input type="hidden" name="fbzx" value="5460528407244223451">
+  <input type="hidden" name="token" value="T5Ig3WgBAAA.nvVWveWrmizB-juG5L79hg.1udzHmiGAFCSKHjDzHFhQg">
 </form>

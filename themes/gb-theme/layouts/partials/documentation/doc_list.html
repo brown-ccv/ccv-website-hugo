@@ -7,18 +7,18 @@
           <button class="btn p-0 menu-trigger"><span class="fas fa-bars fa-2x"></span></button>
       </nav>
     </aside>
-    <div class="row justify-content-between">
+    <div class="row justify-content-between mt-0">
 
       <!-- navigation -->
-      <aside class="col-lg-3 col-xxl-2 p-3 doc-sidebar">
+      <aside class="col-lg-3 col-xxl-2 px-3 doc-sidebar bg-white">
         <div class="sticky">
           <nav class="navbar navbar-vertical navbar-expand-lg navbar-light">
-            <div class="d-flex row align-items-center">
+            <div class="d-flex row justify-content-center">
               <!-- <a href="../../index.html" class="navbar-brand"><span class="badge badge-red ml-3">Resources</span></a> -->
-              <h2>{{ .Params.type }}</h2>
+              <h1>{{ .Params.type }}</h1>
               <span class="ml-1 badge badge-red h-50">{{ .Params.version }}</span>
               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon fas fa-angle-down" style="background-image:none !important;"></span>
               </button>
             </div>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">

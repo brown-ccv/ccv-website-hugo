@@ -2,8 +2,9 @@
 {{ $app := resources.Get "js/app.js" }}
 {{ $custom := resources.Get "js/custom.js" }}
 {{ $search := resources.Get "js/search.js"}}
+{{ $google := resources.Get "js/google-sign-in.js"}}
 
-{{ $js := slice $custom $vendor $app | resources.Concat "js/bundle.js"  }}
+{{ $js := slice $custom $vendor $app $google | resources.Concat "js/bundle.js"  }}
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
@@ -17,6 +18,7 @@
 
 <script src="{{ $js.Permalink }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.js"></script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 
 <script src="{{ $search.Permalink }}"></script>
 
