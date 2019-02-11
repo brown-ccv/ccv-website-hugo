@@ -1,48 +1,46 @@
 <div class="d-flex justify-content-center">
   <h1 class="my-4">Request an Account on Oscar</h1>
 </div>
-<!-- <a class="btn btn-primary mb-2 g-signin2" data-onsuccess="onSignIn" href='https://accounts.google.com/ServiceLogin/signinchooser' target="_blank"><span class="fab fa-google mr-1"></span>Sign in</a> -->
-<div class="g-signin2 mb-2" data-width="200" data-height="48" data-longtitle="true" data-onsuccess="onSignIn"></div>
+<div class="d-flex flex-column align-items-center">
+  <p>To request an account on Oscar you must sign in using your Brown Gmail account. If you don't have  a <code>brown.edu</code> email,
+         your Brown University sponsor should submit this form.</p>
+  <div class="d-flex row mt-10">
+  <div class="g-signin2 col-md-3" data-width="200" data-height="80" data-onsuccess="onSignIn"></div>
+  <div class="ml-2 d-flex flex-column col-md-6 ml-10">
+    <span id="loginmessage">Please, sign in.</span>
+    <span id="googleUser" class="text-blue"></span>
+    <code><span id="googleEmail" class="text-blue"></span></code>
+  </div>
+  </div>
+</div>
 <form class="needs-validation"
       action="https://docs.google.com/forms/d/e/1FAIpQLSfhgHgf_Zm8KJQLgqoMpaXVnKm2uuEZVE6ClIwmANdir3zSQA/formResponse?embedded=true"
       target="_self"
       method="POST"
       id="mG61Hd">
   <div class="form-row">
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-6 invisible">
       <label for="inputFullName">Name</label>
       <input type="text"
              class="form-control"
              id="inputFullName"
              placeholder="Full Name"
              required
+             readonly
              data-item-id="1826071030"
              data-required="true"
              name="entry.350874798">
     </div>
-    <div class="form-group col-md-6">
-      <label for="inputAddress">Mobile number</label>
-      <input type="tel"
-             class="form-control"
-             id="inputTel"
-             pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-             placeholder="123-456-7890"
-             required
-             data-item-id="73404267"
-             data-required="true"
-             name="entry.1606536442">
-      <label>
-        A temporary password will be texted to this number.
-      </label>
-    </div>
-    <div class="form-group col-md-6">
-      <label for="inputEmail4">Email</label>
+
+    <div class="form-group col-md-6 invisible">
+      <label for="inputEmail">Email</label>
       <input type="email"
              class="form-control"
-             id="inputEmail4"
+             id="inputEmail"
              placeholder="Email"
              pattern="([a-z0-9])\w+@((\buri\b)|(\bbrown\b)).edu"
              required
+             readonly
              data-item-id="1043048528"
              data-required="true"
              name="entry.188893251">
