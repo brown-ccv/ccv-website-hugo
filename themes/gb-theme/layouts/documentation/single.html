@@ -29,7 +29,7 @@
                 {{ range $index, $page := (where $.Site.Pages "Type" .Params.Project) }}
                 {{ if ne .Params.weight 0}}
                 <li class="nav-item{{ if (eq $index 1) }} active{{ end }}">
-                  <a class="nav-link" data-toggle="collapse" href="#menu-{{$index}}" role="button" aria-expanded="nav-item{{ if (eq $index 1) }}true{{ end }}" aria-controls="menu-{{$index}}">{{ $page.Title }}</a>
+                  <a class="nav-link doc-nav-link" data-toggle="collapse" href="#menu-{{$index}}" role="button" aria-expanded="nav-item{{ if (eq $index 1) }}true{{ end }}" aria-controls="menu-{{$index}}">{{ $page.Title }}</a>
                   <div class="collapse{{ if (eq $main_title $page.Params.title ) }} show{{ end }}" id="menu-{{$index}}" data-parent="#page-nav">
                     <ul class="nav flex-column">
                       {{ if $page.Params.subitems }}

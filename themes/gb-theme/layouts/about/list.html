@@ -19,7 +19,7 @@
     <ul class="nav nav-toc-page flex-column boxed">
       {{ range .Params.items }}
         <li class="mx-1 nav-item bg-white my-1">
-            <a class="nav-link" href="#{{.name}}">
+            <a class="nav-link section-nav-link" href="#{{.name}}">
                 <span class="text-dark fas fa-{{ .icon }} pr-1 fs-24"></span>
                 <span class="text-dark fs-20">{{ humanize .name }}</span>
             </a>
