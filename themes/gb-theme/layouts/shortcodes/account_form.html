@@ -38,7 +38,7 @@
              class="form-control"
              id="inputEmail"
              placeholder="Email"
-             pattern="([a-z0-9])\w+@((\buri\b)|(\bbrown\b)).edu"
+             pattern="([a-z0-9])\w+@(\bbrown\b).edu"
              required
              readonly
              data-item-id="1043048528"
@@ -117,7 +117,7 @@
       <input type="email"
              class="form-control"
              id="inputUsername4"
-             pattern="([a-z0-9])\w+@((\buri\b)|(\bbrown\b)).edu"
+             pattern="([a-z0-9])\w+@brown.edu"
              required
              data-item-id="542373747"
              data-required="true"
@@ -136,7 +136,7 @@
     <label class="custom-control-label" for="customControlValidation1">I have read and accepted the <a href="{{.Site.BaseURL}}/services/haas/terms-and-conditions/">General Terms and Conditions.</a></label>
     <div class="invalid-feedback">This is required.</div>
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button id="googleSubmit" type="submit" class="btn btn-primary" disabled>Submit</button>
 
   <input type="hidden" name="fbzx" value="5460528407244223451">
   <input type="hidden" name="token" value="T5Ig3WgBAAA.nvVWveWrmizB-juG5L79hg.1udzHmiGAFCSKHjDzHFhQg">
