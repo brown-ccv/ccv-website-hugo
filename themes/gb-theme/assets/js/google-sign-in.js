@@ -1,5 +1,6 @@
 function onSignIn(googleUser) {
   var profile = googleUser.getBasicProfile();
+  console.log(profile);
   $('#inputFullName').val(profile.getName());
   $('#inputEmail').val(profile.getEmail());
   $('#loginmessage').text('Logged in as:');
