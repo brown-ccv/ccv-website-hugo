@@ -17,8 +17,7 @@
 <form class=""
       action="https://docs.google.com/forms/d/e/1FAIpQLSfhgHgf_Zm8KJQLgqoMpaXVnKm2uuEZVE6ClIwmANdir3zSQA/formResponse?embedded=true"
       target="_self"
-      method="POST"
-      id="mG61Hd">
+      method="POST">
   <div class="form-row">
     <div class="form-group col-md-6 invisible">
       <label for="inputFullName">Name</label>
@@ -37,7 +36,7 @@
              class="form-control"
              id="inputEmail"
              placeholder="Email"
-             pattern="([a-z0-9])\w+@(\bbrown\b).edu"
+             pattern="([a-z0-9])\w+@brown.edu"
              required
              readonly
              name="entry.188893251">
@@ -106,20 +105,20 @@
            name="entry.1715736963">
     <small class="mt-2 fs-14">We ask for email approval from a PI before creating accounts associated with their group.</small>
   </div>
+
   </div>
 
   <div class="custom-control custom-checkbox mb-3">
     <input type="checkbox"
            class="custom-control-input"
-           id="customControlValidation1"
-           required
-           name="entry.2110711886">
-    <label class="custom-control-label" for="customControlValidation1">I have read and accepted the <a href="{{.Site.BaseURL}}/services/haas/terms-and-conditions/">General Terms and Conditions.</a></label>
+           id="checkboxAgree"
+           required>
+    <label class="custom-control-label" for="checkboxAgree">I have read and accepted the <a href="{{.Site.BaseURL}}/services/haas/terms-and-conditions/">General Terms and Conditions.</a></label>
     <div class="invalid-feedback">This is required.</div>
+    <input type="text" id="textAgree" class="invisible" name="entry.2110711886"></input>
+
   </div>
 
   <button id="googleSubmit" type="submit" class="btn btn-primary" disabled>Submit</button>
-
-  <input type="hidden" name="fbzx" value="285926332915094338">
-  <input type="hidden" name="token" value="jH9U42gBAAA.nvVWveWrmizB-juG5L79hg.qwK7zbwoC8pMrFJ5DFSpwQ">
+  <input type="hidden" name="token" value="eNfI42gBAAA.nvVWveWrmizB-juG5L79hg.WhhjwBEFBuQTk7_xlKIGqA">
 </form>

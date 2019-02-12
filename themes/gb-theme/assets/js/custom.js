@@ -55,4 +55,7 @@ $(function () {
       $('#radioInput').val(value);
     });
 
+    $('#checkboxAgree').click(function() {
+        $("#textAgree").toggle(this.checked).val("I agree");
+    });
 });
