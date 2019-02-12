@@ -50,4 +50,9 @@ $(function () {
       } // End if
     });
 
+    $("input[type='radio']").click(function(){
+      var value = $("input[type='radio']:checked").val();
+      $('#radioInput').val(value);
+    });
+
 });

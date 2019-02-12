@@ -2,10 +2,10 @@
   <h1 class="my-4">Request an Account on Oscar</h1>
 </div>
 <div class="d-flex flex-column align-items-center">
-  <p>To request an account on Oscar you must sign in using your Brown Gmail account. If you don't have  a <code>brown.edu</code> email,
+  <p><strong class="text-red">Please sign in with you Brown email to request an account. </strong>If you don't have  a <code>brown.edu</code> email,
          your Brown University sponsor should submit this form.</p>
   <div class="d-flex row mt-10">
-  <div class="g-signin2 col-md-3" data-width="200" data-height="80" data-onsuccess="onSignIn"></div>
+  <div class="g-signin2 col-md-3" data-width="230" data-height="80" data-onsuccess="onSignIn"></div>
   <div class="ml-2 d-flex flex-column col-md-6 ml-10">
     <span id="loginmessage">Please, sign in.</span>
     <span id="googleUser" class="text-blue"></span>
@@ -27,8 +27,6 @@
              placeholder="Full Name"
              required
              readonly
-             data-item-id="1826071030"
-             data-required="true"
              name="entry.350874798">
     </div>
 
@@ -41,103 +39,83 @@
              pattern="([a-z0-9])\w+@(\bbrown\b).edu"
              required
              readonly
-             data-item-id="1043048528"
-             data-required="true"
              name="entry.188893251">
     </div>
-    <div class="form-group col-md-6">
-      <label for="inputPassword4">Brown username</label>
-      <input type="text"
-             class="form-control"
-             id="inputUsername4"
-             placeholder="username"
-             required
-             data-item-id="1328947044"
-             data-required="true"
-             name="entry.1540659038">
+
+  <div id="radioGroup" class="form-row d-flex justify-content-around">
+
+ {{ range $index, $a := .Site.Data.rates }}
+    <div class="col-md-3">
+    <div class="card stacked my-3">
+      <div class="card-header pt-0 border-warning border-5">
+        <span class="card-price {{ if eq .type `condo` }}fs-16{{ end }}">{{ humanize .price }}</span>
+
+        <div class="custom-control custom-radio mt-3">
+          <input type="radio" id="customRadio{{$index}}" name="customRadio" class="custom-control-input" value="{{ .type }}">
+          <label class="custom-control-label" for="customRadio{{$index}}"><h3>{{ humanize .type }}</h3></label>
+        </div>
+      </div>
+      <div class="card-body">
+        <ul class="list-group list-group-minimal mb-3 fs-16">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+          Job priority<strong>{{ humanize .priority }}</strong>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            Account number<strong>{{ .accounts }}</strong>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            Max cores<strong>{{ .cores }}</strong>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            Max time<strong>{{ .time }}</strong>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            Home storage<strong>{{ .home }}</strong>
+          </li>
+          {{ with .extra }}
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            {{ humanize .key }}<strong>{{ .value }}</strong>
+          </li>
+          {{ end }}
+        </ul>
+      </div>
     </div>
+    </div>
+    {{ end }}
+    <input id="radioInput" type="hidden" name="entry.860085472">
   </div>
 
-  <div class="form-row">
-    <div class="form-group col-md-6">
-      <label for="inputState">User Type</label>
-      <select id="inputState"
-              class="form-control"
-              required
-              data-item-id="1828953716"
-              data-required="true"
-              name="entry.2078386885">
-        <option selected>Choose...</option>
-        <option>Faculty</option>
-        <option>Staff</option>
-        <option>Graduate</option>
-        <option>Undergrad</option>
-        <option>External</option>
-      </select>
-    </div>
-    <div class="form-group col-md-6">
-      <label for="inputState">Account Type</label>
-      <select id="inputState"
-              class="form-control"
-              required
-              data-item-id="484406619"
-              data-required="true"
-              name="entry.860085472">
-        <option selected>Choose...</option>
-        <option>Exploratory (free; recommended if unsure)</option>
-        <option>Premium</option>
-        <option>Add to PI's condo queue</option>
-      </select>
-      <label><a href="/">click for premium rates</a>b </label>
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="exampleFormControlTextarea1">Intended Use</label>
+  <div class="form-group col-md-6">
+    <small class="fs-18" for="exampleFormControlTextarea1">Intended Use</small>
     <textarea class="form-control"
               id="exampleFormControlTextarea1"
               rows="3"
-              data-item-id="437137239"
-              data-required="true"
               name="entry.1947135603"></textarea>
   </div>
-  <div class="form-row">
-
-    <div class="form-group col-md-6">
-      <label for="inputEmail4">Advisor or PI</label>
-      <input type="text"
-             class="form-control"
-             id="inputEmail4"
-             required
-             data-item-id="1618801604"
-             data-required="true"
-             name="entry.637913206">
-    </div>
-    <div class="form-group col-md-6">
-      <label for="inputPassword4">Advisor or PI's email address</label>
-      <input type="email"
-             class="form-control"
-             id="inputUsername4"
-             pattern="([a-z0-9])\w+@brown.edu"
-             required
-             data-item-id="542373747"
-             data-required="true"
-             name="entry.1715736963">
-      <label>we ask for email approval from a PI before creating accounts associated with their group.</label>
-    </div>
+  <div class="form-group col-md-6">
+    <small class="fs-18" for="inputPassword4">Advisor or PI's email address</small>
+    <input type="email"
+           class="form-control"
+           id="inputUsername4"
+           pattern="([a-z0-9])\w+@brown.edu"
+           required
+           name="entry.1715736963">
+    <small class="mt-2 fs-14">We ask for email approval from a PI before creating accounts associated with their group.</small>
   </div>
+  </div>
+
   <div class="custom-control custom-checkbox mb-3">
     <input type="checkbox"
            class="custom-control-input"
            id="customControlValidation1"
            required
-           data-item-id="1227668249"
-           data-required="true"
-           name="entry.963437811">
+           name="entry.2110711886">
     <label class="custom-control-label" for="customControlValidation1">I have read and accepted the <a href="{{.Site.BaseURL}}/services/haas/terms-and-conditions/">General Terms and Conditions.</a></label>
     <div class="invalid-feedback">This is required.</div>
   </div>
+
   <button id="googleSubmit" type="submit" class="btn btn-primary" disabled>Submit</button>
 
   <input type="hidden" name="fbzx" value="5460528407244223451">
-  <input type="hidden" name="token" value="T5Ig3WgBAAA.nvVWveWrmizB-juG5L79hg.1udzHmiGAFCSKHjDzHFhQg">
+  <input type="hidden" name="token" value="AvKn4mgBAAA.nvVWveWrmizB-juG5L79hg.Cug4sMhjO3wjAOU6l95XoA">
 </form>

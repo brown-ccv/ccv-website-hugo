@@ -1,0 +1,38 @@
+- type: exploratory
+  priority: low
+  accounts: 1
+  cores: 16
+  time: 48h
+  home: 10GB
+  price: Free
+  gform_name:
+
+- type: premium
+  priority: medium
+  accounts: 1
+  cores: 192
+  time: 80h
+  home: 10GB
+  price: $300
+  gform_name:
+
+- type: group
+  priority: medium
+  accounts: 6
+  cores: 192
+  time: 80h
+  home: 10GB
+  price: $750
+  extra:
+    key: additional account
+    value: $150/quarter
+  gform_name:
+
+- type: condo
+  priority: high
+  accounts: 6
+  cores: Custom
+  time: Custom
+  home: 10GB
+  price: contact us
+  gform_name:
