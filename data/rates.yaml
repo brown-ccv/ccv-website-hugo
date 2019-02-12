@@ -5,7 +5,6 @@
   time: 48h
   home: 10GB
   price: Free
-  gform_name:
 
 - type: premium
   priority: medium
@@ -14,7 +13,6 @@
   time: 80h
   home: 10GB
   price: $300
-  gform_name:
 
 - type: group
   priority: medium
@@ -26,7 +24,6 @@
   extra:
     key: additional account
     value: $150/quarter
-  gform_name:
 
 - type: condo
   priority: high
@@ -35,4 +32,3 @@
   time: Custom
   home: 10GB
   price: contact us
-  gform_name:
