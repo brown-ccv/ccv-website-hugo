@@ -23,7 +23,7 @@
   price: $750
   extra:
     key: additional account
-    value: $150/quarter
+    value: $150
 
 - type: condo
   priority: high

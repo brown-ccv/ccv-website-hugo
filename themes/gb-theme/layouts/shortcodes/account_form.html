@@ -13,7 +13,7 @@
   </div>
   </div>
 </div>
-<form class="needs-validation"
+<form class=""
       action="https://docs.google.com/forms/d/e/1FAIpQLSfhgHgf_Zm8KJQLgqoMpaXVnKm2uuEZVE6ClIwmANdir3zSQA/formResponse?embedded=true"
       target="_self"
       method="POST"
@@ -41,11 +41,11 @@
              readonly
              name="entry.188893251">
     </div>
+</div>
 
-  <div id="radioGroup" class="form-row d-flex justify-content-around">
-
+<div id="radioGroup" class="form-row d-flex justify-content-between">
  {{ range $index, $a := .Site.Data.rates }}
-    <div class="col-md-3">
+    <div class="col-md-3 mx-0">
     <div class="card stacked my-3">
       <div class="card-header pt-0 border-warning border-5">
         <span class="card-price {{ if eq .type `condo` }}fs-16{{ end }}">{{ humanize .price }}</span>
@@ -55,7 +55,7 @@
           <label class="custom-control-label" for="customRadio{{$index}}"><h3>{{ humanize .type }}</h3></label>
         </div>
       </div>
-      <div class="card-body">
+      <div class="card-body pb-0">
         <ul class="list-group list-group-minimal mb-3 fs-16">
           <li class="list-group-item d-flex justify-content-between align-items-center">
           Job priority<strong>{{ humanize .priority }}</strong>
@@ -84,7 +84,7 @@
     {{ end }}
     <input id="radioInput" type="hidden" name="entry.860085472">
   </div>
-
+<div class="form-row">
   <div class="form-group col-md-6">
     <small class="fs-18" for="exampleFormControlTextarea1">Intended Use</small>
     <textarea class="form-control"
