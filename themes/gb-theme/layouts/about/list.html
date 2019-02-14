@@ -76,6 +76,29 @@
         </article>
 
 
+
+        <!-- Opportunities -->
+        <header id="opportunities" class="d-flex align-items-center">
+          <span class="btn-red btn-ico btn-lg btn-rounded"><i class="fas fa-user-circle fs-40"></i></span>
+          <h1 class="mx-4 text-secondary">Opportunities</h1>
+          <hr class="bg-dark w-40"/>
+        </header>
+
+
+        <article class="d-flex py-4">
+          {{ range .Site.Data.opportunities }}
+            <div class="card-body boxed bg-white mx-1 mb-1">
+              <h2 class="card-title font-weight-bold mb-0 fs-20">{{ .name }}</h2>
+              <p class="card-text fs-18">{{ .title }}</p>
+              <p class="font-weight-bold text-blue text-small"><span class="icon-users2 pr-1"></span>{{ .team }} |
+                <span class="font-weight-bold text-blue fs-12">{{ .subteam }}</span>
+              </p>
+              <a class="eyebrow link fs-14 text-orange" href="{{ .link }}">Learn More</a>
+            </div>
+          {{ end }}
+        </article>
+
+
         <!-- Publications -->
         <header id="publications" class="d-flex align-items-center">
           <span class="btn-red btn-ico btn-lg btn-rounded"><i class="fas fa-book-dead fs-40"></i></span>
@@ -106,16 +129,6 @@
           </p>
           {{ end }}
         </div>
-
-
-
-        <!-- Opportunities -->
-        <header id="opportunities" class="d-flex align-items-center">
-          <span class="btn-red btn-ico btn-lg btn-rounded"><i class="fas fa-user-circle fs-40"></i></span>
-          <h1 class="mx-4 text-secondary">Opportunities</h1>
-          <hr class="bg-dark w-40"/>
-        </header>
-
 
       </div>
     </div>
