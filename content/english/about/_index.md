@@ -3,7 +3,7 @@ title: About
 draft: false
 
 items:
-  - name: overview
+  - name: mission
     icon: crow
   - name: people
     icon: person-booth
@@ -14,7 +14,7 @@ items:
   - name: contact
     icon: envelope-open-text
 
-overview:
+mission:
   lead: "The Center for Computation and Visualization provides high-performance computing and visualization services to the Brown community."
   text: "Faculty members, researchers, and students turn to CCV when they need to:"
   list_items:
