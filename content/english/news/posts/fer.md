@@ -6,4 +6,4 @@ types: ["posts"] # keep only one of the categories
 tags: ["documentation", "markdown"] # add keywords here, be consistent with other posts.
 authors: ["Fernando Gelin"]
 ---
-{{< email_signature name="Fernando Gelin" title="Research Software Engineer" github="fernandogelin" uuid="8144f0fb-0d36-47ed-ae64-ab07c232ebba">}}
+{{< email_signature >}}
