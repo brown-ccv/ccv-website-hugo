@@ -5,6 +5,10 @@ admin_path:
 webhook_url: 
 sections:
 - type: document
+  path: content/english/about/_index.md
+  label: About
+  match: "**/*"
+- type: document
   path: config.yml
   label: Config
 - type: directory
