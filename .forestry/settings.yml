@@ -4,22 +4,12 @@ auto_deploy: false
 admin_path: 
 webhook_url: 
 sections:
-- type: directory
-  path: ''
-  label: Content
-  create: all
-  match: content/english/**/*
 - type: document
   path: config.yml
   label: Config
 - type: directory
   path: content/english
-  label: English
-  create: all
-  match: "**/*"
-- type: directory
-  path: content/portuguese
-  label: Portuguese
+  label: Content
   create: all
   match: "**/*"
 upload_dir: static/images
