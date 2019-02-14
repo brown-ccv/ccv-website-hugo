@@ -39,8 +39,6 @@ overview:
 
           **Visualization**
           The YURT is our 360 degree immersive virtual reality theater at 180 George. It has a 138 megapixel display surface. The CAVE I is our four wall virtual 3D environment available for instructional and research applications in the Granoff Center. We also provide application support and install 3D display units for departments throughout the university."
-
-
 people:
   lead: CCV team is awesome!
 ---

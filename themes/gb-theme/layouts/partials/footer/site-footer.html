@@ -11,16 +11,15 @@
           <div class="col">
             <ul class="list-group list-group-minimal">
               {{ range .Site.Menus.main.ByWeight }}
+              {{ if ne .Name "Home"}}
               <li class="list-group-item"><a href="{{ .URL }}" class="link">{{ .Name }}</a></li>
-              {{ end}}
+              {{ end }}
+              {{ end }}
             </ul>
           </div>
           <div class="col">
             <ul class="list-group list-group-minimal">
-              <li class="list-group-item"><a href="" class="link"><span class="icon-envelope mr-1"></span>Advanced Research Computing</a></li>
-              <li class="list-group-item"><a href="" class="link"><span class="icon-envelope mr-1"></span>CCV Operations</a></li>
-              <li class="list-group-item"><a href="" class="link"><span class="icon-ticket mr-1 fs-22"></span>Stronghold support</a></li>
-              <li class="list-group-item"><a href="" class="link"><span class="icon-ticket mr-1 fs-22"></span>Oscar support</a></li>
+              <li class="list-group-item"><a href="" class="link"><span class="icon-envelope mr-1"></span>CCV Support</a></li>
             </ul>
           </div>
         </div>
