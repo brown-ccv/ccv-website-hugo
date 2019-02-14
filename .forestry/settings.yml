@@ -6,17 +6,13 @@ webhook_url:
 sections:
 - type: document
   path: config.yml
-  label: Config
+  label: Site Configuration
 - type: directory
   path: content/english
-  label: English
+  label: Content
   create: all
   match: "**/*"
-- type: directory
-  path: content/portuguese
-  label: Portuguese
-  create: all
-  match: "**/*"
+  exclude: search.md
 upload_dir: static/images
 public_path: "/images"
 front_matter_path: ''
