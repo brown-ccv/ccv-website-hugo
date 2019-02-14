@@ -7,7 +7,6 @@ sections:
 - type: document
   path: content/english/about/_index.md
   label: About
-  match: "**/*"
 - type: document
   path: config.yml
   label: Config
