@@ -12,6 +12,7 @@ sections:
   label: Content
   create: all
   match: "**/*"
+  exclude: "*/search.md"
 upload_dir: static/images
 public_path: "/images"
 front_matter_path: ''
