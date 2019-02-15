@@ -2,12 +2,11 @@
 title: "Oscar"
 date: 2019-01-22T13:29:23-05:00
 draft: false
-category: "High Performance Computing"
+category: "High-Performance Computing"
 icon: server2
-lead: "The high-performance computing resources at CCV equip the Brown research community to undertake complex numerical simulation, modeling, and data analysis.
-**Oscar** is our primary research computing cluster with several hundred multi-core nodes sharing a high-performance interconnect and file system. Applications can be run interactively or scheduled as batch jobs."
+lead: "CCV's primary research computing cluster, with more then 500 compute nodes, including both CPU and GPU nodes, and a GPFS parallel filesystem."
 haas: true
 ---
-
+The high-performance computing (HPC) resources at CCV equip the Brown research community with the tools they need to perform complex numerical simulations, modeling, and data analysis.
 
 {{< account_form >}}
