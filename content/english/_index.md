@@ -24,31 +24,31 @@ quick_links:
     icon: server2
     text: See all our documentation
     href: "/documentation/"
-    weight: 
+    weight:
   - name: Data Science
     icon: database
     text: Some text goes here
-    href: "/services#consulting/"
+    href: "/services/consulting/data-science"
     weight: 4
 showcase:
   title: CCV @ Brown
   items:
   - title: Project 1
-    team: 
+    team:
     text: Some description of the project with PI Jane Doe in the X department.
     image: "/images/stocks.png"
-    href: 
+    href:
   - title: Migration to RedHat Roadmap
-    team: 
+    team:
     text: CCV is officially migrating operating to RedHat7! What does this mean for
       you?
     image: "/images/data-store.jpg"
-    href: 
+    href:
   - title: Project 3
-    team: 
+    team:
     text: Some description of the project with PI Jane Doe in the X department.
     image: "/images/videoblocks.png"
-    href: 
+    href:
 news:
   title: Latest Updates
 events:
@@ -56,20 +56,20 @@ events:
   items:
   - title: Intro to Oscar Workshop
     text: Some text with brief description of event.
-    image: 
-    href: 
+    image:
+    href:
     date: Wednesday, Feb 13
     time: 2pm-4pm
   - title: Intro to Linux Workshop
     text: Some text with brief description of event.
-    image: 
-    href: 
+    image:
+    href:
     date: Thursday, Feb 7
     time: 10am-12pm
   - title: Office Hours
     text: Some text with brief description of event.
-    image: 
-    href: 
+    image:
+    href:
     date: Fridays
     time: 10am-1pm
 

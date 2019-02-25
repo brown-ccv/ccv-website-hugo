@@ -1,0 +1,11 @@
+.initial-place {
+  position: absolute;
+  bottom: 80rem;
+}
+.bottom-right {
+  position: sticky;
+  z-index: 1004;
+  bottom: 2rem;
+  right: 2rem;
+  padding: 2rem;
+}

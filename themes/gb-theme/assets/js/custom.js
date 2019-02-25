@@ -1,4 +1,24 @@
+
+
 $(function () {
+      $.fn.isOnScreen = function(){
+
+          var win = $(window);
+
+          var viewport = {
+              top : win.scrollTop(),
+              left : win.scrollLeft()
+          };
+          viewport.right = viewport.left + win.width();
+          viewport.bottom = viewport.top + win.height();
+
+          var bounds = this.offset();
+          bounds.right = bounds.left + this.outerWidth();
+          bounds.bottom = bounds.top + this.outerHeight();
+
+          return (!(viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom));
+
+      };
 // table of contents
     $('#TableOfContents > ul').addClass("nav flex-column toc")
                               .attr("id", "toc");
@@ -67,4 +87,14 @@ $(function () {
     });
 
     $('.taskTooltip').tooltip({trigger: 'manual'}).tooltip('show');
+
+    $(window).scroll(function(){
+        if ($('#discourse-box').isOnScreen()) {
+            // The element is visible, do something
+            $('#discourse-box').removeClass('initial-place');
+            $('#discourse-box').addClass('bottom-right');
+        } else {
+            // The element is NOT visible, do something else
+        }
+    });
 });

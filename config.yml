@@ -47,6 +47,11 @@ menu:
     url: /news/
     weight: 6
 
+params:
+  contact:
+    support: support@ccv.brown.edu
+    discourse: https://discuss.ccv.brown.edu
+
 # i18n
 disableLanguages:
   - pt
