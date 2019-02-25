@@ -50,15 +50,23 @@
       <div class="col-md-3 mx-0">
       <div class="card stacked my-3">
         <div class="card-header pt-0 border-warning border-5">
+          {{ if ne $index 3 }}
           <span class="card-price {{ if eq .type `condo` }}fs-16{{ end }}">{{ humanize .price }}</span>
-
+          {{ end }}
           <div class="custom-control custom-radio mt-3">
             <input type="radio" id="customRadio{{$index}}" name="customRadio" class="custom-control-input" value="{{ .type }}">
-            <label class="custom-control-label" for="customRadio{{$index}}"><h3>{{ humanize .type }}</h3></label>
+            <label class="custom-control-label" for="customRadio{{$index}}">
+              {{ if ne $index 3 }}
+              <h3>{{ humanize .type }}</h3>
+              {{ else }}
+              <h4>{{ humanize .type }}</h4>
+              {{ end }}
+            </label>
           </div>
         </div>
         <div class="card-body pb-0">
           <ul class="list-group list-group-minimal mb-3 fs-16">
+            {{ if ne $index 3}}
             <li class="list-group-item d-flex justify-content-between align-items-center">
             Job priority<strong>{{ humanize .priority }}</strong>
             </li>
@@ -79,6 +87,27 @@
               {{ humanize .key }}<strong>{{ .value }}</strong>
             </li>
             {{ end }}
+            {{ else }}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <strong>Group/Condo:&nbsp;&nbsp;</strong>
+              <input class="group-enable w-75 d-inline" type="text" name="entry.491551205" disabled></input>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <strong>PI's email:</strong>
+              <input type="email"
+                     class="group-enable w-75 d-inline"
+                     id="inputUsername4"
+                     pattern="([a-z0-9])\w+@brown.edu"
+                     name="entry.1715736963"
+                     disabled>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center mt-2">
+              <a data-toggle="tooltip" data-placement="top" class="tooltip-small" title="{{ .condo }}">
+                <span class="fs-18"> What's a condo?&nbsp;&nbsp;</span>
+                <span class="fs-20 fas fa-info-circle"></span>
+              </a>
+            </li>
+            {{ end }}
           </ul>
         </div>
       </div>
@@ -88,28 +117,16 @@
       </div>
       {{ end }}
     {{ end }}
-    <p class="fs-16 col-md-8 pt-2">If you want to be added to an existing group or condo, enter the group/condo name here:</p>
-    <input  id="group-name" class="mb-4 p-1 col-md-4 form-control d-inline" type="text" placeholder="group or condo name" name="entry.491551205" disabled></input>
      <input id="radioInput" type="hidden" name="entry.860085472">
   </div>
 
 <div class="form-row">
-  <div class="form-group col-md-6">
+  <div class="form-group col-md-12">
     <small class="fs-18" for="exampleFormControlTextarea1">Intended Use</small>
     <textarea class="form-control"
               id="exampleFormControlTextarea1"
               rows="3"
               name="entry.1947135603"></textarea>
-  </div>
-  <div class="form-group col-md-6">
-    <small class="fs-18" for="inputPassword4">Advisor or PI's email address</small>
-    <input type="email"
-           class="form-control"
-           id="inputUsername4"
-           pattern="([a-z0-9])\w+@brown.edu"
-           required
-           name="entry.1715736963">
-    <small class="mt-2 fs-14">We ask for email approval from a PI before creating accounts associated with their group.</small>
   </div>
 
   </div>

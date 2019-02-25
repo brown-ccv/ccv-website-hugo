@@ -1,0 +1,15 @@
+
+.tooltip.bs-tooltip-auto[x-placement^=top] .arrow::before, .tooltip.bs-tooltip-top .arrow::before {
+    margin-left: -3px;
+    content: "";
+    border-width: 20px 20px 0;
+    border-top-color: $yellow;
+}
+
+.tooltip-inner {
+  background-color: $yellow !important;
+  font-size: $font-size-sm * 0.9;
+  max-width: 500px !important;
+  color: $brown;
+  padding: 2rem;
+}

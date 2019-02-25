@@ -24,13 +24,8 @@
   extra:
     key: additional account
     value: $150
-  add: true
 
-- type: condo
-  priority: high
-  accounts: 6
-  cores: Custom
-  time: Custom
-  home: 10GB
-  price: contact us
-  add: true
+- type: Add to Group or Condo
+  condo: "PIs may choose to contribute funding for the purchase of additional hardware, to add capacity or capabilities to the core system.
+  The hardware purchase can be tailored to specific research needs (e.g., GPU's, SMP nodes, large memory, solid-state drives, etc.),
+  but all equipment must meet a basic level of compatibility with the existing cluster. Contact us to set up a condo."

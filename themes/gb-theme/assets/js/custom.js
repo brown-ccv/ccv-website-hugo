@@ -54,15 +54,17 @@ $(function () {
       var value = $("input[type='radio']:checked").val();
       $('#radioInput').val(value);
       const group = ['group', 'condo']
-      if (group.includes(value)) {
-        $("#group-name").prop("disabled", false);
+      if (value == "Add to Group or Condo") {
+        $(".group-enable").prop("disabled", false);
       }
       else {
-        $("#group-name").prop("disabled", true);
+        $(".group-enable").prop("disabled", true);
       }
     });
 
     $('#checkboxAgree').click(function() {
         $("#textAgree").toggle(this.checked).val("I agree");
     });
+
+    $('.taskTooltip').tooltip({trigger: 'manual'}).tooltip('show');
 });
