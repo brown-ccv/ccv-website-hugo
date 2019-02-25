@@ -53,6 +53,13 @@ $(function () {
     $("input[type='radio']").click(function(){
       var value = $("input[type='radio']:checked").val();
       $('#radioInput').val(value);
+      const group = ['group', 'condo']
+      if (group.includes(value)) {
+        $("#group-name").prop("disabled", false);
+      }
+      else {
+        $("#group-name").prop("disabled", true);
+      }
     });
 
     $('#checkboxAgree').click(function() {

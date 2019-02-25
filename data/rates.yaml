@@ -24,6 +24,7 @@
   extra:
     key: additional account
     value: $150
+  add: true
 
 - type: condo
   priority: high
@@ -32,3 +33,4 @@
   time: Custom
   home: 10GB
   price: contact us
+  add: true

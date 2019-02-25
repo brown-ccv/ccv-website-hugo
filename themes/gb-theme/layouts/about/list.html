@@ -35,15 +35,15 @@
 
           <!-- Mission -->
           <header id="mission" class="d-flex align-items-center">
-            <span class="btn-red btn-ico btn-lg btn-rounded"><i class="fas fa-crow fs-40"></i></span>
+            <span class="btn-red btn-ico btn-lg btn-rounded"><i class="fas fa-crow"></i></span>
             <h1 class="mx-4 text-secondary">Mission</h1>
             <hr class="bg-dark w-40"/>
           </header>
 
           <article class="d-flex py-6 justify-content-between flex-wrap">
             <div class="col-md-12 py-3">
-              <div class="card p-4">
-                <p class="fs-20">{{ .Params.mission.text | markdownify }}</p>
+              <div>
+                <p class="p-medium">{{ .Params.mission.text | markdownify }}</p>
                 <ul>
                 {{ range .Params.mission.list_items }}
                   <li>{{ . }}</li>
@@ -56,7 +56,7 @@
 
         <!-- People -->
         <header id="people" class="d-flex align-items-center">
-          <span class="btn-red btn-ico btn-lg btn-rounded"><i class="fas fa-person-booth fs-40"></i></span>
+          <span class="btn-red btn-ico btn-lg btn-rounded"><i class="fas fa-person-booth"></i></span>
           <h1 class="mx-4 text-secondary">People</h1>
           <hr class="bg-dark w-40"/>
         </header>
@@ -79,13 +79,13 @@
 
         <!-- Opportunities -->
         <header id="opportunities" class="d-flex align-items-center">
-          <span class="btn-red btn-ico btn-lg btn-rounded"><i class="fas fa-user-circle fs-40"></i></span>
+          <span class="btn-red btn-ico btn-lg btn-rounded"><i class="fas fa-user-circle"></i></span>
           <h1 class="mx-4 text-secondary">Opportunities</h1>
           <hr class="bg-dark w-40"/>
         </header>
 
 
-        <article class="d-flex py-4">
+        <article id="opportunities-content" class="d-flex py-4">
           {{ range .Site.Data.opportunities }}
             <div class="card-body boxed bg-white mx-1 mb-1">
               <h2 class="card-title font-weight-bold mb-0 fs-20">{{ .name }}</h2>
@@ -101,7 +101,7 @@
 
         <!-- Publications -->
         <header id="publications" class="d-flex align-items-center">
-          <span class="btn-red btn-ico btn-lg btn-rounded"><i class="fas fa-book-dead fs-40"></i></span>
+          <span class="btn-red btn-ico btn-lg btn-rounded"><i class="fas fa-book-dead"></i></span>
           <h1 class="mx-4 text-secondary">Publications</h1>
           <hr class="bg-dark w-40"/>
         </header>

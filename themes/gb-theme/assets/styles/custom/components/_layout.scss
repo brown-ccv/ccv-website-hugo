@@ -89,7 +89,29 @@ section, footer {
   font-size: 0.9rem !important;
 }
 
+#opportunities-content {
+  flex-wrap: wrap;
+  .card-body {
+    flex-basis: 22%;
+  }
+  @include media-breakpoint-down(sm) {
+    .card-body {
+      flex-basis: 100%;
+    }
+  }
+}
 
 .border-5 {
   border-width: 5px;
+}
+
+// Quick links
+.card-responsive {
+  width: 25%;
+  padding: 2px;
+}
+@media (max-width: 800px) {
+  .card-responsive {
+    width: 100%;
+  }
 }

@@ -2,10 +2,22 @@
 
 article {
   h1 {
-    font-size: $h1-font-size * 0.7;
+    font-size: $h1-font-size * 0.7 !important;
   }
 }
-
 .line-height-short span {
   line-height: $line-height-sm * 0.1 !important;
+}
+
+.p-medium {
+  font-size: $font-size-lg;
+}
+
+@media (max-width: 800px) {
+  .h1-home {
+    font-size: $h1-font-size * 0.8 !important;
+  }
+  .p-medium {
+    font-size: $font-size-lg * 0.8 !important;
+  }
 }

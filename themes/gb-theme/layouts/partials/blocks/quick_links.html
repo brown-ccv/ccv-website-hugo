@@ -5,14 +5,14 @@
       <div class="col-md-12">
 
         <header class="d-flex align-items-center">
-          <span class="btn-primary btn-ico btn-lg btn-rounded mx-3"><i class="icon-link2 fs-40"></i></span>
-          <h1 class="">{{ .Params.quick_links.title | markdownify }}</h1>
+          <span class="btn-primary btn-ico btn-lg btn-rounded mx-3"><i class="icon-link2"></i></span>
+          <h1 class="h1-home py-8">{{ .Params.quick_links.title | markdownify }}</h1>
         </header>
 
         <section>
           <article class="row">
             {{ range $cards := sort ($.Params.quick_links.cards) "weight" "asc" }}
-                <div class="col-7 col-md-5 col-lg-3 p-2">
+                <div class="card-responsive">
                   <a href="{{$.Site.BaseURL}}{{.href}}">
                   <div class="card scale">
                     <div class="card-body text-center">

@@ -45,48 +45,54 @@
 
 <div id="radioGroup" class="form-row d-flex justify-content-between">
  {{ range $index, $a := .Site.Data.rates }}
-    <div class="col-md-3 mx-0">
-    <div class="card stacked my-3">
-      <div class="card-header pt-0 border-warning border-5">
-        <span class="card-price {{ if eq .type `condo` }}fs-16{{ end }}">{{ humanize .price }}</span>
+ <!-- cards -->
+   {{ if lt $index 4 }}
+      <div class="col-md-3 mx-0">
+      <div class="card stacked my-3">
+        <div class="card-header pt-0 border-warning border-5">
+          <span class="card-price {{ if eq .type `condo` }}fs-16{{ end }}">{{ humanize .price }}</span>
 
-        <div class="custom-control custom-radio mt-3">
-          <input type="radio" id="customRadio{{$index}}" name="customRadio" class="custom-control-input" value="{{ .type }}">
-          <label class="custom-control-label" for="customRadio{{$index}}"><h3>{{ humanize .type }}</h3></label>
+          <div class="custom-control custom-radio mt-3">
+            <input type="radio" id="customRadio{{$index}}" name="customRadio" class="custom-control-input" value="{{ .type }}">
+            <label class="custom-control-label" for="customRadio{{$index}}"><h3>{{ humanize .type }}</h3></label>
+          </div>
+        </div>
+        <div class="card-body pb-0">
+          <ul class="list-group list-group-minimal mb-3 fs-16">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+            Job priority<strong>{{ humanize .priority }}</strong>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Account number<strong>{{ .accounts }}</strong>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Max cores<strong>{{ .cores }}</strong>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Max time<strong>{{ .time }}</strong>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Home storage<strong>{{ .home }}</strong>
+            </li>
+            {{ with .extra }}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              {{ humanize .key }}<strong>{{ .value }}</strong>
+            </li>
+            {{ end }}
+          </ul>
         </div>
       </div>
-      <div class="card-body pb-0">
-        <ul class="list-group list-group-minimal mb-3 fs-16">
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-          Job priority<strong>{{ humanize .priority }}</strong>
-          </li>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            Account number<strong>{{ .accounts }}</strong>
-          </li>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            Max cores<strong>{{ .cores }}</strong>
-          </li>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            Max time<strong>{{ .time }}</strong>
-          </li>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            Home storage<strong>{{ .home }}</strong>
-          </li>
-          {{ with .extra }}
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            {{ humanize .key }}<strong>{{ .value }}</strong>
-          </li>
-          {{ end }}
-        </ul>
+      {{ if eq $index 0}}
+      <p class="mb-4 mt-0 fs-14">* Prices per quarter</p>
+      {{ end }}
       </div>
-    </div>
-    {{ if eq $index 0}}
-    <p class="mb-4 mt-0 fs-14">* Prices per quarter</p>
+      {{ end }}
     {{ end }}
-    </div>
-    {{ end }}
-    <input id="radioInput" type="hidden" name="entry.860085472">
+    <p class="fs-16 col-md-8 pt-2">If you want to be added to an existing group or condo, enter the group/condo name here:</p>
+    <input  id="group-name" class="mb-4 p-1 col-md-4 form-control d-inline" type="text" placeholder="group or condo name" name="entry.491551205" disabled></input>
+     <input id="radioInput" type="hidden" name="entry.860085472">
   </div>
+
 <div class="form-row">
   <div class="form-group col-md-6">
     <small class="fs-18" for="exampleFormControlTextarea1">Intended Use</small>

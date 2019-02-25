@@ -1,0 +1,29 @@
+function myFunction() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const sheet = ss.getActiveSheet();
+  const lastRow = CountColA();
+
+  const request = {};
+  request.timestamp = sheet.getRange(lastRow,1).getValues();
+  request.name = sheet.getRange(lastRow,3).getValues();
+  request.email = sheet.getRange(lastRow,4).getValues();
+  request.account_type = sheet.getRange(lastRow,5).getValues();
+  request.intended_use = sheet.getRange(lastRow,6).getValues();
+  request.pi_email = sheet.getRange(lastRow,7).getValues();
+  request.group_name = sheet.getRange(lastRow,8).getValues();
+
+
+  const email_body = '#team Data Science (CIS)\n\n' + 'THIS IS A TEST TICKET, NO ACTION REQUIRED \n\n' + request.timestamp + '\n\n Oscar Account Request by \n\n' + request.name + '\n\n email: ' + request.email + '\n\n Account type: ' + request.account_type + 'Add to Group/Condo: ' + request.group_name +  '\n\n PI: ' + request.pi_email + '\n\n Intended Use: \n\n' + request.intended_use
+
+  MailApp.sendEmail("fernando@fernandogelin.com", "Oscar Account Request - TEST NO ACTION REQUIRED", email_body);
+}
+
+function CountColA() {
+  var sheet = SpreadsheetApp.getActiveSheet();
+  var data = sheet.getDataRange().getValues();
+  for(var i = data.length-1 ; i >=0 ; i--){
+    if (data[i][0] != null && data[i][0] != ''){
+      return i+1 ;
+    }
+  }
+}
