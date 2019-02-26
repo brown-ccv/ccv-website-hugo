@@ -7,15 +7,15 @@ type = "JupyterHub"
 version = "beta"
 weight = 3
 [[subitems]]
-ref = "additional-resources"
+ref = "additional-resources/"
 subsection = "Additional Resources"
 template = "subitem-list"
 [[subitems]]
-ref = "faq"
+ref = "faq/"
 subsection = "FAQ"
 template = "subitem-list"
 [[subitems]]
-ref = "interface-overview"
+ref = "interface-overview/"
 subsection = "Interface Overview"
 template = "subitem-list"
 

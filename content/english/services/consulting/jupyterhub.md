@@ -5,8 +5,7 @@ draft: false
 category: "Classroom"
 icon: users2
 version: beta
-lead: "With JupyterHub you can create a multi-user Hub which spawns, manages, and proxies multiple instances of the single-user Jupyter notebook server.
-Project Jupyter created JupyterHub to support many users. CCV offers a hosted Hub providing notebook servers to courses at Brown."
+lead: "CCV-hosted Hub providing notebook servers to courses at Brown"
 ---
 
 
