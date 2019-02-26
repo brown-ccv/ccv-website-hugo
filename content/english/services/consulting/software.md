@@ -2,8 +2,7 @@
 title: Software
 date: 2019-01-23 21:04:12 +0000
 category: Consulting
-lead: CCV's research software engineers provide help to researchers who need tools
-  built for their research.
+lead: Help to researchers who need tools built for their research
 weight: 0
 icon: support
 
