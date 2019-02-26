@@ -31,8 +31,10 @@
             English
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="{{.Site.BaseURL}}/zh">Chinese</a>
-            <a class="dropdown-item" href="{{.Site.BaseURL}}/pt">Portuguese</a>
+            {{ range $.Site.Home.AllTranslations }}
+            <a class="dropdown-item" href="{{.Permalink}}">{{.Language.LanguageName}}</a>
+            {{ end }}
+
           </div>
         </div>
       </div>
