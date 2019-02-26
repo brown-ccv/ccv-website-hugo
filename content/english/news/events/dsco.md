@@ -8,7 +8,7 @@ authors: ["Thomas Serre"]
 event:
   date: Thursdays
   time: 12pm
-  location: Carney Institute Innovation Hub
+  location: Carney Institute Innovation Hub, 164 Angel St, 4th Floor
   google: "https://calendar.google.com/event?action=TEMPLATE&tmeid=MTZ2bGljNThhcGNqZWY5aGdqZmxtMTRxM3BfMjAxOTAyMjhUMTcwMDAwWiBicm93bi5lZHVfMGM4bnBtb2x0ZnY0NHRuMHY0ZGdhYWh0NDhAZw&tmsrc=brown.edu_0c8npmoltfv44tn0v4dgaaht48%40group.calendar.google.com&scp=ALL"
 ---
 

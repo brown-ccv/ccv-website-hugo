@@ -1,5 +1,5 @@
 ---
-title: "How to Write Docs and Posts for the ccv Website"
+title: "How to write docs and posts for the CCV Website"
 date: 2019-02-01T11:02:52-05:00
 draft: false
 types: ["posts"] # keep only one of the categories
@@ -197,6 +197,16 @@ If you want to use an image from the internet, use the shortcode `figure` instea
 ```
 
 {{< figure src="https://www.kody.dog/images/kody-locks.jpg" height="400" class="d-flex justify-content-center" >}}
+
+## Buttons
+
+To add a button, use the shortcode:
+
+```go
+{{</* button text="this is a button" href="https://..." */>}}
+```
+
+{{< button text="this is a button" href="#" >}}
 
 
 ## Tables

@@ -17,7 +17,7 @@
       </span>
     </div>
     {{ end }}
-      <h1 class="fs-60 w-100 text-center"> {{ humanize .Title | markdownify }}</h1>
+      <h1 class="fs-60 w-100 text-center"> {{ .Title | markdownify }}</h1>
       <small class="text-center fs-18 text-gray">Posted by {{ range .Params.authors }}{{ . }}{{ end }} on <i>{{ .PublishDate.Format "January 2, 2006" }}</i></small>
   </div>
 </div>
