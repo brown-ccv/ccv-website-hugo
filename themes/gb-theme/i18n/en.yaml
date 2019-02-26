@@ -1,0 +1,38 @@
+- id: Home
+  translation: Home
+- id: About
+  translation: About
+- id: Services
+  translation: Services
+- id: News
+  translation: News
+- id: Documentation
+  translation: Documentation
+
+- id: learn_about_ccv_services
+  translation: Learn About CCV Services
+
+- id: monday
+  translation:
+    one: Monday
+    other: Mondays
+
+- id: tuesday
+  translation:
+    one: Tuesday
+    other: Tuesdays
+
+- id: wednesday
+  translation:
+    one: Wednesday
+    other: Wednesdays
+
+- id: thursday
+  translation:
+    one: Thursday
+    other: Thursdays
+
+- id: friday
+  translation:
+    one: Friday
+    other: Fridays

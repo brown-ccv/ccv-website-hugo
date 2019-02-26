@@ -1,22 +1,19 @@
-
+{{ $name := .Get 0}}
+{{ range .Site.Data.people }}
+{{ if eq .name $name }}
 <div class="position-relative mt-10 ml-2 mb-6" >
 <div class="boxed py-2 pr-2 pl-5">
-  <h5>Kody Morey-Gelin</h5>
-  <p class="fs-16">Kody is intelligent, focussed, and easy to train. He loves being in class and learning new things. After acing training and taking an advanced manners class, he moved on to complete two sections of nosework. He now spends his days running for hours in the Massachusetts countryside.</p>
+  <h5>{{ .name }}</h5>
+  <p class="fs-16">{{ .bio }}</p>
   <div class="d-flex justify-content-start">
-    {{ with .Get "email" }}
-    <a href="mailto:{{.}}"><span class="mr-2 fas fa-envelope fs-20"></span></a>
-    {{ end }}
-    {{ with .Get "github" }}
-    <a href="https://github.com/{{ . }}"><span class="mr-2 fab fa-github fs-20"></span></a>
-    {{ end }}
-    {{ with .Get "twitter" }}
-    <a href="https://twitter.com/{{ . }}"><span class="mr-2 fab fa-twitter fs-20"></span></a>
-    {{ end }}
+    <a href="http://directory.brown.edu/uuid/{{ .brown_directory_uuid }}"><span class="mr-2 fas fa-info-circle fs-20"></span></a>
+    <a href="https://github.com/{{ .github_username }}"><span class="mr-2 fab fa-github fs-20"></span></a>
   </div>
 </div>
-
-<div class="avatar avatra-lg position-absolute left--5 top--14" style="background-image: url('/images/people/gelin.png');">
+{{ $img := printf "images/people/%s" .image }}
+<div class="avatar avatra-lg position-absolute left--5 top--14" style="background-image: url({{$img}});">
 </div>
 
 </div>
+{{ end }}
+{{ end }}

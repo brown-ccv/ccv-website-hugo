@@ -11,7 +11,7 @@
 
         <section>
           <article class="row">
-            {{ range $cards := sort ($.Params.quick_links.cards) "weight" "asc" }}
+            {{ range .Params.quick_links.cards }}
                 <div class="card-responsive">
                   <a href="{{$.Site.BaseURL}}{{.href}}">
                   <div class="card scale">
@@ -32,7 +32,7 @@
                 <div class="row d-flex justify-content-center">
                   <div class="col-md-6 col-lg-6">
                     <form id="search-form" action="{{ "search/" | absURL }}">
-                      <input id="search-query" name="s" type="text" class="scale form-control form-control-minimal" placeholder="what are you looking for?" aria-label="Search">
+                      <input id="search-query" name="s" type="text" class="scale form-control form-control-minimal" placeholder="looking for something else?" aria-label="Search">
                     </form>
                   </div>
                   <div class="col-md-6 col-lg-2">

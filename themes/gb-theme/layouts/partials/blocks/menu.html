@@ -15,14 +15,14 @@
                     <li class="nav-item {{ if $currentPage.HasMenuCurrent "main" . }}active{{ end }}">
                         <a class="nav-link" href="#">
                             {{ .Pre }}
-                            <span>{{ .Name }}</span>
+                            <span>{{ .Title }}</span>
                         </a>
                     </li>
                     <ul class="sub-menu">
                         {{ range .Children }}
                             <li class="{{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }}">
                                 <a class="nav-link" href="{{ .URL }}">
-                                {{ .Name }}
+                                {{ .Title }}
                                 </a>
                             </li>
                         {{ end }}
@@ -31,7 +31,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ .URL }}">
                             {{ .Pre }}
-                            <span class="text-dark fs-24 link ">{{ .Name }}</span>
+                            <span class="text-dark fs-24 link ">{{ i18n .Title }}</span>
                         </a>
                     </li>
                 {{ end }}

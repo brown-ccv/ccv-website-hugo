@@ -53,18 +53,21 @@ params:
     discourse: https://discuss.ccv.brown.edu
 
 # i18n
-disableLanguages:
-  - pt
 languages:
   en:
     languageName: English
     weight: 1
     contentDir: content/english
-
   pt:
     languageName: Portuguese
     weight: 2
     contentDir: content/portuguese
+  zh:
+    languageName: Chinese (Simplified)
+    weight: 3
+    contentDir: content/chinese
+
+
 
 
 # Taxonomies

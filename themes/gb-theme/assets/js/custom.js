@@ -88,6 +88,7 @@ $(function () {
 
     $('.taskTooltip').tooltip({trigger: 'manual'}).tooltip('show');
 
+// Discourse box
     $(window).scroll(function(){
         if ($('#discourse-box').isOnScreen()) {
             // The element is visible, do something
@@ -97,4 +98,7 @@ $(function () {
             // The element is NOT visible, do something else
         }
     });
+
+$('.dropdown-toggle').dropdown();
+
 });

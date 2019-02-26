@@ -4,7 +4,12 @@ date: 2019-01-31T10:49:27-05:00
 draft: false
 types: ["events"] # keep only one of the categories
 tags: ["workshops", "machine learning"] # add keywords here, be consistent with other posts.
-authors: ["Eggsy Morey-Gelin"]
+authors: ["Thomas Serre"]
+event:
+  date: Thursdays
+  time: 12pm
+  location: Carney Institute Innovation Hub
+  google: "https://calendar.google.com/event?action=TEMPLATE&tmeid=MTZ2bGljNThhcGNqZWY5aGdqZmxtMTRxM3BfMjAxOTAyMjhUMTcwMDAwWiBicm93bi5lZHVfMGM4bnBtb2x0ZnY0NHRuMHY0ZGdhYWh0NDhAZw&tmsrc=brown.edu_0c8npmoltfv44tn0v4dgaaht48%40group.calendar.google.com&scp=ALL"
 ---
 
 {{% lead %}}
@@ -35,4 +40,4 @@ Julia, Scikit-learn, Python, Git, high-performance computing with CCV, deep lear
 
 *Sponsored by the Data Science Initiative, the Center for Computation and Visualization, the Brown Libraries, and the Initiative for Computation in Brains and Minds.*
 
-{{% sign email="fer@brown.edu" twitter="1" github="fernandogelin" %}}
+{{% sign "Thomas Serre" %}}

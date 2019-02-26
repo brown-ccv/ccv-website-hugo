@@ -1,31 +1,30 @@
 ---
 title: Home Page
 hero:
-  title: Center for Computation & Visualization
-  lead: High-performance computing, data science, research software engineering, and
-    visualization at Brown University.
+  title: Centro para Computação e Visualização
+  lead: Computação de alto desempenho, ciência de dados, engenharia de software de pesquisa e visualização na Brown University.
   button: test
   logo1: "/themes/gb-theme/static/images/brown-h.svg"
   logo2: "/themes/gb-theme/static/images/ccv-logo.svg"
 quick_links:
-  title: Quick Links
+  title: Links Rápidos
   cards:
   - name: Stronghold
     icon: lock
-    text: Learn more
+    text: Saiba mais
     href: "/services/haas/stronghold/"
     weight: 1
   - name: Oscar Account
     icon: desktop
-    text: click here to open an account
+    text: Clique aqui para abrir uma conta
     href: "/services/haas/oscar/"
     weight: 0
-  - name: User Manuals
+  - name: Manuais do Usuário
     icon: server2
-    text: See all our documentation
+    text: Veja nossa documentação
     href: "/documentation/"
     weight:
-  - name: Data Science
+  - name: Ciência de Dados
     icon: database
     text: Some text goes here
     href: "/services/consulting/data-science"
@@ -52,16 +51,16 @@ showcase:
 news:
   title: Latest Updates
 events:
-  title: Upcoming Events
+  title: Próximos Eventos
   items:
-  - title: Intro to Oscar Workshop
+  - title: Workshop de Introdução ao Oscar
     text: Some text with brief description of event.
     image:
     href:
     location: Digital Scholarship Lab, Rockefeller Library
     date: Wednesday, Feb 13
     time: 2pm-4pm
-  - title: Intro to Linux Workshop
+  - title: Workshop de Introdução ao Linux
     text: Some text with brief description of event.
     image:
     href:

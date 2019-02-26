@@ -1,0 +1,38 @@
+- id: Home
+  translation: 家
+- id: About
+  translation: 关于
+- id: Services
+  translation: 服务
+- id: News
+  translation: 新闻
+- id: Documentation
+  translation: 文件
+
+- id: learn_about_ccv_services
+  translation: 了解CCV服务
+
+- id: monday
+  translation:
+    one: 星期一
+    other: 星期一
+
+- id: tuesday
+  translation:
+    one: 星期二
+    other: 星期二
+
+- id: wednesday
+  translation:
+    one: 星期三
+    other: 星期三
+
+- id: thursday
+  translation:
+    one: 星期四
+    other: 星期四
+
+- id: friday
+  translation:
+    one: 星期五
+    other: 星期五

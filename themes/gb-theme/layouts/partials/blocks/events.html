@@ -34,23 +34,49 @@
         data-dots="true"
         >
     {{ range $index, $item := .Params.events.items }}
-      <div class="py-2">
-        <a id="" class="page-box" data-target="{{sha1 .title }}">
-          <div class="type boxed scale mr-2">
-            <div class="d-flex flex-column">
-              <span class="badge badge-outline badge-outline-primary"><span class="icon-calendar fs-34"></span></span>
-              <h2 class="text-dark h3">{{ .date }}</h2>
-              <h2 class="text-dark h3">{{ .time }}</h2>
-              <p class="">{{ .text }}</p>
+    <div class="py-2">
+        <div class="type boxed mr-2 bg-beige text-dark">
+          <div  class="d-flex flex-column">
+            <a  target="_blank" href="{{.Params.event.google}}">
+              <span class="badge badge-outline badge-outline-primary scale"><span class="fas fa-calendar-plus fa-3x"></span></span>
+            </a>
+            <a class="page-box" data-target="{{sha1 .title }}" href="{{.href}}">
+              <p class="h5">{{ .date }}</p>
+              <p class="h5">{{ .time }}</p>
+              <p class="fs-14"><span class="fas fa-map-marker-alt"></span>&nbsp;{{ .location }}</p>
               <div class="type-example">
-                <h2 class="text-dark">{{ .title }}</h2>
+                <h3>{{ .title }}</h3>
+              </div>
+            </a>
+          </div>
+        </div>
+    </div>
+    {{ end }}
+
+    {{ range $key, $value := .Site.Taxonomies.types }}
+      {{if eq `events` $key}}
+        {{ range $value.Pages }}
+        <div class="py-2">
+            <div class="type boxed mr-2 bg-beige text-dark">
+              <div  class="d-flex flex-column">
+                <a  target="_blank" href="{{.Params.event.google}}">
+                  <span class="badge badge-outline badge-outline-primary scale"><span class="fas fa-calendar-plus fa-3x"></span></span>
+                </a>
+                <a class="page-box" data-target="{{sha1 .Title }}" href="{{.Permalink}}">
+                  <p class="h5">{{ .Params.event.date }}</p>
+                  <p class="h5">{{ .Params.event.time }}</p>
+                  <p class="fs-14"><span class="fas fa-map-marker-alt"></span>&nbsp;{{ .Params.event.location }}</p>
+                  <div class="type-example">
+                    <h3>{{ .Title }}</h3>
+                  </div>
+                </a>
               </div>
             </div>
-          </div>
-        </a>
-      </div>
-
+        </div>
+        {{ end }}
+      {{ end }}
     {{ end }}
+
   </div>
   </section>
 </div>
