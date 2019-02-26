@@ -1,5 +1,5 @@
 ---
-title: "Jupyterhub"
+title: "JupyterHub"
 date: 2019-01-22T14:01:50-05:00
 draft: false
 category: "Classroom"
