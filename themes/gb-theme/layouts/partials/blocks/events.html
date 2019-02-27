@@ -33,6 +33,35 @@
         data-loop="true"
         data-dots="true"
         >
+
+
+      <!-- {{ range .Site.Data.events }}
+      <div class="py-2">
+          <div class="type boxed mr-2 bg-light text-dark">
+            <div  class="d-flex flex-column">
+              <a  target="_blank" href="{{.htmlLink}}">
+                <span class="badge badge-outline badge-outline-primary scale"><span class="fas fa-calendar-alt fa-3x"></span></span>
+              </a>
+              <a class="page-box" data-target="{{sha1 .title }}" href="{{.htmlLink}}">
+                {{ $min := (time .start.dateTime).Minute }}
+                <p class="h5">{{ dateFormat "Monday" .start.dateTime  }}</p>
+                <p class="h6">{{ dateFormat "Jan 2, 2006" .start.dateTime }}</p>
+                <p class="h6">{{ dateFormat "3:04PM" .start.dateTime }}</p>
+                {{ with .location }}
+                <p class="fs-14"><span class="fas fa-map-marker-alt"></span>&nbsp;{{ . }}</p>
+                {{ end }}
+                {{ with .description }}
+                <p class="fs-14"><span class="fs-14 fas fa-chalkboard-teacher"></span>&nbsp;{{ . }}</p>
+                {{ end }}
+                <div class="type-example">
+                  <h3>{{ .summary }}</h3>
+                </div>
+              </a>
+            </div>
+          </div>
+      </div>
+      {{ end }} -->
+
     {{ range $index, $item := .Params.events.items }}
     <div class="py-2">
         <div class="type boxed mr-2 bg-light text-dark">

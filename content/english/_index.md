@@ -2,8 +2,7 @@
 title: Home Page
 hero:
   title: Center for Computation & Visualization
-  lead: High-performance computing, data science, research software engineering, and
-    visualization at Brown University.
+  lead: High-performance computing, secure-compliant computing, data science, research software engineering, and visualization at Brown University.
   button: test
   logo1: "/themes/gb-theme/static/images/brown-h.svg"
   logo2: "/themes/gb-theme/static/images/ccv-logo.svg"
