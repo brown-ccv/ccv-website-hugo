@@ -6,7 +6,7 @@ lead: Support for researchers seeking help with statistical modeling, machine le
   and data mining
 weight: 0
 icon: support
-
+draft: true
 ---
 The team of data scientists at CCV provide support for Brown researchers who would like help with statistical modeling, machine learning, and writing scientific software.
 
