@@ -35,7 +35,7 @@
         >
 
 
-        {{ $events := getJSON "http://localhost:8082" }}
+        {{ $events := getJSON "https://datasci.brown.edu/gcal-api/" }}
         {{ range (sort $events.events ".start.dateTime" "asc") }}
         {{ if ne .visibility "private" }}
         <div class="py-2">
