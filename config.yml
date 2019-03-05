@@ -51,6 +51,7 @@ params:
   contact:
     support: support@ccv.brown.edu
     discourse: https://discuss.ccv.brown.edu
+    github: https://github.com/brown-ccv/ccv-issues
 
 # i18n
 languages:

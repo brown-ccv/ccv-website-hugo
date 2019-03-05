@@ -1,5 +1,5 @@
 ---
-title: Home Page
+title: Center for Computation & Visualization
 hero:
   title: Center for Computation & Visualization
   lead: High-performance computing, secure-compliant computing, data science, research software engineering, and visualization at Brown University.
@@ -50,29 +50,4 @@ showcase:
     href:
 news:
   title: Latest Updates
-events:
-  title: Upcoming Events
-  items:
-  - title: Intro to Oscar Workshop
-    text: Some text with brief description of event.
-    image:
-    href:
-    location: Digital Scholarship Lab, Rockefeller Library
-    date: Wednesday, Feb 13
-    time: 2pm-4pm
-  - title: Intro to Linux Workshop
-    text: Some text with brief description of event.
-    image:
-    href:
-    location: Digital Scholarship Lab, Rockefeller Library
-    date: Thursday, Feb 7
-    time: 10am-12pm
-  - title: Office Hours
-    text: Some text with brief description of event.
-    image:
-    href:
-    location: CCV, 180 George St.
-    date: Fridays
-    time: 10am-1pm
-
 ---

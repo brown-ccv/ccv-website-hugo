@@ -9,7 +9,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "serve": "node index.js && hugo serve",
+    "serve": "node index.js && hugo serve --disableFastRender --ignoreCache",
     "build": "node index.js && hugo",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -15,31 +15,31 @@ script that describes what resources you need and how your program will
 run. Example batch scripts are available in your home directory on
 Oscar, in the directory:
 
-````
-    ~/batch_scripts
-````
+```bash
+~/batch_scripts
+```
 
 To submit a batch job to the queue, use the `sbatch` command:
 
-````
-   sbatch <jobscript>
-````
+```bash
+sbatch <jobscript>
+```
 
 A batch script starts by specifying the `bash` shell as its interpreter,
 with the line:
 
-````
-    #!/bin/bash
-````
+```bash
+#!/bin/bash
+```
 
 Next, a series of lines starting with `#SBATCH` define the resources you
 need, for example:
 
-````
-    #SBATCH -n 4
-    #SBATCH -t 1:00:00
-    #SBATCH --mem=16G
-````
+```bash
+#SBATCH -n 4
+#SBATCH -t 1:00:00
+#SBATCH --mem=16G
+```
 
 Note that all the `#SBATCH` instructions must come **before the
 commands** you want to run. The above lines request 4 cores (`-n`), an
@@ -49,9 +49,9 @@ default, a batch job will reserve 1 core and 2.8GB of memory per core.
 Alternatively, you could set the resources as command-line options to
 `sbatch`:
 
-````
-    sbatch -n 4 -t 1:00:00 --mem=16G <jobscript>
-````
+```bash
+sbatch -n 4 -t 1:00:00 --mem=16G <jobscript>
+```
 
 The command-line options will override the resources specified in the
 script, so this is a handy way to reuse an existing batch script when
@@ -62,9 +62,9 @@ view the output of your job in the file `slurm-<jobid>.out` in the
 directory where you ran the `sbatch` command. For instance, you can view
 the last 10 lines of output with:
 
-````
+```bash
     tail -10 slurm-<jobid>.out
-````
+```
 
 Alternatively, you can mention the file names where you want to dump the
 standard output and errors using the `-o` and `-e` flags.
@@ -102,5 +102,6 @@ option                             | purpose
 
 You can read the full list of options at
 <http://slurm.schedmd.com/sbatch.html> or with the command:
-
+```bash
     $ man sbatch
+```
