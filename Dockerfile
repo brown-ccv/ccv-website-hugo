@@ -10,7 +10,6 @@ RUN set -x && \
   tar xzf ${HUGO_BINARY} && \
   rm -r ${HUGO_BINARY} && \
   mv hugo /usr/bin && \
-  apk del wget ca-certificates && \
   rm /var/cache/apk/*
 
 COPY ./ /site
