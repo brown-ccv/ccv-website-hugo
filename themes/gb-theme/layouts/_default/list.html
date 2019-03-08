@@ -23,11 +23,7 @@
             <a data-scroll class="nav-link section-nav-link" href="#{{$key}}">
                 <span class="text-dark icon-{{.Params.icon}} pr-1 fs-24"></span>
                 <span class="text-dark fs-20">{{ humanize $key }}</span>
-                {{ if .Params.haas }}
-                <span class="ml-1 badge badge-blue">HaaS</span>
-                {{ else }}
-                <span class="ml-1 badge badge-cyan">Support</span>
-                {{ end }}
+
             </a>
         </li>
         {{ end }}

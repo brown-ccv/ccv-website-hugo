@@ -32,6 +32,14 @@ $(function () {
         $('#menu').toggleClass('menu-visible')
     });
 
+// toggle discourse box
+
+    $('.discourse-trigger').click(function () {
+        $('#discourse-box').toggleClass('discourse-visible')
+        $('.discourse-trigger > span').toggleClass('fa-caret-left')
+        $('.discourse-trigger > span').toggleClass('fa-caret-right')
+    });
+
 // Show summary news on hover
 
     $('.page-summary').addClass('d-none');
@@ -90,10 +98,12 @@ $(function () {
 
 // Discourse box
     $(window).scroll(function(){
-        if ($('#discourse-box').isOnScreen()) {
+        if ($('#floating-group').isOnScreen()) {
             // The element is visible, do something
-            $('#discourse-box').removeClass('initial-place');
-            $('#discourse-box').addClass('bottom-right');
+            $('#floating-group').removeClass('hidden-start');
+            $('#discourse-box').addClass('discourse-visible');
+            $('.discourse-trigger > span').removeClass('fa-caret-left')
+            $('.discourse-trigger > span').addClass('fa-caret-right')
         } else {
             // The element is NOT visible, do something else
         }

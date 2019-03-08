@@ -1,11 +1,44 @@
-.initial-place {
-  position: absolute;
-  bottom: 80rem;
+
+.discourse-trigger {
+    position: fixed;
+    right: 1em;
+    top: 45%;
+    z-index: 10023;
 }
-.bottom-right {
-  position: sticky;
-  z-index: 1004;
-  bottom: 2rem;
-  right: 2rem;
-  padding: 2rem;
+
+
+#discourse-box {
+  -moz-transform: translateX(12rem);
+  -webkit-transform: translateX(12rem);
+  -ms-transform: translateX(12rem);
+  transform: translateX(12rem);
+  -moz-transition: -moz-transform 0.45s ease, visibility 0.45s;
+  -webkit-transition: -webkit-transform 0.45s ease, visibility 0.45s;
+  -ms-transition: -ms-transform 0.45s ease, visibility 0.45s;
+  transition: transform 0.45s ease, visibility 0.45s;
+  position: fixed;
+  top: 45%;
+  right: 0;
+  width: 12rem;
+  max-width: 50%;
+  height: 100%;
+  -webkit-overflow-scrolling: touch;
+  background: transparent;
+  color: #ffffff;
+  cursor: default;
+  z-index: 10022;
+}
+
+
+.discourse-visible {
+  -moz-transform: translateX(2px) !important;
+  -webkit-transform: translateX(2px) !important;
+  -ms-transform: translateX(2px) !important;
+  transform: translateX(2px) !important;
+  opacity: 1 !important;
+  visibility: visible;
+}
+
+.hidden-start {
+  visibility: hidden !important;
 }

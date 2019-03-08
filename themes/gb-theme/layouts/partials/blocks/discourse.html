@@ -1,11 +1,31 @@
-<div id="discourse-box" class="initial-place d-flex justify-content-end">
-   <div class="d-flex flex-column text-center boxed p-2 alert alert-warning alert-dismissible fade show" role="alert">
-      <button type="button" class="close p-1" data-dismiss="alert" aria-label="Close">
-         <span aria-hidden="true">&times;</span>
-      </button>
-      <a class="mt-1" href="{{.Site.Params.contact.discourse}}">
-         <span class="fab fa-3x fa-discourse"></span>
-         <p>Join the discussion!</p>
-      </a>
-   </div>
+<div id="floating-group" class="hidden-start">
+<aside>
+   <nav>
+        <button class="btn p-0 discourse-trigger"><span class="fas fa-caret-left"></span></button>
+   </nav>
+</aside>
+
+<nav id="discourse-box">
+    <div class="row">
+      <div class="d-flex flex-column text-center boxed p-2 alert alert-warning" role="alert">
+         <a class="mt-1" href="{{.Site.Params.contact.discourse.link}}">
+            <span class="{{.Site.Params.contact.discourse.fa}} fa-2x"></span>
+            <p class="fs-14">{{.Site.Params.contact.discourse.text}}</p>
+         </a>
+
+         <a class="mt-1" href="{{.Site.Params.contact.support.link}}">
+            <span class="{{.Site.Params.contact.support.fa}} fa-2x"></span>
+            <p class="fs-14">{{.Site.Params.contact.support.text}}</p>
+         </a>
+
+         <a class="mt-1" href="{{.Site.Params.contact.github.link}}">
+            <span class="{{.Site.Params.contact.github.fa}} fa-2x"></span>
+            <p class="fs-14">{{.Site.Params.contact.github.text}}</p>
+         </a>
+      </div>
+    </div>
+
+</nav>
+
+
 </div>
