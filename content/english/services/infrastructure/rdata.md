@@ -1,7 +1,7 @@
 ---
 title: RData
 date: 2019-01-24 20:12:10 +0000
-category: "File Storage & Transfer"
+category: "File Storage and Transfer"
 lead: CCV's high-performance storage system for use with our HPC systems.
 weight: 0
 icon: server2

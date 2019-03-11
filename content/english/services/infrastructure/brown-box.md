@@ -1,7 +1,7 @@
 ---
 title: Brown Box
 date: 2019-01-22 18:29:17 +0000
-category: "File Storage & Transfer"
+category: "File Storage and Transfer"
 icon: database
 lead: CCV's BrownBox service lets you share files that are too large to send by e-mail.
   Note that this service is not meant for backups or permanent storage.
