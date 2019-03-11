@@ -4,8 +4,8 @@ date: 2019-01-22 18:29:23 +0000
 category:
 - Computing
 icon: server2
-lead: CCV's primary research computing cluster, with more then 500 compute nodes,
-  including both CPU and GPU nodes, and a GPFS parallel filesystem.
+lead: CCV's research computing cluster has more than 500 compute nodes, including
+  both CPU and GPU nodes, and a GPFS parallel filesystem.
 haas: true
 
 ---
