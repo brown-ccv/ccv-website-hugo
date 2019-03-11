@@ -9,6 +9,7 @@ sections:
   label: Data
   create: all
   match: "**/*"
+  exclude: events.json
 - type: document
   path: config.yml
   label: Site Configuration
