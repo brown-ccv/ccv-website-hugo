@@ -13,12 +13,12 @@ quick_links:
   - name: Stronghold
     icon: lock
     text: Learn more
-    href: "/services/haas/stronghold/"
+    href: "/services/infrastructure/stronghold/"
     weight: 1
   - name: Oscar Account
     icon: desktop
     text: click here to open an account
-    href: "/services/haas/oscar/"
+    href: "/services/infrastructure/oscar/"
     weight: 0
   - name: User Manuals
     icon: server2
