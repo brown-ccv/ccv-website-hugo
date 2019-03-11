@@ -26,22 +26,20 @@
             skrollable
             skrollable-before"
       data-items="[3,2,1]"
-      data-center="true"
+      data-center="false"
       data-nav="true"
       data-margin="20"
       data-loop="true"
       data-dots="false"
       >
-  {{ range $index, $item := .Params.showcase.items }}
+  {{ range where $.Site.Pages "Section" "projects" }}
   <figure class="photo">
-    <a class="lightbox" href="" title="Image title">
-      <img src="{{ .image }}" alt="Image">
+      <img src="{{ .Params.image }}" alt="Image">
       <div class="carousel-caption flex-column d-flex">
-        <h1 class="text-light">{{ .title }}</h1>
-        <p class="h3 text-light">{{ .text }}</p>
-        <p><a href="#" class="eyebrow link text-orange">Read More</a></p>
+        <h1 class="text-light fs-38">{{.Params.title}}</h1>
+        <p class="fs-22 text-light">{{.Params.text}}</p>
+        <p><a href="{{.Params.href}}" class="eyebrow link text-orange">{{.Params.cfa}}</a></p>
       </div>
-    </a>
   </figure>
 
   {{ end }}
