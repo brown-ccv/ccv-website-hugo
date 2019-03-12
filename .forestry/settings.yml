@@ -4,12 +4,6 @@ auto_deploy: false
 admin_path: 
 webhook_url: 
 sections:
-- type: directory
-  path: content/english
-  label: Content
-  create: all
-  match: "**/*"
-  exclude: search.md
 - type: document
   path: config.yml
   label: Site Configuration
