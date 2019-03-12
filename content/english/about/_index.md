@@ -7,8 +7,7 @@ items:
     icon: crow
   - name: people
     icon: person-booth
-  - name: publications
-    icon: book-dead
+
   - name: opportunities
     icon: user-circle
 

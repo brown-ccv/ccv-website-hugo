@@ -11,24 +11,24 @@ quick_links:
   title: Quick Links
   cards:
   - name: Stronghold
-    icon: lock
+    icon: server2
     text: Learn more
     href: "/services/infrastructure/stronghold/"
     weight: 1
   - name: Oscar Account
     icon: desktop
-    text: click here to open an account
+    text: Open an account
     href: "/services/infrastructure/oscar/"
     weight: 0
   - name: User Manuals
-    icon: server2
-    text: See all our documentation
+    icon: book-open
+    text: See our docs
     href: "/documentation/"
     weight:
   - name: Data Science
     icon: database
-    text: Some text goes here
-    href: "/services#consulting/"
+    text: Need help with data?
+    href: "/services/consulting/advanced-research-computing/"
     weight: 4
 
 showcase:

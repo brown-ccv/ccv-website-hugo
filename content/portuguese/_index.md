@@ -27,7 +27,7 @@ quick_links:
   - name: Ciência de Dados
     icon: database
     text: Some text goes here
-    href: "/services/consulting/data-science"
+    href: "/services/consulting/advanced-research-computing/"
     weight: 4
 showcase:
   title: CCV @ Brown

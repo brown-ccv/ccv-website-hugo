@@ -7,6 +7,13 @@
         <div class="col-md-12 d-flex flex-column pt-6 pb-10">
           <h1 class="fs-60"> {{ humanize .Section }} </h1>
           <p class="fs-30">{{ .Params.hero.lead }}</p>
+          {{ with .Params.hero.cfa }}
+          <p class="nav-item  bg-green shadow w-25 text-center">
+            <a class="nav-link" href="{{$.Site.BaseURL}}{{.href}}">
+              <span class="fs-24 text-beige font-weight-bold">{{ .text }}</span>
+            </a>
+          </p>
+          {{ end }}
         </div>
     </div>
 </div>
