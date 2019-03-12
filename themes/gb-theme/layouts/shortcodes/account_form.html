@@ -49,10 +49,8 @@
    {{ if lt $index 4 }}
       <div class="col-md-3 mx-0">
       <div class="card stacked my-3">
-        <div class="card-header pt-0 border-warning border-5">
-          {{ if ne $index 3 }}
-          <span class="card-price {{ if eq .type `condo` }}fs-16{{ end }}">{{ humanize .price }}</span>
-          {{ end }}
+        <div class="card-header pt-0 border-warning border-5 bg-blue text-white">
+
           <div class="custom-control custom-radio mt-3">
             <input type="radio" id="customRadio{{$index}}" name="customRadio" class="custom-control-input" value="{{ .type }}">
             <label class="custom-control-label" for="customRadio{{$index}}">
