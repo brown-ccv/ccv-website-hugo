@@ -1,5 +1,5 @@
 +++
-category = ["Computing"]
+category = "Computing"
 date = "2019-01-22T18:29:31.000+00:00"
 haas = true
 icon = ""

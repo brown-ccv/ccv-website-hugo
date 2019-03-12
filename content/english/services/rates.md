@@ -2,8 +2,7 @@
 title: "Rates"
 date: 2019-03-12T06:58:51-04:00
 draft: false
-lead: "All services are billed quarterly. Please send questions to support@ccv.brown.edu. To allocate CCV fees from a sponsored project, use the guidelines at the bottom of this page.
-Standard Rates for FY17"
+lead: "We provide services with limited resources at **no cost** for PIs, tenure-track faculty, and their students. For advanced computing that require extra resources, we charge a quarterly fee. See below the rates for FY19"
 ---
 
 # High-performance Computing (Oscar)
