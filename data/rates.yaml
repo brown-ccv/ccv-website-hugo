@@ -4,7 +4,6 @@
   cores: 16
   time: 48h
   home: 10GB
-  price: Free
 
 - type: premium
   priority: medium
@@ -12,7 +11,6 @@
   cores: 192
   time: 80h
   home: 10GB
-  price: $300
 
 - type: group
   priority: medium
@@ -20,10 +18,7 @@
   cores: 192
   time: 80h
   home: 10GB
-  price: $750
-  extra:
-    key: additional account
-    value: $150
+
 
 - type: Add to Group or Condo
   condo: "PIs may choose to contribute funding for the purchase of additional hardware, to add capacity or capabilities to the core system.
