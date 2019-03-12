@@ -20,6 +20,8 @@ HPC Condo	   | High  |	6	    | Size of condo     |	10GB/acct	     | Contact us
 
 > ‡The maximum number of cores and duration may change based on cluster utilization. Priority accounts each have a qos allowing up to 192-cores, 1TB memory, and total running job wallclock of 921600 core-minutes. This allows a 192-core job to run for 80 hours, a 96-core job to run for 160 hours, 192 one core jobs to run for 80 hours, etc.
 
+{{%  button text="Request an Account on Oscar" href="https://datasci.brown.edu/ccv-dev/services/infrastructure/oscar/" %}}
+
 
 # Research Data Storage
 
