@@ -13,7 +13,7 @@ lead: We provide services with limited resources at **no cost** for PIs, tenure-
 | Account Type | Job | Priority | Accounts | Max Cores	Home Directory | Cost |
 | --- | --- | --- | --- | --- | --- |
 | Exploratory | Low | 1 | 16 for 48 hours† | 10GB | Free† |
-| Premium | Medium | 1 | 192 for 80 hours‡ | 10GB | $300/quarter |
+| Premium | Medium | 1 | 208 for 80 hours‡ | 10GB | $300/quarter |
 | Group Premium | Medium | 6 | 192 for 80 hours (per account)‡ | 10GB/acct | $750/quarter (additional accounts $150/quarter) |
 | HPC Condo | High | 6 | Size of condo | 10GB/acct | Contact us |
 
