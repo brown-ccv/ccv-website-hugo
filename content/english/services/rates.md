@@ -1,38 +1,35 @@
 ---
-title: "Rates"
-date: 2019-03-12T06:58:51-04:00
-draft: false
-lead: "We provide services with limited resources at **no cost** for PIs, tenure-track faculty, and their students. For advanced computing that require extra resources, we charge a quarterly fee. See below the rates for FY19"
----
+title: Rates
+date: 2019-03-12 10:58:51 +0000
+lead: We provide services with limited resources at **no cost** for PIs, tenure-track
+  faculty, and their students. For advanced computing that require extra resources,
+  we charge a quarterly fee. See below the rates for FY19
 
+---
 # High-performance Computing (Oscar)
+
 {{% table c="striped" hover="false" w="100" head="dark" %}}
-Account Type |	Job | Priority	|  Accounts	| Max Cores	Home Directory |	Cost   
---------|------ |--------|------ | --------|------  
-Exploratory	 | Low	| 1         |	16 for 48 hours†	| 10GB           |	Free†  
-Premium      | Medium |	1	      | 192 for 80 hours‡ |	10GB           |	$300/quarter  
-Group Premium | Medium |	6	| 192 for 80 hours (per account)‡	| 10GB/acct | $750/quarter (additional accounts $150/quarter)  
-HPC Condo	   | High  |	6	    | Size of condo     |	10GB/acct	     | Contact us  
+
+| Account Type | Job | Priority | Accounts | Max Cores	Home Directory | Cost |
+| --- | --- | --- | --- | --- | --- |
+| Exploratory | Low | 1 | 16 for 48 hours† | 10GB | Free† |
+| Premium | Medium | 1 | 192 for 80 hours‡ | 10GB | $300/quarter |
+| Group Premium | Medium | 6 | 192 for 80 hours (per account)‡ | 10GB/acct | $750/quarter (additional accounts $150/quarter) |
+| HPC Condo | High | 6 | Size of condo | 10GB/acct | Contact us |
 
 {{% /table %}}
 
-> † Free exploratory accounts are available to all tenure-track faculty and PIs at Brown. Students and researchers may also request an exploratory account with written permission from their advisor or PI. Exploratory accounts have a 16-core limit per user, with a per-job limit of 46100 core-minutes.
+> † Free exploratory accounts are available to all tenure-track faculty and PIs at Brown. Students and researchers may also obtain an exploratory account with written permission from their advisor or PI. Exploratory accounts have a 16-core limit per user, with a per-job limit of 46,100 core-minutes.
 
-> ‡The maximum number of cores and duration may change based on cluster utilization. Priority accounts each have a qos allowing up to 192-cores, 1TB memory, and total running job wallclock of 921600 core-minutes. This allows a 192-core job to run for 80 hours, a 96-core job to run for 160 hours, 192 one core jobs to run for 80 hours, etc.
-
-{{%  button text="Request an Account on Oscar" href="https://datasci.brown.edu/ccv-dev/services/infrastructure/oscar/" %}}
-
+> ‡The maximum number of cores and duration may change based on cluster utilization. Priority accounts each have a QOS allowing up to 208 cores, 1TB memory, and total running job wallclock of 998,400 core-minutes. This allows a 208-core job to run for 80 hours, a 104-core job to run for 160 hours, or 208 1-core jobs to run for 80 hours.
 
 # Research Data Storage
 
-- 256GB Base Faculty Allocation - Free
+* 256GB Base Faculty Allocation - Free
+* Additional Storage Allocation - Year to Year - $125 / Terabyte / year
+* Additional Storage Allocation - Long Term (6 years) - $750 / Terabyte / 6 years
 
-- Additional Storage Allocation - Year to Year - $125 / Terabyte / year
-- Additional Storage Allocation - Long Term (6 years) - $750 / Terabyte / 6 years
-
-
-_______
-
+***
 
 ## Allocating CCV Fees to Sponsored Projects
 
