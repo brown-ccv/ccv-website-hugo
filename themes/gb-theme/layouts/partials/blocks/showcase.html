@@ -30,9 +30,10 @@
       data-nav="true"
       data-margin="20"
       data-loop="true"
-      data-dots="false"
+      data-dots="true"
       >
   {{ range where $.Site.Pages "Section" "projects" }}
+  {{if .Params.title }}
   <figure class="photo">
       <img src="{{ .Params.image }}" alt="Image">
       <div class="carousel-caption flex-column d-flex">
@@ -41,7 +42,7 @@
         <p><a href="{{.Params.href}}" class="eyebrow link text-orange">{{.Params.cfa}}</a></p>
       </div>
   </figure>
-
+  {{end}}
   {{ end }}
 </div>
 </section>

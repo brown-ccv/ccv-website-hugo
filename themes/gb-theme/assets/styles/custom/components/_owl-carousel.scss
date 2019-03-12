@@ -1,3 +1,7 @@
 .showcase {
   z-index: 11000;
 }
+
+.owl-prev, .owl-next {
+  background-color: $gray !important;
+}
