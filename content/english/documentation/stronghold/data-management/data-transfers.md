@@ -1,7 +1,7 @@
 ---
 title: "Data Transfers"
 project: Stronghold
-section: Usage
+section: Data Management
 date: 2019-01-14T13:06:12-05:00
 draft: false
 version:

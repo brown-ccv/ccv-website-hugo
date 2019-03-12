@@ -1,9 +1,9 @@
 ---
-Title: Data Transfers
+Title: Data Management
 type: Stronghold
 section: Stronghold
 version:
-weight: 1
+weight: 2
 subitems:
   - subsection: "Data Transfers"
     ref: "data-transfers/"
