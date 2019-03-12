@@ -14,7 +14,7 @@
 - type: group
   priority: medium
   accounts: 6
-  cores: 192
+  cores: 208
   time: 80h
   home: 10GB
 - type: Add to Group or Condo
