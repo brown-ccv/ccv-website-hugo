@@ -10,7 +10,7 @@ items:
 mission:
   lead: 'The Center for Computation and Visualization provides high-performance computing
     and visualization services to the Brown community. We also collaborate with researchers
-    on projects across vast range of research disciplines. '
+    on projects across vast range of disciplines. '
   text: We envision an environment where computational best practices, innovative
     solutions, and expert knowledge combine to build advanced tools for research and
     scholarship, and enable new discoveries and empowering collaborations. Our mission
