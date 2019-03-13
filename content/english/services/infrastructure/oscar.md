@@ -10,7 +10,7 @@ haas: true
 ---
 The high-performance computing (HPC) resources at CCV equip the Brown research community with the tools they need to perform complex numerical simulations, modeling, and data analysis. Oscar, CCV's primary research computing cluster, consists of more than 500 multi-core nodes sharing a high-performance interconnect and file system.
 
-# Oscar Technical Specifications
+## Oscar Technical Specifications
 
   Compute Nodes: 472
 
@@ -32,7 +32,7 @@ The high-performance computing (HPC) resources at CCV equip the Brown research c
 
 A large collection of software is available on Oscar, and CCV staff can help acquire and install most applications upon request.
 
-# Some Popular Software Packages Available on Oscar
+## Some Popular Software Packages Available on Oscar
 
 * MATLAB
 * R
