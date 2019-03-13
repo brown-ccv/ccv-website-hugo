@@ -18,7 +18,7 @@ mission:
     computational research and support Brown’s academic mission. In practice, this
     frequently means partnering with researchers for projects that may span weeks,
     months, or years. In some cases, these partnerships can involve researchers using
-    grant funds as partial support of a research software engineer or data scientist.
+    grant funds as partial support of a CCV research software engineer or data scientist.
 people:
   lead: CCV team is awesome!
 
