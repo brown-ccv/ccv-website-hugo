@@ -9,7 +9,7 @@ items:
   icon: user-circle
 mission:
   lead: 'The Center for Computation and Visualization provides high-performance computing
-    and visualization services to the Brown community. We also collaborate with researcher
+    and visualization services to the Brown community. We also collaborate with researchers
     on projects across vast range of research disciplines. '
   text: We envision an environment where computational best practices, innovative
     solutions, and expert knowledge combine to build advanced tools for research and
