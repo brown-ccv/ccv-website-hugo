@@ -12,12 +12,9 @@ The high-performance computing (HPC) resources at CCV equip the Brown research c
 
 # Oscar Technical Specifications
 
-{{% table c="striped" hover="false" w="100" head="dark" %}}
+  Compute Nodes: 472
 
-| Compute Nodes | 472 |
-
-
-| GPU Nodes | 35 |
+  GPU Nodes: 35
 
 
 | Login Nodes | 2 |
