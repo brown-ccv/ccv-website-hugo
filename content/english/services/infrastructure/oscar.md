@@ -16,28 +16,19 @@ The high-performance computing (HPC) resources at CCV equip the Brown research c
 
   GPU Nodes: 35
 
+  Login Nodes: 2
 
-| Login Nodes | 2 |
+  Large-Memory Nodes (>512 GB): 6
 
+  Total CPU Cores: 9612
 
-| Large-Memory Nodes (512 GB) | 2 |
+  Total GPUs: 194
 
+  Total Storage (GPFS Filesystem): >1 PB
 
-| Total CPU Cores | 9612 |
+  OS: RedHat EL 7.3 (Linux)
 
-
-| Total GPUs | 194 |
-
-
-| Total Storage (GPFS Filesystem) | >1 PB |
-
-
-| OS | RedHat EL 7.3 (Linux) |
-
-
-| Job Scheduler | Slurm Workload Manager |
-
-{{% /table %}}
+  Job Scheduler: Slurm Workload Manager
 
 A large collection of software is available on Oscar, and CCV staff can help acquire and install most applications upon request.
 
