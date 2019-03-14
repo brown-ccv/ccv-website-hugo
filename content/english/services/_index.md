@@ -1,9 +1,14 @@
 ---
 title: Services
-draft: false
 hero:
-  lead: "CCV provides computing infrastructure, consulting, and support to the Brown Community. We have a team of HPC specialists, data scientists, and software engineers available to help with the hardware we provide, as well as the software needs for classrooms, labs, centers, and institutes at Brown. See below the services we provide."
+  lead: 'CCV provides computing infrastructure, consulting, and support to the Brown
+    Community. We have HPC specialists, data scientists, and research software engineers
+    available to work with researchers. We frequently partner with researchers on
+    projects that may span weeks, months, or years. These partnerships can in some
+    cases involve a researcher using grant funds to support one of our data scientists
+    or research software engineers. '
   cfa:
-    text: "See our rates"
+    text: See our rates
     href: "/services/rates/"
+
 ---

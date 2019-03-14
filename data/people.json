@@ -35,7 +35,7 @@
   "Helen Kershaw": {
     "name": "Helen Kershaw",
     "team": "Advanced Research Computing",
-    "title": "Research Software Engineer",
+    "title": "Lead Research Software Engineer",
     "github_username": "hkershaw-brown",
     "brown_directory_uuid": "7dd767e6-6eec-4394-ab48-c89ab40ca69a",
     "bio": "Helen is a research software engineer interested in getting the most out of HPC"
@@ -43,7 +43,7 @@
   "Maria Isabel Restrepo": {
     "name": "Maria Isabel Restrepo",
     "team": "Advanced Research Computing",
-    "title": "Senior Data Scientist",
+    "title": "Lead Data Scientist",
     "github_username": "mirestrepo",
     "brown_directory_uuid": "cb8b0a49-ef4b-66e7-5ccc-6689493e8ace",
     "bio": "Isabel grew up in Colombia and received her Ph.D from Brown in 2013 in Electrical Enginering with a focus in Computer Vision. She enjoys machine learning, reproducible science, reverse enginering, playing squash, the sea, and dancing with her wild children. "
@@ -75,7 +75,7 @@
   "Maximilian King": {
     "name": "Maximilian King",
     "team": "Advanced Research Computing",
-    "title": "Research Software Engineer",
+    "title": "Senior Research Software Engineer",
     "github_username": "maximilianking",
     "brown_directory_uuid": "d075e4ac-07b1-cf3d-a632-16f0c2510a7f",
     "bio": "Max is a research software engineer focusing on high performance computing systems. He has a background in computational physics with interests in optimization, parallelization, and cloud computing. Above all else, he is a tinkerer and tech hobbyist."
