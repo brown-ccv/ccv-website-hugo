@@ -1,5 +1,6 @@
 {{ define "content" }}
 {{ $current_section := .Section }}
+
 <div id="hero-list" class=" bg-yellow text pb-5">
 <div class="container">
     <div class="row">
@@ -11,8 +12,9 @@
 </div>
 </div>
 
-<div class="container col-md-5 overlay-top">
-  <ul class="nav nav-toc-page flex-column boxed">
+<div class="container-fluid overlay-top justify-content-center d-flex">
+  <div class="col-lg-6 col-md-10 col-sm-12">
+      <ul class="nav nav-toc-page flex-column boxed">
     {{ range $key, $value := .Site.Taxonomies.types }}
     {{ range first 1 $value.Pages }}
       <li class="mx-1 nav-item bg-white my-1">
@@ -31,10 +33,11 @@
       {{ end }}
   </ul>
 </div>
+</div>
 
-<div class="container">
-    <div class="row">
-    <section class="my-2 bg-light col-lg-9 col-md-10 col-sm-12">
+<div class="container-fluid">
+    <div class="row d-flex justify-content-center">
+    <section class="my-2 bg-light col-md-7 col-sm-12">
     <!-- News front page -->
     {{ $page := .Page.Title | urlize }}
 
@@ -72,10 +75,10 @@
     {{ end }}
     </section>
 
-    <aside class="my-2 col-lg-3 col-md-2">
-        <div class="ml-5 mt-1 p-1 text-gray d-flex justify-content-start">
+    <aside class="my-2 col-md-3">
+        <div class="ml-5 mt-1 p-1 text-gray">
             {{ range $key, $value := .Site.Taxonomies.tags }}
-            <a href="{{ $.Site.BaseURL }}/tags/{{$key}}">
+            <a href="{{ $.Site.BaseURL }}/tags/{{$key}}/">
             <span class="small">
             {{ humanize $key }} |
             </span>
