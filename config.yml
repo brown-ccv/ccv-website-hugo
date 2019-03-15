@@ -4,7 +4,7 @@ title: Brown Center for Computing and Visualization
 theme: gb-theme
 permalinks:
   news: "/:year/:month/:slug/"
-
+googleAnalytics: UA-136333978-1
 outputs:
   home:
     - html
