@@ -21,7 +21,7 @@ mission:
     software engineers or data scientists. We have a team of data scientists and research
     software engineers with a huge variety of scientific background (e.g., Engineering,
     Physics, Computer Vision, Biology, Psychology, Statistics, Applied Math, Computer
-    Science, etc.), so we can closely calibrating a person with a project. '
+    Science, etc.), so we can closely calibrate a person with a project. '
 people:
   lead: CCV team is awesome!
 
