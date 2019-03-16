@@ -1,4 +1,4 @@
-<div id="floating-group" class="hidden-start">
+<div id="floating-group" class="hidden-start alert" role="alert">
 <aside>
    <nav>
         <button class="btn p-0 discourse-trigger"><span class="fas fa-caret-left"></span></button>
@@ -7,7 +7,10 @@
 
 <nav id="discourse-box">
     <div class="row">
-      <div class="d-flex flex-column text-center boxed p-2 alert alert-warning" role="alert">
+      <div class="d-flex flex-column text-center boxed p-2 alert-warning">
+         <button type="button" class="close align-self-end p-0" data-dismiss="alert" aria-label="Close">
+            <span class="fs-18 text-dark fas fa-times"></span>
+         </button>
          <a class="mt-1" href="{{.Site.Params.contact.discourse.link}}">
             <span class="{{.Site.Params.contact.discourse.fa}} fa-2x"></span>
             <p class="fs-14">{{.Site.Params.contact.discourse.text}}</p>

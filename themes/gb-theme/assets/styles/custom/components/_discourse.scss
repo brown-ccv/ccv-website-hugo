@@ -2,8 +2,9 @@
 .discourse-trigger {
     position: fixed;
     right: 1em;
-    top: 45%;
+    top: 46%;
     z-index: 10023;
+    width: 25px;
 }
 
 
@@ -17,7 +18,7 @@
   -ms-transition: -ms-transform 0.45s ease, visibility 0.45s;
   transition: transform 0.45s ease, visibility 0.45s;
   position: fixed;
-  top: 45%;
+  top: 46%;
   right: 0;
   width: 12rem;
   max-width: 50%;
@@ -27,6 +28,10 @@
   color: #ffffff;
   cursor: default;
   z-index: 10022;
+  .close {
+    margin-top: -1.3rem;
+    margin-right: -0.6rem;
+  }
 }
 
 

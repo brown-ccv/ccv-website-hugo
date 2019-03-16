@@ -97,7 +97,7 @@ $(function () {
     $('.taskTooltip').tooltip({trigger: 'manual'}).tooltip('show');
 
 // Discourse box
-    $(window).scroll(function(){
+    $(document).scroll(function(){
         if ($('#floating-group').isOnScreen()) {
             // The element is visible, do something
             $('#floating-group').removeClass('hidden-start');
