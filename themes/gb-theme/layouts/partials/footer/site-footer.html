@@ -1,5 +1,5 @@
 <!-- footer -->
-<footer class="bg-beige ccv-footer">
+<footer class="bg-beige ccv-footer d-print-none">
   <div class="px-10">
     <div class="row">
       <div class="col-12 col-md-2">
@@ -19,9 +19,9 @@
           </div>
           <div class="col">
             <ul class="list-group list-group-minimal">
-              <li class="list-group-item"><a href="mailto:{{ .Site.Params.contact.support }}" class="link"><span class="icon-envelope mr-1"></span>CCV Support</a></li>
-              <li class="list-group-item"><a href="{{ .Site.Params.contact.discourse }}" class="link"><span class="fab fs-24 fa-discourse"></span> &nbsp;Discourse</a></li>
-              <li class="list-group-item"><a href="{{ .Site.Params.contact.github }}" class="link"><span class="fab fs-24 fa-github"></span> &nbsp;CCV Issues</a></li>
+              <li class="list-group-item"><a href="mailto:{{ .Site.Params.contact.support.link }}" class="link"><span class="icon-envelope mr-1"></span>CCV Support</a></li>
+              <li class="list-group-item"><a href="{{ .Site.Params.contact.discourse.link }}" class="link"><span class="fab fs-24 fa-discourse"></span> &nbsp;Discourse</a></li>
+              <li class="list-group-item"><a href="{{ .Site.Params.contact.github.link }}" class="link"><span class="fab fs-24 fa-github"></span> &nbsp;CCV Issues</a></li>
             </ul>
           </div>
         </div>

@@ -1,0 +1,12 @@
+@media print {
+  .col-lg-8 {
+    max-width: 100%;
+    margin-top: -20%;
+  }
+  .table th, .table td {
+    padding: 0.1rem 0.4rem !important;
+  }
+  #allocating-ccv-fees-to-sponsored-projects {
+    padding-top: 2rem;
+  }
+}
