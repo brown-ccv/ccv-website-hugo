@@ -1,5 +1,5 @@
 ---
-title: Home Page
+title: 计算与可视化中心
 hero:
   title: 计算与可视化中心
   lead: 布朗大学的高性能计算，数据科学，研究软件工程和可视化。

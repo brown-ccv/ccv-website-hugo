@@ -1,6 +1,6 @@
 baseURL: https://datasci.brown.edu/ccv-dev #http://ccv-website-dev.s3-website-us-east-1.amazonaws.com
 languageCode: en-us
-title: Brown Center for Computing and Visualization
+title: Brown Center for Computation and Visualization
 theme: gb-theme
 permalinks:
   news: "/:year/:month/:slug/"

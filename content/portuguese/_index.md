@@ -1,5 +1,5 @@
 ---
-title: Home Page
+title: Centro para Computação e Visualização
 hero:
   title: Centro para Computação e Visualização
   lead: Computação de alto desempenho, ciência de dados, engenharia de software de pesquisa e visualização na Brown University.

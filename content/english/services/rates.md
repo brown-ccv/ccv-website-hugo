@@ -6,7 +6,6 @@ lead: We provide services with limited resources at **no cost** for PIs, tenure-
   we charge a quarterly fee. See below the rates for FY19
 
 ---
-<a href="https://pdf-ace.com/pdfme/" target= "_blank">Save as PDF</a>
 # High-performance Computing (Oscar)
 
 {{% table c="striped" hover="false" w="100" head="dark" %}}

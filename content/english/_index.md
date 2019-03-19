@@ -1,5 +1,5 @@
 ---
-title: Home Page
+title: Center for Computation & Visualization
 hero:
   title: Center for Computation & Visualization
   lead: Scientific and technical computing expertise to advance computational research
