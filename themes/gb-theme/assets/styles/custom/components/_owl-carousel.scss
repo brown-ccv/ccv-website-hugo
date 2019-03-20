@@ -6,3 +6,14 @@
   background-color: $gray !important;
   overflow: hidden !important;
 }
+
+.carousel-img {
+  height: 400px;
+  background-size: cover;
+}
+
+.carousel-caption {
+  background-color: rgba(0,0,0,0.3);
+  border: 0px;
+  padding: 1rem;
+}

@@ -63,13 +63,12 @@
 
         <article class="container-fluid row py-4">
           {{ range .Site.Data.people }}
-          <div class="col-xl-3 col-md-4 col-sm-6 col-xs-12 card card-background mb-0 mx-0" >
-
-            <div class="image" style="background-image:url('{{$.Site.BaseURL}}/images/people/gelin.png')"></div>
-            <div class="card-body">
-              <h2 class="card-title mb-0 fs-20">{{ .name }}</h2>
-              <p class="card-text fs-18">{{ .title }}</p>
-              <p class="font-weight-bold text-beige text-small"><span class="icon-users2 pr-1"></span>{{ .team }}</p>
+          <div class="people-card col-xl-3 col-md-4 col-sm-6 col-xs-12"
+               style="background-image:url('{{$.Site.BaseURL}}/images/people/{{.image}}')">
+            <div class="people-card-body">
+              <h2 class="text-dark mb-0 fs-20">{{ .name }}</h2>
+              <p class="text-dark fs-18">{{ .title }}</p>
+              <!-- <p class="font-weight-bold text-beige text-small"><span class="icon-users2 pr-1"></span>{{ .team }}</p> -->
             </div>
           </div>
           {{ end }}

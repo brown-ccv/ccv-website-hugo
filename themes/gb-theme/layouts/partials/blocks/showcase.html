@@ -34,14 +34,13 @@
       >
   {{ range where $.Site.Pages "Section" "projects" }}
   {{if .Params.title }}
-  <figure class="photo">
-      <img src="{{ .Params.image }}" alt="Image">
-      <div class="carousel-caption flex-column d-flex">
+  <div class="photo carousel-img" style="background-image: url({{.Site.BaseURL}}{{ .Params.image }});">
+      <div class="carousel-caption boxed flex-column d-flex">
         <h1 class="text-light fs-38">{{.Params.title}}</h1>
         <p class="fs-22 text-light">{{.Params.text}}</p>
         <p><a href="{{.Params.href}}" class="eyebrow link text-orange">{{.Params.cfa}}</a></p>
       </div>
-  </figure>
+  </div>
   {{end}}
   {{ end }}
 </div>
