@@ -6,7 +6,7 @@ const fs = require('fs');
 function getCitations(pubList) {
   let pubAll = [];
 
-  pubs.map((value) => {
+  pubList.map((value) => {
     let pubJson = new Cite(value);
     let article = new Object();
     article.id = pubJson.data['0'].id
