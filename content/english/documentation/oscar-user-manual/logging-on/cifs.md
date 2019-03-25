@@ -79,9 +79,9 @@ Now you are ready to mount your CCV directories locally. Instructions for each o
 
     The `fstab` entry is the single line:
 ```bash
-         `//oscarcifs.ccv.brown.edu/<user> /mnt/rdata cifs credentials=/etc/cifspw,vers=1.0,nounix,uid=<localUser> 0 0`
+         //oscarcifs.ccv.brown.edu/<user> /mnt/rdata cifs credentials=/etc/cifspw,vers=1.0,nounix,uid=<localUser> 0 0
 ```
-        Change `<localUser>` to the login used on your Linux workstation.
+    Change `<localUser>` to the login used on your Linux workstation.
 * Mount the share:
 ```bash    
             $ mount -a
