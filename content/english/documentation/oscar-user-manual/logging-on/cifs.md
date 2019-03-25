@@ -22,53 +22,30 @@ their machine. Once the date and time are correct, [use SSH to connect to Oscar]
      smbpasswd
 ```
 
-You will first be prompted for your "old" password, which is the
-temporary password you were given by CCV when your account was created.
-Then, enter a new CIFS password twice. You may choose to use the same
-password here as for your Oscar account.
+First, you will be prompted for your "old" password, which is the
+temporary password you were given by CCV when your account was created. Next, you will be asked to enter a new CIFS password twice. You may choose to use the same password that you use for Oscar, if you wish.
 
 {{< alert warning >}}
-smbpasswd does not change your SSH login password... and
-changing the SSH login password does not change the CIFS password.
-A password reset will change both your smbpasswd and SSH login password
-to the same reset value.
+smbpasswd does not change your SSH login password, and changing the SSH login password does not change the CIFS password. However, if you ever need to request that your Oscar password be reset, both your smbpasswd and SSH login password to the same reset value.
 {{</ alert >}}
 
-Now you are ready to mount your CCV directories locally using the
-following instructions based on your operating system:
+Now you are ready to mount your CCV directories locally. Instructions for each of the various operating systems are given below.
 
-## Windows
-
-* Right-click "Computer" and select "Map Network Drive".
-* Select an unassigned drive letter.
-* Enter `\\oscarcifs.ccv.brown.edu\<user>` as the Folder.
-* Check "Connect using different credentials"
-* Click "Finish"
-* Enter your CCV user name as "ccv\\username" (no quotes)
-* Enter your CIFS password and click "OK".
-
-You can now access your home directory through Windows Explorer with the
-assigned drive letter. Your data and scratch directories are available
-as the subdirectories (`~/data` and `~/scratch`) of your home directory.
-
-## Mac OS X
+## macOS
 
 * In the Finder, press "Command + K" or select "Connect to Server..."
   from the "Go" menu.
 * For "Server Address", enter `smb://oscarcifs.ccv.brown.edu/<user>`
   and click "Connect".
-* Enter your username and password.
-* You may choose to add your login credentials to your keychain so you
-  will not need to enter this again.
+* Enter your username and CIFS password.
+* You may choose to add your login credentials to your keychain so you will not need to enter this again.
 
-**Optional.** If you would like to automatically connect to the share at
-startup:
+**Optional.** If you would like to automatically connect to the share at startup:
 
 * Open "System Preferences" (leave the Finder window open).
 * Go to "Accounts" > "(your account name)".
 * Select "Login Items".
-* Drag your data share from the "Finder" window to the "Login Items"
-  window.
+* Drag your data share from the "Finder" window to the "Login Items" window.
 
 ## Linux
 
@@ -76,11 +53,12 @@ startup:
 
       CentOS/RHEL:   $ sudo yum install cifs-utils
       Ubuntu:        $ sudo apt-get install cifs-utils
+      
 * Make a directory to mount the share into:
 
       $ sudo mkdir /mnt/rdata
-* Create a credentials file and add your CCV account information (use
-  the CIFS password):
+      
+* Create a credentials file and add your CCV account information (use the CIFS password):
 
 ```bash
         $ sudo gedit /etc/cifspw
@@ -92,25 +70,35 @@ startup:
 * Allow only root access to the credentials files:
 
 ```bash
-
         $ sudo chmod 0600 /etc/cifspw
 ```
 
 * Add an entry to the `fstab`:
 
 ```bash
-
         $ sudo gedit /etc/fstab
 ```
 
     The `fstab` entry is the single line:
     ```bash
-    
          `//oscarcifs.ccv.brown.edu/<user> /mnt/rdata cifs credentials=/etc/cifspw,vers=1.0,nounix,uid=<localUser> 0 0`
 
         Change `<localUser>` to the login used on your Linux workstation.
     
-    -   Mount the share:
-    ```bash
-    
+* Mount the share:
+```bash    
             $ mount -a
+```
+
+## Windows
+
+* Right-click "Computer" and select "Map Network Drive".
+* Select an unassigned drive letter.
+* Enter `\\oscarcifs.ccv.brown.edu\<user>` as the Folder.
+* Check "Connect using different credentials"
+* Click "Finish"
+* Enter your CCV user name as "ccv\\username" (no quotes)
+* Enter your CIFS password and click "OK".
+
+You can now access your home directory through Windows Explorer with the assigned drive letter. Your data and scratch directories are available as the subdirectories (`~/data` and `~/scratch`) of your home directory.
+
