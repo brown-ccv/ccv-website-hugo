@@ -50,17 +50,16 @@ Now you are ready to mount your CCV directories locally. Instructions for each o
 ## Linux
 
 * Install the `cifs-utils` package:
-
+```bash
       CentOS/RHEL:   $ sudo yum install cifs-utils
       
       Ubuntu:        $ sudo apt-get install cifs-utils
-      
+```
 * Make a directory to mount the share into:
-
+```bash
       $ sudo mkdir /mnt/rdata
-      
+```
 * Create a credentials file and add your CCV account information (use the CIFS password):
-
 ```bash
         $ sudo gedit /etc/cifspw
 
@@ -81,11 +80,10 @@ Now you are ready to mount your CCV directories locally. Instructions for each o
 ```
 
     The `fstab` entry is the single line:
-    ```bash
+```bash
          `//oscarcifs.ccv.brown.edu/<user> /mnt/rdata cifs credentials=/etc/cifspw,vers=1.0,nounix,uid=<localUser> 0 0`
-
+```
         Change `<localUser>` to the login used on your Linux workstation.
-    
 * Mount the share:
 ```bash    
             $ mount -a
@@ -102,4 +100,3 @@ Now you are ready to mount your CCV directories locally. Instructions for each o
 * Enter your CIFS password and click "OK".
 
 You can now access your home directory through Windows Explorer with the assigned drive letter. Your data and scratch directories are available as the subdirectories (`~/data` and `~/scratch`) of your home directory.
-
