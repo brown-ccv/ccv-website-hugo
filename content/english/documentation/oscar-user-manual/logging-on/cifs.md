@@ -11,8 +11,7 @@ icon: check
 
 CCV users can access their home, data, and scratch directories as a local mount on their own Windows, Mac, or Linux system using the Common Internet File System (CIFS) protocol (also called Samba). This allows you to use applications on your machine to open files stored on Oscar.  It is also a convienient way to move files between Oscar and your own machine, as you can drag and drop files.
 
-{{< alert >}}
-To use CIFS you will need to be on the Brown network. On campus use the 'Brown' wifi network. Off campus use the Brown VPN [VPN](https://vpn.brown.edu) client.
+{{< alert >}} To use CIFS you will need to be on the Brown network. On campus use the 'Brown' wifi network. Off campus use the Brown [VPN](https://vpn.brown.edu) client.
 {{</ alert >}}
 
 Users should ensure that the date and time are set correctly on
@@ -50,16 +49,21 @@ Now you are ready to mount your CCV directories locally. Instructions for each o
 ## Linux
 
 * Install the `cifs-utils` package:
+
 ```bash
       CentOS/RHEL:   $ sudo yum install cifs-utils
       
       Ubuntu:        $ sudo apt-get install cifs-utils
 ```
+
 * Make a directory to mount the share into:
+
 ```bash
       $ sudo mkdir /mnt/rdata
 ```
+
 * Create a credentials file and add your CCV account information (use the CIFS password):
+
 ```bash
         $ sudo gedit /etc/cifspw
 
@@ -68,21 +72,27 @@ Now you are ready to mount your CCV directories locally. Instructions for each o
 ```
 
 * Allow only root access to the credentials files:
+
 ```bash
         $ sudo chmod 0600 /etc/cifspw
 ```
 
 * Add an entry to the `fstab`:
+
 ```bash
         $ sudo gedit /etc/fstab
 ```
 
     The `fstab` entry is the single line:
+
 ```bash
          //oscarcifs.ccv.brown.edu/<user> /mnt/rdata cifs credentials=/etc/cifspw,vers=1.0,nounix,uid=<localUser> 0 0
 ```
+
     Change `<localUser>` to the login used on your Linux workstation.
+
 * Mount the share:
+
 ```bash    
             $ mount -a
 ```
