@@ -9,7 +9,7 @@ subitems:
   ref: ssh/
 - subsection: VNC
   ref: vnc/
-- subsection: Connecting to Oscar's filesystem using CIFS
+- subsection: CIFS
   ref: cifs/
 
 ---
