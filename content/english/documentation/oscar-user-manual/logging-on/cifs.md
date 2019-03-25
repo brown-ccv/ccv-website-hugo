@@ -68,13 +68,11 @@ Now you are ready to mount your CCV directories locally. Instructions for each o
 ```
 
 * Allow only root access to the credentials files:
-
 ```bash
         $ sudo chmod 0600 /etc/cifspw
 ```
 
 * Add an entry to the `fstab`:
-
 ```bash
         $ sudo gedit /etc/fstab
 ```
