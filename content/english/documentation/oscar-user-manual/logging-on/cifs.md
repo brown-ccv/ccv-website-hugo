@@ -52,6 +52,7 @@ Now you are ready to mount your CCV directories locally. Instructions for each o
 * Install the `cifs-utils` package:
 
       CentOS/RHEL:   $ sudo yum install cifs-utils
+      
       Ubuntu:        $ sudo apt-get install cifs-utils
       
 * Make a directory to mount the share into:
