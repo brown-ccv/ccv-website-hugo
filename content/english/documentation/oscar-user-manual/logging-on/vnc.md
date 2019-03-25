@@ -17,11 +17,10 @@ The CCV VNC requires that you download a VNC client onto your machine.
 
 ## Instructions
 
-1. Download the [CCV VNC client](https://brownbox.brown.edu/download.php?hash=b00a6c89)
-2. Ensure you have a recent version of the Java JDK or JRE. These can be found on [Oracle's Java Download Page](http://www.oracle.com/technetwork/java/javase/downloads/).
+1. Ensure you have a recent version of the Java JDK or JRE. These can be found on [Oracle's Java Download Page](http://www.oracle.com/technetwork/java/javase/downloads/).
+2. Download the [CCV VNC client](https://brownbox.brown.edu/download.php?hash=b00a6c89).
 3. If Java has been installed correctly you can now run `CCV\_VNC\_2.x.jar` by double clicking on it. On a Mac, you may need to first right click on the jar, choose "Open", and give the jar permission to run.
-4. In the "Username" and "Password" fields, enter your Oscar username and password, respectively. The server should remain `desktop.ccv.brown.edu`.
-   Press "Connect".
+4. In the "Username" and "Password" fields, enter your Oscar username and password, respectively. The server should remain `desktop.ccv.brown.edu`. Press "Connect".
 5. On the window that pops up, select the memory/CPU parameters you want for your VNC session.
 6. Your VNC session should appear. If you see a window saying your job was queued, it means there were not enough free resources to start your job and it has been placed into the scheduling queue. You will continue to receive that message until your VNC job actually starts. You can monitor the progress of your job in the queue using normal scheduler commands.
 7. Once your VNC session starts, you should see your desktop. There are two new buttons on the menubar at the top, **Suspend VNC session** and **End VNC session**.
