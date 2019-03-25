@@ -1,13 +1,12 @@
 ---
-title: "Cifs"
-date: 2019-01-31T17:06:09-05:00
-draft: false
+title: CIFS
+date: 2019-01-31 22:06:09 +0000
 project: Oscar
 section: Connecting to Oscar
 weight: 0
 icon: check
----
 
+---
 # Mounting the Oscar filesystem on your machine
 
 CCV users can access their home, data and scratch directories as a local
