@@ -8,10 +8,9 @@ icon: oscar.svg
 ---
 Welcome to the CCV Oscar User Manual. Oscar is Brown University's supercomputer.
 
-{{< alert info >}}
+{{< alert >}}
 
-Anyone with a Brown account get an exploratory account on
-Oscar for free.
+Anyone with a Brown account can get a free, exploratory account on Oscar.
 
 {{</ alert >}}
 
