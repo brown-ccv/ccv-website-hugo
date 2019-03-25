@@ -16,8 +16,7 @@ To use CIFS you will need to be on the Brown network. On campus use the 'Brown' 
 {{</ alert >}}
 
 Users should ensure that the date and time are set correctly on
-their machine. Once the date and time are correct, use SSH to [connect to Oscar](/../ssh) to set your CIFS
-password. Once logged in, run the command:
+their machine. Once the date and time are correct, [use SSH to connect to Oscar](/../ssh) to set your CIFS password. Once logged in, run the command:
 
 ```shell
      smbpasswd
