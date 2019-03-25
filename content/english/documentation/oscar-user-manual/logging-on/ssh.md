@@ -27,7 +27,8 @@ Windows users need to install an SSH client. We recommend [PuTTY](http://www.chi
 
 In PuTTY, use `username@ssh.ccv.brown.edu` as the Host Name.
 
-{{% alert info %}}
+## Connecting to Oscar for the First Time
+
 The first time you connect to Oscar you will see a message about the authenticity of the host:
 
 ```shell
@@ -38,13 +39,10 @@ The first time you connect to Oscar you will see a message about the authenticit
 
 You can type `yes` and press return. On subsequent logins you should not see this message.
 
-{{% /alert %}}
-
 You will then  be prompted for your password.
 
 {{< alert note >}}
-Note nothing will show up on the screen when you type in your password, just
-type it in and press enter.
+Note nothing will show up on the screen as you type in your password. Just type it in and press enter.
 
 {{</ alert >}}
 
@@ -55,7 +53,7 @@ Oscar. In your terminal you will see a prompt like this:
     [mhamilton@login004 ~]$
 ```
 
-Congratulations, you are now on one of the Oscar login nodes.  The login nodes are for administrative tasks such as editing files and compiling code.  To use Oscar for computation you will need to use the compute nodes.  To get to the compute nodes from the login nodes you can either start an interactive session on a compute node, or submit a batch job.
+Congratulations, You are now on one of the Oscar login nodes!  The login nodes are for administrative tasks such as editing files and compiling code.  To use Oscar for computation you will need to use the compute nodes.  To get to the compute nodes from the login nodes you can either start an interactive session on a compute node, or submit a batch job.
 
 {{< alert warning >}}
 Please do not run CPU-intense or long-running programs directly on
