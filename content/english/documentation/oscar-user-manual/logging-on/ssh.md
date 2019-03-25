@@ -19,7 +19,7 @@ To log in to Oscar, open a terminal and type
     ssh -X  username@ssh.ccv.brown.edu
 ```
 
-The `-X` allows Oscar to display windows on your machine, e.g. opening a GUI text editor such as `gedit`.
+The `-X` allows Oscar to display windows on your machine. This allows you to, for example, open and use a GUI-based text editor such as `gedit`.
 
 ## Windows
 
