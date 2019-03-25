@@ -112,4 +112,15 @@ $(function () {
 
 $('.dropdown-toggle').dropdown();
 
+// Image change on hover:
+    $('.people-card').mouseenter(function(){
+        const bi = $(this).css("background-image")
+        const ho = bi.replace("_1", "_hover")
+        $(this).css("background-image", ho)
+    })
+    $('.people-card').mouseleave(function(){
+        const ho = $(this).css("background-image")
+        const bi = ho.replace("_hover", "_1")
+        $(this).css("background-image", bi)
+    })
 });

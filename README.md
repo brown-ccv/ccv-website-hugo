@@ -7,8 +7,10 @@ If you want to contribute to this project follow these steps:
 ```shell
 brew install hugo
 ```
-- Install Node dependencies:
+- Clone the repo and install Node dependencies:
 ```shell
+git clone https://github.com/brown-ccv/ccv-website.git
+cd ccv-website
 npm install
 ```
 
