@@ -27,6 +27,8 @@ Windows users need to install an SSH client. We recommend [PuTTY](http://www.chi
 
 In PuTTY, use `username@ssh.ccv.brown.edu` as the Host Name.
 
+---
+
 ## Connecting to Oscar for the First Time
 
 The first time you connect to Oscar you will see a message about the authenticity of the host:
