@@ -26,20 +26,17 @@ The CCV VNC requires that you download a VNC client onto your machine.
 6. Your VNC session should appear. If you see a window saying your job was queued, it means there were not enough free resources to start your job and it has been placed into the scheduling queue. You will continue to receive that message until your VNC job actually starts. You can monitor the progress of your job in the queue using normal scheduler commands.
 7. Once your VNC session starts, you should see your desktop. There are two new buttons on the menubar at the top, **Suspend VNC session** and **End VNC session**.
 
-When you are finished with your VNC session, click the "EXIT" button,
-you now have two choices:
+When you are finished with your VNC session, click the "EXIT" button.
+You now have two choices:
 
-**Disconnect from VNC session** closes the client but leaves your VNC
-session running. When you log in again, you will be automatically
-forwarded to your existing VNC session.
+**Disconnect from VNC session** closes the client but leaves your VNC session running. When you log in again, you will be automatically
+connected to your existing VNC session.
 
-**Kill VNC session** closes the client and stops your VNC session from
-running.
+**Kill VNC session** closes the client and stops your VNC session from running.
 
 {{% alert warning %}}
-Closing the VNC window will only disconnect from the VNC session,
-it will not kill it.
+Closing the VNC window will only disconnect you from the VNC session,
+it will not kill the session.
 
-Sessions are limited to 7 days for all users, depending on resources
-selected. After this time, the session will expire.
+Sessions are limited to a designated period of time (maximum of 7 days, depending on the resources selected for the session). After this time, the session will expire.
 {{% /alert %}}
