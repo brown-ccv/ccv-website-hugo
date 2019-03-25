@@ -11,7 +11,7 @@ icon: check
 
 To log in to Oscar you need Secure Shell (SSH) on your computer.
 
-## Mac and Linux
+## macOS and Linux
 
 To log in to Oscar, open a terminal and type
 
