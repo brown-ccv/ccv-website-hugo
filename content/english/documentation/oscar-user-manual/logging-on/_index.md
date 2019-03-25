@@ -5,10 +5,11 @@ section: Connecting to Oscar
 version: 1.0.0
 weight: 1
 subitems:
-  - subsection: "ssh command line login"
-    ref: "ssh/"
-  - subsection: "VNC Desktop login"
-    ref: "vnc/"
-  - subsection: "Connecting to Oscar's filesystem using CIFS"
-    ref: "cifs/"
+- subsection: SSH
+  ref: ssh/
+- subsection: VNC
+  ref: vnc/
+- subsection: CIFS
+  ref: cifs/
+
 ---

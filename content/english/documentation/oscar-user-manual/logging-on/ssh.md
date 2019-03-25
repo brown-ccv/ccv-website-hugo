@@ -1,5 +1,5 @@
 ---
-title: Ssh
+title: SSH
 date: 2019-01-31 22:06:00 +0000
 project: Oscar
 section: Connecting to Oscar
@@ -11,7 +11,7 @@ icon: check
 
 To log in to Oscar you need Secure Shell (SSH) on your computer.
 
-## Mac and Linux
+## macOS and Linux
 
 To log in to Oscar, open a terminal and type
 
