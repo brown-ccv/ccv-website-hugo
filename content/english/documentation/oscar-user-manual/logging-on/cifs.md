@@ -9,11 +9,10 @@ icon: check
 ---
 # Mounting the Oscar filesystem on your machine
 
-CCV users can access their home, data and scratch directories as a local mount on their own Windows, Mac, or Linux system using the Common Internet File System (CIFS) protocol (also called Samba). This allows you to use applications on your machine to open files stored on Oscar.  It is a convienient way to drag and drop files from your machine to Oscar and vise versa.
+CCV users can access their home, data and scratch directories as a local mount on their own Windows, Mac, or Linux system using the Common Internet File System (CIFS) protocol (also called Samba). This allows you to use applications on your machine to open files stored on Oscar.  It is also a convienient way to move files between Oscar and your own machine, as you can drag and drop files.
 
-{{< alert info >}}
-To use CIFS you will need to be on the Brown network. On campus use the 'Brown' wifi network.
-Off campus use the Brown VPN [VPN](https://vpn.brown.edu) client
+{{< alert >}}
+To use CIFS you will need to be on the Brown network. On campus use the 'Brown' wifi network. Off campus use the Brown VPN [VPN](https://vpn.brown.edu) client.
 {{</ alert >}}
 
 First users should ensure that the time and date is set correctly on
