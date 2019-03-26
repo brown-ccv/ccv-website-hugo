@@ -1,5 +1,5 @@
 ---
-title: Vnc
+title: VNC
 date: 2019-01-31 22:06:05 +0000
 project: Oscar
 section: Connecting to Oscar
