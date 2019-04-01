@@ -77,6 +77,19 @@ There is no limit on the time for condo jobs, but users should be aware that pla
 | Maximum memory in use at once (GB) | 23 |
 | Time limit per job (GPU•hours) | 4 |
 
+# bigmem
+
+* For jobs requiring large amounts of memory
+* Premium users get higher priority and more resources than free users on the bibmem partition
+* Condo users submit to the bigmem partition with normal or priority access (if they have a priority account in addition to their condo)
+
+| Resource Limit | Exploratory (free) Account | Premium Account |
+| --- | --- | --- |
+| Maximum number of jobs | 1 | 2 |
+| Maximum memory in use at once (GB) | 750 | 750 |
+| Time limit (wall clock) per job (hours) | 24 | 96 |
+| Time limit per job (core•minutes) | 46,080 | 184,320 |
+
 # smp partition
 
 * For jobs requiring large amounts of memory
@@ -89,16 +102,3 @@ There is no limit on the time for condo jobs, but users should be aware that pla
 | Maximum memory in use at once (GB) | 503 | 1006 |
 | Time limit (wall clock) per job (hours) | 24 | 48 |
 | Time limit per job (core•minutes) | 92,160 | 184,320 |
-
-# bigmem
-
-* For jobs requiring large amounts of memory
-* Premium users get higher priority and more resources than free users on the bibmem partition
-* Condo users submit to the bigmem partition with normal or priority access (if they have a priority account in addition to their condo)
-
-| Limits | Exploratory (free) account | Premium account |
-| --- | --- | --- |
-| Maximum number of jobs | 1 | 2 |
-| Total memory limit (sum of all running jobs in the partition) | 750 GB | 750GB |
-| Wall clock limit | 24 hours | 96 hours |
-| Total ‘cores*time’ limit (sum of all jobs) | 32 cores*24 hours = 1 bigmem node for 1 day | 32 cores * 96 hours = 1 bigmem node for 4 day |
