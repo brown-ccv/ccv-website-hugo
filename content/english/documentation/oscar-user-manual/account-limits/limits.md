@@ -10,7 +10,7 @@ icon: check
 
 {{< alert info >}} Limits on Oscar are by account and partition.  Limits are enforced by Slurm. You can email support@ccv.brown.edu if you need advice on which paritions to use {{</ alert >}}
 
-Oscar has the following slurm partitions
+The following partitions are available to all Oscar users:
 
 | Name | Purpose |
 | --- | --- |
@@ -24,14 +24,13 @@ Oscar has the following slurm partitions
 # batch partition
 
 * General purpose computing
-* Priority is determnined by account type.  From highest
-  to lowest: Condo, priority, exploratory
+* Priority is determnined by account type (from highest
+  to lowest: Condo, priority, exploratory)
 
 | Limits | Exploratory (free) account | Premium account | Condo |
 | --- | --- | --- | --- |
 | Maximum number of cores in use at once | 16 | 208 | condo size |
-| Per job limit | only limited by total cores*times limit | only limited by total cores*times limit | only limited by number of condo cores |
-| Max number of jobs | 16 | 208 | condo size |
+| Maximum number of jobs at once | 16 | 208 | condo size |
 | Total ‘cores*time’ limit (sum of all jobs) | 16 cores * 48 hours = 46080 core minutes | 208 cores * 80 hours =998400 core minutes | only limited by number of condo cores |
 | Total memory limit (sum of all jobs) | 123GB | 1024GB | condo memory limit |
 
