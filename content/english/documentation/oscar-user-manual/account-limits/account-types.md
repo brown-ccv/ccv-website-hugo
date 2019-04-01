@@ -2,7 +2,7 @@
 title: Account Types
 date: 2019-01-31 22:01:25 +0000
 project: Oscar
-section: Account Limits
+section: Accounts
 weight: 0
 icon: check
 
