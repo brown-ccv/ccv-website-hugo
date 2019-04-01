@@ -1,7 +1,7 @@
 ---
 Title: Accounts on Oscar
 type: Oscar
-section: Accounts on Oscar
+section: Accounts
 version: 1.0.0
 weight: 2
 subitems:
