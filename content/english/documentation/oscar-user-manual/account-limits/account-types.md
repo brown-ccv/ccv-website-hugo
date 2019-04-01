@@ -1,13 +1,12 @@
 ---
-title: "Account Types"
-date: 2019-01-31T17:01:25-05:00
-draft: false
+title: Account Types
+date: 2019-01-31 22:01:25 +0000
 project: Oscar
 section: Account Limits
 weight: 0
 icon: check
----
 
+---
 # Account Types  
 
 There are four categories of accounts on Oscar.  
@@ -16,7 +15,6 @@ There are four categories of accounts on Oscar.
   * premium  
   * condo  
   * class  
-
 
 ## Exploratory accounts
 
@@ -29,10 +27,9 @@ Premium accounts are available through a quarterly subscription.
 
 ## Condo
 
-PIs who purchase hardware (compute nodes) for the CCV machine get a condo account.
-Condo account users have next-to-run prioriy on the equivalent number of cores to their purchase.
+PIs who purchase hardware (compute nodes) for the CCV machine get a condo account. Condo account users have next-to-run prioriy on the number of cores equivalent to the hardware they purchased.
 
 ## Class
 
 Class accounts are provided free of charge for faculty who are teaching
-using Oscar.  To set up accounts for your class, email `support@ccv.brown.edu`.
+using Oscar. To set up accounts for your class, email 'support@ccv.brown.edu`.
