@@ -8,10 +8,7 @@ icon: check
 ---
 # Account Limits
 
-{{< alert info >}}
-Limits on Oscar are by account and partition.  Limits are enforced by Slurm.
-You can email support@ccv.brown.edu if you need advice on which paritions to use
-{{</ alert >}}
+{{< alert info >}} Limits on Oscar are by account and partition.  Limits are enforced by Slurm. You can email support@ccv.brown.edu if you need advice on which paritions to use {{</ alert >}}
 
 Oscar has the following slurm partitions
 
