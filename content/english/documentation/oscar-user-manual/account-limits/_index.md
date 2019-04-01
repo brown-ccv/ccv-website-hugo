@@ -5,9 +5,9 @@ section: Accounts
 version: 1.0.0
 weight: 2
 subitems:
-- subsection: Types of Oscar account
+- subsection: Account Types
   ref: account-types/
-- subsection: Limits
+- subsection: Account Limits
   ref: limits/
 
 ---
