@@ -24,10 +24,10 @@ The following partitions are available to all Oscar users:
 # batch partition
 
 * General purpose computing
-* Priority is determnined by account type (from highest
+* Priority is determined by account type (from highest
   to lowest: condo, premium, exploratory)
 
-| Limit | Exploratory (free) Account | Premium Account | Condo |
+| Resource Limit | Exploratory (free) Account | Premium Account | Condo |
 | --- | --- | --- | --- |
 | Maximum number of cores in use at once | 16 | 208 | condo size |
 | Maximum number of jobs | 16 | 208 | condo size |
@@ -45,7 +45,7 @@ There is no limit on the time for condo jobs, but users should be aware that pla
 * Short wait time, short run time access for debugging
 * All users have the same limits and priority on the debug partition
 
-| Limit | All Users |
+| Resource Limit | All Users |
 | --- | --- |
 | Maximum number of cores in use at once | 16 |
 | Maximum number of jobs | 2 |
@@ -58,24 +58,24 @@ There is no limit on the time for condo jobs, but users should be aware that pla
 * Premium users get higher priority and more resources than free users on the GPU partition
 * Condo users submit to the gpu partition with normal or priority access (if they have a priority account in addition to their condo)
 
-| Limit | Exploratory (free) Account | Premium Account |
+| Resource Limit | Exploratory (free) Account | Premium Account |
 | --- | --- | --- |
-| Max number of GPUs in use at once | 2 | 8 |
-| Max number of CPUs in use at once | 4 | 16 |
-| Max Memory | 46GB | 180GB |
-| Total gpu*time limit (sum of all jobs) | 2 GPU * 24 hours | 8 GPUs * 24 hours |
+| Maximum number of GPUs in use at once | 2 | 8 |
+| Maximum number of CPUs in use at once | 4 | 16 |
+| Maximum memory in use at once (GB) | 46 | 180 |
+| Time limit per job (GPU•hours) | 48 | 192 |
 
 # gpu-debug partition
 
 * Short wait time, short run time gpu access for debugging
-* No premium or condo access to the gpu-debug partition.  All users have the same limits and priority on the gpu-debug partition.
+* All users have the same limits and priority on the gpu-debug partition
 
-| Limits | all users |
+| Resource Limit | All Users |
 | --- | --- |
-| Max number of GPUs in use at once | 1 |
-| Max number of CPUs in use at once | 2 |
-| Max Memory | 23GB |
-| Total gpu*time limit (sum of all jobs) | 1 GPU * 4 hours |
+| Maximum number of GPUs in use at once | 1 |
+| Maximum number of CPUs in use at once | 2 |
+| Maximum memory in use at once (GB) | 23 |
+| Time limit per job (GPU•hours) | 4 |
 
 # smp partition
 
