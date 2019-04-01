@@ -79,20 +79,22 @@ There is no limit on the time for condo jobs, but users should be aware that pla
 
 # smp partition
 
+* For jobs requiring large amounts of memory
 * Premium users get higher priority and more resources than free users on the SMP partition
-* No condo access to the SMP partition.  Condo users submit to the SMP partition with normal or priority access (if they have a priority account in addition to their condo)
+* Condo users submit to the SMP partition with normal or priority access (if they have a priority account in addition to their condo)
 
-| Limits | Exploratory (free) account | Premium account |
+| Resource Limit | Exploratory (free) Account | Premium Account |
 | --- | --- | --- |
 | Maximum number of jobs | 1 | 2 |
-| Total memory limit (sum of all jobs) | 503GB | 1006GB |
-| Wall clock limit | 24 hours | 48 hours |
-| Total cores*time limit (sum of all jobs) | 64 cores*24 hours = 92160 core minutes = 1 SMP node for 1 day | 2 * 64 cores * 24 hours = 184320 core minutes = 2 SMP nodes for 1 day |
+| Maximum memory in use at once (GB) | 503 | 1006 |
+| Time limit (wall clock) per job (hours) | 24 | 48 |
+| Time limit per job (core•minutes) | 92,160 | 184,320 |
 
 # bigmem
 
-* Premium users get higher priority and more resources than free users on the SMP partition
-* No condo access to the bigmem partition.  Condo users submit to the bigmem partition with normal or priority access (if they have a priority account in addition to their condo)
+* For jobs requiring large amounts of memory
+* Premium users get higher priority and more resources than free users on the bibmem partition
+* Condo users submit to the bigmem partition with normal or priority access (if they have a priority account in addition to their condo)
 
 | Limits | Exploratory (free) account | Premium account |
 | --- | --- | --- |
