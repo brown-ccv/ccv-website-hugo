@@ -8,7 +8,7 @@ icon: oscar.svg
 ---
 Welcome to the CCV Oscar User Manual. Oscar is Brown University's supercomputer.
 
-This user manual assumes you already have an Oscar account.  If you do not have an Oscar account, you can request one by filling and submitting a \[new user account form\]({{< ref "../../../services/infrastructure/oscar.md" >}}).
+This user manual assumes you already have an Oscar account.  If you do not have an Oscar account, you can request one by filling and submitting a [new user account form]({{< ref "../../../services/infrastructure/oscar.md" >}}).
 
 {{< alert note >}}
 

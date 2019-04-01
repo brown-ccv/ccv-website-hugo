@@ -1,0 +1,87 @@
+baseURL: https://datasci.brown.edu/ccv-dev #http://ccv-website-dev.s3-website-us-east-1.amazonaws.com
+languageCode: en-us
+title: Brown Center for Computation and Visualization
+theme: gb-theme
+permalinks:
+  news: "/:year/:month/:slug/"
+googleAnalytics: UA-136333978-1
+outputs:
+  home:
+    - html
+    - rss
+    - json
+
+enableRobotsTXT: true
+DefaultContentLanguage: en
+canonifyURLs: true
+relativeURLs: false
+
+pygmentsCodefences: true
+
+# Menu
+menu:
+  main:
+  - identifier: home
+    name: Home
+    title: Home
+    url: /
+    weight: 1
+  - identifier: about
+    name: About
+    title: About
+    url: /about/
+    weight: 2
+  - identifier: services
+    name: Services
+    title: Services
+    url: /services/
+    weight: 3
+  - identifier: documentation
+    name: Documentation
+    title: Documentation
+    url: /documentation/
+    weight: 5
+  - identifier: news
+    name: News
+    title: News
+    url: /news/
+    weight: 6
+
+params:
+  contact:
+    support:
+      text: Submit a ticket
+      link: support@ccv.brown.edu
+      fa: fas fa-ticket-alt
+    discourse:
+      text: Join the discussion!
+      link: https://discuss.ccv.brown.edu
+      fa: fab fa-discourse
+    github:
+      text: Github issues
+      link: https://github.com/brown-ccv/ccv-issues
+      fa: fab fa-github
+
+# i18n
+languages:
+  en:
+    languageName: English
+    weight: 1
+    contentDir: content/english
+  pt:
+    languageName: Portuguese
+    weight: 2
+    contentDir: content/portuguese
+  zh:
+    languageName: Chinese (Simplified)
+    weight: 3
+    contentDir: content/chinese
+
+
+
+
+# Taxonomies
+taxonomies:
+  tag: "tags"
+  type: "types"
+  category: "category"
