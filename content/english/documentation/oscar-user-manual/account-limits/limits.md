@@ -30,6 +30,7 @@ The following partitions are available to all Oscar users:
 | Limits | Exploratory (free) account | Premium account | Condo |
 | --- | --- | --- | --- |
 | Maximum number of cores in use at once | 16 | 208 | condo size |
+| Maximum number of jobs | 16 | 208 | condo size |
 | Maximum memory in use at once (GB) | 123 | 1024 | condo size | 
 | Time limit per job (core•minutes) | 46,100 | 998,400 | condo size |
 
@@ -46,10 +47,10 @@ There is no limit on the time for condo jobs, but users should be aware that pla
 
 | Limis | all users |
 | --- | --- |
-| Maximum number of jobs | 2 |
-| Time limit on a job | 30 minutes |
 | Maximum number of cores in use at once | 16 |
-| Total memory limit (sum of all jobs) | 123GB |
+| Maximum number of jobs | 2 |
+| Maximum memory in use at once (GB) | 123 |
+| Time limit on a job (minutes) | 30 minutes |
 
 # gpu partition
 
