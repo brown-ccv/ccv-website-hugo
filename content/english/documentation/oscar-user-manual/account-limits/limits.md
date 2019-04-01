@@ -36,13 +36,13 @@ The following partitions are available to all Oscar users:
 Condo limits apply to the group (i.e., thery are the sum of all users on the condo). Condo users can check the limits on their condo with the command `condos`.
 
 {{< alert warning >}}
-There is no limit on the time for condo jobs, but users should be aware that there may be CCV planned maintenance on the machine with one month’s notice given.
+There is no limit on the time for condo jobs, but users should be aware that planned maintenance on the machine may occur (one month’s notice is given prior to any planned maintenance).
 {{</ alert >}}
 
 # debug partition
 
-* Short wait time, short run time access for debugging.
-* No premium or condo access to the debug partition.  All users have the same limits and priority on the debug partition.
+* Short wait time, short run time access for debugging
+* All users have the same limits and priority on the debug partition
 
 | Limis | all users |
 | --- | --- |
