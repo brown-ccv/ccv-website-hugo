@@ -30,12 +30,10 @@ The following partitions are available to all Oscar users:
 | Limits | Exploratory (free) account | Premium account | Condo |
 | --- | --- | --- | --- |
 | Maximum number of cores in use at once | 16 | 208 | condo size |
-| Maximum number of jobs at once | 16 | 208 | condo size |
-| Total ‘cores*time’ limit (sum of all jobs) | 16 cores * 48 hours = 46080 core minutes | 208 cores * 80 hours =998400 core minutes | only limited by number of condo cores |
-| Total memory limit (sum of all jobs) | 123GB | 1024GB | condo memory limit |
+| Maximum memory in use at once (GB) | 123 | 1024 | condo size | 
+| Time limit per job (core•minutes) | 46,100 | 998,400 | condo size |
 
-Condo limits are by group so are the sum of all users on the condo.
-Condo users can check the limits on their condo with the command `condos`
+Condo limits apply to the group (i.e., thery are the sum of all users on the condo). Condo users can check the limits on their condo with the command `condos`.
 
 {{< alert warning >}}
 There is no limit on the time for condo jobs, but users should be aware that there may be CCV planned maintenance on the machine with one month’s notice given.
