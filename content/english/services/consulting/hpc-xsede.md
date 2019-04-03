@@ -1,11 +1,11 @@
 ---
-title: "HPC"
-date: 2019-01-24T15:20:47-05:00
-draft: false
-category: "Consulting"
-lead: "Help using High-Performance Computing (HPC) in your research"
+title: HPC
+date: 2019-01-24 20:20:47 +0000
+category: Consulting
+lead: Help using High-Performance Computing (HPC) in your research.
 weight: 0
 icon: support
+
 ---
 CCV's team of computational scientists and software engineers help researchers get the most out of Brown's high-performance computing (HPC) resources. They provide a range of services, including:
 
