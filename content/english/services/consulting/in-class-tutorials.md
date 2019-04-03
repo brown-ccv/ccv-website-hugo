@@ -1,11 +1,11 @@
 ---
-title: "In-Class Tutorials"
-date: 2019-01-24T15:20:06-05:00
-draft: false
-category: "Classroom"
-lead: "CCV-lead tutorials to introduce students to using Brown's HPC systems"
+title: In-Class Tutorials
+date: 2019-01-24 20:20:06 +0000
+category: Classroom
+lead: CCV staff members introduce students to Brown's HPC systems
 weight: 0
 icon: users2
+
 ---
 CCV offers a variety of tutorials to provide students with experience using Brown's HPC systems. CCV staff members provide students with an overview of the topic and guide them through a series of hands-on activities. Tutorials can range from the basics of using HPC systems to the use of specific applications on Brown's HPC systems. Examples of tutorial topics include:
 
