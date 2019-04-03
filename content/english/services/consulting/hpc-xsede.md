@@ -2,7 +2,7 @@
 title: HPC
 date: 2019-01-24 20:20:47 +0000
 category: Consulting
-lead: Help using High-Performance Computing (HPC) in your research.
+lead: Get help using High-Performance Computing (HPC) in your research.
 weight: 0
 icon: support
 
