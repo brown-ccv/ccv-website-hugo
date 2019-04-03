@@ -1,11 +1,11 @@
 ---
-title: "Cave"
-date: 2019-01-22T13:29:50-05:00
-draft: false
-category: "Visualization Systems"
-icon:
-lead: "CCV's fully-immersive display system, the Cave is an 8' cubic room in which 3-D images are projected on the walls and the floor." 
+title: Cave
+date: 2019-01-22 18:29:50 +0000
+category: Visualization Systems
+icon: 
+lead: Our fully-immersive display system
 haas: true
+
 ---
 The Cave is a [TAN VR-Cube](http://www.barco.com/en/products-solutions/cubic-immersive-virtual-environment.aspx), an 8' cubic room in which 3-D images are projected images on the walls and the floor. CrystalEyes LCD-shutter glasses provide stereo depth-perception, and a variety of Intersense and Polhemus tracking devices allow software to track the user's position. The Cave also has a multi-speaker sound system that provides positional audio. Software packages available through CCV allow the Cave to be used for a variety of purposed, including volume visualization, molecular visualization, and simple 3-D model manipulation.   
 
