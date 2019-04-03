@@ -1,11 +1,11 @@
 ---
-title: "Student Accounts"
-date: 2019-01-24T15:20:17-05:00
-draft: false
-category: "Classroom"
-lead: "Accounts on Brown's HPC systems custom-tailored for class use"
+title: Student Accounts
+date: 2019-01-24 20:20:17 +0000
+category: Classroom
+lead: Accounts on Brown's HPC systems, custom-tailored for class use
 weight: 0
 icon: users2
+
 ---
 CCV provides access to HPC resources for classes, workshops, demonstrations, and other instructional uses.  In general, the system is available for most types of instructional use at Brown where HPC resources are required, and we will do what we can to provide the resources necessary to help teach your class.  We do ask that you follow these guidelines to help us better support your class.
 
