@@ -1,11 +1,12 @@
 ---
-title: "Stronghold"
-date: 2019-01-22T13:29:31-05:00
-draft: false
-category: "Computing"
-icon: "server2"
-lead: "CCV's secure computing and storage environment enables Brown researchers to analyze sensitive data, while complying with regulatory or contractual requirements."
+title: Stronghold
+date: 2019-01-22 18:29:31 +0000
+category: Computing
+icon: server2
+lead: Secure computing and storage environment that enables researchers to analyze
+  sensitive data while complying with regulatory or contractual requirements
 haas: true
+
 ---
 Stronghold is currently self-certified to meet the security requirements and controls for HIPAA (Health Insurance Portability and Accountability Act) and is undergoing the certification process for FISMA (Federal Information Security Management Act) and CJIS (Criminal Justice Information Security).
 
