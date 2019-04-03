@@ -3,8 +3,8 @@ title: Stronghold
 date: 2019-01-22 18:29:31 +0000
 category: Computing
 icon: server2
-lead: Secure computing and storage environment that enables researchers to analyze
-  sensitive data while complying with regulatory or contractual requirements
+lead: Analyze sensitive data while complying with regulatory or contractual requirements
+  for data security
 haas: true
 
 ---
