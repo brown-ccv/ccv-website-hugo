@@ -3,7 +3,7 @@ category = "Computing"
 date = "2019-01-22T18:29:31.000+00:00"
 haas = true
 icon = ""
-lead = "For departments or researchers who want access to a server but don't want to purchase or maintain the hardware."
+lead = "Access a server without needing to purchase or maintain the hardware"
 title = "Virtual Machine Hosting"
 
 +++
