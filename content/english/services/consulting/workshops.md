@@ -1,11 +1,11 @@
 ---
-title: "Workshops"
-date: 2019-01-24T15:19:52-05:00
-draft: false
-category: "Classroom"
-lead: "CCV-hosted workshops to educate users on the effective use of Brown's HPC systems"
+title: Workshops
+date: 2019-01-24 20:19:52 +0000
+category: Classroom
+lead: Learn how to effectively use of Brown's HPC systems in your research
 weight: 0
 icon: users2
+
 ---
 CCV hosts a variety of workshops to help educate our users and promote more effective use of our systems and services. Upcoming workshops are announced one to two weeks in advance through Brown Morning Mail and the Oscar user mailing list. Examples of workshops include:
 
