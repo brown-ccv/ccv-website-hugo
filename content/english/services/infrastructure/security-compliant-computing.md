@@ -12,7 +12,11 @@ Virtual Hosting is aimed at departments or researchers who want access to a Serv
 ## To Request this Service
 
 Fill out a (ticket) indicating you would like virtual server hosting. Please include any system resource requirements, software, storage needs, etc.
-Note: we do not currently support GPUs in this environment.
+
+{{< alert note >}}
+We do not currently support GPUs in this environment.
+{{</ alert >}}
+
 
 ## VM Environment sizing limits:
 
