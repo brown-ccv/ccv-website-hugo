@@ -2,7 +2,7 @@
 title: Workshops
 date: 2019-01-24 20:19:52 +0000
 category: Classroom
-lead: Learn how to effectively use of Brown's HPC systems in your research
+lead: Learn to use Brown's HPC systems effectively in your research
 weight: 0
 icon: users2
 
