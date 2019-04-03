@@ -1,13 +1,12 @@
 ---
-title: "BrownBox"
-date: 2019-01-22T13:29:17-05:00
-draft: false
-category: "File Storage and Transfer"
-icon: "database"
-lead: "Share files that are too large to send by e-mail."
+title: BrownBox
+date: 2019-01-22 18:29:17 +0000
+category: File Storage and Transfer
+icon: database
+lead: Share files that are too large to send by e-mail
 weight: 0
----
 
+---
 # BrownBox
 
 Available to all Brown faculty, staff, and their colleagues, CCV's BrownBox service lets you share files that are up to 2GB in size.
@@ -26,4 +25,4 @@ If your password is less than 8 characters in length you may not be able to acce
 ### Sponsors
 - [Vice President for Research](https://www.brown.edu/research/conducting-research-brown/about-office)
 - [Department of Ecology and Evolutionary Biology](https://www.brown.edu/academics/ecology-and-evolutionary-biology/)
-- [CCV](https://ccv.brown.edu)  
+- [CCV](https://ccv.brown.edu)
