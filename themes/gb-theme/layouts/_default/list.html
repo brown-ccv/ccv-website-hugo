@@ -55,7 +55,7 @@
         {{ if eq $key "file-storage-and-transfer"}}
         <div class="d-flex px-2 py-6 justify-content-between flex-wrap">
           <h3>{{ markdownify .Site.Data.file_storage.lead }}</h3>
-          <a class="btn btn-secondary mt-2 fs-26" href="{{.Site.BaseURL}}{{.Site.Data.file_storage.path}}"><span class="fas fa-table"></span> See comparison table </a>
+          <a class="btn btn-secondary mt-2 fs-26" href="{{.Site.BaseURL}}/{{.Site.Data.file_storage.path}}"><span class="fas fa-table"></span> See comparison table </a>
         </div>
         {{ end }}
         <article class="d-flex py-6 justify-content-between flex-wrap">
