@@ -6,12 +6,12 @@
   <h5>{{ .name }}</h5>
   <p class="fs-16">{{ .bio }}</p>
   <div class="d-flex justify-content-start">
-    <a href="http://directory.brown.edu/uuid/{{ .brown_directory_uuid }}"><span class="mr-2 fas fa-info-circle fs-20"></span></a>
+    <a href="https://directory.brown.edu/uuid/{{ .brown_directory_uuid }}"><span class="mr-2 fas fa-info-circle fs-20"></span></a>
     <a href="https://github.com/{{ .github_username }}"><span class="mr-2 fab fa-github fs-20"></span></a>
   </div>
 </div>
-{{ $img := printf "images/people/%s" .image }}
-<div class="avatar avatra-lg position-absolute left--5 top--14" style="background-image: url({{$img}});">
+{{ $img := printf "images/people/JPEG/%s" .image }}
+<div class="avatar avatar-lg position-absolute left--5 top--14" style="background-image: url({{$.Site.BaseURL}}/{{$img}});">
 </div>
 
 </div>
