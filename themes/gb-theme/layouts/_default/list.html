@@ -54,7 +54,7 @@
         </header>
         {{ if eq $key "file-storage-and-transfer"}}
         <div class="d-flex px-2 py-6 justify-content-between flex-wrap">
-          <h3>Several services at Brown allow you to share and store files. <a href="{{.Site.BaseURL}}services/infrastructure/storage/">See a comparison table with the options <span class="fas fa-table"></span></a> and decide which ones are right for you.</h3>
+          <h3>{{ markdownify .Site.Data.file_storage.lead }}</h3>
         </div>
         {{ end }}
         <article class="d-flex py-6 justify-content-between flex-wrap">

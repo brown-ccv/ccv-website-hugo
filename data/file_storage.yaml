@@ -1,0 +1,1 @@
+lead: 'Several services at Brown allow you to share and store files. <a href="{{.Site.BaseURL}}services/infrastructure/storage/">See a comparison table with the options <span class="fas fa-table"></span></a> and decide which ones are right for you.'
