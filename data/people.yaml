@@ -122,7 +122,7 @@
     at Brown.  His research areas are seismology and planetary geology.  He enjoys
     watching TV on a laptop with his fiancée, being outdoors, representing District
     Five in the state Senate, and being viciously attacked by his cat."
-  image: sam_main.jpg
+  image: bell_main.jpg
 
 - name: Andrew Leith
   team: Advanced Research Computing
@@ -207,3 +207,27 @@
   brown_directory_uuid: d797cce1-aae5-515f-1de6-25571fc91b93
   bio: ''
   image: ben_main.jpg
+
+- name: Paulo S Baptista
+  team: CCV Operations
+  title: Senior Research Systems Administrator
+  github_username: ''
+  brown_directory_uuid: 6e74d82d-bce5-0512-4ba0-f91ff313675a
+  bio: ''
+  image: paulo_main.jpg
+
+- name: David D Johnson
+  team: CCV Operations
+  title: Senior HPC Systems Engineer
+  github_username: ''
+  brown_directory_uuid: c14eb6ba-4b51-aabd-bf11-ef4071826060
+  bio: ''
+  image: dave_main.jpg
+
+- name: Sam Fulcomer
+  team: CCV Operations
+  title: Associate Director
+  github_username: ''
+  brown_directory_uuid: 0d83d4b5-85a5-62fc-44a3-81eaff49e183
+  bio: ''
+  image: fulcomer_main.jpg
