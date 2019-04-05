@@ -4,6 +4,12 @@ auto_deploy: false
 admin_path: 
 webhook_url: 
 sections:
+- type: directory
+  path: data
+  label: data
+  create: all
+  match: "**/*"
+  exclude: events.json
 - type: document
   path: config.yml
   label: Site Configuration
