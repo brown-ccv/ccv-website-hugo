@@ -22,18 +22,14 @@
 <div class="container-fluid overlay-top justify-content-center d-flex">
   <div class="col-lg-6 col-md-10 col-sm-12">
     <ul class="nav nav-toc-page flex-column boxed">
-        {{ range where $.Site.Pages "Section" "documentation" }}
-        {{ if eq .Params.level "Main" }}
+        {{ range .Site.Data.documentation }}
         <li class="mx-1 nav-item bg-white my-1">
-            <a class="nav-link" href="{{ .Permalink }}">
-                {{ if .Params.icon }}
-                {{ readFile (printf "/themes/gb-theme/static/images/%s" .Params.icon ) | safeHTML }}
-                {{ end }}
-                <span class="text-dark fs-20">{{ .Title }}</span>
-                <span class="badge badge-red">{{ .Params.version }}</span>
+            <a class="nav-link" href="https://docs.ccv.brown.edu/{{urlize .name}}">
+                {{ readFile "/themes/gb-theme/static/images/gitbook.svg" | safeHTML }}
+                <span class="text-dark fs-20">{{ .name }}</span>
+                <span class="badge badge-red">{{ .version }}</span>
             </a>
         </li>
-        {{ end }}
         {{ end }}
     </ul>
   </div>

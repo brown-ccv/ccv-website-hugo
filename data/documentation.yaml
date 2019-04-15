@@ -1,0 +1,4 @@
+- name: JupyterHub
+  version: beta
+- name: Oscar
+- name: Stronghold
