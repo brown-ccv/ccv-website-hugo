@@ -1,6 +1,7 @@
 ---
 title: Data Science, Computing, and Visualization Workshops
-date: 2019-04-12 14:49:27 +0000
+date: 2019-04-16T09:31:34-04:00
+draft: false
 types:
 - events
 tags:
@@ -8,13 +9,8 @@ tags:
 - machine learning
 authors:
 - Thomas Serre
-event:
-  date: Thursdays
-  time: 12pm
-  location: Carney Institute Innovation Hub, 164 Angel St, 4th Floor
-  google: https://calendar.google.com/event?action=TEMPLATE&tmeid=MTZ2bGljNThhcGNqZWY5aGdqZmxtMTRxM3BfMjAxOTAyMjhUMTcwMDAwWiBicm93bi5lZHVfMGM4bnBtb2x0ZnY0NHRuMHY0ZGdhYWh0NDhAZw&tmsrc=brown.edu_0c8npmoltfv44tn0v4dgaaht48%40group.calendar.google.com&scp=ALL
-
 ---
+
 {{% lead %}}
 DSCoV: Data Science, Computing, and Visualization Workshops
 Want to become a Kaggle Master, start a tech company, or succeed in research? Ready to get your hands dirty and learn the data science and programming skills needed to solve real-world data science problems?
@@ -27,7 +23,7 @@ Want to become a Kaggle Master, start a tech company, or succeed in research? Re
 
 ### Upcoming Workshops
 
-**April 18:** Basics of Data Visualization with Vega.
+**April 18:** Basics of Data Visualization and Exploration with Vega.
 
 ### Previous and future topics
 
