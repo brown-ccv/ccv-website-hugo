@@ -1,5 +1,6 @@
 - name: Fernando Gelin
   team: Advanced Research Computing
+  subteam: "Isabel's Group"
   title: Research Software Engineer
   github_username: fernandogelin
   brown_directory_uuid: 8144f0fb-0d36-47ed-ae64-ab07c232ebba
@@ -11,6 +12,7 @@
 
 - name: Mary McGrath
   team: Advanced Research Computing
+  subteam: "Isabel's Group"
   title: Data Scientist
   github_username: mcmcgrath13
   brown_directory_uuid: fa814738-23c5-42b9-a63c-1ea789f3d1eb
@@ -20,7 +22,8 @@
   image: mary_main.jpg
 
 - name: Paul Stey
-  team: Advanced Research Computing
+  team: Leadership
+  subteam: all
   title: Director of Scientific Computing and Data Science
   github_username: paulstey
   brown_directory_uuid: 0525f19f-d156-4c47-a2e1-8b4e904a2e84
@@ -32,6 +35,7 @@
 - name: Joselynn Wallace
   team: Advanced Research Computing
   title: Genomics Data Scientist
+  subteam: Computational Biology Core
   github_username: jrwallace
   brown_directory_uuid: 1eb864be-02d2-4880-a43f-62076e2d7366
   bio: "Joselynn is a genomics data scientist. Before coming to Brown, she got her
@@ -41,6 +45,7 @@
 
 - name: Helen Kershaw
   team: Advanced Research Computing
+  subteam: High-Performance Computing
   title: Lead Research Software Engineer
   github_username: hkershaw-brown
   brown_directory_uuid: 7dd767e6-6eec-4394-ab48-c89ab40ca69a
@@ -48,8 +53,9 @@
     HPC"
   image: helen_main.jpg
 
-- name: Maria Isabel Restrepo
+- name: Isabel Restrepo
   team: Advanced Research Computing
+  subteam: "Isabel's Group"
   title: Lead Data Scientist
   github_username: mirestrepo
   brown_directory_uuid: cb8b0a49-ef4b-66e7-5ccc-6689493e8ace
@@ -61,6 +67,7 @@
 
 - name: August Guang
   team: Advanced Research Computing
+  subteam: Computational Biology Core
   title: Genomics Data Scientist
   github_username: aguang
   brown_directory_uuid: b3f2991e-b618-190f-881f-25fc21f82d02
@@ -73,6 +80,7 @@
 
 - name: Khemraj Shukla
   team: Advanced Research Computing
+  subteam: High-Performance Computing
   title: Research Software Engineer
   github_username: rajexplo
   brown_directory_uuid: efc4e7f2-8d48-48e4-999d-9538b7a3f27d
@@ -82,6 +90,7 @@
 
 - name: Andras Zsom
   team: Advanced Research Computing
+  subteam: Institutional Data
   title: Lead Data Scientist
   github_username: azsom
   brown_directory_uuid: 84734442-fa19-4e15-8b06-9f71351e9104
@@ -92,6 +101,7 @@
 
 - name: Maximilian King
   team: Advanced Research Computing
+  subteam: High-Performance Computing
   title: Senior Research Software Engineer
   github_username: maximilianking
   brown_directory_uuid: d075e4ac-07b1-cf3d-a632-16f0c2510a7f
@@ -103,6 +113,7 @@
 
 - name: Ashley S. Lee
   team: Advanced Research Computing
+  subteam: Institutional Data
   title: Data Scientist
   github_username: alee35
   brown_directory_uuid: 380094e2-6f9d-47cf-91ce-e636876a58cf
@@ -114,6 +125,7 @@
 
 - name: Sam Bell
   team: Advanced Research Computing
+  subteam: Institutional Data
   title: Data Scientist
   github_username: samwbell
   brown_directory_uuid: 30ee22e9-98c2-2d4c-997c-fd52036b8b9a
@@ -125,6 +137,7 @@
 
 - name: Andrew Leith
   team: Advanced Research Computing
+  subteam: Computational Biology Core
   title: Genomics Data Scientist
   github_username: andrew-leith
   brown_directory_uuid: d0bcfa61-086d-fac1-0cad-dd7f7fd58a5e
@@ -134,7 +147,7 @@
   image: andrew_main.jpg
 
 - name: Thomas Serre
-  team: Center for Computation and Visualization
+  team: Leadership
   title: Faculty Director
   github_username: tserre
   brown_directory_uuid: 9517d64b-6924-1c56-1f7e-2452b2304030
@@ -146,6 +159,7 @@
 
 - name: Paul Hall
   team: Advanced Research Computing
+  subteam: High-Performance Computing
   title: Research Software Engineer
   github_username: phall-brown
   brown_directory_uuid: da1c3aed-d801-56a8-0536-0701f6c5c830
@@ -155,6 +169,7 @@
 
 - name: Ashok Ragavendran
   team: Advanced Research Computing
+  subteam: Computational Biology Core
   title: Lead Data Scientist
   github_username: ashokrags
   brown_directory_uuid: 60802d0b-8f18-499a-a1f3-5f9b24c390e4
@@ -168,7 +183,7 @@
   image: ashok_main.jpg
 
 - name: Mete Tunca
-  team: CCV Operations
+  team: Leadership
   title: Assistant Director of Cloud and Research Computing
   github_username: ''
   brown_directory_uuid: d0e7b3b6-f6b4-f28b-3bfd-08bccf05ac31
@@ -184,7 +199,7 @@
   image: john_main.jpg
 
 - name: Linnea Wolfe
-  team: CCV Operations
+  team: Leadership
   title: Director of Operations
   github_username: ''
   brown_directory_uuid: 3ddfe2bd-672a-0f09-03bc-cbb37339a434
@@ -193,6 +208,7 @@
 
 - name: Camilo Diaz
   team: Advanced Research Computing
+  subteam: "Isabel's Group"
   title: Graphics System Programmer
   github_username: kmilo9999
   brown_directory_uuid: 448fac67-1dea-42ef-8205-9305ac9b79a6
@@ -201,6 +217,7 @@
 
 - name: Benjamin Knorlein
   team: Advanced Research Computing
+  subteam: "Isabel's Group"
   title: Research Software Engineer
   github_username: BenKnorlein
   brown_directory_uuid: d797cce1-aae5-515f-1de6-25571fc91b93
@@ -224,7 +241,7 @@
   image: dave_main.jpg
 
 - name: Sam Fulcomer
-  team: CCV Operations
+  team: Leadership
   title: Associate Director
   github_username: ''
   brown_directory_uuid: 0d83d4b5-85a5-62fc-44a3-81eaff49e183

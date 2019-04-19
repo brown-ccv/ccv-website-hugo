@@ -93,15 +93,14 @@ section, footer {
   background-position: 30%;
   align-items: flex-end;
   justify-content: flex-end;
+  padding: 0;
+  border: 2px solid white;
 }
 .people-card-body {
-  background-color: rgba(255,255,255,.6);
+  background-color: rgb(255,255,255);
   width: 100%;
-  margin-right: -1rem;
-  padding-right: 0.5rem;
-  padding-left: 1rem;
+  padding: 0.5rem;
 }
-
 
 .text-small {
   font-size: 0.9rem !important;
