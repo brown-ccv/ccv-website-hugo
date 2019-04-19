@@ -1,6 +1,7 @@
 - name: Fernando Gelin
+  weight: 4
   team: Advanced Research Computing
-  subteam: "Isabel's Group"
+  subteam: "TBD"
   title: Research Software Engineer
   github_username: fernandogelin
   brown_directory_uuid: 8144f0fb-0d36-47ed-ae64-ab07c232ebba
@@ -11,8 +12,9 @@
   image: fernando_main.jpg
 
 - name: Mary McGrath
+  weight: 5
   team: Advanced Research Computing
-  subteam: "Isabel's Group"
+  subteam: "TBD"
   title: Data Scientist
   github_username: mcmcgrath13
   brown_directory_uuid: fa814738-23c5-42b9-a63c-1ea789f3d1eb
@@ -23,7 +25,6 @@
 
 - name: Paul Stey
   team: Leadership
-  subteam: all
   title: Director of Scientific Computing and Data Science
   github_username: paulstey
   brown_directory_uuid: 0525f19f-d156-4c47-a2e1-8b4e904a2e84
@@ -33,6 +34,7 @@
   image: stey_main.jpg
 
 - name: Joselynn Wallace
+  weight: 9
   team: Advanced Research Computing
   title: Genomics Data Scientist
   subteam: Computational Biology Core
@@ -44,6 +46,7 @@
   image: joselynn_main.jpg
 
 - name: Helen Kershaw
+  weight: 10
   team: Advanced Research Computing
   subteam: High-Performance Computing
   title: Lead Research Software Engineer
@@ -54,8 +57,9 @@
   image: helen_main.jpg
 
 - name: Isabel Restrepo
+  weight: 1
   team: Advanced Research Computing
-  subteam: "Isabel's Group"
+  subteam: "TBD"
   title: Lead Data Scientist
   github_username: mirestrepo
   brown_directory_uuid: cb8b0a49-ef4b-66e7-5ccc-6689493e8ace
@@ -66,6 +70,7 @@
   image: isabel_main.jpg
 
 - name: August Guang
+  weight: 8
   team: Advanced Research Computing
   subteam: Computational Biology Core
   title: Genomics Data Scientist
@@ -79,6 +84,7 @@
   image: august_main.jpg
 
 - name: Khemraj Shukla
+  weight: 11
   team: Advanced Research Computing
   subteam: High-Performance Computing
   title: Research Software Engineer
@@ -89,6 +95,7 @@
   image: raj_main.jpg
 
 - name: Andras Zsom
+  weight: 14
   team: Advanced Research Computing
   subteam: Institutional Data
   title: Lead Data Scientist
@@ -100,6 +107,7 @@
   image: andras_main.jpg
 
 - name: Maximilian King
+  weight: 12
   team: Advanced Research Computing
   subteam: High-Performance Computing
   title: Senior Research Software Engineer
@@ -112,6 +120,7 @@
   image: max_main.jpg
 
 - name: Ashley S. Lee
+  weight: 15
   team: Advanced Research Computing
   subteam: Institutional Data
   title: Data Scientist
@@ -124,6 +133,7 @@
   image: ashley_main.jpg
 
 - name: Sam Bell
+  weight: 16
   team: Advanced Research Computing
   subteam: Institutional Data
   title: Data Scientist
@@ -136,6 +146,7 @@
   image: bell_main.jpg
 
 - name: Andrew Leith
+  weight: 7
   team: Advanced Research Computing
   subteam: Computational Biology Core
   title: Genomics Data Scientist
@@ -158,6 +169,7 @@
   image: thomas_main.jpg
 
 - name: Paul Hall
+  weight: 13
   team: Advanced Research Computing
   subteam: High-Performance Computing
   title: Research Software Engineer
@@ -168,6 +180,7 @@
   image: hall_main.jpg
 
 - name: Ashok Ragavendran
+  weight: 6
   team: Advanced Research Computing
   subteam: Computational Biology Core
   title: Lead Data Scientist
@@ -207,8 +220,9 @@
   image: linnea_main.jpg
 
 - name: Camilo Diaz
+  weight: 3
   team: Advanced Research Computing
-  subteam: "Isabel's Group"
+  subteam: "TBD"
   title: Graphics System Programmer
   github_username: kmilo9999
   brown_directory_uuid: 448fac67-1dea-42ef-8205-9305ac9b79a6
@@ -216,8 +230,9 @@
   image: camilo_main.jpg
 
 - name: Benjamin Knorlein
+  weight: 2
   team: Advanced Research Computing
-  subteam: "Isabel's Group"
+  subteam: "TBD"
   title: Research Software Engineer
   github_username: BenKnorlein
   brown_directory_uuid: d797cce1-aae5-515f-1de6-25571fc91b93
