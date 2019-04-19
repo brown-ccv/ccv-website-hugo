@@ -97,7 +97,7 @@
 
           <h4 class="pt-2 text-gray">Advanced Research Computing</h4>
           <article class="container-fluid row py-1">
-            {{ range sort .Site.Data.people "name"}}
+            {{ range sort .Site.Data.people "subteam"}}
             {{ if eq .team "Advanced Research Computing"}}
             <div class="people-card photo-main col-xl-3 col-md-4 col-sm-6 col-xs-12"
                  style="background-image:url('{{$.Site.BaseURL}}/images/people/JPEG/{{.image}}')">
