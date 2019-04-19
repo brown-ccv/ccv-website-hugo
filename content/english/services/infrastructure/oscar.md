@@ -18,12 +18,12 @@ The high-performance computing (HPC) resources at CCV equip the Brown research c
  Oscar Technical Specifications    |   
  ---------------  |  ------
    Compute Notes    |  472
-   GPU Nodes      |  35
+   GPU Nodes      |  19
    Login Nodes    |  2
-   Large-Memory Nodes (>512 GB) | 6
+   Large-Memory Nodes (>512 GB) | 2
    Total CPU Cores | 9612
-   Total GPUs | 194
-   Total Storage (GPFS Filesystem) | >1 PB
+   Total GPUs | 66
+   Total Storage (GPFS Filesystem) | 1.7 PB
    OS | RedHat EL 7.3 (Linux)
    Job Scheduler | Slurm Workload Manager
  {{% /table %}}
