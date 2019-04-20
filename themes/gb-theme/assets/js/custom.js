@@ -102,8 +102,8 @@ $(function () {
             // The element is visible, do something
             $('#floating-group').removeClass('hidden-start');
             $('#discourse-box').addClass('discourse-visible');
-            $('.discourse-trigger > span').removeClass('fa-caret-left')
-            $('.discourse-trigger > span').addClass('fa-caret-right')
+            $('.discourse-trigger > span').removeClass('fa-caret-left');
+            $('.discourse-trigger > span').addClass('fa-caret-right');
         } else {
             // The element is NOT visible, do something else
         }

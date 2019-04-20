@@ -20,11 +20,14 @@
 
 {{ partial "blocks/hero" . }}
 {{ partial "blocks/quick_links" . }}
+{{ if .Site.Data.whatsnew.display }}
+{{ partial "blocks/whatsnew" . }}
+{{ end }}
 {{ partial "blocks/events" . }}
 <!-- {{ partial "blocks/news" .}} -->
+{{ partial "blocks/discourse" . }}
 {{ partial "blocks/showcase" . }}
 {{ partial "blocks/alerts" . }}
-{{ partial "blocks/discourse" . }}
 
 
 </body>

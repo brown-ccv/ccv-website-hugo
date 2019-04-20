@@ -42,4 +42,5 @@ A large collection of software is available on Oscar, and CCV staff can help acq
 * Blender
 * Paraview
 
-{{< account_form >}}
+{{< button text="Request an Account" href="https://web1.ccv.brown.edu/secure/account" >}}
+<!-- {{< account_form >}} -->

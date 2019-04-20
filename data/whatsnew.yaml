@@ -1,0 +1,15 @@
+title: What's New
+display: true
+items:
+  - title: This is New
+    text: 
+    link:
+    image:
+  - title: This is also New
+    text:
+    link:
+    image:
+  - title: This is not new, but it's so cool!
+    text:
+    link:
+    image:
