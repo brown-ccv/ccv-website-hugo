@@ -1,4 +1,4 @@
-<section id="whatsnew" class="bg-light showcase">
+<section id="whatsnew" class="bg-beige">
   <section>
 
   <div class="container">
@@ -9,12 +9,27 @@
           <span class="btn-green btn-ico btn-lg btn-rounded mx-3">
             <i class="text-light fas fa-kiwi-bird"></i>
           </span>
-          <h1 class="h1-home py-8">{{ .Site.Data.whatsnew.title | markdownify }}</h1>
+          <h1 class="h1-home py-8 text-gray">{{ .Site.Data.whatsnew.title | markdownify }}</h1>
         </header>
 
       </div>
-      <article>
-        
+      <article id="new-card">
+        {{ range .Site.Data.whatsnew.items }}
+
+        <div class="card stacked">
+          <div class="card-body">
+            <div class="row align-items-center">
+              <div class="col">
+                <h3 class="font-weight-normal mb-2">{{ .title }}</h3>
+                <hr class="bg-yellow">
+                <p>{{ .text }}</p>
+                <a href="" class="action mt-1 text-blue">More</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        {{ end }}
       </article>
     </div>
   </div>

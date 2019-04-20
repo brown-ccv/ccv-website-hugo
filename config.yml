@@ -63,7 +63,7 @@ params:
     #   fa: fab fa-github
     feedback:
       text: Help us improve!
-      link:
+      link: https://docs.google.com/forms/d/e/1FAIpQLSdT00ZSXQh8vKbAMvc1xUoBfGtf2SU8bw5T3tIchKf03TgfbA/viewform?usp=sf_link
       fa: fas fa-star-half-alt
 
 # i18n

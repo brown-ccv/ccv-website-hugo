@@ -143,3 +143,22 @@ section, footer {
 .fa-x {
   color: $green;
 }
+
+// What's new
+#new-card {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  .card {
+    flex-basis: 48%;
+    margin-bottom: 2rem;
+  }
+}
+@media (max-width: 800px) {
+  #new-card {
+    .card {
+      flex-basis: 96%;
+    }
+  }
+}
