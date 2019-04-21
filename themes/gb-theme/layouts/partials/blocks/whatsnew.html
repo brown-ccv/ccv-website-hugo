@@ -18,14 +18,16 @@
 
         <div class="card stacked">
           <div class="card-body">
-            <div class="row align-items-center">
-              <div class="col">
                 <h3 class="font-weight-normal mb-2">{{ .title }}</h3>
                 <hr class="bg-yellow">
-                <p>{{ .text }}</p>
-                <a href="" class="action mt-1 text-blue">More</a>
-              </div>
+            <div class="d-flex align-items-center">
+                <span class="{{.image.name}} fa-4x px-3 text-yellow"></span>
+                <p>
+                  {{ .text }}
+                  <a href="{{ .link }}" class="action mt-1 text-blue">More</a>
+                </p>
             </div>
+
           </div>
 
         </div>

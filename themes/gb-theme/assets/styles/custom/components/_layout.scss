@@ -149,7 +149,7 @@ section, footer {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
   .card {
     flex-basis: 48%;
     margin-bottom: 2rem;
