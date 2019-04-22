@@ -1,5 +1,5 @@
 - name: Fernando Gelin
-  weight: 4
+  weight: 8
   team: Advanced Research Computing
   subteam: "Data & Visualization"
   title: Research Software Engineer
@@ -12,7 +12,7 @@
   image: fernando_main.jpg
 
 - name: Mary McGrath
-  weight: 5
+  weight: 9
   team: Advanced Research Computing
   subteam: "Data & Visualization"
   title: Data Scientist
@@ -34,7 +34,7 @@
   image: stey_main.jpg
 
 - name: Joselynn Wallace
-  weight: 9
+  weight: 4
   team: Advanced Research Computing
   title: Genomics Data Scientist
   subteam: Computational Biology Core
@@ -57,7 +57,7 @@
   image: helen_main.jpg
 
 - name: Isabel Restrepo
-  weight: 1
+  weight: 5
   team: Advanced Research Computing
   subteam: "Data & Visualization"
   title: Lead Data Scientist
@@ -70,7 +70,7 @@
   image: isabel_main.jpg
 
 - name: August Guang
-  weight: 8
+  weight: 3
   team: Advanced Research Computing
   subteam: Computational Biology Core
   title: Genomics Data Scientist
@@ -146,7 +146,7 @@
   image: bell_main.jpg
 
 - name: Andrew Leith
-  weight: 7
+  weight: 2
   team: Advanced Research Computing
   subteam: Computational Biology Core
   title: Genomics Data Scientist
@@ -180,7 +180,7 @@
   image: hall_main.jpg
 
 - name: Ashok Ragavendran
-  weight: 6
+  weight: 1
   team: Advanced Research Computing
   subteam: Computational Biology Core
   title: Lead Data Scientist
@@ -220,7 +220,7 @@
   image: linnea_main.jpg
 
 - name: Camilo Diaz
-  weight: 3
+  weight: 7
   team: Advanced Research Computing
   subteam: "Data & Visualization"
   title: Graphics System Programmer
@@ -230,7 +230,7 @@
   image: camilo_main.jpg
 
 - name: Benjamin Knorlein
-  weight: 2
+  weight: 6
   team: Advanced Research Computing
   subteam: "Data & Visualization"
   title: Research Software Engineer
