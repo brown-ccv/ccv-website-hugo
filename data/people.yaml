@@ -262,3 +262,10 @@
   brown_directory_uuid: 0d83d4b5-85a5-62fc-44a3-81eaff49e183
   bio: ''
   image: fulcomer_main.jpg
+
+- name: Geoffrey Avila
+  team: CCV Operations
+  title: Senior HPC Systems Engineer
+  github_username: ''
+  brown_directory_uuid: f904bb23-202f-48fb-bf93-7b7d326c7043
+  image: avila_main.jpg
