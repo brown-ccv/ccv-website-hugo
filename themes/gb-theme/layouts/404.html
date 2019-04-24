@@ -1,5 +1,10 @@
 {{ define "content"}}
-<div class="bg-red vh-90">
-<h1 class="fs-100 text-beige">404</h1>
+<div id="_404" class="bg-red">
+    <iframe src="https://giphy.com/embed/1irfi6MmcGGc751W16" width="320" height="700" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/reaction-mood-1irfi6MmcGGc751W16"></a></p>
+    <div class="pl-10">
+    <h1 class="fs-50 text-beige pt-6">404</h1>
+    <h1 class="fs-50 text-beige">There's nothing here! &#128528;</h1>
+    {{ readFile "/themes/gb-theme/static/images/isometric-ccv.svg" | safeHTML }}
+    </div>
 </div>
 {{ end }}
