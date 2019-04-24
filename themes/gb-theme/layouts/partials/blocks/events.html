@@ -53,7 +53,7 @@
                 <p class="fs-14"><span class="fas fa-map-marker-alt"></span>&nbsp;{{ . }}</p>
                 {{ end }}
                 {{ with .description }}
-                <p class="fs-14"><span class="fs-14 fas fa-chalkboard-teacher"></span>&nbsp;{{ . }}</p>
+                <p class="fs-14"><span class="fs-14 fas fa-chalkboard-teacher"></span>&nbsp;{{ markdownify . }}</p>
                 {{ end }}
                 <div class="type-example">
                   <h3>{{ .summary }}</h3>
