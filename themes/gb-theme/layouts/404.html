@@ -1,10 +1,9 @@
 {{ define "content"}}
-<div id="_404" class="bg-red vh-90">
+<div id="_404" class="bg-light vh-90">
     <iframe src="https://giphy.com/embed/1irfi6MmcGGc751W16" width="320" height="700" frameBorder="0" allowFullScreen></iframe>
-    <div class="pl-10">
-    <h1 class="fs-50 text-beige pt-6">404</h1>
-    <h1 class="fs-50 text-beige">There's nothing here! &#128528;</h1>
-    {{ readFile "/themes/gb-theme/static/images/isometric-ccv.svg" | safeHTML }}
+    <div class="pl-10 d-flex flex-column justify-content-center">
+        <h1 class="fs-50 text-dark">There's nothing here...  &#128528;</h1>
+        <p class="fs-30 text-beige"><a href="{{.Site.BaseURL}}">Go home!</a></p>
     </div>
 </div>
 {{ end }}
