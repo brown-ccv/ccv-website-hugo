@@ -1,5 +1,5 @@
 ---
-title: Stronghold
+title: Data Risk Level 3 Computing (Stronghold)
 date: 2019-01-22 18:29:31 +0000
 category: Computing
 icon: server2
