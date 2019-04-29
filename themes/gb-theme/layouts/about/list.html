@@ -118,7 +118,17 @@
             {{ end }}
             {{ end }}
         </article>
+        <!-- Diversity -->
+        <header id="diversity" class="d-flex align-items-center pt-6">
+          <span class="btn-cyan btn-ico btn-lg btn-rounded"><i class="fas fa-people-carry"></i></span>
+          <h1 class="mx-4 text-secondary">Diversity Statement</h1>
+          <hr class="bg-dark w-40"/>
+        </header>
 
+
+        <article id="diversity-content" class="py-4">
+          <p class="p-medium">{{ .Params.mission.diversity | markdownify }}</p>
+        </article>
 
 
         <!-- Opportunities -->
