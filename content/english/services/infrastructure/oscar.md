@@ -1,5 +1,5 @@
 ---
-title: High-Performance Computing (HPC)
+title: High-Performance Computing (Oscar)
 date: 2019-01-22 18:29:23 +0000
 category: Computing
 icon: server2
@@ -42,5 +42,4 @@ A large collection of software is available on Oscar, and CCV staff can help acq
 * Blender
 * Paraview
 
-{{< button text="Request an Account" href="https://web1.ccv.brown.edu/secure/account" >}}
-<!-- {{< account_form >}} -->
+{{< account_form >}}
