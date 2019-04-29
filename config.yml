@@ -53,10 +53,10 @@ params:
       text: Submit a ticket
       link: mailto:support@ccv.brown.edu
       fa: fas fa-ticket-alt
-    discourse:
-      text: Join the discussion!
-      link: https://discuss.ccv.brown.edu
-      fa: fab fa-discourse
+    # discourse:
+    #   text: Join the discussion!
+    #   link: https://discuss.ccv.brown.edu
+    #   fa: fab fa-discourse
     # github:
     #   text: Github issues
     #   link: https://github.com/brown-ccv/ccv-issues
