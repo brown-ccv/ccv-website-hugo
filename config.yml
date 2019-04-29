@@ -1,4 +1,4 @@
-baseURL: https://datasci.brown.edu/ccv-dev #http://ccv-website-dev.s3-website-us-east-1.amazonaws.com
+baseURL: https://datasci.brown.edu/ #https://datasci.brown.edu #http://ccv-website-dev.s3-website-us-east-1.amazonaws.com
 languageCode: en-us
 title: Brown Center for Computation and Visualization
 theme: gb-theme
@@ -14,7 +14,7 @@ outputs:
 enableRobotsTXT: true
 DefaultContentLanguage: en
 canonifyURLs: true
-relativeURLs: false
+relativeURLs: true
 
 pygmentsCodefences: true
 
@@ -80,8 +80,6 @@ languages:
     languageName: Chinese (Simplified)
     weight: 3
     contentDir: content/chinese
-
-
 
 
 # Taxonomies

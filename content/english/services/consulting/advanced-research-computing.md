@@ -32,7 +32,7 @@ We also have long-running collaborations with researchers in Neuroscience, Socio
 ##### Outreach
 
 In addition to directly working with researchers, our group also works to to advance best practices in software engineering and promote robust and reproducible research across the university. To that end, we frequently hold workshops that aim to disseminate the current state-of-the-art tools and best practices for data analysis that is both sound and reproducible.
-{{% button text="Check our upcoming events here" href="https://datasci.brown.edu/ccv-dev/#section-3"%}}
+{{% button text="Check our upcoming events here" href="https://datasci.brown.edu/#section-3"%}}
 
 
 -------

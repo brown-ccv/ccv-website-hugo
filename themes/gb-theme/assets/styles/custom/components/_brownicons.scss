@@ -9,16 +9,6 @@
   url("/fonts/brown-icons.svg#brown-icons") format("svg");
   font-weight: normal;
   font-style: normal; }
-  
-@font-face {
-  font-family: "brown-icons";
-  src: url("/ccv-dev/fonts/brown-icons.eot");
-  src: url("/ccv-dev/fonts/brown-icons.eot?#iefix") format("embedded-opentype"),
-  url("/ccv-dev/fonts/brown-icons.woff") format("woff"),
-  url("/ccv-dev/fonts/brown-icons.ttf") format("truetype"),
-  url("/ccv-dev/fonts/brown-icons.svg#brown-icons") format("svg");
-  font-weight: normal;
-  font-style: normal; }
 
 [data-icon]::before {
   font-family: "brown-icons" !important;
