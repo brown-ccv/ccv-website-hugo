@@ -14,7 +14,7 @@ outputs:
 enableRobotsTXT: true
 DefaultContentLanguage: en
 canonifyURLs: true
-relativeURLs: false
+relativeURLs: true
 
 pygmentsCodefences: true
 
