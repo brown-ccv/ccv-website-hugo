@@ -13,8 +13,6 @@ outputs:
 
 enableRobotsTXT: true
 DefaultContentLanguage: en
-canonifyURLs: true
-relativeURLs: true
 
 pygmentsCodefences: true
 
@@ -80,8 +78,6 @@ languages:
     languageName: Chinese (Simplified)
     weight: 3
     contentDir: content/chinese
-
-
 
 
 # Taxonomies
