@@ -29,7 +29,7 @@ Our data scientists and research software engineers can work with researchers on
 We also have long-running collaborations with researchers in Neuroscience, Sociology, Engineering, Epidemiology, and the Department of Earth, Environment, and Planetary Sciences.
 
 ------
-## Our teams
+## Our Teams
 {{< flexrow >}}
 {{< tile name="Computational Biology Core" lead="Ashok Ragavendran" color="blue">}}
 The COBRE-CBHD Computational Biology Core (CBC) integrates across multiple research focused Centers supporting data-intensive research using high-throughput DNA/RNA sequencing datasets. CBC provides help for experimental design and data processing pipelines for high-throughput datasets generated in individual projects, particularly for DNA/RNA sequencing data.
