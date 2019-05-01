@@ -22,7 +22,7 @@ mission:
     software engineers with a huge variety of scientific backgrounds (e.g., Engineering,
     Physics, Computer Vision, Biology, Psychology, Statistics, Applied Math, Computer
     Science, etc.), so we can closely calibrate a person with a project.</p>'
-  diversity: '<p>CCV embraces a community enriched and enhanced by diverse dimensions, including race, ethnicity and national origins, people with disabilities, gender and gender identity, sexuality, class and religion.  We believe diversity brings innovation and progress. We are especially committed to increasing the representation of those populations that have been historically underrepresented in STEM.</p>
+  diversity: '<p>CCV embraces a community enriched and enhanced by diverse dimensions, including race, ethnicity and national origins, disability status, gender and gender identity, sexuality, class and religion.  We believe diversity brings innovation and progress. We are especially committed to increasing the representation of those populations that have been historically underrepresented in STEM.</p>
       <p>We are committed to attracting, recruiting and retaining a diverse team. We especially encourage individuals from underrepresented groups to join our community.</p>'
 people:
   lead: CCV team is awesome!
