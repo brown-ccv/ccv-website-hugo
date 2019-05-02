@@ -1,4 +1,4 @@
-baseURL: http://pccvwebcit2.services.brown.edu/ #http://ccv-website-dev.s3-website-us-east-1.amazonaws.com
+baseURL: https://pccvwebcit2.services.brown.edu/ #http://ccv-website-dev.s3-website-us-east-1.amazonaws.com
 languageCode: en-us
 title: Brown Center for Computation and Visualization
 theme: gb-theme
