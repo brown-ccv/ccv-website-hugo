@@ -38,6 +38,7 @@
         {{ $events := getJSON "https://datasci.brown.edu/gcal-api/" }}
         {{ range (sort $events.events ".start.dateTime" "asc") }}
         {{ if ne .visibility "private" }}
+        {{ if ne .id "4ms1nkdapkkr7h2osu6mkb3ih6_R20190508T173000"}}
         <div class="py-2">
           <div class="type boxed mr-2 bg-light text-dark">
             <div  class="d-flex flex-column">
@@ -62,6 +63,7 @@
             </div>
           </div>
       </div>
+      {{ end }}
       {{ end }}
       {{ end }}
 
