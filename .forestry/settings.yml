@@ -4,6 +4,12 @@ auto_deploy: false
 admin_path: 
 webhook_url: 
 sections:
+- type: directory
+  path: ''
+  label: Data
+  create: all
+  match: data/**/*
+  exclude: events.json
 - type: document
   path: config.yml
   label: Site Configuration
@@ -13,12 +19,6 @@ sections:
   create: all
   match: "**/*"
   exclude: search.md
-- type: directory
-  path: data
-  label: Data
-  create: all
-  match: "**/*"
-  exclude: events.json
 upload_dir: static/images
 public_path: "/images"
 front_matter_path: ''
