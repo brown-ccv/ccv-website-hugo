@@ -13,7 +13,11 @@
           <article class="row">
             {{ range .Params.quick_links.cards }}
                 <div class="card-responsive">
+                  {{ if in .href "http"}}
+                  <a href="{{.href}}">
+                  {{ else }}
                   <a href="{{$.Site.BaseURL}}{{.href}}">
+                  {{ end }}
                   <div class="card scale">
                     <div class="card-body text-center">
                       <span class="icon-{{.icon}} h1"></span>
