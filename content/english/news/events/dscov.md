@@ -1,7 +1,6 @@
 ---
 title: Data Science, Computing, and Visualization Workshops
-date: 2019-04-16T09:31:34-04:00
-draft: false
+date: 2019-04-16T13:31:34.000+00:00
 types:
 - events
 tags:
@@ -9,8 +8,8 @@ tags:
 - machine learning
 authors:
 - Thomas Serre
----
 
+---
 {{% lead %}}
 DSCoV: Data Science, Computing, and Visualization Workshops
 Want to become a Kaggle Master, start a tech company, or succeed in research? Ready to get your hands dirty and learn the data science and programming skills needed to solve real-world data science problems?
@@ -23,10 +22,17 @@ Want to become a Kaggle Master, start a tech company, or succeed in research? Re
 
 ### Upcoming Workshops
 
-**April 18:** Basics of Data Visualization and Exploration with Vega.
+**May 9th:** XSEDE - The Extreme Science and Engineering Discovery Environment.
+
+**May 16th:** DeepLabCut Tutorial.
+
+**May 30th:** Solving the Two-Language Problem with Julia.
+
+**June 2nd:** Getting Started with Virtual Reality.
 
 ### Previous and future topics
 
+* Basics of Data Visualization and Exploration with Vega.
 * Nonorthogonal source-separation for guided network discovery
 * Basics of Data Visualization with D3.js
 * Tidying, Transforming, and Visualizing Data in R
