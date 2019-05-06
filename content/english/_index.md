@@ -13,22 +13,22 @@ quick_links:
   - name: Stronghold
     icon: server2
     text: Learn more
-    href: "/services/infrastructure/stronghold/"
+    href: "services/infrastructure/stronghold/"
     weight: 1
   - name: Oscar Account
     icon: desktop
     text: Open an account
-    href: "/services/infrastructure/oscar/"
+    href: "http://pccvwebcit.services.brown.edu/secure/account/"
     weight: 0
   - name: User Manuals
     icon: book-open
     text: See our docs
-    href: "/documentation/"
+    href: "documentation/"
     weight:
   - name: Data Science
     icon: database
     text: Need help with data?
-    href: "/services/consulting/advanced-research-computing/"
+    href: "services/consulting/advanced-research-computing/"
     weight: 4
 
 showcase:
