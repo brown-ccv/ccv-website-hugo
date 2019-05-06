@@ -24,7 +24,7 @@ CCV's research software engineers work with researchers to develop scientific so
 
 We have expertise in `C`, `C++`, `CUDA`, `Fortran`, `JavaScript`, `Julia`, `Matlab`, `OpenCL`, `Python`, `R`, and `SQL`. To achieve best practices in reproducible research, we use state-of-the-art technologies like [Docker](https://docker.com), [Git](https://git-scm.com/) and [GitHub](https://github.com), [Travis CI](https://travis-ci.org), [Conda](https://conda.io), among others.
 
-Our data scientists and research software engineers can work with researchers on a short-term basis or on a more long-term basis—and anywhere in between. We have existing long-term collaborations with several groups on campus, including the [Brown Center for Biomedical Informatics](https://bcbi.brown.edu), the [Computational Biology Core](http://cbc.brown.edu), part of the Brown's COBRE Center for Computational Biology of Human Disease, and several of Brown's administrative offices.
+Our data scientists and research software engineers can work with researchers on a short-term basis or on a more long-term basis—and anywhere in between. We have existing long-term collaborations with several groups on campus, including the [Computational Biology Core](http://cbc.brown.edu), part of the Brown's COBRE Center for Computational Biology of Human Disease, and several of Brown's administrative offices.
 
 We also have long-running collaborations with researchers in Neuroscience, Sociology, Engineering, Epidemiology, and the Department of Earth, Environment, and Planetary Sciences.
 
@@ -60,5 +60,3 @@ In addition to directly working with researchers, our group also works to to adv
 
 
 [Computational Biology Core Tools](https://compbiocore.github.io)
-
-[Brown Center for Biomedical Informatics Tools](https://bcbi.brown.edu)
