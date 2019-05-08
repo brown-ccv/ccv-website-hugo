@@ -20,7 +20,7 @@ We open the YURT to the public on the last Friday of each month at 10 am. Tours 
 
 {{< button text="Reserve a spot" href="https://calendar.google.com/calendar/selfsched?sstoken=UU1GdVFDaDFsOGI0fGRlZmF1bHR8ZjA2OWMxOTg3ODdkYTk5M2JlYThkZjU1YWU0ZDgyNzU" >}}
 
-<br/><br/>
+<br/>
 
 ### Group Tours/Demos
 
