@@ -26,13 +26,8 @@ We open the YURT to the public on the last Friday of each month at 10 am. Tours 
 
 If you would like to request a tour for a special visitor or to explore how to take advantage of the YURT for your research, you may  schedule a tour by completing the request form below. Please take into consideration our **general scheduling guidelines.** Exceptions are only accommodated in special circumstances.
 
-<<<<<<< HEAD
-* Book your visit **at least 8 days prior** to the desired day. This will give us enough time to for appropriate maintenance and getting the theater and data ready for you.
-* The minimum number of people per visit is 3.
-=======
 * Book your visit **at least 8 days prior** to the desired day. This will give us enough time  for appropriate maintenance, and getting the theater and data ready for you.
 * The minimum number of people per visit is 3. 
->>>>>>> e79dd6bbc3d81e8266b6b9b0f37c0691128a3e59
 * A full demo might take between 15 to 25 minutes.The maximum number of people inside the chamber is 8. Groups over that number need to be divided. Multiply the number of groups by the number of minutes per demo. That will provide an estimate of  the time needed for your tour. We ask to request tours that last at most 60 minutes.
 * Be open to reschedule your visit at any time. Many situations out of the CCV staff hands could preclude the good state of the YURT.
 
