@@ -17,8 +17,7 @@ There are other environments that may be great alternatives for your teaching ne
 
 * Colab support Python 2.7 or 3.x as the backend. 
 * JupyterHub can be configured to support [any language]() that has jupyter kernel support.
-* With JupyterHub, you can pre-define the Docker container (and all the software) that is going to be running on the instances
+* With JupyterHub, you can pre-define the Docker container (and all the software) that is going to be running on the instances. Having a Docker container per class is a nice way to ensure reproducibility for students who may want to "take their compute environment with them" at the end of the semester.
 * Colab comes bundled with most Python scientific software libraries, but you will have to re-install all non-standard libraries _every time_ you connect to an instance. 
-* Having a Docker container per class is a nice way to ensure reproducibility for students who may want to "take their compute environment with them" at the end of the semester.
-* Colab runs a notebook interface, JupyterHub can run scripts and also a terminal window.
+* Colab runs a notebook interface, JupyterHub open Jupiter Notebooks, markdown files, PDFs, scripts and a terminal window.
 * Colab integrates nicely with your Google Drive and supports real-time collaboration
