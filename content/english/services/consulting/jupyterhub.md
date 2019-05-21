@@ -16,7 +16,7 @@ JupyterHub provides a convenient way to serve Jupyter Notebooks for multiple use
 There are other environments that may be great alternatives for your teaching needs. [Google Colaboratory](https://colab.research.google.com/) provides a similar Jupyter-based notebook environment that is free to use, and depending on your needs may require not set up at all. It also provides free access to GPU and TPU programming, which can be great for Deep Learning courses. Other new and up-coming platforms such as [https://repl.it](https://repl.it "repl.it") are also great alternatives for teaching and learning programming. To-date JupyterHub provides few benefits over these platforms. We list here few of the differentiating features between Google Colab and JupyterHub to help you decide which choice is right for your course:
 
 * Colab support Python 2.7 or 3.x as the backend. 
-* JupyterHub can be configured to support any language that has a supported kernel.
+* JupyterHub can be configured to support [any language]() that has jupyter kernel support.
 * With JupyterHub, you can pre-define the Docker container (and all the software) that is going to be running on the instances
 * Colab comes bundled with most Python scientific software libraries, but you will have to re-install all non-standard libraries _every time_ you connect to an instance. 
 * Having a Docker container per class is a nice way to ensure reproducibility for students who may want to "take their compute environment with them" at the end of the semester.
