@@ -14,7 +14,11 @@ The blending and warping that create one image from many projectors is proprieta
 
 We welcome projects that take advantage of this unique technology to advance teaching and research at Brown. Please read below our policies and process to schedule a visit
 
-<h3> Regular Open House {{ < badge "Comming Fall 2019">}} </h3>
+<br>
+
+### Regular Open House {{< badge "Coming Fall 2019" "yellow" >}}
+
+
 
 Starting on the Fall of 2019, we will open the YURT to the public on the last Friday of each month at 10 am. Tours will happen if a minimum of three people have signed up for a visit. We can host at most 8 people and the tour will typically last between 30-60 minutes. If you are interested in visiting the YURT please reserve your spot in our calendar.
 
