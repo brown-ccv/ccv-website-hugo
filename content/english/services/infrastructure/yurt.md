@@ -16,7 +16,7 @@ We welcome projects that take advantage of this unique technology to advance tea
 
 ### Regular Open House
 
-We open the YURT to the public on the last Friday of each month at 10 am. Tours will happen if a minimum of three people have signed up for a visit. We can host at most 8 people and the tour will typically last between 30-60 minutes. If you are interested in visiting the YURT please reserve your spot in our calendar.
+Starting on the Fall of 2019, we will open the YURT to the public on the last Friday of each month at 10 am. Tours will happen if a minimum of three people have signed up for a visit. We can host at most 8 people and the tour will typically last between 30-60 minutes. If you are interested in visiting the YURT please reserve your spot in our calendar.
 
 {{< button text="Reserve a spot" href="https://calendar.google.com/calendar/selfsched?sstoken=UU1GdVFDaDFsOGI0fGRlZmF1bHR8ZjA2OWMxOTg3ODdkYTk5M2JlYThkZjU1YWU0ZDgyNzU" >}}
 
@@ -27,7 +27,7 @@ We open the YURT to the public on the last Friday of each month at 10 am. Tours 
 If you would like to request a tour for a special visitor or to explore how to take advantage of the YURT for your research, you may  schedule a tour by completing the request form below. Please take into consideration our **general scheduling guidelines.** Exceptions are only accommodated in special circumstances.
 
 * Book your visit **at least 8 days prior** to the desired day. This will give us enough time  for appropriate maintenance, and getting the theater and data ready for you.
-* The minimum number of people per visit is 3. 
+* The minimum number of people per visit is 5.
 * A full demo might take between 15 to 25 minutes.The maximum number of people inside the chamber is 8. Groups over that number need to be divided. Multiply the number of groups by the number of minutes per demo. That will provide an estimate of  the time needed for your tour. We ask to request tours that last at most 60 minutes.
 * Be open to reschedule your visit at any time. Many situations out of the CCV staff hands could preclude the good state of the YURT.
 
