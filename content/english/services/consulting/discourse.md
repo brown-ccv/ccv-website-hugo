@@ -10,10 +10,12 @@ icon: support
 
 A shared community resource, providing a discussion forum to share skills, knowledge and interests through ongoing conversation.
 
-Brown has its own "category" for Brown specific questions, to be answered by our CCV moderators. For more general questions or discussion topics about research computing, there are other categories that are not institution specific, where feedback may be provided by moderators from any of the participating institutions.
+Brown has its own category for Brown specific questions, to be answered by participants. For more general questions or discussion topics about research computing, there are other categories that are not institution specific, where feedback may be provided by users from any of the participating institutions.
+
+Click below to join the discussion.
 
 <div class="d-flex justify-content-center">
-{{% button text="ask.ci" href="https://ask.ci" %}}
+{{% button text="General" href="https://ask.ci" %}}
 
 {{% button text="Brown Space" href="https://ask.cyberinfrastructure.org/c/brown-research-computing" %}}
 </div>
