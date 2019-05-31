@@ -1,15 +1,15 @@
 title: What's New
 display: true
 items:
-  - title: CCV Documentation
-    text: We redesigned and improved our documentation. Now you can easily get started with Oscar and Stronghold.
-    link: /documentation/
+  - title: Discourse
+    text: A Q&A platform for researchers, facilitators, sysadmins and others who do research computing.
+    link: "https://ask.cyberinfrastructure.org/c/brown-research-computing"
     image:
       fa: true
       name: fab fa-discourse
-  - title: CCV Blog
-    text: We will be posting tutorials, projects, info on the latest tech we use, etc.
-    link: /news/
+  - title: Computer Visualizations Bring New Perspective to Science
+    text: Working in Brown University’s Center for Computation and Visualization, application scientist Benjamin Knorlein helps turn research data into virtual reality.
+    link: /2019/05/computer-visualizations-bring-new-perspective-to-science/
     image:
       fa: true
       name: fas fa-blog

@@ -95,7 +95,7 @@
             </header>
             <hr class="bg-blue">
             <article>
-            {{ truncate 200 .Plain }}
+            <p>{{ truncate 200 .Content | markdownify }}</p>
             </article>
         </a>
     </div>

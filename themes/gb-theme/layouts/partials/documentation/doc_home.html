@@ -24,8 +24,16 @@
     <ul class="nav nav-toc-page flex-column boxed">
         {{ range .Site.Data.documentation }}
         <li class="mx-1 nav-item bg-white my-1">
+            {{ if .url }}
+            <a class="nav-link" href="{{ .url }}">
+            {{ else }}
             <a class="nav-link" href="https://docs.ccv.brown.edu/{{urlize .name}}">
+            {{ end }}
+                {{ if .icon }}
+                <span class="{{ .icon }} fa-2x docs-icon"></span>
+                {{ else }}
                 {{ readFile "/themes/gb-theme/static/images/gitbook.svg" | safeHTML }}
+                {{ end }}
                 <span class="text-dark fs-20">{{ .name }}</span>
                 <span class="badge badge-red">{{ .version }}</span>
             </a>
