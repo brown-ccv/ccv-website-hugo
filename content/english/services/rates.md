@@ -1,6 +1,6 @@
 ---
 title: Rates
-date: 2019-03-12 10:58:51 +0000
+date: 2019-03-12T10:58:51.000+00:00
 lead: We provide services with limited resources at **no cost** for PIs, tenure-track
   faculty, and their students. For advanced computing that require extra resources,
   we charge a quarterly fee. See below the rates for FY19
@@ -10,7 +10,7 @@ lead: We provide services with limited resources at **no cost** for PIs, tenure-
 
 {{% table c="striped" hover="false" w="100" head="dark" %}}
 
-| Account Type | Priority | Jobs | Accounts | GB in	Home Directory | Cost |
+| Account Type | Priority | # of Accounts | Resource Limits | GB in	Home Directory | Cost |
 | --- | --- | --- | --- | --- | --- |
 | Exploratory | Low | 1 | 16 for 48 hours† | 10GB | Free† |
 | Premium | Medium | 1 | 208 for 80 hours‡ | 10GB | $300/quarter |
