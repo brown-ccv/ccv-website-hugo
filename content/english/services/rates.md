@@ -10,7 +10,7 @@ lead: We provide services with limited resources at **no cost** for PIs, tenure-
 
 {{% table c="striped" hover="false" w="100" head="dark" %}}
 
-| Account Type | Priority | # of Accounts | Resource Limits | GB in	Home Directory | Cost |
+| Account(s) Type | Priority | # of User Accounts | CPU Resource Limits | GB in	Home Directory | Cost |
 | --- | --- | --- | --- | --- | --- |
 | Exploratory | Low | 1 | 16 for 48 hours† | 10GB | Free† |
 | Premium | Medium | 1 | 208 for 80 hours‡ | 10GB | $300/quarter |
