@@ -30,7 +30,6 @@
             <a data-scroll class="nav-link section-nav-link" href="#{{$key}}">
                 <span class="text-dark icon-{{.Params.icon}} pr-1 fs-24"></span>
                 <span class="text-dark fs-20">{{ humanize $key }}</span>
-
             </a>
         </li>
         {{ end }}
@@ -69,7 +68,7 @@
               <span class="badge-red badge h-50 ml-1">{{ .Params.version }}</span>
               </div>
               {{ with .Params.extra }}
-              <a href="{{.link}}" class="mt-1 w-50 text-danger badge border border-danger bg-warning">{{.text}}</a>
+              <a href="{{.link}}" class="mt-1 text-danger badge border border-danger bg-warning">{{.text}}</a>
               {{ end }}
               <hr class="bg-primary">
               <p class="fs-20">{{ .Params.lead | markdownify }}</p>
