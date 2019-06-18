@@ -6,6 +6,7 @@ icon: server2
 lead: Analyze sensitive data while complying with regulatory or contractual requirements
   for data security
 haas: true
+docs_link: stronghold
 
 ---
 Stronghold is currently self-certified to meet the security requirements and controls for HIPAA (Health Insurance Portability and Accountability Act) and is undergoing the certification process for FISMA (Federal Information Security Management Act) and CJIS (Criminal Justice Information Security).

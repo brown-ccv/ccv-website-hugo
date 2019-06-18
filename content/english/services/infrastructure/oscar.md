@@ -6,6 +6,7 @@ icon: server2
 lead: Research computing cluster with ~500 nodes, including both CPU and GPU nodes,
   and a parallel filesystem
 haas: true
+docs_link: oscar
 
 ---
 {{% lead %}}
