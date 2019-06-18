@@ -1,8 +1,18 @@
-<section class="p-2 pl-10 bg-white brown-nav">
-  <a href="https://www.brown.edu">
-  {{ readFile "/themes/gb-theme/static/images/brown-logo.svg" | safeHTML }}&nbsp;&nbsp;
-  </a>
-  <a href="{{ .Site.BaseURL }}">
-  {{ readFile "/themes/gb-theme/static/images/ccv-logo.svg" | safeHTML }}
-  </a>
+<section class="p-2 pl-10 bg-white brown-nav d-flex justify-content-between">
+  <div>
+    <a href="https://www.brown.edu">
+    {{ readFile "/themes/gb-theme/static/images/brown-logo.svg" | safeHTML }}&nbsp;&nbsp;
+    </a>
+    <a href="{{ .Site.BaseURL }}">
+    {{ readFile "/themes/gb-theme/static/images/ccv-logo.svg" | safeHTML }}
+    </a>
+  </div>
+  <div class="mr-5 hide-mobile">
+    <div class="col-md-10 col-lg-10 d-flex">
+      <form id="search-form" action="{{ "search/" | absURL }}">
+        <input id="search-query" name="s" type="text" class="border-bottom border-warning rounded-0 form-control form-control-minimal" placeholder="search" aria-label="Search">
+      </form>
+      <button form="search-form" type="submit" class="w-25 btn font-weight-bold" value="Submit"><span class="fas fa-search" /></button>
+    </div>
+  <div>
 </section>
