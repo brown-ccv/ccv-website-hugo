@@ -68,9 +68,17 @@
               <h1>{{ .Title | markdownify }}</h1>
               <span class="badge-red badge h-50 ml-1">{{ .Params.version }}</span>
               </div>
+              {{ with .Params.extra }}
+              <a href="{{.link}}" class="mt-1 w-50 text-danger badge border border-danger bg-warning">{{.text}}</a>
+              {{ end }}
               <hr class="bg-primary">
               <p class="fs-20">{{ .Params.lead | markdownify }}</p>
-              <p><a href="{{.Permalink}}" class="action mt-1 text-blue">More</a></p>
+              <span>
+                <a href="{{.Permalink}}" class="mt-1 text-blue"><u>Details</u></a>
+                {{ if .Params.docs_link }}
+                <a href="https://docs.ccv.brown.edu/{{.Params.docs_link}}" class="mt-1 text-orange">&nbsp;&nbsp;<u>Documentation</u>&nbsp;&nbsp;</a>
+                {{ end }}
+              </span>
             </div>
           </div>
           {{ end }}

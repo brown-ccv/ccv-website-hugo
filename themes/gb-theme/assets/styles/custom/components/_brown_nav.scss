@@ -6,3 +6,10 @@
     height: 40px;
   }
 }
+
+@media (max-width: 576px) {
+  .hide-mobile {
+    visibility: hidden;
+    display: none;
+  }
+}

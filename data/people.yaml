@@ -98,23 +98,11 @@
     good. He has a PhD in astrophysics and he was a postdoctoral researcher at MIT
     before coming to Brown.
   image: andras_main.jpg
-- name: Maximilian King
-  weight: "12"
-  team: Advanced Research Computing
-  subteam: High-Performance Computing
-  title: Senior Research Software Engineer
-  github_username: maximilianking
-  brown_directory_uuid: d075e4ac-07b1-cf3d-a632-16f0c2510a7f
-  bio: Max is a research software engineer focusing on high performance computing
-    systems. He has a background in computational physics with interests in optimization,
-    parallelization, and cloud computing. Above all else, he is a tinkerer and tech
-    hobbyist.
-  image: max_main.jpg
 - name: Ashley S. Lee
   weight: "15"
   team: Advanced Research Computing
   subteam: Institutional Data
-  title: Data Scientist
+  title: Senior Data Scientist
   github_username: alee35
   brown_directory_uuid: 380094e2-6f9d-47cf-91ce-e636876a58cf
   bio: Ashley received training in Biology and Data Science at the University of Virginia
