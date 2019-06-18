@@ -1,6 +1,6 @@
 ---
 title: Rates
-date: 2019-03-12 10:58:51 +0000
+date: 2019-03-12T10:58:51.000+00:00
 lead: We provide services with limited resources at **no cost** for PIs, tenure-track
   faculty, and their students. For advanced computing that require extra resources,
   we charge a quarterly fee. See below the rates for FY19
@@ -10,7 +10,7 @@ lead: We provide services with limited resources at **no cost** for PIs, tenure-
 
 {{% table c="striped" hover="false" w="100" head="dark" %}}
 
-| Account Type | Priority | Jobs | Accounts | GB in	Home Directory | Cost |
+| Account(s) Type | Priority | # of User Accounts | CPU Cores | GB in	Home Directory | Cost |
 | --- | --- | --- | --- | --- | --- |
 | Exploratory | Low | 1 | 16 for 48 hours† | 10GB | Free† |
 | Premium | Medium | 1 | 208 for 80 hours‡ | 10GB | $300/quarter |
@@ -21,7 +21,7 @@ lead: We provide services with limited resources at **no cost** for PIs, tenure-
 
 > † Free exploratory accounts are available to all tenure-track faculty and PIs at Brown. Students and researchers may also obtain an exploratory account with written permission from their advisor or PI. Exploratory accounts have a 16-core limit per user, with a per-job limit of 46,100 core-minutes.
 
-> ‡The maximum number of cores and duration may change based on cluster utilization. Priority accounts each have a QOS allowing up to 208 cores, 1TB memory, and total running job wallclock of 998,400 core-minutes. This allows a 208-core job to run for 80 hours, a 104-core job to run for 160 hours, or 208 1-core jobs to run for 80 hours.
+> ‡The maximum number of cores and duration may change based on cluster utilization. Priority accounts each have a Quality-of-Service (QOS) allowing up to 208 cores, 1TB memory, and total per-job limit of 998,400 core-minutes. This allows a 208-core job to run for 80 hours, a 104-core job to run for 160 hours, or 208 1-core jobs to run for 80 hours.
 
 # Research Data Storage
 
