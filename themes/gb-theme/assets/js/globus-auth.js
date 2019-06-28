@@ -46,7 +46,7 @@ function oauth2SignIn() {
 
 function accessToken() {
   var accessTokenEndpoint = 'https://auth.globus.org/v2/oauth2/token'
-  var params = `redirect_uri=${YOUR_REDIRECT_URI_ENCODED}&grant_type=authorization_code&code=${CODE}`
+  var params = `redirect_uri=${YOUR_REDIRECT_URI_ENCODED}&grant_type=authorization_code&code=${CODE}&client_id=${YOUR_CLIENT_ID}`
 
 
   var xhr = new XMLHttpRequest();
