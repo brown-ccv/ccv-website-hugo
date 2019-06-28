@@ -1,6 +1,6 @@
 var YOUR_CLIENT_ID = '7d7c343d-2a58-4a11-b351-f8bdc45fa522';
-var YOUR_REDIRECT_URI = 'https://ccv.brown.edu/services/infrastructure/oscar/';
-var YOUR_REDIRECT_URI_ENCODED = 'https%3A%2F%2Fccv.brown.edu%2Fservices%2Finfrastructure%2Foscar%2F';
+var YOUR_REDIRECT_URI = 'https://datasci.brown.edu/services/infrastructure/oscar/';
+var YOUR_REDIRECT_URI_ENCODED = 'https%3A%2F%2Fdatasci.brown.edu%2Fservices%2Finfrastructure%2Foscar%2F';
 var CODE = window.location.search.toString().split('=')[1];
 var fragmentString = location.hash.substring(1);
 
