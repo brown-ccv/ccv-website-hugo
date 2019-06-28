@@ -5,7 +5,11 @@
   <p><strong class="text-red">Please sign in with you Brown email to request an account. </strong>If you don't have  a <code>brown.edu</code> email,
          your Brown University sponsor should submit this form.</p>
   <div class="d-flex row mt-10">
-  <div class="g-signin2 col-md-3" data-width="230" data-height="80" data-onsuccess="onSignIn"></div>
+
+  <button onclick="oauth2SignIn();">Try sample request</button>
+  <button onclick="accessToken();">access token</button>
+
+  <!-- <div class="g-signin2 col-md-3" data-width="230" data-height="80" data-onsuccess="onSignIn"></div> -->
   <div class="col-md-1"></div>
   <div class="ml-2 d-flex flex-column col-md-5 ml-10">
     <span id="loginmessage">Please, sign in.</span>
