@@ -11,8 +11,7 @@ docs_link: jupyterhub
 
 JupyterHub provides a convenient way to serve Jupyter Notebooks for multiple users with a pre-configured computing environment where users do not need to worry about installing any software packages. This set-up free environment is ideal for courses and workshops with computing components. If you are an instructor, CCV can provide access to a cloud-hosted JupyterHub for your class or workshop. The implementation is supported by Brown CIS, please follow the links below to request an instance for your class or search the documentation.
 
-{{< button text="Request Service" href="https://docs.google.com/forms/d/e/1FAIpQLSct9rFCxLhPIezHI-RYRyEuSnvHrPZLMuUSFRTriIyd_3TAfA/viewform?usp=sf_link" >}}
-{{< button text="Documentation" href="https://docs.ccv.brown.edu/jupyterhub/" >}}
+{{< button text="Request Service" href="https://docs.google.com/forms/d/e/1FAIpQLSct9rFCxLhPIezHI-RYRyEuSnvHrPZLMuUSFRTriIyd_3TAfA/viewform?usp=sf_link" >}} {{< button text="Documentation" href="https://docs.ccv.brown.edu/jupyterhub/" >}}
 
 ## JupyterHub Vs Other Resources for Teaching
 
