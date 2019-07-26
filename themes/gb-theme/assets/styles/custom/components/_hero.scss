@@ -96,6 +96,11 @@
   .bottom-6 {
     bottom: -6% !important;
   }
+	.zdog-svg {
+		width: 60% !important;
+		height: 60% !important;
+		margin-left: 20% !important;
+	}
 }
 @include media-breakpoint-down(sm) {
   .iso-ccv {
