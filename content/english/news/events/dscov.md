@@ -1,6 +1,7 @@
 ---
 title: Data Science, Computing, and Visualization Workshops
 date: 2019-04-16T13:31:34.000+00:00
+draft: true
 types:
 - events
 tags:
