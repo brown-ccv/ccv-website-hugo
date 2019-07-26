@@ -7,16 +7,16 @@ tags: ["documentation", "markdown"] # add keywords here, be consistent with othe
 authors: ["Fernando Gelin"]
 ---
 
-{{< lead >}}
-<p>CCV's website is built with [Hugo](http://gohugo.io), a fast and flexible,
+{{% lead %}}
+CCV's website is built with [Hugo](http://gohugo.io), a fast and flexible,
 open-source static site generator. This flexibility allows us to create complex
 templates that simplifies the process of content creation by letting the user to
 create the content with simple Markdown files. In addition to the regular markdown
 syntax, the use of shortcodes provides the ability to create complex html elements
 without the need to use html syntax, making the content `.md` file simple and free of noise.
 This tutorial will walk you over some of these shortcodes and how to set up and organize
-the content.</p>
-{{< /lead >}}
+the content.
+{{% /lead %}}
 
 # The News Section
 
