@@ -7,7 +7,7 @@
   github_username: fernandogelin
   brown_directory_uuid: 8144f0fb-0d36-47ed-ae64-ab07c232ebba
   bio: Fernando grew up in Brazil, received his PhD in Biology from the University
-    of Vermont in 2014. He is the mastermind behind the CCV, CBC, and BCBI websites.
+    of Vermont in 2014. He is the mastermind behind the CCV and CBC websites.
     His professional interests include Julia, JavaScript, web app development; his
     personal interests include feeding his dogs ice cream and spending time outside.
   image: fernando_main.jpg
@@ -18,9 +18,10 @@
   title: Data Scientist
   github_username: mcmcgrath13
   brown_directory_uuid: fa814738-23c5-42b9-a63c-1ea789f3d1eb
-  bio: Mary is a data scientist/whatever-needs-doing-er at CCV. She primarily works
-    with the Brown Center for Biomedical Informatics. Her background is in health
-    data and anlytics.
+  bio: Mary is a data scientist/whatever-needs-doing-er at CCV. She enjoys learning
+    new tools and technologies, coffee, bike touring, and cooking excellent food.
+    Prior to coming to Brown, Mary was a consultant at Accenture specializing in
+     health data and analytics.
   image: mary_main.jpg
 - name: Paul Stey
   team: Leadership

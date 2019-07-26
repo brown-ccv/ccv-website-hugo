@@ -9,7 +9,14 @@ docs_link: jupyterhub
 ---
 # Introduction
 
-JupyterHub provides a convenient way to serve Jupyter Notebooks for multiple users with a pre-configured computing environment where users do not need to worry about installing any software packages. This set-up free environment is ideal for courses and workshops with computing components. If you are an instructor, CCV can provide access to a cloud-hosted JupyterHub for your class or workshop. The implementation is supported by Brown CIS, and for any questions/comments/concerns regarding this service, please contact the Brown CIS JupyterHub team by emailing jupyter-help@brown.edu. If you are looking for the user guide, please visit our [https://docs.ccv.brown.edu/jupyterhub/](https://docs.ccv.brown.edu/jupyterhub/ "https://docs.ccv.brown.edu/jupyterhub/")
+JupyterHub provides a convenient way to serve Jupyter Notebooks for multiple users with a pre-configured computing environment where users do not need to worry about installing any software packages. This set-up free environment is ideal for courses and workshops with computing components. If you are an instructor, CCV can provide access to a cloud-hosted JupyterHub for your class or workshop. The implementation is supported by Brown CIS, please follow the links below to request an instance for your class or search the documentation.
+<!-- 
+{{< button text="Request Service" href="https://docs.google.com/forms/d/e/1FAIpQLSct9rFCxLhPIezHI-RYRyEuSnvHrPZLMuUSFRTriIyd_3TAfA/viewform?usp=sf_link" >}} {{< button text="Documentation" href="https://docs.ccv.brown.edu/jupyterhub/" >}}
+ -->
+
+<div class="d-flex justify-content-center m-1">
+<a class="btn btn-primary btn-sm p-1" href="https://docs.google.com/forms/d/e/1FAIpQLSct9rFCxLhPIezHI-RYRyEuSnvHrPZLMuUSFRTriIyd_3TAfA/viewform?usp=sf_link">Request Service</a>&nbsp &nbsp<a class="btn btn-primary btn-sm p-1" href="https://docs.ccv.brown.edu/jupyterhub/">Documentation</a>
+</div>
 
 ## JupyterHub Vs Other Resources for Teaching
 
