@@ -15,8 +15,7 @@ JupyterHub provides a convenient way to serve Jupyter Notebooks for multiple use
  -->
 
 <div class="d-flex justify-content-center m-1">
-<a class="btn btn-primary btn-sm p-1" href="https://docs.google.com/forms/d/e/1FAIpQLSct9rFCxLhPIezHI-RYRyEuSnvHrPZLMuUSFRTriIyd_3TAfA/viewform?usp=sf_link">Request Service</a>
-<a class="btn btn-primary btn-sm p-1" href="https://docs.ccv.brown.edu/jupyterhub/">Documentation</a>
+<a class="btn btn-primary btn-sm p-1" href="https://docs.google.com/forms/d/e/1FAIpQLSct9rFCxLhPIezHI-RYRyEuSnvHrPZLMuUSFRTriIyd_3TAfA/viewform?usp=sf_link">Request Service</a>&nbsp &nbsp<a class="btn btn-primary btn-sm p-1" href="https://docs.ccv.brown.edu/jupyterhub/">Documentation</a>
 </div>
 
 ## JupyterHub Vs Other Resources for Teaching
