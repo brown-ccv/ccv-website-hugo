@@ -3,7 +3,7 @@ title: "Computer Visualizations Bring New Perspective to Science"
 date: 2019-05-09T15:46:38-04:00
 draft: false
 types: ["posts"] # keep only one of the categories
-tags: ["VR", ""] # add keywords here, be consistent with other posts.
+tags: ["VR", "visualization"] # add keywords here, be consistent with other posts.
 authors: ["Ben Knorlein"]
 ---
 
@@ -27,4 +27,4 @@ Knorlein, an application scientist in Brown’s Center for Computation and Visua
 
 Recently, for example, he collaborated with Beth Brainerd, professor of ecology and evolutionary biology, to unveil new and improved software for capturing uniquely informative 3D movies of the motion of animal muscles and bones. With sophisticated data processing and visualization, researchers can literally see their research like never before.
 
-{{% sign "Benjamin Knorlein" %}}
+{{% sign "Benjamin Knörlein" %}}
