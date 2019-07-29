@@ -18,7 +18,7 @@ quick_links:
   - name: Oscar Account
     icon: desktop
     text: Open an account
-    href: "http://pccvwebcit.services.brown.edu/secure/account/"
+    href: "https://brown.edu/cis/forms/CCV/newuseraccount.php"
     weight: 0
   - name: User Manuals
     icon: book-open
