@@ -25,19 +25,19 @@ While the alignment and reference .fasta file should be easy to find, the bait a
 
 In this particular case, the capture kit used was the Agilent SureSelect Human All Exon v5 kit, so I went [here](https://earray.chem.agilent.com/suredesign/index.htm) and signed up for an account. After signing in, I was directed to the following landing page, where I clicked on the 'Find Designs' tab at the top middle of the page and clicked 'SureSelect DNA' from the dropdown menu that appeared. 
 
-{{< image src="images⁩/HSMetrics⁩/Screenshot 2019-05-22 13.12.30.png" height="400" align="center" >}}
+{{< image src="images⁩/HSMetrics⁩/HSMetrics_img_1.png" height="400" align="center" >}}
 
 When I arrived at the next page, I selected the tab for 'Agilent Catalog' and in the meny on the left, I checked the box for H. sapiens (hg19). Interestingly, the results table did not populate until I also checked the box for 'Design Category'. 
 
-{{< image src="images⁩/HSMetrics⁩/Screenshot 2019-06-03 16.20.54.png" height="400" align="center" >}}
+{{< image src="images⁩/HSMetrics⁩/HSMetrics_img_2.png" height="400" align="center" >}}
 
 Then I clicked the link for 'SureSelect Human All Exon V5' and another popup appeared, which had a pull-down menu to indicate which genome build I wanted to view. Again, I selected hg19 and clicked 'View Design Details' and clicked the download link. 
 
-{{< image src="images⁩/HSMetrics⁩/Screenshot 2019-06-03 16.21.34.png" height="400" align="center" >}}
+{{< image src="images⁩/HSMetrics⁩/HSMetrics_img_3.png" height="400" align="center" >}}
 
 I downloaded all of the files, since at this point I wasn't sure which file would be the baits and which would be the intervals. 
 
-{{< image src="images⁩/HSMetrics⁩/Screenshot 2019-06-03 16.34.42.png" height="400" align="center" >}}
+{{< image src="images⁩/HSMetrics⁩/HSMetrics_img_4.png" height="400" align="center" >}}
 
 **Which files are baits and intervals?**
 
