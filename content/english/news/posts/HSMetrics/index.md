@@ -20,14 +20,15 @@ resources:
 Picard tools are a set of tools for manipulating files (SAM, VCF, etc.) from high-throughput sequencing experiments, including several modules for collecting and reporting various quality [metrics](http://broadinstitute.github.io/picard/picard-metric-definitions.html). This blog post details how I ran Picard tools' [`CollectHsMetrics`](https://broadinstitute.github.io/picard/command-line-overview.html#CollectHsMetrics) on an exome sequencing library.
 {{% /lead %}}
 
-You can find more details on Picard tools on [here](https://github.com/broadinstitute/picard) and s According to the documentation, `CollectHsMetrics` requires the following input: <br />
+You can find more details on Picard tools on [github](https://github.com/broadinstitute/picard). According to the documentation, `CollectHsMetrics` requires the following input: <br />
 
 1. Alignment file (.BAM or .SAM)
 2. Reference sequence .fasta file
 3. List of target intervals
 4. List of bait intervals<br />
 
-While the alignment and reference .fasta file should be easy to find, the bait and target intervals might be a little more challenging.
+While the alignment and reference .fasta file should be easy to find, the bait and target intervals can be a little more challenging. 
+
 
 **Download baits and intervals files**
 
@@ -35,11 +36,13 @@ In this particular case, the capture kit used was the Agilent SureSelect Human A
 
 {{% image  name="img1" align="center" %}}
 
-When I arrived at the next page, I selected the tab for 'Agilent Catalog' and in the meny on the left, I checked the box for H. sapiens (hg19). Interestingly, the results table did not populate until I also checked the box for 'Design Category'.
+When I arrived at the next page, I selected the tab for 'Agilent Catalog' and checked the box for H. sapiens (hg19) in the left menu. The results table did not populate until I also checked the box for 'Design Category' (also in the left menu). 
+
 
 {{< image  name="img2" align="center" >}}
 
-Then I clicked the link for 'SureSelect Human All Exon V5' and another popup appeared, which had a pull-down menu to indicate which genome build I wanted to view. Again, I selected hg19 and clicked 'View Design Details' and clicked the download link.
+Then I clicked the link for 'SureSelect Human All Exon V5' (highlighted in blue in the above figure) and another popup appeared, which had a pull-down menu to indicate which genome build I wanted to view. Again, I selected hg19 and clicked 'View Design Details' and clicked the download link. 
+
 
 {{< image  name="img3" align="center" >}}
 
@@ -49,16 +52,22 @@ I downloaded all of the files, since at this point I wasn't sure which file woul
 
 **Which files are baits and intervals?**
 
-To get a better sense of what was in the .bed files, I looked at the first few lines of the files using `head -10 S04380110_Padded.bed`, `head -10 S04380110_Covered.bed`, and `head -10 S04380110_Regions.bed` and saw the following:
+To get a better sense of what was in the .bed files, I looked at the first few lines of each file using the `head` command and saw the following information in the first few lines of each file:
 
-`track name="Padded" description="Agilent SureSelect DNA - SureSelectXT Human All Exon V5 - Covered bed file extended by 100bp on either side"`
-`track name="Covered" description="Agilent SureSelect DNA - SureSelectXT Human All Exon V5 - Genomic regions covered by probes" `
-`track name="Target Regions" description="Agilent SureSelect DNA - SureSelectXT Human All Exon V5"`
+The second line returned from `head -10 S04380110_Padded.bed` was:  
+```track name="Padded" description="Agilent SureSelect DNA - SureSelectXT Human All Exon V5 - Covered bed file extended by 100bp on either side"```
 
-Which led me to use the `S04380110_Covered.bed` as the baits and `S04380110_Regions.bed` as the targets files. I used `rsync` to upload my `.bed` files to [CCV Oscar](https://docs.ccv.brown.edu/oscar/).
+The second line returned from `head -10 S04380110_Covered.bed` was:  
+```track name="Covered" description="Agilent SureSelect DNA - SureSelectXT Human All Exon V5 - Genomic regions covered by probes".```
+
+The second line returned from `head -10 S04380110_Regions.bed` was:   
+```track name="Target Regions" description="Agilent SureSelect DNA - SureSelectXT Human All Exon V5"```      
+
+Based on these descriptions, I used `S04380110_Covered.bed` as the baits and `S04380110_Regions.bed` as the targets files.    
+
 
 **Convert baits and intervals and running CollectHsMetrics**
-`CollectHsMetrics` expects the baits and targets files to be in interval list format, so I used Picard tools `BedToIntervalList` tool to convert the .bed files. If you don't already have access to a sequence dictionary file (which is required by `BedToIntervalList`), it can be created with `CreateSequenceDictionary`. I converted the .bed files to intervals with the following bash script:
+`CollectHsMetrics` expects the baits and targets files to be in interval list format, so I used Picard tools `BedToIntervalList` tool to convert the .bed files. `BedToIntervalList` requires a sequence dictionary file. If you don't already have access to a sequence dictionary file, it can be created with Picard tools `CreateSequenceDictionary`. I converted the .bed files to intervals with the following bash script:   
 
 ```shell
 #!/bin/bash
