@@ -5,6 +5,7 @@ draft: false
 types: ["posts"]
 tags: ["computational biology", "genomics", "exome sequencing"]
 authors: ["Joselynn Wallace"]
+group: "compbiocore"
 resources:
 - src: 'images/HSMetrics_img_1.png'
   name: img1
@@ -27,7 +28,7 @@ You can find more details on Picard tools on [github](https://github.com/broadin
 3. List of target intervals
 4. List of bait intervals<br />
 
-While the alignment and reference .fasta file should be easy to find, the bait and target intervals can be a little more challenging. 
+While the alignment and reference .fasta file should be easy to find, the bait and target intervals can be a little more challenging.
 
 
 **Download baits and intervals files**
@@ -36,12 +37,12 @@ In this particular case, the capture kit used was the Agilent SureSelect Human A
 
 {{% image  name="img1" align="center" %}}
 
-When I arrived at the next page, I selected the tab for 'Agilent Catalog' and checked the box for H. sapiens (hg19) in the left menu. The results table did not populate until I also checked the box for 'Design Category' (also in the left menu). 
+When I arrived at the next page, I selected the tab for 'Agilent Catalog' and checked the box for H. sapiens (hg19) in the left menu. The results table did not populate until I also checked the box for 'Design Category' (also in the left menu).
 
 
 {{< image  name="img2" align="center" >}}
 
-Then I clicked the link for 'SureSelect Human All Exon V5' (highlighted in blue in the above figure) and another popup appeared, which had a pull-down menu to indicate which genome build I wanted to view. Again, I selected hg19 and clicked 'View Design Details' and clicked the download link. 
+Then I clicked the link for 'SureSelect Human All Exon V5' (highlighted in blue in the above figure) and another popup appeared, which had a pull-down menu to indicate which genome build I wanted to view. Again, I selected hg19 and clicked 'View Design Details' and clicked the download link.
 
 
 {{< image  name="img3" align="center" >}}

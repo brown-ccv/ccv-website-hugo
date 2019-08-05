@@ -185,7 +185,7 @@ text.
 
 ## Images
 
-If you post contains images or other resources, create a Page Bundle:
+If your post contains images or other resources, create a Page Bundle:
 
 {{< file-tree >}}
 {{< dir name="posts" open="true" >}}
