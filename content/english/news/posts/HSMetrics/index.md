@@ -105,3 +105,5 @@ TARGET_INTERVALS=S04380110_Regions.interval_list
 
 ```
 Now you will have information to access the performance of your exome sequencing experiment. For more details on how to interpret the output from `CollectHsMetrics`, click [here](http://broadinstitute.github.io/picard/picard-metric-definitions.html#HsMetrics).
+
+{{< sign "Joselynn Wallace">}}
