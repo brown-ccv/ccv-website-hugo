@@ -1,15 +1,12 @@
 title: What's New
 display: true
 items:
-  - title: Prototyping Visualizations for the Web with Vega and Julia
-    text: Data Scientist Mary McGrath recently presented on Vega and Julia for the web at JuliaCon 2019.
-    link: /2019/07/prototyping-visualizations-for-the-web-with-vega-and-julia/
+  - title: CCV news and posts moved to Medium
+    text: We just realeased two new publications on Medium. [Click here for the Brown CCV publication](https://medium.com/brown-ccv), and [here for the Computational Biology Core](https://medium.com/brown-compbiocore).
     image:
       fa: true
       name: fas fa-blog
-  - title: R, Travis-CI, and C++ standards with Ubuntu 16.04
-    text: Data scientist August Guang discusses best practices for continuous integration.
-    link: /2019/07/r-travis-ci-and-c-standards-with-ubuntu-16.04/
-    image:
-      fa: true
-      name: fas fa-blog
+  - title: CCVCon
+    media:
+      type: image
+      path: ccvcon.png
