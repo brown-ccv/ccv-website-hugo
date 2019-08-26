@@ -15,7 +15,14 @@
       </div>
       <article id="new-card">
         {{ range .Site.Data.whatsnew.items }}
-
+        {{ if .media }}
+        <div class="card stacked"
+             style="background-image:url('{{$.Site.BaseURL}}images/{{.media.path}}'); background-position: 50% 10%; background-size: 93%;">
+          <div class="p-1 d-flex justify-content-center">
+            <p>Stay tuned, more information coming soon.</p>
+          </div>
+        </div>
+        {{ else }}
         <div class="card stacked">
           <div class="card-body">
                 <h3 class="font-weight-normal mb-2">{{ .title }}</h3>
@@ -23,14 +30,15 @@
             <div class="d-flex align-items-center">
                 <span class="{{.image.name}} fa-4x px-3 text-yellow"></span>
                 <p>
-                  {{ .text }}
-                  <a href="{{.Site.BaseURL }}{{ .link }}" class="action mt-1 text-blue">More</a>
+                  {{ .text | markdownify }}
+                  {{ if .link }}<a href="{{.Site.BaseURL }}{{ .link }}" class="action mt-1 text-blue">More</a>{{ end }}
                 </p>
             </div>
 
           </div>
 
         </div>
+        {{ end }}
         {{ end }}
       </article>
     </div>

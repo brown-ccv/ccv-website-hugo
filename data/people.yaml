@@ -176,13 +176,13 @@
   brown_directory_uuid: d0e7b3b6-f6b4-f28b-3bfd-08bccf05ac31
   bio: ''
   image: mete_main.jpg
-- name: John Huffman
+- name: Singh Saluja
   team: CCV Operations
-  title: Manager, User Services and Applications
-  github_username: ''
-  brown_directory_uuid: afaf0ff5-d633-3f3f-38a2-247778780b0c
+  title: Research Services Support Specialist
+  github_username: singhsaluja
+  brown_directory_uuid: 786ef442-dcc4-4463-aaf3-c5728a2a8d38
   bio: ''
-  image: john_main.jpg
+  image: saluja_main.jpg
 - name: Linnea Wolfe
   team: Leadership
   title: Director of Operations

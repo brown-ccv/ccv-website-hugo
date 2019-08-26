@@ -1,4 +1,14 @@
-<figure class="justify-content-{{.Get `align`}} d-flex">
-  <img src="{{ .Page.Parent.Permalink }}{{.Get `src`}}" height={{.Get "height"}} width={{.Get "width"}}>
-  <figcaption>{{.Get "caption"}}</figcaption>
-</figure>
+{{ $align := .Get "align" }}
+{{ $caption := .Get "caption" }}
+{{ $height := .Get "height" }}
+
+{{ with .Page.Resources.Match (.Get "name") }}
+{{ range .}}
+  <figure class="justify-content-{{$align}} d-flex">
+
+    <img src="{{.RelPermalink}}" height="{{ $height }}">
+    <figcaption>{{$caption}}</figcaption>
+
+  </figure>
+{{ end }}
+{{ end }}

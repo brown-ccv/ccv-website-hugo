@@ -41,3 +41,35 @@
 .small {
   font-size: 1rem !important;
 }
+
+.compbiocore-banner {
+  background-color: $blue;
+  height: 40vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  h1 {
+    margin-top: 5rem;
+    color: $sand !important;
+  }
+  svg {
+    height: 80px;
+    margin-right: 2rem;
+    stroke: white;
+    .st1c {
+      fill: $blue;
+    }
+  }
+
+}
+
+.cbc-logo {
+  display: flex;
+  flex: row;
+  justify-content: center;
+  align-items: center;
+  small {
+    font-size: 1rem;
+  }
+}
