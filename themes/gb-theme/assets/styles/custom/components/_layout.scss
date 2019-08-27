@@ -90,18 +90,19 @@ section, footer {
   height: 350px;
   display: flex;
   flex-direction: column;
-  background-size: cover;
-  background-position: 30%;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: top;
   align-items: flex-end;
   justify-content: flex-end;
   padding: 0;
   border: 2px solid white;
 }
+
 .people-card-body {
   background-color: rgb(255,255,255);
   width: 100%;
   padding: 0.5rem;
-
 }
 
 .arc-people {
