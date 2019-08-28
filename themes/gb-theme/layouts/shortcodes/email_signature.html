@@ -13,7 +13,12 @@
 				<br><br>
 
 				<strong>{{ .title }}</strong><br>
-				<span class="fs-8">{{.subteam}}</span><br>
+				{{if (eq .subteam "Computational Biology Core")}}
+				<a class="ml-1" href="https://cbc.brown.edu"><span class="fs-8">{{.subteam}}</span><img src="https://datasci.brown.edu/images/cbc.png" height="23"></a>
+				{{else}}
+				<span class="fs-8">{{.subteam}}</span>
+				{{end}}
+				<br>
 				Center for Computation and Visualization<br>
 				Brown University&nbsp;&nbsp;|&nbsp;&nbsp;CIS
 				<br>
