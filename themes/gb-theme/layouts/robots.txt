@@ -1,6 +1,7 @@
 User-agent: *
-Allow: /ccvcon
-
 {{range .Pages}}
 Disallow: {{.RelPermalink}}
 {{end}}
+
+User-agent: Twitterbot
+Disallow:
