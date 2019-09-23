@@ -13,14 +13,14 @@ If you would like more information on upcoming workshops, or if you would like t
 
 ## Basic-Level Workshops
 
-#### Getting Started on Oscar
+##### Getting Started on Oscar
 An introduction to Oscar, Brown’s research computing cluster, for new users. Participants will learn how  to connect to Oscar (ssh, VNC), how to navigate Oscar’s filesystem, and how to use the module system to access software packages on Oscar. This is a hands-on workshop with interactive examples.
 
-#### Working on the Command Line
+##### Working on the Command Line
 A practical introduction to the Linux operating system. Topics covered include: basic Linux commands for maneuvering within the file system and manipulating files, Unix shells, and working with environment variables and paths. This is a hands-on workshop with interactive examples.
 
-#### File Transfer Basics
+##### File Transfer Basics
 An overview of methods for moving files onto and off of Oscar. Topics covered include: Linux command line tools for file transfer (scp, rsync, sftp), GUI-based file transfer applications, mounting Oscar’s filesystem using CIFS, and using Globus on Oscar. This is a hands-on workshop with interactive examples.
 
-#### Working with Slurm
+##### Working with Slurm
 A primer on submitting jobs to the job scheduler on Oscar. Some basic familiarity with Unix/Linux systems is assumed. Topics covered include: an overview of the use of Slurm for resource allocation, submitting  jobs to Slurm, setting up array jobs, using Bash scripts to configure and submit jobs to Slurm, best practices for requesting resources from Slurm, monitoring jobs with Slurm utilities, and analyzing Slurm errors. This is a hands-on workshop with interactive examples.
