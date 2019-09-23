@@ -11,7 +11,7 @@ CCV hosts a variety of workshops to help educate users and promote more effectiv
 
 If you would like more information on upcoming workshops, or if you would like to suggest a workshop topic, please contact [support@ccv.brown.edu](mailto:support@ccv.brown.edu).
 
-## Basic-Level Workshops
+## Basic Workshops
 
 ##### Getting Started on Oscar
 An introduction to Oscar, Brown’s research computing cluster, for new users. Participants will learn how  to connect to Oscar (ssh, VNC), how to navigate Oscar’s filesystem, and how to use the module system to access software packages on Oscar. This is a hands-on workshop with interactive examples.
