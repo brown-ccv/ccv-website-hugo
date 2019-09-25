@@ -1,6 +1,7 @@
 ---
 - name: Fernando Gelin
   weight: "8"
+  type: Full Time
   team: Advanced Research Computing
   subteam: Data & Visualization
   title: Research Software Engineer
@@ -13,6 +14,7 @@
   image: fernando_main.jpg
 - name: Mary McGrath
   weight: "9"
+  type: Full Time
   team: Advanced Research Computing
   subteam: Data & Visualization
   title: Data Scientist
@@ -24,6 +26,7 @@
      health data and analytics.
   image: mary_main.jpg
 - name: Paul Stey
+  type: Full Time
   team: Leadership
   title: Director of Scientific Computing and Data Science
   github_username: paulstey
@@ -34,6 +37,7 @@
   image: stey_main.jpg
 - name: Joselynn Wallace
   weight: "4"
+  type: Full Time
   team: Advanced Research Computing
   title: Genomics Data Scientist
   subteam: Computational Biology Core
@@ -45,6 +49,7 @@
   image: joselynn_main.jpg
 - name: Helen Kershaw
   weight: "10"
+  type: Full Time
   team: Advanced Research Computing
   subteam: High-Performance Computing
   title: Lead Research Software Engineer
@@ -55,6 +60,7 @@
   image: helen_main.jpg
 - name: Isabel Restrepo
   weight: "5"
+  type: Full Time
   team: Advanced Research Computing
   subteam: Data & Visualization
   title: Lead Data Scientist
@@ -67,6 +73,7 @@
   image: isabel_main.jpg
 - name: August Guang
   weight: "3"
+  type: Full Time
   team: Advanced Research Computing
   subteam: Computational Biology Core
   title: Genomics Data Scientist
@@ -80,6 +87,7 @@
   image: august_main.jpg
 - name: Raj Shukla
   weight: "11"
+  type: Full Time
   team: Advanced Research Computing
   subteam: High-Performance Computing
   title: Research Software Engineer
@@ -90,6 +98,7 @@
   image: raj_main.jpg
 - name: Andras Zsom
   weight: "14"
+  type: Full Time
   team: Advanced Research Computing
   subteam: Institutional Data
   title: Lead Data Scientist
@@ -101,6 +110,7 @@
   image: andras_main.jpg
 - name: Ashley S. Lee
   weight: "15"
+  type: Full Time
   team: Advanced Research Computing
   subteam: Institutional Data
   title: Senior Data Scientist
@@ -113,6 +123,7 @@
   image: ashley_main.jpg
 - name: Sam Bell
   weight: "16"
+  type: Full Time
   team: Advanced Research Computing
   subteam: Institutional Data
   title: Data Scientist
@@ -125,6 +136,7 @@
   image: bell_main.jpg
 - name: Andrew Leith
   weight: "2"
+  type: Full Time
   team: Advanced Research Computing
   subteam: Computational Biology Core
   title: Genomics Data Scientist
@@ -135,6 +147,7 @@
     methods for reproducible research in genomics, and the biology of human longevity.
   image: andrew_main.jpg
 - name: Thomas Serre
+  type: Full Time
   team: Leadership
   title: Faculty Director
   github_username: tserre
@@ -146,6 +159,7 @@
   image: thomas_main.jpg
 - name: Paul Hall
   weight: "13"
+  type: Full Time
   team: Advanced Research Computing
   subteam: High-Performance Computing
   title: Senior Research Software Engineer
@@ -156,6 +170,7 @@
   image: hall_main.jpg
 - name: Ashok Ragavendran
   weight: "1"
+  type: Full Time
   team: Advanced Research Computing
   subteam: Computational Biology Core
   title: Lead Data Scientist
@@ -170,6 +185,7 @@
     the beach.
   image: ashok_main.jpg
 - name: Mete Tunca
+  type: Full Time
   team: Leadership
   title: Assistant Director of Cloud and Research Computing
   github_username: ''
@@ -177,6 +193,7 @@
   bio: ''
   image: mete_main.jpg
 - name: Singh Saluja
+  type: Full Time
   team: CCV Operations
   title: Research Services Support Specialist
   github_username: singhsaluja
@@ -184,6 +201,7 @@
   bio: ''
   image: saluja_main.jpg
 - name: Linnea Wolfe
+  type: Full Time
   team: Leadership
   title: Director of Operations
   github_username: ''
@@ -192,6 +210,7 @@
   image: linnea_main.jpg
 - name: Camilo Diaz
   weight: "7"
+  type: Full Time
   team: Advanced Research Computing
   subteam: Data & Visualization
   title: Graphics System Programmer
@@ -201,6 +220,7 @@
   image: camilo_main.jpg
 - name: Benjamin Knörlein
   weight: "6"
+  type: Full Time
   team: Advanced Research Computing
   subteam: Data & Visualization
   title: Senior Research Software Engineer
@@ -209,6 +229,7 @@
   bio: ''
   image: ben_main.jpg
 - name: Paulo S Baptista
+  type: Full Time
   team: CCV Operations
   title: Senior Research Systems Administrator
   github_username: ''
@@ -216,6 +237,7 @@
   bio: ''
   image: paulo_main.jpg
 - name: David D Johnson
+  type: Full Time
   team: CCV Operations
   title: Senior HPC Systems Engineer
   github_username: ''
@@ -223,6 +245,7 @@
   bio: ''
   image: dave_main.jpg
 - name: Sam Fulcomer
+  type: Full Time
   team: Leadership
   title: Associate Director
   github_username: ''
@@ -230,8 +253,35 @@
   bio: ''
   image: fulcomer_main.jpg
 - name: Geoffrey Avila
+  type: Full Time
   team: CCV Operations
   title: Senior HPC Systems Engineer
   github_username: ''
   brown_directory_uuid: f904bb23-202f-48fb-bf93-7b7d326c7043
   image: avila_main.jpg
+- name: Rashi Dhar
+  weight: 
+  type: CCV Interns
+  team: Advanced Research Computing
+  subteam: Data & Visualization
+  title: Web Developer Intern
+  github_username: Rashi1997
+  brown_directory_uuid: 8144f0fb-0d36-47ed-ae64-ab07c232ebba
+  image: 
+- name: Kalvin Lam
+  weight: 
+  type: CCV Interns
+  team: Advanced Research Computing
+  subteam: Data & Visualization
+  title: Virtual Reality Intern
+  github_username: theklam
+  brown_directory_uuid: 8144f0fb-0d36-47ed-ae64-ab07c232ebba
+  image: 
+- name: Kalvin Lam
+  weight: 
+  type: CCV Interns
+  team: CCV Operations
+  title: Virtual Reality Intern
+  github_username: theklam
+  brown_directory_uuid: 8144f0fb-0d36-47ed-ae64-ab07c232ebba
+  image: 
