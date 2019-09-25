@@ -21,7 +21,7 @@
         <li class="mx-1 nav-item bg-white my-1">
             <a class="nav-link section-nav-link" href="#{{.name}}">
                 <span class="text-dark fas fa-{{ .icon }} pr-1 fs-24"></span>
-                <span class="text-dark fs-20">{{ humanize .name }}</span>
+                <span class="text-dark fs-20">{{ title .name }}</span>
             </a>
         </li>
         {{ end }}
@@ -170,14 +170,14 @@
         <!-- Cite CCV -->
         <header id="cite" class="d-flex align-items-center pt-4">
             <span class="btn-red btn-ico btn-lg btn-rounded"><i class="fas fa-comments"></i></span>
-            <h1 class="mx-4 text-secondary">How to Cite CCV</h1>
+            <h1 class="mx-4 text-secondary">{{ .Params.cite.title }}</h1>
             <hr class="bg-dark w-40"/>
         </header>
         
         <article id="cite-content" class="py-4">
-            <h4 class="pt-2 text-blue">Acknowledgment</h4>
+            <h4 class="pt-2 text-blue">{{ .Params.cite.subtitle1 }}</h4>
             <p class="p-medium">{{ .Params.cite.acknowledgment | markdownify }}</p>
-            <h4 class="pt-2 text-blue">Facilities Statement</h4>
+            <h4 class="pt-2 text-blue">{{ .Params.cite.subtitle2 }}</h4>
             <p class="p-medium">{{ .Params.cite.facilities | markdownify }}</p>
         </article>
 
