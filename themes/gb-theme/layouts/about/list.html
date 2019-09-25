@@ -166,6 +166,20 @@
             </div>
           {{ end }}
         </article>
+        
+        <!-- Cite CCV -->
+        <header id="cite" class="d-flex align-items-center pt-4">
+            <span class="btn-red btn-ico btn-lg btn-rounded"><i class="fas fa-comments"></i></span>
+            <h1 class="mx-4 text-secondary">How to Cite CCV</h1>
+            <hr class="bg-dark w-40"/>
+        </header>
+        
+        <article id="cite-content" class="py-4">
+            <h4 class="pt-2 text-blue">Acknowledgment</h4>
+            <p class="p-medium">{{ .Params.cite.acknowledgment | markdownify }}</p>
+            <h4 class="pt-2 text-blue">Facilities Statement</h4>
+            <p class="p-medium">{{ .Params.cite.facilities | markdownify }}</p>
+        </article>
 
 
         <!-- Publications -->
