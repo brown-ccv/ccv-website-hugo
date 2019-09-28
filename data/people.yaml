@@ -259,15 +259,6 @@
   github_username: ''
   brown_directory_uuid: f904bb23-202f-48fb-bf93-7b7d326c7043
   image: avila_main.jpg
-- name: Rashi Dhar
-  weight: 
-  type: CCV Interns
-  team: Advanced Research Computing
-  subteam: Data & Visualization
-  title: Web Developer Intern
-  github_username: Rashi1997
-  brown_directory_uuid: 8144f0fb-0d36-47ed-ae64-ab07c232ebba
-  image: rashi_main.jpg
 - name: Kalvin Lam
   weight: 
   type: CCV Interns
@@ -276,7 +267,16 @@
   title: Virtual Reality Intern
   github_username: theklam
   brown_directory_uuid: 5c72f742-5b9e-4cca-91e6-35a730536791
-  image: 
+  image: kalvin_main.jpg
+- name: Rashi Dhar
+  weight: 
+  type: CCV Interns
+  team: Advanced Research Computing
+  subteam: Data & Visualization
+  title: Web Developer Intern
+  github_username: Rashi1997
+  brown_directory_uuid: 07ffddd8-24dd-4f2c-b125-55f8913c83e2
+  image: rashi_main.jpg  
 - name: Aryan Srivastava
   weight: 
   type: CCV Interns
@@ -285,15 +285,7 @@
   title: Virtual Reality Intern
   github_username: aryan096
   brown_directory_uuid: 83d46da6-50fa-48e8-b17c-665d2b66427b
-  image: 
-- name: Sample
-  weight: 
-  type: CCV Interns
-  team: CCV Operations
-  title: CCV Operations Intern
-  github_username: theklam
-  brown_directory_uuid: 8144f0fb-0d36-47ed-ae64-ab07c232ebba
-  image: 
+  image: aryan_main.jpg
 - name: Tiffany Lei
   weight: 
   type: CCV Interns
@@ -302,4 +294,4 @@
   title: Web Developer Intern
   github_username: TiffL
   brown_directory_uuid: 2fe3c48e-df22-4a97-a910-6d784e3fba73
-  image: 
+  image: tiffany_main.jpg
