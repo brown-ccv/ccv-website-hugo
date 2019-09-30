@@ -21,7 +21,7 @@
         <li class="mx-1 nav-item bg-white my-1">
             <a class="nav-link section-nav-link" href="#{{.name}}">
                 <span class="text-dark fas fa-{{ .icon }} pr-1 fs-24"></span>
-                <span class="text-dark fs-20">{{ humanize .name }}</span>
+                <span class="text-dark fs-20">{{ title .name }}</span>
             </a>
         </li>
         {{ end }}
@@ -84,44 +84,17 @@
           {{ end }}
           </article>
 
-        <h4 class="pt-2 text-gray">CCV Operations</h4>
+          <h4 class="pt-2 text-gray">CCV Operations</h4>
 
-        <article class="container-fluid row py-1">
-          {{ range sort .Site.Data.people "name"}}
-          {{ if eq .team "CCV Operations"}}
-          <div class="people-card photo-main col-xl-3 col-md-4 col-sm-6 col-xs-12"
-               style="background-image:url('{{$.Site.BaseURL}}/images/people/JPEG/{{.image}}')">
-            <div class="people-card-body" style="border-left: 5px solid #CCC6B8;">
-              <h2 class="text-dark mb-0 fs-20">{{ .name }}</h2>
-              <p class="text-dark text-small">{{ .title }}</p>
-              <div class="text-small d-flex w-100 justify-content-end">
-                <a class="text-secondary mr-1" href="https://directory.brown.edu/uuid/{{ .brown_directory_uuid }}"><span class="fas fa-info-circle" /></a>
-                {{ if .github_username }}
-                <a class="text-secondary mr-1" href="https://github.com/{{.github_username}}"><span class="fab fa-github" /></a>
-                {{ end }}
-              </div>
-            </div>
-          </div>
-          {{ end }}
-          {{ end }}
-          </article>
-
-          <h4 class="pt-2 text-gray">Advanced Research Computing</h4>
           <article class="container-fluid row py-1">
-            {{ range sort .Site.Data.people "weight"}}
-            {{ if eq .team "Advanced Research Computing"}}
+            {{ range sort .Site.Data.people "name"}}
+            {{ if eq .type "Full Time"}}
+            {{ if eq .team "CCV Operations"}}
             <div class="people-card photo-main col-xl-3 col-md-4 col-sm-6 col-xs-12"
                  style="background-image:url('{{$.Site.BaseURL}}/images/people/JPEG/{{.image}}')">
-              <div class="people-card-body arc-people" style="{{if eq .subteam `Computational Biology Core`}}border-left: 5px solid #003C71;
-                                                   {{else if eq .subteam `Data & Visualization`}}border-left: 5px solid #FFC72C;
-                                                   {{else if eq .subteam `High-Performance Computing`}}border-left: 5px solid #A79A94;
-                                                   {{else if eq .subteam `Institutional Data`}}border-left: 5px solid #4E3629;
-                                                   {{ else }}border-left: 5px solid	#FFC72C;
-                                                   {{ end }}
-                                                    ">
-                <h2 class="text-dark mb-0 fs-20 pb-1">{{ .name }}</h2>
+              <div class="people-card-body" style="border-left: 5px solid #CCC6B8;">
+                <h2 class="text-dark mb-0 fs-20">{{ .name }}</h2>
                 <p class="text-dark text-small">{{ .title }}</p>
-                <p class="text-gray text-small"><span class="icon-users2 pr-1"></span>{{ .subteam }}</p>
                 <div class="text-small d-flex w-100 justify-content-end">
                   <a class="text-secondary mr-1" href="https://directory.brown.edu/uuid/{{ .brown_directory_uuid }}"><span class="fas fa-info-circle" /></a>
                   {{ if .github_username }}
@@ -132,7 +105,70 @@
             </div>
             {{ end }}
             {{ end }}
-        </article>
+            {{ end }}
+            </article>
+  
+            <h4 class="pt-2 text-gray">Advanced Research Computing</h4>
+            <article class="container-fluid row py-1">
+              {{ range sort .Site.Data.people "weight"}}
+              {{ if eq .type "Full Time"}}
+              {{ if eq .team "Advanced Research Computing"}}
+              <div class="people-card photo-main col-xl-3 col-md-4 col-sm-6 col-xs-12"
+                   style="background-image:url('{{$.Site.BaseURL}}/images/people/JPEG/{{.image}}')">
+                <div class="people-card-body arc-people" style="{{if eq .subteam `Computational Biology Core`}}border-left: 5px solid #003C71;
+                                                     {{else if eq .subteam `Data & Visualization`}}border-left: 5px solid #FFC72C;
+                                                     {{else if eq .subteam `High-Performance Computing`}}border-left: 5px solid #A79A94;
+                                                     {{else if eq .subteam `Institutional Data`}}border-left: 5px solid #4E3629;
+                                                     {{ else }}border-left: 5px solid	#FFC72C;
+                                                     {{ end }}
+                                                      ">
+                  <h2 class="text-dark mb-0 fs-20 pb-1">{{ .name }}</h2>
+                  <p class="text-dark text-small">{{ .title }}</p>
+                  <p class="text-gray text-small"><span class="icon-users2 pr-1"></span>{{ .subteam }}</p>
+                  <div class="text-small d-flex w-100 justify-content-end">
+                    <a class="text-secondary mr-1" href="https://directory.brown.edu/uuid/{{ .brown_directory_uuid }}"><span class="fas fa-info-circle" /></a>
+                    {{ if .github_username }}
+                    <a class="text-secondary mr-1" href="https://github.com/{{.github_username}}"><span class="fab fa-github" /></a>
+                    {{ end }}
+                  </div>
+                </div>
+              </div>
+              {{ end }}
+              {{ end }}
+              {{ end }}
+          </article>
+  
+          <h4 class="pt-2 text-gray">CCV Interns</h4>
+            <article class="container-fluid row py-1">
+              {{ range sort .Site.Data.people "weight"}}
+              {{ if eq .type "CCV Interns"}}
+              <div class="people-card photo-main col-xl-3 col-md-4 col-sm-6 col-xs-12"
+                   style="background-image:url('{{$.Site.BaseURL}}/images/people/JPEG/{{.image}}')">
+                <div class="people-card-body arc-people" style="{{if eq .team `CCV Operations`}}border-left: 5px solid #CCC6B8;
+                                                      {{ end }}
+                                                      {{if eq .team `Advanced Research Computing`}}
+                                                      {{if eq .subteam `Computational Biology Core`}}border-left: 5px solid #003C71;
+                                                      {{else if eq .subteam `Data & Visualization`}}border-left: 5px solid #FFC72C;
+                                                      {{else if eq .subteam `High-Performance Computing`}}border-left: 5px solid #A79A94;
+                                                      {{else if eq .subteam `Institutional Data`}}border-left: 5px solid #4E3629;
+                                                      {{ else }}border-left: 5px solid	#FFC72C;
+                                                      {{ end }}
+                                                      {{ end }}
+                                                      ">
+                  <h2 class="text-dark mb-0 fs-20 pb-1">{{ .name }}</h2>
+                  <p class="text-dark text-small">{{ .title }}</p>
+                  <p class="text-gray text-small"><span class="icon-users2 pr-1"></span>{{ .subteam }}</p>
+                  <div class="text-small d-flex w-100 justify-content-end">
+                    <a class="text-secondary mr-1" href="https://directory.brown.edu/uuid/{{ .brown_directory_uuid }}"><span class="fas fa-info-circle" /></a>
+                    {{ if .github_username }}
+                    <a class="text-secondary mr-1" href="https://github.com/{{.github_username}}"><span class="fab fa-github" /></a>
+                    {{ end }}
+                  </div>
+                </div>
+              </div>
+              {{ end }}
+              {{ end }}
+          </article>
         <!-- Diversity -->
         <header id="diversity" class="d-flex align-items-center pt-6">
           <span class="btn-cyan btn-ico btn-lg btn-rounded"><i class="fas fa-people-carry"></i></span>
@@ -165,6 +201,20 @@
               <a class="eyebrow link fs-14 text-orange" href="{{ .link }}">Learn More</a>
             </div>
           {{ end }}
+        </article>
+        
+        <!-- Cite CCV -->
+        <header id="cite" class="d-flex align-items-center pt-4">
+            <span class="btn-red btn-ico btn-lg btn-rounded"><i class="fas fa-comments"></i></span>
+            <h1 class="mx-4 text-secondary">{{ .Params.cite.title }}</h1>
+            <hr class="bg-dark w-40"/>
+        </header>
+        
+        <article id="cite-content" class="py-4">
+            <h4 class="pt-2 text-blue">{{ .Params.cite.subtitle1 }}</h4>
+            <p class="p-medium">{{ .Params.cite.acknowledgment | markdownify }}</p>
+            <h4 class="pt-2 text-blue">{{ .Params.cite.subtitle2 }}</h4>
+            <p class="p-medium">{{ .Params.cite.facilities | markdownify }}</p>
         </article>
 
 
