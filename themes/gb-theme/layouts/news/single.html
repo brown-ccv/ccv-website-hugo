@@ -1,8 +1,22 @@
 {{ define "content" }}
 
 
-<div id="hero-list" class=" bg-light text pb-5">
+<div id="hero-list" class=" bg-white text pb-5">
+  <div class="{{ if eq .Params.group `compbiocore`}}compbiocore-banner{{ end }}">
   <div class="container d-flex flex-column pt-6">
+    {{ if eq .Params.group `compbiocore`}}
+        <div class="cbc-logo">
+          <a href="https://cbc.brown.edu">
+          {{ readFile "/themes/gb-theme/static/images/cbc.svg" | safeHTML }}
+          </a>
+          <div>
+            <a href="https://www.brown.edu/research/projects/computational-biology-of-human-disease/">
+              <small class="text-gray">Center for Computational Biology of Human Disease</small>
+            </a>
+            <a href="https://cbc.brown.edu"><p class="text-gray">Computational Biology Core</p></a>
+          </div>
+        </div>
+    {{ else }}
     {{ range .Params.types }}
     <div class="line-around">
       <span>
@@ -17,12 +31,14 @@
       </span>
     </div>
     {{ end }}
+    {{ end }}
       <h1 class="fs-60 w-100 text-center"> {{ .Title | markdownify }}</h1>
       <small class="text-center fs-18 text-gray">Posted by {{ range .Params.authors }}{{ . }}{{ end }} on <i>{{ .PublishDate.Format "January 2, 2006" }}</i></small>
+    </div>
   </div>
 </div>
 
-<section id="section-1" class="bg-light">
+<section id="section-1" class="bg-white">
 
 
 

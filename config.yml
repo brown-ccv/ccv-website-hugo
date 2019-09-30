@@ -44,7 +44,7 @@ menu:
   - identifier: news
     name: News
     title: News
-    url: /news/
+    url: https://medium.com/brown-ccv
     weight: 6
 
 params:

@@ -1,15 +1,12 @@
-title: What's New
-display: true
-items:
-  - title: Discourse
-    text: A Q&A platform for researchers, facilitators, sysadmins and others who do research computing.
-    link: "https://ask.cyberinfrastructure.org/c/brown-research-computing"
-    image:
-      fa: true
-      name: fab fa-discourse
-  - title: Computer Visualizations Bring New Perspective to Science
-    text: Working in Brown University’s Center for Computation and Visualization, application scientist Benjamin Knorlein helps turn research data into virtual reality.
-    link: /2019/05/computer-visualizations-bring-new-perspective-to-science/
-    image:
-      fa: true
-      name: fas fa-blog
+# title: What's New
+# display: true
+# items:
+#   - title: CCV news and posts moved to Medium
+#     text: We just realeased two new publications on Medium. [Click here for the Brown CCV publication](https://medium.com/brown-ccv), and [here for the Computational Biology Core](https://medium.com/brown-compbiocore).
+#     image:
+#       fa: true
+#       name: fas fa-blog
+#   - title: CCVCon
+#     media:
+#       type: image
+#       path: ccvcon.png

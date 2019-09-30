@@ -5,18 +5,23 @@ draft: false
 types: ["posts"] # keep only one of the categories
 tags: ["documentation", "markdown"] # add keywords here, be consistent with other posts.
 authors: ["Fernando Gelin"]
+resources:
+- src: 'images/dogs.png'
+  name: png
+- src: 'images/dogs.jpg'
+  name: jpg
 ---
 
-{{< lead >}}
-<p>CCV's website is built with [Hugo](http://gohugo.io), a fast and flexible,
+{{% lead %}}
+CCV's website is built with [Hugo](http://gohugo.io), a fast and flexible,
 open-source static site generator. This flexibility allows us to create complex
 templates that simplifies the process of content creation by letting the user to
 create the content with simple Markdown files. In addition to the regular markdown
 syntax, the use of shortcodes provides the ability to create complex html elements
 without the need to use html syntax, making the content `.md` file simple and free of noise.
 This tutorial will walk you over some of these shortcodes and how to set up and organize
-the content.</p>
-{{< /lead >}}
+the content.
+{{% /lead %}}
 
 # The News Section
 
@@ -180,15 +185,39 @@ text.
 
 ## Images
 
-To add images to your content, simply add the image to the same folder as the
-`.md` file, or in an `images` folder. The `image` shortcode will display
-the image:
+If your post contains images or other resources, create a Page Bundle:
 
-```go  
-  {{</* image src="path/dogs.png" height="400" align="center" */>}}
+{{< file-tree >}}
+{{< dir name="posts" open="true" >}}
+{{< dir name="post_name" open="true" >}}
+
+{{< file name="index.md" description="post content with front-matter" >}}
+{{< dir name="images" open="true" >}}
+{{< file name="image1.png" >}}
+{{< file name="image2.jpg" >}}
+
+{{< /dir >}}
+{{< /dir >}}
+{{< /dir >}}
+{{< /file-tree >}}
+
+In the front matter of your post, list the resources:
+
+```yaml
+resources:
+- src: 'images/image1.png'
+  name: png
+- src: 'images/image2.jpg'
+  name: jpg
 ```
 
-{{< image src="images/dogs.png" height="400" align="center">}}
+To add images to your content, use the `image` shortcode, where name is the name listed in the front-matter resources.
+
+```go  
+  {{</* image name="png" height="400" align="center" */>}}
+```
+
+{{< image name="png" height="400" align="center">}}
 
 If you want to use an image from the internet, use the shortcode `figure` instead:
 
