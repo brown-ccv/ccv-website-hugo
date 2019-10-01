@@ -9,7 +9,7 @@ haas: true
 
 ---
 {{% lead %}}
-The high-performance computing (HPC) resources at CCV equip the Brown research community with the tools they need to perform complex numerical simulations, modeling, and data analysis. Oscar, CCV's primary research computing cluster, consists of \~500 multi-core nodes sharing a high-performance interconnect and file system.
+The high-performance computing (HPC) resources at CCV equip the Brown research community with the tools they need to perform complex numerical simulations, modeling, and data analysis. Oscar, CCV's primary research computing cluster, consists of more than 300 multi-core nodes sharing a high-performance interconnect and file system.
 
 {{% /lead %}}
 
