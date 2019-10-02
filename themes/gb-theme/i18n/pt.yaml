@@ -8,6 +8,8 @@
   translation: Notícias
 - id: Documentation
   translation: Documentação
+- id: Apps
+  translation: Apps
 
 - id: learn_about_ccv_services
   translation: Saiba mais sobre nossos serviços

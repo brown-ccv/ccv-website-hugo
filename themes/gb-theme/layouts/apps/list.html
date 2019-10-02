@@ -1,0 +1,59 @@
+{{ define "content" }}
+<!-- header - yellow container -->
+{{ $current_section := .Section }}
+<div id="hero-list" class=" bg-yellow text pb-5">
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 d-flex flex-column pt-6 pb-10">
+          <h1 class="fs-60"> {{ humanize .Section }} </h1>
+          <p class="fs-30">{{ .Params.lead | markdownify }}</p>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="container-fluid d-flex justify-content-center py-10 px-0">
+    <div class="col-lg-9 col-md-11 col-sm-12">
+
+    <!-- Apps -->
+    <header id="apps" class="d-flex align-items-center pt-4">
+        <span class="btn-blue btn-ico btn-lg btn-rounded"><i class="fas fa-code"></i></span>
+        <h1 class="mx-4 text-secondary">Apps</h1>
+        <hr class="bg-dark w-40"/>
+    </header>
+
+    <article id="apps-content" class="row justify-content-center py-4">
+        {{ range $i, $apps := getJSON "data/info.json" }}
+        
+        <div class="card-responsive boxed bg-white col-md-5 mx-1 mb-2 px-3 py-3">
+            <h1 class="card-title font-weight-bold mb-0 fs-20">
+                {{ if $apps.repo_url }}
+                    <a class="eyebrow" href={{ $apps.repo_url }}>{{ $apps.site_name }}
+                        <i class="fab fa-github"></i>
+                    </a>
+                {{ else }}
+                    {{ $apps.site_name }}
+                {{ end }}
+            </h1>
+            <p class="card-text fs-16 text-orange">
+            Maintainers:
+            {{ range $i2, $details := $apps.authors }}
+            
+            {{ $totalLen := sub (len $apps.authors) 1 }}
+            {{ if eq $i2 $totalLen }}
+                {{ $details.name }}
+            {{ else }}
+                {{ $details.name }},
+            {{ end }}
+            
+            {{ end }}
+            </p>
+                
+            <p class="card-text fs-18">{{ $apps.site_description }}</p>
+        </div>
+        {{ end }}
+    </article>
+        
+    </div>
+</div>
+{{ end }}

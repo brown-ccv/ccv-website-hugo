@@ -46,6 +46,11 @@ menu:
     title: News
     url: https://medium.com/brown-ccv
     weight: 6
+  - identifier: apps
+    name: Apps
+    title: Apps
+    url: /apps/
+    weight: 7
 
 params:
   contact:
