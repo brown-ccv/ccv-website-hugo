@@ -273,7 +273,7 @@
   type: CCV Interns
   team: Advanced Research Computing
   subteam: Data & Visualization
-  title: Web Developer Intern
+  title: Web Development Intern
   github_username: Rashi1997
   brown_directory_uuid: 07ffddd8-24dd-4f2c-b125-55f8913c83e2
   image: rashi_main.jpg  
@@ -291,7 +291,16 @@
   type: CCV Interns
   team: Advanced Research Computing
   subteam: Data & Visualization
-  title: Web Developer Intern
+  title: Web Development Intern
   github_username: TiffL
   brown_directory_uuid: 2fe3c48e-df22-4a97-a910-6d784e3fba73
   image: tiffany_main.jpg
+- name: Maura Driscoll
+  weight: 
+  type: CCV Interns
+  team: Advanced Research Computing
+  subteam: Data & Visualization
+  title: Web Development Intern
+  github_username: mauradriscoll
+  brown_directory_uuid: 333b6b44-a77c-4df4-9d02-d01e02b15572
+  image: maura_main.jpg
