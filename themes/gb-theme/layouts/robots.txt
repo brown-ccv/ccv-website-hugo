@@ -1,7 +1,2 @@
-User-agent: *
-{{range .Pages}}
-Disallow: {{.RelPermalink}}
-{{end}}
-
 User-agent: Twitterbot
 Disallow:
