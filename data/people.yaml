@@ -304,3 +304,15 @@
   github_username: mauradriscoll
   brown_directory_uuid: 333b6b44-a77c-4df4-9d02-d01e02b15572
   image: maura_main.jpg
+- name: Minsik Cho
+  weight:
+  type: CCV Interns
+  team: Advanced Research Computing
+  subteam: High-Performance Computing
+  title: HPC Intern
+  github_username: mscho527
+  brown_directory_uuid: 883cb383-0b7a-40eb-8e4f-8a8805e7306a
+  bio: Minsik is an undergrad student studying chemical physics.
+  image: minsik_main.jpg
+
+
