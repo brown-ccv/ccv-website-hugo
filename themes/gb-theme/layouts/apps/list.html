@@ -62,9 +62,9 @@
             
             {{ $totalLen := sub (len $apps.authors) 1 }}
             {{ if eq $i2 $totalLen }}
-                {{ $details.name }}
+                <a href="https://github.com/{{$details.github_user}}"> {{ $details.name }} </a>
             {{ else }}
-                {{ $details.name }},
+                <a href="https://github.com/{{$details.github_user}}"> {{ $details.name }} </a>,
             {{ end }}
             
             {{ end }}
