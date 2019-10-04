@@ -1,5 +1,9 @@
 ---
 title: HPC
+
+tagTitle: HPC - Center for Computation and Visualization
+tagDescription: Get help using High-Performance Computing (HPC) in your research
+
 date: 2019-01-24T20:20:47.000+00:00
 category: Consulting
 lead: Get help using High-Performance Computing (HPC) in your research

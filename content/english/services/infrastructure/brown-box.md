@@ -1,5 +1,9 @@
 ---
 title: BrownBox
+
+tagTitle: BrownBox - Center for Computation and Visualization
+tagDescription: Share files up to 2GB in size with CCV's BrownBox service.
+
 date: 2019-01-22 18:29:17 +0000
 category: File Storage and Transfer
 icon: database

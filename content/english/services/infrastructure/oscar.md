@@ -1,5 +1,9 @@
 ---
 title: High-Performance Computing (Oscar)
+
+tagTitle: High-Performance Computing (Oscar) - Center for Computation and Visualization
+tagDescription: Looking for High-Peformance Computing? Learn about Oscar, CCV’s primary research computing cluster.
+
 date: 2019-01-22T18:29:23.000+00:00
 category: Computing
 icon: server2

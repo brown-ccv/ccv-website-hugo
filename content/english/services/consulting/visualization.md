@@ -1,5 +1,9 @@
 ---
 title: "Visualization"
+
+tagTitle: Visualization - Center for Computation and Visualization
+tagDescription: Get help developing and implementing advanced visualization technology.
+
 date: 2019-01-24T15:20:37-05:00
 draft: false
 category: "Consulting"

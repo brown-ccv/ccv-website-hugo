@@ -1,5 +1,9 @@
 ---
 title: Workshops
+
+tagTitle: Workshops - Center for Computation and Visualization
+tagDescription: CCV hosts a variety of workshops to help educate users on its systems and services. Get more information about these workshops here.
+
 date: 2019-01-24T20:19:52.000+00:00
 category: Classroom
 lead: Learn to use Brown's HPC systems effectively in your research

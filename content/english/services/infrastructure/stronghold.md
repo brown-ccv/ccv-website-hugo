@@ -1,5 +1,9 @@
 ---
 title: Data Risk Level 3 Computing (Stronghold)
+
+tagTitle: Data Risk Level 3 Computing (Stronghold) - Center for Computation and Visualization
+tagDescription: Learn about the CCV's Stronghold service for analyzing sensitive data while complying with regulatory or contractual requirements for data security.
+
 date: 2019-01-22 18:29:31 +0000
 category: Computing
 icon: server2

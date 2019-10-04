@@ -1,5 +1,9 @@
 ---
 title: Cave
+
+tagTitle: Cave - Center for Computation and Visualization
+tagDescription: Learn more about the Cave, a fully-immersive display system available to all researchers and educators at Brown.
+
 date: 2019-01-22 18:29:50 +0000
 category: Visualization Systems
 icon: 
