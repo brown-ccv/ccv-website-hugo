@@ -12,18 +12,39 @@
 </div>
 </div>
 
+<!-- table of contents -->
+
+<!-- TODO: Fix bug with scrolling / linking to same page -->
+
+<div class="container-fluid overlay-top justify-content-center d-flex">
+    <div class="col-lg-6 col-md-10 col-sm-12">
+        <ul class="nav nav-toc-page flex-column boxed">
+            {{ range .Params.items }}
+            <li class="mx-1 nav-item bg-white my-1">
+                <a class="nav-link section-nav-link" href="#{{ .name }}">
+                    <span class="text-dark fas fa-{{ .icon }} pr-1 fs-24"></span>
+                    <span class="text-dark fs-20">{{ title .name }}</span>
+                </a>
+            </li>
+            {{ end }}
+        </ul>
+    </div>
+</div>
+
 <div class="container-fluid d-flex justify-content-center py-10 px-0">
     <div class="col-lg-9 col-md-11 col-sm-12">
+    
+    {{ range .Params.items }}
 
     <!-- Apps -->
-    <header id="apps" class="d-flex align-items-center pt-4">
+    <header id="{{ .name }}" name="{{ .name }}" class="d-flex align-items-center pt-4">
         <span class="btn-blue btn-ico btn-lg btn-rounded"><i class="fas fa-code"></i></span>
-        <h1 class="mx-4 text-secondary">Apps</h1>
+        <h1 class="mx-4 text-secondary">{{ .name }} </h1>
         <hr class="bg-dark w-40"/>
     </header>
 
     <article id="apps-content" class="row justify-content-center py-4">
-        {{ range $i, $apps := getJSON "data/info.json" }}
+        {{ range $i, $apps := getJSON .dataLoc }}
         
         <div class="card-responsive boxed bg-white col-md-5 mx-1 mb-2 px-3 py-3">
             <h1 class="card-title font-weight-bold mb-0 fs-20">
@@ -51,9 +72,11 @@
                 
             <p class="card-text fs-18">{{ $apps.site_description }}</p>
         </div>
+        
         {{ end }}
     </article>
-        
+    
+    {{ end }}
     </div>
 </div>
 {{ end }}
