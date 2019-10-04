@@ -33,4 +33,11 @@ Our intermediate workshops are geared towards users who already have some basic 
 Learn how to build and install software packages on Oscar. Topics covered include: make, cmake, compiler options on Oscar, pip, building python packages from source, and python virtual environments.
 
 ##### Using Jupyter Notebooks on Oscar
-Learn everything you need to know to start using Jupyter Notebooks on Oscar. Topics covered include: installing Jupyter Notebook, using Jupyter Notebook in the VNC, and running Jupyter Notebook as a batch job. This is a hands-on workshop with interactive examples.
+Learn everything you need to know to start using Jupyter Notebooks on Oscar. Topics covered include: installing Jupyter Notebook, using Jupyter Notebook in the VNC, and running Jupyter Notebook as a batch job.
+
+##### Using Matlab on Oscar
+An introduction to using Matlab on Oscar. Topics covered include: working with Matlab interactively on Oscar, using the Matlab GUI, using Matlab in batch jobs, and working with Parallel Toolbox.
+
+##### Version Control with Git
+An introduction to using Matlab on Oscar. Topics covered include: working with Matlab interactively on Oscar, using the Matlab GUI, using Matlab in batch jobs, and working with Parallel Toolbox.
+
