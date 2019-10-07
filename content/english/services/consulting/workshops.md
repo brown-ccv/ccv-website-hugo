@@ -46,3 +46,7 @@ Learn everything you need to know to start using Jupyter Notebooks on Oscar. Top
 ##### Using Matlab on Oscar
 
 An introduction to using Matlab on Oscar. Topics covered include: working with Matlab interactively on Oscar, using the Matlab GUI, using Matlab in batch jobs, and working with Parallel Toolbox.
+
+##### Version Control with Git
+
+A practical introduction to version control for software management using Git. Topics covered include: creating a repository, checking the status of a repository, committing changes, viewing changes, reverting to older versions of files, and setting up a remote repository.
