@@ -10,8 +10,10 @@ items:
 - name: 'CCV Open Source Software and Applications'
   dataLoc: "data/info-brown-ccv.json"
   icon: code
+  locID: ccvApps
 - name: 'CBC Apps, Workshops, Documentation'
   dataLoc: "data/info-compbiocore.json"
   icon: code
+  locID: cbcApps
 
 ---
