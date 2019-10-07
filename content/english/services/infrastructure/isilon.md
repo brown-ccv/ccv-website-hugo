@@ -1,5 +1,9 @@
 ---
 title: Campus File Service
+
+tagTitle: Campus File Storage - Center for Computation and Visualization
+tagDescription: Learn more about storing, sharing, and backing up files at Brown with Campus File Storage.
+
 date: 2019-01-22 18:29:08 +0000
 category: File Storage and Transfer
 icon: database2

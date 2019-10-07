@@ -1,5 +1,9 @@
 ---
 title: RData
+
+tagTitle: RData - Center for Computation and Visualization
+tagDescription: Learn about RData, a high-performance storage system for use with CCV's HPC systems.
+
 date: 2019-01-24 20:12:10 +0000
 category: File Storage and Transfer
 lead: High-performance storage for use with our HPC systems
