@@ -43,4 +43,4 @@ A large collection of software is available on Oscar, and CCV staff can help acq
 * Paraview
 
 <!-- {{< account_form >}} -->
-{{< button text="Request an Account" href="https://web1.ccv.brown.edu/secure/account">}}
+{{< button text="Request an Account" href="https://brown.edu/cis/forms/CCV/newuseraccount.php">}}
