@@ -2,3 +2,4 @@ node_modules
 public
 .ftpconfig
 .DS_Store
+.env
