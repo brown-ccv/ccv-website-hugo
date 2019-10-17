@@ -9,7 +9,7 @@
 - id: Documentation
   translation: 文件
 - id: Events
-  translation: Events
+  translation: 大事记
 
 - id: learn_about_ccv_services
   translation: 了解CCV服务
