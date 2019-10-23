@@ -46,6 +46,11 @@ menu:
     title: News
     url: https://medium.com/brown-ccv
     weight: 6
+  - identifier: events  
+    name: Events
+    title: Events
+    url: https://events.brown.edu/ccv/view/month
+    weight: 8
 
 params:
   contact:
