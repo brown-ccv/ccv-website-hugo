@@ -66,7 +66,10 @@ params:
       text: Help us improve!
       link: https://docs.google.com/forms/d/e/1FAIpQLSdT00ZSXQh8vKbAMvc1xUoBfGtf2SU8bw5T3tIchKf03TgfbA/viewform?usp=sf_link
       fa: fas fa-star-half-alt
-
+  githubLinks:
+    ccvGithub: https://github.com/brown-ccv/
+    cbcGithub: https://github.com/compbiocore/
+    
 # i18n
 languages:
   en:
