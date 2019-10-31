@@ -30,7 +30,7 @@ lead: We provide services with limited resources at **no cost** for PIs, tenure-
 # Research Data Storage
 
 * 1TB per Brown Faculty Member - Free
-* 10TB per awarded Grant at the request of the Brown PI = a unique, active billing will be required to provide this allocation and the data will be migrated to archive storage at the end of grant.
+* 10TB per awarded Grant at the request of the Brown PI - a unique, active billing will be required to provide this allocation and the data will be migrated to archive storage at the end of grant.
 * Additional Storage Allocation - Year to Year - $100 / Terabyte / year
 * Additional Storage Allocation - Long Term (6 years) - $750 / Terabyte / 6 years
 
