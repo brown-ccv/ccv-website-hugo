@@ -10,15 +10,16 @@ lead: We provide services with limited resources at **no cost** for PIs, tenure-
 
 {{% table c="striped" hover="false" w="100" head="dark" %}}
 
-| Account(s) Type | # of User Accounts | CPU Cores | GB in Home Directory | Cost |
-| --- | --- | --- | --- | --- | --- |
-| Exploratory | 1 | 32 for 48 hours† | 20GB | Free† |
-| HPC Priority | 1 | 208 for 96 hours‡ | 20GB | $200/quarter |
-| HPC Priority+ | 1 | 416 for 96 hours‡ | 20GB | $400/quarter |
-| HPC GPU Priority Standard | 1 | 4 std GPU for 96 hours, Titan RTX or lower‡ | 20GB | $200/quarter |
-| HPC GPU Priority Standard+ | 1 | 8 std GPU for 96 hours, Titan RTX or lower‡ | 20GB | $400/quarter |
-| HPC GPU Priority High End | 1 | 4 high end GPU for 96 hours, Tesla V100‡ | 20GB | $400/quarter |
-| HPC Priority Large Memory | 1 | 32 cores for 96 hours with 760GB real memory or 2TB Virtual‡ | 20GB |
+| Account(s) Type | CPU Cores and Walltime | Storage Allocation | Cost |
+| --- | --- | --- | --- |
+| Exploratory | 32 for 48 hours† | 20G Home <br> 512G Scratch <br> 256G Data | Free† |
+|Exploratoy (No PI) | 32 for 48 Hours | 20GB Home <br> 512G Scratch | Free
+| HPC Priority |208 for 96 hours | 20GB Home <br> 512G Scratch <br> 256G Data | $200/quarter |
+| HPC Priority+ | 416 for 96 hours | 20GB Home <br> 512G Scratch <br> 256G Data | $400/quarter |
+| HPC GPU Priority Standard | 4 std GPU for 96 hours, Titan RTX or lower | 20GB Home <br> 512G Scratch <br> 256G Data | $200/quarter |
+| HPC GPU Priority Standard+ | 8 std GPU for 96 hours, Titan RTX or lower‡ | 20GB Home <br> 512G Scratch <br> 256G Data | $400/quarter |
+| HPC GPU Priority High End | 4 high end GPU for 96 hours, Tesla V100‡ | 20GB Home <br> 512G Scratch <br> 256G Data | $400/quarter |
+| HPC Priority Large Memory | 32 cores for 96 hours with 760GB real memory or 2TB Virtual | 20GB Home <br> 512G Scratch <br> 256G Data |
 
 {{% /table %}}
 
