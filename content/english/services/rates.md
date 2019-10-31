@@ -34,20 +34,5 @@ lead: We provide services with limited resources at **no cost** for PIs, tenure-
 * Additional Storage Allocation - Year to Year - $100 / Terabyte / year
 * Additional Storage Allocation - Long Term (6 years) - $750 / Terabyte / 6 years
 
-***
 
-## Allocating CCV Fees to Sponsored Projects
 
-Include these fees in proposal budgets and budget justification. The CCV mission statement can be used to justify this. The rates for CCV fees have been approved by the Brown University Controllers office and found to be well below actual cost. When allocating the cost of CCV fees to grants and contracts, please follow the guidelines below.
-
-If just one grant or contract is charged, a basic statement of research relevance and benefit for the CCV activities suffices.
-
-Establish a basis for allocating fees if two or more projects benefit.
-
-The concept of interrelatedness applies and has been documented by the CCV and approved by OSP.
-
-Any reasonable basis for allocating costs can be used. The following are examples:
-
-Distribute CCV charges on the basis of the projects’ total direct costs; or
-Distribute CCV charges based on PI’s % effort on projects.
-The remarks section on the interdepartmental invoice or an attached document must include the allocation methodology used to allocate CCV fees among sponsored awards.
