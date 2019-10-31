@@ -12,14 +12,20 @@ lead: We provide services with limited resources at **no cost** for PIs, tenure-
 
 | Account(s) Type | Priority | # of User Accounts | CPU Cores | GB in	Home Directory | Cost |
 | --- | --- | --- | --- | --- | --- |
-| Exploratory | Low | 1 | 32 for 48 hours† | 20GB | Free† |
-| Premium | Medium | 1 | 208 for 80 hours‡ | 20GB | $300/quarter |
+| Exploratory | 1 | 32 for 48 hours† | 20GB | Free† |
+| HPC Priority | 1 | 208 for 96 hours‡ | 20GB | $200/quarter |
+| HPC Priority+ | 1 | 416 for 96 hours‡ | 20GB | $400/quarter |
+| HPC GPU Priority Standard | 1 | 4 std GPU for 96 hours, Titan RTX or lower‡ | 20GB | $200/quarter |
+| HPC GPU Priority Standard+ | 1 | 8 std GPU for 96 hours, Titan RTX or lower‡ | 20GB | $400/quarter |
+| HPC GPU Priority High End | 1 | 4 high end GPU for 96 hours, Tesla V100‡ | 20GB | $400/quarter |
+| HPC Priority Large Memory | 1 | 32 cores (up to 1 node) for 96 hours with 760GB real memory or 2TB Virtual‡ | 20GB | $100/quarter |
+
 | Group Premium | Medium | 6 | 208 for 80 hours (per account)‡ | 20GB/acct | $750/quarter (additional accounts $150/quarter) |
 | HPC Condo | High | 6 | Size of condo | 20GB/acct | Contact us |
 
 {{% /table %}}
 
-> † Free exploratory accounts are available to all tenure-track faculty and PIs at Brown. Students and researchers may also obtain an exploratory account with written permission from their advisor or PI. Exploratory accounts have a 16-core limit per user, with a per-job limit of 92,160 core-minutes.
+> † Free exploratory accounts are available to all tenure-track faculty and PIs at Brown. Students and researchers may also obtain an exploratory account with written permission from their advisor or PI. Exploratory accounts have a 32-core limit per user, with a per-job limit of 92,160 core-minutes.
 
 > ‡The maximum number of cores and duration may change based on cluster utilization. Priority accounts each have a Quality-of-Service (QOS) allowing up to 208 cores, 1TB memory, and total per-job limit of 998,400 core-minutes. This allows a 208-core job to run for 80 hours, a 104-core job to run for 160 hours, or 208 1-core jobs to run for 80 hours.
 
