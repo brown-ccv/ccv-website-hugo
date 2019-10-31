@@ -19,7 +19,6 @@ lead: We provide services with limited resources at **no cost** for PIs, tenure-
 | HPC GPU Priority Standard+ | 1 | 8 std GPU for 96 hours, Titan RTX or lower‡ | 20GB | $400/quarter |
 | HPC GPU Priority High End | 1 | 4 high end GPU for 96 hours, Tesla V100‡ | 20GB | $400/quarter |
 | HPC Priority Large Memory | 1 | 32 cores (up to 1 node) for 96 hours with 760GB real memory or 2TB Virtual‡ | 20GB | $100/quarter |
-
 | Group Premium | Medium | 6 | 208 for 80 hours (per account)‡ | 20GB/acct | $750/quarter (additional accounts $150/quarter) |
 | HPC Condo | High | 6 | Size of condo | 20GB/acct | Contact us |
 
