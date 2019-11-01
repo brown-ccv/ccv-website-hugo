@@ -23,7 +23,7 @@ lead: We provide services with limited resources at **no cost** for PIs,
 | Condo Rental | 256 Cores | $10,000 | No wall-time limits |
 
 # Staff Services
-| Support Level | Description | Cost
+| Support Level | Description | Cost |
 | --- | --- | --- | 
 | General Support | Limited code troubleshooting, training, office-hours. Limited to 1 week per year | $0
 | Advanced Support | Any staff services requiring more than 1 week's effort per year | $85/hour |
