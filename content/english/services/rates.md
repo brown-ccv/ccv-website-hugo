@@ -13,17 +13,17 @@ lead: We provide services with limited resources at **no cost** for PIs,
 | Account(s) Type | CPU Cores and Walltime | Cost | Description | 
 | --- | --- | --- | --- |
 | Exploratory | 32 for 48 hours† | Free† | Suitable for New users |
-| Exploratoy (No PI) | 32 for 48 Hours | Free | New Users without PI approval <br> No Data Directorty is assigned
-| HPC Priority |208 for 96 hours | $200/user/quarter |
-| HPC Priority+ | 416 for 96 hours | $400/user/quarter |
-| HPC GPU Priority Standard | 4 std GPU for 96 hours, Titan RTX or lower | $200/user/quarter |
-| HPC GPU Priority Standard+ | 8 std GPU for 96 hours, Titan RTX or lower‡ | $400/user/quarter |
-| HPC GPU Priority High End | 4 high end GPU for 96 hours, Tesla V100‡ | $400/user/quarter |
-| HPC Priority Large Memory | 32 cores for 96 hours with 760GB real memory or 2TB Virtual | $100/user/quarter
+|Exploratoy (No PI) | 32 for 48 Hours | Free | No Data Directorty is assigned |
+| HPC Priority |208 for 96 hours | $200/user/quarter | For CPU instensive workloads |
+| HPC Priority+ | 416 for 96 hours | $400/user/quarter | For CPU instensive workloads |
+| HPC GPU Priority Standard | 4 std GPU for 96 hours, Titan RTX or lower | $200/user/quarter | Basic GPU intensive workloads |
+| HPC GPU Priority Standard+ | 8 std GPU for 96 hours, Titan RTX or lower‡ | $400/user/quarter | For workloads that require multiple GPUs
+| HPC GPU Priority High End | 4 high end GPU for 96 hours, Tesla V100‡ | $400/user/quarter | For workloads that require High-end GPUs
+| HPC Priority Large Memory | 32 cores for 96 hours with 760GB real memory or 2TB Virtual | $100/user/quarter | For very memory intensive workloads 
 
 {{% /table %}}
 
-> Every account gets 20G Home, 512G Scratch (purged every 30 days), and 256G Data Directory (shared amongst members of the group) by default. Except no-PI exploratory accounts they do not get a Data directory.
+> Each account is assigned 20G Home, 512G Scratch (purged every 30 days), and 256G Data Directory (shared amongst members of the group) by default. Except no-PI exploratory accounts they do not get a Data directory.
 
 > † Free exploratory accounts are available to all faculty and PIs at Brown. Exploratory accounts have a 32-core limit per user, with a per-job limit of 92,160 core-minutes.
 
