@@ -22,11 +22,18 @@ lead: We provide services with limited resources at **no cost** for PIs,
 | HPC Priority Large Memory | 32 cores for 96 hours with 760GB real memory or 2TB Virtual | $100/user/quarter | For very memory intensive workloads 
 | Condo Rental | 256 Cores | $10,000 | No wall-time limits |
 
+# Staff Services
+| Support Level | Description | Cost
+| --- | --- | --- | 
+| General Support | Limited code troubleshooting, training, Office Hours. Limited to 1 week per year | $0
+| Advanced Support | Any staff services requiring more than 1 week's effort per year | $85/hour |
+| Project Collaboration | Percent time of a specific staff member charged directly to the grant | %FTE |
+
 {{% /table %}}
 
 > Each account is assigned 20G Home, 512G Scratch (purged every 30 days), and 256G Data Directory (shared amongst members of the group) by default. Except no-PI exploratory accounts they do not get a Data directory.
 
-> † Free exploratory accounts are available to all faculty and PIs at Brown. Exploratory accounts have a 32-core limit per user, with a per-job limit of 92,160 core-minutes.
+> † Free exploratory accounts are available to all faculty and PIs at Brown. Priority accounts have a higher Quality-of-Service (QOS) i.e. priorty accounts will have faster job start times.
 
 > ‡The maximum number of cores and duration may change based on cluster utilization. Priority accounts each have a Quality-of-Service (QOS) allowing up to 208 cores, 1TB memory, and total per-job limit of 998,400 core-minutes. This allows a 208-core job to run for 80 hours, a 104-core job to run for 160 hours, or 208 1-core jobs to run for 80 hours.
 
