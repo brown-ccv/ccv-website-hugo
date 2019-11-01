@@ -25,7 +25,7 @@ lead: We provide services with limited resources at **no cost** for PIs,
 # Staff Services
 | Support Level | Description | Cost
 | --- | --- | --- | 
-| General Support | Limited code troubleshooting, training, Office Hours. Limited to 1 week per year | $0
+| General Support | Limited code troubleshooting, training, office-hours. Limited to 1 week per year | $0
 | Advanced Support | Any staff services requiring more than 1 week's effort per year | $85/hour |
 | Project Collaboration | Percent time of a specific staff member charged directly to the grant | %FTE |
 
