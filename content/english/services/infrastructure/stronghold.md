@@ -15,16 +15,20 @@ Stronghold is currently self-certified to meet the security requirements and con
 
 This service is customized to the needs of individual users and their data use agreements. Each Principal Investigator (PI) is given a dedicated environment for their project to support their researchers, graduate students, and collaborators. Access to the internet is restricted except for required locations for data imports or necessary software downloads. Import and export controls are in place to limit who can perform data migration, where sensitive data can come from and where desensitized or anonymized data can be moved to. Sensitive data is subject to file system auditing, and real-time alerting is available at the request of the PI. Please [contact us](mailto:CIS-Stronghold@brown.edu) for a consultation if you have a planned or current research project involving sensitive data that is made available to you through a data use agreement.
 
+{{% aligncenter %}}
 # Highlights
+{{% /aligncenter %}}
 
+{{% flexrow %}}
+{{% flexcolumn %}}
 ### Software
 
-- .NET 3.5  
 - Acrobat Reader
 - ArcGis
 - Julia
 - Matlab
 - MS Office
+- .NET 3.5
 - NVIVO
 - Python (PIP mirror coming soon)
 - R (includes CRAN & Bioconductor mirrors)
@@ -35,6 +39,9 @@ This service is customized to the needs of individual users and their data use a
 - Stat/Transfer
 - Visual Studio Code
 - VLC Media Player
+{{% /flexcolumn %}}
+
+{{% flexcolumn %}}
 
 ### Key Features
 
@@ -48,5 +55,7 @@ This service is customized to the needs of individual users and their data use a
 **Database** - MySQL or Oracle  
 **Secure Transfers** - ability to securely transfer (files, data, videos) in and out of Stronghold  
 **REDCap** - available for risk level 3 data residing in Stronghold  
+{{% /flexcolumn %}}
+{{% /flexrow %}}
 
 {{< button text="Request an Account" href="https://brown.edu/go/stronghold">}}
