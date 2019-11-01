@@ -1,7 +1,7 @@
 ---
 title: Rates
 date: 2019-03-12T10:58:51.000+00:00
-lead: We provide services with limited resources at **no cost** for PIs, tenure-track
+lead: We provide services with limited resources at **no cost** for PIs,
   faculty, and their students. For advanced computing that require extra resources,
   we charge a quarterly fee. See below the rates for FY19
 
@@ -10,39 +10,39 @@ lead: We provide services with limited resources at **no cost** for PIs, tenure-
 
 {{% table c="striped" hover="false" w="100" head="dark" %}}
 
-| Account(s) Type | Priority | # of User Accounts | CPU Cores | GB in	Home Directory | Cost |
-| --- | --- | --- | --- | --- | --- |
-| Exploratory | Low | 1 | 32 for 48 hours† | 20GB | Free† |
-| Premium | Medium | 1 | 208 for 80 hours‡ | 20GB | $300/quarter |
-| Group Premium | Medium | 6 | 208 for 80 hours (per account)‡ | 20GB/acct | $750/quarter (additional accounts $150/quarter) |
-| HPC Condo | High | 6 | Size of condo | 20GB/acct | Contact us |
+| Account(s) Type | CPU Cores and Walltime | Cost | Description | 
+| --- | --- | --- | --- |
+| Exploratory (PI Sponsored) | 32 for 48 hours† | Free† | Available to all members affiliated with Brown |
+| Exploratoy (No PI) | 32 for 48 Hours | Free | No Data Directory is assigned |
+| HPC Priority |208 for 96 hours | $200/user/quarter | For CPU instensive workloads |
+| HPC Priority+ | 416 for 96 hours | $400/user/quarter | For CPU instensive workloads |
+| HPC GPU Priority Standard | 4 std GPU for 96 hours, Titan RTX or lower | $200/user/quarter | Basic GPU intensive workloads |
+| HPC GPU Priority Standard+ | 8 std GPU for 96 hours, Titan RTX or lower‡ | $400/user/quarter | For workloads that require multiple GPUs
+| HPC GPU Priority High End | 4 high end GPU for 96 hours, Tesla V100‡ | $400/user/quarter | For workloads that require High-end GPUs
+| HPC Priority Large Memory | 32 cores for 96 hours with 760GB real memory or 2TB Virtual | $100/user/quarter | For very memory intensive workloads 
+| Condo Rental | 256 Cores | $10,000 | No wall-time limits |
+
+# Staff Services
+| Support Level | Description | Cost
+| --- | --- | --- | 
+| General Support | Limited code troubleshooting, training, office-hours. Limited to 1 week per year | $0
+| Advanced Support | Any staff services requiring more than 1 week's effort per year | $85/hour |
+| Project Collaboration | Percent time of a specific staff member charged directly to the grant | %FTE |
 
 {{% /table %}}
 
-> † Free exploratory accounts are available to all tenure-track faculty and PIs at Brown. Students and researchers may also obtain an exploratory account with written permission from their advisor or PI. Exploratory accounts have a 16-core limit per user, with a per-job limit of 92,160 core-minutes.
+> Each account is assigned 20G Home, 512G Scratch (purged every 30 days), and 256G Data Directory (shared amongst members of the group) by default. Except no-PI exploratory accounts they do not get a Data directory.
+
+> † Free exploratory accounts are available to all faculty and PIs at Brown. Priority accounts have a higher Quality-of-Service (QOS) i.e. priorty accounts will have faster job start times.
 
 > ‡The maximum number of cores and duration may change based on cluster utilization. Priority accounts each have a Quality-of-Service (QOS) allowing up to 208 cores, 1TB memory, and total per-job limit of 998,400 core-minutes. This allows a 208-core job to run for 80 hours, a 104-core job to run for 160 hours, or 208 1-core jobs to run for 80 hours.
 
 # Research Data Storage
 
-* 256GB Base Faculty Allocation - Free
-* Additional Storage Allocation - Year to Year - $125 / Terabyte / year
+* 1TB per Brown Faculty Member - Free
+* 10TB per awarded Grant at the request of the Brown PI - a unique, active billing will be required to provide this allocation and the data will be migrated to archive storage at the end of grant.
+* Additional Storage Allocation - Year to Year - $100 / Terabyte / year
 * Additional Storage Allocation - Long Term (6 years) - $750 / Terabyte / 6 years
 
-***
 
-## Allocating CCV Fees to Sponsored Projects
 
-Include these fees in proposal budgets and budget justification. The CCV mission statement can be used to justify this. The rates for CCV fees have been approved by the Brown University Controllers office and found to be well below actual cost. When allocating the cost of CCV fees to grants and contracts, please follow the guidelines below.
-
-If just one grant or contract is charged, a basic statement of research relevance and benefit for the CCV activities suffices.
-
-Establish a basis for allocating fees if two or more projects benefit.
-
-The concept of interrelatedness applies and has been documented by the CCV and approved by OSP.
-
-Any reasonable basis for allocating costs can be used. The following are examples:
-
-Distribute CCV charges on the basis of the projects’ total direct costs; or
-Distribute CCV charges based on PI’s % effort on projects.
-The remarks section on the interdepartmental invoice or an attached document must include the allocation methodology used to allocate CCV fees among sponsored awards.
