@@ -10,7 +10,7 @@ lead: We provide services with limited resources at **no cost** for PIs,
 
 {{% table c="striped" hover="false" w="100" head="dark" %}}
 
-| Account(s) Type | CPU Cores and Walltime | Cost | Description | 
+| Account(s) Type | CPU Cores and Walltime | Cost | Description |
 | --- | --- | --- | --- |
 | Exploratory (PI Sponsored) | 32 for 48 hours† | Free† | Available to all members affiliated with Brown |
 | Exploratoy (No PI) | 32 for 48 Hours | Free | No Data Directory is assigned |
@@ -19,12 +19,12 @@ lead: We provide services with limited resources at **no cost** for PIs,
 | HPC GPU Priority Standard | 4 std GPU for 96 hours, Titan RTX or lower | $200/user/quarter | Basic GPU intensive workloads |
 | HPC GPU Priority Standard+ | 8 std GPU for 96 hours, Titan RTX or lower‡ | $400/user/quarter | For workloads that require multiple GPUs
 | HPC GPU Priority High End | 4 high end GPU for 96 hours, Tesla V100‡ | $400/user/quarter | For workloads that require High-end GPUs
-| HPC Priority Large Memory | 32 cores for 96 hours with 760GB real memory or 2TB Virtual | $100/user/quarter | For very memory intensive workloads 
+| HPC Priority Large Memory | 32 cores for 96 hours with 760GB real memory or 2TB Virtual | $100/user/quarter | For very memory intensive workloads
 | Condo Rental | 256 Cores | $10,000 | No wall-time limits |
 
 # Staff Services
-| Support Level | Description | Cost
-| --- | --- | --- | 
+| Support Level | Description | Cost |
+| --- | --- | --- |
 | General Support | Limited code troubleshooting, training, office-hours. Limited to 1 week per year | $0
 | Advanced Support | Any staff services requiring more than 1 week's effort per year | $85/hour |
 | Project Collaboration | Percent time of a specific staff member charged directly to the grant | %FTE |
@@ -43,6 +43,3 @@ lead: We provide services with limited resources at **no cost** for PIs,
 * 10TB per awarded Grant at the request of the Brown PI - a unique, active billing will be required to provide this allocation and the data will be migrated to archive storage at the end of grant.
 * Additional Storage Allocation - Year to Year - $100 / Terabyte / year
 * Additional Storage Allocation - Long Term (6 years) - $750 / Terabyte / 6 years
-
-
-
