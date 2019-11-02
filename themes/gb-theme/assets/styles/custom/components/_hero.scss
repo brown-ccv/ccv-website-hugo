@@ -102,18 +102,15 @@
 		margin-left: 20% !important;
 	}
 }
-@include media-breakpoint-down(sm) {
-  .iso-ccv {
-    height: 12rem;
-  }
-  .bottom-6 {
-    bottom: -20% !important;
-  }
-  .text-medium-brown {
-    font-size: $font-size-lg !important;
-  }
-}
 
+@include media-breakpoint-down(sm) {
+	.zdog-svg {
+		display: none;
+	}
+	.owl-dots {
+		display: none;
+	}
+}
 .zdog-svg {
 	width: 100%;
 	height: 100%;
