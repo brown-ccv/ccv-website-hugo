@@ -47,39 +47,12 @@ The code is on [GitHub](https://github.com/brown-ccv/ccv-website). We will use t
 ## Creating New Content
 
 Sections:
-- News (Blog)
 - Showcase Projects
 - Documentation
 - People
-- Citations
 - Opportunities
 
-#### News
-This is the blog section. Posts are divided in three sub categories:
-- **Events**: we include events that have a long description. Ex. [DSCoV workshops](https://datasci.brown.edu/ccv-dev/2019/01/data-science-computing-and-visualization-workshops/). Other events, go directly on CCV's calendar (more on this later).
-- **Posts**: Any blog post you want.
-- **Projects**: Student projects, or projects you want to showcase that doesn't have a standalone website.
-
-`.md` files in the Blog post section have the following front-matter:
-
-```yaml
----
-title: "{{ replace .Name "-" " " | title }}"
-date: {{ .Date }}
-draft: false
-types: ["events", "posts", "projects"] # keep only one of the categories
-tags: [""] # add keywords here, be consistent with other posts.
-authors: [""]
----
-```
-
-To create a new file:
-```shell
-hugo new content/english/news/posts/post.md
-```
-Hugo will create a new `.md` file with the front-matter. If you don't use Hugo's cli, make sure to add the front-matter to your file.
-
-#### Pojects to Showcase on Home Page
+#### Projects to Showcase on Home Page
 Project, labs, initiatives, groups, collaborations, or anything we want to showcase. Items under this section will show up on the home page's carousel.
 
 ```yaml
@@ -131,16 +104,18 @@ Documentation is managed with Gitbook.
   link: "https://brown.wd5.myworkdayjobs.com/en-US/staff-careers-brown/job/180-George-Street/Research-Services-Support-Specialist_REQ151702"
 ```
 
-##### Citations
-`data/_citations.taml`
+##### Apps
 
-```yaml
-- '10.1002/2016GL071307'
-- '10.5281/zenodo.2553597'
-- '10.3354/meps12568'
+Fetching apps data requires a .env file (template below). 
+
+- The .env file is included in .gitignore and should never be committed.
+- You can obtain a Github Access Token by following [these instructions](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line).
+
 ```
-[More on citations](https://datasci.brown.edu/ccv-dev/2019/02/how-to-write-docs-and-posts-for-the-ccv-website/#citations)
-
+GITHUB_TOKEN=
+GITHUB_USER=
+ORGANIZATION=brown-ccv,compbiocore
+```
 
 #### CCV Bot - Calendar and Oscar/Stronghold Account Request.  
 
