@@ -1,12 +1,18 @@
-# title: What's New
-# display: true
-# items:
-#   - title: CCV news and posts moved to Medium
-#     text: We just realeased two new publications on Medium. [Click here for the Brown CCV publication](https://medium.com/brown-ccv), and [here for the Computational Biology Core](https://medium.com/brown-compbiocore).
-#     image:
-#       fa: true
-#       name: fas fa-blog
-#   - title: CCVCon
-#     media:
-#       type: image
-#       path: ccvcon.png
+title: What's New
+display: true
+items:
+  - title: New CCV rates
+    text: Check the new rates for our consulting services and infrastructure. [**Click here for details.**](https://ccv.brown.edu/services/rates/)
+    fa:
+      prefix: fad
+      icon: fa-sack-dollar
+  - title: Changes to Oscar exploratory limits
+    text: Exploratoy accounts now have access to 32 cores and 246GB memory for 48hrs! [**See this and other changes here.**](https://ccv.brown.edu/services/rates/)
+    fa:
+      prefix: fad
+      icon: fa-server
+  - title: Agreements with cloud providers
+    text: CIS now has agreements with the major cloud providers. Contact us for details! [**ccv@brown.edu**](mailto:ccv@brown.edu)
+    fa:
+      prefix: fad
+      icon: fa-cloud-rainbow

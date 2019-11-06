@@ -17,3 +17,13 @@
   border: 0px;
   padding: 1rem;
 }
+
+@include media-breakpoint-down(sm) {
+	.owl-dots {
+		display: none;
+	}
+	.carousel-caption {
+		width: 86%;
+		margin-left: -2rem;
+	}
+}
