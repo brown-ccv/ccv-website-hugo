@@ -4,6 +4,9 @@
     <div class="pl-10 d-flex flex-column justify-content-center">
         <h1 class="fs-50 text-dark">There's nothing here...  &#128528;</h1>
         <p class="fs-30 text-beige"><a href="{{.Site.BaseURL}}">Go home!</a></p>
+        <a class="mt-1" href="{{.Site.Params.contact.support.link}}">
+            <p class="fs-30">{{.Site.Params.contact.support.text}}</p>
+         </a>
     </div>
 </div>
 {{ end }}
