@@ -318,10 +318,19 @@
   weight:
   type: CCV Interns
   team: Advanced Research Computing
-  subteam: Data & Visualization
+  subteam: Institutional Data
   title: Data Science Intern
   github_username: louis-kilfoyle
   brown_directory_uuid: 5b343470-0e0f-4797-8a13-519449cb5d49
   bio: Louis is an undergrad studying Computer Science and Applied Mathematics.
   image: louisk_main.jpg
-
+- name: Cameron Webster
+  weight:
+  type: CCV Interns
+  team: Advanced Research Computing
+  subteam: Institutional Data
+  title: Data science Intern
+  github_username: camweb36
+  brown_directory_uuid: 3b9db98c-fb5f-45a8-b220-1abfc19dd4e6
+  bio: Cameron is an undergraduate studying applied math-biology
+  image: cameron_main.jpg
