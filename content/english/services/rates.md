@@ -1,7 +1,7 @@
 ---
 title: Rates
 date: 2019-03-12T10:58:51.000+00:00
-lead: We provide services with limited resources at **no cost** for all
+lead: We provide services with limited resources at **no cost** to all
   members affiliated with Brown. For advanced computing that requires extra resources,
   we charge a quarterly fee. See below the rates for FY20
 
