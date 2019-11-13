@@ -28,7 +28,6 @@
 - name: Paul Stey
   type: Full Time
   team: Leadership
-  subteam: 
   title: Director of Scientific Computing and Data Science
   github_username: paulstey
   brown_directory_uuid: 0525f19f-d156-4c47-a2e1-8b4e904a2e84
@@ -150,7 +149,6 @@
 - name: Thomas Serre
   type: Full Time
   team: Leadership
-  subteam: 
   title: Faculty Director
   github_username: tserre
   brown_directory_uuid: 9517d64b-6924-1c56-1f7e-2452b2304030
@@ -198,7 +196,6 @@
 - name: Singh Saluja
   type: Full Time
   team: CCV Operations
-  subteam: 
   title: Research Services Support Specialist
   github_username: singhsaluja
   brown_directory_uuid: 786ef442-dcc4-4463-aaf3-c5728a2a8d38
@@ -207,7 +204,6 @@
 - name: Linnea Wolfe
   type: Full Time
   team: Leadership
-  subteam:
   title: Director of Operations
   github_username: ''
   brown_directory_uuid: 3ddfe2bd-672a-0f09-03bc-cbb37339a434
@@ -236,7 +232,6 @@
 - name: Paulo S Baptista
   type: Full Time
   team: CCV Operations
-  subteam: 
   title: Senior Research Systems Administrator
   github_username: ''
   brown_directory_uuid: 6e74d82d-bce5-0512-4ba0-f91ff313675a
@@ -245,7 +240,6 @@
 - name: David D Johnson
   type: Full Time
   team: CCV Operations
-  subteam: 
   title: Senior HPC Systems Engineer
   github_username: ''
   brown_directory_uuid: c14eb6ba-4b51-aabd-bf11-ef4071826060
@@ -254,7 +248,6 @@
 - name: Sam Fulcomer
   type: Full Time
   team: Leadership
-  subteam: 
   title: Associate Director
   github_username: ''
   brown_directory_uuid: 0d83d4b5-85a5-62fc-44a3-81eaff49e183
@@ -263,7 +256,6 @@
 - name: Geoffrey Avila
   type: Full Time
   team: CCV Operations
-  subteam: 
   title: Senior HPC Systems Engineer
   github_username: ''
   brown_directory_uuid: f904bb23-202f-48fb-bf93-7b7d326c7043
