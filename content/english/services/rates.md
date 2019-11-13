@@ -22,6 +22,8 @@ lead: We provide services with limited resources at **no cost** to all
 | HPC Priority Large Memory | 32 cores for 96 hours with 760GB real memory or 2TB Virtual | $100/user/quarter | For very memory-intensive workloads
 | Condo Rental | 256 Cores | $10,000 | No wall-time limits |
 
+> Each account is assigned 20G Home, 512G Scratch (purged every 30 days), and 256G Data Directory (shared amongst members of the group) by default. Except for no-PI exploratory accounts, they do not get a Data directory.
+
 # Staff Services
 | Support Level | Description | Cost |
 | --- | --- | --- |
@@ -30,8 +32,6 @@ lead: We provide services with limited resources at **no cost** to all
 | Project Collaboration | Percent time of a specific staff member charged directly to the grant | %FTE |
 
 {{% /table %}}
-
-> Each account is assigned 20G Home, 512G Scratch (purged every 30 days), and 256G Data Directory (shared amongst members of the group) by default. Except for no-PI exploratory accounts, they do not get a Data directory.
 
 > † Free exploratory accounts are available to all faculty and PIs at Brown. Priority accounts have a higher Quality-of-Service (QOS) i.e. priority accounts will have faster job start times.
 
