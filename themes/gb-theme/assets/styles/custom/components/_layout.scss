@@ -114,18 +114,15 @@ section, footer {
   justify-content: flex-end;
   padding: 0;
   border: 2px solid white;
+  p {
+    line-height: 1.2;
+  }
 }
 
 .people-card-body {
   background-color: rgb(255,255,255);
   width: 100%;
   padding: 0.5rem;
-}
-
-.arc-people {
-  p {
-    line-height: 1.2;
-  }
 }
 
 .text-small {
