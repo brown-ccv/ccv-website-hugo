@@ -217,38 +217,6 @@
             <p class="p-medium">{{ .Params.cite.facilities | markdownify }}</p>
         </article>
 
-
-        <!-- Publications -->
-        <!-- <header id="publications" class="d-flex align-items-center">
-          <span class="btn-red btn-ico btn-lg btn-rounded"><i class="fas fa-book-dead"></i></span>
-          <h1 class="mx-4 text-secondary">Publications</h1>
-          <hr class="bg-dark w-40"/>
-        </header>
-
-        <div id="citations" class="fs-14 col-md-10 container my-3">
-          {{ range sort .Site.Data.publications "pubyear" "desc"}}
-          <p>
-            {{ $last := sub (len .author) 1 }}
-            {{ range $index, $author := .author }}
-            <span>{{ $author.family }}, {{ $author.given }}
-            {{if ne $index $last}}
-            ,
-            {{ else }}
-            .
-            {{ end }}
-            </span>
-            {{ end }}
-            <i>{{ .title }}.</i>
-            <span>{{ if .page}}{{ .page }}.{{end}}</span>
-            <span>{{if .volume}}{{ .volume }}.{{end}}</span>
-            <span class="font-weight-bold">{{if .journal}}{{.journal}}.{{end}}</span>
-            <span>{{if .publisher}}{{ .publisher }}.{{end}}</span>
-            <span class="font-weight-bold">{{if .pubyear}}{{ .pubyear }}.{{end}}</span>
-            {{if .URL}}<a href="{{.URL}}"><span class="fas fa-external-link-square-alt fs-18"></span></a>{{end}}
-          </p>
-          {{ end }}
-        </div> -->
-
       </div>
     </div>
 {{ end }}
