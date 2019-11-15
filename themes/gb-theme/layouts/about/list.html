@@ -190,9 +190,9 @@
         </header>
 
 
-        <article id="opportunities-content" class="d-flex py-4">
+        <article id="opportunities-content" class="container-fluid row py-4">
           {{ range .Site.Data.opportunities }}
-            <div class="card-body boxed bg-white mx-1 mb-1">
+            <div class="card-body boxed bg-white mx-1 mb-1 col-auto" style="min-width: 30%;">
               <h2 class="card-title font-weight-bold mb-0 fs-20">{{ .name }}</h2>
               <p class="card-text fs-18">{{ .title }}</p>
               <p class="font-weight-bold text-blue text-small"><span class="icon-users2 pr-1"></span>{{ .team }} |
