@@ -1,1 +1,5 @@
+{{if (.Get 1) }}
 <span class="fas fa-{{.Get 0}} fa-{{.Get 1}}x"></span>
+{{ else }}
+<span class="fas fa-{{.Get 0}}"></span>
+{{end}}
