@@ -26,8 +26,7 @@ $(function () {
     $('#TableOfContents > ul > li > a').addClass("nav-link")
                                        .attr("data-scroll", "");
 
-
-// toggle menu
+    // toggle menu
     $('.menu-trigger').click(function () {
         $('#menu').toggleClass('menu-visible')
     });
