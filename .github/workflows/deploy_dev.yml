@@ -1,0 +1,28 @@
+name: Deploy Dev
+
+on:
+  push:
+    branches: 
+      - develop
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: get embeds and github repos
+      run: npm run data
+    - name: Build Hugo
+      uses: lowply/build-hugo@v0.58.3
+      with:
+        args: --baseURL https://compbiocore.github.io/cbc-website/
