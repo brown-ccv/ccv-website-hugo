@@ -46,16 +46,27 @@ menu:
     title: News
     url: https://medium.com/brown-ccv
     weight: 6
-  - identifier: apps
-    name: Apps
-    title: Apps
-    url: /apps/
-    weight: 7
   - identifier: events
     name: Events
     title: Events
     url: https://events.brown.edu/ccv/view/month
+    weight: 7
+  - identifier: ourwork
+    name: Our Work
+    title: "Our Work:"
     weight: 8
+  - identifier: apps
+    parent: ourwork
+    name: Software
+    title: Software
+    url: /apps/
+    weight: 8
+  - identifier: workshops
+    parent: ourwork
+    name: Workshops
+    title: Workshops
+    url: /workshops/
+    weight: 9
 
 params:
   contact:

@@ -50,14 +50,22 @@
         {{ $savedDataLoc := .dataLoc }}
 
         {{ range $i, $apps := sort $jsonData "type" "asc"}}
-        {{ if (eq $apps.type "software")}}
+
+
+        {{ if or (eq $apps.type "tutorial") (eq $apps.type "workshop") }}
+
         <!-- if new subsection started -->
         {{ if not (in $seen $apps.type) }}
             {{ $seen = $seen | append $apps.type }}
-
             <!-- close off previous subsections -->
             {{ if not (eq $i 0) }}
                 </article>
+            {{ end }}
+
+            {{ if or (eq $apps.type "tutorial") (eq $apps.type "workshop") }}
+            <div class="d-flex justify-content-around">
+                <h2 class="text-blue">{{ title $apps.type }}s</h2>
+            </div>
             {{ end }}
 
             <article id="apps-content" class="row justify-content-center py-4">
@@ -125,10 +133,8 @@
         {{ if eq $i $totalLen }}
             </article>
         {{ end }}
-
         {{ end }}
         {{ end }}
-
     </div>
 
     {{ end }}

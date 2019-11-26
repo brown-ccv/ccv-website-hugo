@@ -8,10 +8,14 @@
   translation: News
 - id: Documentation
   translation: Documentation
-- id: Apps
-  translation: Apps
+- id: Software
+  translation: Software
 - id: Events
   translation: Events
+- id: Workshops
+  translation: Workshops
+- id: Our Work
+  translation: "Our Work:"
 
 - id: learn_about_ccv_services
   translation: Learn About CCV Services

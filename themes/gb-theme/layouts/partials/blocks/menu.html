@@ -12,26 +12,33 @@
             {{ $currentPage := . }}
             {{ range .Site.Menus.main.ByWeight }}
                 {{ if .HasChildren }}
-                    <li class="nav-item {{ if $currentPage.HasMenuCurrent "main" . }}active{{ end }}">
-                        <a class="nav-link" href="#">
+                    <li id="{{ .Title | urlize }}" class="{{ if $currentPage.HasMenuCurrent "main" . }}active{{ end }}">
+                        <a class="nav-link text-dark">
                             {{ .Pre }}
                             <span>{{ .Title }}</span>
                         </a>
                     </li>
                     <ul class="sub-menu">
                         {{ range .Children }}
-                            <li class="{{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }}">
-                                <a class="nav-link" href="{{ .URL }}">
-                                {{ .Title }}
+                            <li id="{{ .Title | urlize }}" class="{{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }}">
+                                <a class="nav-link text-success" href="{{ .URL }}">
+                                    <span class="fs-24 link ">
+                                        {{if (eq .Title "Workshops")}}
+                                        <span class="fad fa-chalkboard-teacher"></span>
+                                        {{else}}
+                                        <span class="fad fa-code"></span>
+                                        {{end}}
+                                        {{ i18n .Title }}
+                                    </span>
                                 </a>
                             </li>
                         {{ end }}
                     </ul>
                 {{ else }}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ .URL }}">
+                    <li id="{{ .Title | urlize }}" class="nav-item">
+                        <a class="nav-link text-dark" href="{{ .URL }}">
                             {{ .Pre }}
-                            <span class="text-dark fs-24 link ">{{ i18n .Title }}</span>
+                            <span class="fs-24 link ">{{ i18n .Title }}</span>
                         </a>
                     </li>
                 {{ end }}
