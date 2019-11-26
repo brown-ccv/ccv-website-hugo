@@ -1,5 +1,9 @@
 ---
 title: Student Accounts
+
+tagTitle: Student Accounts - Center for Computation and Visualization
+tagDescription: Learn more about the CCV's HPC resources for classes, workshops, demonstrations, and other instructional uses.
+
 date: 2019-01-24 20:20:17 +0000
 category: Classroom
 lead: Accounts on Brown's HPC systems, custom-tailored for class use

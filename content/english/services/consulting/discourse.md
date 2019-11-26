@@ -1,5 +1,9 @@
 ---
 title: "Discourse"
+
+tagTitle: Discourse - Center for Computation and Visualization
+tagDescription: Got Questions? Discover the Q&A platform for researchers, facilitators, sysadmins and others who do research computing.
+
 date: 2019-05-29T15:04:54-04:00
 draft: false
 category: "Consulting"

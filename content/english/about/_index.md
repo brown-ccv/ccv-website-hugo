@@ -1,5 +1,9 @@
 ---
 title: About
+
+tagTitle: About - Center for Computation and Visualization
+tagDescription: Learn more about the CCV's mission, values, and people. 
+
 items:
 - name: mission
   icon: crow

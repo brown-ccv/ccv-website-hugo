@@ -6,6 +6,9 @@ icon = ""
 lead = "Server access without the need to purchase or maintain hardware"
 title = "Virtual Machine Hosting"
 
+tagTitle = "Virtual Machine Hosting - Center for Computation and Visualization"
+tagDescription = "Looking for access to a Server without having to purchase or maintain hardware? Consider CCV's Virtual Machine Hosting."
+
 +++
 Virtual Hosting is aimed at departments or researchers who want access to a Server but don’t want to purchase or maintain the hardware. The virtual machines (VMs) can be either Windows or Linux servers. Depending on your needs, we can assist with basic system administration and maintenance.
 

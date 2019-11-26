@@ -1,5 +1,9 @@
 ---
 title: Visualization Lab
+
+tagTitle: Visualization Lab - Center for Computation and Visualization
+tagDescription: Get access to a wide range of VR and visualization technologies with CCV's Visualization Lab.
+
 date: 2019-01-22 18:30:55 +0000
 category: Visualization Systems
 icon: eye2

@@ -1,5 +1,9 @@
 ---
 title: YURT
+
+tagTitle: YURT - Center for Computation and Visualization
+tagDescription: Learn about the YURT, CCV's state-of-the-art virtual reality theater.
+
 date: 2019-01-22T18:29:55.000+00:00
 category: Visualization Systems
 icon: eye2
