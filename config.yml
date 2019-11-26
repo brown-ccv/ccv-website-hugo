@@ -1,4 +1,3 @@
-baseURL: https://ccv.brown.edu/ #http://ccv-website-dev.s3-website-us-east-1.amazonaws.com
 languageCode: en-us
 title: Brown Center for Computation and Visualization
 theme: gb-theme
@@ -46,11 +45,27 @@ menu:
     title: News
     url: https://medium.com/brown-ccv
     weight: 6
-  - identifier: events  
+  - identifier: events
     name: Events
     title: Events
     url: https://events.brown.edu/ccv/view/month
+    weight: 7
+  - identifier: ourwork
+    name: Our Work
+    title: "Our Work:"
     weight: 8
+  - identifier: apps
+    parent: ourwork
+    name: Software
+    title: Software
+    url: /apps/
+    weight: 8
+  - identifier: workshops
+    parent: ourwork
+    name: Workshops
+    title: Workshops
+    url: /workshops/
+    weight: 9
 
 params:
   contact:
@@ -69,7 +84,7 @@ params:
   githubLinks:
     ccvGithub: https://github.com/brown-ccv/
     cbcGithub: https://github.com/compbiocore/
-    
+
 # i18n
 languages:
   en:

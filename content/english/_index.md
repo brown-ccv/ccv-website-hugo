@@ -1,5 +1,9 @@
 ---
 title: Center for Computation & Visualization
+
+tagTitle: Center for Computation & Visualization
+tagDescription: Scientific and technical computing expertise to advance computational research.
+
 hero:
   title: Center for Computation & Visualization
   lead: Scientific and technical computing expertise to advance computational research

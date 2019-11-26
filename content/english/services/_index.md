@@ -1,5 +1,9 @@
 ---
 title: Services
+
+tagTitle: Services - Center for Computation and Visualization
+tagDescription: Learn more about the CCV's high-performance computing and visualization services. 
+
 hero:
   lead: 'CCV provides computing infrastructure, consulting, and support to the Brown
     Community. We have HPC specialists, data scientists, and research software engineers

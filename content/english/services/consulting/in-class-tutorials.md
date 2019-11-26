@@ -1,5 +1,9 @@
 ---
 title: In-Class Tutorials
+
+tagTitle: In-Class Tutorials - Center for Computation and Visualization
+tagDescription: CCV offers a variety of tutorials to provide students with experience using Brown's HPC systems. Learn more here.
+
 date: 2019-01-24 20:20:06 +0000
 category: Classroom
 lead: CCV staff members introduce students to Brown's HPC systems

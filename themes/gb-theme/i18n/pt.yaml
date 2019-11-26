@@ -8,6 +8,8 @@
   translation: Notícias
 - id: Documentation
   translation: Documentação
+- id: Apps
+  translation: Apps
 - id: Events
   translation: Eventos
 

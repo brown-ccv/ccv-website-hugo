@@ -1,0 +1,143 @@
+{{ define "content" }}
+<!-- header - yellow container -->
+{{ $current_section := .Section }}
+<div id="hero-list" class=" bg-yellow text pb-5">
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 d-flex flex-column pt-6 pb-10">
+          <h1 class="fs-60"> {{ humanize .Params.title }} </h1>
+          <p class="fs-30">{{ .Params.lead | markdownify }}</p>
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- table of contents -->
+
+<div class="container-fluid overlay-top justify-content-center d-flex">
+    <div class="col-lg-6 col-md-10 col-sm-12">
+        <ul class="nav nav-toc-page flex-column boxed">
+            {{ range .Params.items }}
+            <li class="mx-1 nav-item bg-white my-1">
+                <a class="nav-link section-nav-link d-flex align-items-center" href="#{{ .locID }}">
+                    <span class="text-dark fad fa-{{ .icon }} pr-1 fa-2x"></span>
+                    <span class="text-dark fs-20">{{ title .name }}</span>
+                </a>
+            </li>
+            {{ end }}
+        </ul>
+    </div>
+</div>
+
+<div class="container-fluid d-flex justify-content-center py-10 px-0">
+    <div class="col-lg-10 col-md-11 col-sm-12">
+
+    {{ range .Params.items }}
+
+    <!-- Apps -->
+    <header id="{{ .locID }}" name="{{ .locID }}" class="d-flex align-items-center pt-4 mb-4">
+        <span class="btn-blue btn-ico btn-lg btn-rounded d-flex justify-content-center align-items-center">
+            <span class="fad fa-{{ .icon }}"></span>
+        </span>
+        <h1 class="mx-4 text-secondary">{{ .name }} </h1>
+        <hr class="bg-dark w-40"/>
+    </header>
+
+    <!-- Subsections (Documentation, Tutorials, etc.) -->
+    <div>
+        {{ $seen := slice }}
+        {{ $jsonData := getJSON .dataLoc }}
+        {{ $savedDataLoc := .dataLoc }}
+
+        {{ range $i, $apps := sort $jsonData "type" "asc"}}
+
+
+        {{ if or (eq $apps.type "tutorial") (eq $apps.type "workshop") }}
+
+        <!-- if new subsection started -->
+        {{ if not (in $seen $apps.type) }}
+            {{ $seen = $seen | append $apps.type }}
+            <!-- close off previous subsections -->
+            {{ if not (eq $i 0) }}
+                </article>
+            {{ end }}
+
+            {{ if or (eq $apps.type "tutorial") (eq $apps.type "workshop") }}
+            <div class="d-flex justify-content-around">
+                <h2 class="text-blue">{{ title $apps.type }}s</h2>
+            </div>
+            {{ end }}
+
+            <article id="apps-content" class="row justify-content-center py-4">
+        {{ end }}
+
+        <div class="card-responsive boxed bg-white col-md-5 mx-1 mb-2 px-3 py-3">
+            <h1 class="card-title font-weight-bold mb-0 fs-20">
+                {{ if $apps.repo_url }}
+                    <a href={{ $apps.repo_url }}><h4 class="text-blue">{{ $apps.site_name }}
+                        <i class="fab fa-github"></i></h4>
+                    </a>
+                {{ else }}
+                    {{ if eq $savedDataLoc "data/info-compbiocore.json" }}
+                    <a href={{ print "https://github.com/compbiocore/" $apps.repo }}><h4 class="text-blue">{{ $apps.site_name }}
+                        <i class="fab fa-github"></i></h4>
+                    </a>
+                    {{ else if $savedDataLoc "data/info-brown-ccv.json"}}
+                    <a href={{ print "https://github.com/brown-ccv/" $apps.repo }}><h4 class="text-blue">{{ $apps.site_name }}
+                        <i class="fab fa-github"></i></h4>
+                    </a>
+                    {{ end }}
+                {{ end }}
+            </h1>
+            <p class="card-text fs-16 text-orange">
+            Maintainers:
+            {{ range $i2, $details := $apps.authors }}
+                {{ $totalLen := sub (len $apps.authors) 1 }}
+                {{ if eq $i2 $totalLen }}
+                    <a href="https://github.com/{{$details.github_user}}"> {{ $details.name }}</a>
+                {{ else }}
+                    <a href="https://github.com/{{$details.github_user}}"> {{ $details.name }}</a> · 
+                {{ end }}
+            {{ end }}
+            </p>
+
+            <p class="card-text fs-18">{{ $apps.site_description }} </p>
+
+            <div>
+                {{ if eq $savedDataLoc "data/info-compbiocore.json" }}
+                <img src="https://img.shields.io/travis/compbiocore/{{ .repo }}.svg?style=flat"/>
+                {{ end }}
+
+                {{ if .docs_url }}
+                <a href="{{ .docs_url }}">
+                    <img src="https://img.shields.io/badge/docs-stable-blue.svg?style=flat"/>
+                </a>
+                {{ end }}
+
+                {{ if .doi }}
+                <a href='https://doi.org/{{ .doi }}'>
+                    <img src='https://img.shields.io/badge/DOI-{{ replace (replace (replace .doi "/" "%2F") "_" "__") "-" "--" }}-purple.svg?style=flat'/>
+                </a>
+                {{ end }}
+
+                {{ if .pypi }}
+                <a href='https://pypi.org/project/{{ .site_name }}/'>
+                    <img src='https://img.shields.io/pypi/v/{{ .site_name }}.svg?style=flat'/>
+                </a>
+                {{ end }}
+            </div>
+        </div>
+
+        <!-- close off final subsection -->
+        {{ $totalLen := sub (len $apps) 1 }}
+        {{ if eq $i $totalLen }}
+            </article>
+        {{ end }}
+        {{ end }}
+        {{ end }}
+    </div>
+
+    {{ end }}
+    </div>
+</div>
+{{ end }}

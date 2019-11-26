@@ -37,7 +37,7 @@ Go to `localhost:8080`
 
 ## Updating Content
 
-The code is on [GitHub](https://github.com/brown-ccv/ccv-website). We will use the gitflow branching model. 
+The code is on [GitHub](https://github.com/brown-ccv/ccv-website). We will use the gitflow branching model.
 
 **GitHub**: If you want to add or update content, create a `feature branch` from `develop`. When done, send a PR to `develop`. The `develop` (staging) branch will deploy to `datasci.brown.edu/ccv-dev/`. The staging site should then be reviewed and merged into `master` for production.  
 > **Any change pushed to `develop` will trigger a Docker build. If the build is successful, a webhook will trigger a script in the `datasci.brown.edu` server that will pull and restart the image.** This process takes a few minutes, be patient.
@@ -50,7 +50,6 @@ Sections:
 - Showcase Projects
 - Documentation - https://app.gitbook.com/@brown-cis/spaces
 - People
-- Citations
 - Opportunities
 
 #### News
@@ -78,7 +77,7 @@ hugo new content/english/projects/project.md
 
 #### Documentation
 
-Documentation is managed with Gitbook. 
+Documentation is managed with Gitbook.
 [Check the docs here](https://docs.ccv.brown.edu/)
 
 #### The data folder
@@ -108,16 +107,18 @@ Documentation is managed with Gitbook.
   link: "https://brown.wd5.myworkdayjobs.com/en-US/staff-careers-brown/job/180-George-Street/Research-Services-Support-Specialist_REQ151702"
 ```
 
-##### Citations
-`data/_citations.taml`
+##### Apps
 
-```yaml
-- '10.1002/2016GL071307'
-- '10.5281/zenodo.2553597'
-- '10.3354/meps12568'
+Fetching apps data requires a .env file (template below).
+
+- The .env file is included in .gitignore and should never be committed.
+- You can obtain a Github Access Token by following [these instructions](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line).
+
 ```
-[More on citations](https://datasci.brown.edu/ccv-dev/2019/02/how-to-write-docs-and-posts-for-the-ccv-website/#citations)
-
+GITHUB_TOKEN=
+GITHUB_USER=
+ORGANIZATION=brown-ccv,compbiocore
+```
 
 #### CCV Bot - Calendar and Oscar/Stronghold Account Request.  
 
