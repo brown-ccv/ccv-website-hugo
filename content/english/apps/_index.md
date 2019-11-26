@@ -1,10 +1,10 @@
 ---
-title: Open Source Software and Applications
+title: Software and Applications
 
 tagTitle: Apps - Center for Computation and Visualization
-tagDescription: Browse through some of the CCV's open source software and applications.
+tagDescription: Browse through some of the CCV's software and applications.
 
-lead: 'Here are some of our open source software and applications.'
+lead: 'Here are some of our software projects and applications.'
 
 items:
 - name: 'CCV Open Source Software and Applications'
