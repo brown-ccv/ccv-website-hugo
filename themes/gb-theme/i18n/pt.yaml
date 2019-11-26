@@ -10,6 +10,8 @@
   translation: Documentação
 - id: Apps
   translation: Apps
+- id: Events
+  translation: Eventos
 
 - id: learn_about_ccv_services
   translation: Saiba mais sobre nossos serviços

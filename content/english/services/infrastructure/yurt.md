@@ -24,7 +24,7 @@ We welcome projects that take advantage of this unique technology to advance tea
 
 
 
-Starting on the Fall of 2019, we will open the YURT to the public on the last Friday of each month at 10 am. Tours will happen if a minimum of three people have signed up for a visit. We can host at most 8 people and the tour will typically last between 30-60 minutes. If you are interested in visiting the YURT please reserve your spot in our calendar.
+Starting on the Fall of 2019, we will open the YURT to the public on the first Friday of each month at 4 pm. Tours will happen if a minimum of three people have signed up for a visit. We can host at most 8 people and the tour will typically last between 30-60 minutes. If you are interested in visiting the YURT please reserve your spot in our calendar.
 
 {{< button text="Reserve a spot" href="https://calendar.google.com/calendar/selfsched?sstoken=UU1GdVFDaDFsOGI0fGRlZmF1bHR8ZjA2OWMxOTg3ODdkYTk5M2JlYThkZjU1YWU0ZDgyNzU" >}}
 

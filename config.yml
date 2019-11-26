@@ -51,6 +51,11 @@ menu:
     title: Apps
     url: /apps/
     weight: 7
+  - identifier: events
+    name: Events
+    title: Events
+    url: https://events.brown.edu/ccv/view/month
+    weight: 8
 
 params:
   contact:
@@ -66,6 +71,9 @@ params:
       text: Help us improve!
       link: https://docs.google.com/forms/d/e/1FAIpQLSdT00ZSXQh8vKbAMvc1xUoBfGtf2SU8bw5T3tIchKf03TgfbA/viewform?usp=sf_link
       fa: fas fa-star-half-alt
+  githubLinks:
+    ccvGithub: https://github.com/brown-ccv/
+    cbcGithub: https://github.com/compbiocore/
 
 # i18n
 languages:

@@ -5,6 +5,12 @@
   .ccv-logo {
     height: 40px;
   }
+  @extend .justify-content-between;
+}
+
+@include media-breakpoint-down(sm) {
+  justify-content: flex-start !important;
+  padding-left: 1rem !important;
 }
 
 @media (max-width: 576px) {

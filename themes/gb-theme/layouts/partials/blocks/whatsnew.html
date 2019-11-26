@@ -1,46 +1,24 @@
 <section id="whatsnew" class="bg-beige">
   <section>
 
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-12">
-
-        <header class="d-flex align-items-center">
-          <span class="btn-green btn-ico btn-lg btn-rounded mx-3">
-            <i class="text-light fas fa-kiwi-bird"></i>
-          </span>
-          <h1 class="h1-home py-8 text-gray">{{ .Site.Data.whatsnew.title | markdownify }}</h1>
-        </header>
-
-      </div>
-      <article id="new-card">
+    <div class="d-flex justify-content-center px-3">
+      <article id="new-card" class="pt-3">
         {{ range .Site.Data.whatsnew.items }}
-        {{ if .media }}
-        <div class="card stacked"
-             style="background-image:url('{{$.Site.BaseURL}}images/{{.media.path}}'); background-position: 50% 10%; background-size: 93%;">
-          <div class="p-1 d-flex justify-content-center">
-          </div>
-        </div>
-        {{ else }}
         <div class="card stacked">
           <div class="card-body">
                 <h3 class="font-weight-normal mb-2">{{ .title }}</h3>
                 <hr class="bg-yellow">
             <div class="d-flex align-items-center">
-                <span class="{{.image.name}} fa-4x px-3 text-yellow"></span>
+                <span class="{{.fa.prefix}} {{.fa.icon}} fa-7x px-3 text-yellow"></span>
                 <p>
                   {{ .text | markdownify }}
                   {{ if .link }}<a href="{{.Site.BaseURL }}{{ .link }}" class="action mt-1 text-blue">More</a>{{ end }}
                 </p>
             </div>
-
           </div>
-
         </div>
-        {{ end }}
         {{ end }}
       </article>
     </div>
-  </div>
 </section>
 </section>

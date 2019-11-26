@@ -37,22 +37,25 @@ Go to `localhost:8080`
 
 ## Updating Content
 
-The code is on [GitHub](https://github.com/brown-ccv/ccv-website). We will use the gitflow branching model. Currently, there are two ways to update content:
+The code is on [GitHub](https://github.com/brown-ccv/ccv-website). We will use the gitflow branching model.
 
-1. **GitHub**: If you want to add or update content, create a `feature branch` from `develop`. When done, send a PR to `develop`. The `develop` (staging) branch will deploy to `datasci.brown.edu/ccv-dev/`. The staging site should then be reviewed and merged into `master` for production.  
+**GitHub**: If you want to add or update content, create a `feature branch` from `develop`. When done, send a PR to `develop`. The `develop` (staging) branch will deploy to `datasci.brown.edu/ccv-dev/`. The staging site should then be reviewed and merged into `master` for production.  
 > **Any change pushed to `develop` will trigger a Docker build. If the build is successful, a webhook will trigger a script in the `datasci.brown.edu` server that will pull and restart the image.** This process takes a few minutes, be patient.
 
-2. [**Forestry.io**](https://app.forestry.io/sites/gm-j7ebsou8h0q/#/): A static CMS that commits. Forestry gives you a GUI to update content. It's also convenient for small changes. When changes are saved, Forestry will commit and push to `develop`. That will trigger the deployment process. If you save multiple times, you'll see that Docker Hub will have multiple builds queued up, so you might want to stop the earlier builds manually.
 
 ## Creating New Content
 
 Sections:
+- News (Blog) - https://www.medium.com/brown-ccv
 - Showcase Projects
-- Documentation
+- Documentation - https://app.gitbook.com/@brown-cis/spaces
 - People
 - Opportunities
 
-#### Projects to Showcase on Home Page
+#### News
+This is the blog section. It's now on [Medium](https://www.medium.com/brown-ccv)
+
+#### Pojects to Showcase on Home Page
 Project, labs, initiatives, groups, collaborations, or anything we want to showcase. Items under this section will show up on the home page's carousel.
 
 ```yaml
@@ -74,7 +77,7 @@ hugo new content/english/projects/project.md
 
 #### Documentation
 
-Documentation is managed with Gitbook. 
+Documentation is managed with Gitbook.
 [Check the docs here](https://docs.ccv.brown.edu/)
 
 #### The data folder
@@ -106,7 +109,7 @@ Documentation is managed with Gitbook.
 
 ##### Apps
 
-Fetching apps data requires a .env file (template below). 
+Fetching apps data requires a .env file (template below).
 
 - The .env file is included in .gitignore and should never be committed.
 - You can obtain a Github Access Token by following [these instructions](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line).
@@ -120,7 +123,7 @@ ORGANIZATION=brown-ccv,compbiocore
 #### CCV Bot - Calendar and Oscar/Stronghold Account Request.  
 
 > [CCV's Calendar](https://calendar.google.com/calendar/b/2?cid=Y2N2LWJvdEBicm93bi5lZHU)
-
+> We also have an Events@brown calendar. https://event.brown.edu/ccv
 ##### Events
 To add events to the website, simply invite `ccv-bot@brown.edu` to your event. Make sure to set a location, have a displayable name, and a nice typo-free, short description. The Bot needs to accept the invitation before it can be displayed on the website.
 
@@ -129,4 +132,4 @@ In addition, the Bot checks the calendar every day around 7:25am. It combines th
 The Bot will also create a deskpro ticket when users request an account on Oscar or Stronghold.
 
 #### Guidelines for writing Markdown content
-Find detailed information on how to write your markdown content and include shortcodes specific for CCV's website [here](https://datasci.brown.edu/ccv-dev/2019/02/how-to-write-docs-and-posts-for-the-ccv-website/).
+Find detailed information on how to write your markdown content and include shortcodes specific for CCV's website [here](https://datasci.brown.edu/2019/02/how-to-write-docs-and-posts-for-the-ccv-website/).

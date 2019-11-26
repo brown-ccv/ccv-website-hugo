@@ -1,0 +1,9 @@
+#new-card .card {
+  flex-basis: 30% !important;
+}
+
+@include media-breakpoint-down(sm) {
+  #new-card .card {
+    flex-basis: 96% !important;
+  }
+}

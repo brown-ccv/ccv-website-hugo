@@ -10,6 +10,8 @@
   translation: 文件
 - id: Apps
   translation: Apps
+- id: Events
+  translation: 大事记
 
 - id: learn_about_ccv_services
   translation: 了解CCV服务

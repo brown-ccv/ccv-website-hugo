@@ -4,7 +4,7 @@
   type: Full Time
   team: Advanced Research Computing
   subteam: Data & Visualization
-  title: Research Software Engineer
+  title: Senior Research Software Engineer
   github_username: fernandogelin
   brown_directory_uuid: 8144f0fb-0d36-47ed-ae64-ab07c232ebba
   bio: Fernando grew up in Brazil, received his PhD in Biology from the University
@@ -86,7 +86,7 @@
     how change happens.
   image: august_main.jpg
 - name: Raj Shukla
-  weight: "11"
+  weight: "13"
   type: Full Time
   team: Advanced Research Computing
   subteam: High-Performance Computing
@@ -158,7 +158,7 @@
     Bretagne (France) in 2000.
   image: thomas_main.jpg
 - name: Paul Hall
-  weight: "13"
+  weight: "11"
   type: Full Time
   team: Advanced Research Computing
   subteam: High-Performance Computing
@@ -213,7 +213,7 @@
   type: Full Time
   team: Advanced Research Computing
   subteam: Data & Visualization
-  title: Graphics System Programmer
+  title: Graphics/Visualization Software Engineer
   github_username: kmilo9999
   brown_directory_uuid: 448fac67-1dea-42ef-8205-9305ac9b79a6
   bio: ''
@@ -304,3 +304,33 @@
   github_username: mauradriscoll
   brown_directory_uuid: 333b6b44-a77c-4df4-9d02-d01e02b15572
   image: maura_main.jpg
+- name: Minsik Cho
+  weight:
+  type: CCV Interns
+  team: Advanced Research Computing
+  subteam: High-Performance Computing
+  title: HPC Intern
+  github_username: mscho527
+  brown_directory_uuid: 883cb383-0b7a-40eb-8e4f-8a8805e7306a
+  bio: Minsik is an undergrad student studying chemical physics.
+  image: minsik_main.jpg
+- name: Louis Kilfoyle
+  weight:
+  type: CCV Interns
+  team: Advanced Research Computing
+  subteam: Institutional Data
+  title: Data Science Intern
+  github_username: louis-kilfoyle
+  brown_directory_uuid: 5b343470-0e0f-4797-8a13-519449cb5d49
+  bio: Louis is an undergrad studying Computer Science and Applied Mathematics.
+  image: louisk_main.jpg
+- name: Cameron Webster
+  weight:
+  type: CCV Interns
+  team: Advanced Research Computing
+  subteam: Institutional Data
+  title: Data science Intern
+  github_username: camweb36
+  brown_directory_uuid: 3b9db98c-fb5f-45a8-b220-1abfc19dd4e6
+  bio: Cameron is an undergraduate studying applied math-biology
+  image: cameron_main.jpg

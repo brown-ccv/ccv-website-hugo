@@ -10,6 +10,10 @@
             <i class="text-light fas fa-calendar"></i>
           </span>
           <h1 class="py-8 h1-home">Upcoming Events</h1>
+          <a class="ml-4 text-green" href="https://events.brown.edu/ccv/view/month">
+            <span class="fad fa-calendar"></span>
+            Click here for full schedule
+          </a>
         </header>
         <section>
 
@@ -18,56 +22,8 @@
     </div>
   </div>
 </section>
-<div class="container">
-  <section class="bg-white row">
-  <div class="owl-carousel
-              owl-carousel-showcase
-              owl-carousel-fluid
-              owl-loaded owl-drag
-              skrollable
-              skrollable-before"
-        data-items="[3,3,2]"
-        data-center="false"
-        data-nav="false"
-        data-margin="40"
-        data-loop="true"
-        data-dots="true"
-        >
-
-
-        {{ $events := getJSON "https://datasci.brown.edu/gcal-api/" }}
-        {{ range (sort $events.events ".start.dateTime" "asc") }}
-        {{ if ne .visibility "private" }}
-        {{ if ne .id "4ms1nkdapkkr7h2osu6mkb3ih6_R20190508T173000"}}
-        <div class="py-2">
-          <div class="type boxed mr-2 bg-light text-dark">
-            <div  class="d-flex flex-column">
-              <a  target="_blank" href="{{.htmlLink}}">
-                <span class="badge badge-outline badge-outline-primary scale"><span class="fas fa-calendar-alt fa-3x"></span></span>
-              </a>
-              <a class="page-box" data-target="{{sha1 .title }}" href="{{.htmlLink}}">
-                {{ $min := (time .start.dateTime).Minute }}
-                <p class="h5">{{ dateFormat "Monday" .start.dateTime  }}</p>
-                <p class="h6">{{ dateFormat "Jan 2, 2006" .start.dateTime }}</p>
-                <p class="h1 fs-16">{{ dateFormat "3:04PM" .start.dateTime }}-{{ dateFormat "3:04PM" .end.dateTime }}</p>
-                {{ with .location }}
-                <p class="fs-14"><span class="fas fa-map-marker-alt"></span>&nbsp;{{ . }}</p>
-                {{ end }}
-                {{ with .description }}
-                <p class="fs-14"><span class="fs-14 fas fa-chalkboard-teacher"></span>&nbsp;{{ markdownify . }}</p>
-                {{ end }}
-                <div class="type-example">
-                  <h3>{{ .summary }}</h3>
-                </div>
-              </a>
-            </div>
-          </div>
-      </div>
-      {{ end }}
-      {{ end }}
-      {{ end }}
-
-  </div>
-  </section>
+<div class="container-fluid pb-4">
+  <section class="bg-white row d-flex flex-row justify-content-center">
+    <iframe src="https://calendar.google.com/calendar/b/1/embed?height=400&amp;wkst=1&amp;bgcolor=%23ffffff&amp;ctz=America%2FNew_York&amp;src=Y2N2LWJvdEBicm93bi5lZHU&amp;color=%2322AA99&amp;showTitle=0&amp;showNav=0&amp;showDate=1&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;showPrint=0&amp;title=CCV%20Events&amp;mode=WEEK" style="border-width:0" width="1000" height="400" frameborder="0" scrolling="no"></iframe>
 </div>
 </section>

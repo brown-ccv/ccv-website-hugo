@@ -7,10 +7,10 @@ tagDescription: Looking for High-Peformance Computing? Learn about Oscar, CCV’
 date: 2019-01-22T18:29:23.000+00:00
 category: Computing
 icon: server2
-lead: Research computing cluster with ~500 nodes, including both CPU and GPU nodes,
-  and a parallel filesystem
+lead: Research computing cluster featuring more than 300 multi-core nodes, GPU nodes,
+  and a high-performance parallel filesystem
 haas: true
-
+docs_link: oscar
 ---
 {{% lead %}}
 The high-performance computing (HPC) resources at CCV equip the Brown research community with the tools they need to perform complex numerical simulations, modeling, and data analysis. Oscar, CCV's primary research computing cluster, consists of more than 300 multi-core nodes sharing a high-performance interconnect and file system.
@@ -47,4 +47,4 @@ A large collection of software is available on Oscar, and CCV staff can help acq
 * Paraview
 
 <!-- {{< account_form >}} -->
-{{< button text="Request an Account" href="https://web1.ccv.brown.edu/secure/account">}}
+{{< button text="Request an Account" href="https://brown.edu/cis/forms/CCV/newuseraccount.php">}}
