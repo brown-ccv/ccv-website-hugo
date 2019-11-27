@@ -6,9 +6,12 @@ tagDescription: CCV hosts a variety of workshops to help educate users on its sy
 
 date: 2019-01-24T20:19:52.000+00:00
 category: Classroom
-lead: Learn to use Brown's HPC systems effectively in your research
+lead: CCV hosts a variety of workshops to help educate users on our systems and services, computational biology, basic programming skills, and much more
 weight: "0"
 icon: users2
+cross_link:
+  text: Workshops materials
+  link: workshops
 
 ---
 CCV hosts a variety of workshops to help educate users and promote more effective use of our systems and services. All workshops are hands-on, and include interactive examples. Participants are expected to bring a laptop.
