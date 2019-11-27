@@ -26,7 +26,31 @@ const githubRequest = (path, returnHeaders) => {
       if (returnHeaders) {
         resolve(response); // send back headers + body
       } else {
-        resolve(JSON.parse(response.body)); // just send back body
+        resolve(JSON.parse(response.body));
+      }
+    });
+  });
+};
+
+/**
+ * Returns a promise that resolves to a Github API response.
+ * Get License
+ */
+const githubLicenseRequest = (path, repoName) => {
+  return new Promise((resolve, reject) => {
+    request({
+      url: `https://api.github.com/${path}`,
+      headers: {
+        'Authorization': `token ${token}`,
+        'User-Agent': user,
+        'Accept': 'application/vnd.github.v3+json'
+      }
+    }, (err, response) => {
+      let parsed = JSON.parse(response.body);
+      if (parsed.license) {
+        resolve([repoName, [parsed.license.name, parsed["html_url"]]]);
+      } else {
+        resolve([repoName, null]);
       }
     });
   });
@@ -63,12 +87,12 @@ function getPage(url, organization, filePath) {
 
     if (values.headers['link']) {
       // if API paginated items
-                                
+
       let linksDict = {}; // dictionary (key: rel | value: url)
 
       // parse returned header for link to next page
       let headerLinks = values.headers['link'].split(", "); // split previous, next, last links.
-                                
+
       for (let linkI = 0; linkI < headerLinks.length; linkI++) {
         let linkRelSplit = headerLinks[linkI].split(">; rel=\"");
         let relExtracted = linkRelSplit[1].substring(0, linkRelSplit[1].length-1);
@@ -92,7 +116,6 @@ function getPage(url, organization, filePath) {
 
     // gets the contents of the repos
     let body = JSON.parse(values.body);
-                                
     return Promise.all(body.map((repo) => {
       return githubRequest(`repos/${organization}/${repo.name}/contents`, false)
     }));
@@ -105,13 +128,44 @@ function getPage(url, organization, filePath) {
     )));
   }).then((values) => {
     // gets contents from ready.yml of the repos that have docs folder
-    return Promise.all(values.map((item) => {
-      return githubRequest(`repos/${organization}/${item}/contents/ready.yml`, false);
+    let reposToDisplay = values;
+    let promiseList = ["contents", "license"];
+
+    return Promise.all(promiseList.map((type) => {
+      if (type === "contents") {
+        return Promise.all(reposToDisplay.map((item) => {
+          return githubRequest(`repos/${organization}/${item}/contents/ready.yml`, false);
+        }))
+      } else {
+        return Promise.all(reposToDisplay.map((item) => {
+          return githubLicenseRequest(`repos/${organization}/${item}/license`, item);
+        }))
+      }
     }))
   }).then((values) => {
     // decode and save readme content
     let existingDataList = retrievedData[organization];
-    values.forEach((item) => existingDataList.push(yaml.safeLoad(Base64.decode(item.content))));
+    
+    let licenseDict = {};
+
+    values[1].forEach((item) => {
+      license = item[1];
+      if (license) {
+        repoName = item[0];
+        licenseDict[repoName] = license;
+      }
+    });
+          
+    values[0].forEach((item) => {
+        let parsedContent = yaml.safeLoad(Base64.decode(item.content));
+        if (parsedContent["repo"] in licenseDict) {
+          let license = licenseDict[parsedContent["repo"]];
+          parsedContent["license_type"] = license[0];
+          parsedContent["license_url"] = license[1];
+        }
+        existingDataList.push(parsedContent)
+    });
+          
     retrievedData[organization] = existingDataList;
 
     if (last) {

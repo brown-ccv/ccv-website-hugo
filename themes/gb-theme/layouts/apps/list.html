@@ -88,7 +88,7 @@
                 {{ if eq $i2 $totalLen }}
                     <a href="https://github.com/{{$details.github_user}}"> {{ $details.name }}</a>
                 {{ else }}
-                    <a href="https://github.com/{{$details.github_user}}"> {{ $details.name }}</a> · 
+                    <a href="https://github.com/{{$details.github_user}}"> {{ $details.name }}</a> ·
                 {{ end }}
             {{ end }}
             </p>
@@ -117,11 +117,21 @@
                     <img src='https://img.shields.io/pypi/v/{{ .site_name }}.svg?style=flat'/>
                 </a>
                 {{ end }}
+
+                {{ if .license_url }}
+                <a href="{{ .license_url }}">
+                    {{ if (eq .license_type "GNU General Public License v3.0")}}
+                    <img src='https://img.shields.io/badge/license-GPL_3.0-orange.svg?style=flat'/>
+                    {{ else if (eq .license_type "MIT License")}}
+                    <img src='https://img.shields.io/badge/license-MIT-orange.svg?style=flat'/>
+                    {{ end }}
+                </a>
+                {{ end }}
             </div>
         </div>
 
         <!-- close off final subsection -->
-        {{ $totalLen := sub (len $apps) 1 }}
+        {{ $totalLen := len $apps }}
         {{ if eq $i $totalLen }}
             </article>
         {{ end }}
