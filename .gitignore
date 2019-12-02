@@ -3,5 +3,4 @@ public
 .ftpconfig
 .DS_Store
 .env
-info-brown-ccv.json
-info-compbiocore.json
+info-*.json
