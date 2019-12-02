@@ -15,5 +15,9 @@ items:
   dataLoc: "data/info-compbiocore.json"
   icon: dna
   locID: cbcApps
+- name: 'Data Science, Computation and Visualization (DSCoV)'
+  dataLoc: "data/info-dscov-tutorials.json"
+  icon: compact-disc
+  locID: dscovApps
 
 ---
