@@ -73,7 +73,16 @@
 
         <div class="card-responsive boxed bg-white col-md-5 mx-1 mb-2 px-3 py-3">
             <h1 class="card-title font-weight-bold mb-0 fs-20">
-                {{ if $apps.repo_url }}
+                {{ if $apps.site_url }}
+                    <div style="display: inline;">
+                    <a href={{ $apps.site_url }} style="display: inline-block;"><h4 class="text-blue">{{ $apps.site_name }}</h4></a>
+                    {{ if $apps.repo_url }}
+                        <a href={{ $apps.repo_url }} style="display: inline-block;"><h4 class="text-blue">
+                            <i class="fab fa-github"></i></h4>
+                        </a>
+                    {{ end }}
+                    </div>
+                {{ else if $apps.repo_url }}
                     <a href={{ $apps.repo_url }}><h4 class="text-blue">{{ $apps.site_name }}
                         <i class="fab fa-github"></i></h4>
                     </a>
