@@ -100,7 +100,7 @@
                 {{ if eq $i2 $totalLen }}
                     <a href="https://github.com/{{$details.github_user}}"> {{ $details.name }}</a>
                 {{ else }}
-                    <a href="https://github.com/{{$details.github_user}}"> {{ $details.name }}</a> · 
+                    <a href="https://github.com/{{$details.github_user}}"> {{ $details.name }}</a> ·
                 {{ end }}
             {{ end }}
             </p>
@@ -133,7 +133,7 @@
         </div>
 
         <!-- close off final subsection -->
-        {{ $totalLen := sub (len $apps) 1 }}
+        {{ $totalLen := sub (len $apps) 0 }}
         {{ if eq $i $totalLen }}
             </article>
         {{ end }}
