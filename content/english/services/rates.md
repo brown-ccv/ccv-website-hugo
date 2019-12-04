@@ -16,7 +16,7 @@ lead: We provide services with limited resources at **no cost** to all
 
 | Account(s) Type | CPU Cores and Walltime | Cost | Description |
 | --- | --- | --- | --- |
-| Exploratory (PI Sponsored) | 32 for 48 hours† | Free† | Available to all members affiliated with Brown |
+| Exploratory (PI Sponsored) | 32 for 48 hours per job, 2 std GPUs for 48 hours† | Free† | Available to all members affiliated with Brown |
 | Exploratory (No PI) | 32 for 48 Hours | Free | No Data Directory is assigned |
 | HPC Priority |208 for 96 hours | $200/user/quarter | For CPU intensive workloads |
 | HPC Priority+ | 416 for 96 hours | $400/user/quarter | For CPU intensive workloads |
