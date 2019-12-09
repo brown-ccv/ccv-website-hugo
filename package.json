@@ -23,7 +23,8 @@
     "serve": "hugo serve --disableFastRender --ignoreCache",
     "prebuild": "node index.js",
     "build": "hugo --baseURL $BASEURL",
-    "version": "hugo version"
+    "version": "hugo version",
+    "new": "hugo new"
   },
   "repository": {
     "type": "git",

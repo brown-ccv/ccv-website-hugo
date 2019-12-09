@@ -117,7 +117,7 @@ cfa: "Launch the App" # call for action button: Read More, Learn More, Launch th
 ```
 
 ```shell
-hugo new content/english/projects/project.md
+npm run new content/english/projects/project.md
 ```
 
 #### Documentation
@@ -163,6 +163,12 @@ The majority of the website's content can be found under `content/english/` in M
 - Home page: `content/english/_index.md`
 - About: `content/english/about/_index.md`
 - Services: `content/english/services/**/*`
+
+To create new files under `services` use the command:
+
+```shell
+npm run new content/english/services/consulting/new_file.md
+```
 
 ##### Guidelines for writing Markdown content
 There are special shortcodes that can be used in the Markdown content files that generate styled html components that follow the website design.
