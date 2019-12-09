@@ -3,19 +3,28 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "dependencies": {
-    "citation-js": "^0.3.4",
-    "dotenv": "^8.1.0",
+  "dependencies": {},
+  "devDependencies": {
+    "citation-js": "^0.5.0-alpha.4",
+    "cz-conventional-changelog": "^3.0.2",
+    "dotenv": "^8.2.0",
+    "git-cz": "^3.3.0",
+    "hugo": "0.0.3",
+    "hugo-bin": "^0.48.1",
     "js-base64": "^2.5.1",
     "js-yaml": "^3.13.1",
     "lodash": "^4.17.15",
     "request": "^2.88.0"
   },
-  "devDependencies": {},
   "scripts": {
-    "serve": "node index.js && hugo serve --disableFastRender --ignoreCache",
-    "build": "node index.js && hugo --baseURL ${BASEURL}",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "commit": "git-cz",
+    "fetch": "node index.js",
+    "preserve": "node index.js",
+    "serve": "hugo serve --disableFastRender --ignoreCache",
+    "prebuild": "node index.js",
+    "build": "hugo --baseURL $BASEURL",
+    "version": "hugo version",
+    "new": "hugo new"
   },
   "repository": {
     "type": "git",
@@ -25,6 +34,14 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/brown-data-science/ccv-website/issues"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "hugo-bin": {
+    "buildTags": "extended"
   },
   "homepage": "https://github.com/brown-data-science/ccv-website#readme"
 }
