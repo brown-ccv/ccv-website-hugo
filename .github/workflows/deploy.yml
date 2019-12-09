@@ -25,7 +25,7 @@ jobs:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         GITHUB_USER: ${{ secrets.GITHUB_USER }}
         ORGANIZATION: ${{ secrets.ORGANIZATION }}
-        BASEURL: https://brown-ccv.github.io/ccv-website/
+        BASEURL: ${{ secrets.BASEURL }}
       run: |
         npm install
         npm run build

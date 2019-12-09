@@ -85,8 +85,14 @@ A Slack channel `gh-ccv-website` is linked to this repository. Join that channel
 
 When committing your changes, use `npm run commit` instead of `git commit -m`. Follow the instructions on the terminal to create your conventional commit message. [Click here to learn more](https://www.conventionalcommits.org/en/v1.0.0/). This is required and the technical reviewer should make sure only changes with conventional commits are merged.
 
-#### Labels
+#### Opening an Issue
 
+Issues are welcome and are the recommended way to request or suggest changes.
+Use one of the templates provided and add labels as needed.
+
+#### Submitting a PR
+
+Use the template provided.
 
 ## Creating New Content
 
