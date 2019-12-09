@@ -1,5 +1,5 @@
 ---
-name: Content Update
+name: Content update
 about: Request content update
 title: "[CONTENT]"
 labels: content
