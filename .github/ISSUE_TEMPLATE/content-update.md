@@ -1,9 +1,9 @@
 ---
 name: Content Update
-about: Describe this issue template's purpose here.
-title: ''
+about: Request content update
+title: "[CONTENT]"
 labels: content
-assignees: ''
+assignees: fernandogelin
 
 ---
 

@@ -1,13 +1,13 @@
 ---
-name: Feature request
-about: Suggest an idea for this project
-title: "[FEATURE]"
-labels: feature, suggestion
+name: Other issues
+about: Open an issue that doesn't fall in any of the other categories.
+title: "[ISSUE]"
+labels: ''
 assignees: fernandogelin
 
 ---
 
-**Is your feature request related to a problem? Please describe.**
+**Is this issue related to a problem? Please describe.**
 A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
 
 **Describe the solution you'd like**
