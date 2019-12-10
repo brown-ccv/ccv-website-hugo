@@ -41,7 +41,7 @@ If you wish to contribute with content updates, style changes, new features, or 
       * [Types of Changes](#types-of-changes)
       * [Conventional commits](#conventional-commits)
    * [Issues and PRs](#issues-and-prs)
-      * [Opening an issue](#oppening-an-issue)
+      * [Opening an issue](#opening-an-issue)
       * [Submitting a PR](#submitting-a-pr)
       * [Reviewers](#reviewers)
    * [Creating new content](#creating-new-content)
@@ -51,12 +51,14 @@ If you wish to contribute with content updates, style changes, new features, or 
 
 #### Production
 
+- https://ccv.brown.edu
 - deployed from `production` branch.
 - will include all changes accepted into the `master` branch.
 - PRs from `master`. Only members of `website-admin` team are able to approve/merge PRs to `production`.
 
 #### Staging
 
+- https://datasci.brown.edu
 - deployed from `master` branch.
 - for changes to make into this branch they need to be reviewed and approved.
 - no direct push allowed. All changes come from PRs from topic branches.
@@ -68,21 +70,21 @@ If you wish to contribute with content updates, style changes, new features, or 
 [Check the GitLab Flow Docs](https://docs.gitlab.com/ee/topics/gitlab_flow.html)
 
 The main branches are:
-- `production`: this is the production branch. Changes to this branch come from PRs from `master`. PRs need to be reviewed and approved (mostly check the staging website). Only members of website-admin team can approve and merge PRs to production. Staging site can be found at `https://ccv.brown.edu`.
-- `master` (default): development/staging branch. Changes to this branch come from topic branches. Contributors should branch off `master` to work on their changes. A PR should be submitted to `master`, add the appropriate label to the changes being proposed. Reviews are required before merging. The topic branch will be deleted when merged. Development site is deployed to: `https://datasci.brown.edu`
+- `production`: this is the production branch. Changes to this branch come from PRs from `master`. PRs need to be reviewed and approved (mostly check the staging website). Only members of website-admin team can approve and merge PRs to production.
+- `master` (default): development/staging branch. Changes to this branch come from topic branches. Contributors should branch off `master` to work on their changes. A PR should be submitted to `master`, add the appropriate label to the changes being proposed. Reviews are required before merging. The topic branch will be deleted when merged.
 
-Changes happen in topic/feature branches. Topic branch names start with the type of the change `<change_type>-*` (see types below). If multiple changes are expected in the same branch, name the branch `updates-*` and add the labels corresponding to the change type in your PR. Support branches are created off `master`.
+Changes happen in topic branches. Topic branch names start with the type of the change `<change_type>-*` (see types below). If multiple changes are expected in the same branch, name the branch `updates-*` and add the labels corresponding to the change type in your PR. Topic branches are created off `master`.
 
 Once changes are done, a PR is submitted to `master` with the corresponding labels, and a review is requested from one or two reviewers (depending on the type of change - content (sometimes) or technical (always)).
 
 #### Types of changes:
 
-- **Hotfix**: bugs/mistakes that must be addressed in production. These changes happen in support branches `hotfix-*`.
-- **Data**:  changes to files in the data folder. Includes **people** and **opportunities.** Changes (add/remove/update) to items in those sections. These changes happen in support branches `data-*`.
-- **Content**: changes to content (in content folder). These changes happen in support branches `content-*`
+- **Hotfix**: bugs/mistakes that must be addressed in production. These changes happen in topic branches `hotfix-*`.
+- **Data**:  changes to files in the data folder. Includes **people** and **opportunities.** Changes (add/remove/update) to items in those sections. These changes happen in topic branches `data-*`.
+- **Content**: changes to content (in content folder). These changes happen in topic branches `content-*`
     - **What's New:** this is a special case of content changes. All what's new items will be removed every month.
-- **Style**: basic style changes. These changes happen in support branches `style-*`
-- **New Feature**: major UI changes, new features, pages, new content, etc. New features follow the release cycle. These changes happen in support branches `feature-*`.
+- **Style**: basic style changes. These changes happen in topic branches `style-*`
+- **New Feature**: major UI changes, new features, pages, new content, etc. These changes happen in topic branches `feature-*`. New features requests happen in issues with the [`suggestion` label](#the-suggestion-label) and are discussed during triage meetings.
 
 #### Conventional Commits
 
@@ -106,12 +108,12 @@ Issues labeled with `suggestion` will be brought up for discussion during triage
 Use the template provided and fill in all the information requested and assign the appropriate reviewers.
 
 For **content** changes:
-- assign reviews to **website-content** team or to a specific person that you think should be the reviewer.
-- 2 reviewers required, one of whom must not have been close to the development/design of the feature.
+- assign reviews to **website-content** and **website-dev** teams or to a specific person that you think should be the reviewer.
+- 2 reviewers required (1 technical and 1 content), one of whom must not have been close to the development/design of the feature.
 
 For **new feature** changes:
 - assign reviews to **website-content** and **website-dev** teams.
-- 2 reviewers required (technical and content), one of whom must not have been close to the development/design of the feature.
+- 3 reviewers required (1 technical and 2 content), one of whom must not have been close to the development/design of the feature.
 
 For **hotfix**, **data**, and **style** changes:
 - assign reviews to **website-dev** team for **hotfix**, **data**, and **style** changes.
