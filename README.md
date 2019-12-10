@@ -32,7 +32,7 @@ Go to `localhost:8080`
 
 If you wish to contribute with content updates, style changes, new features, or bug fixes, follow the contributing guidelines below:
 
-### Overview
+### Deployment environments
 
 #### Production - ccv.brown.edu
 
@@ -46,15 +46,9 @@ If you wish to contribute with content updates, style changes, new features, or 
 - for changes to make into this branch they need to be reviewed and approved.
 - no direct push allowed. All changes come from PRs from `feature/topic` branches.
 
-
-#### Reviewers
-
-There are two types of reviewers:
-
-- **technical**: will check if the code meets standards
-- **content**: will check the content, proof read, etc
-
 ### GitLab Flow:
+
+[Check the GitLab Flow Docs](https://docs.gitlab.com/ee/topics/gitlab_flow.html)
 
 The main branches are:
 - `production`: this is the production branch. Changes to this branch come from PRs from `master`. PRs need to be reviewed and approved (mostly check the staging website). Only members of website-admin team can approve and merge PRs to production. Staging site can be found at `https://ccv.brown.edu`.
@@ -64,7 +58,12 @@ Changes happen in topic/feature branches. Topic branch names start with the type
 
 Once changes are done, a PR is submitted to `master` with the corresponding labels, and a review is requested from one or two reviewers (depending on the type of change - content (sometimes) or technical (always)).
 
-A Slack channel `gh-ccv-website` is linked to this repository. Join that channel if you want to receive notifications when issues, PRs, and releases are created.
+### Reviewers
+
+There are two types of reviewers:
+
+- **technical**: will check if the code meets standards
+- **content**: will check the content, proof read, etc
 
 #### Types of changes:
 
@@ -79,6 +78,10 @@ A Slack channel `gh-ccv-website` is linked to this repository. Join that channel
 
 When committing your changes, use `npm run commit` instead of `git commit -m`. Follow the instructions on the terminal to create your conventional commit message. [Click here to learn more](https://www.conventionalcommits.org/en/v1.0.0/). This is required and the technical reviewer should make sure only changes with conventional commits are merged.
 
+### Issues and PRs
+
+A Slack channel `gh-ccv-website` is linked to this repository. Join that channel if you want to receive notifications when issues, PRs, and deployments are created.
+
 #### Opening an Issue
 
 Issues are welcome and are the recommended way to request or suggest changes.
@@ -86,15 +89,15 @@ Use one of the templates provided and add labels as needed.
 
 ##### The `suggestion` label
 
-Issues labeled with `suggestion` will be brought up for discussion during triage meetings. If a suggestion is approved, the label will removed. If the suggestion is declined, a new label `declined` will be added and the issue will be closed.
+Issues labeled with `suggestion` will be brought up for discussion during triage meetings. If a suggestion is approved, the label will be removed. If the suggestion is declined, a new label `declined` will be added and the issue will be closed.
 
 #### Submitting a PR
 
 Use the template provided. Assign reviewers to the PR.
 
-## Creating New Content
+### Creating New Content
 
-Sections:
+Sections:  
 - News (Blog) - https://www.medium.com/brown-ccv
 - Showcase Projects
 - Documentation - https://app.gitbook.com/@brown-cis/spaces
@@ -126,7 +129,7 @@ npm run new content/english/projects/project.md
 
 #### Documentation
 
-Documentation is managed with Gitbook.
+Documentation is hosted on Gitbook.
 [Check the docs here](https://docs.ccv.brown.edu/)
 
 For documentation related issues, open issues directly on the doc repo.
@@ -181,16 +184,17 @@ Find detailed information on how to write your markdown content and include shor
 
 ##### Our work: Software and Workshops
 - Adding, updating, or deleting items from here do not require change to this repo.
-Fetching apps data requires a .env file (template below).
-
-- The .env file is included in .gitignore and should never be committed.
-- You can obtain a Github Access Token by following [these instructions](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line).
+Fetching apps data requires a .env:
 
 ```
 GITHUB_TOKEN=
 GITHUB_USER=
-ORGANIZATION=brown-ccv,compbiocore
+ORGANIZATION=brown-ccv,compbiocore,dscov-tutorials
 ```
+
+- The .env file is included in .gitignore and should never be committed.
+- You can obtain a Github Access Token by following [these instructions](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line).
+
 
 #### CCV Bot - Calendar
 
