@@ -36,19 +36,16 @@ If you wish to contribute with content updates, style changes, new features, or 
 
 #### Production - ccv.brown.edu
 
-- deployed from `master` on the last Friday of the month
-- will include all changes accepted into the `release` branch up to the 3rd Friday.
+- deployed from `production` branch.
+- will include all changes accepted into the `master` branch.
+- PRs from `master`. Only members of `website-admin` team are able to approve/merge PRs to `production`.
 
 #### Staging - datasci.brown.edu
 
-- deployed from `release` branch on the 3rd Friday of the month.
-- PR's from `develop`, `hotfix-*`, or `data-*` branches.
-- for changes to make into this branch they need to be reviewed and approved
+- deployed from `master` branch.
+- for changes to make into this branch they need to be reviewed and approved.
+- no direct push allowed. All changes come from PRs from `feature/topic` branches.
 
-#### Development - brown-ccv.github.io/ccv-website
-
-- deployed from `develop`
-- PR's encouraged from `topic` branches
 
 #### Reviewers
 
@@ -57,28 +54,25 @@ There are two types of reviewers:
 - **technical**: will check if the code meets standards
 - **content**: will check the content, proof read, etc
 
-### Understanding the branching system
+### GitLab Flow:
 
-We use the GitFlow approach. The main branches are:
-- `master`: this is the production branch. Changes to this branch can only be made using PRs from `release`. The production site is `https://ccv.brown.edu`.
-- `release`: this is the staging branch. Changes to this branch come from PRs from `develop`, `hotfix-*`, or `data-*` branches. PRs need to be reviewed and approved by a content reviewer and/or a technical reviewer. Staging site can be found at `https://datasci.brown.edu`.
-- `develop`: development branch. Changes to this branch come from `topic` branches. Contributors should branch off `develop` to work on their changes that are not `hotfix` or `data`. A PR should be submitted to `develop`, add the appropriate label to the changes being proposed. Reviews are encouraged before merging. The topic branch will be deleted when merged. Development site is deployed to GH Pages: `https://brown-ccv.github.io/ccv-website`
+The main branches are:
+- `production`: this is the production branch. Changes to this branch come from PRs from `master`. PRs need to be reviewed and approved (mostly check the staging website). Only members of website-admin team can approve and merge PRs to production. Staging site can be found at `https://ccv.brown.edu`.
+- `master` (default): development/staging branch. Changes to this branch come from `topic` branches. Contributors should branch off `master` to work on their changes that are not `hotfix` or `data`. A PR should be submitted to `master`, add the appropriate label to the changes being proposed. Reviews are encouraged before merging. The topic branch will be deleted when merged. Development site is deployed to GH Pages: `https://datasci.brown.edu`
 
-#### GitFlow:
+Changes happen in topic/feature branches. Topic branch names start with the type of the change `<change_type>-*` (see types below). If multiple changes are expected in the same branch, name the branch `updates-*` and add the labels corresponding to the change type in your PR. Support branches are created off `master`.
 
-Changes happen in topic branches. Topic branch names start with the type of the change `<change_type>-*` (see types below). If multiple changes are expected in the same branch, name the branch `updates-*` and add the labels corresponding to the change type in your PR. Support branches are created off `develop` (except for **hotfix** and **data** changes).
-
-Once changes are done, a PR is submitted to `develop` with the corresponding labels, and a review is requested from one or two reviewers (depending on the type of change - content (sometimes) or technical (always)). If the reviewer fails to approve/request changes to the PR before the 21st of the month, the changes won't make into `release` and can be reassessed for the following release.
+Once changes are done, a PR is submitted to `master` with the corresponding labels, and a review is requested from one or two reviewers (depending on the type of change - content (sometimes) or technical (always)).
 
 A Slack channel `gh-ccv-website` is linked to this repository. Join that channel if you want to receive notifications when issues, PRs, and releases are created.
 
 #### Types of changes:
 
-- **Hotfix**: bugs/mistakes that must be addressed in production. There's no waiting period for hotfixes.
-- **Data**:  changes to files in the data folder. Includes **people** and **opportunities.** Changes (add/remove/update) to items in those sections are done directly in production without a waiting period.
-- **Content**: changes to content (in content folder). Content changes follow the release cycle. These changes happen in support branches `content-*`
-    - **What's New:** this is a special case of content changes. All what's new items will be removed every month. New items can be added following the release cycle.
-- **Style**: basic style changes. Style changes follow the release cycle. These changes happen in support branches `style-*`
+- **Hotfix**: bugs/mistakes that must be addressed in production.
+- **Data**:  changes to files in the data folder. Includes **people** and **opportunities.** Changes (add/remove/update) to items in those sections.
+- **Content**: changes to content (in content folder). These changes happen in support branches `content-*`
+    - **What's New:** this is a special case of content changes. All what's new items will be removed every month.
+- **Style**: basic style changes. These changes happen in support branches `style-*`
 - **New Feature**: major UI changes, new features, pages, new content, etc. New features follow the release cycle. These changes happen in support branches `feature-*` and require 2 content reviewers, one of whom must not have been close to the development/design of the feature.
 
 #### Conventional Commits
@@ -90,9 +84,13 @@ When committing your changes, use `npm run commit` instead of `git commit -m`. F
 Issues are welcome and are the recommended way to request or suggest changes.
 Use one of the templates provided and add labels as needed.
 
+##### The `suggestion` label
+
+Issues labeled with `suggestion` will be brought up for discussion during triage meetings. If a suggestion is approved, the label will removed. If the suggestion is declined, a new label `declined` will be added and the issue will be closed.
+
 #### Submitting a PR
 
-Use the template provided.
+Use the template provided. Assign reviewers to the PR.
 
 ## Creating New Content
 
@@ -106,7 +104,7 @@ Sections:
 #### News
 This is the blog section. It's now on [Medium](https://www.medium.com/brown-ccv).
 
-#### Pojects to Showcase on Home Page
+#### Projects to Showcase on Home Page
 Project, labs, initiatives, groups, collaborations, or anything we want to showcase. Items under this section will show up on the home page's carousel.
 
 ```yaml

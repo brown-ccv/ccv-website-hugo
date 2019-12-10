@@ -17,6 +17,7 @@
     "request": "^2.88.0"
   },
   "scripts": {
+    "precommit": "node index.js && hugo",
     "commit": "git-cz",
     "fetch": "node index.js",
     "preserve": "node index.js",
