@@ -1,16 +1,19 @@
 # CCV Website
 This is the repo for Brown CCV's static website built with [Hugo](https://www.gohugo.io).
 
-## Serving to `localhost`
+## Getting Started
 
-Clone the repo and install Node dependencies:
+To make contributions, first clone the repo and install the dependencies:
+
 ```shell
 git clone https://github.com/brown-ccv/ccv-website.git
 cd ccv-website
 npm install
 ```
 
-To start the server:
+#### Serving to `localhost`
+
+To run it locally:
 ```shell
 npm run serve
 ```
@@ -21,58 +24,65 @@ To build the site into the `public/` folder. This generates all the files needed
 npm run build
 ```
 
-> Using Docker:  
-```shell
-docker build -t ccv-website .
-docker run -d -p 8080:80 ccv-website
-```
-Go to `localhost:8080`
+## Suggesting changes and reporting bugs
 
-## Contributing
+Open an issue using one of the provided templates. Follow the instructions and complete all items in the issue template. Consider assigning it to yourself and starting a pull request following the contribution guidelines below.
 
-If you wish to contribute with content updates, style changes, new features, or bug fixes, follow the contributing guidelines below:
+## Contribution Guidelines
+
+If you wish to contribute with content updates, style changes, new features, or bug fixes, read the full contributing guidelines below and follow the contribution workflow.
+
+<!--ts-->
+   * [Deployment environments](#deployment-environments)
+      * [Production](#production)
+      * [Staging](#staging)
+   * [Conventions](#conventions)
+      * [GitLab Flow](#gitlab-flow)
+      * [Types of Changes](#types-of-changes)
+      * [Conventional commits](#conventional-commits)
+   * [Issues and PRs](#issues-and-prs)
+      * [Opening an issue](#oppening-an-issue)
+      * [Submitting a PR](#submitting-a-pr)
+      * [Reviewers](#reviewers)
+   * [Creating new content](#creating-new-content)
+<!--te-->
 
 ### Deployment environments
 
-#### Production - ccv.brown.edu
+#### Production
 
 - deployed from `production` branch.
 - will include all changes accepted into the `master` branch.
 - PRs from `master`. Only members of `website-admin` team are able to approve/merge PRs to `production`.
 
-#### Staging - datasci.brown.edu
+#### Staging
 
 - deployed from `master` branch.
 - for changes to make into this branch they need to be reviewed and approved.
-- no direct push allowed. All changes come from PRs from `feature/topic` branches.
+- no direct push allowed. All changes come from PRs from topic branches.
 
-### GitLab Flow:
+### Conventions
+
+#### GitLab Flow
 
 [Check the GitLab Flow Docs](https://docs.gitlab.com/ee/topics/gitlab_flow.html)
 
 The main branches are:
 - `production`: this is the production branch. Changes to this branch come from PRs from `master`. PRs need to be reviewed and approved (mostly check the staging website). Only members of website-admin team can approve and merge PRs to production. Staging site can be found at `https://ccv.brown.edu`.
-- `master` (default): development/staging branch. Changes to this branch come from `topic` branches. Contributors should branch off `master` to work on their changes that are not `hotfix` or `data`. A PR should be submitted to `master`, add the appropriate label to the changes being proposed. Reviews are encouraged before merging. The topic branch will be deleted when merged. Development site is deployed to GH Pages: `https://datasci.brown.edu`
+- `master` (default): development/staging branch. Changes to this branch come from topic branches. Contributors should branch off `master` to work on their changes. A PR should be submitted to `master`, add the appropriate label to the changes being proposed. Reviews are required before merging. The topic branch will be deleted when merged. Development site is deployed to: `https://datasci.brown.edu`
 
 Changes happen in topic/feature branches. Topic branch names start with the type of the change `<change_type>-*` (see types below). If multiple changes are expected in the same branch, name the branch `updates-*` and add the labels corresponding to the change type in your PR. Support branches are created off `master`.
 
 Once changes are done, a PR is submitted to `master` with the corresponding labels, and a review is requested from one or two reviewers (depending on the type of change - content (sometimes) or technical (always)).
 
-### Reviewers
-
-There are two types of reviewers:
-
-- **technical**: will check if the code meets standards
-- **content**: will check the content, proof read, etc
-
 #### Types of changes:
 
-- **Hotfix**: bugs/mistakes that must be addressed in production.
-- **Data**:  changes to files in the data folder. Includes **people** and **opportunities.** Changes (add/remove/update) to items in those sections.
+- **Hotfix**: bugs/mistakes that must be addressed in production. These changes happen in support branches `hotfix-*`.
+- **Data**:  changes to files in the data folder. Includes **people** and **opportunities.** Changes (add/remove/update) to items in those sections. These changes happen in support branches `data-*`.
 - **Content**: changes to content (in content folder). These changes happen in support branches `content-*`
     - **What's New:** this is a special case of content changes. All what's new items will be removed every month.
 - **Style**: basic style changes. These changes happen in support branches `style-*`
-- **New Feature**: major UI changes, new features, pages, new content, etc. New features follow the release cycle. These changes happen in support branches `feature-*` and require 2 content reviewers, one of whom must not have been close to the development/design of the feature.
+- **New Feature**: major UI changes, new features, pages, new content, etc. New features follow the release cycle. These changes happen in support branches `feature-*`.
 
 #### Conventional Commits
 
@@ -93,7 +103,35 @@ Issues labeled with `suggestion` will be brought up for discussion during triage
 
 #### Submitting a PR
 
-Use the template provided. Assign reviewers to the PR.
+Use the template provided and fill in all the information requested and assign the appropriate reviewers.
+
+For **content** changes:
+- assign reviews to **website-content** team or to a specific person that you think should be the reviewer.
+- 2 reviewers required, one of whom must not have been close to the development/design of the feature.
+
+For **new feature** changes:
+- assign reviews to **website-content** and **website-dev** teams.
+- 2 reviewers required (technical and content), one of whom must not have been close to the development/design of the feature.
+
+For **hotfix**, **data**, and **style** changes:
+- assign reviews to **website-dev** team for **hotfix**, **data**, and **style** changes.
+
+Team members can find a checklist for reviews in the team's discussion page. Everyone is expected to follow the guidelines outlined here.
+
+When a PR is merged into `master`, the topic branch that originates the PR is automatically deleted.
+
+One of the reviewers who merged the PR into `master` is responsible for starting a PR to `production` and assigning it to the `website-admin` team.
+
+The member from the `website-admin` will announce on the slack channel `gh-ccv-website` the waiting period for the PR to give everyone interested a chance to look at the staging site.
+
+
+#### Reviewers
+
+There are two types of reviewers. Reviewers are part of teams on GitHub and can find a checklist in the team discussion board.
+
+- **website-dev**: will check if the code meets standards.
+- **website-content**: will check the content, proof read, etc.
+- **website-admin**: members who have permission to review and merge PRs from `master` to `production`.
 
 ### Creating New Content
 
