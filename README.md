@@ -101,7 +101,7 @@ Use one of the templates provided and add labels as needed.
 
 ##### The `suggestion` label
 
-Issues labeled with `suggestion` will be brought up for discussion during triage meetings, unless the suggestion was discussed and approved in the issue's comments. If a suggestion is approved, the issue will get the label `next-up` and will be assigned to a member of `website-dev` or `website-content`. If the suggestion is declined, a new label `declined` will be added and the issue will be closed.
+Issues labeled with `suggestion` will be brought up for discussion during triage meetings. If a suggestion is approved, the issue will get the label `next-up` or `fast-track` depending on urgency and will be assigned to a member of `website-dev` or `website-content`. Priorities will also be discussed in the triage meetings and will be communicated to the assignee on the issue. If the suggestion is declined, a new label `declined` will be added and the issue will be closed. Declined suggestions can be brought up for discussion in future meetings.
 
 #### Submitting a PR
 
