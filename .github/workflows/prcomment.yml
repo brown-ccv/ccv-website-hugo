@@ -16,7 +16,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 12.x
-    - name: Comment on PR
+    - name: Comment on PR if new
       uses: brown-ccv/gh-actions/comment-pr-checklist@pr-checklist
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
