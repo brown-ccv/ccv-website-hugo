@@ -22,7 +22,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Technical Comment on new PR
       id: pr_type
-      uses: brown-ccv/gh-actions/comment-pr-checklist@master
+      uses: brown-ccv/gh-actions/comment-pr-checklist@pr-checklist
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         message_id: "Technical"
