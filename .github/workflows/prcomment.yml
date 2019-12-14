@@ -21,20 +21,21 @@ jobs:
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Technical Comment on new PR
+      id: pr_type
       uses: brown-ccv/gh-actions/comment-pr-checklist@master
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         message_id: "Technical"
         message_file: '.github/tech_code_review.md'
     - name: Content 1 Comment on new PR
-      if: ${{ contains(outputs.change_types, 'content') || contains(outputs.change_types, 'feature') || contains(outputs.change_types, 'other')}}
+      if: ${{ contains(steps.pr_type.outputs.change_types, 'content') || contains(steps.pr_type.outputs.change_types, 'feature') || contains(steps.pr_type.outputs.change_types, 'other')}}
       uses: brown-ccv/gh-actions/comment-pr-checklist@pr-checklist
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         message_id: "Content 1"
         message_file: '.github/content_code_review.md'
     - name: Content 2 Comment on new PR
-      if: ${{ contains(outputs.change_types, 'feature') || contains(outputs.change_types, 'other')}}
+      if: ${{ contains(steps.pr_type.outputs.change_types, 'feature') || contains(steps.pr_type.outputs.change_types, 'other')}}
       uses: brown-ccv/gh-actions/comment-pr-checklist@pr-checklist
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
