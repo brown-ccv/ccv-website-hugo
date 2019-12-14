@@ -35,7 +35,7 @@ jobs:
         message_id: "Content 1"
         message_file: '.github/content_code_review.md'
     - name: Content 2 Comment on new PR
-      if: contains(${{ steps.pr_type.outputs.change_types }}, 'feature') || contains(${{ steps.pr_type.outputs.change_types }}, 'other')
+      if: contains(steps.pr_type.outputs.change_types, 'feature') || contains(steps.pr_type.outputs.change_types, 'other')
       uses: brown-ccv/gh-actions/comment-pr-checklist@pr-checklist
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
