@@ -17,11 +17,11 @@ jobs:
       with:
         node-version: 12.x
     - name: Get PR Change Types
+      id: pr_type
       uses: brown-ccv/gh-actions/get-pr-type@pr-checklist
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Technical Comment PR
-      id: pr_type
       uses: brown-ccv/gh-actions/comment-pr-checklist@pr-checklist
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
