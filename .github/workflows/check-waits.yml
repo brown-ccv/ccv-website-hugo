@@ -1,0 +1,30 @@
+name: Check Wait Times
+
+on:
+  schedule:
+    - cron:  '*/15 * * * *'
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+    - name: Check 4 day waits
+      uses: brown-ccv/gh-actions/check-wait-label@add-wait-label
+      with:
+        GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+        wait_label: "4 day wait"
+        wait_time: 4
+        done_waiting_label: ready
+    - name: Check 2 day waits
+      uses: brown-ccv/gh-actions/check-wait-label@add-wait-label
+      with:
+        GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+        wait_label: "2 day wait"
+        wait_time: 0 # JUST FOR TESTING
+        done_waiting_label: ready
