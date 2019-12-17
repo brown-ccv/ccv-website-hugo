@@ -4,6 +4,7 @@ on:
   pull_request:
     branch:
       - develop
+      - master
 
 jobs:
   comment:
