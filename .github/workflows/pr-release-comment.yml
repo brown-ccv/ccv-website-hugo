@@ -38,4 +38,4 @@ jobs:
       uses: brown-ccv/gh-actions/add-pr-label@add-wait-label
       with:
         GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-        label: "4 day wait"
+        label: "2 day wait"
