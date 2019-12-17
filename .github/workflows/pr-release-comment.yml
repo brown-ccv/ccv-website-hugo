@@ -29,15 +29,13 @@ jobs:
         message_file: '.github/CODE_REVIEW/release.md'
     - name: Add 4 day wait
       if: contains(steps.pr_type.outputs.change_types, 'feature')
-      uses: andymckay/labeler@1.0.2
+      uses: brown-ccv/gh-actions/add-pr-labelt@add-wait-label
       with:
-        repo-token: "${{ secrets.GITHUB_TOKEN }}"
-        add-labels: "4 day wait"
-        ignore-if-assigned: false
+        GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+        label: "4 day wait"
     - name: Add 2 day wait
       if: (!contains(steps.pr_type.outputs.change_types, 'feature'))
-      uses: andymckay/labeler@1.0.2
+      uses: brown-ccv/gh-actions/add-pr-labelt@add-wait-label
       with:
-        repo-token: "${{ secrets.GITHUB_TOKEN }}"
-        add-labels: "2 day wait"
-        ignore-if-assigned: false
+        GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+        label: "4 day wait"
