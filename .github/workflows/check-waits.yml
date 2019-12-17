@@ -2,13 +2,10 @@ name: Check Wait Times
 
 on:
   schedule:
-    - cron:  '*/15 * * * *'
-  push:
-    branch:
-      - chore-pr-comments # FOR TESTING
+    - cron:  '0 */6 * * *' # every 6 hours
 
 jobs:
-  comment:
+  check:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,16 +15,16 @@ jobs:
       with:
         node-version: 12.x
     - name: Check 4 day waits
-      uses: brown-ccv/gh-actions/check-wait-label@add-wait-label
+      uses: brown-ccv/gh-actions/check-wait-label@master
       with:
         GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         wait_label: "4 day wait"
         wait_time: 4
         done_waiting_label: ready
     - name: Check 2 day waits
-      uses: brown-ccv/gh-actions/check-wait-label@add-wait-label
+      uses: brown-ccv/gh-actions/check-wait-label@master
       with:
         GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         wait_label: "2 day wait"
-        wait_time: 0 # JUST FOR TESTING
+        wait_time: 2
         done_waiting_label: ready
