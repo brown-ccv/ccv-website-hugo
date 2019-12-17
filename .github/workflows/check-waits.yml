@@ -4,7 +4,8 @@ on:
   schedule:
     - cron:  '*/15 * * * *'
   push:
-    - chore-pr-comments # FOR TESTING
+    branch:
+      - chore-pr-comments # FOR TESTING
 
 jobs:
   comment:
