@@ -8,8 +8,15 @@ To make contributions, first clone the repo and install the dependencies:
 ```shell
 git clone https://github.com/brown-ccv/ccv-website.git
 cd ccv-website
-npm install
 ```
+
+#### Set up `.env` file:  
+
+Create a `.env` file with the contents of `.env.example` in the root of your project.
+
+- The .env file is included in .gitignore and should never be committed.
+- You can obtain a Github Access Token by following [these instructions](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line).
+
 
 #### Serving to `localhost`
 
