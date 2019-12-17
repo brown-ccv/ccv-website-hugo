@@ -19,6 +19,10 @@ Create a `.env` file with the contents of `.env.example` in the root of your pro
 
 
 #### Serving to `localhost`
+First, install the dependencies:
+```shell
+npm install
+```
 
 To run it locally:
 ```shell
