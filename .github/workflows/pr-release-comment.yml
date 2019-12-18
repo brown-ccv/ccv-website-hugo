@@ -1,0 +1,40 @@
+name: PR Commenter and Labeler - Release
+
+on:
+  pull_request:
+    branch:
+      - production
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+    - name: Get PR Change Types
+      id: pr_type
+      uses: brown-ccv/gh-actions/get-pr-type@master
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Release Review Comment PR
+      uses: brown-ccv/gh-actions/comment-pr-checklist@master
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        message_id: "Release"
+        message_file: '.github/CODE_REVIEW/release.md'
+    - name: Add 4 day wait
+      if: contains(steps.pr_type.outputs.change_types, 'feature')
+      uses: brown-ccv/gh-actions/add-pr-label@master
+      with:
+        GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+        label: "4 day wait"
+    - name: Add 2 day wait
+      if: (!contains(steps.pr_type.outputs.change_types, 'feature'))
+      uses: brown-ccv/gh-actions/add-pr-label@master
+      with:
+        GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+        label: "2 day wait"
