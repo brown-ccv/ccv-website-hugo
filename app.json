@@ -15,12 +15,5 @@
     {
       "url": "https://github.com/heroku/heroku-buildpack-static"
     }
-  ],
-  "environments": {
-    "review": {
-      "scripts": {
-        "build": "node index.js && hugo --baseURL https://$HEROKU_APP_NAME.herokuapp.com"
-      }
-    }
-  }
+  ]
 }
