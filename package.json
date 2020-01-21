@@ -23,7 +23,7 @@
     "preserve": "node index.js",
     "serve": "hugo serve --disableFastRender --ignoreCache",
     "prebuild": "node index.js",
-    "build": "hugo --baseURL $BASEURL",
+    "build:production": "hugo --baseURL $BASEURL",
     "version": "hugo version",
     "new": "hugo new"
   },
