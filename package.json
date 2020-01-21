@@ -24,7 +24,6 @@
     "serve": "hugo serve --disableFastRender --ignoreCache",
     "prebuild": "node index.js",
     "build": "hugo --baseURL $BASEURL",
-    "heroku-postbuild": "hugo --baseURL https://$HEROKU_APP_NAME.herokuapp.com",
     "version": "hugo version",
     "new": "hugo new"
   },
