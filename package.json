@@ -23,6 +23,7 @@
     "preserve": "node index.js",
     "serve": "hugo serve --disableFastRender --ignoreCache",
     "prebuild": "node index.js",
+    "prebuild:production": "node index.js",
     "build": "hugo --baseURL https://$HEROKU_APP_NAME.herokuapp.com",
     "build:production": "hugo --baseURL $BASEURL",
     "version": "hugo version",
