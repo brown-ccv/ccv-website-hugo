@@ -2,8 +2,7 @@ name: PR Commenter
 
 on:
   pull_request:
-    branch:
-      - develop
+    branches:
       - master
 
 jobs:
