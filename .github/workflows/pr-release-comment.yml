@@ -2,7 +2,7 @@ name: PR Commenter and Labeler - Release
 
 on:
   pull_request:
-    branch:
+    branches:
       - production
 
 jobs:
