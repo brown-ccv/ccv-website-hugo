@@ -29,7 +29,7 @@ ARG BASEURL
 RUN export BASEURL=$BASEURL
 
 RUN npm install
-RUN npm run build
+RUN npm run build:production
 
 FROM nginx
 

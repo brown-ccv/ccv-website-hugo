@@ -2,7 +2,7 @@
 title: Rates
 
 tagTitle: Rates - Center for Computation and Visualization
-tagDescription: Check rates for advanced research computing that require extra resources. 
+tagDescription: Check rates for advanced research computing that require extra resources.
 
 date: 2019-03-12T10:58:51.000+00:00
 lead: We provide services with limited resources at **no cost** to all
@@ -16,7 +16,7 @@ lead: We provide services with limited resources at **no cost** to all
 
 | Account(s) Type | CPU Cores and Walltime | Cost | Description |
 | --- | --- | --- | --- |
-| Exploratory (PI Sponsored) | 32 for 48 hours† | Free† | Available to all members affiliated with Brown |
+| Exploratory (PI Sponsored) | 32 for 48 hours per job, 2 std GPUs for 48 hours† | Free† | Available to all members affiliated with Brown |
 | Exploratory (No PI) | 32 for 48 Hours | Free | No Data Directory is assigned |
 | HPC Priority |208 for 96 hours | $200/user/quarter | For CPU intensive workloads |
 | HPC Priority+ | 416 for 96 hours | $400/user/quarter | For CPU intensive workloads |
@@ -44,5 +44,5 @@ lead: We provide services with limited resources at **no cost** to all
 # Research Data Storage
 
 * 1TB per Brown Faculty Member - Free
-* 10TB per awarded Grant at the request of the Brown PI - a unique, active billing will be required to provide this allocation and the data will be migrated to archive storage at the end of the grant.
+* 10TB per awarded Grant at the request of the Brown PI - an active grant account number will be required to provide this allocation and the data will be migrated to archive storage at the end of the grant.
 * Additional Storage Allocation - Year to Year - $100 / Terabyte / year
