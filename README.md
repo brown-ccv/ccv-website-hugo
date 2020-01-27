@@ -98,7 +98,7 @@ When committing your changes, use `npm run commit` instead of `git commit -m`. F
 
 - https://datasci.brown.edu
 - deployed from `master` branch.
-- for changes to make into this branch they need to be reviewed and approved.
+- for changes to make it into this branch they need to be reviewed and approved.
 - no direct push allowed. All changes come from PRs from topic branches.
 
 ### Issues and PRs
@@ -118,6 +118,8 @@ Issues labeled with `suggestion` will be brought up for discussion during triage
 
 Use the template provided and fill in all the information requested and assign the appropriate reviewers. Make sure to fill this out correctly and check the appropriate checkboxes. A checklist for the reviewers will be created based on this.
 
+A version of the website will be deployed for review to Heroku and a link to the deployed website will be added to the PR comments section. To view the website, click on `view deployment`. In addition, when the review site is deployed, the `gh-ccv-website` will be notified.
+
 For **content** changes:
 - assign reviews to **website-content** and **website-dev** teams or to a specific person that you think should be the reviewer.
 - 2 reviewers required (1 technical and 1 content), one of whom must not have been close to the development/design of the feature.
@@ -133,12 +135,11 @@ When a PR is merged into `master`, the topic branch that originates the PR is au
 
 ##### Notes for reviewers
 
-A checklist will be created in the comments section of the PR. Follow those instructions and use the checklist.
+A checklist will be created in the comments section of the PR. Follow those instructions and use the checklist. And review the website deployed to Heroku.
 
 The reviewer who merged the PR into `master` is responsible for starting a PR to `production` and assigning it to the `website-admin` team.
 
 The member from the `website-admin` will announce on the slack channel `gh-ccv-website` the waiting period for the PR to give everyone interested a chance to look at the staging site.
-
 
 
 #### Reviewers
