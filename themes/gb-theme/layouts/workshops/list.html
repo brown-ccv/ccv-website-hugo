@@ -82,8 +82,12 @@
                     <a href={{ print "https://github.com/compbiocore/" $apps.repo }}><h4 class="text-blue">{{ $apps.site_name }}
                         <i class="fab fa-github"></i></h4>
                     </a>
-                    {{ else if $savedDataLoc "data/info-brown-ccv.json"}}
+                    {{ else if eq $savedDataLoc "data/info-brown-ccv.json"}}
                     <a href={{ print "https://github.com/brown-ccv/" $apps.repo }}><h4 class="text-blue">{{ $apps.site_name }}
+                        <i class="fab fa-github"></i></h4>
+                    </a>
+                    {{ else if eq $savedDataLoc "data/info-dscov-tutorials.json"}}
+                    <a href={{ print "https://github.com/dscov-tutorials/" $apps.repo }}><h4 class="text-blue">{{ $apps.site_name }}
                         <i class="fab fa-github"></i></h4>
                     </a>
                     {{ end }}
@@ -96,7 +100,7 @@
                 {{ if eq $i2 $totalLen }}
                     <a href="https://github.com/{{$details.github_user}}"> {{ $details.name }}</a>
                 {{ else }}
-                    <a href="https://github.com/{{$details.github_user}}"> {{ $details.name }}</a> · 
+                    <a href="https://github.com/{{$details.github_user}}"> {{ $details.name }}</a> ·
                 {{ end }}
             {{ end }}
             </p>
@@ -129,7 +133,7 @@
         </div>
 
         <!-- close off final subsection -->
-        {{ $totalLen := sub (len $apps) 1 }}
+        {{ $totalLen := sub (len $apps) 0 }}
         {{ if eq $i $totalLen }}
             </article>
         {{ end }}

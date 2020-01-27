@@ -1,0 +1,42 @@
+name: PR Commenter
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+    - name: Get PR Change Types
+      id: pr_type
+      uses: brown-ccv/gh-actions/get-pr-type@master
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Technical Comment PR
+      uses: brown-ccv/gh-actions/comment-pr-checklist@master
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        message_id: "Technical"
+        message_file: '.github/CODE_REVIEW/tech.md'
+    - name: Content 1 Comment on new PR
+      if: contains(steps.pr_type.outputs.change_types, 'content') || contains(steps.pr_type.outputs.change_types, 'feature') || contains(steps.pr_type.outputs.change_types, 'other')
+      uses: brown-ccv/gh-actions/comment-pr-checklist@master
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        message_id: "Content 1"
+        message_file: '.github/CODE_REVIEW/content.md'
+    - name: Content 2 Comment on new PR
+      if: contains(steps.pr_type.outputs.change_types, 'feature') || contains(steps.pr_type.outputs.change_types, 'other')
+      uses: brown-ccv/gh-actions/comment-pr-checklist@master
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        message_id: "Content 2"
+        message_file: '.github/CODE_REVIEW/content_2nd.md'
