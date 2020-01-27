@@ -98,7 +98,7 @@ When committing your changes, use `npm run commit` instead of `git commit -m`. F
 
 - https://datasci.brown.edu
 - deployed from `master` branch.
-- for changes to make into this branch they need to be reviewed and approved.
+- for changes to make it into this branch they need to be reviewed and approved.
 - no direct push allowed. All changes come from PRs from topic branches.
 
 ### Issues and PRs
