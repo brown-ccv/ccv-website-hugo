@@ -25,7 +25,7 @@
     "prebuild": "node index.js",
     "prebuild:production": "node index.js",
     "build": "hugo --baseURL https://$HEROKU_APP_NAME.herokuapp.com",
-    "build:production": "hugo --baseURL ${BASEURL}",
+    "build:production": "hugo --baseURL=${BASEURL}",
     "version": "hugo version",
     "new": "hugo new"
   },
