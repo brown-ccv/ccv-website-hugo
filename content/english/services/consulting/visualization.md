@@ -17,4 +17,4 @@ CCV's team of graphics software engineers provides a wide range of services to a
  - Custom software development  
  - Experience implementing advanced visualiztion technology in labs and work environments across campus
 
-If you would like more information on CCV's visualization services, please contact [support@ccv.brown.edu](mailto:support@ccv.brown.edu)..
+If you would like more information on CCV's visualization services, please contact [support@ccv.brown.edu](mailto:support@ccv.brown.edu).
