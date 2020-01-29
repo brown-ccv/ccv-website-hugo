@@ -1,5 +1,29 @@
 [
   {
+    "repo": "nlp_workshop_material",
+    "project_name": "Introduction to python, natural language processing, and machine learning",
+    "authors": [
+      {
+        "name": "Andras Zsom",
+        "github_user": "azsom"
+      },
+      {
+        "name": "Ashley Lee",
+        "github_user": "alee35"
+      }
+    ],
+    "site_description": "A two week summer workshop with the goal to introduce the participants to python and the most important aspects of natural language processing and machine learning.",
+    "docs_url": null,
+    "doi": null,
+    "type": "workshop",
+    "registry": [
+      "name",
+      {
+        "url": null
+      }
+    ]
+  },
+  {
     "repo": "react-aframe-volume-renderer",
     "site_name": "Volume Renderer",
     "authors": [
