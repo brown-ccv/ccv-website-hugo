@@ -18,10 +18,12 @@
 
   <div class="container-fluid d-flex justify-content-center px-0">
     <div class="col-lg-8 col-md-10 col-sm-12 py-10">
-
       {{ .Content }}
-
+      <i class="text-small">
+        This page was last modified on {{ .Page.Lastmod.Format "January 2, 2006" }}
+      </i>
     </div>
+
   </div>
 
 </section>

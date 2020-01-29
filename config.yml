@@ -17,6 +17,9 @@ relativeURLs: true
 
 pygmentsCodefences: true
 
+frontmatter:
+  lastmod: ["lastmod", ":fileModTime", ":default"]
+
 # Menu
 menu:
   main:

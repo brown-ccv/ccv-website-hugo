@@ -217,7 +217,12 @@
             <h4 class="pt-2 text-blue">{{ .Params.cite.subtitle2 }}</h4>
             <p class="p-medium">{{ .Params.cite.facilities | safeHTML }}</p>
         </article>
+        <i class="text-small">
+          This page was last modified on {{ .Page.Lastmod.Format "January 2, 2006" }}
+        </i>
 
       </div>
+
     </div>
+
 {{ end }}
