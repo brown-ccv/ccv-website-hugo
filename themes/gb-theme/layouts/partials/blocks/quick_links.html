@@ -4,12 +4,19 @@
     <div class="row justify-content-center">
       <div class="col-md-12">
 
+        <section class="mt-2">
+           <div class="row d-flex justify-content-center">
+             <div class="gcse-search"></div>
+           </div>
+       </section>
+       
         <header class="d-flex align-items-center">
           <span class="btn-primary btn-ico btn-lg btn-rounded mx-3"><i class="icon-link2"></i></span>
           <h1 class="h1-home py-8">{{ .Params.quick_links.title | markdownify }}</h1>
         </header>
 
         <section>
+
           <article class="row">
             {{ range .Params.quick_links.cards }}
                 <div class="card-responsive">
@@ -30,20 +37,6 @@
                 </div>
             {{ end }}
           </article>
-
-        <footer class="mt-2">
-           <div class="row d-flex justify-content-center">
-             <div class="col-md-6 col-lg-6">
-               <form id="search-form" action="{{ "search/" | absURL }}">
-                 <input id="search-query" name="s" type="text" class="scale form-control form-control-minimal" placeholder="looking for something else?" aria-label="Search">
-               </form>
-             </div>
-             <div class="col-md-6 col-lg-2">
-               <button form="search-form" type="submit" class="scale btn btn-block btn-blue font-weight-bold fs-16" value="Submit">Search</button>
-             </div>
-           </div>
-       </footer>
-
         </section>
       </div>
     </div>

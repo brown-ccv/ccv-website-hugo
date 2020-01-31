@@ -122,4 +122,34 @@ $('.dropdown-toggle').dropdown();
         const bi = ho.replace("_hover", "_main")
         $(this).css("background-image", bi)
     })
+
+// Force style change with Jquery for Google Search
+$('.gsc-input').attr('placeholder', 'CCV Search')
+$('#___gcse_0').css('width', '100%')
+$('.gsc-search-button').css('border', '0')
+$('.gsc-search-button').css('background-color', '#EFECE5')
+$('.gsc-input').css('border', '0')
+$('.gsc-control-cse').css('border', '0')
+$('.gsc-control-cse').css('background-color', 'transparent')
+$('.gsc-control-cse').css('padding', '0')
+$('.gsc-input').css('background-color', 'white')
+$('.gsc-input').css('padding', '0')
+$('.gsc-input').css('font-size', '2rem')
+$('.gsc-input').css('margin-bottom', '0')
+$('.gsc-input-box').css('border-color', 'white')
+$('.gsib_a').css('border', 0)
+$('.gsib_b').css('border', 0)
+$('.gsc-search-button svg').attr('height', '40')
+$('.gsc-search-button svg').attr('width', '40')
+
+$('.nav-search .gsc-search-button').css('background-color', 'transparent')
+$('.nav-search .gsc-search-button').css('padding', '0')
+$('.nav-search .gsc-search-button svg').attr('height', '20')
+$('.nav-search .gsc-search-button svg').attr('width', '20')
+$('.nav-search .gsib_b').css('display', 'none')
+$('.nav_search .gsib_a').css('padding', '0')
+$('.nav-search .gsc-input').css('width', '8rem')
+$('.nav-search #gsc-i-id2').css('border-bottom', '1px solid #00B398')
+
+
 });
