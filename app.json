@@ -1,0 +1,19 @@
+{
+  "name": "CCV Website",
+  "description": "Brown Center for Computation and Visualization.",
+  "keywords": [
+    "web",
+    "hugo",
+    "node"
+  ],
+  "website": "https://ccv.brown.edu/",
+  "repository": "https://github.com/brown-ccv/ccv-website/",
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    },
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-static"
+    }
+  ]
+}
