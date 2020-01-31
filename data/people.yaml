@@ -85,17 +85,6 @@
     that crisis and uncertainty are a gift and that we must be involved in shaping
     how change happens.
   image: august_main.jpg
-- name: Raj Shukla
-  weight: "13"
-  type: Full Time
-  team: Advanced Research Computing
-  subteam: High-Performance Computing
-  title: Research Software Engineer
-  github_username: rajexplo
-  brown_directory_uuid: efc4e7f2-8d48-48e4-999d-9538b7a3f27d
-  bio: Raj is a computational scientist with a background in Computational Physics
-    and Mathematics.
-  image: raj_main.jpg
 - name: Andras Zsom
   weight: "14"
   type: Full Time
@@ -121,19 +110,6 @@
     Fiduciary at Smoothie King. She enjoys food and beverage, bodies of water, jokes, and
     caring for her beloved dog and plants.
   image: ashley_main.jpg
-- name: Sam Bell
-  weight: "16"
-  type: Full Time
-  team: Advanced Research Computing
-  subteam: Institutional Data
-  title: Data Scientist
-  github_username: samwbell
-  brown_directory_uuid: 30ee22e9-98c2-2d4c-997c-fd52036b8b9a
-  bio: Before coming to Brown, Sam did a postdoc at URI and got his PhD in Geology
-    at Brown.  His research areas are seismology and planetary geology.  He enjoys
-    watching TV on a laptop with his fiancée, being outdoors, representing District
-    Five in the state Senate, and being viciously attacked by his cat.
-  image: bell_main.jpg
 - name: Andrew Leith
   weight: "2"
   type: Full Time
