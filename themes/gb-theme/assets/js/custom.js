@@ -142,14 +142,5 @@ $('.gsib_b').css('border', 0)
 $('.gsc-search-button svg').attr('height', '40')
 $('.gsc-search-button svg').attr('width', '40')
 
-$('.nav-search .gsc-search-button').css('background-color', 'transparent')
-$('.nav-search .gsc-search-button').css('padding', '0')
-$('.nav-search .gsc-search-button svg').attr('height', '20')
-$('.nav-search .gsc-search-button svg').attr('width', '20')
-$('.nav-search .gsib_b').css('display', 'none')
-$('.nav_search .gsib_a').css('padding', '0')
-$('.nav-search .gsc-input').css('width', '8rem')
-$('.nav-search #gsc-i-id2').css('border-bottom', '1px solid #00B398')
-
 
 });

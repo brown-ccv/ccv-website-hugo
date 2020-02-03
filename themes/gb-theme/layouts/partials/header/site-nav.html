@@ -7,4 +7,21 @@
     {{ readFile "/themes/gb-theme/static/images/ccv-logo.svg" | safeHTML }}
     </a>
   </div>
+  <button type="button" class="btn search-button" data-toggle="modal" data-target="#searchModal">
+    <span class="fas fa-search fa-2x"></span>
+  </button>
+
+
+  <div class="modal fade search-modal" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content search-modal-content">
+        <section class="mt-2 search-width">
+           <div class="row d-flex justify-content-center search-results">
+             <div class="gcse-search"></div>
+           </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
 </section>
