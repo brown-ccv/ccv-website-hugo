@@ -43,13 +43,13 @@
           <article class="d-flex py-6 justify-content-between flex-wrap">
             <div class="col-md-12 py-3">
               <div>
-                <p class="p-medium">{{ .Params.mission.text | markdownify }}</p>
+                <p class="p-medium">{{ .Params.mission.text | safeHTML }}</p>
                 <ul>
                 {{ range .Params.mission.list_items }}
                   <li>{{ . }}</li>
                 {{ end }}
                 </ul>
-                {{ .Params.mission.after | markdownify }}
+                {{ .Params.mission.after | safeHTML }}
               </div>
             </div>
         </article>
@@ -178,7 +178,7 @@
 
 
         <article id="diversity-content" class="py-4">
-          <p class="p-medium">{{ .Params.mission.diversity | markdownify }}</p>
+          <p class="p-medium">{{ .Params.mission.diversity | safeHTML }}</p>
         </article>
 
 
@@ -213,9 +213,9 @@
 
         <article id="cite-content" class="py-4">
             <h4 class="pt-2 text-blue">{{ .Params.cite.subtitle1 }}</h4>
-            <p class="p-medium">{{ .Params.cite.acknowledgment | markdownify }}</p>
+            <p class="p-medium">{{ .Params.cite.acknowledgment | safeHTML }}</p>
             <h4 class="pt-2 text-blue">{{ .Params.cite.subtitle2 }}</h4>
-            <p class="p-medium">{{ .Params.cite.facilities | markdownify }}</p>
+            <p class="p-medium">{{ .Params.cite.facilities | safeHTML }}</p>
         </article>
 
       </div>

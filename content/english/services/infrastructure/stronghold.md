@@ -15,51 +15,27 @@ extra:
   text: CIS Risk Classification
   link: "https://it.brown.edu/computing-policies/risk-classifications"
 ---
-Stronghold is currently self-certified to meet the security requirements and controls for HIPAA (Health Insurance Portability and Accountability Act) and is undergoing the certification process for FISMA (Federal Information Security Management Act) and CJIS (Criminal Justice Information Security).
+# Overview
 
-This service is customized to the needs of individual users and their data use agreements. Each Principal Investigator (PI) is given a dedicated environment for their project to support their researchers, graduate students, and collaborators. Access to the internet is restricted except for required locations for data imports or necessary software downloads. Import and export controls are in place to limit who can perform data migration, where sensitive data can come from and where desensitized or anonymized data can be moved to. Sensitive data is subject to file system auditing, and real-time alerting is available at the request of the PI. Please [contact us](mailto:CIS-Stronghold@brown.edu) for a consultation if you have a planned or current research project involving sensitive data that is made available to you through a data use agreement.
+Stronghold is a secure computing and storage environment that enables Brown researchers to analyze sensitive data while complying with regulatory or contractual requirements. It has been established by Brown University to be compatible with Federal and Rhode Island Law standards for data privacy and protection.
 
-{{% aligncenter %}}
-# Highlights
-{{% /aligncenter %}}
+Each Principal Investigator (PI) is given a dedicated environment for their project to support their researchers, graduate students, and collaborators. To view the Stronghold documentation and learn more about the offered features, please follow this [link](https://docs.ccv.brown.edu/stronghold/).
 
-{{% flexrow %}}
-{{% flexcolumn %}}
-### Software
+# Key Features
 
-- Acrobat Reader
-- ArcGis
-- Julia
-- Matlab
-- MS Office
-- .NET 3.5
-- NVIVO
-- Python (PIP mirror coming soon)
-- R (includes CRAN & Bioconductor mirrors)
-- R Studio
-- SAS
-- SPSS
-- Stata
-- Stat/Transfer
-- Visual Studio Code
-- VLC Media Player
-{{% /flexcolumn %}}
+- **Environments** - Linux or Windows compute environments available
+- **Software** - Workstations come preinstalled with our Windows Standard Software or Linux Standard Software packages
+- **Automated Git Sync** - Changes made to remote git repositories are automatically pulled to local repositories in Stronghold after initial configuration
+- **Remote Access** - Access system on campus through Brown Wireless or off campus through the Brown VPN
+- **Secure Transfers** - Transfer data in and out of Stronghold between whitelisted agencies or personal computers for permitted users though a secure, virus scanned transfer server via SFTP
+- **Data Downloads** - Download data directly through your browser from whitelisted agencies via HTTPS and SFTP
+- **Box.com** - Transfer data between workstation and Box.com via FTPS
+- **Slurm** - Schedule and manage jobs running in Linux environments
+- **Storage** - Store data in encrypted or unencrypted storage arrays
+- **Databases** - Manage data with MySQL or Oracle databases
+- **REDCap** - Secure database and survey builder and manager webapp for risk level 3 data residing in Stronghold
+- **Automated Reports** - Receive automated reports as the PI of the environment on
+security group membership, user login times, and user file transfer activity
+Dual Firewall -  Provides added layer of security for traffic coming in and out of your system
 
-{{% flexcolumn %}}
-
-### Key Features
-
-**Environments** - RedHat Linux or Windows workstations available  
-**Automated GitHub sync** - upload your code to GitHub, automated transfer to Stronghold within 5 minutes  
-**Remote Access** - campus access from Brown wireless, remote access via Brown VPN  
-**Data Downloads** - HTTPS and SFTP downloads from granting agencies  
-**Box.com** - FTPS uploads and downloads to Box.com  
-**Slurm** - job scheduler for Linux environments  
-**Storage** - Encrypted and not encrypted storage arrays  
-**Database** - MySQL or Oracle  
-**Secure Transfers** - ability to securely transfer (files, data, videos) in and out of Stronghold  
-**REDCap** - available for risk level 3 data residing in Stronghold  
-{{% /flexcolumn %}}
-{{% /flexrow %}}
-
-{{< button text="Request an Account" href="https://brown.edu/go/stronghold">}}
+{{< button text="Request an Environment" href="https://brown.edu/go/stronghold">}}
