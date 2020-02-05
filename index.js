@@ -23,6 +23,10 @@ const githubRequest = (path, returnHeaders) => {
         'Accept': 'application/vnd.github.v3+json'
       }
     }, (err, response) => {
+      if (err) {
+	return reject(err);
+      }
+
       if (returnHeaders) {
         resolve(response); // send back headers + body
       } else {
@@ -122,5 +126,5 @@ function getPage(url, organization, filePath) {
       // get data from next page
       getPage(nextURL, organization, filePath);
     }
-  });
+  }).catch((err) => console.error(err));
 }
