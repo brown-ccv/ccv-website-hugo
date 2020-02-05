@@ -15,8 +15,7 @@ cd ccv-website
 Create a `.env` file with the contents of `.env.example` in the root of your project.
 
 - The .env file is included in .gitignore and should never be committed.
-- You can obtain a Github Access Token by following [these instructions](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line).
-
+- You can obtain a Github Access Token by following [these instructions](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line). The Github Access Token only needs the `public_repo` scope.
 
 #### Serving to `localhost`
 First, install the dependencies:
