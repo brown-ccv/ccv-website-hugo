@@ -33,7 +33,7 @@ jobs:
         GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         label: "4 day wait"
     - name: Add 2 day wait
-      if: (!contains(steps.pr_type.outputs.change_types, 'feature'))
+      if: contains(steps.pr_type.outputs.change_types, 'content') || contains(steps.pr_type.outputs.change_types, 'other')
       uses: brown-ccv/gh-actions/add-pr-label@master
       with:
         GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
