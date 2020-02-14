@@ -24,7 +24,7 @@ lead: We provide services with limited resources at **no cost** to all
 | HPC GPU Priority Standard+ | 8 std GPU for 96 hours, Titan RTX or lower‡ | $400/user/quarter | For workloads that require multiple GPUs
 | HPC GPU Priority High End | 4 high-end GPU for 96 hours, Tesla V100‡ | $400/user/quarter | For workloads that require High-end GPUs
 | HPC Priority Large Memory | 32 cores for 96 hours with 760GB real memory or 2TB Virtual | $100/user/quarter | For very memory-intensive workloads
-| Condo Rental | 256 Cores | $10,000/year | No wall-time limits |
+| Condo Rental | 256 Cores | $10,000 | No wall-time limits |
 
 > Each account is assigned 20G Home, 512G Scratch (purged every 30 days), and 256G Data Directory (shared amongst members of the group) by default. Except for no-PI exploratory accounts, they do not get a Data directory.
 
