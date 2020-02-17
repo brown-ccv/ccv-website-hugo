@@ -23,6 +23,10 @@ const githubRequest = (path, returnHeaders) => {
         'Accept': 'application/vnd.github.v3+json'
       }
     }, (err, response) => {
+      if (err) {
+	return reject(err);
+      }
+
       if (returnHeaders) {
         resolve(response); // send back headers + body
       } else {
@@ -63,12 +67,12 @@ function getPage(url, organization, filePath) {
 
     if (values.headers['link']) {
       // if API paginated items
-                                
+
       let linksDict = {}; // dictionary (key: rel | value: url)
 
       // parse returned header for link to next page
       let headerLinks = values.headers['link'].split(", "); // split previous, next, last links.
-                                
+
       for (let linkI = 0; linkI < headerLinks.length; linkI++) {
         let linkRelSplit = headerLinks[linkI].split(">; rel=\"");
         let relExtracted = linkRelSplit[1].substring(0, linkRelSplit[1].length-1);
@@ -92,20 +96,26 @@ function getPage(url, organization, filePath) {
 
     // gets the contents of the repos
     let body = JSON.parse(values.body);
-                                
     return Promise.all(body.map((repo) => {
       return githubRequest(`repos/${organization}/${repo.name}/contents`, false)
     }));
   }).then((values) => {
-    // checks if the repo contains the docs folder
-    return _.compact(_.flatten(values.map((content) =>
-      content.map((file) => {
-        if (Object.values(file).includes('ready.yml')) return file.url.split('/')[5];
+    return arr = _.compact(_.flatten(values.map((content) => {
+      return _.filter(content, function(n) {
+        return n.length != 0;
       })
-    )));
+    })));
   }).then((values) => {
+    return values.map((file) => {
+      if (Object.values(file).includes('ready.yml')) {
+        console.log(file.url)
+        return file.url.split('/')[5]
+      };
+    })
+  }).then((values) => {
+    const readyRepos = _.filter(values, (n) => n != undefined)
     // gets contents from ready.yml of the repos that have docs folder
-    return Promise.all(values.map((item) => {
+    return Promise.all(readyRepos.map((item) => {
       return githubRequest(`repos/${organization}/${item}/contents/ready.yml`, false);
     }))
   }).then((values) => {
@@ -122,5 +132,5 @@ function getPage(url, organization, filePath) {
       // get data from next page
       getPage(nextURL, organization, filePath);
     }
-  });
+  }).catch((err) => console.error(err));
 }

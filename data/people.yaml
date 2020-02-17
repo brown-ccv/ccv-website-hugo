@@ -1,6 +1,6 @@
 ---
 - name: Fernando Gelin
-  weight: "8"
+  weight: "9"
   type: Full Time
   team: Advanced Research Computing
   subteam: Data & Visualization
@@ -13,7 +13,7 @@
     personal interests include feeding his dogs ice cream and spending time outside.
   image: fernando_main.jpg
 - name: Mary McGrath
-  weight: "9"
+  weight: "10"
   type: Full Time
   team: Advanced Research Computing
   subteam: Data & Visualization
@@ -25,6 +25,19 @@
     Prior to coming to Brown, Mary was a consultant at Accenture specializing in
      health data and analytics.
   image: mary_main.jpg
+- name: Bradford N. Roarr
+  weight: "7"
+  type: Full Time
+  team: Advanced Research Computing
+  title: Senior Research Software Engineer
+  subteam: Data & Visualization
+  github_username: broarr
+  brown_directory_uuid: 0adf6ab4-8d56-410a-8ac6-4b4ca136a534
+  bio: Bradford is a software engineer with a broad range of experience including
+    firmware engineering, devops, full-stack programming, and more. His professional
+    interests include systems programming, infrastructure-as-code, and automation.
+    Before Brown, Bradford worked for various startups in the Silicon Valley.
+  image: bradford_main.jpg
 - name: Paul Stey
   type: Full Time
   team: Leadership
@@ -48,7 +61,7 @@
     microbes.
   image: joselynn_main.jpg
 - name: Helen Kershaw
-  weight: "10"
+  weight: "11"
   type: Full Time
   team: Advanced Research Computing
   subteam: High-Performance Computing
@@ -85,19 +98,8 @@
     that crisis and uncertainty are a gift and that we must be involved in shaping
     how change happens.
   image: august_main.jpg
-- name: Raj Shukla
-  weight: "13"
-  type: Full Time
-  team: Advanced Research Computing
-  subteam: High-Performance Computing
-  title: Research Software Engineer
-  github_username: rajexplo
-  brown_directory_uuid: efc4e7f2-8d48-48e4-999d-9538b7a3f27d
-  bio: Raj is a computational scientist with a background in Computational Physics
-    and Mathematics.
-  image: raj_main.jpg
 - name: Andras Zsom
-  weight: "14"
+  weight: "13"
   type: Full Time
   team: Advanced Research Computing
   subteam: Institutional Data
@@ -109,7 +111,7 @@
     before coming to Brown.
   image: andras_main.jpg
 - name: Ashley S. Lee
-  weight: "15"
+  weight: "14"
   type: Full Time
   team: Advanced Research Computing
   subteam: Institutional Data
@@ -121,19 +123,6 @@
     Fiduciary at Smoothie King. She enjoys food and beverage, bodies of water, jokes, and
     caring for her beloved dog and plants.
   image: ashley_main.jpg
-- name: Sam Bell
-  weight: "16"
-  type: Full Time
-  team: Advanced Research Computing
-  subteam: Institutional Data
-  title: Data Scientist
-  github_username: samwbell
-  brown_directory_uuid: 30ee22e9-98c2-2d4c-997c-fd52036b8b9a
-  bio: Before coming to Brown, Sam did a postdoc at URI and got his PhD in Geology
-    at Brown.  His research areas are seismology and planetary geology.  He enjoys
-    watching TV on a laptop with his fiancée, being outdoors, representing District
-    Five in the state Senate, and being viciously attacked by his cat.
-  image: bell_main.jpg
 - name: Andrew Leith
   weight: "2"
   type: Full Time
@@ -158,7 +147,7 @@
     Bretagne (France) in 2000.
   image: thomas_main.jpg
 - name: Paul Hall
-  weight: "11"
+  weight: "12"
   type: Full Time
   team: Advanced Research Computing
   subteam: High-Performance Computing
@@ -227,7 +216,7 @@
   bio: ''
   image: linnea_main.jpg
 - name: Camilo Diaz
-  weight: "7"
+  weight: "8"
   type: Full Time
   team: Advanced Research Computing
   subteam: Data & Visualization
