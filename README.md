@@ -233,7 +233,7 @@ npm run new content/english/services/consulting/new_file.md
 
 ##### Guidelines for writing Markdown content
 There are special shortcodes that can be used in the Markdown content files that generate styled html components that follow the website design.
-Find detailed information on how to write your markdown content and include shortcodes specific for CCV's website [here](https://datasci.brown.edu/2019/02/how-to-write-docs-and-posts-for-the-ccv-website/).
+Find detailed information on how to write your markdown content and include shortcodes specific for CCV's website [here](https://datasci.brown.edu/hidden/how-to-write-md/).
 
 
 ##### Our work: Software and Workshops
