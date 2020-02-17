@@ -4,7 +4,6 @@ theme: gb-theme
 permalinks:
   news: "/:year/:month/:slug/"
 googleAnalytics: UA-136333978-7
-enableGitInfo: true
 outputs:
   home:
     - html
@@ -18,6 +17,8 @@ relativeURLs: true
 
 pygmentsCodefences: true
 
+frontmatter:
+  lastmod: ["lastmod", ":fileModTime"]
 
 # Menu
 menu:
