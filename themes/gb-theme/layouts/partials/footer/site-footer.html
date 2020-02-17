@@ -4,7 +4,7 @@
       <div class="col-12 col-md-2 footer-logo">
         {{ readFile "/themes/gb-theme/static/images/ccv-logo.svg" | safeHTML }}
       </div>
-      <div class="col-12 col-md-6 text-dark">
+      <div class="col-12 col-md-8 text-dark">
         <p class="fs-20 font-weight-bold">Brown Center for Computation and Visualization</p>
         <div class="row">
           <div class="col">
@@ -24,18 +24,9 @@
               <li class="list-group-item"><a href="{{ .Site.Params.githubLinks.cbcGithub }}" class="link"><span class="fab fs-24 fa-github"></span> &nbsp;CBC GitHub</a></li>
             </ul>
           </div>
-        </div>
-      </div>
-      <div class="col-12 col-md-4 col-lg-2 ml-auto text-md-right">
-        <div class="dropdown">
-          <button class="btn btn-block dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            English
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            {{ range $.Site.Home.AllTranslations }}
-            <a class="dropdown-item" href="{{.Permalink}}">{{.Language.LanguageName}}</a>
-            {{ end }}
-
+          <div class="col">
+            <span class="fad fs-24 fa-map-marked mr-2"></span>
+            <span>{{ .Site.Params.address }}</span>
           </div>
         </div>
       </div>
