@@ -1,6 +1,14 @@
-input.gsc-input {
-  background-color: blue;
+.search-button {
+  padding: 0;
+  margin-right: 6rem;
 }
-input.gsc-search-button {}
-form.gsc-search-box {}
-div.gsc-control-cse {}
+
+.search-modal-content {
+  background-color: white;
+  width: 250vw;
+}
+
+.search-results {
+  width: 90%;
+  margin: 1rem;
+}

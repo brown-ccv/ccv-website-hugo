@@ -7,12 +7,21 @@
     {{ readFile "/themes/gb-theme/static/images/ccv-logo.svg" | safeHTML }}
     </a>
   </div>
-  <div class="mr-5 hide-mobile">
-    <div class="col-md-10 col-lg-10 d-flex">
-      <form id="search-form" action="{{ "search/" | absURL }}">
-        <input id="search-query" name="s" type="text" class="border-bottom border-warning rounded-0 form-control form-control-minimal" placeholder="search" aria-label="Search">
-      </form>
-      <button form="search-form" type="submit" class="w-25 btn font-weight-bold" value="Submit"><span class="fas fa-search" /></button>
+  <button type="button" class="btn search-button" data-toggle="modal" data-target="#searchModal">
+    <span class="fas fa-search fa-2x"></span>
+  </button>
+
+
+  <div class="modal fade search-modal" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content search-modal-content">
+        <section class="mt-2 search-width">
+           <div class="row d-flex justify-content-center search-results">
+             <div class="gcse-search"></div>
+           </div>
+        </section>
+      </div>
     </div>
-  <div>
+  </div>
+
 </section>
