@@ -136,7 +136,10 @@ When a PR is merged into `master`, the topic branch that originates the PR is au
 
 A checklist will be created in the comments section of the PR. Follow those instructions and use the checklist. And review the website deployed to Heroku.
 
-The reviewer who merged the PR into `master` is responsible for starting a PR to `production` and assigning it to the `website-admin` team.
+The reviewer who merged the PR into `master` is responsible for starting a PR to `production` and assigning it to the `website-admin` team once the waiting period (if applicable) is complete.  Wait times are automatically tracked with the `2 day wait` and `4 day wait` labels and changed to `ready` when 48 or 96 non-weekend hours have lapsed since the last commit.  The wait times are as follows:
+* **content**, **other** - 2 days
+* **new feature** - 4 days
+* **data**, **hotfix**, **styles** - No wait
 
 The member from the `website-admin` will announce on the slack channel `gh-ccv-website` the waiting period for the PR to give everyone interested a chance to look at the staging site.
 
