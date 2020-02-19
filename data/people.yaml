@@ -17,7 +17,7 @@
   type: Full Time
   team: Advanced Research Computing
   subteam: Data & Visualization
-  title: Data Scientist
+  title: Senior Research Software Engineer
   github_username: mcmcgrath13
   brown_directory_uuid: fa814738-23c5-42b9-a63c-1ea789f3d1eb
   bio: Mary is a data scientist/whatever-needs-doing-er at CCV. She enjoys learning
@@ -194,23 +194,23 @@
   type: Full Time
   team: CCV Operations
   title: Senior Research Systems Administrator
-  github_username: n8wood-brown 
+  github_username: n8wood-brown
   brown_directory_uuid: 857b928c-2ce1-fb2a-cde7-1a4ff21fa2d3
-  bio: 
+  bio:
   image: nate_main.jpg
 - name: Yang Liu
   weight:  6
   type: Full Time
   team: CCV Operations
   title: Research Service Center Manager
-  github_username: 
+  github_username:
   brown_directory_uuid: e0e55df3-9f2c-4a12-a1de-742955164e1e
-  bio: 
+  bio:
   image: yang_main.jpg
 - name: Linnea Wolfe
   type: Full Time
   team: Leadership
-  title: Director of Operations
+  title: Assistant Chief Information Officer, Infrastructure and Research Computing
   github_username: ''
   brown_directory_uuid: 3ddfe2bd-672a-0f09-03bc-cbb37339a434
   bio: ''
@@ -266,26 +266,17 @@
   github_username: ''
   brown_directory_uuid: f904bb23-202f-48fb-bf93-7b7d326c7043
   image: avila_main.jpg
-- name: Kalvin Lam
-  weight: 
-  type: CCV Interns
-  team: Advanced Research Computing
-  subteam: Data & Visualization
-  title: Virtual Reality Intern
-  github_username: theklam
-  brown_directory_uuid: 5c72f742-5b9e-4cca-91e6-35a730536791
-  image: kalvin_main.jpg
 - name: Rashi Dhar
-  weight: 
+  weight:
   type: CCV Interns
   team: Advanced Research Computing
   subteam: Data & Visualization
   title: Web Development Intern
   github_username: Rashi1997
   brown_directory_uuid: 07ffddd8-24dd-4f2c-b125-55f8913c83e2
-  image: rashi_main.jpg  
+  image: rashi_main.jpg
 - name: Aryan Srivastava
-  weight: 
+  weight:
   type: CCV Interns
   team: Advanced Research Computing
   subteam: Data & Visualization
@@ -294,7 +285,7 @@
   brown_directory_uuid: 83d46da6-50fa-48e8-b17c-665d2b66427b
   image: aryan_main.jpg
 - name: Tiffany Lei
-  weight: 
+  weight:
   type: CCV Interns
   team: Advanced Research Computing
   subteam: Data & Visualization
@@ -303,7 +294,7 @@
   brown_directory_uuid: 2fe3c48e-df22-4a97-a910-6d784e3fba73
   image: tiffany_main.jpg
 - name: Maura Driscoll
-  weight: 
+  weight:
   type: CCV Interns
   team: Advanced Research Computing
   subteam: Data & Visualization

@@ -17,7 +17,7 @@
                   {{ if in .href "http"}}
                   <a href="{{.href}}">
                   {{ else }}
-                  <a href="{{$.Site.BaseURL}}{{.href}}">
+                  <a href="{{$.Site.BaseURL}}/{{.href}}">
                   {{ end }}
                   <div class="card scale">
                     <div class="card-body text-center">
