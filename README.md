@@ -253,8 +253,8 @@ ORGANIZATION=brown-ccv,compbiocore,dscov-tutorials
 - If the repo is not part of one of these organizations: brown-ccv, compbiocore, dscov-tutorials, open an issue to let the admins know the new organization name.
 
 ```
-repo:             ccv-con
-site_name:        "CCV-Con Slide Archive"
+repo: ccv-con
+site_name: "CCV-Con Slide Archive"
 authors:
  - name: "Fernando Gelin"
    github_user: fernandogelin
@@ -262,10 +262,10 @@ authors:
    github_user: mcmcgrath13
  - name: "Paul Stey"
    github_user: paulstey
-repo_url:         https://github.com/brown-ccv/ccv-con
+repo_url: https://github.com/brown-ccv/ccv-con
 site_description: "This repo houses links to the publically available slides from presentations at the CCV-Con Conference at Brown University."
 docs_url:         
-type:             workshop    # required. choose one of [software, tutorial, workshop, documentation]
+type: workshop    # required. choose one of [software, tutorial, workshop, documentation]
 ```
 
 #### CCV Bot - Calendar
