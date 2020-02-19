@@ -236,7 +236,7 @@ npm run new content/english/services/consulting/new_file.md
 
 ##### Guidelines for writing Markdown content
 There are special shortcodes that can be used in the Markdown content files that generate styled html components that follow the website design.
-Find detailed information on how to write your markdown content and include shortcodes specific for CCV's website [here](https://datasci.brown.edu/2019/02/how-to-write-docs-and-posts-for-the-ccv-website/).
+Find detailed information on how to write your markdown content and include shortcodes specific for CCV's website [here](https://datasci.brown.edu/hidden/how-to-write-md/).
 
 
 ##### Our work: Software and Workshops
@@ -252,6 +252,24 @@ ORGANIZATION=brown-ccv,compbiocore,dscov-tutorials
 - The .env file is included in .gitignore and should never be committed.
 - You can obtain a Github Access Token by following [these instructions](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line).
 
+- To add a new workshop/software to this list, add a file called `ready.yml` to **your workshop/software repository (not this repo!)**, follow example below.
+- If the repo is not part of one of these organizations: brown-ccv, compbiocore, dscov-tutorials, open an issue to let the admins know the new organization name.
+
+```
+repo: ccv-con
+site_name: "CCV-Con Slide Archive"
+authors:
+ - name: "Fernando Gelin"
+   github_user: fernandogelin
+ - name: "Mary McGrath"
+   github_user: mcmcgrath13
+ - name: "Paul Stey"
+   github_user: paulstey
+repo_url: https://github.com/brown-ccv/ccv-con
+site_description: "This repo houses links to the publically available slides from presentations at the CCV-Con Conference at Brown University."
+docs_url:         
+type: workshop    # required. choose one of [software, tutorial, workshop, documentation]
+```
 
 #### CCV Bot - Calendar
 

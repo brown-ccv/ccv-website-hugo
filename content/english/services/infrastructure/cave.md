@@ -6,7 +6,7 @@ tagDescription: Learn more about the Cave, a fully-immersive display system avai
 
 date: 2019-01-22 18:29:50 +0000
 category: Visualization Systems
-icon: 
+icon:
 lead: Our fully-immersive display system
 haas: true
 
@@ -17,7 +17,7 @@ The Cave is available to all researchers and educators at Brown. New projects ca
 
 General information on Caves and projects involving the Cave:
 
-* [Brown University unveils 3D virtual-reality room](https://web1.ccv.brown.edu/sites/default/files/bg-photos.pdf)
+* [Brown University unveils 3D virtual-reality room](https://www.bostonglobe.com/lifestyle/style/2015/06/19/brown-university-unveils-virtual-reality-room/QoTOOp66NpPZeGMF0bapjO/story.html)
 * [Brown University and the Future of Virtual Reality](http://www.xconomy.com/boston/2014/10/22/brown-university-and-the-future-of-virtual-reality/)
 * [Various Brown CS projects](http://vis.cs.brown.edu/areas/projects.html)
 * [Plato's Allegory of the Cave](http://en.wikipedia.org/wiki/Allegory_of_the_Cave) (one way the name "Cave" was derived)
