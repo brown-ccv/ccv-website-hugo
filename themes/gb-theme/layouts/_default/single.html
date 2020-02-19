@@ -1,31 +1,22 @@
 {{ define "content" }}
 
 <div id="hero-list" class=" bg-green text pb-5">
-<div class="container">
+  <div class="container">
     <div class="row">
-        <div class="col-md-12 d-flex flex-column pt-6 pb-10">
-          <h1 class="fs-60"> {{ .Title | markdownify }} </h1>
-          <p class="fs-30 text-beige">{{ .Params.lead | markdownify }}</p>
-
-        </div>
+      <div class="col-md-12 d-flex flex-column pt-6 pb-10">
+        <h1 class="fs-60">{{ .Title | markdownify }}</h1>
+        <p class="fs-30 text-beige">{{ .Params.lead | markdownify }}</p>
+      </div>
     </div>
-</div>
+  </div>
 </div>
 
 <section id="section-1" class="bg-light">
-
-
-
   <div class="container-fluid d-flex justify-content-center px-0">
     <div class="col-lg-8 col-md-10 col-sm-12 py-10">
       {{ .Content }}
-      <i class="text-small">
-        This page was last modified on {{ .Page.Lastmod.Format "January 2, 2006" }}
-      </i>
     </div>
-
   </div>
-
 </section>
 
 {{ end }}
