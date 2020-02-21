@@ -2,149 +2,183 @@
 <!-- header - yellow container -->
 {{ $current_section := .Section }}
 <div id="hero-list" class=" bg-yellow text pb-5">
-<div class="container">
+  <div class="container">
     <div class="row">
-        <div class="col-md-12 d-flex flex-column pt-6 pb-10">
-          <h1 class="fs-60"> {{ humanize .Section }} </h1>
-          <p class="fs-30">{{ .Params.mission.lead | markdownify }}</p>
-        </div>
-    </div>
-</div>
-</div>
-
-
-<!-- table of contents -->
-  <div class="container-fluid overlay-top justify-content-center d-flex">
-    <div class="col-lg-6 col-md-10 col-sm-12">
-    <ul class="nav nav-toc-page flex-column boxed">
-      {{ range .Params.items }}
-        <li class="mx-1 nav-item bg-white my-1">
-            <a class="nav-link section-nav-link" href="#{{.name | urlize }}">
-                <span class="text-dark fas fa-{{ .icon }} pr-1 fs-24"></span>
-                <span class="text-dark fs-20">{{ title .name }}</span>
-            </a>
-        </li>
-        {{ end }}
-    </ul>
+      <div class="col-md-12 d-flex flex-column pt-6 pb-10">
+        <h1 class="fs-60">{{ humanize .Section }}</h1>
+        <p class="fs-30">{{ .Params.mission.lead | markdownify }}</p>
+      </div>
     </div>
   </div>
+</div>
 
+<!-- table of contents -->
+<div class="container-fluid overlay-top justify-content-center d-flex">
+  <div class="col-lg-6 col-md-10 col-sm-12">
+    <ul class="nav nav-toc-page flex-column boxed">
+      {{ range .Params.items }}
+      <li class="mx-1 nav-item bg-white my-1">
+        <a class="nav-link section-nav-link" href="#{{.name | urlize }}">
+          <span class="text-dark fas fa-{{ .icon }} pr-1 fs-24"></span>
+          <span class="text-dark fs-20">{{ title .name }}</span>
+        </a>
+      </li>
+      {{ end }}
+    </ul>
+  </div>
+</div>
 
-    <div class="container-fluid d-flex justify-content-center py-10 px-0">
-        <div class="col-lg-9 col-md-11 col-sm-12">
+<div class="container-fluid d-flex justify-content-center py-10 px-0">
+  <div class="col-lg-9 col-md-11 col-sm-12">
+    <!-- Mission -->
+    <header id="mission" class="d-flex align-items-center">
+      <span class="btn-red btn-ico btn-lg btn-rounded"
+        ><i class="fas fa-crow"></i
+      ></span>
+      <h1 class="mx-4 text-secondary">Mission</h1>
+      <hr class="bg-dark w-40" />
+    </header>
 
-          <!-- Mission -->
-          <header id="mission" class="d-flex align-items-center">
-            <span class="btn-red btn-ico btn-lg btn-rounded"><i class="fas fa-crow"></i></span>
-            <h1 class="mx-4 text-secondary">Mission</h1>
-            <hr class="bg-dark w-40"/>
-          </header>
+    <article class="d-flex py-6 justify-content-between flex-wrap">
+      <div class="col-md-12 py-3">
+        <div>
+          <p class="p-medium">{{ .Params.mission.text | safeHTML }}</p>
+          <ul>
+            {{ range .Params.mission.list_items }}
+            <li>{{ . }}</li>
+            {{ end }}
+          </ul>
+          {{ .Params.mission.after | safeHTML }}
+        </div>
+      </div>
+    </article>
 
-          <article class="d-flex py-6 justify-content-between flex-wrap">
-            <div class="col-md-12 py-3">
-              <div>
-                <p class="p-medium">{{ .Params.mission.text | safeHTML }}</p>
-                <ul>
-                {{ range .Params.mission.list_items }}
-                  <li>{{ . }}</li>
-                {{ end }}
-                </ul>
-                {{ .Params.mission.after | safeHTML }}
-              </div>
-            </div>
-        </article>
+    <!-- People -->
+    <header id="people" class="d-flex align-items-center">
+      <span class="btn-red btn-ico btn-lg btn-rounded"
+        ><i class="fas fa-person-booth"></i
+      ></span>
+      <h1 class="mx-4 text-secondary">People</h1>
+      <hr class="bg-dark w-40" />
+    </header>
 
-        <!-- People -->
-        <header id="people" class="d-flex align-items-center">
-          <span class="btn-red btn-ico btn-lg btn-rounded"><i class="fas fa-person-booth"></i></span>
-          <h1 class="mx-4 text-secondary">People</h1>
-          <hr class="bg-dark w-40"/>
-        </header>
+    <h4 class="pt-2 text-gray">Leadership</h4>
 
-        <h4 class="pt-2 text-gray">Leadership</h4>
-
-        <article class="container-fluid row py-1">
-          {{ range sort .Site.Data.people "name"}}
-          {{ if eq .team "Leadership"}}
-          <div class="people-card photo-main col-xl-3 col-md-4 col-sm-6 col-xs-12"
-               style="background-image:url('{{$.Site.BaseURL}}/images/people/JPEG/{{.image}}')">
-            <div class="people-card-body" style="border-left: 5px solid #00B398;">
-              <h2 class="text-dark mb-0 fs-20 pb-1">{{ .name }}</h2>
-              <p class="text-dark text-small pb-1">{{ .title }}</p>
-              <div class="text-small d-flex w-100 justify-content-end">
-                <a class="text-secondary mr-1" href="https://directory.brown.edu/uuid/{{ .brown_directory_uuid }}"><span class="fas fa-info-circle" /></a>
-                {{ if .github_username }}
-                <a class="text-secondary mr-1" href="https://github.com/{{.github_username}}"><span class="fab fa-github" /></a>
-                {{ end }}
-              </div>
-              <!-- <p class="font-weight-bold text-beige text-small"><span class="icon-users2 pr-1"></span>{{ .team }}</p> -->
-            </div>
+    <article class="container-fluid row py-1">
+      {{ range sort .Site.Data.people "name"}} {{ if eq .team "Leadership"}}
+      <div
+        class="people-card photo-main col-xl-3 col-md-4 col-sm-6 col-xs-12"
+        style="background-image:url('{{$.Site.BaseURL}}/images/people/JPEG/{{.image}}')"
+      >
+        <div class="people-card-body" style="border-left: 5px solid #00B398;">
+          <h2 class="text-dark mb-0 fs-20 pb-1">{{ .name }}</h2>
+          <p class="text-dark text-small pb-1">{{ .title }}</p>
+          <div class="text-small d-flex w-100 justify-content-end">
+            <a
+              class="text-secondary mr-1"
+              href="https://directory.brown.edu/uuid/{{ .brown_directory_uuid }}"
+              ><span class="fas fa-info-circle"
+            /></a>
+            {{ if .github_username }}
+            <a
+              class="text-secondary mr-1"
+              href="https://github.com/{{.github_username}}"
+              ><span class="fab fa-github"
+            /></a>
+            {{ end }}
           </div>
-          {{ end }}
-          {{ end }}
-          </article>
+          <!-- <p class="font-weight-bold text-beige text-small"><span class="icon-users2 pr-1"></span>{{ .team }}</p> -->
+        </div>
+      </div>
+      {{ end }} {{ end }}
+    </article>
 
-          <h4 class="pt-2 text-gray">CCV Operations</h4>
+    <h4 class="pt-2 text-gray">CCV Operations</h4>
 
-          <article class="container-fluid row py-1">
-            {{ range sort .Site.Data.people "name"}}
-            {{ if eq .type "Full Time"}}
-            {{ if eq .team "CCV Operations"}}
-            <div class="people-card photo-main col-xl-3 col-md-4 col-sm-6 col-xs-12"
-                 style="background-image:url('{{$.Site.BaseURL}}/images/people/JPEG/{{.image}}')">
-              <div class="people-card-body" style="border-left: 5px solid #CCC6B8;">
-                <h2 class="text-dark mb-0 fs-20 pb-1">{{ .name }}</h2>
-                <p class="text-dark text-small pb-1">{{ .title }}</p>
-                <div class="text-small d-flex w-100 justify-content-end">
-                  <a class="text-secondary mr-1" href="https://directory.brown.edu/uuid/{{ .brown_directory_uuid }}"><span class="fas fa-info-circle" /></a>
-                  {{ if .github_username }}
-                  <a class="text-secondary mr-1" href="https://github.com/{{.github_username}}"><span class="fab fa-github" /></a>
-                  {{ end }}
-                </div>
-              </div>
-            </div>
+    <article class="container-fluid row py-1">
+      {{ range sort .Site.Data.people "name"}}
+      {{ if eq .type "Full Time"}}
+      {{ if eq .team "CCV Operations"}}
+      <div
+        class="people-card photo-main col-xl-3 col-md-4 col-sm-6 col-xs-12"
+        style="background-image:url('{{$.Site.BaseURL}}/images/people/JPEG/{{.image}}')"
+      >
+        <div class="people-card-body" style="border-left: 5px solid #CCC6B8;">
+          <h2 class="text-dark mb-0 fs-20 pb-1">{{ .name }}</h2>
+          <p class="text-dark text-small pb-1">{{ .title }}</p>
+          <div class="text-small d-flex w-100 justify-content-end">
+            <a
+              class="text-secondary mr-1"
+              href="https://directory.brown.edu/uuid/{{ .brown_directory_uuid }}"
+              ><span class="fas fa-info-circle"
+            /></a>
+            {{ if .github_username }}
+            <a
+              class="text-secondary mr-1"
+              href="https://github.com/{{.github_username}}"
+              ><span class="fab fa-github"
+            /></a>
             {{ end }}
-            {{ end }}
-            {{ end }}
-            </article>
+          </div>
+        </div>
+      </div>
+      {{ end }} {{ end }} {{ end }}
+    </article>
 
-            <h4 class="pt-2 text-gray">Advanced Research Computing</h4>
-            <article class="container-fluid row py-1">
-              {{ range sort .Site.Data.people "weight"}}
-              {{ if eq .type "Full Time"}}
-              {{ if eq .team "Advanced Research Computing"}}
-              <div class="people-card photo-main col-xl-3 col-md-4 col-sm-6 col-xs-12"
-                   style="background-image:url('{{$.Site.BaseURL}}/images/people/JPEG/{{.image}}')">
-                <div class="people-card-body" style="{{if eq .subteam `Computational Biology Core`}}border-left: 5px solid #003C71;
+    <h4 class="pt-2 text-gray">Advanced Research Computing</h4>
+    <article class="container-fluid row py-1">
+      {{ range sort .Site.Data.people "weight"}}
+      {{ if eq .type "Full Time"}}
+      {{ if eq .team "Advanced Research Computing"}}
+      <div
+        class="people-card photo-main col-xl-3 col-md-4 col-sm-6 col-xs-12"
+        style="background-image:url('{{$.Site.BaseURL}}/images/people/JPEG/{{.image}}')"
+      >
+        <div
+          class="people-card-body"
+          style="{{if eq .subteam `Computational Biology Core`}}border-left: 5px solid #003C71;
                                                      {{else if eq .subteam `Data & Visualization`}}border-left: 5px solid #FFC72C;
                                                      {{else if eq .subteam `High-Performance Computing`}}border-left: 5px solid #A79A94;
                                                      {{else if eq .subteam `Institutional Data`}}border-left: 5px solid #4E3629;
                                                      {{ else }}border-left: 5px solid	#FFC72C;
                                                      {{ end }}
-                                                      ">
-                  <h2 class="text-dark mb-0 fs-20 pb-1 mb-0">{{ .name }}</h2>
-                  <p class="text-dark text-small mb-1">{{ .title }}</p>
-                  <p class="text-gray text-small mb-0"><span class="icon-users2 pr-1"></span>{{ .subteam }}</p>
-                  <div class="text-small d-flex w-100 justify-content-end">
-                    <a class="text-secondary mr-1" href="https://directory.brown.edu/uuid/{{ .brown_directory_uuid }}"><span class="fas fa-info-circle" /></a>
-                    {{ if .github_username }}
-                    <a class="text-secondary mr-1" href="https://github.com/{{.github_username}}"><span class="fab fa-github" /></a>
-                    {{ end }}
-                  </div>
-                </div>
-              </div>
-              {{ end }}
-              {{ end }}
-              {{ end }}
-          </article>
+                                                      "
+        >
+          <h2 class="text-dark mb-0 fs-20 pb-1 mb-0">{{ .name }}</h2>
+          <p class="text-dark text-small mb-1">{{ .title }}</p>
+          <p class="text-gray text-small mb-0">
+            <span class="icon-users2 pr-1"></span>{{ .subteam }}
+          </p>
+          <div class="text-small d-flex w-100 justify-content-end">
+            <a
+              class="text-secondary mr-1"
+              href="https://directory.brown.edu/uuid/{{ .brown_directory_uuid }}"
+              ><span class="fas fa-info-circle"
+            /></a>
+            {{ if .github_username }}
+            <a
+              class="text-secondary mr-1"
+              href="https://github.com/{{.github_username}}"
+              ><span class="fab fa-github"
+            /></a>
+            {{ end }}
+          </div>
+        </div>
+      </div>
+      {{ end }} {{ end }} {{ end }}
+    </article>
 
-          <h4 class="pt-2 text-gray">CCV Interns</h4>
-            <article class="container-fluid row py-1">
-              {{ range sort .Site.Data.people "name"}}
-              {{ if eq .type "CCV Interns"}}
-              <div class="people-card photo-main col-xl-3 col-md-4 col-sm-6 col-xs-12"
-                   style="background-image:url('{{$.Site.BaseURL}}/images/people/JPEG/{{.image}}')">
-                <div class="people-card-body" style="{{if eq .team `CCV Operations`}}border-left: 5px solid #CCC6B8;
+    <h4 class="pt-2 text-gray">CCV Interns</h4>
+    <article class="container-fluid row py-1">
+      {{ range sort .Site.Data.people "name"}}
+      {{ if eq .type "CCV Interns"}}
+      <div
+        class="people-card photo-main col-xl-3 col-md-4 col-sm-6 col-xs-12"
+        style="background-image:url('{{$.Site.BaseURL}}/images/people/JPEG/{{.image}}')"
+      >
+        <div
+          class="people-card-body"
+          style="{{if eq .team `CCV Operations`}}border-left: 5px solid #CCC6B8;
                                                       {{ end }}
                                                       {{if eq .team `Advanced Research Computing`}}
                                                       {{if eq .subteam `Computational Biology Core`}}border-left: 5px solid #003C71;
@@ -154,70 +188,89 @@
                                                       {{ else }}border-left: 5px solid	#FFC72C;
                                                       {{ end }}
                                                       {{ end }}
-                                                      ">
-                  <h2 class="text-dark mb-0 fs-20 pb-1 mb-0">{{ .name }}</h2>
-                  <p class="text-dark text-small mb-1">{{ .title }}</p>
-                  <p class="text-gray text-small mb-0"><span class="icon-users2 pr-1"></span>{{ .subteam }}</p>
-                  <div class="text-small d-flex w-100 justify-content-end">
-                    <a class="text-secondary mr-1" href="https://directory.brown.edu/uuid/{{ .brown_directory_uuid }}"><span class="fas fa-info-circle" /></a>
-                    {{ if .github_username }}
-                    <a class="text-secondary mr-1" href="https://github.com/{{.github_username}}"><span class="fab fa-github" /></a>
-                    {{ end }}
-                  </div>
-                </div>
-              </div>
-              {{ end }}
-              {{ end }}
-          </article>
-        <!-- Diversity -->
-        <header id="diversity" class="d-flex align-items-center pt-6">
-          <span class="btn-cyan btn-ico btn-lg btn-rounded"><i class="fas fa-people-carry"></i></span>
-          <h1 class="mx-4 text-secondary">Diversity Statement</h1>
-          <hr class="bg-dark w-40"/>
-        </header>
-
-
-        <article id="diversity-content" class="py-4">
-          <p class="p-medium">{{ .Params.mission.diversity | safeHTML }}</p>
-        </article>
-
-
-        <!-- Opportunities -->
-        <header id="opportunities" class="d-flex align-items-center pt-4">
-          <span class="btn-red btn-ico btn-lg btn-rounded"><i class="fas fa-user-circle"></i></span>
-          <h1 class="mx-4 text-secondary">Opportunities</h1>
-          <hr class="bg-dark w-40"/>
-        </header>
-
-
-        <article id="opportunities-content" class="container-fluid row py-4">
-          {{ $numOpportunities := len .Site.Data.opportunities }}
-          {{ range .Site.Data.opportunities }}
-            <div class="card-body boxed bg-white mx-1 mb-1 {{ if gt $numOpportunities 2 }} col-auto {{ end }}" style="min-width: 30%;">
-              <h2 class="card-title font-weight-bold mb-0 fs-20">{{ .name }}</h2>
-              <p class="card-text fs-18">{{ .title }}</p>
-              <p class="font-weight-bold text-blue text-small"><span class="icon-users2 pr-1"></span>{{ .team }} |
-                <span class="font-weight-bold text-blue fs-12">{{ .subteam }}</span>
-              </p>
-              <a class="eyebrow link fs-14 text-orange" href="{{ .link }}">Learn More</a>
-            </div>
-          {{ end }}
-        </article>
-
-        <!-- Cite CCV -->
-        <header id="how-to-cite-ccv" class="d-flex align-items-center pt-4">
-            <span class="btn-red btn-ico btn-lg btn-rounded"><i class="fas fa-comments"></i></span>
-            <h1 class="mx-4 text-secondary">{{ .Params.cite.title }}</h1>
-            <hr class="bg-dark w-40"/>
-        </header>
-
-        <article id="cite-content" class="py-4">
-            <h4 class="pt-2 text-blue">{{ .Params.cite.subtitle1 }}</h4>
-            <p class="p-medium">{{ .Params.cite.acknowledgment | safeHTML }}</p>
-            <h4 class="pt-2 text-blue">{{ .Params.cite.subtitle2 }}</h4>
-            <p class="p-medium">{{ .Params.cite.facilities | safeHTML }}</p>
-        </article>
-
+                                                      "
+        >
+          <h2 class="text-dark mb-0 fs-20 pb-1 mb-0">{{ .name }}</h2>
+          <p class="text-dark text-small mb-1">{{ .title }}</p>
+          <p class="text-gray text-small mb-0">
+            <span class="icon-users2 pr-1"></span>{{ .subteam }}
+          </p>
+          <div class="text-small d-flex w-100 justify-content-end">
+            <a
+              class="text-secondary mr-1"
+              href="https://directory.brown.edu/uuid/{{ .brown_directory_uuid }}"
+              ><span class="fas fa-info-circle"
+            /></a>
+            {{ if .github_username }}
+            <a
+              class="text-secondary mr-1"
+              href="https://github.com/{{.github_username}}"
+              ><span class="fab fa-github"
+            /></a>
+            {{ end }}
+          </div>
+        </div>
       </div>
-    </div>
+      {{ end }} {{ end }}
+    </article>
+    <!-- Diversity -->
+    <header id="diversity" class="d-flex align-items-center pt-6">
+      <span class="btn-cyan btn-ico btn-lg btn-rounded"
+        ><i class="fas fa-people-carry"></i
+      ></span>
+      <h1 class="mx-4 text-secondary">Diversity Statement</h1>
+      <hr class="bg-dark w-40" />
+    </header>
+
+    <article id="diversity-content" class="py-4">
+      <p class="p-medium">{{ .Params.mission.diversity | safeHTML }}</p>
+    </article>
+
+    <!-- Opportunities -->
+    <header id="opportunities" class="d-flex align-items-center pt-4">
+      <span class="btn-red btn-ico btn-lg btn-rounded"
+        ><i class="fas fa-user-circle"></i
+      ></span>
+      <h1 class="mx-4 text-secondary">Opportunities</h1>
+      <hr class="bg-dark w-40" />
+    </header>
+
+    <article id="opportunities-content" class="container-fluid row py-4">
+      {{ $numOpportunities := len .Site.Data.opportunities }}
+      {{ range .Site.Data.opportunities }}
+      <div
+        class="card-body boxed bg-white mx-1 mb-1 {{ if gt $numOpportunities 2 }} col-auto {{ end }}"
+        style="min-width: 30%;"
+      >
+        <h2 class="card-title font-weight-bold mb-0 fs-20">{{ .name }}</h2>
+        <p class="card-text fs-18">{{ .title }}</p>
+        <p class="font-weight-bold text-blue text-small">
+          <span class="icon-users2 pr-1"></span>{{ .team }} |
+          <span class="font-weight-bold text-blue fs-12">{{ .subteam }}</span>
+        </p>
+        <a class="eyebrow link fs-14 text-orange" href="{{ .link }}"
+          >Learn More</a
+        >
+      </div>
+      {{ end }}
+    </article>
+
+    <!-- Cite CCV -->
+    <header id="how-to-cite-ccv" class="d-flex align-items-center pt-4">
+      <span class="btn-red btn-ico btn-lg btn-rounded"
+        ><i class="fas fa-comments"></i
+      ></span>
+      <h1 class="mx-4 text-secondary">{{ .Params.cite.title }}</h1>
+      <hr class="bg-dark w-40" />
+    </header>
+
+    <article id="cite-content" class="py-4">
+      <h4 class="pt-2 text-blue">{{ .Params.cite.subtitle1 }}</h4>
+      <p class="p-medium">{{ .Params.cite.acknowledgment | safeHTML }}</p>
+      <h4 class="pt-2 text-blue">{{ .Params.cite.subtitle2 }}</h4>
+      <p class="p-medium">{{ .Params.cite.facilities | safeHTML }}</p>
+    </article>
+  </div>
+</div>
+
 {{ end }}
