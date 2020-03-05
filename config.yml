@@ -17,9 +17,6 @@ relativeURLs: true
 
 pygmentsCodefences: true
 
-frontmatter:
-  lastmod: ["lastmod", ":fileModTime"]
-
 # Menu
 menu:
   main:
@@ -38,40 +35,44 @@ menu:
     title: Services
     url: /services/
     weight: 3
+  - identifier: facilities
+    name: Facilities
+    title: Facilities
+    url: /facilities/
+    weight: 5
   - identifier: documentation
     name: Documentation
     title: Documentation
     url: /documentation/
-    weight: 5
+    weight: 6
   - identifier: news
     name: News
     title: News
     url: https://medium.com/brown-ccv
-    weight: 6
+    weight: 7
   - identifier: events
     name: Events
     title: Events
     url: https://events.brown.edu/ccv/view/month
-    weight: 7
+    weight: 8
   - identifier: ourwork
     name: Our Work
     title: "Our Work:"
-    weight: 8
+    weight: 9
   - identifier: apps
     parent: ourwork
     name: Software
     title: Software
     url: /apps/
-    weight: 8
+    weight: 10
   - identifier: workshops
     parent: ourwork
     name: Workshops
     title: Workshops
     url: /workshops/
-    weight: 9
+    weight: 10
 
 params:
-  address: 180 George St, Providence RI 02906
   contact:
     support:
       text: Submit a ticket

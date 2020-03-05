@@ -4,6 +4,8 @@
   translation: About
 - id: Services
   translation: Services
+- id: Facilities
+  translation: Facilities
 - id: News
   translation: News
 - id: Documentation
