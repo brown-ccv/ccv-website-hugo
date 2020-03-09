@@ -73,6 +73,7 @@ menu:
     weight: 10
 
 params:
+  address: 180 George St, Providence RI 02906
   contact:
     support:
       text: Submit a ticket
