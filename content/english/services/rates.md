@@ -14,7 +14,6 @@ lead: We provide services with limited resources at **no cost** to all
 
 {{< rates >}}
 
-
 > Each account is assigned 20G Home, 512G Scratch (purged every 30 days), and 256G Data Directory (shared amongst members of the group) by default. Except for no-PI exploratory accounts, they do not get a Data directory.
 
 > † Free exploratory accounts are available to all faculty and PIs at Brown. Priority accounts have a higher Quality-of-Service (QOS) i.e. priority accounts will have faster job start times.
