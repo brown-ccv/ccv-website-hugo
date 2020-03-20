@@ -14,12 +14,20 @@ lead: We provide services with limited resources at **no cost** to all
 
 {{< rates >}}
 
+> Storage Quotas for every account (except Individual Exploratory):
+* 20G Home Directory
+* 512G Scratch (files and directories older than 30 days are purged)
+* 1TB Data Directory (shared amongst members of the group) by default.
 
-> Each account is assigned 20G Home, 512G Scratch (purged every 30 days), and 256G Data Directory (shared amongst members of the group) by default. Except for no-PI exploratory accounts, they do not get a Data directory.
+> GPU Definition:
+* Std. (Standard) - QuadroRTX or lower
+* HighEnd - Tesla v100
 
-> † Free exploratory accounts are available to all faculty and PIs at Brown. Priority accounts have a higher Quality-of-Service (QOS) i.e. priority accounts will have faster job start times.
+> Exploratory accounts are available to all faculty and PIs at Brown at no cost. 
+> Priority accounts have a higher Quality-of-Service (QOS) i.e. priority accounts will have faster job start times.
 
-> ‡The maximum number of cores and duration may change based on cluster utilization. Priority accounts each have a Quality-of-Service (QOS) allowing up to 208 cores, 1TB memory, and a total per-job limit of 998,400 core-minutes. This allows a 208-core job to run for 80 hours, a 104-core job to run for 160 hours, or 208 1-core jobs to run for 80 hours.
+> The maximum number of cores and duration may change based on cluster utilization. For example - HPC Priority account has a Quality-of-Service (QOS) allowing up to 208 cores, 1TB memory, and a total per-job limit of 998,400 core-minutes. This allows a 208-core job to run for 80 hours, a 104-core job to run for 160 hours, or 208 1-core jobs to run for 80 hours.
+
 
 # Staff Services
 | Support Level | Description | Cost |
