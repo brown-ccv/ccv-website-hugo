@@ -12,19 +12,7 @@ lead: We provide services with limited resources at **no cost** to all
 ---
 # High-performance Computing (Oscar)
 
-{{% table c="striped" hover="false" w="100" head="dark" %}}
-
-| Account(s) Type | CPU Cores and Walltime | Cost | Description |
-| --- | --- | --- | --- |
-| Exploratory (PI Sponsored) | 32 for 48 hours per job, 2 std GPUs for 48 hours† | Free† | Available to all members affiliated with Brown |
-| Exploratory (No PI) | 32 for 48 Hours | Free | No Data Directory is assigned |
-| HPC Priority |208 for 96 hours | $200/user/quarter | For CPU intensive workloads |
-| HPC Priority+ | 416 for 96 hours | $400/user/quarter | For CPU intensive workloads |
-| HPC GPU Priority Standard | 4 std GPU for 96 hours, Titan RTX or lower | $200/user/quarter | Basic GPU intensive workloads |
-| HPC GPU Priority Standard+ | 8 std GPU for 96 hours, Titan RTX or lower‡ | $400/user/quarter | For workloads that require multiple GPUs
-| HPC GPU Priority High End | 4 high-end GPU for 96 hours, Tesla V100‡ | $400/user/quarter | For workloads that require High-end GPUs
-| HPC Priority Large Memory | 32 cores for 96 hours with 760GB real memory or 2TB Virtual | $100/user/quarter | For very memory-intensive workloads
-| Condo Rental | 512 Cores | $10,000 | No wall-time limits |
+{{< rates >}}
 
 > Each account is assigned 20G Home, 512G Scratch (purged every 30 days), and 256G Data Directory (shared amongst members of the group) by default. Except for no-PI exploratory accounts, they do not get a Data directory.
 
@@ -39,7 +27,6 @@ lead: We provide services with limited resources at **no cost** to all
 | Advanced Support | Any staff services requiring more than 1 week's effort per year | $85/hour |
 | Project Collaboration | Percent time of a specific staff member charged directly to the grant | %FTE |
 
-{{% /table %}}
 
 # Research Data Storage
 
