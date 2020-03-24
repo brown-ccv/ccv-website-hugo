@@ -18,12 +18,13 @@ lead: We provide services with limited resources at **no cost** to all
 
 {{< rates >}}
 
-
- * GPU Definitions: Std - QuadroRTX or lower | High End - Tesla V100
  * Each account is assigned 20G Home, 512G Scratch (purged every 30 days). 
  * All Priority accounts get a data directory. 
  * Priority accounts have a higher Quality-of-Service (QOS) i.e. priority accounts will have faster job start times.
  * The maximum number of cores and duration may change based on cluster utilization. For example - HPC Priority account has a Quality-of-Service (QOS) allowing up to 208 cores, 1TB memory, and a total per-job limit of 998,400 core-minutes. This allows a 208-core job to run for 80 hours, a 104-core job to run for 160 hours, or 208 1-core jobs to run for 80 hours.
+  * GPU Definitions: 
+    *  Std - QuadroRTX or lower
+    *  High End - Tesla V100
 
 
 
