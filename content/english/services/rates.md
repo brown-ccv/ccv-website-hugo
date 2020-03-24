@@ -26,8 +26,6 @@ lead: We provide services with limited resources at **no cost** to all
     *  Std - QuadroRTX or lower
     *  High End - Tesla V100
 
-
-
 # Staff Services
 | Support Level | Description | Cost |
 | --- | --- | --- |
