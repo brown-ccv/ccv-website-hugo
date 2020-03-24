@@ -20,21 +20,25 @@ We welcome projects that take advantage of this unique technology to advance tea
 
 <br>
 
-### Regular Open House
+### Regular Open House {{< badge "canceled until further notice" "warning" >}}
 
-The YURT is open to the public on the first Friday of each month at 4 pm. Tours will happen if a minimum of three people have signed up for a visit. We can host at most 8 people and the tour will typically last between 30-60 minutes. If you are interested in visiting the YURT please reserve your spot in our calendar.
+{{< lead >}}
+For the health and safety of the community, we will no offer demos until further notice. We continue to monitor the coronavirus situation closely and we are taking action based on guidance from public health experts. Please stay safe.
+{{</ lead >}}
 
-{{< button text="Book Your Visit Here" href="https://calendar.google.com/calendar/selfsched?sstoken=UU1GdVFDaDFsOGI0fGRlZmF1bHR8ZjA2OWMxOTg3ODdkYTk5M2JlYThkZjU1YWU0ZDgyNzU" >}}
+<!-- The YURT is open to the public on the first Friday of each month at 4 pm. Tours will happen if a minimum of three people have signed up for a visit. We can host at most 8 people and the tour will typically last between 30-60 minutes. If you are interested in visiting the YURT please reserve your spot in our calendar. -->
+
+<!-- {{< button text="Book Your Visit Here" href="https://calendar.google.com/calendar/selfsched?sstoken=UU1GdVFDaDFsOGI0fGRlZmF1bHR8ZjA2OWMxOTg3ODdkYTk5M2JlYThkZjU1YWU0ZDgyNzU" >}} -->
 
 <br/>
 
-### Group Tours/Demos
+<!-- ### Group Tours/Demos -->
 
-If you would like to request a tour for a special visitor or to explore how to take advantage of the YURT for your research, you may  schedule a tour by completing the request form below. Please take into consideration our **general scheduling guidelines.** Exceptions are only accommodated in special circumstances.
+<!-- If you would like to request a tour for a special visitor or to explore how to take advantage of the YURT for your research, you may  schedule a tour by completing the request form below. Please take into consideration our **general scheduling guidelines.** Exceptions are only accommodated in special circumstances.
 
 * Book your visit **at least 8 days prior** to the desired day. This will give us enough time  for appropriate maintenance, and getting the theater and data ready for you.
 * The minimum number of people per visit is 5.
 * A full demo might take between 15 to 25 minutes.The maximum number of people inside the chamber is 8. Groups over that number need to be divided. Multiply the number of groups by the number of minutes per demo. That will provide an estimate of  the time needed for your tour. We ask to request tours that last at most 60 minutes.
 * Be open to reschedule your visit at any time. Many situations out of the CCV staff hands could preclude the good state of the YURT.
 
-{{< button text="Request a Group Demo" href="https://docs.google.com/forms/d/e/1FAIpQLSeErFJ52ta-XvBp4APNuakHi0TRsKeuT7rZ85alF-z7lVDBdQ/viewform?usp=sf_link" >}}
+{{< button text="Request a Group Demo" href="https://docs.google.com/forms/d/e/1FAIpQLSeErFJ52ta-XvBp4APNuakHi0TRsKeuT7rZ85alF-z7lVDBdQ/viewform?usp=sf_link" >}} -->
