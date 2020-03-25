@@ -10,27 +10,22 @@ lead: We provide services with limited resources at **no cost** to all
   we charge a quarterly fee. See below the rates for FY20
 
 ---
-# High-performance Computing (Oscar)
+# High Performance Computing Cluster (Oscar)
+> The number and size of jobs allowed on Oscar vary with both partition and type of user account. The following partitions are available to all Oscar users:
+* Batch   - General Purpose Computing
+* GPU     - GPU Nodes
+* BigMem  - Large Memory Nodes
 
-{{% table c="striped" hover="false" w="100" head="dark" %}}
+{{< rates >}}
 
-| Account(s) Type | CPU Cores and Walltime | Cost | Description |
-| --- | --- | --- | --- |
-| Exploratory (PI Sponsored) | 32 for 48 hours per job, 2 std GPUs for 48 hours† | Free† | Available to all members affiliated with Brown |
-| Exploratory (No PI) | 32 for 48 Hours | Free | No Data Directory is assigned |
-| HPC Priority |208 for 96 hours | $200/user/quarter | For CPU intensive workloads |
-| HPC Priority+ | 416 for 96 hours | $400/user/quarter | For CPU intensive workloads |
-| HPC GPU Priority Standard | 4 std GPU for 96 hours, Titan RTX or lower | $200/user/quarter | Basic GPU intensive workloads |
-| HPC GPU Priority Standard+ | 8 std GPU for 96 hours, Titan RTX or lower‡ | $400/user/quarter | For workloads that require multiple GPUs
-| HPC GPU Priority High End | 4 high-end GPU for 96 hours, Tesla V100‡ | $400/user/quarter | For workloads that require High-end GPUs
-| HPC Priority Large Memory | 32 cores for 96 hours with 760GB real memory or 2TB Virtual | $100/user/quarter | For very memory-intensive workloads
-| Condo Rental | 256 Cores | $10,000 | No wall-time limits |
-
-> Each account is assigned 20G Home, 512G Scratch (purged every 30 days), and 256G Data Directory (shared amongst members of the group) by default. Except for no-PI exploratory accounts, they do not get a Data directory.
-
-> † Free exploratory accounts are available to all faculty and PIs at Brown. Priority accounts have a higher Quality-of-Service (QOS) i.e. priority accounts will have faster job start times.
-
-> ‡The maximum number of cores and duration may change based on cluster utilization. Priority accounts each have a Quality-of-Service (QOS) allowing up to 208 cores, 1TB memory, and a total per-job limit of 998,400 core-minutes. This allows a 208-core job to run for 80 hours, a 104-core job to run for 160 hours, or 208 1-core jobs to run for 80 hours.
+ * Each account is assigned 20G Home, 512G Scratch (purged every 30 days).
+ * \* Priority accounts and Exploratory accounts with a PI get a data directory.
+ * \* Exploratory accounts without a PI have no data directory provided.
+ * Priority accounts have a higher Quality-of-Service (QOS) i.e. priority accounts will have faster job start times.
+ * The maximum number of cores and duration may change based on cluster utilization. For example - HPC Priority account has a Quality-of-Service (QOS) allowing up to 208 cores, 1TB memory, and a total per-job limit of 998,400 core-minutes. This allows a 208-core job to run for 80 hours, a 104-core job to run for 160 hours, or 208 1-core jobs to run for 80 hours.
+  * GPU Definitions:
+    *  Std - QuadroRTX or lower
+    *  High End - Tesla V100
 
 # Staff Services
 | Support Level | Description | Cost |
@@ -39,7 +34,6 @@ lead: We provide services with limited resources at **no cost** to all
 | Advanced Support | Any staff services requiring more than 1 week's effort per year | $85/hour |
 | Project Collaboration | Percent time of a specific staff member charged directly to the grant | %FTE |
 
-{{% /table %}}
 
 # Research Data Storage
 

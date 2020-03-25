@@ -14,7 +14,7 @@
 <section id="section-1" class="bg-light">
   <div class="container-fluid d-flex justify-content-center px-0">
     <div class="col-lg-8 col-md-10 col-sm-12 py-10">
-      {{ .Content }}
+      {{ .Content | safeHTML }}
     </div>
   </div>
 </section>

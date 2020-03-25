@@ -22,7 +22,7 @@ quick_links:
   - name: Oscar Account
     icon: desktop
     text: Open an account
-    href: "https://brown.edu/cis/forms/CCV/newuseraccount.php"
+    href: "https://brown.co1.qualtrics.com/jfe/form/SV_0GtBE8kWJpmeG4B"
     weight: 0
   - name: User Manuals
     icon: book-open
