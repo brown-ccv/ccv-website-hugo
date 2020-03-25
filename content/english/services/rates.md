@@ -10,15 +10,21 @@ lead: We provide services with limited resources at **no cost** to all
   we charge a quarterly fee. See below the rates for FY20
 
 ---
-# High-performance Computing (Oscar)
+# High Performance Computing Cluster (Oscar)
+> The number and size of jobs allowed on Oscar vary with both partition and type of user account. The following partitions are available to all Oscar users:
+* Batch   - General Purpose Computing
+* GPU     - GPU Nodes
+* BigMem  - Large Memory Nodes
 
 {{< rates >}}
 
-> Each account is assigned 20G Home, 512G Scratch (purged every 30 days), and 256G Data Directory (shared amongst members of the group) by default. Except for no-PI exploratory accounts, they do not get a Data directory.
-
-> † Free exploratory accounts are available to all faculty and PIs at Brown. Priority accounts have a higher Quality-of-Service (QOS) i.e. priority accounts will have faster job start times.
-
-> ‡The maximum number of cores and duration may change based on cluster utilization. Priority accounts each have a Quality-of-Service (QOS) allowing up to 208 cores, 1TB memory, and a total per-job limit of 998,400 core-minutes. This allows a 208-core job to run for 80 hours, a 104-core job to run for 160 hours, or 208 1-core jobs to run for 80 hours.
+ * Each account is assigned 20G Home, 512G Scratch (purged every 30 days).
+ * All Priority accounts get a data directory. \* Exploratory accounts without a PI have no data directory provided.
+ * Priority accounts have a higher Quality-of-Service (QOS) i.e. priority accounts will have faster job start times.
+ * The maximum number of cores and duration may change based on cluster utilization. For example - HPC Priority account has a Quality-of-Service (QOS) allowing up to 208 cores, 1TB memory, and a total per-job limit of 998,400 core-minutes. This allows a 208-core job to run for 80 hours, a 104-core job to run for 160 hours, or 208 1-core jobs to run for 80 hours.
+  * GPU Definitions:
+    *  Std - QuadroRTX or lower
+    *  High End - Tesla V100
 
 # Staff Services
 | Support Level | Description | Cost |
