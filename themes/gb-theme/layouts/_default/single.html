@@ -4,8 +4,8 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12 d-flex flex-column pt-6 pb-10">
-        <h1 class="fs-60">{{ .Title | markdownify }}</h1>
-        <p class="fs-30 text-beige">{{ .Params.lead | markdownify }}</p>
+        <h1 class="fs-60">{{ .Title | safeHTML }}</h1>
+        <p class="fs-30 text-beige">{{ .Params.lead | safeHTML }}</p>
       </div>
     </div>
   </div>
