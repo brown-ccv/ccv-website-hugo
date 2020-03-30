@@ -6,7 +6,7 @@ tagDescription: Support for researchers seeking help with statistical modeling, 
 
 date: 2019-01-24 20:20:43 +0000
 category: Consulting
-lead: Support for researchers seeking help with statistical modeling, machine learning, data mining, data visualization, computational biology, high-performance computing, and software engineering.
+lead: Support for researchers seeking help with statistical modeling, machine learning, data mining, data visualization, computational biology, high-performance computing, and software engineering
 weight: 0
 icon: support
 ---
