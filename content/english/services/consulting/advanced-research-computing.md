@@ -20,15 +20,15 @@ The breath of methods with which we have expertise is broad—spanning anything 
 
 CCV's research software engineers work with researchers to develop scientific software that is essential to conduct their research. This includes, for example, the development of tools and libraries for working with data, building workflows and infrastructure, and web application development. Our team of research software engineers also work with researchers to help take existing software and optimize it for performance and efficiency.
 
-## High-Preformance Computing
+## High-Performance Computing
 
-CCV's team of computational scientists and software engineers help researchers get the most out of Brown's high-performance computing (HPC) resources. They provide a range of services, including:
+CCV's team of research software engineers help researchers get the most out of Brown's high-performance computing (HPC) resources. They provide a range of services, including:
 
-* Custom software development, including parallelization of existing programs
-* Debugging of programs
-* Code profiling to identify bottlenecks and optimize performance
-* Assistance using Oscar, Brown's research computing cluster
-* Assistance accessing computational resources made available through [XSEDE](https://www.xsede.org)
+- Custom software development, including parallelization of existing programs
+- Debugging of programs
+- Code profiling to identify bottlenecks and optimize performance
+- Assistance using Oscar, Brown's research computing cluster
+- Assistance accessing computational resources made available through [XSEDE](https://www.xsede.org)
 
 If you would like more information on CCV's HPC services, please contact [support@ccv.brown.edu](mailto:support@ccv.brown.edu).
 
@@ -44,7 +44,7 @@ If you would like more information on CCV's visualization services, please conta
 
 ## Computational Biology
 
-The Computational Biology Core provides assistance in experimental design and data processing pipelines for high-throughput datasets generated in individual projects, particularly for DNA/RNA sequencing data. Our assistance falls broadly into the categories outlined below.
+The Computational Biology Core provides assistance in experimental design and data processing pipelines for high-throughput datasets generated in individual projects, particularly for DNA/RNA sequencing data. CBC's assistance falls broadly into the categories outlined below.
 
 - Experimental Design and Power Analysis
 - Benchmarking

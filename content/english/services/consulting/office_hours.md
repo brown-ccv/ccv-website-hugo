@@ -1,8 +1,8 @@
 ---
 title: "Office Hours"
 
-tagTitle: Office Hours
-tagDescription: CCV Share is a collection of Slack channels where CCV staff and the community will be available to discuss your questions!
+tagTitle: ""
+tagDescription: ""
 
 date: 2019-05-29T15:04:54-04:00
 draft: false
