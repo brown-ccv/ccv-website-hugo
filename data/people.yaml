@@ -266,6 +266,16 @@
   github_username: ''
   brown_directory_uuid: f904bb23-202f-48fb-bf93-7b7d326c7043
   image: avila_main.jpg
+- name: Kirk Brown
+  weight:
+  type: Full Time
+  team: CCV Operations
+  subteam:
+  title: Research Computing Analyst
+  github_username:
+  brown_directory_uuid: 1c597441-90f8-4543-8627-d11dcd0dbdb0
+  bio:
+  image: kirk_main.jpg
 - name: Rashi Dhar
   weight:
   type: CCV Interns
@@ -332,3 +342,13 @@
   brown_directory_uuid: 3b9db98c-fb5f-45a8-b220-1abfc19dd4e6
   bio: Cameron is an undergraduate studying applied math-biology
   image: cameron_main.jpg
+- name: Kuba Tarlowski
+  weight:
+  type: CCV Interns
+  team: CCV Operations
+  subteam: CCV Operations
+  title: Services Support Intern
+  github_username: kubatarlowski
+  brown_directory_uuid: 154c611f-7b29-4209-9bf3-5e731cf360ea
+  bio:
+  image: kuba_main.jpg
