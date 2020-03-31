@@ -272,7 +272,7 @@
   team: CCV Operations
   subteam:
   title: Research Computing Analyst
-  github_username:  
+  github_username:
   brown_directory_uuid: 1c597441-90f8-4543-8627-d11dcd0dbdb0
   bio:
   image: kirk_main.jpg
@@ -346,7 +346,7 @@
   weight:
   type: CCV Interns
   team: CCV Operations
-  subteam:
+  subteam: CCV Operations
   title: Services Support Intern
   github_username: kubatarlowski
   brown_directory_uuid: 154c611f-7b29-4209-9bf3-5e731cf360ea
