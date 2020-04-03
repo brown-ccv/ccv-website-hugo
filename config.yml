@@ -93,7 +93,7 @@ params:
 
   covid:
     title: COVID-19 Updates
-    lastUpdated: 17 March 2020
+    lastUpdated: 03 April 2020
     text: |
       The Center for Computation and Visualization remains committed to supporting
       the computing needs of the Brown Research Community during this difficult time.
@@ -104,7 +104,14 @@ params:
       We are committed to supporting the research community throughout this pandemic.
       Anyone with specific questions or concerns should reach out to Thomas Serre,
       Faculty Director for CCV at thomas_serre@brown.edu, Linnea Wolfe, Operating Director for CCV
-      at linnea_wolfe@brown.edu, or Paul Stey, Director of Data Science and Scientific Computing at paul_stey@brown.edu. Thank you for your patience and continued use of CCV services.
+      at linnea_wolfe@brown.edu, or Paul Stey, Director of Data Science and Scientific Computing at paul_stey@brown.edu. 
+
+      Furthermore, in partnership with the Office of the Vice President for Research, the Center for Computation and Visualization is 
+      announcing the availability of HPC compute resources (condo) for use on the CCV cluster at no-cost for approved research. 
+      In addition, we will be providing the JHU CSSE COVID-19 dataset with daily updates. Other public datasets that are needed may be 
+      added on request, if reasonable. Please email support@ccv.brown.edu to ask for this service and CCV will work with OVPR to vet and approve the request.
+
+      Thank you for your patience and continued use of CCV services.
 
 # i18n
 languages:
