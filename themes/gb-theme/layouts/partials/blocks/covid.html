@@ -1,8 +1,7 @@
 <section class="bg-beige">
-   <div class="message-banner container pt-5 pb-5">
-      <h1 class="text-danger"> 🦠 {{ .Site.Params.covid.title }}</h1>
-      <small class="small">Last Updated: {{ .Site.Params.covid.lastUpdated }}</small>
-      <p class="fs-24 pt-4 pb-4">{{ .Site.Params.covid.text | markdownify}}</p>
-      <a href="https://covid.brown.edu" class="btn btn-danger">Brown COVID-19 Website</a>
+   <div class="message-banner container py-3">
+      <h5 class="text-primary">{{ .Site.Params.covid.text }}
+         <a href="covid" class="btn btn-danger px-1 py-0">🦠 {{ .Site.Params.covid.title }}</a>
+      </h5>
    </div>
 </section>

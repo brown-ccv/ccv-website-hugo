@@ -1,0 +1,56 @@
+{{ define "content" }}
+<!-- header - yellow container -->
+{{ $current_section := .Section }}
+<div id="hero-list" class=" bg-yellow text pb-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 d-flex flex-column pt-6 pb-10">
+        <h1 class="fs-60">COVID-19 Updates</h1>
+        <p class="fs-30">{{ .Params.hero.lead | markdownify }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- table of contents -->
+<div class="container-fluid overlay-top justify-content-center d-flex">
+  <div class="col-lg-6 col-md-10 col-sm-12">
+    <ul class="nav nav-toc-page flex-column boxed">
+      {{ range .Params.items }}
+      <li class="mx-1 nav-item bg-white my-1">
+        <a class="nav-link section-nav-link" href="#{{.name | urlize }}">
+          <span class="text-dark fad fa-{{ .icon }} pr-1 fs-24"></span>
+          <span class="text-dark fs-20">{{ title .title }}</span>
+        </a>
+      </li>
+      {{ end }}
+    </ul>
+  </div>
+</div>
+
+<div class="container-fluid d-flex justify-content-center py-10 px-0">
+  <div class="col-lg-9 col-md-11 col-sm-12">
+    <small class="small">Last Updated: {{ .Params.lastUpdated }}</small>
+
+    <!-- sections -->
+    {{ range .Params.items }}
+    <header id="{{ .name }}-section" class="d-flex align-items-center pt-6">
+      <span class="btn-cyan btn-ico btn-lg btn-rounded"
+        ><i class="fas fa-{{ .icon}}"></i
+      ></span>
+      <h1 class="mx-4 text-secondary">{{ title .title }}</h1>
+      <hr class="bg-dark w-40" />
+    </header>
+
+    <article id="{{ .name }}-content" class="py-4">
+      <p class="p-medium">{{ .text | markdownify }}</p>
+    </article>
+    {{ end }}
+
+  </div>
+</div>
+
+{{ end }}
