@@ -26,7 +26,7 @@ items:
         Anyone with specific questions or concerns should reach out to Thomas Serre,
         Faculty Director for CCV at thomas_serre@brown.edu, Linnea Wolfe, Operating Director for CCV
         at linnea_wolfe@brown.edu, or Paul Stey, Director of Data Science and Scientific Computing
-        at paul_stey@brown.edu. Thank you for your patience and continued use of CCV services.
+        at paul_stey@brown.edu.
 
         Thank you for your patience and continued use of CCV services.
 - name: hpc
