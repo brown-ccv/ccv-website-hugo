@@ -38,9 +38,9 @@
     <!-- sections -->
     {{ range .Params.items }}
     <header id="{{ .name }}-section" class="d-flex align-items-center pt-6">
-      <span class="btn-cyan btn-ico btn-lg btn-rounded"
-        ><i class="fas fa-{{ .icon}}"></i
-      ></span>
+      <span class="btn-cyan btn-ico btn-lg btn-rounded">
+        <i class="fas fa-{{ .icon}}"></i>
+      </span>
       <h1 class="mx-4 text-secondary">{{ title .title }}</h1>
       <hr class="bg-dark w-40" />
     </header>

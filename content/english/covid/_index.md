@@ -20,7 +20,7 @@ items:
         In addition to the various platforms for compute and storage, CCV staff
         will continue to provide data science and consulting support as well as office hours and workshops.
         These will be done remotely, but will continue with the same regularity as was provided on campus.
-        Onsite repairs and additions to hardware will be provided as safety permits.c
+        Onsite repairs and additions to hardware will be provided as safety permits.
 
         We are committed to supporting the research community throughout this pandemic.
         Anyone with specific questions or concerns should reach out to Thomas Serre,
