@@ -245,12 +245,14 @@
         <h2 class="card-title font-weight-bold mb-0 fs-20">{{ .name }}</h2>
         <p class="card-text fs-18">{{ .title }}</p>
         <p class="font-weight-bold text-blue text-small">
-          <span class="icon-users2 pr-1"></span>{{ .team }} |
+          <span class="icon-users2 pr-1"></span>{{ .team }} {{if .subteam }} | {{end}}
           <span class="font-weight-bold text-blue fs-12">{{ .subteam }}</span>
         </p>
-        <a class="eyebrow link fs-14 text-orange" href="{{ .link }}"
+        {{ with .link }}
+        <a class="eyebrow link fs-14 text-orange" href="{{ . }}"
           >Learn More</a
         >
+        {{ end }}
       </div>
       {{ end }}
     </article>
