@@ -125,13 +125,15 @@ $('.dropdown-toggle').dropdown();
 
 // Force style change with Jquery for Google Search
 $('.gsc-input').attr('placeholder', 'CCV Search')
-$('#___gcse_0').css('width', '100%')
+$('#___gcse_0').css('width', '150%')
 $('.gsc-search-button').css('border', '0')
-$('.gsc-search-button').css('background-color', '#EFECE5')
+// $('.gsc-search-button').css('background-color', '#EFECE5')
 $('.gsc-input').css('border', '0')
 $('.gsc-control-cse').css('border', '0')
 $('.gsc-control-cse').css('background-color', 'transparent')
-$('.gsc-control-cse').css('padding', '0')
+$('gsc-control-cse').css('width', '150%')
+$('gsc-control-cse').css('margin-left', '-20%')
+// $('.gsc-control-cse').css('padding', '0')
 $('.gsc-input').css('background-color', 'white')
 $('.gsc-input').css('padding', '0')
 $('.gsc-input').css('font-size', '2rem')
@@ -139,7 +141,7 @@ $('.gsc-input').css('margin-bottom', '0')
 $('.gsc-input-box').css('border-color', 'white')
 $('.gsib_a').css('border', 0)
 $('.gsib_b').css('border', 0)
-$('.gsc-search-button svg').attr('height', '40')
-$('.gsc-search-button svg').attr('width', '40')
+// $('.gsc-search-button svg').attr('height', '40')
+// $('.gsc-search-button svg').attr('width', '40')
 
 });
