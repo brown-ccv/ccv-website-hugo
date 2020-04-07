@@ -2,7 +2,7 @@ title: What's New
 display: true
 items:
   - title: COVID-19 Updates
-    text: The Center for Computation and Visualization remains committed to supporting the computing needs of the Brown Research Community during this difficult time. [**Click here for details.**](covid)
+    text: The Center for Computation and Visualization remains committed to supporting the computing needs of the Brown Research Community during this difficult time. [**Click here for details.**](covid/)
     fa:
       prefix: fad
       icon: fa-shield-virus
