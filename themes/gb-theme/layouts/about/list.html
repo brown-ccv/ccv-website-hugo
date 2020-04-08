@@ -18,8 +18,8 @@
     <ul class="nav nav-toc-page flex-column boxed">
       {{ range .Params.items }}
       <li class="mx-1 nav-item bg-white my-1">
-        <a class="nav-link section-nav-link" href="#{{.name | urlize }}">
-          <span class="text-dark fas fa-{{ .icon }} pr-1 fs-24"></span>
+        <a class="nav-link section-nav-link d-flex align-items-center" href="#{{.name | urlize }}">
+          <span class="text-dark fas fa-{{ .icon }} pr-1 fs-34"></span>
           <span class="text-dark fs-20">{{ title .name }}</span>
         </a>
       </li>
@@ -32,7 +32,7 @@
   <div class="col-lg-9 col-md-11 col-sm-12">
     <!-- Mission -->
     <header id="mission" class="d-flex align-items-center">
-      <span class="btn-red btn-ico btn-lg btn-rounded"
+      <span class="btn-red btn-ico btn-lg btn-rounded d-flex align-items-center justify-content-center"
         ><i class="fas fa-crow"></i
       ></span>
       <h1 class="mx-4 text-secondary">Mission</h1>
@@ -55,7 +55,7 @@
 
     <!-- People -->
     <header id="people" class="d-flex align-items-center">
-      <span class="btn-red btn-ico btn-lg btn-rounded"
+      <span class="btn-red btn-ico btn-lg btn-rounded d-flex align-items-center justify-content-center"
         ><i class="fas fa-person-booth"></i
       ></span>
       <h1 class="mx-4 text-secondary">People</h1>
@@ -215,7 +215,7 @@
     </article>
     <!-- Diversity -->
     <header id="diversity" class="d-flex align-items-center pt-6">
-      <span class="btn-cyan btn-ico btn-lg btn-rounded"
+      <span class="btn-cyan btn-ico btn-lg btn-rounded d-flex align-items-center justify-content-center"
         ><i class="fas fa-people-carry"></i
       ></span>
       <h1 class="mx-4 text-secondary">Diversity Statement</h1>
@@ -228,7 +228,7 @@
 
     <!-- Opportunities -->
     <header id="opportunities" class="d-flex align-items-center pt-4">
-      <span class="btn-red btn-ico btn-lg btn-rounded"
+      <span class="btn-red btn-ico btn-lg btn-rounded d-flex align-items-center justify-content-center"
         ><i class="fas fa-user-circle"></i
       ></span>
       <h1 class="mx-4 text-secondary">Opportunities</h1>
@@ -245,19 +245,21 @@
         <h2 class="card-title font-weight-bold mb-0 fs-20">{{ .name }}</h2>
         <p class="card-text fs-18">{{ .title }}</p>
         <p class="font-weight-bold text-blue text-small">
-          <span class="icon-users2 pr-1"></span>{{ .team }} |
+          <span class="icon-users2 pr-1"></span>{{ .team }} {{if .subteam }} | {{end}}
           <span class="font-weight-bold text-blue fs-12">{{ .subteam }}</span>
         </p>
-        <a class="eyebrow link fs-14 text-orange" href="{{ .link }}"
+        {{ with .link }}
+        <a class="eyebrow link fs-14 text-orange" href="{{ . }}"
           >Learn More</a
         >
+        {{ end }}
       </div>
       {{ end }}
     </article>
 
     <!-- Cite CCV -->
     <header id="how-to-cite-ccv" class="d-flex align-items-center pt-4">
-      <span class="btn-red btn-ico btn-lg btn-rounded"
+      <span class="btn-red btn-ico btn-lg btn-rounded d-flex align-items-center justify-content-center"
         ><i class="fas fa-comments"></i
       ></span>
       <h1 class="mx-4 text-secondary">{{ .Params.cite.title }}</h1>
