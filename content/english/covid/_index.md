@@ -39,6 +39,11 @@ items:
         will be providing the JHU CSSE COVID-19 dataset with daily updates. Other public
         datasets that are needed may be added on request, if reasonable.
 
+        Any Brown faculty member whose salary is paid by Brown or whose research is administered
+        through Brown is eligible to be a Principal Investigator. Brown faculty employed by 
+        affiliated institutions, or Brown faculty whose research is administered through affiliated 
+        institutions, may be included as co-PIs on the research team.
+
         Please email [support@ccv.brown.edu](mailto:support@ccv.brown.edu) to ask for
         this service and CCV will work with OVPR to vet and approve the request.
 
