@@ -18,8 +18,7 @@ Brown has its own category for Brown specific questions, to be answered by parti
 
 Click below to join the discussion.
 
-<div class="d-flex justify-content-center">
-{{% button text="General" href="https://ask.ci" %}}
-
-{{% button text="Brown Space" href="https://ask.cyberinfrastructure.org/c/brown-research-computing" %}}
-</div>
+{{< flexrow >}}
+{{< button text="General" href="https://ask.ci" >}}
+{{< button text="Brown Space" href="https://ask.cyberinfrastructure.org/c/brown-research-computing" >}}
+{{< /flexrow >}}
