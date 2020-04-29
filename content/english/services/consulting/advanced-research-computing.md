@@ -2,11 +2,11 @@
 title: Advanced Research Computing
 
 tagTitle: Advanced Research Computing - Center for Computation and Visualization
-tagDescription: Find support for researchers seeking help with statistical modeling, machine learning, data mining, data visualization, and software engineering
+tagDescription: Support for researchers seeking help with statistical modeling, machine learning, data mining, data visualization, computational biology, high-performance computing, and software engineering
 
 date: 2019-01-24 20:20:43 +0000
 category: Consulting
-lead: Support for researchers seeking help with statistical modeling, machine learning, data mining, data visualization, and software engineering
+lead: Support for researchers seeking help with statistical modeling, machine learning, data mining, data visualization, computational biology, high-performance computing, and software engineering
 weight: 0
 icon: support
 ---
@@ -19,6 +19,40 @@ The breath of methods with which we have expertise is broad—spanning anything 
 ## Software Engineering
 
 CCV's research software engineers work with researchers to develop scientific software that is essential to conduct their research. This includes, for example, the development of tools and libraries for working with data, building workflows and infrastructure, and web application development. Our team of research software engineers also work with researchers to help take existing software and optimize it for performance and efficiency.
+
+## High-Performance Computing
+
+CCV's team of research software engineers help researchers get the most out of Brown's high-performance computing (HPC) resources. They provide a range of services, including:
+
+- Custom software development, including parallelization of existing programs
+- Debugging of programs
+- Code profiling to identify bottlenecks and optimize performance
+- Assistance using Oscar, Brown's research computing cluster
+- Assistance accessing computational resources made available through [XSEDE](https://www.xsede.org)
+
+If you would like more information on CCV's HPC services, please contact [support@ccv.brown.edu](mailto:support@ccv.brown.edu).
+
+## Visualization
+
+CCV's team of graphics software engineers provides a wide range of services to assist researchers at Brown with visualization projects, including:
+ - Expertise with graphics software and packages
+ - Familiarity with a wide range of cutting-edge visualization hardware
+ - Custom software development  
+ - Experience implementing advanced visualiztion technology in labs and work environments across campus
+
+If you would like more information on CCV's visualization services, please contact [support@ccv.brown.edu](mailto:support@ccv.brown.edu).
+
+## Computational Biology
+
+The Computational Biology Core provides assistance in experimental design and data processing pipelines for high-throughput datasets generated in individual projects, particularly for DNA/RNA sequencing data. CBC's assistance falls broadly into the categories outlined below.
+
+- Experimental Design and Power Analysis
+- Benchmarking
+- Technology Assessment
+- Software Engineering
+
+{{< button text="Computational Biology Core Website" href="https://cbc.brown.edu">}}
+
 
 ----
 
@@ -60,7 +94,4 @@ In addition to directly working with researchers, our group also works to to adv
 ### Check out our code, containers, and applications!
 -------
 
-[GitHub {{% fab github %}}](https://github.com/brown-ccv), [Docker {{% fab docker %}}](https://hub.docker.com/u/browndatasci)
-
-
-[Computational Biology Core Tools](https://compbiocore.github.io)
+[GitHub {{% fab github %}}](https://github.com/brown-ccv), [Docker {{% fab docker %}}](https://hub.docker.com/u/browndatasci), [CBC GitHub {{% fab github %}}](https://github.com/compbiocore)

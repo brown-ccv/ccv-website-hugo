@@ -87,6 +87,8 @@ params:
       text: Help us improve!
       link: https://docs.google.com/forms/d/e/1FAIpQLSdT00ZSXQh8vKbAMvc1xUoBfGtf2SU8bw5T3tIchKf03TgfbA/viewform?usp=sf_link
       fa: fas fa-star-half-alt
+    slack:
+      link: https://join.slack.com/t/ccv-share/shared_invite/enQtODY5OTQ3MTk0ODU1LTM4OWQyZjVlYWRmY2QxNWEyZjQ0NzEwMmRlNTRlZjYyMjM1Y2U5MDU1ZGFmMmRhZWIzNjliYmQzYTBiMzY2NzU
   githubLinks:
     ccvGithub: https://github.com/brown-ccv/
     cbcGithub: https://github.com/compbiocore/it
