@@ -1,16 +1,16 @@
 title: What's New
 display: true
 items:
+  - title: COVID-19 Updates
+    text: The Center for Computation and Visualization remains committed to supporting the computing needs of the Brown Research Community during this difficult time. [**Click here for details.**](covid/)
+    fa:
+      prefix: fad
+      icon: fa-shield-virus
   - title: New CCV rates
     text: Check the new rates for our consulting services and infrastructure. [**Click here for details.**](https://ccv.brown.edu/services/rates/)
     fa:
       prefix: fad
       icon: fa-sack-dollar
-  - title: Changes to Oscar exploratory limits
-    text: Exploratoy accounts now have access to 32 cores and 246GB memory for 48hrs! [**See this and other changes here.**](https://ccv.brown.edu/services/rates/)
-    fa:
-      prefix: fad
-      icon: fa-server
   - title: Agreements with cloud providers
     text: CIS now has agreements with the major cloud providers. Contact us for details! [**ccv@brown.edu**](mailto:ccv@brown.edu)
     fa:

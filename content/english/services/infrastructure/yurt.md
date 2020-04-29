@@ -23,7 +23,7 @@ We welcome projects that take advantage of this unique technology to advance tea
 ### Regular Open House {{< badge "canceled until further notice" "warning" >}}
 
 {{< lead >}}
-For the health and safety of the community, we will no offer demos until further notice. We continue to monitor the coronavirus situation closely and we are taking action based on guidance from public health experts. Please stay safe.
+For the health and safety of the community, we will no longer offer demos until further notice. We continue to monitor the coronavirus situation closely and we are taking action based on guidance from public health experts. Please stay safe.
 {{</ lead >}}
 
 <!-- The YURT is open to the public on the first Friday of each month at 4 pm. Tours will happen if a minimum of three people have signed up for a visit. We can host at most 8 people and the tour will typically last between 30-60 minutes. If you are interested in visiting the YURT please reserve your spot in our calendar. -->

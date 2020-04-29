@@ -95,18 +95,9 @@ params:
 
   covid:
     title: COVID-19 Updates
-    lastUpdated: 17 March 2020
     text: |
       The Center for Computation and Visualization remains committed to supporting
       the computing needs of the Brown Research Community during this difficult time.
-      In addition to the various platforms for compute and storage, CCV staff
-      will continue to provide data science and consulting support as well as office hours and workshops.
-      These will be done remotely, but will continue with the same regularity as was provided on campus.
-      Onsite repairs and additions to hardware will be provided as safety permits.
-      We are committed to supporting the research community throughout this pandemic.
-      Anyone with specific questions or concerns should reach out to Thomas Serre,
-      Faculty Director for CCV at thomas_serre@brown.edu, Linnea Wolfe, Operating Director for CCV
-      at linnea_wolfe@brown.edu, or Paul Stey, Director of Data Science and Scientific Computing at paul_stey@brown.edu. Thank you for your patience and continued use of CCV services.
 
 # i18n
 languages:
