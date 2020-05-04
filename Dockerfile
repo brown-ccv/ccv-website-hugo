@@ -20,5 +20,6 @@ RUN npm install
 RUN npm run build:production
 
 FROM nginx
+COPY nginx.conf /etc/nginx/nginx.conf
 
 COPY --from=0 /site/public /usr/share/nginx/html
