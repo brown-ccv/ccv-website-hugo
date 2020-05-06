@@ -61,19 +61,27 @@
           {{ range where $.Site.Pages "Section" $current_section}}
           {{ if eq (.Params.category | urlize) $key }}
           {{ $weight := .Params.weight }}
-          <div class="col-md-6 py-3">
+          <div class="{{if eq .Title "Advanced Research Computing"}}col-md-12{{else}}col-md-6{{end}} py-3">
             <div class="card p-4">
               <div class="d-flex">
-              <h1>{{ .Title | markdownify }}</h1>
+              <h1>{{ .Title | safeHTML }}</h1>
               <span class="badge-red badge h-50 ml-1">{{ .Params.version }}</span>
               </div>
               {{ with .Params.extra }}
               <a href="{{.link}}" class="mt-1 text-danger badge border border-danger bg-warning">{{.text}}</a>
               {{ end }}
               <hr class="bg-primary">
-              <p class="fs-20">{{ .Params.lead | markdownify }}</p>
+              <p class="fs-20">{{ .Params.lead | safeHTML }}</p>
               <span>
+                {{ if not .Params.direct_link }}
                 <a href="{{.Permalink}}" class="mt-1 text-blue"><u>Details</u></a>
+                {{else}}
+                {{ with .Params.direct_link }}
+                {{ range . }}
+                  <a class="mt-1 text-orange mr-2 link" href="{{.url}}">{{.text | safeHTML }}</a>
+                {{ end }}
+                {{ end }}
+                {{ end }}
                 {{ if .Params.docs_link }}
                 <a href="https://docs.ccv.brown.edu/{{.Params.docs_link}}" class="mt-1 text-orange">&nbsp;&nbsp;<u>Documentation</u>&nbsp;&nbsp;</a>
                 {{ end }}
