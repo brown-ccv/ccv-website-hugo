@@ -9,6 +9,7 @@ category: File Storage and Transfer
 icon: database
 lead: Transfer files asynchronously and securely
 weight: 0
+docs_link: globus
 
 ---
 # Globus
