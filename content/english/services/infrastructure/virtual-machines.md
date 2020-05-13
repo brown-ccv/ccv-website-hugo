@@ -14,7 +14,7 @@ Virtual Hosting is aimed at departments or researchers who want access to a Serv
 
 ## To Request this Service
 
-Contact [CCV support](mailto:support@ccv.brown.edu) and indicate that you would like virtual server hosting. Please include any system resource requirements, software, storage needs, etc.
+Please complete this [form](https://brown.co1.qualtrics.com/jfe/form/SV_6Jv0o5Ded65UWot).
 
 {{< alert note >}}
 We do not currently support GPUs in this environment.
