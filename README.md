@@ -67,9 +67,9 @@ The main branches are:
 - `master` (default): development/staging branch. Changes to this branch come from topic branches. Contributors should branch off `master` to work on their changes. A PR should be submitted to `master`, add the appropriate label to the changes being proposed. Reviews are required before merging. The topic branch will be deleted when merged.
 - `production`: this is the production branch. Changes to this branch come from PRs from `master`. PRs need to be reviewed and approved (mostly check the staging website). Only members of website-admin team can approve and merge PRs to production.
 
-Changes happen in topic branches. Topic branch names start with the type of the change `<change_type>-*` ([see types below](#types-of-changes)). If multiple changes are expected in the same branch, name the branch `updates-*` and add the labels corresponding to the change type in your PR. Topic branches are created off `master`.
+Changes happen in topic branches. Topic branch names start with the type of the change `<change_type>-*` ([see types below](#types-of-changes)). If multiple changes are expected in the same branch, name the branch `updates-*` and add the labels corresponding to the change type in your PR. Topic branches are created off `master` by `git checkout -b your_topic_branch`.
 
-Once changes are done, a PR is submitted to `master` with the corresponding labels, and a review is requested from up to 3 reviewers (depending on the type of change - content (sometimes) or technical (always)).
+Once changes are done in your topic branch, use `git add .`, `npm run commit` and `git push` to submit a PR to `master` with the corresponding labels, and then a review is requested from up to 3 reviewers (depending on the type of change - content (sometimes) or technical (always)).
 
 #### Types of changes:
 
