@@ -9,8 +9,7 @@ draft: false
 lead: Several services at Brown allow you to share and store files. This guide will let you compare the options and decide which one(s) are right for you.
 ---
 
-
- | Google Drive | Dropbox | BrownBox | Campus File Storage | RData | Stronghold   
+| | Google Drive | Dropbox | BrownBox | Campus File Storage | RData | Stronghold
 -----  |  -----  |  ------ |  ------ |  ------ |  ------ |  ------  
 Collaborative editing | {{< fas check >}} |   |   |   |   |  
 Easy access from smartphones | {{< fas check >}} | {{< fas check >}} |   |   |   |  
