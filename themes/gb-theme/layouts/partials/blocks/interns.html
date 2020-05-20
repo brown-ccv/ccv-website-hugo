@@ -1,0 +1,48 @@
+<section id="interns" class="bg-light">
+    <div class="container">
+      <div class="">
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+      </div>
+    <h1 class="pt-8 pb-1 h1-home">
+      <i class="fas fa-2x fa-graduation-cap text-green"></i>
+      {{.Site.Data.interns2020.title}}</h1>
+      <h3 class="text-blue mb-4">{{.Site.Data.interns2020.text}}</h3>
+  </div>
+    <div class="d-flex justify-content-center px-3">
+
+      <article id="new-card" class="pt-3">
+        {{ range .Site.Data.interns2020.people }}
+        <div class="card stacked">
+          <div class="card-body">
+                <h3 class="font-weight-normal mb-2">{{ .title }}</h3>
+                <hr class="bg-yellow">
+            <div class="d-flex align-items-center">
+                <p>
+                  {{ .text | markdownify }}
+                </p>
+            </div>
+          </div>
+        </div>
+        {{ end }}
+      </article>
+    </div>
+</section>
