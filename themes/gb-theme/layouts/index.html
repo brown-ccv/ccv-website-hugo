@@ -18,12 +18,13 @@
 </ul> -->
 <!-- / nav dots -->
 {{ partial "blocks/hero" . }}
+{{ partial "blocks/interns" .}}
 {{ partial "blocks/quick_links" . }}
 {{ if .Site.Data.whatsnew.display }}
 {{ partial "blocks/whatsnew" . }}
 {{ end }}
 {{ partial "blocks/discourse" . }}
-{{ partial "blocks/showcase" . }}
+<!-- {{ partial "blocks/showcase" . }} -->
 {{ partial "blocks/events" . }}
 {{ partial "blocks/alerts" . }}
 
