@@ -16,8 +16,4 @@ items:
     fa:
       prefix: fad
       icon: fa-sack-dollar
-  # - title: Agreements with cloud providers
-  #   text: CIS now has agreements with the major cloud providers. Contact us for details! [**ccv@brown.edu**](mailto:ccv@brown.edu)
-  #   fa:
-  #     prefix: fad
-  #     icon: fa-cloud-rainbow
+
