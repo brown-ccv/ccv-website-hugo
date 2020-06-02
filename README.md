@@ -29,7 +29,7 @@ npm run serve
 ```
 Go to `localhost:1313/`
 
-To build the site into the `public/` folder. This generates all the files needed to publish the side, but doesn't start the server.
+To build the site into the `public/` folder. This generates all the files needed to publish the site, but doesn't start the server.
 ```shell
 npm run build
 ```
