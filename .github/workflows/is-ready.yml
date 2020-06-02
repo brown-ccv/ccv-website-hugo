@@ -1,0 +1,24 @@
+name: Is PR Ready
+
+on:
+  pull_request:
+    types:
+      - labeled
+    branches:
+      - master
+
+jobs:
+  check-ready:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: check for ready label
+        if: (!contains(github.event.pull_request.labels.*.name, 'ready'))
+        script: |
+          // Check for error
+          if (true) {
+            throw "This is an exception message."
+          }
+          // Everything is okay
+          return 42;
