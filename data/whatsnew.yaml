@@ -5,7 +5,7 @@ items:
     text: The Carney Institute for Brain Science, the Data Science Initiative, and CCV are sponsoring the [Brown Unconference on Computational Intelligence and Applications](https://serre-lab.github.io/BrownUnconf.github.io/)
     fa:
       prefix: fad
-      icon: fa-wifi
+      icon: fa-satellite-dish
   - title: COVID-19 Updates
     text: The Center for Computation and Visualization remains committed to supporting the computing needs of the Brown Research Community during this difficult time. [**Click here for details.**](covid/)
     fa:
