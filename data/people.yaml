@@ -123,6 +123,16 @@
     Fiduciary at Smoothie King. She enjoys food and beverage, bodies of water, jokes, and
     caring for her beloved dog and plants.
   image: ashley_main.jpg
+- name: Matt Slivinski
+  weight: "16"
+  type: Full Time
+  team: Advanced Research Computing
+  subteam: Institutional Data
+  title: Data Scientist
+  github_username: mattsliv
+  brown_directory_uuid: 326247d1-8219-46f1-848b-d45d10d7624d
+  bio: ""
+  image: matt_main.jpg
 - name: Andrew Leith
   weight: "2"
   type: Full Time
@@ -218,7 +228,7 @@
   title: Research Service Center Manager
   github_username:
   brown_directory_uuid: e0e55df3-9f2c-4a12-a1de-742955164e1e
-  bio:
+  bio: ""
   image: yang_main.jpg
 - name: Linnea Wolfe
   type: Full Time
