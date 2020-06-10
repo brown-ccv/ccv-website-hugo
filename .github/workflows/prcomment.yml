@@ -40,18 +40,18 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         message_id: "Content 2"
         message_file: '.github/CODE_REVIEW/content_2nd.md'
-    - name: Add 4 day wait
+    - name: Add 2.5 day wait
       if: contains(steps.pr_type.outputs.change_types, 'feature')
       uses: brown-ccv/gh-actions/add-pr-label@master
       with:
         GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-        label: "4 day wait"
-    - name: Add 2 day wait
+        label: "2.5 day wait"
+    - name: Add 1 day wait
       if: (contains(steps.pr_type.outputs.change_types, 'content') || contains(steps.pr_type.outputs.change_types, 'other')) && !contains(steps.pr_type.outputs.change_types, 'feature')
       uses: brown-ccv/gh-actions/add-pr-label@master
       with:
         GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-        label: "2 day wait"
+        label: "1 day wait"
     - name: Add Ready Label
       if: (contains(steps.pr_type.outputs.change_types, 'data') || contains(steps.pr_type.outputs.change_types, 'bug')) && !(contains(steps.pr_type.outputs.change_types, 'content') || contains(steps.pr_type.outputs.change_types, 'other') || contains(steps.pr_type.outputs.change_types, 'feature'))
       uses: brown-ccv/gh-actions/add-pr-label@master

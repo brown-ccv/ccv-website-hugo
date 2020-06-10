@@ -5,8 +5,15 @@
   .brown-logo-color {
     height: 50px;
   }
-  .ccv-logo {
+  .ccv-logo, .ccv-logo-alt {
     height: 40px;
+  }
+  .ccv-logo-alt {
+    .c2 {
+      fill: none;
+      stroke: black;
+      stroke-width: 4px;
+    }
   }
   @extend .justify-content-between;
 }

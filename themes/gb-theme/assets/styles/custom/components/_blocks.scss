@@ -1,0 +1,20 @@
+.blocks {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+
+}
+.block {
+    flex-basis: 45%;
+    height: 50%;
+    h1 {
+        font-size: 2.2rem !important;
+        font-weight: bold;
+    }
+    .name {
+        font-size: 2rem;
+        text-align: right;
+        color: $green;
+    }
+}
