@@ -2,6 +2,12 @@
 // hero
 #hero {
   position: relative;
+  .hero-content-container-alt {
+    padding: 5rem;
+    overflow: hidden;
+    background-position: 20% 65%;
+    background-size: cover;
+  }
   .hero-content-container {
     position: relative;
     overflow: hidden;
