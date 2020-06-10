@@ -1,0 +1,44 @@
+<section id="hero" class="position-relative">
+
+    <div class="hero-content-container-alt bg-dark" style="background-image: url('{{$.Site.BaseURL}}/images/hero-blm.svg');">
+      <div class="blocks">
+          {{range .Site.Data.quotes }}
+          <blockquote class="block">
+              <h1 class="text-green p-2">{{.quote}}</h1>
+              <p class="name"> – {{.person}}</p>
+          </blockquote>
+          {{ end }}
+
+      </div>
+    </div>
+  
+    <!-- floating button -->
+    <a data-scroll href="#section-1" class="z-10 position-absolute left-5 bottom-10">
+    <button type="button" class="small-invisible btn btn-outline-white btn-ico btn-rounded"><i class="icon-arrow-down2 fs-26"></i></button>
+    </a>
+
+  </section>
+
+  <div class="container py-5">
+    <h1 class="text-dark h1-home">{{ .Params.hero.title }}</h1>
+    <p class="text-medium-brown">{{ .Params.hero.lead }}</p>
+    <div class="row d-flex">
+    <ul class="nav">
+        {{ $currentPage := . }}
+        {{ range .Site.Menus.main }}
+        {{ if eq "Services" .Name }}
+        <li class="mx-1 nav-item  bg-green shadow">
+        <a class="nav-link" href="{{ .URL }}">
+            <span class="text-beige font-weight-bold">{{ i18n "learn_about_ccv_services" }}</span>
+        </a>
+        </li>
+        <li class="mx-1 nav-item  bg-dark shadow">
+            <a class="nav-link" href="about/#diversity">
+                <span class="text-beige font-weight-bold">Read CCV's diversity statement</span>
+            </a>
+        </li>
+        {{ end }}
+        {{ end }}
+    </ul>
+    </div>
+</div>
