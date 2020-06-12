@@ -22,10 +22,13 @@ lead: We provide services with limited resources at **no cost** to all
  * \* Priority accounts and Exploratory accounts with a PI get a data directory.
  * \* Exploratory accounts without a PI have no data directory provided.
  * Priority accounts have a higher Quality-of-Service (QOS) i.e. priority accounts will have faster job start times.
- * The maximum number of cores and duration may change based on cluster utilization. For example - HPC Priority account has a Quality-of-Service (QOS) allowing up to 208 cores, 1TB memory, and a total per-job limit of 998,400 core-minutes. This allows a 208-core job to run for 80 hours, a 104-core job to run for 160 hours, or 208 1-core jobs to run for 80 hours.
+ * The maximum number of cores and duration may change based on cluster utilization. 
+    * HPC Priority account has a Quality-of-Service (QOS) allowing up to 208 cores, 1TB memory, and a total per-job limit of 1,198,080 core-minutes. This allows a 208-core job to run for 96 hours, a 104-core job to run for 192 hours, or 208 1-core jobs to run for 96 hours.
+    * Exploratory account has a Quality-of-Service (QOS) allowing up to 2 GPUs and a total of 5760 GPU-minutes. This allows a 2 GPU job to run for 48 hours or 1 GPU job to run for 96 hours.
   * GPU Definitions:
     *  Std - QuadroRTX or lower
     *  High End - Tesla V100
+  * For more technical details, please see this [link.](https://docs.ccv.brown.edu/oscar/system-overview)
 
 # Staff Services
 | Support Level | Description | Cost |
