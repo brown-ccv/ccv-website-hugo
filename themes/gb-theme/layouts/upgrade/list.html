@@ -1,0 +1,39 @@
+{{ define "content" }}
+<!-- header - yellow container -->
+{{ $current_section := .Section }}
+<div id="hero-list" class=" bg-yellow text pb-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 d-flex flex-column pt-6 pb-10">
+        <h1 class="fs-60">Oscar Upgrade</h1>
+        <p class="fs-30">{{ .Params.hero.lead | markdownify }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="container-fluid d-flex justify-content-center py-10 px-0">
+  <div class="col-lg-9 col-md-11 col-sm-12">
+    <small class="small">Last Updated: {{ .Params.lastUpdated }}</small>
+
+    <!-- sections -->
+    {{ range .Params.items }}
+    <header id="{{ .name }}" class="d-flex align-items-center pt-6">
+      <span class="btn-red text-light btn-ico btn-lg btn-rounded d-flex align-items-center justify-content-center">
+        <i class="fas fa-{{ .icon}} fs-36"></i>
+      </span>
+      <h1 class="mx-4 text-secondary">{{ title .title }}</h1>
+      <hr class="bg-dark w-40" />
+    </header>
+
+    <article id="{{ .name }}-content" class="py-4">
+      <p class="p-medium">{{ .text | markdownify }}</p>
+    </article>
+    {{ end }}
+
+  </div>
+</div>
+
+{{ end }}
