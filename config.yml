@@ -93,11 +93,11 @@ params:
     ccvGithub: https://github.com/brown-ccv/
     cbcGithub: https://github.com/compbiocore/it
 
-  covid:
-    title: COVID-19 Updates
+  upgrade:
+    title: Oscar Planned Outage
     text: |
-      The Center for Computation and Visualization remains committed to supporting
-      the computing needs of the Brown Research Community during this difficult time.
+      CCV's High Performance Computing Cluster ("Oscar") will unavailable from June 22 to June 28 for 
+      planned upgrades.
 
 # i18n
 languages:
