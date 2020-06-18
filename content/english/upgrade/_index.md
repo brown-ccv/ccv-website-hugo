@@ -3,7 +3,7 @@ title: Oscar Upgrade
 
 tagTitle: Oscar Upgrade
 hero:
-  lead: The Oscar cluster will be unavailable for scheduled maintenance, beginning Monday, June 22, 2020 at 8:00 am to Monday, June 29, 2020.
+  lead: CCV's Oscar cluster will be unavailable for scheduled maintenance from June 22, 2020 at 8:00 am - June 29, 2020 at 5:00 pm
 
 lastUpdated: 18 June 2020
 
@@ -12,7 +12,7 @@ items:
   title: Oscar Planned Outage Details
   icon: cog
   text: |
-        The Oscar cluster will be unavailable for scheduled maintenance, beginning Monday, June 22, 2020 at 8:00 am to Monday, June 29, 2020.
+        The Oscar cluster will be unavailable for scheduled maintenance, beginning Monday, June 22, 2020 at 8:00 am to Monday, June 29 at 5:00pm, 2020.
 
         We expect to bring the cluster back online much sooner than published downtime, but have lengthened the downtime in case of unforeseen problems. Without issues, the downtime should be 3-4 days.
 

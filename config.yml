@@ -96,8 +96,7 @@ params:
   upgrade:
     title: Oscar Planned Outage
     text: |
-      CCV's High-Performance Computing Cluster ("Oscar") will be unavailable from June 22 to June 28 for 
-      planned upgrades.
+      Oscar scheduled maintenance - June 22, 2020 at 8:00 am - June 29, 2020 at 5:00 pm
 
 # i18n
 languages:
