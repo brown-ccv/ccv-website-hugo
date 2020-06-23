@@ -1,0 +1,4 @@
+{{ range $.Site.Data.storage.items }}
+<h1>{{ .title }}</h1>
+{{.description | safeHTML }}
+{{ end }}

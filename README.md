@@ -238,6 +238,9 @@ npm run new content/english/services/consulting/new_file.md
 There are special shortcodes that can be used in the Markdown content files that generate styled html components that follow the website design.
 Find detailed information on how to write your markdown content and include shortcodes specific for CCV's website [here](https://datasci.brown.edu/hidden/how-to-write-md/).
 
+#### Storage Guide
+
+Content that appear on this page: https://ccv.brown.edu/services/infrastructure/storage/ is fetched at build time from the Deskpro RSS feed (https://ithelp.brown.edu/kb/storage-and-backup.rss). Therefore, to update that content, just update the Deskpro Knowledge Base document. For more information, reach out to CCV User Services team.
 
 ##### Our work: Software and Workshops
 - Adding, updating, or deleting items from here do not require change to this repo.
