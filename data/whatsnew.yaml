@@ -1,11 +1,11 @@
 title: What's New
 display: true
 items:
-  - title: Pooled Storage Rates
-    text: Check the new rates for pooled storage allocations. [**Click here for details.**](https://ccv.brown.edu/services/rates/)
+  - title: Pooled Storage Allocations
+    text: Check out the new pooled storage allocations. [**Click here for details.**](https://ccv.brown.edu/services/rates/)
     fa:
       prefix: fad
-      icon: fa-sack-dollar
+      icon: fa-database
   - title: Brown Unconf
     text: The Carney Institute for Brain Science, the Data Science Initiative, and CCV are sponsoring the [Brown Unconference on Computational Intelligence and Applications](https://serre-lab.github.io/BrownUnconf.github.io/)
     fa:
