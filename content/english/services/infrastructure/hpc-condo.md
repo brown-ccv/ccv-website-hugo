@@ -16,8 +16,9 @@ CCV provides a mechanism for investigators to purchase equipment and add it as a
 Note that condo purchases are not limited to CPU-only nodes; GPU nodes can also be included as part of a condo. 
 
 ## Job Priority
-The high priority guarantees that the purchaser's jobs will run prior to any subscription-based use, unless the purchaser is already using their limit of 1.25 times the number of cores purchased.
+The high priority guarantees that the purchaser's jobs will run prior to any subscription-based use, unless the purchaser is already using their limit of 1.25 times the number of cores purchased. Condo jobs are also not subject to the conventional wall clock limits of `Exploratory` or `Priority` accounts on Oscar.
 
+## Processors and Memory
 CCV standardizes processor, and to an extent, node memory configurations for a period of roughly six months to a year in order to maintain a degree of homogeneity in the cluster. As an example, our current standard node CPU configuration is two-socket Intel Xeon Gold 6242 (16-core, 2.8GHz), with node memory of either 192GB or 384GB.
 
 # Purchasing
