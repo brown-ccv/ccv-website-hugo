@@ -1,11 +1,10 @@
 ---
 title: "HPC Condo"
-date: 2020-06-24T15:09:10-04:00
+date: 2018-02-24T15:09:10-04:00
 draft: false
 lead: Dedicated high-performance computing resources for researchers in the form of "condos" on the University's main supercomputer, Oscar.  
 category: Computing
 icon: server2
-weight: 1
 haas: true
 ---
 
