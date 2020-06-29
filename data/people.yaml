@@ -289,16 +289,6 @@
   github_username: ''
   brown_directory_uuid: f904bb23-202f-48fb-bf93-7b7d326c7043
   image: avila_main.jpg
-- name: Kirk Brown
-  weight:
-  type: Full Time
-  team: CCV Operations
-  subteam:
-  title: Research Computing Analyst
-  github_username:
-  brown_directory_uuid: 1c597441-90f8-4543-8627-d11dcd0dbdb0
-  bio:
-  image: kirk_main.jpg
 - name: Rashi Dhar
   weight:
   type: CCV Interns
