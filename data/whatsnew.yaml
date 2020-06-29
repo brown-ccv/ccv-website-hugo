@@ -2,7 +2,7 @@ title: What's New
 display: true
 items:
   - title: Pooled Storage Allocations
-    text: Check out the new pooled storage allocations. [**Click here for details.**](https://ccv.brown.edu/services/rates/)
+    text:  Looking to share your storage quotas with your collaborators? Check out the [**new pooled storage allocations.**](services/rates#pooled-storage-allocations)
     fa:
       prefix: fad
       icon: fa-database
