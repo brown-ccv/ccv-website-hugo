@@ -4,4 +4,4 @@ public
 .DS_Store
 .env
 info-*.json
-data/storage.json
+data/kb_articles.json

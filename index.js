@@ -118,10 +118,25 @@ function getPage(organization, filePath, cursor) {
 
 
 // Extract data from Deskpro RSS feed and save to data folder. 
-const storageFilePath = 'data/storage.json'
 
-Feed.load('https://ithelp.brown.edu/kb/storage-and-backup.rss', function(err, rss){
-	fs.writeFileSync(storageFilePath, JSON.stringify(rss, null, 3));
-	console.log('Data written to ' + storageFilePath );
-});
- 
+const rssList = [
+	'storage-and-backup',
+	'ccv-website-articles'
+]
+
+const getRssList = (rssList) => {
+	const promises = rssList.map(feed => Feed.load(`https://ithelp.brown.edu/kb/${feed}.rss`, (err, rss) =>
+		rss
+	));
+	return promises
+}
+
+Promise.all(getRssList(rssList)).then(
+	arr => {
+		fs.writeFileSync('data/kb_articles.json', JSON.stringify(arr, null, 3))
+		console.log('Data written to data/kb_articles.json');
+	}
+);
+
+
+
