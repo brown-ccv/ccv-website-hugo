@@ -13,6 +13,7 @@
     overflow: hidden;
     background-position: 20% 65%;
     background-size: cover;
+    margin-top: -4.5rem;
     .hero-content {
       position: relative;
       z-index: 10;
@@ -109,4 +110,20 @@
 .zdog-svg {
 	width: 100%;
 	height: 100%;
+}
+
+#hero-list {
+  margin-top: -4.5rem;
+  z-index: 2;
+  position: relative;
+}
+
+.hero-list-single {
+  margin-top: -9.8rem !important;
+  z-index: 2;
+  position: relative;
+}
+
+.nav-toc-page {
+  z-index: 10;
 }
