@@ -1,0 +1,9 @@
+{{$match := (.Get 0)}}
+{{ range $.Site.Data.kb_articles }}
+{{range .items }}
+{{ if (strings.HasSuffix .link $match) }}
+<h1>{{ .title }}</h1>
+{{.description | safeHTML }}
+{{ end }}
+{{end}}
+{{end}}

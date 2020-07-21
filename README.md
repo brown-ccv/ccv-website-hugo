@@ -239,6 +239,18 @@ There are special shortcodes that can be used in the Markdown content files that
 Find detailed information on how to write your markdown content and include shortcodes specific for CCV's website [here](https://datasci.brown.edu/hidden/how-to-write-md/).
 
 
+#### Deskpro Knowledge Base Articles
+
+It's possible to add content hosted in the Deskpro Knowledge Base. The content will be fetched at build time from the Deskpro RSS feed (https://ithelp.brown.edu/kb/ccv-website-articles.rss). For more information, reach out to CCV User Services team. If you are a content creator and are using Deskpro's Knowledge Base to serve content to the CCV Website, add the category `Technical Services > CCV Website Articles` to your article. Only articles in that category will be fetched.
+
+To add that content to a Markdown file, use the  `rss` shortcode with the article name as the only argument:
+
+Note that the article name can be found in the article URL, for example, to add this article: `https://ithelp.brown.edu/kb/articles/github-for-brown`, use:
+
+```
+{{< rss "github-for-brown" >}}
+```
+
 ##### Our work: Software and Workshops
 - Adding, updating, or deleting items from here do not require change to this repo.
 Fetching apps data requires a .env:

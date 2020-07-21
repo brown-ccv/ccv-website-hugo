@@ -51,11 +51,21 @@
           <h1 class="mx-4 text-secondary">{{ humanize $key }}</h1>
           <hr class="bg-dark w-40"/>
         </header>
+
         {{ if eq $key "file-storage-and-transfer"}}
-        <div class="d-flex px-2 py-6 justify-content-between flex-wrap">
-          <h3>{{ markdownify .Site.Data.file_storage.lead }}</h3>
-          <a class="btn btn-secondary mt-2 fs-26" href="{{.Site.BaseURL}}/{{.Site.Data.file_storage.path}}"><span class="fas fa-table"></span> See comparison table </a>
+        <div class="col-md-12 py-3">
+          <div class="card p-4">
+
+              
+                <h3>{{ markdownify .Site.Data.file_storage.lead }}</h3>
+                <hr class="bg-primary">
+                <a class="fs-26" href="{{.Site.BaseURL}}/{{.Site.Data.file_storage.path}}">
+                  <span class="mt-1 text-blue"><u>Storage Guide</u></span>
+                </a>
+
+          </div>
         </div>
+
         {{ end }}
         <article class="d-flex py-6 justify-content-between flex-wrap">
           {{ range where $.Site.Pages "Section" $current_section}}
