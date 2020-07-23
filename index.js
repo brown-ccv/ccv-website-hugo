@@ -3,6 +3,7 @@ require('dotenv').config()
 const fs   = require('fs');
 const request = require('request');
 const yaml = require('js-yaml');
+const Feed = require('rss-to-json');
 
 const token = process.env.GITHUB_TOKEN;
 const user = process.env.GITHUB_USER;
@@ -114,3 +115,28 @@ function getPage(organization, filePath, cursor) {
   })
   .catch((err) => console.error(err));
 }
+
+
+// Extract data from Deskpro RSS feed and save to data folder. 
+
+const rssList = [
+	'storage-and-backup',
+	'ccv-website-articles'
+]
+
+const getRssList = (rssList) => {
+	const promises = rssList.map(feed => Feed.load(`https://ithelp.brown.edu/kb/${feed}.rss`, (err, rss) =>
+		rss
+	));
+	return promises
+}
+
+Promise.all(getRssList(rssList)).then(
+	arr => {
+		fs.writeFileSync('data/kb_articles.json', JSON.stringify(arr, null, 3))
+		console.log('Data written to data/kb_articles.json');
+	}
+);
+
+
+

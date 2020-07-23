@@ -1,4 +1,8 @@
 
+function resizeIframe(obj) {
+    console.log(obj.contentWindow.height)
+    obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
+}
 
 $(function () {
       $.fn.isOnScreen = function(){

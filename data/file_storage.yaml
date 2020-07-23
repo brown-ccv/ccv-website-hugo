@@ -1,2 +1,5 @@
-lead: 'Several services at Brown allow you to share and store files. Click on the link bellow to see comparison table with the options and decide which ones are right for you.'
+lead: |
+    Several services at Brown allow you to share and store files. 
+    Click below to see detailed information and learn more about 
+    the storage options that Brown provides.
 path: 'services/infrastructure/storage/'
