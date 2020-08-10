@@ -74,9 +74,9 @@ The COBRE-CBHD Computational Biology Core (CBC) integrates across multiple resea
 {{< button text="CBC Website" href="https://cbc.brown.edu">}}
 {{< /tile >}}
 {{< tile name="Data & Visualization" lead="Isabel Restrepo" color="yellow">}}
-We partner with Brown’s researchers and academic community to bring modern software engineering, visualization, and data science practices to their work. We are software engineers and data scientists with expertise in a broad range of fields, including: visualization techniques, computer vision, computer graphics, web technologies, data management, and data science. We can program in almost any language, and enjoy learning new technologies, documenting, striving for best practices, and especially brewing coffee. 
+We partner with Brown’s researchers and academic community to bring modern software engineering, visualization, and data science practices to their work. We are software engineers and data scientists with expertise in a broad range of fields, including: visualization techniques, computer vision, computer graphics, web technologies, data management, and data science. We can program in almost any language, and enjoy learning new technologies, documenting, striving for best practices, and especially brewing coffee.
 {{< /tile >}}
-{{< tile name="High-Performance Computing" lead="Helen Kershaw" color="green">}}
+{{< tile name="High-Performance Computing" lead="Ashok Ragavendran" color="green">}}
 Our software engineers help researchers to get the most out of high-performance computing (HPC) resources. To achieve this, we partner with users to design, debug, and optimize their code to run in an HPC environment. We also collaborate with new and non-traditional HPC users to help them to scale up and accelerate their science.
 {{< /tile >}}
 {{< tile name="Institutional Data Group" lead="Andras Zsom" color="brown">}}
