@@ -1,5 +1,5 @@
 ---
-title: RData
+title: Research Data Storage (RData)
 
 tagTitle: RData - Center for Computation and Visualization
 tagDescription: Learn about RData, a high-performance storage system for use with CCV's HPC systems.
