@@ -12,7 +12,7 @@ icon: server2
 haas: true
 
 ---
-Research Data Storage (RData - Intended for use in High-Performance Computing)
+Research Data Storage (RData) - Intended for use in High-Performance Computing
 RData is a high-performance data storage system which is accessible from any computer connected from Brown's campus network, or from outside the network via ssh.  It is backed up nightly on an incremental basis. What sets this option apart from the others is that it is directly connected to Brown’s primary supercomputer, “Oscar”, making computation easier. If you don’t intend to compute your data with Brown’s supercomputer, you may consider using Campus File Storage / Research instead. You could also use RData for computing and then move your results to Campus File Storage for greater accessibility, reliability, and protection.
 * Synonyms: RDATA, GPFS, HPC Storage, Oscar Storage 
 * Best for: High performance storage of research data, perform computation on your data using Brown’s supercomputer
