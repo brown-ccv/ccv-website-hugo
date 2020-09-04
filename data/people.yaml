@@ -60,17 +60,6 @@
     PhD from the University of Rhode Island. Her background is primarily in studying
     microbes.
   image: joselynn_main.jpg
-- name: Helen Kershaw
-  weight: "11"
-  type: Full Time
-  team: Advanced Research Computing
-  subteam: High-Performance Computing
-  title: Lead Research Software Engineer
-  github_username: hkershaw-brown
-  brown_directory_uuid: 7dd767e6-6eec-4394-ab48-c89ab40ca69a
-  bio: Helen is a research software engineer interested in getting the most out of
-    HPC
-  image: helen_main.jpg
 - name: Isabel Restrepo
   weight: "5"
   type: Full Time
@@ -175,9 +164,9 @@
   title: Research Software Engineer
   github_username: rkakodkar
   brown_directory_uuid: bdc65f4b-8852-4cef-99c3-f765988e15c0
-  bio: Rohit completed his Ph.D. in Mechanical Engineering at the University of Delaware, 
-    where his research involved developing a large-scale simulation code base to calculate 
-    thermal properties of nanostructured materials. Using these simulations, he worked on developing 
+  bio: Rohit completed his Ph.D. in Mechanical Engineering at the University of Delaware,
+    where his research involved developing a large-scale simulation code base to calculate
+    thermal properties of nanostructured materials. Using these simulations, he worked on developing
     materials that would be more efficient at thermal management inside microprocessors.
   image: rohit_main.jpg
 - name: Ashok Ragavendran
@@ -199,8 +188,8 @@
 - name: Mete Tunca
   type: Full Time
   team: Leadership
-  title: Assistant Director of Cloud and Research Computing
-  github_username: ''
+  title: Associate Director of Research Systems and Services
+  github_username: 'mttunca'
   brown_directory_uuid: d0e7b3b6-f6b4-f28b-3bfd-08bccf05ac31
   bio: ''
   image: mete_main.jpg
