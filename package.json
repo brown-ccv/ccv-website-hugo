@@ -5,15 +5,15 @@
   "main": "index.js",
   "dependencies": {},
   "devDependencies": {
-    "citation-js": "^0.5.0-alpha.4",
-    "cz-conventional-changelog": "^3.0.2",
+    "citation-js": "^0.5.0-alpha.7",
+    "cz-conventional-changelog": "^3.3.0",
     "dotenv": "^8.2.0",
     "git-cz": "^3.3.0",
     "hugo": "0.0.3",
     "hugo-bin": "^0.51.2",
-    "js-base64": "^2.5.1",
-    "js-yaml": "^3.13.1",
-    "request": "^2.88.0",
+    "js-base64": "^2.6.4",
+    "js-yaml": "^3.14.0",
+    "request": "^2.88.2",
     "rss-to-json": "^1.1.1"
   },
   "scripts": {
