@@ -30,6 +30,16 @@ lead: We provide services with limited resources at **no cost** to all
     *  High End - Tesla V100
   * For more technical details, please see this [link.](https://docs.ccv.brown.edu/oscar/system-overview)
 
+# Condo Purchase
+> An investigator may choose to purchase a condo to support their high performance computing needs.
+## Benefits of condo ownership
+* **5 year lifecycle** - condo resources will be available for a duration of 5 years
+* **Access to more cpu cores than purchased** - condo will have access to 1.25 times the number of cpu cores purchased for the first 3 years of its lifecycle. For the remaining 2 years, condo will have access to the same number of cpu cores purchased 
+* **Support** - CCV staff will install, upgrade and maintain condo hardware throughout its lifecycle
+## How to get started
+* Contact support@ccv.brown.edu to discuss your needs and review purchase options
+
+
 # Staff Services
 | Support Level | Description | Cost |
 | --- | --- | --- |
