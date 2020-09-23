@@ -2,6 +2,7 @@ node_modules
 public
 .ftpconfig
 .DS_Store
+*/*.DS_Store
 .env
 info-*.json
 data/kb_articles.json
