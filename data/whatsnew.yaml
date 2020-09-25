@@ -11,8 +11,8 @@ items:
     fa:
       prefix: fad
       icon: fa-shield-virus
-  - title: New CCV rates
-    text: Check the new rates for our consulting services and infrastructure. [**Click here for details.**](services/rates/)
+  - title: CCV Rates
+    text: Check the rates for our consulting services and infrastructure. [**Click here for details.**](services/rates/)
     fa:
       prefix: fad
       icon: fa-sack-dollar
