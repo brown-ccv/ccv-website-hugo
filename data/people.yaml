@@ -122,18 +122,6 @@
   brown_directory_uuid: 326247d1-8219-46f1-848b-d45d10d7624d
   bio: ""
   image: matt_main.jpg
-- name: Andrew Leith
-  weight: "2"
-  type: Full Time
-  team: Advanced Research Computing
-  subteam: Computational Biology Core
-  title: Genomics Data Scientist
-  github_username: andrew-leith
-  brown_directory_uuid: d0bcfa61-086d-fac1-0cad-dd7f7fd58a5e
-  bio: Andrew is a data scientist with a degree in Biostatistics from the Brown School
-    of Public Health; his professional interests include cloud computing and infrastructure,
-    methods for reproducible research in genomics, and the biology of human longevity.
-  image: andrew_main.jpg
 - name: Thomas Serre
   type: Full Time
   team: Leadership
@@ -266,7 +254,7 @@
 - name: Sam Fulcomer
   type: Full Time
   team: Leadership
-  title: Associate Director
+  title: HPC IT Architect
   github_username: ''
   brown_directory_uuid: 0d83d4b5-85a5-62fc-44a3-81eaff49e183
   bio: ''
