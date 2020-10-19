@@ -26,7 +26,7 @@ Here are the details of [Rates for Research Data Storage](https://ccv.brown.edu/
 * Users can access the [snapshops of their RData](https://docs.ccv.brown.edu/oscar/managing-files/restore) for the last 5-7 days.
 
 # Transfer
-* Users can [transfer data between their local computers and Rdata](https://docs.ccv.brown.edu/oscar/managing-files/filetransfer-isilon)
+* Users can [transfer data between their local computers and Rdata](https://docs.ccv.brown.edu/oscar/managing-files/filetransfer)
 * Users can [transfer data between files.brown.edu and RData](https://docs.ccv.brown.edu/oscar/managing-files/filetransfer-isilon)
 
 
