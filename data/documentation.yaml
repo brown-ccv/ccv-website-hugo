@@ -4,7 +4,7 @@
 - name: Stronghold
 - name: Globus
 - name: Visualization Software
-  url: "https://app.gitbook.com/@brown-cis/s/visualization/"
+  url: "https://docs.ccv.brown.edu/visualization/"
 - name: Discourse
   url: "https://ask.cyberinfrastructure.org/c/brown-research-computing"
   icon: fab fa-discourse
