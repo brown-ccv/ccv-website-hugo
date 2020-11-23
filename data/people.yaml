@@ -312,26 +312,6 @@
   brown_directory_uuid: 883cb383-0b7a-40eb-8e4f-8a8805e7306a
   bio: Minsik is an undergrad student studying chemical physics.
   image: minsik_main.jpg
-- name: Louis Kilfoyle
-  weight:
-  type: CCV Interns
-  team: Advanced Research Computing
-  subteam: Institutional Data
-  title: Data Science Intern
-  github_username: louis-kilfoyle
-  brown_directory_uuid: 5b343470-0e0f-4797-8a13-519449cb5d49
-  bio: Louis is an undergrad studying Computer Science and Applied Mathematics.
-  image: louisk_main.jpg
-- name: Cameron Webster
-  weight:
-  type: CCV Interns
-  team: Advanced Research Computing
-  subteam: Institutional Data
-  title: Data science Intern
-  github_username: camweb36
-  brown_directory_uuid: 3b9db98c-fb5f-45a8-b220-1abfc19dd4e6
-  bio: Cameron is an undergraduate studying applied math-biology
-  image: cameron_main.jpg
 - name: Kuba Tarlowski
   weight:
   type: CCV Interns
@@ -342,3 +322,23 @@
   brown_directory_uuid: 154c611f-7b29-4209-9bf3-5e731cf360ea
   bio:
   image: kuba_main.jpg
+- name: Justin Tian
+  weight:
+  type: CCV Interns
+  team: Institutional Data
+  subteam: Institutional Data
+  title: Data Science Intern
+  github_username: quicklearnerjustin
+  brown_directory_uuid: 1034dc39-54c6-4b0b-aa2f-770783dedfc2
+  bio:
+  image: justin_main.jpg
+- name: Maitreya Venkataswamy
+  weight:
+  type: CCV Interns
+  team: Institutional Data
+  subteam: Institutional Data
+  title: Data Science Intern
+  github_username: maitreyakv
+  brown_directory_uuid: fd13942d-d553-4032-ad4e-0fb82f594f78
+  bio:
+  image: maitreya_main.jpg
