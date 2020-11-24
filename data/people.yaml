@@ -312,20 +312,10 @@
   brown_directory_uuid: 883cb383-0b7a-40eb-8e4f-8a8805e7306a
   bio: Minsik is an undergrad student studying chemical physics.
   image: minsik_main.jpg
-- name: Kuba Tarlowski
-  weight:
-  type: CCV Interns
-  team: CCV Operations
-  subteam: CCV Operations
-  title: Services Support Intern
-  github_username: kubatarlowski
-  brown_directory_uuid: 154c611f-7b29-4209-9bf3-5e731cf360ea
-  bio:
-  image: kuba_main.jpg
 - name: Justin Tian
   weight:
   type: CCV Interns
-  team: Institutional Data
+  team: Advanced Research Computing
   subteam: Institutional Data
   title: Data Science Intern
   github_username: quicklearnerjustin
@@ -335,7 +325,7 @@
 - name: Maitreya Venkataswamy
   weight:
   type: CCV Interns
-  team: Institutional Data
+  team: Advanced Research Computing
   subteam: Institutional Data
   title: Data Science Intern
   github_username: maitreyakv
