@@ -125,7 +125,7 @@
 - name: Thomas Serre
   type: Full Time
   team: Leadership
-  title: Faculty Director
+  title: CCV Faculty Director, Associate Professor of Cognitive, Linguistic, and Psychological Sciences 
   github_username: tserre
   brown_directory_uuid: 9517d64b-6924-1c56-1f7e-2452b2304030
   bio: Dr. Serre is an Associate Professor in the Cognitive Linguistic & Psychological
@@ -324,3 +324,11 @@
   brown_directory_uuid: 7f8bd728-1d56-4b59-a579-779936142792
   bio:
   image: yadi_main.jpg
+- name: Alex Duchnowski
+  type: CCV Interns
+  team: CCV Operations
+  title: User Services Intern
+  github_username: AlexDuchnowski
+  brown_directory_uuid: 92601ca5-d320-4db4-add9-2d2f1bc8c4b2
+  bio: 
+  image: alex_main.jpg
