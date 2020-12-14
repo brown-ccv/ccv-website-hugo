@@ -2,10 +2,13 @@
 title: "HPC Condo"
 date: 2018-02-24T15:09:10-04:00
 draft: false
-lead: Dedicated high-performance computing resources for researchers in the form of "condos" on the University's main supercomputer, Oscar.  
+lead: "Dedicated high-performance computing resources for researchers in the form of 'condos' on the University's main supercomputer, Oscar."
 category: Computing
 icon: server2
 haas: true
+extra:
+  text: "Risk Classification: Level 2"
+  link: "https://it.brown.edu/computing-policies/risk-classifications"
 ---
 
 
@@ -22,3 +25,26 @@ CCV standardizes processor and memory configurations for a period of roughly six
 
 # Purchasing
 Pricing is dependent on the size of the condo, and will be provided upon request. Please contact CCV at [support@ccv.brown.edu](mailto:support@ccv.brown.edu).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

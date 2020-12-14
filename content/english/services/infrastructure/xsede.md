@@ -8,9 +8,12 @@ tagDescription: |
 date: 2019-01-22T18:29:23.000+00:00
 category: Computing
 icon: server2
-lead: |
-  XSEDE is an NSF-funded, nationwide collection of supercomputing systems that are available to researchers through merit-based allocations. 
+lead: "XSEDE is an NSF-funded, nationwide collection of supercomputing systems that are available to researchers through merit-based allocations."
 haas: true
+
+extra:
+  text: "Risk Classification: N/A (Not owned by Brown University)"
+  link: "https://it.brown.edu/computing-policies/risk-classifications"
 ---
 
 [XSEDE](https://www.xsede.org/) is an NSF-funded, nationwide collection of supercomputing systems that are available to researchers through merit-based allocations.  The resources are free, but the application process is competitive.  CCV participates in the Campus Champions program and has a small pool of compute time available for Brown researchers to try out XSEDE resources.   This is a great way to test your code on XSEDE systems before getting your own allocation.
