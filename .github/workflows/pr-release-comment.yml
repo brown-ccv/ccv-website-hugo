@@ -17,11 +17,11 @@ jobs:
         node-version: 12.x
     - name: Get PR Change Types
       id: pr_type
-      uses: brown-ccv/gh-actions/get-pr-type@master
+      uses: brown-ccv/gh-actions/get-pr-type@main
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Release Review Comment PR
-      uses: brown-ccv/gh-actions/comment-pr-checklist@master
+      uses: brown-ccv/gh-actions/comment-pr-checklist@main
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         message_id: "Release"
