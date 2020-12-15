@@ -12,7 +12,7 @@ hero:
     cases involve a researcher using grant funds to support one of our data scientists
     or research software engineers. '
   cfa:
-    text: See our Rates
+    text: See our rates
     href: "/services/rates/"
 
 ---
