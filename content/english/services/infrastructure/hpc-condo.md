@@ -25,26 +25,3 @@ CCV standardizes processor and memory configurations for a period of roughly six
 
 # Purchasing
 Pricing is dependent on the size of the condo, and will be provided upon request. Please contact CCV at [support@ccv.brown.edu](mailto:support@ccv.brown.edu).
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
