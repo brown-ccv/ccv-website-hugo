@@ -6,7 +6,7 @@ tagDescription: Learn more about the CCV's mission, values, and people.
 
 items:
 - name: mission
-  icon: route
+  icon: rocket-launch
 - name: people
   icon: user
 - name: diversity statement
