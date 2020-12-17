@@ -58,7 +58,7 @@ A large collection of software is available on Oscar, and CCV staff can help acq
 **Storage**
 * Home Directories:  All HPC accounts have a 20GB home directory.  All home directories are backed up on a nightly basis.  Requests for data restores can be made by contacting support@ccv.brown.edu.
 * Scratch Disk: CCV maintains a scratch pool shared by all HPC users.  This storage is intended for temporary files.  It is not backed up and old files are purged regularly. 
-* RDATA: All HPC environments have access to RDATA GPFS disk storage.  All faculty have a base allocation of 1TB without charge (across any combination of CIS/CCV storage platforms), as well as grant allocated storage  and purchased storage as described at [CCV Rates](https://ccv.brown.edu/services/rates/).  RDATA storage is backed up nightly. 
+* RDATA: All HPC environments have access to RDATA GPFS disk storage.  All faculty have a base allocation of 1TB without charge (across any combination of CIS/CCV storage platforms), as well as grant allocated storage  and purchased storage as described at [CCV Rates](/services/rates).  RDATA storage is backed up nightly. 
 
 **Maintenance Schedule**
 * Nondisruptive Maintenance (may occur at any time, no notification provided) - nondisruptive work, including software changes, maintenance and testing
