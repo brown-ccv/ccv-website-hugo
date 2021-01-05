@@ -60,6 +60,18 @@
     PhD from the University of Rhode Island. Her background is primarily in studying
     microbes.
   image: joselynn_main.jpg
+- name: Jordan Lawson
+  weight: "4"
+  type: Full Time
+  team: Advanced Research Computing
+  title: Research Software Engineer
+  subteam: Computational Biology Core
+  github_username: j-stat
+  brown_directory_uuid: 44dc2e77-eaaf-4884-ace2-e3fbb57e58ea
+  bio: Jordan is a Research Software Engineer in the Computational Biology Core at CCV.
+    He did his Ph.D. in Applied Statistics at Boston College, with an emphasis on causal inference. He 
+    loves learning about natural and formal languages, superhero movies, boxing, and basketball. 
+  image: jordan_main.jpg
 - name: Isabel Restrepo
   weight: "5"
   type: Full Time
