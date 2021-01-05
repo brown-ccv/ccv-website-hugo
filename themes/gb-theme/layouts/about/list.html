@@ -33,7 +33,7 @@
     <!-- Mission -->
     <header id="mission" class="d-flex align-items-center">
       <span class="btn-red btn-ico btn-lg btn-rounded d-flex align-items-center justify-content-center"
-        ><i class="fas fa-crow"></i
+        ><i class="fas fa-rocket-launch"></i
       ></span>
       <h1 class="mx-4 text-secondary">Mission</h1>
       <hr class="bg-dark w-40" />
@@ -56,7 +56,7 @@
     <!-- People -->
     <header id="people" class="d-flex align-items-center">
       <span class="btn-red btn-ico btn-lg btn-rounded d-flex align-items-center justify-content-center"
-        ><i class="fas fa-person-booth"></i
+        ><i class="fas fa-user"></i
       ></span>
       <h1 class="mx-4 text-secondary">People</h1>
       <hr class="bg-dark w-40" />
@@ -214,22 +214,22 @@
       {{ end }} {{ end }}
     </article>
     <!-- Diversity -->
-    <header id="diversity" class="d-flex align-items-center pt-6">
-      <span class="btn-cyan btn-ico btn-lg btn-rounded d-flex align-items-center justify-content-center"
-        ><i class="fas fa-people-carry"></i
+    <header id="diversity-statement" class="d-flex align-items-center pt-6">
+      <span class="btn-red btn-ico btn-lg btn-rounded d-flex align-items-center justify-content-center"
+        ><i class="fas fa-users"></i
       ></span>
-      <h1 class="mx-4 text-secondary">Diversity Statement</h1>
+      <h1 class="mx-4 text-secondary">{{ .Params.diversity.title }}</h1>
       <hr class="bg-dark w-40" />
     </header>
 
     <article id="diversity-content" class="py-4">
-      <p class="p-medium">{{ .Params.mission.diversity | safeHTML }}</p>
+      <p class="p-medium">{{ .Params.diversity.statement | safeHTML }}</p>
     </article>
 
     <!-- Opportunities -->
     <header id="opportunities" class="d-flex align-items-center pt-4">
       <span class="btn-red btn-ico btn-lg btn-rounded d-flex align-items-center justify-content-center"
-        ><i class="fas fa-user-circle"></i
+        ><i class="fas fa-door-open"></i
       ></span>
       <h1 class="mx-4 text-secondary">Opportunities</h1>
       <hr class="bg-dark w-40" />
