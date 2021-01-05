@@ -1,19 +1,19 @@
 ---
-title: Data Risk Level 3 Computing (Stronghold)
+title: Secure Computing (Stronghold)
 
-tagTitle: Data Risk Level 3 Computing (Stronghold) - Center for Computation and Visualization
+tagTitle: Secure Computing (Stronghold) - Center for Computation and Visualization
 tagDescription: Learn about the CCV's Stronghold service for analyzing sensitive data while complying with regulatory or contractual requirements for data security.
 
 date: 2019-01-22 18:29:31 +0000
 category: Computing
 icon: server2
-lead: Analyze sensitive data while complying with regulatory or contractual requirements
-  for data security
+lead: "Analyze sensitive data while complying with regulatory or contractual requirements for data security"
 haas: true
 docs_link: stronghold
 extra:
-  text: CIS Risk Classification
+  text: "Risk Classification: Level 3"
   link: "https://it.brown.edu/computing-policies/risk-classifications"
+
 ---
 # Overview
 

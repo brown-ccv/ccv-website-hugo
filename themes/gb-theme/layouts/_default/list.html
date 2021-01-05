@@ -59,7 +59,7 @@
               
                 <h3>{{ markdownify .Site.Data.file_storage.lead }}</h3>
                 <hr class="bg-primary">
-                <a class="fs-26" href="{{.Site.BaseURL}}/{{.Site.Data.file_storage.path}}">
+                <a class="fs-26" href="{{.Site.Data.file_storage.path}}">
                   <span class="mt-1 text-blue"><u>Storage Guide</u></span>
                 </a>
 
@@ -78,7 +78,7 @@
               <span class="badge-red badge h-50 ml-1">{{ .Params.version }}</span>
               </div>
               {{ with .Params.extra }}
-              <a href="{{.link}}" class="mt-1 text-danger badge border border-danger bg-warning">{{.text}}</a>
+              <a href="{{.link}}" class="mt-1 text-blue badge bg-beige">{{.text}}</a>
               {{ end }}
               <hr class="bg-primary">
               <p class="fs-20">{{ .Params.lead | safeHTML }}</p>

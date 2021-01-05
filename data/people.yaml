@@ -60,6 +60,18 @@
     PhD from the University of Rhode Island. Her background is primarily in studying
     microbes.
   image: joselynn_main.jpg
+- name: Jordan Lawson
+  weight: "4"
+  type: Full Time
+  team: Advanced Research Computing
+  title: Research Software Engineer
+  subteam: Computational Biology Core
+  github_username: j-stat
+  brown_directory_uuid: 44dc2e77-eaaf-4884-ace2-e3fbb57e58ea
+  bio: Jordan is a Research Software Engineer in the Computational Biology Core at CCV.
+    He did his Ph.D. in Applied Statistics at Boston College, with an emphasis on causal inference. He 
+    loves learning about natural and formal languages, superhero movies, boxing, and basketball. 
+  image: jordan_main.jpg
 - name: Isabel Restrepo
   weight: "5"
   type: Full Time
@@ -125,7 +137,7 @@
 - name: Thomas Serre
   type: Full Time
   team: Leadership
-  title: Faculty Director
+  title: CCV Faculty Director, Associate Professor of Cognitive, Linguistic, and Psychological Sciences 
   github_username: tserre
   brown_directory_uuid: 9517d64b-6924-1c56-1f7e-2452b2304030
   bio: Dr. Serre is an Associate Professor in the Cognitive Linguistic & Psychological
@@ -275,24 +287,6 @@
   github_username: Rashi1997
   brown_directory_uuid: 07ffddd8-24dd-4f2c-b125-55f8913c83e2
   image: rashi_main.jpg
-- name: Aryan Srivastava
-  weight:
-  type: CCV Interns
-  team: Advanced Research Computing
-  subteam: Data & Visualization
-  title: Virtual Reality Intern
-  github_username: aryan096
-  brown_directory_uuid: 83d46da6-50fa-48e8-b17c-665d2b66427b
-  image: aryan_main.jpg
-- name: Tiffany Lei
-  weight:
-  type: CCV Interns
-  team: Advanced Research Computing
-  subteam: Data & Visualization
-  title: Web Development Intern
-  github_username: TiffL
-  brown_directory_uuid: 2fe3c48e-df22-4a97-a910-6d784e3fba73
-  image: tiffany_main.jpg
 - name: Maura Driscoll
   weight:
   type: CCV Interns
@@ -312,33 +306,41 @@
   brown_directory_uuid: 883cb383-0b7a-40eb-8e4f-8a8805e7306a
   bio: Minsik is an undergrad student studying chemical physics.
   image: minsik_main.jpg
-- name: Louis Kilfoyle
+- name: Justin Tian
   weight:
   type: CCV Interns
   team: Advanced Research Computing
   subteam: Institutional Data
   title: Data Science Intern
-  github_username: louis-kilfoyle
-  brown_directory_uuid: 5b343470-0e0f-4797-8a13-519449cb5d49
-  bio: Louis is an undergrad studying Computer Science and Applied Mathematics.
-  image: louisk_main.jpg
-- name: Cameron Webster
+  github_username: quicklearnerjustin
+  brown_directory_uuid: 1034dc39-54c6-4b0b-aa2f-770783dedfc2
+  bio:
+  image: justin_main.jpg
+- name: Maitreya Venkataswamy
   weight:
   type: CCV Interns
   team: Advanced Research Computing
   subteam: Institutional Data
-  title: Data science Intern
-  github_username: camweb36
-  brown_directory_uuid: 3b9db98c-fb5f-45a8-b220-1abfc19dd4e6
-  bio: Cameron is an undergraduate studying applied math-biology
-  image: cameron_main.jpg
-- name: Kuba Tarlowski
+  title: Data Science Intern
+  github_username: maitreyakv
+  brown_directory_uuid: fd13942d-d553-4032-ad4e-0fb82f594f78
+  bio:
+  image: maitreya_main.jpg
+- name: Yadi Yang
   weight:
   type: CCV Interns
-  team: CCV Operations
-  subteam: CCV Operations
-  title: Services Support Intern
-  github_username: kubatarlowski
-  brown_directory_uuid: 154c611f-7b29-4209-9bf3-5e731cf360ea
+  team: Advanced Research Computing
+  subteam: Institutional Data
+  title: Data Science Intern
+  github_username: skyyaya28
+  brown_directory_uuid: 7f8bd728-1d56-4b59-a579-779936142792
   bio:
-  image: kuba_main.jpg
+  image: yadi_main.jpg
+- name: Alex Duchnowski
+  type: CCV Interns
+  team: CCV Operations
+  title: User Services Intern
+  github_username: AlexDuchnowski
+  brown_directory_uuid: 92601ca5-d320-4db4-add9-2d2f1bc8c4b2
+  bio: 
+  image: alex_main.jpg
