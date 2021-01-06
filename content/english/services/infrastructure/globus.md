@@ -1,4 +1,5 @@
 ---
+hidden: true
 title: Globus
 
 tagTitle: Globus

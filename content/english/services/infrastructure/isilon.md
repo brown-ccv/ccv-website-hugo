@@ -1,4 +1,5 @@
 ---
+hidden: true
 title: Campus File Service
 
 tagTitle: Campus File Storage - Center for Computation and Visualization
