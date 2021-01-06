@@ -1,4 +1,5 @@
 ---
+hidden: true
 title: BrownBox
 
 tagTitle: BrownBox - Center for Computation and Visualization

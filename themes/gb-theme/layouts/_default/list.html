@@ -70,6 +70,7 @@
         <article class="d-flex py-6 justify-content-between flex-wrap">
           {{ range where $.Site.Pages "Section" $current_section}}
           {{ if eq (.Params.category | urlize) $key }}
+		  {{ if not .Params.hidden }}
           {{ $weight := .Params.weight }}
           <div class="{{if eq .Title "Advanced Research Computing"}}col-md-12{{else}}col-md-6{{end}} py-3">
             <div class="card p-4">
@@ -98,6 +99,7 @@
               </span>
             </div>
           </div>
+		  {{ end }}
           {{ end }}
           {{ end }}
       </article>
