@@ -1,4 +1,5 @@
 ---
+hidden: true
 title: RData
 
 tagTitle: RData - Center for Computation and Visualization
