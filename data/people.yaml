@@ -170,11 +170,9 @@
     materials that would be more efficient at thermal management inside microprocessors.
   image: rohit_main.jpg
 - name: Ashok Ragavendran
-  weight: "1"
   type: Full Time
-  team: Advanced Research Computing
-  subteam: Computational Biology Core
-  title: Lead Data Scientist
+  team: Leadership
+  title: Assistant Director of Computational Biology and Data Science
   github_username: ashokrags
   brown_directory_uuid: 60802d0b-8f18-499a-a1f3-5f9b24c390e4
   bio: Ashok is a computational biologist/data scientist with a varied background
