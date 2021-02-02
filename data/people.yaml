@@ -1,17 +1,4 @@
 ---
-- name: Fernando Gelin
-  weight: "9"
-  type: Full Time
-  team: Advanced Research Computing
-  subteam: Data & Visualization
-  title: Senior Research Software Engineer
-  github_username: fernandogelin
-  brown_directory_uuid: 8144f0fb-0d36-47ed-ae64-ab07c232ebba
-  bio: Fernando grew up in Brazil, received his PhD in Biology from the University
-    of Vermont in 2014. He is the mastermind behind the CCV and CBC websites.
-    His professional interests include Julia, JavaScript, web app development; his
-    personal interests include feeding his dogs ice cream and spending time outside.
-  image: fernando_main.jpg
 - name: Mary McGrath
   weight: "10"
   type: Full Time
@@ -61,7 +48,7 @@
     microbes.
   image: joselynn_main.jpg
 - name: Jordan Lawson
-  weight: "4"
+  weight: "3"
   type: Full Time
   team: Advanced Research Computing
   title: Research Software Engineer
@@ -69,8 +56,8 @@
   github_username: j-stat
   brown_directory_uuid: 44dc2e77-eaaf-4884-ace2-e3fbb57e58ea
   bio: Jordan is a Research Software Engineer in the Computational Biology Core at CCV.
-    He did his Ph.D. in Applied Statistics at Boston College, with an emphasis on causal inference. He 
-    loves learning about natural and formal languages, superhero movies, boxing, and basketball. 
+    He did his Ph.D. in Applied Statistics at Boston College, with an emphasis on causal inference. He
+    loves learning about natural and formal languages, superhero movies, boxing, and basketball.
   image: jordan_main.jpg
 - name: Isabel Restrepo
   weight: "5"
@@ -137,7 +124,7 @@
 - name: Thomas Serre
   type: Full Time
   team: Leadership
-  title: CCV Faculty Director, Associate Professor of Cognitive, Linguistic, and Psychological Sciences 
+  title: CCV Faculty Director, Associate Professor of Cognitive, Linguistic, and Psychological Sciences
   github_username: tserre
   brown_directory_uuid: 9517d64b-6924-1c56-1f7e-2452b2304030
   bio: Dr. Serre is an Associate Professor in the Cognitive Linguistic & Psychological
@@ -170,11 +157,9 @@
     materials that would be more efficient at thermal management inside microprocessors.
   image: rohit_main.jpg
 - name: Ashok Ragavendran
-  weight: "1"
   type: Full Time
-  team: Advanced Research Computing
-  subteam: Computational Biology Core
-  title: Lead Data Scientist
+  team: Leadership
+  title: Assistant Director of Computational Biology and Data Science
   github_username: ashokrags
   brown_directory_uuid: 60802d0b-8f18-499a-a1f3-5f9b24c390e4
   bio: Ashok is a computational biologist/data scientist with a varied background
@@ -342,5 +327,5 @@
   title: User Services Intern
   github_username: AlexDuchnowski
   brown_directory_uuid: 92601ca5-d320-4db4-add9-2d2f1bc8c4b2
-  bio: 
+  bio:
   image: alex_main.jpg

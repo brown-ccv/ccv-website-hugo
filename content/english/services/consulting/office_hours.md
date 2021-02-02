@@ -12,5 +12,8 @@ weight: 0
 icon: question
 direct_link:
   - text: Find Zoom Link <i class="fas fa-video"></i>
-    url: https://events.brown.edu/ccv/view/month
+    url: https://events.brown.edu/ccv/view/all
+
 ---
+
+**[CCV Office Hours Calendar](https://events.brown.edu/ccv/view/all)**
