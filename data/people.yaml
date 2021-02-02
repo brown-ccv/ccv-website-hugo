@@ -48,7 +48,7 @@
     microbes.
   image: joselynn_main.jpg
 - name: Jordan Lawson
-  weight: "4"
+  weight: "3"
   type: Full Time
   team: Advanced Research Computing
   title: Research Software Engineer
@@ -56,8 +56,8 @@
   github_username: j-stat
   brown_directory_uuid: 44dc2e77-eaaf-4884-ace2-e3fbb57e58ea
   bio: Jordan is a Research Software Engineer in the Computational Biology Core at CCV.
-    He did his Ph.D. in Applied Statistics at Boston College, with an emphasis on causal inference. He 
-    loves learning about natural and formal languages, superhero movies, boxing, and basketball. 
+    He did his Ph.D. in Applied Statistics at Boston College, with an emphasis on causal inference. He
+    loves learning about natural and formal languages, superhero movies, boxing, and basketball.
   image: jordan_main.jpg
 - name: Isabel Restrepo
   weight: "5"
@@ -124,7 +124,7 @@
 - name: Thomas Serre
   type: Full Time
   team: Leadership
-  title: CCV Faculty Director, Associate Professor of Cognitive, Linguistic, and Psychological Sciences 
+  title: CCV Faculty Director, Associate Professor of Cognitive, Linguistic, and Psychological Sciences
   github_username: tserre
   brown_directory_uuid: 9517d64b-6924-1c56-1f7e-2452b2304030
   bio: Dr. Serre is an Associate Professor in the Cognitive Linguistic & Psychological
@@ -327,5 +327,5 @@
   title: User Services Intern
   github_username: AlexDuchnowski
   brown_directory_uuid: 92601ca5-d320-4db4-add9-2d2f1bc8c4b2
-  bio: 
+  bio:
   image: alex_main.jpg
