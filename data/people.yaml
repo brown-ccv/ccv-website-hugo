@@ -1,17 +1,4 @@
 ---
-- name: Fernando Gelin
-  weight: "9"
-  type: Full Time
-  team: Advanced Research Computing
-  subteam: Data & Visualization
-  title: Senior Research Software Engineer
-  github_username: fernandogelin
-  brown_directory_uuid: 8144f0fb-0d36-47ed-ae64-ab07c232ebba
-  bio: Fernando grew up in Brazil, received his PhD in Biology from the University
-    of Vermont in 2014. He is the mastermind behind the CCV and CBC websites.
-    His professional interests include Julia, JavaScript, web app development; his
-    personal interests include feeding his dogs ice cream and spending time outside.
-  image: fernando_main.jpg
 - name: Mary McGrath
   weight: "10"
   type: Full Time
