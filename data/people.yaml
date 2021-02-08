@@ -329,3 +329,12 @@
   brown_directory_uuid: 92601ca5-d320-4db4-add9-2d2f1bc8c4b2
   bio:
   image: alex_main.jpg
+- name: Galen Winsor
+  weight:
+  type: CCV Interns
+  team: Advanced Research Computing
+  subteam: Data & Visualization
+  title: Web Development Intern
+  github_username: galenwinsor
+  brown_directory_uuid: 
+  image: galen_main.jpg
