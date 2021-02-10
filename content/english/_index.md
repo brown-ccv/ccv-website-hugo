@@ -23,18 +23,21 @@ quick_links:
     icon: desktop
     text: Open an account
     href: "https://brown.co1.qualtrics.com/jfe/form/SV_0GtBE8kWJpmeG4B"
-    weight: 0
+    weight: 2
   - name: User Manuals
     icon: book-open
     text: See our docs
     href: "documentation/"
-    weight:
+    weight: 3
   - name: Data Science
     icon: database
     text: Need help with data?
     href: "services/consulting/advanced-research-computing/"
     weight: 4
-
+  - name: CCV Status
+    icon: heartbeat
+    text: Status of CCV Systems
+    href: "https://status.ccv.brown.edu"
 showcase:
   title: CCV @ Brown
 ---
