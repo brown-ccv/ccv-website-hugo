@@ -156,6 +156,16 @@ section, footer {
   }
 }
 
+#section-1 {
+  .row {
+    align-items: stretch;
+  }
+  .scale {
+    height: 100%;
+
+  }
+}
+
 .fa-x {
   color: $green;
 }

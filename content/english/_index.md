@@ -38,6 +38,7 @@ quick_links:
     icon: heartbeat
     text: Status of CCV Systems
     href: "https://status.ccv.brown.edu"
+    weight: 5
 showcase:
   title: CCV @ Brown
 ---
