@@ -147,12 +147,22 @@ section, footer {
 
 // Quick links
 .card-responsive {
-  width: 25%;
+  width: 20%;
   padding: 2px;
 }
 @media (max-width: 800px) {
   .card-responsive {
     width: 100%;
+  }
+}
+
+#section-1 {
+  .row {
+    align-items: stretch;
+  }
+  .scale {
+    height: 100%;
+
   }
 }
 
