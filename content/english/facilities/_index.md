@@ -42,7 +42,7 @@ statement:
            </ul>
         </p>
         <p class="text-dark"></p>
-		<h4>dbGap</h4>
+		<h4>dbGaP</h4>
 		<p>Use of dbGaP data on the computing cluster is restricted to a Singularity software container mechanism that isolates the application from outside networking. It also restricts storage write access to a special area on the enterprise Isilon platform that is reserved for dbGaP use.</p>
 		<p>A separate transfer gateway system with file access auditing provides a path for dbGaP data transfer into the system, as well as the transfer of computational results out of the system.</p>
 		<h4>Stronghold</h4>
