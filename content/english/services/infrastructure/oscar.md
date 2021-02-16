@@ -24,13 +24,13 @@ The high-performance computing (HPC) resources at CCV equip the Brown research c
  {{% table c="striped"  hover="true" head="dark"%}}
  |
  ---------------  |  ------
-   Compute Notes  |  334
-   GPU Nodes      |  23
+   Compute Notes  |  405
+   GPU Nodes      |  27
    Login Nodes    |  2
-   Large-Memory Nodes (>512 GB) | 6
-   Total CPU Cores | 8740
-   Total GPUs | 95
-   Total Storage (GPFS Filesystem) | 1.7 PB
+   Large-Memory Nodes (>512 GB) | 4
+   Total CPU Cores | 11552
+   Total GPUs | 193
+   Total Storage (GPFS Filesystem) | 3.27 PB
    OS | RedHat EL 7.3 (Linux)
    Job Scheduler | Slurm Workload Manager
  {{% /table %}}
