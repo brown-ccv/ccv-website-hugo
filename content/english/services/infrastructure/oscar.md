@@ -7,7 +7,7 @@ tagDescription: Looking for High-Peformance Computing? Learn about Oscar, CCV’
 date: 2019-01-22T18:29:23.000+00:00
 category: Computing
 icon: server2
-lead: "Research computing cluster featuring more than 300 multi-core nodes, GPU nodes, and a high-performance parallel filesystem"
+lead: "Research computing cluster featuring more than 400 multi-core nodes, GPU nodes, and a high-performance parallel filesystem"
 haas: true
 docs_link: oscar
 extra:
