@@ -2,14 +2,14 @@
   team: CCV Operations
   subteam: User Services
   link: "https://brown.wd5.myworkdayjobs.com/en-US/staff-careers-brown/job/180-George-Street/Research-Computing-Analyst_REQ168211"
-# - title: Research Software Engineer
-#   team: Advanced Research Computing
-#   subteam: High-Performance Computing
-#   link: "https://brown.wd5.myworkdayjobs.com/en-US/staff-careers-brown/job/180-George-Street/Research-Software-Engineer_REQ164152"
-# - title: Data Scientist/Senior Data Scientist
-#   team: Advanced Research Computing
-#   subteam: Institutional Data
-#   link: "https://brown.wd5.myworkdayjobs.com/en-US/staff-careers-brown/job/3-Davol-Square/Data-Scientist-Senior-Data-Scientist_REQ163492"
+- title: Research Software Engineer
+  team: Advanced Research Computing
+  subteam: High-Performance Computing
+  link: "https://brown.wd5.myworkdayjobs.com/en-US/staff-careers-brown/job/180-George-Street/Research-Software-Engineer_REQ169311"
+- title: Research Software Engineer/Senior Research Software Engineer
+  team: Advanced Research Computing
+  subteam: Data & Visualization
+  link: "https://brown.wd5.myworkdayjobs.com/en-US/staff-careers-brown/job/3-Davol-Square/Research-Software-Engineer--Senior-Research-Software-Engineer_REQ169396"
 # - title: Research Software Engineer
 #   team: Advanced Research Computing
 #   subteam: Computational Biology Core

@@ -11,3 +11,8 @@ items:
     fa:
       prefix: fad
       icon: fa-shield-virus
+  - title: We're Hiring!!!
+    text: We have several open positions at the Center for Computation and Visualization! [**Check out opportunities.**](about/#opportunities)
+    fa:
+      prefix: fad
+      icon: fa-door-open
