@@ -26,7 +26,7 @@ Dozens of datasets are made publicly available to the global research community 
 * [Landsat 8](https://registry.opendata.aws/landsat-8/)
 * [MUR](https://registry.opendata.aws/mur/)
 
-For more information about Machine Learning with AWS, go [here](https://aws.amazon.com/machine-learning/).
+For more information, visit the [AWS Machine Learning page](https://aws.amazon.com/machine-learning/).
 
 (COMING SOON): [STRIDES](https://datascience.nih.gov/strides) agreement
 
