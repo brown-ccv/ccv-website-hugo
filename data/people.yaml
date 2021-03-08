@@ -181,7 +181,7 @@
 - name: Singh Saluja
   type: Full Time
   team: CCV Operations
-  title: Research Services Support Specialist
+  title: Research Computing Consultant
   github_username: singhsaluja
   brown_directory_uuid: 786ef442-dcc4-4463-aaf3-c5728a2a8d38
   bio: ''
@@ -222,16 +222,6 @@
   brown_directory_uuid: 448fac67-1dea-42ef-8205-9305ac9b79a6
   bio: ''
   image: camilo_main.jpg
-- name: Benjamin Knörlein
-  weight: "6"
-  type: Full Time
-  team: Advanced Research Computing
-  subteam: Data & Visualization
-  title: Senior Research Software Engineer
-  github_username: BenKnorlein
-  brown_directory_uuid: d797cce1-aae5-515f-1de6-25571fc91b93
-  bio: ''
-  image: ben_main.jpg
 - name: Paulo S Baptista
   type: Full Time
   team: CCV Operations
@@ -321,6 +311,16 @@
   brown_directory_uuid: 7f8bd728-1d56-4b59-a579-779936142792
   bio:
   image: yadi_main.jpg
+- name: Fernando Cisneros
+  weight:
+  type: CCV Interns
+  team: Advanced Research Computing
+  subteam: Computational Biology Core
+  title: Computational Biology Intern
+  github_username: Nando1014
+  brown_directory_uuid: 2747108a-a45e-41d4-8b68-5c0d66f21804
+  bio:
+  image: nando_main.jpg
 - name: Alex Duchnowski
   type: CCV Interns
   team: CCV Operations
