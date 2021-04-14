@@ -1,18 +1,18 @@
 title: What's New
 display: true
 items:
-  - title: Pooled Storage Allocations
-    text:  Looking to share your storage quotas with your collaborators? Check out the [**new pooled storage allocations.**](services/rates#pooled-storage-allocations)
-    fa:
-      prefix: fad
-      icon: fa-database
-  - title: COVID-19 Updates
-    text: The Center for Computation and Visualization remains committed to supporting the computing needs of the Brown Research Community during this difficult time. [**Click here for details.**](covid/)
-    fa:
-      prefix: fad
-      icon: fa-shield-virus
   - title: We're Hiring!!!
     text: We have several open positions at the Center for Computation and Visualization! [**Check out opportunities.**](about/#opportunities)
     fa:
       prefix: fad
       icon: fa-door-open
+  - title: Bootcamp
+    text: CCV will be hosing a virtual bootcamp for HPC as well as computational biology! This will be the first week in May; so check back for details!
+    fa:
+      prefix: fad
+      icon: fa-boot
+  - title: Oscar "How-To" Videos
+    text: CCV User Services has updated the Oscar documentation to include brief "how-to" videos for new Oscar users. [**Check out vidoes.**](https://docs.ccv.brown.edu/oscar/short-videos)
+    fa:
+      prefix: fad
+      icon: fa-video

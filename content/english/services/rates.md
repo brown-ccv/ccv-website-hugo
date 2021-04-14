@@ -18,6 +18,7 @@ lead: We provide services with limited resources at **no cost** to all
 
 {{< rates >}}
 
+ * Note, these values are subject to periodic review and changes
  * Each account is assigned 20G Home, 512G Scratch (purged every 30 days).
  * \* Priority accounts and Exploratory accounts with a PI get a data directory.
  * \* Exploratory accounts without a PI have no data directory provided.
