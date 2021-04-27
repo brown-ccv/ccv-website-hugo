@@ -7,7 +7,7 @@ items:
       prefix: fad
       icon: fa-door-open
   - title: Bootcamp
-    text: CCV will be hosing a virtual bootcamp for HPC as well as computational biology! [**Check out the bootcamp details!**](https://docs.ccv.brown.edu/bootcamp2021)
+    text: CCV will be hosting a virtual bootcamp for HPC as well as computational biology! [**Check out the bootcamp details!**](https://docs.ccv.brown.edu/bootcamp2021)
     fa:
       prefix: fad
       icon: fa-boot
