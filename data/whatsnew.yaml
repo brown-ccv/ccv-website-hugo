@@ -16,3 +16,13 @@ items:
     fa:
       prefix: fad
       icon: fa-video
+  - title: myBrown Research Tab
+    text: There is a new Research Compute tab on the myBrown portal! [**Check out the myBrown Portal!**](https://my.brown.edu/web/guest/research-compute)
+    fa:
+      prefix: fad
+      icon: fa-microscope
+  - title: Python Workshop
+    text: CCV will be hosting an introductory Python workshop. [**Check out Python workshop details.**](https://today.brown.edu/events/139280?utm_source=todayAtBrown&utm_medium=email&utm_campaign=Campus%20Faculty)
+    fa:
+      prefix: fad
+      icon: fa-hammer
