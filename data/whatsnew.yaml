@@ -6,13 +6,13 @@ items:
     fa:
       prefix: fad
       icon: fa-door-open
-  - title: Bootcamp
-    text: CCV will be hosting a virtual bootcamp for HPC as well as computational biology! [**Check out the bootcamp details!**](https://docs.ccv.brown.edu/bootcamp2021)
+  - title: myBrown Research Tab
+    text: There is a new Research Compute tab on the myBrown portal! [**Check out the myBrown Portal!**](https://my.brown.edu/web/guest/research-compute)
     fa:
       prefix: fad
-      icon: fa-boot
-  - title: Oscar "How-To" Videos
-    text: CCV User Services has updated the Oscar documentation to include brief "how-to" videos for new Oscar users. [**Check out vidoes.**](https://docs.ccv.brown.edu/oscar/short-videos)
+      icon: fa-microscope
+  - title: Python Workshop
+    text: CCV will be hosting an introductory Python workshop. [**Check out Python workshop details.**](https://today.brown.edu/events/139280)
     fa:
       prefix: fad
-      icon: fa-video
+      icon: fa-hammer
