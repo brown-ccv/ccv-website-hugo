@@ -99,10 +99,10 @@
     before coming to Brown.
   image: andras_main.jpg
 - name: Ashley S. Lee
-  weight: "15"
+  weight: "6"
   type: Full Time
   team: Advanced Research Computing
-  subteam: Institutional Data
+  subteam: Data & Visualization
   title: Senior Data Scientist
   github_username: ashleysyg
   brown_directory_uuid: 380094e2-6f9d-47cf-91ce-e636876a58cf
@@ -121,6 +121,16 @@
   brown_directory_uuid: 326247d1-8219-46f1-848b-d45d10d7624d
   bio: ""
   image: matt_main.jpg
+- name: Ellen Duong
+  weight: "9"
+  type: Full Time
+  team: Advanced Research Computing
+  subteam: Data & Visualization
+  title: Research Software Engineer
+  github_username: eldu
+  brown_directory_uuid: 1dee85fb-a5e4-474d-9f5e-ebef7d9d5ab7
+  bio: ""
+  image: ellen_main.jpg
 - name: Thomas Serre
   type: Full Time
   team: Leadership
