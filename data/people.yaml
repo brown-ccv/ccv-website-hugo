@@ -99,10 +99,10 @@
     before coming to Brown.
   image: andras_main.jpg
 - name: Ashley S. Lee
-  weight: "15"
+  weight: "6"
   type: Full Time
   team: Advanced Research Computing
-  subteam: Institutional Data
+  subteam: Data & Visualization
   title: Senior Data Scientist
   github_username: ashleysyg
   brown_directory_uuid: 380094e2-6f9d-47cf-91ce-e636876a58cf
