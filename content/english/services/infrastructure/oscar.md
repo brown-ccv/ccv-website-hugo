@@ -58,7 +58,7 @@ A large collection of software is available on Oscar, and CCV staff can help acq
 **Storage**
 * Home Directories:  All HPC accounts have a 20GB home directory.  All home directories are backed up on a nightly basis.  Requests for data restores can be made by contacting support@ccv.brown.edu.
 * Scratch Disk: CCV maintains a scratch pool shared by all HPC users.  This storage is intended for temporary files.  It is not backed up and old files are purged regularly. 
-* RDATA: All HPC environments have access to RDATA GPFS disk storage.  All faculty have a base allocation of 1TB without charge (across any combination of CIS/CCV storage platforms), as well as grant allocated storage  and purchased storage as described at [CCV Rates](/services/rates).  RDATA storage is backed up nightly. 
+* RDATA: All HPC environments have access to RDATA GPFS disk storage.  All faculty have a base allocation of 1TB without charge (across any combination of OIT/CCV storage platforms), as well as grant allocated storage  and purchased storage as described at [CCV Rates](/services/rates).  RDATA storage is backed up nightly. 
 
 **Maintenance Schedule**
 * Nondisruptive Maintenance (may occur at any time, no notification provided) - nondisruptive work, including software changes, maintenance and testing
@@ -74,7 +74,7 @@ A large collection of software is available on Oscar, and CCV staff can help acq
   * Send email to [support@ccv.brown.edu](mailto:support@ccv.brown.edu). A ticket will get created and CCV staff will attempt to address the issue as soon as possible.
 * During Non-Business Hours:
   * Send email to [support@ccv.brown.edu](mailto:support@ccv.brown.edu).
-  * Call CIS Operations Center at (401) 863-7562. A ticket will get created and CCV staff will be contacted to address the issue.
+  * Call OIT Operations Center at (401) 863-7562. A ticket will get created and CCV staff will be contacted to address the issue.
 
 <!-- {{< account_form >}} -->
 {{< button text="Request an Account" href="https://brown.co1.qualtrics.com/jfe/form/SV_0GtBE8kWJpmeG4B">}}

@@ -116,8 +116,8 @@ icon: "jupyter.svg"
 Welcome to the Brown University JupyterHub Documentation & Quickstart Guide.
 This document is designed to help you get started using Jupyter notebooks served
 by Google Cloud for use by the Brown University community. The implementation is
-supported by Brown CIS, and for any questions/comments/concerns regarding
-this service, please contact the Brown CIS JupyterHub team by emailing
+supported by Brown OIT, and for any questions/comments/concerns regarding
+this service, please contact the Brown OIT JupyterHub team by emailing
 jupyter-help@brown.edu.
 ```
 
