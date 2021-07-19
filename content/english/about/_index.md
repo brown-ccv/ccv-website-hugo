@@ -17,9 +17,11 @@ items:
   icon: comments
 
 mission:
-  lead: 'The Center for Computation and Visualization provides high-performance computing
-    and visualization services to the Brown community. We also collaborate with researchers
-    on projects across vast range of disciplines. '
+  lead: 'The Center for Computation and Visualization (CCV) is a division of the [Office of
+    Information Technology (OIT)](https://it.brown.edu). CCV provides research computing 
+    services to the Brown University community. This includes high-performance computing, 
+    data science, visualization, and research software engineering. We also collaborate with
+    researchers on projects across vast range of disciplines.'
   text: '<p>We envision an environment where computational best practices, innovative
     solutions, and expert knowledge combine to build advanced tools for research and
     to enable new discoveries. Our mission is to provide the scientific and technical
