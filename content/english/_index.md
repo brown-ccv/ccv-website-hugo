@@ -16,7 +16,7 @@ quick_links:
   cards:
   - name: Stronghold
     icon: server2
-    text: Learn more
+    text: Computing with sensitive data
     href: "services/infrastructure/stronghold/"
     weight: 1
   - name: Oscar Account
@@ -29,15 +29,15 @@ quick_links:
     text: See our docs
     href: "documentation/"
     weight: 3
-  - name: Data Science
-    icon: database
-    text: Need help with data?
-    href: "services/consulting/advanced-research-computing/"
-    weight: 4
   - name: CCV Status
     icon: heartbeat
     text: Status of CCV Systems
     href: "https://status.ccv.brown.edu"
+    weight: 4
+  - name: OIT
+    icon: cpu
+    text: Learn about CCV's parent org
+    href: "https://it.brown.edu"
     weight: 5
 showcase:
   title: CCV @ Brown
