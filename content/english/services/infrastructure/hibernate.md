@@ -9,7 +9,7 @@ category: File Storage and Transfer
 icon: database
 lead: Data Archive Solution
 weight: 0
-docs_link: globus
+docs_link: hibernate
 
 ---
 # Hibernate
