@@ -8,7 +8,7 @@
 - name: Discourse
   url: "https://ask.cyberinfrastructure.org/c/brown-research-computing"
   icon: fab fa-discourse
-- name: Hibernate - Data Archive
+- name: Hibernate
   url: "https://docs.ccv.brown.edu/hibernate/"
 - name: Other File Transfer Services
   url: "https://docs.ccv.brown.edu/filetransferservices/"
