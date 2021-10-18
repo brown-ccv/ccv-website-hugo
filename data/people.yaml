@@ -348,3 +348,13 @@
   github_username: galenwinsor
   brown_directory_uuid: 77e8343c-498a-4bed-bedf-ed0a59d0fa3c
   image: galen_main.jpg
+- name: Hadley Dalten
+  weight:
+  type: CCV Interns
+  team: Advanced Research Computing
+  subteam: Data & Visualization
+  title: Mobile App Development Intern
+  github_username: hadleydalt
+  brown_directory_uuid: 791e5317-8b12-4fca-8612-7d2f8521f1b6
+  image: hadley_main.jpg
+
