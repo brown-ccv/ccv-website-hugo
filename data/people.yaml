@@ -86,18 +86,6 @@
     that crisis and uncertainty are a gift and that we must be involved in shaping
     how change happens.
   image: august_main.jpg
-- name: Andras Zsom
-  weight: "14"
-  type: Full Time
-  team: Advanced Research Computing
-  subteam: Institutional Data
-  title: Lead Data Scientist
-  github_username: azsom
-  brown_directory_uuid: 84734442-fa19-4e15-8b06-9f71351e9104
-  bio: Andras is passionate about using machine learning and predictive modeling for
-    good. He has a PhD in astrophysics and he was a postdoctoral researcher at MIT
-    before coming to Brown.
-  image: andras_main.jpg
 - name: Ashley S. Lee
   weight: "6"
   type: Full Time
@@ -111,16 +99,6 @@
     Fiduciary at Smoothie King. She enjoys food and beverage, bodies of water, jokes, and
     caring for her beloved dog and plants.
   image: ashley_main.jpg
-- name: Matt Slivinski
-  weight: "16"
-  type: Full Time
-  team: Advanced Research Computing
-  subteam: Institutional Data
-  title: Data Scientist
-  github_username: mattsliv
-  brown_directory_uuid: 326247d1-8219-46f1-848b-d45d10d7624d
-  bio: ""
-  image: matt_main.jpg
 - name: Ellen Duong
   weight: "9"
   type: Full Time
@@ -142,8 +120,28 @@
     He received a Ph.D. in Neuroscience from MIT in 2006 and an MSc in EECS from Télécom
     Bretagne (France) in 2000.
   image: thomas_main.jpg
-- name: Paul Hall
+- name: Matt Slivinski
+  weight: "11"
+  type: Full Time
+  team: Advanced Research Computing
+  subteam: Data & Visualization
+  title: Data Scientist
+  github_username: mattsliv
+  brown_directory_uuid: 326247d1-8219-46f1-848b-d45d10d7624d
+  bio: ""
+  image: matt_main.jpg
+- name: Robert Gemma, Jr.
   weight: "12"
+  type: Full Time
+  team: Advanced Research Computing
+  subteam: Data & Visualization
+  title: Research Software Engineer
+  github_username: RobertGemmaJr
+  brown_directory_uuid: e78668ed-0e7a-4e5f-a69e-ab4a5015961c
+  bio: ""
+  image: gemma_main.jpg
+- name: Paul Hall
+  weight: "13"
   type: Full Time
   team: Advanced Research Computing
   subteam: High-Performance Computing
@@ -154,7 +152,7 @@
     his Ph.D. in Oceanography from the URI.
   image: hall_main.jpg
 - name: Rohit Kakodkar
-  weight: "13"
+  weight: "14"
   type: Full Time
   team: Advanced Research Computing
   subteam: High-Performance Computing
@@ -263,24 +261,6 @@
   github_username: ''
   brown_directory_uuid: f904bb23-202f-48fb-bf93-7b7d326c7043
   image: avila_main.jpg
-- name: Rashi Dhar
-  weight:
-  type: CCV Interns
-  team: Advanced Research Computing
-  subteam: Data & Visualization
-  title: Web Development Intern
-  github_username: Rashi1997
-  brown_directory_uuid: 07ffddd8-24dd-4f2c-b125-55f8913c83e2
-  image: rashi_main.jpg
-- name: Maura Driscoll
-  weight:
-  type: CCV Interns
-  team: Advanced Research Computing
-  subteam: Data & Visualization
-  title: Web Development Intern
-  github_username: mauradriscoll
-  brown_directory_uuid: 333b6b44-a77c-4df4-9d02-d01e02b15572
-  image: maura_main.jpg
 - name: Minsik Cho
   weight:
   type: CCV Interns
@@ -291,60 +271,13 @@
   brown_directory_uuid: 883cb383-0b7a-40eb-8e4f-8a8805e7306a
   bio: Minsik is an undergrad student studying chemical physics.
   image: minsik_main.jpg
-- name: Justin Tian
-  weight:
-  type: CCV Interns
-  team: Advanced Research Computing
-  subteam: Institutional Data
-  title: Data Science Intern
-  github_username: quicklearnerjustin
-  brown_directory_uuid: 1034dc39-54c6-4b0b-aa2f-770783dedfc2
-  bio:
-  image: justin_main.jpg
-- name: Maitreya Venkataswamy
-  weight:
-  type: CCV Interns
-  team: Advanced Research Computing
-  subteam: Institutional Data
-  title: Data Science Intern
-  github_username: maitreyakv
-  brown_directory_uuid: fd13942d-d553-4032-ad4e-0fb82f594f78
-  bio:
-  image: maitreya_main.jpg
-- name: Yadi Yang
-  weight:
-  type: CCV Interns
-  team: Advanced Research Computing
-  subteam: Institutional Data
-  title: Data Science Intern
-  github_username: skyyaya28
-  brown_directory_uuid: 7f8bd728-1d56-4b59-a579-779936142792
-  bio:
-  image: yadi_main.jpg
-- name: Fernando Cisneros
-  weight:
-  type: CCV Interns
-  team: Advanced Research Computing
-  subteam: Computational Biology Core
-  title: Computational Biology Intern
-  github_username: Nando1014
-  brown_directory_uuid: 2747108a-a45e-41d4-8b68-5c0d66f21804
-  bio:
-  image: nando_main.jpg
-- name: Alex Duchnowski
-  type: CCV Interns
-  team: CCV Operations
-  title: User Services Intern
-  github_username: AlexDuchnowski
-  brown_directory_uuid: 92601ca5-d320-4db4-add9-2d2f1bc8c4b2
-  bio:
-  image: alex_main.jpg
-- name: Galen Winsor
+- name: Hadley Dalton
   weight:
   type: CCV Interns
   team: Advanced Research Computing
   subteam: Data & Visualization
-  title: Web Development Intern
-  github_username: galenwinsor
-  brown_directory_uuid: 77e8343c-498a-4bed-bedf-ed0a59d0fa3c
-  image: galen_main.jpg
+  title: Mobile App Development Intern
+  github_username: hadleydalt
+  brown_directory_uuid: 791e5317-8b12-4fca-8612-7d2f8521f1b6
+  image: hadley_main.jpg
+
