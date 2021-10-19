@@ -99,16 +99,6 @@
     Fiduciary at Smoothie King. She enjoys food and beverage, bodies of water, jokes, and
     caring for her beloved dog and plants.
   image: ashley_main.jpg
-- name: Matt Slivinski
-  weight: "10"
-  type: Full Time
-  team: Advanced Research Computing
-  subteam: Data & Visualization
-  title: Data Scientist
-  github_username: mattsliv
-  brown_directory_uuid: 326247d1-8219-46f1-848b-d45d10d7624d
-  bio: ""
-  image: matt_main.jpg
 - name: Ellen Duong
   weight: "9"
   type: Full Time
@@ -119,16 +109,6 @@
   brown_directory_uuid: 1dee85fb-a5e4-474d-9f5e-ebef7d9d5ab7
   bio: ""
   image: ellen_main.jpg
-- name: Robert Gemma
-  weight: "9"
-  type: Full Time
-  team: Advanced Research Computing
-  subteam: Data & Visualization
-  title: Research Software Engineer
-  github_username: RobertGemmaJr
-  brown_directory_uuid: e78668ed-0e7a-4e5f-a69e-ab4a5015961c
-  bio: ""
-  image: gemma_main.jpg
 - name: Thomas Serre
   type: Full Time
   team: Leadership
@@ -140,8 +120,28 @@
     He received a Ph.D. in Neuroscience from MIT in 2006 and an MSc in EECS from Télécom
     Bretagne (France) in 2000.
   image: thomas_main.jpg
-- name: Paul Hall
+- name: Matt Slivinski
+  weight: "11"
+  type: Full Time
+  team: Advanced Research Computing
+  subteam: Data & Visualization
+  title: Data Scientist
+  github_username: mattsliv
+  brown_directory_uuid: 326247d1-8219-46f1-848b-d45d10d7624d
+  bio: ""
+  image: matt_main.jpg
+- name: Robert Gemma
   weight: "12"
+  type: Full Time
+  team: Advanced Research Computing
+  subteam: Data & Visualization
+  title: Research Software Engineer
+  github_username: RobertGemmaJr
+  brown_directory_uuid: e78668ed-0e7a-4e5f-a69e-ab4a5015961c
+  bio: ""
+  image: gemma_main.jpg
+- name: Paul Hall
+  weight: "13"
   type: Full Time
   team: Advanced Research Computing
   subteam: High-Performance Computing
@@ -152,7 +152,7 @@
     his Ph.D. in Oceanography from the URI.
   image: hall_main.jpg
 - name: Rohit Kakodkar
-  weight: "13"
+  weight: "14"
   type: Full Time
   team: Advanced Research Computing
   subteam: High-Performance Computing
@@ -271,7 +271,7 @@
   brown_directory_uuid: 883cb383-0b7a-40eb-8e4f-8a8805e7306a
   bio: Minsik is an undergrad student studying chemical physics.
   image: minsik_main.jpg
-- name: Hadley Dalten
+- name: Hadley Dalton
   weight:
   type: CCV Interns
   team: Advanced Research Computing
