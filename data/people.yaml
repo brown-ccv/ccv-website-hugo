@@ -119,6 +119,16 @@
   brown_directory_uuid: 1dee85fb-a5e4-474d-9f5e-ebef7d9d5ab7
   bio: ""
   image: ellen_main.jpg
+- name: Robert Gemma
+  weight: "9"
+  type: Full Time
+  team: Advanced Research Computing
+  subteam: Data & Visualization
+  title: Research Software Engineer
+  github_username: RobertGemmaJr
+  brown_directory_uuid: e78668ed-0e7a-4e5f-a69e-ab4a5015961c
+  bio: ""
+  image: gemma_main.jpg
 - name: Thomas Serre
   type: Full Time
   team: Leadership
