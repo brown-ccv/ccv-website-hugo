@@ -26,6 +26,7 @@ Each Principal Investigator (PI) is given a dedicated environment for their proj
 - **Environments** - Linux or Windows compute environments available
 - **Software** - Workstations come preinstalled with our Windows Standard Software or Linux Standard Software packages
 - **Automated Git Sync** - Changes made to remote git repositories are automatically pulled to local repositories in Stronghold after initial configuration
+- **Gitlab** - Host and manage git repositories on an internal server within the secure environment. Web-based GUI allows easy access to source code management tools.
 - **Remote Access** - Access system on campus through Brown Wireless or off campus through the Brown VPN
 - **Secure Transfers** - Transfer data in and out of Stronghold between whitelisted agencies or personal computers for permitted users though a secure, virus scanned transfer server via SFTP
 - **Data Downloads** - Download data directly through your browser from whitelisted agencies via HTTPS and SFTP
