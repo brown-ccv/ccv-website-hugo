@@ -86,18 +86,6 @@
     that crisis and uncertainty are a gift and that we must be involved in shaping
     how change happens.
   image: august_main.jpg
-- name: Andras Zsom
-  weight: "14"
-  type: Full Time
-  team: Advanced Research Computing
-  subteam: Institutional Data
-  title: Lead Data Scientist
-  github_username: azsom
-  brown_directory_uuid: 84734442-fa19-4e15-8b06-9f71351e9104
-  bio: Andras is passionate about using machine learning and predictive modeling for
-    good. He has a PhD in astrophysics and he was a postdoctoral researcher at MIT
-    before coming to Brown.
-  image: andras_main.jpg
 - name: Ashley S. Lee
   weight: "6"
   type: Full Time
@@ -115,7 +103,7 @@
   weight: "16"
   type: Full Time
   team: Advanced Research Computing
-  subteam: Institutional Data
+  subteam: Data & Visualization
   title: Data Scientist
   github_username: mattsliv
   brown_directory_uuid: 326247d1-8219-46f1-848b-d45d10d7624d
