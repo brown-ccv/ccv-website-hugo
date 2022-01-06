@@ -55,6 +55,11 @@ A large collection of software is available on Oscar, and CCV staff can help acq
 
 **Denial of Access** - Authorized users must comply with the Brown University [Acceptable Use Policy](https://it.brown.edu/computing-policies/acceptable-use-policy) and the [Computing Passwords Policy](http://www.brown.edu/information-technology/computing-policies/computing-passwords-policy).  Please refer to the full list of policies at [Computing Policies](https://it.brown.edu/computing-policies).
 
+**Security Model** 
+* The security model for oscar uses two-factor authentication for access from outside networks. The first factor may be either a password or an ssh key. The second factor is the Duo second-factor application. Internally, ssh keys are generated to allow single-factor passwordless access between oscar systems (e.g., the login nodes and compute nodes).
+
+* Home directories are by default protected by Posix permissions to only allow access by the users that own them. Investigator data directories are protected by Posix permissions to only allow access by the investigator group.
+
 **Storage**
 * Home Directories:  All HPC accounts have a 20GB home directory.  All home directories are backed up on a nightly basis.  Requests for data restores can be made by contacting support@ccv.brown.edu.
 * Scratch Disk: CCV maintains a scratch pool shared by all HPC users.  This storage is intended for temporary files.  It is not backed up and old files are purged regularly. 
