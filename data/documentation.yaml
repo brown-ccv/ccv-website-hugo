@@ -1,14 +1,18 @@
-- name: JupyterHub
-  version: beta
-- name: Oscar
-- name: Stronghold
-- name: Globus
-- name: Visualization Software
-  url: "https://docs.ccv.brown.edu/visualization/"
 - name: Discourse
   url: "https://ask.cyberinfrastructure.org/c/brown-research-computing"
-  icon: fab fa-discourse
+- name: File Storage Guide
+  url: "https://ithelp.brown.edu/kb/articles/decide-how-to-store-and-share-files-for-researchers"
+- name: Globus
 - name: Hibernate
   url: "https://docs.ccv.brown.edu/hibernate/"
+- name: JupyterHub
+- name: Oscar
+- name: Starfish
+  url: "https://docs.ccv.brown.edu/hibernate/starfish/getting-started"
+- name: Stronghold
+- name: Visualization Software
+  url: "https://docs.ccv.brown.edu/visualization/"
+  icon: fab fa-discourse
 - name: Other File Transfer Services
   url: "https://docs.ccv.brown.edu/filetransferservices/"
+
