@@ -8,7 +8,7 @@
 - name: JupyterHub
 - name: Oscar
 - name: Starfish
-  url: "https://docs.ccv.brown.edu/hibernate/starfish/getting-started"
+  url: "https://docs.ccv.brown.edu/starfish/"
 - name: Stronghold
 - name: Visualization Software
   url: "https://docs.ccv.brown.edu/visualization/"
