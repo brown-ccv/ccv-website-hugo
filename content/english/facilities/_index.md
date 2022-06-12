@@ -38,7 +38,7 @@ statement:
         <p>CCV also supports the Carney condo for The Robert J. & Nancy D. Carney Institute for Brain Science. The condo has
            <ul><li>10 Intel Cascade Lake nodes, each with 32 cores and 376GB memory</li>
                <li>100 Nvidia Quadrortx GPUs, each with 24GB memory</li>
-               <li>1.4 TB data storage</li>
+               <li>1.4 Petabyte data storage</li>
            </ul>
         </p>
         <p class="text-dark"></p>
